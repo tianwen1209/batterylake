@@ -349,9 +349,17 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .modal-notes { font-size: 14px; color: var(--text2); line-height: 1.6; background: var(--bg2); padding: 12px 16px; border-radius: 8px; }
 .modal-link { color: var(--accent); text-decoration: none; font-size: 14px; display: block; margin-bottom: 8px; }
 .modal-link:hover { text-decoration: underline; }
-.modal-download-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 16px; background: var(--accent); color: #fff; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background .15s, transform .15s; }
-.modal-download-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-.modal-download-btn { border: none; cursor: pointer; }
+.modal-links-row { display: flex; gap: 10px; }
+.modal-link-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0; text-decoration: none; background: var(--bg); cursor: pointer; flex: 1; box-sizing: border-box; transition: border-color .15s, background .15s; }
+.modal-link-row:hover { border-color: var(--accent); background: #f0f4ff; }
+.modal-link-label { font-size: 12px; font-weight: 600; color: var(--text3); flex-shrink: 0; }
+.modal-link-val { font-size: 12px; color: var(--accent); word-break: break-all; text-align: right; display: flex; align-items: center; gap: 4px; }
+.modal-link-na { color: var(--text3); }
+.modal-link-dl-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; background: var(--accent); color: #fff; border-radius: 6px; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+.modal-link-row--dl:hover .modal-link-dl-btn { background: var(--accent-hover); }
+.modal-link-row--na { cursor: default; }
+.modal-link-row--na:hover { border-color: var(--border); background: var(--bg); }
+.modal-link-btn-na { background: var(--border2); color: var(--text3); }
 
 /* progress checklist */
 .checklist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
@@ -5732,15 +5740,15 @@ function openModal(idx) {
   const hasDoi = d.doi && d.doi.startsWith('http');
   const hasProcessed = d.processed_url && d.processed_url.startsWith('http');
   linksSec.style.display = 'block';
-  let html = '';
-  if (hasDoi) html += `<a class="modal-link" href="${esc(d.doi)}" target="_blank">${esc(d.doi)} ↗</a>`;
-  const dlIcon = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
-  if (hasProcessed) {
-    html += `<a class="modal-download-btn" href="${esc(d.processed_url)}" target="_blank">${dlIcon} Download Processed Data</a>`;
-  } else {
-    html += `<button class="modal-download-btn" onclick="showToast('Processed data for this dataset is coming soon.','info')">${dlIcon} Download Processed Data</button>`;
-  }
-  linksEl.innerHTML = html;
+  const extIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+  const dlIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+  const srcBtn = hasDoi
+    ? `<a class="modal-link-row" href="${esc(d.doi)}" target="_blank"><span class="modal-link-label">Source Dataset</span><span class="modal-link-val">${esc(d.doi)} ${extIcon}</span></a>`
+    : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn modal-link-btn-na">${extIcon} Source</span></div>`;
+  const procBtn = hasProcessed
+    ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.processed_url)}" target="_blank"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></a>`
+    : `<button class="modal-link-row modal-link-row--dl" onclick="showToast('Processed data for this dataset is coming soon.','info')"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></button>`;
+  linksEl.innerHTML = `<div class="modal-links-row">${srcBtn}${procBtn}</div>`;
   document.getElementById('modal').classList.add('show');
 }
 function closeModal() { document.getElementById('modal').classList.remove('show'); }
