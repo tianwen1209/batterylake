@@ -12,7 +12,7 @@
 [![Source Labs](https://img.shields.io/badge/Source%20Labs-34-7c3aed)](#-whats-inside)
 [![Span](https://img.shields.io/badge/Years-2007--2026-d97706)](#-whats-inside)
 
-[Explore the Platform](https://tianwen1209.github.io/BatteryLake-Benchmark-DataPrep/) · [Naming Standard](#-naming-standard) · [ETL Pipeline](#-the-etl-pipeline) · [Benchmark Tasks](#-benchmark-tasks)
+[Explore the Platform](https://tianwen1209.github.io/batterylake/) · [Naming Standard](#-naming-standard) · [ETL Pipeline](#-the-etl-pipeline) · [Benchmark Tasks](#-benchmark-tasks)
 
 <br/>
 
@@ -126,8 +126,8 @@ A reference model suite spans the full methodological spectrum — from classica
 
 ```bash
 # Clone the repository
-git clone https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep.git
-cd BatteryLake-Benchmark-DataPrep
+git clone https://github.com/tianwen1209/batterylake.git
+cd batterylake
 ```
 
 **Browse the catalog.** Open `index.html` locally, or visit the hosted platform to explore all datasets, apply chemistry / form-factor / institution / temperature filters, inspect ETL progress, and download both **source** and **processed** data per dataset.
@@ -155,7 +155,8 @@ Developed at **Nanyang Technological University, Singapore**.
 
 | Role | Member |
 |---|---|
-| **Project Supervisors** | Prof. Yonggang Wen, Wang Hao (Research Fellow) |
+| **Principal Investigator** | Prof. Yonggang Wen |
+| **Research Fellow** | Wang Hao |
 | **Core Researcher** | Zhu Tianwen |
 | **Web Engineering** | Liu Kefan · Cao Han |
 
@@ -171,7 +172,7 @@ If BatteryLake supports your research, please cite this work:
   author = {Zhu, Tianwen and Wang, Hao and Wen, Yonggang},
   year   = {2026},
   note   = {Nanyang Technological University},
-  url    = {https://github.com/tianwen1209/batterylake.git}
+  url    = {https://github.com/tianwen1209/batterylake}
 }
 ```
 
