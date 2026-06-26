@@ -155,8 +155,7 @@ Developed at **Nanyang Technological University, Singapore**.
 
 | Role | Member |
 |---|---|
-| **Principal Investigator** | Prof. Yonggang Wen |
-| **Research Fellow** | Wang Hao |
+| **Project Supervisors** | Prof. Yonggang Wen, Wang Hao (Research Fellow) |
 | **Core Researcher** | Zhu Tianwen |
 | **Web Engineering** | Liu Kefan · Cao Han |
 
@@ -172,7 +171,7 @@ If BatteryLake supports your research, please cite this work:
   author = {Zhu, Tianwen and Wang, Hao and Wen, Yonggang},
   year   = {2026},
   note   = {Nanyang Technological University},
-  url    = {https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep}
+  url    = {https://github.com/tianwen1209/batterylake.git}
 }
 ```
 
