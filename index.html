@@ -495,7 +495,6 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   padding: 34px; text-align: center; color: var(--text3);
   background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
 }
-#page-datasets .metrics-panel { display: none; }
 @media (max-width: 960px) {
   .dataset-filter-grid { grid-template-columns: 1fr; }
 }
@@ -3395,23 +3394,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
         <div class="wo-desc">Data download, benchmarking, feature engineering, interpretation</div>
       </div>
     </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       PAGE: DATASETS
-       ═══════════════════════════════════════ -->
-  <div class="page active datasets-landing" id="page-datasets">
-    <div class="page-header datasets-hero">
-      <div class="page-title">Datasets</div>
-      <div class="page-desc" id="datasets-subtitle">Explore BatteryLake's curated catalog for benchmark-ready cycling, safety, impedance, and EV field datasets.</div>
-      <div class="datasets-actions">
-        <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
-        <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-          Contribute Dataset
-        </button>
-      </div>
-    </div>
 
     <!-- 10-METRIC OVERVIEW PANEL -->
     <div class="metrics-panel" id="metrics-panel">
@@ -3494,6 +3476,24 @@ body { font-size: var(--type-body); letter-spacing: 0; }
         </div>
         <div class="metric-val green" id="m-done">—</div>
         <div class="metric-sub" id="m-done-sub">ETL pipeline done</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PAGE: DATASETS
+       ═══════════════════════════════════════ -->
+  <div class="page active datasets-landing" id="page-datasets">
+    <div class="page-header datasets-hero">
+      <div class="page-title">Datasets</div>
+      <div class="page-desc" id="datasets-subtitle">Explore BatteryLake's curated catalog for benchmark-ready cycling, safety, impedance, and EV field datasets.</div>
+      <div class="datasets-actions">
+        <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
+        <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Contribute Dataset
+        </button>
       </div>
     </div>
 
