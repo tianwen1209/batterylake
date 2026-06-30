@@ -14,8 +14,28 @@ cd "$(dirname "$0")"
 echo "🔋 BatteryLake sync"
 echo "──────────────────────────────────────────"
 
-# 1) Pull remote changes first (rebase to keep history linear).
-#    This avoids conflicts if you also edited files on GitHub web.
+# 1) Stage everything (respects .gitignore).
+git add -A
+
+# 2) Commit local changes (if any) BEFORE pulling — rebase needs a clean tree.
+if git diff --cached --quiet; then
+  echo "ℹ️  No local changes to commit."
+else
+  echo "📝 Changes to sync:"
+  git status -s
+  echo ""
+  if [ "$#" -ge 1 ] && [ -n "$1" ]; then
+    MSG="$1"
+  else
+    MSG="Sync: $(date '+%Y-%m-%d %H:%M:%S')"
+  fi
+  git commit -q -m "$MSG"
+  echo "✔️  Committed: $MSG"
+fi
+
+# 3) Pull remote changes (rebase to keep history linear).
+#    Tree is clean now, so this is safe. Avoids conflicts if you also
+#    edited files on GitHub web.
 echo "⬇️  Pulling latest from GitHub..."
 if ! git pull --rebase origin main; then
   echo ""
@@ -25,33 +45,14 @@ if ! git pull --rebase origin main; then
   exit 1
 fi
 
-# 2) Stage everything (respects .gitignore).
-git add -A
-
-# 3) If nothing changed, stop here — already in sync.
-if git diff --cached --quiet; then
-  echo "✅ Nothing to commit — already in sync with GitHub."
+# 4) Push to GitHub (only if local is ahead).
+if [ -n "$(git log origin/main..main 2>/dev/null)" ]; then
+  echo "⬆️  Pushing to GitHub..."
+  git push -q origin main
+else
+  echo "✅ Nothing to push — already in sync with GitHub."
   exit 0
 fi
-
-# 4) Show what's about to be committed.
-echo ""
-echo "📝 Changes to sync:"
-git status -s
-echo ""
-
-# 5) Commit (custom message or timestamped default).
-if [ "$#" -ge 1 ] && [ -n "$1" ]; then
-  MSG="$1"
-else
-  MSG="Sync: $(date '+%Y-%m-%d %H:%M:%S')"
-fi
-git commit -q -m "$MSG"
-echo "✔️  Committed: $MSG"
-
-# 6) Push to GitHub.
-echo "⬆️  Pushing to GitHub..."
-git push -q origin main
 
 echo "──────────────────────────────────────────"
 echo "✅ Done — local folder is now in sync with GitHub."
