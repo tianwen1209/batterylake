@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BatteryLake — Battery Data Intelligence Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+(() => {
+  const storedTheme = localStorage.getItem('bt-theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+})();
+</script>
 <style>
 /* ══════════════════════════════════════════════════════════════
    CSS VARIABLES & RESET
@@ -13,12 +22,12 @@
   --bg: #ffffff;
   --bg2: #f7f8fb;
   --bg3: #eef1f6;
-  --sidebar-bg: #1b2a4a;
-  --sidebar-hover: #243560;
-  --sidebar-active: #2d4278;
-  --sidebar-text: #b8c5dc;
-  --sidebar-text-active: #ffffff;
-  --sidebar-section: #7889a8;
+  --sidebar-bg: var(--bg2);
+  --sidebar-hover: #eef1f6;
+  --sidebar-active: #ebf0ff;
+  --sidebar-text: #2d3748;
+  --sidebar-text-active: #1d4ed8;
+  --sidebar-section: #718096;
   --border: #dce1ea;
   --border2: #c8cfd9;
   --text1: #1a2332;
@@ -68,6 +77,11 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .sidebar-brand svg { flex-shrink: 0; }
+.sidebar-brand-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .sidebar-brand-text { font-family: var(--display); font-weight: 700; font-size: 18px; color: #fff; letter-spacing: -0.02em; }
 .sidebar-brand-sub { font-size: 13px; color: var(--sidebar-section); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
 
@@ -79,22 +93,22 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   color: var(--sidebar-text); text-decoration: none; transition: all 0.15s;
   cursor: pointer;
 }
-.sidebar-nav li a:hover { background: var(--sidebar-hover); color: #e2e8f0; }
+.sidebar-nav li a:hover { background: var(--sidebar-hover); color: var(--text1); }
 .sidebar-nav li a.active { background: var(--sidebar-active); color: var(--sidebar-text-active); font-weight: 600; }
 .sidebar-nav li a .nav-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0.7; }
 .sidebar-nav li a.active .nav-icon { opacity: 1; }
 .sidebar-nav li a .nav-badge {
-  margin-left: auto; background: rgba(255,255,255,0.12); color: var(--sidebar-text);
+  margin-left: auto; background: #e6ebf3; color: var(--sidebar-text);
   font-size: 13px; font-weight: 600; padding: 1px 7px; border-radius: 10px; font-family: var(--mono);
 }
-.sidebar-nav li a.active .nav-badge { background: rgba(255,255,255,0.2); color: #fff; }
+.sidebar-nav li a.active .nav-badge { background: rgba(37,99,235,0.12); color: var(--sidebar-text-active); }
 
 .sidebar-footer {
-  margin-top: auto; padding: 16px 18px; border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: auto; padding: 16px 18px; border-top: 1px solid var(--border);
   font-size: 13px; color: var(--sidebar-section); line-height: 1.6;
 }
 .sidebar-footer a { color: var(--sidebar-text); text-decoration: none; }
-.sidebar-footer a:hover { color: #fff; }
+.sidebar-footer a:hover { color: var(--text1); }
 
 /* ── MAIN ── */
 .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
@@ -102,23 +116,53 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 /* ── TOP BAR ── */
 .topbar {
   background: var(--bg); border-bottom: 1px solid var(--border);
-  padding: 12px 32px; display: flex; align-items: center; gap: 16px;
+  padding: 12px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 10px;
   position: sticky; top: 0; z-index: 50;
 }
 .search-box {
-  flex: 1; max-width: 560px; position: relative;
+  flex: 0 1 420px; max-width: 420px; position: relative;
 }
 .search-box input {
   width: 100%; padding: 10px 14px 10px 40px; border: 1px solid var(--border);
   border-radius: 8px; font-size: 14px; font-family: var(--sans);
   background: var(--bg2); color: var(--text1); outline: none; transition: all 0.2s;
 }
-.search-box input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-light); }
+.search-box input:focus { border-color: var(--accent); background: var(--bg); box-shadow: 0 0 0 3px var(--accent-light); }
 .search-box input::placeholder { color: var(--text4); }
 .search-box .search-icon {
   position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
   color: var(--text4); pointer-events: none;
 }
+.topbar-search-btn,
+.theme-toggle {
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.topbar-search-btn {
+  padding: 0 16px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.topbar-search-btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-1px); }
+.theme-toggle {
+  width: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text2);
+}
+.theme-toggle:hover { background: var(--bg3); border-color: var(--border2); color: var(--text1); }
+.theme-toggle .theme-icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .theme-icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .theme-icon-moon { display: block; }
 .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 .topbar-btn {
   padding: 8px 16px; border-radius: 7px; font-size: 13px; font-weight: 600; font-family: var(--sans);
@@ -685,13 +729,27 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
   .main { margin-left: 0; }
-  .topbar { padding: 12px 16px; }
+  .topbar { padding: 12px 16px 12px 58px; }
+  .topbar-right { display: none; }
   .page { padding: 20px 16px 40px; }
   .hamburger { display: block !important; }
 }
 .hamburger {
   display: none; background: none; border: none; cursor: pointer; color: var(--text2);
   padding: 4px; margin-right: 4px;
+}
+.sidebar-mobile-toggle {
+  position: fixed;
+  top: 13px;
+  left: 14px;
+  z-index: 70;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text2);
+  box-shadow: var(--card-shadow);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -2319,8 +2377,14 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --bg: #ffffff;
   --bg2: #f3f6fc;
   --bg3: #e9eef7;
+  --surface: #ffffff;
+  --surface-alt: #f8fbff;
+  --surface-raised: #ffffff;
+  --input-bg: #ffffff;
+  --overlay: rgba(15,22,38,.46);
   --border: #e4e9f2;
   --border2: #cfd8e6;
+  --divider: #d7deeb;
   --text1: #151d2c;
   --text2: #414c5e;
   --text3: #6b7689;
@@ -2329,6 +2393,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --accent: #2a5fea;
   --accent-light: #eaf1ff;
   --accent-hover: #1d4bd1;
+  --accent-soft: rgba(42,95,234,.12);
 
   --green:  #15a05a;  --green-bg:  #e8f8ef;
   --amber:  #d9810a;  --amber-bg:  #fff4e3;
@@ -2336,10 +2401,66 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --teal:   #0e9b8e;  --teal-bg:   #e5f7f4;
   --purple: #7a45e6;  --purple-bg: #f1ecfe;
 
+  --sidebar-bg: var(--bg2);
+  --sidebar-hover: #e9eef7;
+  --sidebar-active: #eaf1ff;
+  --sidebar-text: #2d3748;
+  --sidebar-text-active: #1d4bd1;
+  --sidebar-section: #6b7689;
+
   --card-shadow: 0 1px 2px rgba(22,30,48,.04), 0 2px 8px rgba(22,30,48,.05);
   --card-shadow-hover: 0 10px 26px rgba(22,30,48,.10), 0 3px 8px rgba(22,30,48,.06);
+  --topbar-bg: rgba(255,255,255,.84);
+  --code-bg: #111827;
+  --code-text: #dbe7f7;
+  --chart-grid: #e7ebf1;
+  --chart-axis: #bac5d4;
 
   --radius-lg: 14px;
+}
+
+[data-theme="dark"] {
+  --bg: #111d31;
+  --bg2: #0a1424;
+  --bg3: #17263d;
+  --surface: #122037;
+  --surface-alt: #162840;
+  --surface-raised: #182a44;
+  --input-bg: #0e1a2d;
+  --overlay: rgba(2,8,23,.72);
+  --border: #263a59;
+  --border2: #3a5375;
+  --divider: #314664;
+  --text1: #f4f8ff;
+  --text2: #d7e1ef;
+  --text3: #9fb0c7;
+  --text4: #7588a2;
+
+  --accent: #7db3ff;
+  --accent-light: rgba(125,179,255,.16);
+  --accent-hover: #9bc5ff;
+  --accent-soft: rgba(125,179,255,.18);
+
+  --green:  #4ade80;  --green-bg:  rgba(74,222,128,.14);
+  --amber:  #fbbf24;  --amber-bg:  rgba(251,191,36,.15);
+  --red:    #fb7185;  --red-bg:    rgba(251,113,133,.15);
+  --teal:   #2dd4bf;  --teal-bg:   rgba(45,212,191,.14);
+  --purple: #b79cff;  --purple-bg: rgba(183,156,255,.15);
+
+  --sidebar-bg: var(--bg2);
+  --sidebar-hover: rgba(125,179,255,.10);
+  --sidebar-active: rgba(125,179,255,.16);
+  --sidebar-text: #c9d5e6;
+  --sidebar-text-active: #ddecff;
+  --sidebar-section: #8295ad;
+
+  --card-shadow: 0 1px 0 rgba(255,255,255,.035) inset, 0 16px 38px rgba(0,0,0,.26);
+  --card-shadow-hover: 0 1px 0 rgba(255,255,255,.045) inset, 0 22px 52px rgba(0,0,0,.34);
+  --topbar-bg: rgba(10,20,36,.86);
+  --code-bg: #08111f;
+  --code-text: #dbeafe;
+  --chart-grid: #263a59;
+  --chart-axis: #526985;
 }
 
 /* ── 2 · GLOBAL FEEL ─────────────────────────────────────────────── */
@@ -2349,12 +2470,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   background:
-    radial-gradient(1100px 460px at 82% -10%, rgba(42,95,234,.06), transparent 62%),
-    radial-gradient(760px 380px at -5% 0%, rgba(14,155,142,.045), transparent 60%),
+    radial-gradient(1100px 460px at 82% -10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 62%),
+    radial-gradient(760px 380px at -5% 0%, color-mix(in srgb, var(--teal) 7%, transparent), transparent 60%),
     var(--bg2);
   background-attachment: fixed;
 }
-::selection { background: rgba(42,95,234,.18); color: var(--text1); }
+::selection { background: var(--accent-light); color: var(--text1); }
 
 /* thin, quiet scrollbars */
 * { scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
@@ -2363,7 +2484,7 @@ body {
   background: var(--border2); border-radius: 10px;
   border: 3px solid transparent; background-clip: padding-box;
 }
-::-webkit-scrollbar-thumb:hover { background: #a9b5c8; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--text4); background-clip: padding-box; }
 ::-webkit-scrollbar-track { background: transparent; }
 
 /* keyboard focus ring */
@@ -2374,40 +2495,39 @@ select:focus-visible, [tabindex]:focus-visible {
 
 /* ── 3 · SIDEBAR ─────────────────────────────────────────────────── */
 .sidebar {
-  background:
-    radial-gradient(420px 220px at 28% -6%, rgba(96,165,250,.16), transparent 70%),
-    linear-gradient(180deg, #16233f 0%, #131d35 58%, #0f192d 100%);
-  border-right: 1px solid rgba(255,255,255,.06);
+  background: var(--bg2);
+  border-right: 1px solid var(--divider);
 }
 .sidebar::-webkit-scrollbar { width: 8px; }
-.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.13); border: none; }
-.sidebar-brand { padding: 22px 18px 18px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.sidebar::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--text4) 30%, transparent); border: none; }
+.sidebar-brand { padding: 6px 18px 0; border-bottom: 0; }
 .sidebar-brand svg { filter: drop-shadow(0 3px 8px rgba(42,95,234,.45)); }
 .sidebar-brand-text { font-size: 19px; }
-.sidebar-brand-sub { font-size: 11px; color: #7585a2; }
-.sidebar-section { font-size: 11px; letter-spacing: .14em; color: #74849f; padding: 22px 20px 8px; }
-.sidebar-nav { padding: 4px 10px; }
+.sidebar-brand-sub { font-size: 11px; color: var(--sidebar-section); }
+.sidebar-section { font-size: 11px; letter-spacing: .14em; color: var(--sidebar-section); padding: 22px 20px 8px; }
+.sidebar-brand + .sidebar-section { padding-top: 0; }
+.sidebar-nav { padding: 0 10px 4px; }
 .sidebar-nav li a {
   border-radius: 9px; padding: 9px 12px;
   transition: background .16s ease, color .16s ease, box-shadow .16s ease;
 }
-.sidebar-nav li a:hover { background: rgba(255,255,255,.06); color: #eaf0fb; }
+.sidebar-nav li a:hover { background: var(--sidebar-hover); color: var(--text1); }
 .sidebar-nav li a.active {
-  background: linear-gradient(90deg, rgba(42,95,234,.34), rgba(42,95,234,.12));
-  color: #fff;
-  box-shadow: inset 3px 0 0 #60a5fa, inset 0 0 0 1px rgba(96,165,250,.20);
+  background: var(--sidebar-active);
+  color: var(--sidebar-text-active);
+  box-shadow: inset 3px 0 0 var(--accent), inset 0 0 0 1px rgba(37,99,235,.14);
 }
-.sidebar-nav li a .nav-badge { background: rgba(255,255,255,.10); }
-.sidebar-nav li a.active .nav-badge { background: rgba(96,165,250,.32); color: #fff; }
-.sidebar-footer { border-top: 1px solid rgba(255,255,255,.07); }
+.sidebar-nav li a .nav-badge { background: var(--bg3); color: var(--sidebar-text); }
+.sidebar-nav li a.active .nav-badge { background: var(--accent-soft); color: var(--sidebar-text-active); }
+.sidebar-footer { border-top: 1px solid var(--border); }
 
 /* ── 4 · TOP BAR ─────────────────────────────────────────────────── */
 .topbar {
-  background: rgba(255,255,255,.82);
+  background: var(--topbar-bg);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 8px 22px -16px rgba(22,30,48,.5);
+  box-shadow: 0 8px 22px -16px color-mix(in srgb, var(--text1) 40%, transparent);
 }
 .search-box input { border-radius: 10px; }
 .search-box input:focus { box-shadow: 0 0 0 4px var(--accent-light); }
@@ -3183,6 +3303,145 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .metrics-panel .metric-cell.metric-featured-cell .metric-sub {
   color: color-mix(in srgb, var(--teal) 62%, var(--text3));
 }
+
+/* ── Home landing page ─────────────────────────────────────────── */
+#page-home {
+  min-height: calc(100vh - 58px);
+  padding: 0 clamp(32px, 5.2vw, 82px) 96px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(247,250,255,.96) 54%, rgba(243,247,253,.98) 100%);
+  overflow: hidden;
+}
+.home-hero {
+  width: min(1180px, 100%);
+  min-height: clamp(412px, 37.2vw, 490px);
+  margin: 0 auto;
+  padding: clamp(118px, 14vh, 168px) 0 clamp(92px, 12vh, 146px);
+  position: relative;
+}
+.home-hero h1 {
+  width: fit-content;
+  max-width: 720px;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(42px, 5.4vw, 82px);
+  line-height: .94;
+  font-weight: 900;
+  letter-spacing: 0;
+  color: var(--text1);
+}
+.home-hero p {
+  max-width: 680px;
+  margin-top: clamp(24px, 3vw, 34px);
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.22;
+  font-weight: 650;
+  color: color-mix(in srgb, var(--text2) 78%, var(--accent));
+}
+.home-metrics-wrap {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 66px) 0 0;
+}
+#page-home .home-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(26px, 3.6vw, 46px);
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+#page-home .home-metrics .metric-cell {
+  min-height: 210px;
+  padding: clamp(28px, 3.4vw, 42px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(191,219,254,.78);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,.99), rgba(248,250,252,.98));
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.92) inset,
+    0 12px 28px rgba(15,23,42,.055),
+    0 0 24px rgba(37,99,235,.10);
+  isolation: isolate;
+  z-index: 0;
+}
+#page-home .home-metrics .metric-cell::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  padding: 8px;
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(125,211,252,.58), rgba(37,99,235,.50) 46%, rgba(14,165,233,.30) 72%, rgba(191,219,254,.42)),
+    radial-gradient(circle at 12% 18%, rgba(56,189,248,.58), transparent 34%),
+    radial-gradient(circle at 88% 82%, rgba(37,99,235,.50), transparent 36%);
+  filter: blur(9px);
+  opacity: .56;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  z-index: -1;
+  pointer-events: none;
+}
+#page-home .home-metrics .metric-cell::after {
+  display: none;
+}
+#page-home .home-metrics .metric-val {
+  display: inline-flex;
+  align-items: baseline;
+  min-height: 72px;
+  max-width: 100%;
+  font-family: var(--sans);
+  font-size: clamp(46px, 4.8vw, 70px) !important;
+  line-height: .9;
+  font-weight: 900;
+  letter-spacing: 0;
+  color: transparent !important;
+  background: linear-gradient(115deg, #1d4ed8 0%, #2563eb 44%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#page-home .home-metrics .metric-unit {
+  margin-left: .1em;
+  font-size: .4em;
+  line-height: 1;
+  font-weight: 850;
+  color: transparent;
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+#page-home .home-metrics .metric-sub {
+  margin-top: 18px;
+  font-size: clamp(15px, 1.45vw, 20px);
+  line-height: 1.22;
+  font-weight: 800;
+  color: var(--text2);
+}
+
+@media (max-width: 1020px) {
+  #page-home .home-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  #page-home { padding-left: 20px; padding-right: 20px; padding-bottom: 64px; }
+  .home-hero { min-height: 319px; padding-top: 84px; padding-bottom: 72px; }
+  .home-hero h1 { font-size: clamp(34px, 9.8vw, 42px); }
+  .home-hero p { font-size: clamp(15px, 4vw, 16px); }
+  #page-home .home-metrics { grid-template-columns: 1fr; gap: 22px; }
+  #page-home .home-metrics .metric-cell { min-height: 168px; padding: 28px; }
+}
 .model-table th,
 .bw-table th {
   font-size: 12px !important;
@@ -3276,6 +3535,288 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 #page-datasets .dataset-section-title h2 {
   font-size: 23px !important;
 }
+
+/* ── 16 · GLOBAL THEME COMPATIBILITY LAYER ───────────────────────── */
+body, .main, .page { color: var(--text1); }
+
+.topbar,
+.metric-cell,
+.dataset-card,
+.dataset-filter-popover,
+.modal,
+.bench-card,
+.stat-card,
+.team-card,
+.quality-card,
+.diag-section,
+.qa-json-card,
+.pp-main-card,
+.pp-side-card,
+.pp-op,
+.pp-check,
+.pp-guide-step,
+.api-route-rail,
+.api-playground,
+.api-param,
+.app-module,
+.contrib-file-tile,
+.api-card,
+.bw-panel,
+.bw-progress,
+.bw-package-card,
+.bw-results-upload,
+.bw-paper-card,
+.bw-chartbox,
+.bw-result-kpis .bw-rstat,
+.bw-phead,
+.bw-recipe-panel,
+.bw-feature-block,
+.bw-upload-zone,
+.bw-file-row,
+.ml-card,
+.ml-package,
+.ml-detail,
+.ml-chip {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text1);
+}
+
+.dataset-search-panel,
+.datasets-landing,
+.bw-pbody,
+.bw-results .bw-pbody,
+.bw-tabs,
+.modal-body,
+.pp-config,
+.bw-cellcol,
+.bw-excluded,
+.bw-empty-plot,
+.ml-search input,
+.ml-filter select,
+.api-response-strip div,
+.bw-data-place,
+.bw-data-path,
+.bw-data-place code,
+.bw-pill-soft,
+.bw-result-controls select,
+.bw-feat-add,
+.bw-file-ic,
+.bw-import-btn {
+  background: var(--surface-alt) !important;
+  border-color: var(--border) !important;
+  color: var(--text2) !important;
+}
+
+input:not([type="file"]),
+textarea,
+select,
+.search-box input,
+.dataset-search input,
+.bw-input,
+.pp-field input,
+.pp-field select {
+  background: var(--input-bg) !important;
+  color: var(--text1) !important;
+  border-color: var(--border) !important;
+}
+
+input::placeholder,
+textarea::placeholder { color: var(--text4) !important; }
+
+input:focus,
+textarea:focus,
+select:focus,
+.search-box input:focus,
+.dataset-search input:focus {
+  border-color: var(--accent) !important;
+  background: var(--surface-raised) !important;
+  box-shadow: 0 0 0 4px var(--accent-light) !important;
+}
+
+.btn-outline,
+.topbar-btn,
+.bw-btn,
+.ml-btn,
+.dataset-filter-action,
+.dataset-filter-toggle,
+.view-btn,
+.filter-sort select,
+.bw-seg-btn,
+.bw-cancel-btn {
+  background: var(--surface) !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+
+.btn-outline:hover,
+.topbar-btn:hover,
+.bw-btn:hover,
+.ml-btn:hover,
+.dataset-filter-action:hover,
+.dataset-filter-toggle:hover,
+.view-btn:hover {
+  background: var(--bg3) !important;
+  color: var(--text1) !important;
+  border-color: var(--border2) !important;
+}
+
+.view-btn.active,
+.bw-seg-btn.active,
+.bw-model-card.selected,
+.bw-model-item.selected,
+.bw-feat.selected {
+  background: var(--accent-light) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.bw-split-card.selected .bw-split-ic,
+.bw-model-item.selected .bw-model-ic {
+  background: var(--surface-raised) !important;
+  color: var(--accent) !important;
+}
+
+.btn-primary,
+.dataset-contribute-btn,
+.topbar-search-btn,
+.bw-btn-primary,
+.bw-download,
+.bw-run,
+.ml-btn-primary,
+.dataset-filter-action.apply {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.dataset-contribute-btn:hover,
+.topbar-search-btn:hover,
+.bw-btn-primary:hover,
+.bw-download:hover,
+.bw-run:hover,
+.ml-btn-primary:hover,
+.dataset-filter-action.apply:hover {
+  background: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+}
+
+.page-title,
+.dataset-section-title h2,
+.pp-panel-title,
+.pp-side-title,
+.api-route-title,
+.api-card-title,
+.bw-results-title,
+.bw-chart-title,
+.ml-card-title,
+.ml-d-title { color: var(--text1) !important; }
+
+.page-desc,
+.metric-sub,
+.dc-refname,
+.dc-stat,
+.pp-panel-copy,
+.pp-op p,
+.pp-side-sub,
+.api-card-copy,
+.bw-results-desc,
+.bw-lg,
+.ml-card-copy { color: var(--text3) !important; }
+
+.dataset-grid,
+.metrics-panel,
+.bw-table,
+.model-table { background: var(--border) !important; }
+
+.model-table th,
+.bw-table th {
+  background: var(--bg3) !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+
+.model-table td,
+.bw-table td {
+  background: var(--surface) !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+
+.model-table tr:hover td,
+.bw-table tr:hover td,
+.dataset-card:hover,
+.metric-cell:hover {
+  background: var(--surface-alt) !important;
+}
+
+.modal-backdrop { background: var(--overlay) !important; }
+.modal-link-row:hover { background: var(--accent-light) !important; border-color: var(--accent) !important; }
+
+.status-done { background: var(--green-bg) !important; color: var(--green) !important; }
+.status-wip { background: var(--amber-bg) !important; color: var(--amber) !important; }
+.status-pending { background: var(--bg3) !important; color: var(--text3) !important; }
+.status-skip { background: var(--red-bg) !important; color: var(--red) !important; }
+
+.filter-type-chemistry { --tag-fg: #9a6a06; --tag-bg: #fff7d6; --tag-border: #ead58a; }
+.filter-type-category { --tag-fg: var(--teal); --tag-bg: var(--teal-bg); --tag-border: color-mix(in srgb, var(--teal) 35%, var(--border)); }
+.filter-type-profile { --tag-fg: var(--purple); --tag-bg: var(--purple-bg); --tag-border: color-mix(in srgb, var(--purple) 35%, var(--border)); }
+.filter-type-form { --tag-fg: var(--text2); --tag-bg: var(--bg3); --tag-border: var(--border2); }
+.filter-type-domain { --tag-fg: var(--accent); --tag-bg: var(--accent-light); --tag-border: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+.filter-type-all { --tag-fg: var(--green); --tag-bg: var(--green-bg); --tag-border: color-mix(in srgb, var(--green) 35%, var(--border)); }
+
+[data-theme="dark"] .filter-type-chemistry {
+  --tag-fg: #fde68a;
+  --tag-bg: rgba(251,191,36,.14);
+  --tag-border: rgba(251,191,36,.28);
+}
+
+.code-block,
+.pp-output,
+.pp-copy-code,
+.api-code-card,
+.bw-package-command,
+pre {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  border-color: color-mix(in srgb, var(--border2) 65%, transparent) !important;
+}
+
+.qa-code,
+.api-code,
+.bw-command-code,
+.pp-output-code { color: var(--code-text) !important; }
+
+.bw-plot-axis { stroke: var(--chart-axis) !important; }
+.bw-plot-grid { stroke: var(--chart-grid) !important; }
+.bw-plot-label,
+.bw-plot-note,
+.bw-bar-label { fill: var(--text3) !important; }
+
+[data-theme="dark"] .home-hero,
+[data-theme="dark"] #page-home {
+  background: transparent !important;
+}
+
+[data-theme="dark"] #page-home .home-metrics .metric-cell {
+  background: linear-gradient(180deg, var(--surface-raised), var(--surface)) !important;
+  border-color: var(--border2) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+[data-theme="dark"] .oh-hero,
+[data-theme="dark"] .contribute-hero,
+[data-theme="dark"] .api-hero,
+[data-theme="dark"] .qa-hero {
+  border-color: var(--border2) !important;
+}
+
+@media (max-width: 760px) {
+  .topbar { padding: 10px 14px 10px 58px; gap: 8px; }
+  .search-box { flex: 1 1 auto; min-width: 0; }
+  .topbar-search-btn { padding: 0 12px; }
+}
 </style>
 </head>
 <body>
@@ -3284,15 +3825,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 <!-- ════════════════ SIDEBAR ════════════════ -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <rect width="32" height="32" rx="8" fill="#2563eb"/>
-      <path d="M10 22V10h4c3 0 4.5 1.5 4.5 4s-1.5 4-4.5 4h-1.5V22H10zm2.5-6.5H14c1.2 0 2-.7 2-1.8s-.8-1.7-2-1.7h-1.5v3.5z" fill="#fff"/>
-      <rect x="20" y="10" width="2.5" height="12" rx="1" fill="#60a5fa"/>
-    </svg>
-    <div>
-      <div class="sidebar-brand-text">BatteryLake</div>
-      <div class="sidebar-brand-sub">Data Intelligence Platform</div>
-    </div>
+    <img class="sidebar-brand-logo" src="assets/batterylake_logo.png" alt="BatteryLake">
   </div>
 
   <div class="sidebar-section">Explore</div>
@@ -3374,150 +3907,60 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 </nav>
 
 <!-- ════════════════ MAIN ════════════════ -->
+<button class="hamburger sidebar-mobile-toggle" type="button" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Open navigation">
+  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
 <div class="main">
   <!-- TOP BAR -->
   <div class="topbar">
-    <button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-    </button>
     <div class="search-box" id="topbar-search-box">
       <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-      <input type="text" id="topbarSearchInput" placeholder="Open Datasets to search the catalog" onfocus="showPage('datasets', document.getElementById('nav-datasets')); document.getElementById('searchInput').focus();">
+      <input type="text" id="topbarSearchInput" placeholder="Search" aria-label="Search datasets">
     </div>
-    <div class="topbar-right">
-      <button class="btn-contribute" onclick="showPage('contribute', document.querySelector('[onclick*=contribute]'))" title="Contribute your battery dataset">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-        Contribute Dataset
-      </button>
-      <span class="sync-status" id="sync-status"></span>
-      <input type="file" id="csv-upload" accept=".csv,text/csv" style="display:none" onchange="handleLocalCSV(event)">
-      <button class="topbar-btn btn-outline sync-btn" id="upload-btn" onclick="document.getElementById('csv-upload').click()" title="Upload dataset_registry.csv from local">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-2px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload CSV
-      </button>
-      <button class="topbar-btn btn-outline sync-btn" id="sync-btn" onclick="syncFromGitHub()" title="Try fetching CSV from public GitHub URL">
-        <span class="sync-icon">⟳</span> Sync
-      </button>
-    </div>
+    <button class="topbar-search-btn" type="button" onclick="triggerTopbarSearch()">Search</button>
+    <button class="theme-toggle" type="button" id="theme-toggle" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Switch theme">
+      <svg class="theme-icon-sun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="theme-icon-moon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A8.5 8.5 0 1111.21 3 6.6 6.6 0 0021 12.79z"/></svg>
+    </button>
   </div>
 
   <!-- ═══════════════════════════════════════
        PAGE: HOME
        ═══════════════════════════════════════ -->
   <div class="page" id="page-home">
-    <div class="page-header">
-      <div class="page-title">Home</div>
-      <div class="page-desc">Curated battery cycling datasets for machine learning benchmarks. Uniformly processed via the BatteryLake ETL pipeline with standardized metadata, time-series, and cycle summaries.</div>
+    <div class="home-hero">
+      <h1>BatteryLake</h1>
+      <p>BatteryLake unifies curated battery datasets, standardized metadata, and cycle intelligence for reproducible battery research.</p>
     </div>
 
-    <!-- 4-STEP PLATFORM WORKFLOW OVERVIEW -->
-    <div class="workflow-overview">
-      <div class="wo-step" onclick="showPage('datasets', document.getElementById('nav-datasets'))" style="cursor:pointer;">
-        <div class="wo-num s1">1</div>
-        <div class="wo-title">Choose Your Data</div>
-        <div class="wo-desc">Browse catalog, preview metadata, apply domain-aware filters</div>
-      </div>
-      <div class="wo-step" onclick="showPage('preprocessing', document.querySelector('[onclick*=preprocessing]'))" style="cursor:pointer;">
-        <div class="wo-num s2">2</div>
-        <div class="wo-title">Smart Processing</div>
-        <div class="wo-desc">Cleaning, resampling, metadata harmonization, cycle analytics</div>
-      </div>
-      <div class="wo-step" onclick="showPage('quality', document.querySelector('[onclick*=quality]'))" style="cursor:pointer;">
-        <div class="wo-num s3">3</div>
-        <div class="wo-title">Quality Assurance</div>
-        <div class="wo-desc">Completeness, consistency, accuracy &amp; validity scoring</div>
-      </div>
-      <div class="wo-step" onclick="showPage('apis', document.querySelector('[onclick*=apis]'))" style="cursor:pointer;">
-        <div class="wo-num s4">4</div>
-        <div class="wo-title">Platform APIs</div>
-        <div class="wo-desc">Data download, benchmarking, feature engineering, interpretation</div>
+    <div class="home-metrics-wrap">
+      <div class="metrics-panel home-metrics" id="metrics-panel" aria-label="BatteryLake platform metrics">
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-datasets">0</div>
+          <div class="metric-sub" id="m-datasets-sub">Curated datasets</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-labs">0</div>
+          <div class="metric-sub">Worldwide institutions</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-years">0</div>
+          <div class="metric-sub" id="m-years-sub">Years span</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-cycles">0</div>
+          <div class="metric-sub" id="m-cycles-sub">Total cycles</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-cells">0</div>
+          <div class="metric-sub" id="m-cells-sub">Total cells</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-volume">0 <span class="metric-unit">GB</span></div>
+          <div class="metric-sub">Data volume</div>
+        </div>
       </div>
     </div>
-
-    <!-- 10-METRIC OVERVIEW PANEL -->
-    <div class="metrics-panel" id="metrics-panel">
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-          Datasets
-        </div>
-        <div class="metric-val accent" id="m-datasets">—</div>
-        <div class="metric-sub" id="m-datasets-sub">curated</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          Total Cells
-        </div>
-        <div class="metric-val" id="m-cells">—</div>
-        <div class="metric-sub" id="m-cells-sub">individual units</div>
-      </div>
-      <div class="metric-cell metric-featured-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><polyline points="21 4 21 10 15 10"/></svg>
-          Total Cycles
-        </div>
-        <div class="metric-val teal metric-featured" id="m-cycles">—</div>
-        <div class="metric-sub" id="m-cycles-sub">charge/discharge</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          Data Volume
-        </div>
-        <div class="metric-val purple" id="m-volume">—<span class="metric-unit">GB</span></div>
-        <div class="metric-sub">time-series + summaries</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
-          Source Labs
-        </div>
-        <div class="metric-val" id="m-labs">—</div>
-        <div class="metric-sub">worldwide institutions</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg>
-          Chemistries
-        </div>
-        <div class="metric-val green" id="m-chems">—</div>
-        <div class="metric-sub" id="m-chems-sub">LFP · NMC · LCO · NCA</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M22 11h-2a2 2 0 000 4h2"/></svg>
-          Form Factors
-        </div>
-        <div class="metric-val" id="m-forms">—</div>
-        <div class="metric-sub" id="m-forms-sub">18650 · 21700 · pouch …</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
-          Temperatures
-        </div>
-        <div class="metric-val amber" id="m-temps">—</div>
-        <div class="metric-sub" id="m-temps-sub">°C test conditions</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Year Span
-        </div>
-        <div class="metric-val" id="m-years">—</div>
-        <div class="metric-sub" id="m-years-sub">publication range</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Completed
-        </div>
-        <div class="metric-val green" id="m-done">—</div>
-        <div class="metric-sub" id="m-done-sub">ETL pipeline done</div>
-      </div>
-    </div>
-
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -4072,8 +4515,8 @@ bash run_benchmark.sh</pre>
               </div>
             </div>
             <div class="bw-legend" id="bw-curve-legend">
-              <span class="bw-lg"><i style="background:#111827"></i>Ground truth</span>
-              <span class="bw-lg"><i style="background:#2563eb"></i>Prediction</span>
+              <span class="bw-lg"><i style="background:var(--text1)"></i>Ground truth</span>
+              <span class="bw-lg"><i style="background:var(--accent)"></i>Prediction</span>
             </div>
             <div id="bw-curve-chart" class="bw-plot-host"><div class="bw-empty-plot">Upload predictions.csv to render the trajectory.</div></div>
           </div>
@@ -5554,8 +5997,10 @@ function showToast(msg, type = 'info', duration = 3500) {
 async function syncFromGitHub(silent = false) {
   const btn = document.getElementById('sync-btn');
   const statusEl = document.getElementById('sync-status');
-  btn.classList.add('loading');
-  btn.disabled = true;
+  if (btn) {
+    btn.classList.add('loading');
+    btn.disabled = true;
+  }
 
   try {
     const res = await fetch(GITHUB_CSV_URL, { cache: 'no-store' });
@@ -5570,7 +6015,7 @@ async function syncFromGitHub(silent = false) {
 
     // Update UI
     refreshAll();
-    statusEl.innerHTML = '<span class="sync-dot live"></span> Live · ' + DATASETS.length + ' datasets';
+    if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Live · ' + DATASETS.length + ' datasets';
     if (!silent) showToast('Synced from GitHub — ' + DATASETS.length + ' datasets loaded', 'success');
   } catch (e) {
     console.warn('GitHub sync failed:', e.message);
@@ -5580,11 +6025,13 @@ async function syncFromGitHub(silent = false) {
     }
     refreshAll();
     const label = dataSource === 'local' ? 'Local' : 'Built-in';
-    statusEl.innerHTML = '<span class="sync-dot fallback"></span> ' + label + ' · ' + DATASETS.length + ' datasets';
+    if (statusEl) statusEl.innerHTML = '<span class="sync-dot fallback"></span> ' + label + ' · ' + DATASETS.length + ' datasets';
     if (!silent) showToast('GitHub fetch failed (private repo requires auth). Use "Upload CSV" instead.', 'error', 5000);
   } finally {
-    btn.classList.remove('loading');
-    btn.disabled = false;
+    if (btn) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
   }
 }
 
@@ -5607,7 +6054,7 @@ function handleLocalCSV(event) {
       DATASETS = parsed;
       dataSource = 'local';
       refreshAll();
-      statusEl.innerHTML = '<span class="sync-dot live"></span> Local · ' + DATASETS.length + ' datasets';
+      if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Local · ' + DATASETS.length + ' datasets';
       showToast('Loaded ' + DATASETS.length + ' datasets from ' + file.name, 'success');
     } catch (err) {
       console.error('CSV parse error:', err);
@@ -5683,108 +6130,67 @@ function extractYearFromRef(ref) {
 }
 
 function renderMetrics() {
-  const ds = DATASETS;
-  const n = ds.length;
+  animateHomeMetrics();
+}
 
-  // Total cells (sum numeric values, skip "—")
-  const totalCells = ds.reduce((a, d) => {
-    const v = parseInt(('' + d.cells).replace(/[^\d]/g, ''), 10);
-    return a + (isNaN(v) ? 0 : v);
-  }, 0);
+let homeMetricAnimation = null;
 
-  // Total cycles
-  const totalCycles = ds.reduce((a, d) => a + (Number(d.cycles) || 0), 0);
+function setHomeMetric(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
 
-  // Total data volume (MB → GB)
-  const totalMB = ds.reduce((a, d) => a + (Number(d.size_mb) || 0), 0);
-  const totalGB = totalMB / 1024;
+function animateHomeMetrics() {
+  const metricsEl = document.getElementById('metrics-panel');
+  if (!metricsEl) return;
 
-  // Unique chemistries
-  const chemSet = new Set();
-  ds.forEach(d => { if (d.chemistry && d.chemistry !== 'Unknown') {
-    // expand Multi into nothing (count Multi as one category)
-    chemSet.add(d.chemistry);
-  }});
+  const duration = 1400;
+  const final = {
+    datasets: 41,
+    labs: 34,
+    years: 19,
+    cyclesK: 331.8,
+    cells: 1499,
+    volumeGB: 9.7
+  };
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const render = progress => {
+    const p = ease(progress);
+    setHomeMetric('m-datasets', String(Math.round(final.datasets * p)));
+    setHomeMetric('m-labs', String(Math.round(final.labs * p)));
+    setHomeMetric('m-years', String(Math.round(final.years * p)));
+    setHomeMetric('m-cycles', `${(final.cyclesK * p).toFixed(1)}<span class="metric-unit">K</span>`);
+    setHomeMetric('m-cells', Math.round(final.cells * p).toLocaleString('en-US'));
+    setHomeMetric('m-volume', `${(final.volumeGB * p).toFixed(1)} <span class="metric-unit">GB</span>`);
+    if (progress >= 1) {
+      setHomeMetric('m-datasets', '41');
+      setHomeMetric('m-labs', '34');
+      setHomeMetric('m-years', '19');
+      setHomeMetric('m-cycles', '331.8<span class="metric-unit">K</span>');
+      setHomeMetric('m-cells', '1499');
+      setHomeMetric('m-volume', '9.7 <span class="metric-unit">GB</span>');
+    }
+  };
 
-  // Form factors
-  const formSet = new Set();
-  ds.forEach(d => { if (d.form && d.form !== '—') formSet.add(d.form); });
-
-  // Source labs (unique)
-  const labSet = new Set();
-  ds.forEach(d => {
-    const s = extractSourceFromRef(d.ref_name);
-    if (s) labSet.add(s);
-  });
-
-  // Temperatures (unique numeric values)
-  const tempSet = new Set();
-  let hasMultiT = false;
-  ds.forEach(d => {
-    const t = extractTempFromRef(d.ref_name);
-    if (t === 'multi') hasMultiT = true;
-    else if (typeof t === 'number') tempSet.add(t);
-  });
-  const tempCount = tempSet.size + (hasMultiT ? 1 : 0);
-  const tempsList = [...tempSet].sort((a,b)=>a-b);
-  const tempMin = tempsList[0];
-  const tempMax = tempsList[tempsList.length - 1];
-
-  // Year span
-  const years = ds.map(d => extractYearFromRef(d.ref_name)).filter(Boolean);
-  const yMin = years.length ? Math.min(...years) : null;
-  const yMax = years.length ? Math.max(...years) : null;
-
-  // Completion
-  const done = ds.filter(d => d.status === 'done').length;
-  const pct = n > 0 ? Math.round(done / n * 100) : 0;
-
-  // ── Render ──
-  const fmt = v => v >= 1000 ? v.toLocaleString('en-US') : String(v);
-  document.getElementById('m-datasets').textContent = fmt(n);
-  document.getElementById('m-datasets-sub').textContent = 'curated';
-
-  document.getElementById('m-cells').textContent = totalCells > 0 ? fmt(totalCells) : '—';
-  document.getElementById('m-cells-sub').textContent = 'individual units';
-
-  document.getElementById('m-cycles').textContent = totalCycles > 0
-    ? (totalCycles >= 10000 ? (totalCycles/1000).toFixed(1) + 'K' : fmt(totalCycles))
-    : '—';
-  document.getElementById('m-cycles-sub').textContent = 'charge/discharge';
-
-  const volEl = document.getElementById('m-volume');
-  if (totalGB >= 1) {
-    volEl.innerHTML = totalGB.toFixed(1) + '<span class="metric-unit">GB</span>';
-  } else if (totalMB > 0) {
-    volEl.innerHTML = totalMB.toFixed(0) + '<span class="metric-unit">MB</span>';
-  } else {
-    volEl.textContent = '—';
+  if (homeMetricAnimation) cancelAnimationFrame(homeMetricAnimation);
+  if (prefersReducedMotion) {
+    render(1);
+    return;
   }
 
-  document.getElementById('m-labs').textContent = labSet.size > 0 ? fmt(labSet.size) : '—';
-
-  document.getElementById('m-chems').textContent = chemSet.size > 0 ? fmt(chemSet.size) : '—';
-  document.getElementById('m-chems-sub').textContent = [...chemSet].slice(0, 5).map(c => c === 'Multi' ? 'LCO' : c).join(' · ') || '—';
-
-  document.getElementById('m-forms').textContent = formSet.size > 0 ? fmt(formSet.size) : '—';
-  document.getElementById('m-forms-sub').textContent = [...formSet].slice(0, 4).join(' · ') || '—';
-
-  document.getElementById('m-temps').textContent = tempCount > 0 ? fmt(tempCount) : '—';
-  if (tempMin !== undefined && tempMax !== undefined) {
-    document.getElementById('m-temps-sub').textContent =
-      tempMin === tempMax ? `${tempMin}°C` : `${tempMin}–${tempMax}°C`;
-  }
-
-  const yearsEl = document.getElementById('m-years');
-  if (yMin && yMax) {
-    yearsEl.innerHTML = yMin === yMax ? String(yMin) : `${yMin}<span class="metric-unit">–${yMax}</span>`;
-    document.getElementById('m-years-sub').textContent = `${yMax - yMin + 1} years of data`;
-  } else {
-    yearsEl.textContent = '—';
-  }
-
-  document.getElementById('m-done').innerHTML = fmt(done) + '<span class="metric-unit">/' + n + '</span>';
-  document.getElementById('m-done-sub').textContent = `${pct}% ETL pipeline done`;
+  const start = performance.now();
+  const tick = now => {
+    const progress = Math.min((now - start) / duration, 1);
+    render(progress);
+    if (progress < 1) {
+      homeMetricAnimation = requestAnimationFrame(tick);
+    } else {
+      homeMetricAnimation = null;
+    }
+  };
+  render(0);
+  homeMetricAnimation = requestAnimationFrame(tick);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -6245,6 +6651,65 @@ function clearSearch() {
   document.getElementById('search-box').classList.remove('has-text');
   input.focus();
   filterDatasets();
+}
+
+function runDatasetSearch(query) {
+  const q = (query || '').trim();
+  if (!q) return false;
+  const datasetNav = document.getElementById('nav-datasets');
+  showPage('datasets', datasetNav);
+  const input = document.getElementById('searchInput');
+  const box = document.getElementById('search-box');
+  if (input) {
+    input.value = q;
+    if (box) box.classList.toggle('has-text', Boolean(q));
+  }
+  allDatasetsApplied = false;
+  syncPendingFromActive();
+  renderAppliedFilterChips();
+  filterDatasets();
+  if (input) input.focus();
+  return true;
+}
+
+function triggerTopbarSearch() {
+  const input = document.getElementById('topbarSearchInput');
+  if (!input) return;
+  runDatasetSearch(input.value);
+}
+window.triggerTopbarSearch = triggerTopbarSearch;
+
+function setTheme(theme) {
+  const resolved = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = resolved;
+  document.documentElement.style.colorScheme = resolved;
+  localStorage.setItem('bt-theme', resolved);
+  updateThemeToggle();
+}
+
+function toggleTheme() {
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+}
+window.toggleTheme = toggleTheme;
+
+function updateThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+}
+
+function initTopbarControls() {
+  updateThemeToggle();
+  const input = document.getElementById('topbarSearchInput');
+  if (!input) return;
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      triggerTopbarSearch();
+    }
+  });
 }
 
 /* ── MODAL ── */
@@ -8521,10 +8986,13 @@ async function ppHandleReportUpload(event) {
    ══════════════════════════════════════════════════════════════ */
 (async function init() {
   // Render fallback immediately so page isn't blank
+  initTopbarControls();
   refreshAll();
   ppRender();
-  document.getElementById('sync-status').innerHTML =
-    '<span class="sync-dot fallback"></span> Built-in · ' + DATASETS.length + ' datasets';
+  const statusEl = document.getElementById('sync-status');
+  if (statusEl) {
+    statusEl.innerHTML = '<span class="sync-dot fallback"></span> Built-in · ' + DATASETS.length + ' datasets';
+  }
   applyInitialPageFromHash();
 
   // Attempt GitHub sync silently in background.
@@ -9012,8 +9480,8 @@ function bwLineChartSvg(rows, target, cell) {
     xTicks.map(v => '<text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 20) + '" text-anchor="middle">' + bwFmtMetric(v, 0) + '</text>').join('') +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + t + '" x2="' + l + '" y2="' + (h - b) + '"/>' +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + (h - b) + '" x2="' + (w - r) + '" y2="' + (h - b) + '"/>' +
-    '<polyline fill="none" stroke="#111827" stroke-width="2.3" points="' + truePts + '"/>' +
-    '<polyline fill="none" stroke="#2563eb" stroke-width="2.1" stroke-dasharray="5 4" points="' + predPts + '"/>' +
+    '<polyline fill="none" stroke="var(--text1)" stroke-width="2.3" points="' + truePts + '"/>' +
+    '<polyline fill="none" stroke="var(--accent)" stroke-width="2.1" stroke-dasharray="5 4" points="' + predPts + '"/>' +
     '<text class="bw-plot-label" x="' + ((w + l - r) / 2).toFixed(1) + '" y="' + (h - 4) + '" text-anchor="middle">Cycle</text>' +
     '<text class="bw-plot-label" x="15" y="' + ((h - b + t) / 2).toFixed(1) + '" text-anchor="middle" transform="rotate(-90 15 ' + ((h - b + t) / 2).toFixed(1) + ')">' + esc(target) + '</text>' +
     '<text class="bw-plot-note" x="' + (w - r) + '" y="16" text-anchor="end">' + esc(bwResultShortCell(cell)) + '</text>' +
@@ -9026,12 +9494,12 @@ function bwScatterSvg(rows, target) {
   const x = v => l + (Number(v) - min) / (max - min || 1) * (w - l - r);
   const y = v => t + (max - Number(v)) / (max - min || 1) * (h - t - b);
   const ticks = bwTicks(min, max, 5);
-  const points = data.map(d => '<circle cx="' + x(d.y_true).toFixed(1) + '" cy="' + y(d.y_pred).toFixed(1) + '" r="2.3" fill="#2563eb" fill-opacity=".38"/>').join('');
+  const points = data.map(d => '<circle cx="' + x(d.y_true).toFixed(1) + '" cy="' + y(d.y_pred).toFixed(1) + '" r="2.3" fill="var(--accent)" fill-opacity=".45"/>').join('');
   return '<svg class="bw-chart" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="xMidYMid meet">' +
     ticks.map(v => '<line class="bw-plot-grid" x1="' + l + '" y1="' + y(v).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(v).toFixed(1) + '"/><line class="bw-plot-grid" x1="' + x(v).toFixed(1) + '" y1="' + t + '" x2="' + x(v).toFixed(1) + '" y2="' + (h - b) + '"/><text class="bw-plot-label" x="' + (l - 10) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end">' + bwFmtMetric(v, 3) + '</text><text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 20) + '" text-anchor="middle">' + bwFmtMetric(v, 3) + '</text>').join('') +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + t + '" x2="' + l + '" y2="' + (h - b) + '"/>' +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + (h - b) + '" x2="' + (w - r) + '" y2="' + (h - b) + '"/>' +
-    '<line x1="' + x(min).toFixed(1) + '" y1="' + y(min).toFixed(1) + '" x2="' + x(max).toFixed(1) + '" y2="' + y(max).toFixed(1) + '" stroke="#111827" stroke-width="1.5" stroke-dasharray="5 4"/>' +
+    '<line x1="' + x(min).toFixed(1) + '" y1="' + y(min).toFixed(1) + '" x2="' + x(max).toFixed(1) + '" y2="' + y(max).toFixed(1) + '" stroke="var(--text1)" stroke-width="1.5" stroke-dasharray="5 4"/>' +
     points +
     '<text class="bw-plot-label" x="' + ((w + l - r) / 2).toFixed(1) + '" y="' + (h - 4) + '" text-anchor="middle">Ground truth ' + esc(target) + '</text>' +
     '<text class="bw-plot-label" x="15" y="' + ((h - b + t) / 2).toFixed(1) + '" text-anchor="middle" transform="rotate(-90 15 ' + ((h - b + t) / 2).toFixed(1) + ')">Predicted ' + esc(target) + '</text>' +
@@ -9046,7 +9514,7 @@ function bwErrorBarsSvg(rows) {
   const x = v => l + Number(v) / max * (w - l - r);
   const bars = data.map((d, i) => {
     const y = t + i * 22;
-    const color = i === 0 ? '#e23b46' : '#2563eb';
+    const color = i === 0 ? 'var(--red)' : 'var(--accent)';
     return '<text class="bw-bar-label" x="' + (l - 8) + '" y="' + (y + 11) + '" text-anchor="end">' + esc(bwResultShortCell(d.cell_id)) + '</text>' +
       '<rect x="' + l + '" y="' + y + '" width="' + Math.max(2, x(d.rmse) - l).toFixed(1) + '" height="' + barH + '" rx="3" fill="' + color + '" fill-opacity="' + (i === 0 ? '.9' : '.72') + '"/>' +
       '<text class="bw-plot-label" x="' + (x(d.rmse) + 6).toFixed(1) + '" y="' + (y + 11) + '">' + bwFmtMetric(d.rmse) + '</text>';
