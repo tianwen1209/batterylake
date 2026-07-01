@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BatteryLake — Battery Data Intelligence Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script>
 (() => {
   const storedTheme = localStorage.getItem('bt-theme');
@@ -56,7 +56,7 @@
   --header-h: 0px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body { font-family: var(--sans); background: var(--bg2); color: var(--text1); min-height: 100vh; }
 
 /* ══════════════════════════════════════════════════════════════
@@ -116,11 +116,11 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 /* ── TOP BAR ── */
 .topbar {
   background: var(--bg); border-bottom: 1px solid var(--border);
-  padding: 12px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+  padding: 12px 32px; display: flex; align-items: center; gap: 10px;
   position: sticky; top: 0; z-index: 50;
 }
 .search-box {
-  flex: 0 1 420px; max-width: 420px; position: relative;
+  flex: 1 1 auto; max-width: none; min-width: 0; position: relative;
 }
 .search-box input {
   width: 100%; padding: 10px 14px 10px 40px; border: 1px solid var(--border);
@@ -524,10 +524,13 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .dataset-section-icon.cat-ev { background: var(--amber); }
 .dataset-section-meta { margin-left: 4px; color: var(--text3); font-size: 13px; font-family: var(--mono); }
 .dataset-see-all {
-  border: 0; background: transparent; color: var(--accent); font-family: var(--sans);
-  font-size: 14px; font-weight: 800; cursor: pointer; padding: 6px 0;
+  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--text3);
+  cursor: pointer; padding: 0; transition: background .15s, border-color .15s, color .15s;
 }
-.dataset-see-all:hover { color: var(--accent-hover); text-decoration: underline; }
+.dataset-see-all:hover { color: var(--accent); background: var(--bg3); border-color: var(--border2); }
+.dataset-section-head { cursor: pointer; }
+.dataset-section-head .dataset-see-all { flex-shrink: 0; }
 .dataset-card-grid {
   display: flex; flex-direction: column; gap: 12px;
 }
@@ -2500,12 +2503,12 @@ select:focus-visible, [tabindex]:focus-visible {
 }
 .sidebar::-webkit-scrollbar { width: 8px; }
 .sidebar::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--text4) 30%, transparent); border: none; }
-.sidebar-brand { padding: 6px 18px 0; border-bottom: 0; }
+.sidebar-brand { padding: 15px 18px; border-bottom: 0; }
 .sidebar-brand svg { filter: drop-shadow(0 3px 8px rgba(42,95,234,.45)); }
 .sidebar-brand-text { font-size: 19px; }
 .sidebar-brand-sub { font-size: 11px; color: var(--sidebar-section); }
 .sidebar-section { font-size: 11px; letter-spacing: .14em; color: var(--sidebar-section); padding: 22px 20px 8px; }
-.sidebar-brand + .sidebar-section { padding-top: 0; }
+.sidebar-brand + .sidebar-section { padding-top: 0; margin-top: 0; }
 .sidebar-nav { padding: 0 10px 4px; }
 .sidebar-nav li a {
   border-radius: 9px; padding: 9px 12px;
@@ -3306,11 +3309,17 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 
 /* ── Home landing page ─────────────────────────────────────────── */
 #page-home {
+  --home-font: 'Noto Sans', var(--sans);
   min-height: calc(100vh - 58px);
   padding: 0 clamp(32px, 5.2vw, 82px) 96px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(247,250,255,.96) 54%, rgba(243,247,253,.98) 100%);
+  font-family: var(--home-font);
   overflow: hidden;
+}
+#page-home,
+#page-home * {
+  font-family: var(--home-font) !important;
 }
 .home-hero {
   width: min(1180px, 100%);
@@ -3319,14 +3328,19 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   padding: clamp(118px, 14vh, 168px) 0 clamp(92px, 12vh, 146px);
   position: relative;
 }
+.home-hero-copy {
+  position: relative;
+  z-index: 2;
+  width: min(46%, 560px);
+  min-width: 430px;
+}
 .home-hero h1 {
   width: fit-content;
   max-width: 720px;
   margin: 0;
-  font-family: var(--sans);
-  font-size: clamp(42px, 5.4vw, 82px);
+  font-size: clamp(26.88px, 3.456vw, 52.48px);
   line-height: .94;
-  font-weight: 900;
+  font-weight: 500;
   letter-spacing: 0;
   color: var(--text1);
 }
@@ -3338,10 +3352,49 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   font-weight: 650;
   color: color-mix(in srgb, var(--text2) 78%, var(--accent));
 }
+.home-learn-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 24px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 84%, var(--accent-light));
+  color: var(--accent);
+  box-shadow: 0 8px 22px rgba(37,99,235,.10);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  transition: background .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.home-learn-more:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(37,99,235,.20);
+  transform: translateY(-1px);
+}
+.home-hero-art {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: clamp(44px, 6.2vw, 82px);
+  width: min(760px, calc(50vw - 144px));
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 46px rgba(15,23,42,.10));
+  pointer-events: none;
+  user-select: none;
+}
 .home-metrics-wrap {
   width: min(1180px, 100%);
   margin: 0 auto;
   padding: clamp(34px, 5vw, 66px) 0 0;
+  transform: translateY(-100px);
 }
 #page-home .home-metrics {
   display: grid;
@@ -3361,7 +3414,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   justify-content: center;
   border: 1px solid rgba(191,219,254,.78);
   border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255,255,255,.99), rgba(248,250,252,.98));
+  background: transparent;
   box-shadow:
     0 0 0 1px rgba(255,255,255,.92) inset,
     0 12px 28px rgba(15,23,42,.055),
@@ -3370,27 +3423,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   z-index: 0;
 }
 #page-home .home-metrics .metric-cell::before {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  padding: 8px;
-  border-radius: 16px;
-  background:
-    linear-gradient(135deg, rgba(125,211,252,.58), rgba(37,99,235,.50) 46%, rgba(14,165,233,.30) 72%, rgba(191,219,254,.42)),
-    radial-gradient(circle at 12% 18%, rgba(56,189,248,.58), transparent 34%),
-    radial-gradient(circle at 88% 82%, rgba(37,99,235,.50), transparent 36%);
-  filter: blur(9px);
-  opacity: .56;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  z-index: -1;
-  pointer-events: none;
+  display: none;
 }
 #page-home .home-metrics .metric-cell::after {
   display: none;
@@ -3430,14 +3463,23 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   font-weight: 800;
   color: var(--text2);
 }
+#page-home .home-metrics .metric-detail {
+  margin-top: 4px;
+}
 
 @media (max-width: 1020px) {
   #page-home .home-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+@media (max-width: 1100px) {
+  .home-hero-copy { width: 100%; min-width: 0; }
+  .home-hero-art { position: relative; left: auto; top: auto; display: block; width: min(620px, 100%); margin: 32px 0 -42px auto; }
+}
 @media (max-width: 760px) {
   #page-home { padding-left: 20px; padding-right: 20px; padding-bottom: 64px; }
   .home-hero { min-height: 319px; padding-top: 84px; padding-bottom: 72px; }
-  .home-hero h1 { font-size: clamp(34px, 9.8vw, 42px); }
+  .home-hero-copy { width: 100%; min-width: 0; }
+  .home-hero-art { position: relative; left: auto; top: auto; display: block; width: min(520px, 118vw); margin: 28px -8vw -34px auto; }
+  .home-hero h1 { font-size: clamp(21.76px, 6.272vw, 26.88px); }
   .home-hero p { font-size: clamp(15px, 4vw, 16px); }
   #page-home .home-metrics { grid-template-columns: 1fr; gap: 22px; }
   #page-home .home-metrics .metric-cell { min-height: 168px; padding: 28px; }
@@ -3491,7 +3533,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   --dataset-lift-transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease, background .16s ease;
 }
 #page-datasets .dataset-card-grid .dataset-card {
-  background: var(--bg);
+  background: transparent !important;
   transition: var(--dataset-lift-transition);
 }
 #page-datasets .dataset-card-grid .dataset-card::before {
@@ -3751,6 +3793,16 @@ select:focus,
   background: var(--surface-alt) !important;
 }
 
+#page-home .home-metrics .metric-cell,
+#page-home .home-metrics .metric-cell:hover,
+#page-home .home-metrics,
+#page-datasets .dataset-grid,
+#page-datasets .dataset-card-grid,
+#page-datasets .dataset-card-grid .dataset-card,
+#page-datasets .dataset-card-grid .dataset-card:hover {
+  background: transparent !important;
+}
+
 .modal-backdrop { background: var(--overlay) !important; }
 .modal-link-row:hover { background: var(--accent-light) !important; border-color: var(--accent) !important; }
 
@@ -3799,8 +3851,12 @@ pre {
   background: transparent !important;
 }
 
+[data-theme="dark"] .home-hero-art {
+  filter: drop-shadow(0 22px 46px rgba(0,0,0,.30));
+}
+
 [data-theme="dark"] #page-home .home-metrics .metric-cell {
-  background: linear-gradient(180deg, var(--surface-raised), var(--surface)) !important;
+  background: transparent !important;
   border-color: var(--border2) !important;
   box-shadow: var(--card-shadow) !important;
 }
@@ -3825,7 +3881,7 @@ pre {
 <!-- ════════════════ SIDEBAR ════════════════ -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <img class="sidebar-brand-logo" src="assets/batterylake_logo.png" alt="BatteryLake">
+    <img class="sidebar-brand-logo" id="sidebar-logo" src="assets/logo-light.png" alt="BatteryLake">
   </div>
 
   <div class="sidebar-section">Explore</div>
@@ -3915,7 +3971,7 @@ pre {
   <div class="topbar">
     <div class="search-box" id="topbar-search-box">
       <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-      <input type="text" id="topbarSearchInput" placeholder="Search" aria-label="Search datasets">
+      <input type="text" id="topbarSearchInput" placeholder="Search datasets" aria-label="Search datasets">
     </div>
     <button class="topbar-search-btn" type="button" onclick="triggerTopbarSearch()">Search</button>
     <button class="theme-toggle" type="button" id="theme-toggle" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Switch theme">
@@ -3929,8 +3985,12 @@ pre {
        ═══════════════════════════════════════ -->
   <div class="page" id="page-home">
     <div class="home-hero">
-      <h1>BatteryLake</h1>
-      <p>BatteryLake unifies curated battery datasets, standardized metadata, and cycle intelligence for reproducible battery research.</p>
+      <div class="home-hero-copy">
+        <h1>BatteryLake</h1>
+        <p>BatteryLake unifies curated battery datasets,<br> standardized metadata, and cycle intelligence for<br> reproducible battery research.</p>
+        <a class="home-learn-more" href="https://github.com/tianwen1209/batterylake" target="_blank" rel="noopener noreferrer">Learn More</a>
+      </div>
+      <img class="home-hero-art" src="assets/home.png" alt="" aria-hidden="true">
     </div>
 
     <div class="home-metrics-wrap">
@@ -3945,7 +4005,8 @@ pre {
         </div>
         <div class="metric-cell">
           <div class="metric-val accent" id="m-years">0</div>
-          <div class="metric-sub" id="m-years-sub">Years span</div>
+          <div class="metric-sub">Years span</div>
+          <div class="metric-sub metric-detail">2007–2026</div>
         </div>
         <div class="metric-cell">
           <div class="metric-val accent" id="m-cycles">0</div>
@@ -4833,6 +4894,7 @@ bash run_benchmark.sh</pre>
       <div class="team-grid">
         <div class="team-card"><div class="team-name">Liu Kefan</div><div class="team-role">Frontend Engineer</div></div>
         <div class="team-card"><div class="team-name">Cao Han</div><div class="team-role">Frontend Engineer</div></div>
+        <div class="team-card"><div class="team-name">Cai Yezi</div><div class="team-role">Frontend Engineer</div></div>
       </div>
 
       <h3>Affiliation</h3>
@@ -6164,11 +6226,11 @@ function animateHomeMetrics() {
     setHomeMetric('m-cells', Math.round(final.cells * p).toLocaleString('en-US'));
     setHomeMetric('m-volume', `${(final.volumeGB * p).toFixed(1)} <span class="metric-unit">GB</span>`);
     if (progress >= 1) {
-      setHomeMetric('m-datasets', '41');
-      setHomeMetric('m-labs', '34');
+      setHomeMetric('m-datasets', '41+');
+      setHomeMetric('m-labs', '34+');
       setHomeMetric('m-years', '19');
       setHomeMetric('m-cycles', '331.8<span class="metric-unit">K</span>');
-      setHomeMetric('m-cells', '1499');
+      setHomeMetric('m-cells', '1499+');
       setHomeMetric('m-volume', '9.7 <span class="metric-unit">GB</span>');
     }
   };
@@ -6203,6 +6265,7 @@ let activeSort = 'newest';
 let activeDomains = new Set();
 let activeDuties = new Set();
 let allDatasetsApplied = false;
+let expandedDatasetCategories = new Set(['cycle_aging']);
 let pendingChems = new Set();
 let pendingForms = new Set();
 let pendingCategories = new Set();
@@ -6229,6 +6292,21 @@ const DATASET_CATEGORIES = [
   { key: 'eis', label: 'EIS', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 17c3-9 5 3 8-6s5 3 8-4"/><path d="M4 20h16M4 4v16"/></svg>' },
   { key: 'ev', label: 'EV Field', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17h10l2-7H5l2 7z"/><path d="M7 17l-1 3M17 17l1 3M8 10l1-4h6l1 4"/><circle cx="9" cy="20" r="1"/><circle cx="15" cy="20" r="1"/></svg>' }
 ];
+
+function datasetCategoryToggleIcon(expanded) {
+  return expanded
+    ? '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>'
+    : '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+}
+
+function toggleDatasetCategorySection(cat) {
+  if (expandedDatasetCategories.has(cat)) {
+    expandedDatasetCategories.delete(cat);
+  } else {
+    expandedDatasetCategories.add(cat);
+  }
+  filterDatasets();
+}
 
 function getChemClass(chem) {
   if (!chem) return 'chem-Unknown';
@@ -6392,20 +6470,18 @@ function renderDatasets(data) {
   grid.innerHTML = viewCats.map(cat => {
     const allForCat = data.filter(d => d.category === cat.key);
     if (!allForCat.length) return '';
-    const shown = allForCat.slice(0, 4);
+    const expanded = expandedDatasetCategories.has(cat.key);
     return `
-      <section class="dataset-section">
-        <div class="dataset-section-head">
+      <section class="dataset-section ${expanded ? 'is-expanded' : 'is-collapsed'}">
+        <div class="dataset-section-head" role="button" tabindex="0" aria-expanded="${expanded ? 'true' : 'false'}" onclick="toggleDatasetCategorySection('${cat.key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDatasetCategorySection('${cat.key}')}">
           <div class="dataset-section-title">
             <span class="dataset-section-icon ${getCatClass(cat.key)}">${cat.icon}</span>
             <h2>${esc(cat.label)}</h2>
             <span class="dataset-section-meta">${allForCat.length}</span>
           </div>
-          <button class="dataset-see-all" onclick="showDatasetCategory('${cat.key}')">See All</button>
+          <button class="dataset-see-all" type="button" aria-label="${expanded ? 'Collapse' : 'Expand'} ${escAttr(cat.label)}" onclick="event.stopPropagation();toggleDatasetCategorySection('${cat.key}')">${datasetCategoryToggleIcon(expanded)}</button>
         </div>
-        <div class="dataset-card-grid">
-          ${shown.map(datasetCardHTML).join('')}
-        </div>
+        ${expanded ? `<div class="dataset-card-grid">${allForCat.map(datasetCardHTML).join('')}</div>` : ''}
       </section>
     `;
   }).join('') || '<div class="dataset-empty">No datasets match your filters.</div>';
@@ -6684,6 +6760,7 @@ function setTheme(theme) {
   document.documentElement.dataset.theme = resolved;
   document.documentElement.style.colorScheme = resolved;
   localStorage.setItem('bt-theme', resolved);
+  updateThemeLogo(resolved);
   updateThemeToggle();
 }
 
@@ -6691,6 +6768,14 @@ function toggleTheme() {
   setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 }
 window.toggleTheme = toggleTheme;
+
+function updateThemeLogo(theme) {
+  const logo = document.getElementById('sidebar-logo');
+  if (!logo) return;
+  const isDark = theme === 'dark';
+  const nextSrc = isDark ? 'assets/logo-dark.png' : 'assets/logo-light.png';
+  if (!logo.getAttribute('src')?.endsWith(nextSrc)) logo.src = nextSrc;
+}
 
 function updateThemeToggle() {
   const btn = document.getElementById('theme-toggle');
@@ -6701,6 +6786,7 @@ function updateThemeToggle() {
 }
 
 function initTopbarControls() {
+  updateThemeLogo(document.documentElement.dataset.theme);
   updateThemeToggle();
   const input = document.getElementById('topbarSearchInput');
   if (!input) return;
