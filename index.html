@@ -4,7 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BatteryLake — Battery Data Intelligence Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+(() => {
+  const storedTheme = localStorage.getItem('bt-theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+})();
+</script>
 <style>
 /* ══════════════════════════════════════════════════════════════
    CSS VARIABLES & RESET
@@ -13,12 +22,12 @@
   --bg: #ffffff;
   --bg2: #f7f8fb;
   --bg3: #eef1f6;
-  --sidebar-bg: #1b2a4a;
-  --sidebar-hover: #243560;
-  --sidebar-active: #2d4278;
-  --sidebar-text: #b8c5dc;
-  --sidebar-text-active: #ffffff;
-  --sidebar-section: #7889a8;
+  --sidebar-bg: var(--bg2);
+  --sidebar-hover: #eef1f6;
+  --sidebar-active: #ebf0ff;
+  --sidebar-text: #2d3748;
+  --sidebar-text-active: #1d4ed8;
+  --sidebar-section: #718096;
   --border: #dce1ea;
   --border2: #c8cfd9;
   --text1: #1a2332;
@@ -47,7 +56,7 @@
   --header-h: 0px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body { font-family: var(--sans); background: var(--bg2); color: var(--text1); min-height: 100vh; }
 
 /* ══════════════════════════════════════════════════════════════
@@ -68,6 +77,11 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .sidebar-brand svg { flex-shrink: 0; }
+.sidebar-brand-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .sidebar-brand-text { font-family: var(--display); font-weight: 700; font-size: 18px; color: #fff; letter-spacing: -0.02em; }
 .sidebar-brand-sub { font-size: 13px; color: var(--sidebar-section); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
 
@@ -79,22 +93,22 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   color: var(--sidebar-text); text-decoration: none; transition: all 0.15s;
   cursor: pointer;
 }
-.sidebar-nav li a:hover { background: var(--sidebar-hover); color: #e2e8f0; }
+.sidebar-nav li a:hover { background: var(--sidebar-hover); color: var(--text1); }
 .sidebar-nav li a.active { background: var(--sidebar-active); color: var(--sidebar-text-active); font-weight: 600; }
 .sidebar-nav li a .nav-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0.7; }
 .sidebar-nav li a.active .nav-icon { opacity: 1; }
 .sidebar-nav li a .nav-badge {
-  margin-left: auto; background: rgba(255,255,255,0.12); color: var(--sidebar-text);
+  margin-left: auto; background: #e6ebf3; color: var(--sidebar-text);
   font-size: 13px; font-weight: 600; padding: 1px 7px; border-radius: 10px; font-family: var(--mono);
 }
-.sidebar-nav li a.active .nav-badge { background: rgba(255,255,255,0.2); color: #fff; }
+.sidebar-nav li a.active .nav-badge { background: rgba(37,99,235,0.12); color: var(--sidebar-text-active); }
 
 .sidebar-footer {
-  margin-top: auto; padding: 16px 18px; border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: auto; padding: 16px 18px; border-top: 1px solid var(--border);
   font-size: 13px; color: var(--sidebar-section); line-height: 1.6;
 }
 .sidebar-footer a { color: var(--sidebar-text); text-decoration: none; }
-.sidebar-footer a:hover { color: #fff; }
+.sidebar-footer a:hover { color: var(--text1); }
 
 /* ── MAIN ── */
 .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
@@ -102,23 +116,53 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 /* ── TOP BAR ── */
 .topbar {
   background: var(--bg); border-bottom: 1px solid var(--border);
-  padding: 12px 32px; display: flex; align-items: center; gap: 16px;
+  padding: 12px 32px; display: flex; align-items: center; gap: 10px;
   position: sticky; top: 0; z-index: 50;
 }
 .search-box {
-  flex: 1; max-width: 560px; position: relative;
+  flex: 1 1 auto; max-width: none; min-width: 0; position: relative;
 }
 .search-box input {
   width: 100%; padding: 10px 14px 10px 40px; border: 1px solid var(--border);
   border-radius: 8px; font-size: 14px; font-family: var(--sans);
   background: var(--bg2); color: var(--text1); outline: none; transition: all 0.2s;
 }
-.search-box input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-light); }
+.search-box input:focus { border-color: var(--accent); background: var(--bg); box-shadow: 0 0 0 3px var(--accent-light); }
 .search-box input::placeholder { color: var(--text4); }
 .search-box .search-icon {
   position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
   color: var(--text4); pointer-events: none;
 }
+.topbar-search-btn,
+.theme-toggle {
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.topbar-search-btn {
+  padding: 0 16px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.topbar-search-btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-1px); }
+.theme-toggle {
+  width: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text2);
+}
+.theme-toggle:hover { background: var(--bg3); border-color: var(--border2); color: var(--text1); }
+.theme-toggle .theme-icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .theme-icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .theme-icon-moon { display: block; }
 .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 .topbar-btn {
   padding: 8px 16px; border-radius: 7px; font-size: 13px; font-weight: 600; font-family: var(--sans);
@@ -314,10 +358,204 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   font-size: 13px; font-weight: 500; padding: 2px 8px; border-radius: 4px;
   background: var(--bg3); color: var(--text3);
 }
-.dc-tag.cat-cycle { background: var(--teal-bg); color: var(--teal); }
-.dc-tag.cat-safety { background: var(--red-bg); color: var(--red); }
-.dc-tag.cat-eis { background: var(--purple-bg); color: var(--purple); }
-.dc-tag.cat-ev { background: var(--amber-bg); color: var(--amber); }
+.dc-tag.cat-cycle,
+.dc-tag.cat-safety,
+.dc-tag.cat-eis,
+.dc-tag.cat-ev { background: var(--tag-bg, var(--bg3)); color: var(--tag-fg, var(--text3)); }
+
+/* ── KAGGLE-INSPIRED DATASETS LANDING ── */
+.datasets-landing {
+  max-width: 1180px;
+}
+.datasets-hero {
+  padding: 24px 0 28px;
+  margin-bottom: 8px;
+}
+.datasets-hero .page-title { font-size: 34px !important; }
+.datasets-hero .page-desc { max-width: 680px; }
+.datasets-actions { margin-top: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.dataset-upload-input { display: none; }
+.dataset-contribute-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 38px; padding: 0 15px; border: 0; border-radius: 8px;
+  background: var(--accent); color: #fff; font-family: var(--sans);
+  font-size: 14px; font-weight: 800; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(37,99,235,.24);
+  transition: background .15s, box-shadow .15s, transform .15s;
+}
+.dataset-contribute-btn:hover { background: var(--accent-hover); box-shadow: 0 6px 16px rgba(37,99,235,.30); transform: translateY(-1px); }
+.dataset-search-panel {
+  margin: 10px 0 32px;
+  padding: 8px 0 10px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+}
+.dataset-search-row { display: flex; align-items: center; gap: 10px; }
+.dataset-search {
+  flex: 1; min-width: 220px; position: relative;
+}
+.dataset-search input {
+  width: 100%; height: 46px; padding: 0 42px 0 44px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--accent-light)); border-radius: 9px;
+  background: color-mix(in srgb, var(--bg2) 88%, #fff); color: var(--text1); font-family: var(--sans);
+  box-shadow: 0 1px 2px rgba(22,30,48,.035), 0 5px 14px rgba(22,30,48,.035);
+  font-size: 15px; outline: none; transition: var(--dataset-lift-transition, border-color .16s ease, box-shadow .16s ease, transform .16s ease, background .16s ease);
+}
+.dataset-search input:focus {
+  background: var(--dataset-lift-bg, color-mix(in srgb, var(--bg) 96%, var(--accent-light)));
+  border-color: var(--dataset-lift-border, color-mix(in srgb, var(--accent) 42%, var(--border)));
+  box-shadow: var(--dataset-lift-shadow, 0 0 0 3px rgba(37,99,235,.09), 0 12px 28px rgba(37,99,235,.13), var(--card-shadow-hover));
+}
+.dataset-search .search-icon {
+  position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+  color: var(--text4); pointer-events: none; display: inline-flex; align-items: center;
+}
+.dataset-filter-toggle {
+  height: 46px; padding: 0 14px; display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border); border-radius: 9px; background: color-mix(in srgb, var(--bg2) 94%, #fff);
+  color: var(--text2); font-family: var(--sans); font-size: 14px; font-weight: 800;
+  cursor: pointer; transition: border-color .15s, background .15s;
+}
+.dataset-filter-toggle:hover { background: var(--bg2); border-color: var(--border2); }
+.dataset-filter-popover {
+  display: none;
+  position: absolute;
+  right: 18px;
+  top: calc(100% - 8px);
+  width: min(760px, calc(100% - 36px));
+  z-index: 30;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(15,23,42,.16), var(--card-shadow);
+}
+.dataset-filter-popover.open { display: block; }
+.dataset-filter-all {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-bottom: 12px; margin-bottom: 13px; border-bottom: 1px solid var(--border);
+}
+.dataset-filter-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+.dataset-filter-grid .filter-group {
+  display: flex; align-items: flex-start; gap: 7px; padding: 0; border-left: 0;
+}
+.dataset-filter-grid .filter-group + .filter-group { border-left: 0; padding-left: 0; }
+.dataset-filter-grid .filter-label {
+  width: 100%; margin-bottom: 1px; text-transform: none; letter-spacing: 0 !important;
+  font-size: 13px !important; color: var(--text2);
+}
+.dataset-filter-grid .filter-tag { border-radius: 999px; padding: 4px 10px; }
+.filter-type-chemistry { --tag-fg: #9a6a06; --tag-bg: #fff7d6; --tag-border: #ead58a; }
+.filter-type-category { --tag-fg: #0d9488; --tag-bg: #e6fbf7; --tag-border: #a9ddd6; }
+.filter-type-profile { --tag-fg: #6d5bd0; --tag-bg: #f2efff; --tag-border: #ccc3f4; }
+.filter-type-form { --tag-fg: #48638f; --tag-bg: #edf3fb; --tag-border: #bcc9dd; }
+.filter-type-domain { --tag-fg: #0b7694; --tag-bg: #e8f8fc; --tag-border: #acd7e2; }
+.filter-type-all { --tag-fg: #2f6f56; --tag-bg: #eaf8f0; --tag-border: #b5d8c4; }
+.filter-type-status { --tag-fg: var(--text3); --tag-bg: var(--bg3); --tag-border: var(--border); }
+.filter-token {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+}
+.filter-token.active,
+.filter-token.is-active {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tag-fg) 16%, transparent) !important;
+}
+.dataset-filter-actions {
+  display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; padding-top: 13px;
+  border-top: 1px solid var(--border);
+}
+.dataset-filter-action {
+  height: 34px; padding: 0 14px; border-radius: 8px; font-family: var(--sans);
+  font-size: 13px; font-weight: 800; cursor: pointer; border: 1px solid var(--border);
+  background: #fff; color: var(--text2);
+}
+.dataset-filter-action:hover { background: var(--bg2); border-color: var(--border2); }
+.dataset-filter-action.apply { background: var(--accent); border-color: var(--accent); color: #fff; }
+.dataset-filter-action.apply:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.applied-filter-chips { display: none; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.applied-filter-chips.has-chips { display: flex; }
+.applied-chip {
+  display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 8px 0 11px;
+  border-radius: 999px; border: 1px solid var(--tag-border, var(--border)); background: var(--tag-bg, var(--bg2));
+  color: var(--tag-fg, var(--text2)); font-size: 13px; font-weight: 800;
+}
+.applied-chip button {
+  width: 18px; height: 18px; border-radius: 50%; border: 0; background: transparent;
+  color: var(--text3); cursor: pointer; font-size: 15px; line-height: 1;
+}
+.applied-chip button:hover { background: var(--border); color: var(--text1); }
+.dataset-results-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin: 0 0 14px;
+}
+.dataset-results-head.browse { justify-content: flex-end; }
+.dataset-results-head.browse .filter-count,
+.dataset-results-head.browse .dataset-results-tools { display: none; }
+.filter-count {
+  color: var(--text1);
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1.24;
+}
+.dataset-results-tools { display: flex; align-items: center; gap: 12px; }
+.dataset-section { margin-top: 26px; }
+.dataset-section:first-child { margin-top: 8px; }
+.dataset-section-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-bottom: 10px;
+}
+.dataset-section-title { display: inline-flex; align-items: center; gap: 9px; min-width: 0; }
+.dataset-section-title h2 { font-size: 23px; line-height: 1.22; font-weight: 850; color: var(--text1); margin: 0; }
+.dataset-section-icon {
+  width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; flex-shrink: 0; box-shadow: 0 8px 18px rgba(15,23,42,.10);
+}
+.dataset-section-icon.cat-cycle { background: var(--teal); }
+.dataset-section-icon.cat-safety { background: var(--red); }
+.dataset-section-icon.cat-eis { background: var(--purple); }
+.dataset-section-icon.cat-ev { background: var(--amber); }
+.dataset-section-meta { margin-left: 4px; color: var(--text3); font-size: 13px; font-family: var(--mono); }
+.dataset-see-all {
+  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--text3);
+  cursor: pointer; padding: 0; transition: background .15s, border-color .15s, color .15s;
+}
+.dataset-see-all:hover { color: var(--accent); background: var(--bg3); border-color: var(--border2); }
+.dataset-section-head { cursor: pointer; }
+.dataset-section-head .dataset-see-all { flex-shrink: 0; }
+.dataset-card-grid {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.dataset-card-grid .dataset-card {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+}
+.dataset-card-grid .dataset-card:hover { border-color: var(--border2); box-shadow: var(--card-shadow-hover); }
+.dataset-card-grid .dataset-card::before { border-radius: 10px 0 0 10px; }
+.dataset-empty {
+  padding: 34px; text-align: center; color: var(--text3);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+}
+@media (max-width: 960px) {
+  .dataset-filter-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .dataset-search-row, .dataset-results-head, .dataset-section-head { align-items: stretch; flex-direction: column; }
+  .dataset-filter-toggle, .dataset-contribute-btn { width: 100%; justify-content: center; }
+  .dataset-filter-popover { right: 12px; left: 12px; width: auto; }
+}
 
 /* ── DATASET DETAIL MODAL ── */
 .modal-overlay {
@@ -494,13 +732,27 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
   .main { margin-left: 0; }
-  .topbar { padding: 12px 16px; }
+  .topbar { padding: 12px 16px 12px 58px; }
+  .topbar-right { display: none; }
   .page { padding: 20px 16px 40px; }
   .hamburger { display: block !important; }
 }
 .hamburger {
   display: none; background: none; border: none; cursor: pointer; color: var(--text2);
   padding: 4px; margin-right: 4px;
+}
+.sidebar-mobile-toggle {
+  position: fixed;
+  top: 13px;
+  left: 14px;
+  z-index: 70;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text2);
+  box-shadow: var(--card-shadow);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -2128,8 +2380,14 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --bg: #ffffff;
   --bg2: #f3f6fc;
   --bg3: #e9eef7;
+  --surface: #ffffff;
+  --surface-alt: #f8fbff;
+  --surface-raised: #ffffff;
+  --input-bg: #ffffff;
+  --overlay: rgba(15,22,38,.46);
   --border: #e4e9f2;
   --border2: #cfd8e6;
+  --divider: #d7deeb;
   --text1: #151d2c;
   --text2: #414c5e;
   --text3: #6b7689;
@@ -2138,6 +2396,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --accent: #2a5fea;
   --accent-light: #eaf1ff;
   --accent-hover: #1d4bd1;
+  --accent-soft: rgba(42,95,234,.12);
 
   --green:  #15a05a;  --green-bg:  #e8f8ef;
   --amber:  #d9810a;  --amber-bg:  #fff4e3;
@@ -2145,10 +2404,66 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --teal:   #0e9b8e;  --teal-bg:   #e5f7f4;
   --purple: #7a45e6;  --purple-bg: #f1ecfe;
 
+  --sidebar-bg: var(--bg2);
+  --sidebar-hover: #e9eef7;
+  --sidebar-active: #eaf1ff;
+  --sidebar-text: #2d3748;
+  --sidebar-text-active: #1d4bd1;
+  --sidebar-section: #6b7689;
+
   --card-shadow: 0 1px 2px rgba(22,30,48,.04), 0 2px 8px rgba(22,30,48,.05);
   --card-shadow-hover: 0 10px 26px rgba(22,30,48,.10), 0 3px 8px rgba(22,30,48,.06);
+  --topbar-bg: rgba(255,255,255,.84);
+  --code-bg: #111827;
+  --code-text: #dbe7f7;
+  --chart-grid: #e7ebf1;
+  --chart-axis: #bac5d4;
 
   --radius-lg: 14px;
+}
+
+[data-theme="dark"] {
+  --bg: #111d31;
+  --bg2: #0a1424;
+  --bg3: #17263d;
+  --surface: #122037;
+  --surface-alt: #162840;
+  --surface-raised: #182a44;
+  --input-bg: #0e1a2d;
+  --overlay: rgba(2,8,23,.72);
+  --border: #263a59;
+  --border2: #3a5375;
+  --divider: #314664;
+  --text1: #f4f8ff;
+  --text2: #d7e1ef;
+  --text3: #9fb0c7;
+  --text4: #7588a2;
+
+  --accent: #7db3ff;
+  --accent-light: rgba(125,179,255,.16);
+  --accent-hover: #9bc5ff;
+  --accent-soft: rgba(125,179,255,.18);
+
+  --green:  #4ade80;  --green-bg:  rgba(74,222,128,.14);
+  --amber:  #fbbf24;  --amber-bg:  rgba(251,191,36,.15);
+  --red:    #fb7185;  --red-bg:    rgba(251,113,133,.15);
+  --teal:   #2dd4bf;  --teal-bg:   rgba(45,212,191,.14);
+  --purple: #b79cff;  --purple-bg: rgba(183,156,255,.15);
+
+  --sidebar-bg: var(--bg2);
+  --sidebar-hover: rgba(125,179,255,.10);
+  --sidebar-active: rgba(125,179,255,.16);
+  --sidebar-text: #c9d5e6;
+  --sidebar-text-active: #ddecff;
+  --sidebar-section: #8295ad;
+
+  --card-shadow: 0 1px 0 rgba(255,255,255,.035) inset, 0 16px 38px rgba(0,0,0,.26);
+  --card-shadow-hover: 0 1px 0 rgba(255,255,255,.045) inset, 0 22px 52px rgba(0,0,0,.34);
+  --topbar-bg: rgba(10,20,36,.86);
+  --code-bg: #08111f;
+  --code-text: #dbeafe;
+  --chart-grid: #263a59;
+  --chart-axis: #526985;
 }
 
 /* ── 2 · GLOBAL FEEL ─────────────────────────────────────────────── */
@@ -2158,12 +2473,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   background:
-    radial-gradient(1100px 460px at 82% -10%, rgba(42,95,234,.06), transparent 62%),
-    radial-gradient(760px 380px at -5% 0%, rgba(14,155,142,.045), transparent 60%),
+    radial-gradient(1100px 460px at 82% -10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 62%),
+    radial-gradient(760px 380px at -5% 0%, color-mix(in srgb, var(--teal) 7%, transparent), transparent 60%),
     var(--bg2);
   background-attachment: fixed;
 }
-::selection { background: rgba(42,95,234,.18); color: var(--text1); }
+::selection { background: var(--accent-light); color: var(--text1); }
 
 /* thin, quiet scrollbars */
 * { scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
@@ -2172,7 +2487,7 @@ body {
   background: var(--border2); border-radius: 10px;
   border: 3px solid transparent; background-clip: padding-box;
 }
-::-webkit-scrollbar-thumb:hover { background: #a9b5c8; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--text4); background-clip: padding-box; }
 ::-webkit-scrollbar-track { background: transparent; }
 
 /* keyboard focus ring */
@@ -2183,40 +2498,39 @@ select:focus-visible, [tabindex]:focus-visible {
 
 /* ── 3 · SIDEBAR ─────────────────────────────────────────────────── */
 .sidebar {
-  background:
-    radial-gradient(420px 220px at 28% -6%, rgba(96,165,250,.16), transparent 70%),
-    linear-gradient(180deg, #16233f 0%, #131d35 58%, #0f192d 100%);
-  border-right: 1px solid rgba(255,255,255,.06);
+  background: var(--bg2);
+  border-right: 1px solid var(--divider);
 }
 .sidebar::-webkit-scrollbar { width: 8px; }
-.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.13); border: none; }
-.sidebar-brand { padding: 22px 18px 18px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.sidebar::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--text4) 30%, transparent); border: none; }
+.sidebar-brand { padding: 15px 18px; border-bottom: 0; }
 .sidebar-brand svg { filter: drop-shadow(0 3px 8px rgba(42,95,234,.45)); }
 .sidebar-brand-text { font-size: 19px; }
-.sidebar-brand-sub { font-size: 11px; color: #7585a2; }
-.sidebar-section { font-size: 11px; letter-spacing: .14em; color: #74849f; padding: 22px 20px 8px; }
-.sidebar-nav { padding: 4px 10px; }
+.sidebar-brand-sub { font-size: 11px; color: var(--sidebar-section); }
+.sidebar-section { font-size: 11px; letter-spacing: .14em; color: var(--sidebar-section); padding: 22px 20px 8px; }
+.sidebar-brand + .sidebar-section { padding-top: 0; margin-top: 0; }
+.sidebar-nav { padding: 0 10px 4px; }
 .sidebar-nav li a {
   border-radius: 9px; padding: 9px 12px;
   transition: background .16s ease, color .16s ease, box-shadow .16s ease;
 }
-.sidebar-nav li a:hover { background: rgba(255,255,255,.06); color: #eaf0fb; }
+.sidebar-nav li a:hover { background: var(--sidebar-hover); color: var(--text1); }
 .sidebar-nav li a.active {
-  background: linear-gradient(90deg, rgba(42,95,234,.34), rgba(42,95,234,.12));
-  color: #fff;
-  box-shadow: inset 3px 0 0 #60a5fa, inset 0 0 0 1px rgba(96,165,250,.20);
+  background: var(--sidebar-active);
+  color: var(--sidebar-text-active);
+  box-shadow: inset 3px 0 0 var(--accent), inset 0 0 0 1px rgba(37,99,235,.14);
 }
-.sidebar-nav li a .nav-badge { background: rgba(255,255,255,.10); }
-.sidebar-nav li a.active .nav-badge { background: rgba(96,165,250,.32); color: #fff; }
-.sidebar-footer { border-top: 1px solid rgba(255,255,255,.07); }
+.sidebar-nav li a .nav-badge { background: var(--bg3); color: var(--sidebar-text); }
+.sidebar-nav li a.active .nav-badge { background: var(--accent-soft); color: var(--sidebar-text-active); }
+.sidebar-footer { border-top: 1px solid var(--border); }
 
 /* ── 4 · TOP BAR ─────────────────────────────────────────────────── */
 .topbar {
-  background: rgba(255,255,255,.82);
+  background: var(--topbar-bg);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 8px 22px -16px rgba(22,30,48,.5);
+  box-shadow: 0 8px 22px -16px color-mix(in srgb, var(--text1) 40%, transparent);
 }
 .search-box input { border-radius: 10px; }
 .search-box input:focus { box-shadow: 0 0 0 4px var(--accent-light); }
@@ -2992,6 +3306,184 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .metrics-panel .metric-cell.metric-featured-cell .metric-sub {
   color: color-mix(in srgb, var(--teal) 62%, var(--text3));
 }
+
+/* ── Home landing page ─────────────────────────────────────────── */
+#page-home {
+  --home-font: 'Noto Sans', var(--sans);
+  min-height: calc(100vh - 58px);
+  padding: 0 clamp(32px, 5.2vw, 82px) 96px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(247,250,255,.96) 54%, rgba(243,247,253,.98) 100%);
+  font-family: var(--home-font);
+  overflow: hidden;
+}
+#page-home,
+#page-home * {
+  font-family: var(--home-font) !important;
+}
+.home-hero {
+  width: min(1180px, 100%);
+  min-height: clamp(412px, 37.2vw, 490px);
+  margin: 0 auto;
+  padding: clamp(118px, 14vh, 168px) 0 clamp(92px, 12vh, 146px);
+  position: relative;
+}
+.home-hero-copy {
+  position: relative;
+  z-index: 2;
+  width: min(46%, 560px);
+  min-width: 430px;
+}
+.home-hero h1 {
+  width: fit-content;
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(26.88px, 3.456vw, 52.48px);
+  line-height: .94;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--text1);
+}
+.home-hero p {
+  max-width: 680px;
+  margin-top: clamp(24px, 3vw, 34px);
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.22;
+  font-weight: 650;
+  color: color-mix(in srgb, var(--text2) 78%, var(--accent));
+}
+.home-learn-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 24px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 84%, var(--accent-light));
+  color: var(--accent);
+  box-shadow: 0 8px 22px rgba(37,99,235,.10);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  transition: background .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.home-learn-more:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(37,99,235,.20);
+  transform: translateY(-1px);
+}
+.home-hero-art {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: clamp(44px, 6.2vw, 82px);
+  width: min(760px, calc(50vw - 144px));
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 46px rgba(15,23,42,.10));
+  pointer-events: none;
+  user-select: none;
+}
+.home-metrics-wrap {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 66px) 0 0;
+  transform: translateY(-100px);
+}
+#page-home .home-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(26px, 3.6vw, 46px);
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+#page-home .home-metrics .metric-cell {
+  min-height: 210px;
+  padding: clamp(28px, 3.4vw, 42px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(191,219,254,.78);
+  border-radius: 8px;
+  background: transparent;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.92) inset,
+    0 12px 28px rgba(15,23,42,.055),
+    0 0 24px rgba(37,99,235,.10);
+  isolation: isolate;
+  z-index: 0;
+}
+#page-home .home-metrics .metric-cell::before {
+  display: none;
+}
+#page-home .home-metrics .metric-cell::after {
+  display: none;
+}
+#page-home .home-metrics .metric-val {
+  display: inline-flex;
+  align-items: baseline;
+  min-height: 72px;
+  max-width: 100%;
+  font-family: var(--sans);
+  font-size: clamp(46px, 4.8vw, 70px) !important;
+  line-height: .9;
+  font-weight: 900;
+  letter-spacing: 0;
+  color: transparent !important;
+  background: linear-gradient(115deg, #1d4ed8 0%, #2563eb 44%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#page-home .home-metrics .metric-unit {
+  margin-left: .1em;
+  font-size: .4em;
+  line-height: 1;
+  font-weight: 850;
+  color: transparent;
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+#page-home .home-metrics .metric-sub {
+  margin-top: 18px;
+  font-size: clamp(15px, 1.45vw, 20px);
+  line-height: 1.22;
+  font-weight: 800;
+  color: var(--text2);
+}
+#page-home .home-metrics .metric-detail {
+  margin-top: 4px;
+}
+
+@media (max-width: 1020px) {
+  #page-home .home-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1100px) {
+  .home-hero-copy { width: 100%; min-width: 0; }
+  .home-hero-art { position: relative; left: auto; top: auto; display: block; width: min(620px, 100%); margin: 32px 0 -42px auto; }
+}
+@media (max-width: 760px) {
+  #page-home { padding-left: 20px; padding-right: 20px; padding-bottom: 64px; }
+  .home-hero { min-height: 319px; padding-top: 84px; padding-bottom: 72px; }
+  .home-hero-copy { width: 100%; min-width: 0; }
+  .home-hero-art { position: relative; left: auto; top: auto; display: block; width: min(520px, 118vw); margin: 28px -8vw -34px auto; }
+  .home-hero h1 { font-size: clamp(21.76px, 6.272vw, 26.88px); }
+  .home-hero p { font-size: clamp(15px, 4vw, 16px); }
+  #page-home .home-metrics { grid-template-columns: 1fr; gap: 22px; }
+  #page-home .home-metrics .metric-cell { min-height: 168px; padding: 28px; }
+}
 .model-table th,
 .bw-table th {
   font-size: 12px !important;
@@ -3023,6 +3515,364 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   }
   .page { padding-left: 20px; padding-right: 20px; }
 }
+#page-datasets .dataset-filter-grid .filter-label {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+#page-datasets .dataset-grid {
+  display: block;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+#page-datasets {
+  --dataset-lift-bg: color-mix(in srgb, var(--bg) 96%, var(--accent-light));
+  --dataset-lift-border: color-mix(in srgb, var(--accent) 42%, var(--border));
+  --dataset-lift-shadow: 0 0 0 3px rgba(37,99,235,.09), 0 12px 28px rgba(37,99,235,.13), var(--card-shadow-hover);
+  --dataset-lift-transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease, background .16s ease;
+}
+#page-datasets .dataset-card-grid .dataset-card {
+  background: transparent !important;
+  transition: var(--dataset-lift-transition);
+}
+#page-datasets .dataset-card-grid .dataset-card::before {
+  display: none;
+}
+#page-datasets .dataset-card-grid .dataset-card:hover {
+  background: var(--dataset-lift-bg) !important;
+  border-color: var(--dataset-lift-border) !important;
+  box-shadow: var(--dataset-lift-shadow) !important;
+  transform: translateY(-1px) !important;
+}
+#page-datasets .dataset-search input:hover,
+#page-datasets .dataset-search input:focus {
+  background: var(--dataset-lift-bg) !important;
+  border-color: var(--dataset-lift-border) !important;
+  box-shadow: var(--dataset-lift-shadow) !important;
+}
+#page-datasets .filter-token {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+}
+#page-datasets .dataset-filter-popover .filter-token:not(.active) {
+  background: var(--bg2) !important;
+  border-color: var(--border) !important;
+  color: var(--text3) !important;
+  box-shadow: none !important;
+}
+#page-datasets .filter-token.active,
+#page-datasets .filter-token.is-active {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tag-fg) 16%, transparent) !important;
+}
+#page-datasets .dataset-filter-popover .filter-token.active {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+}
+#page-datasets .dataset-section-title h2 {
+  font-size: 23px !important;
+}
+
+/* ── 16 · GLOBAL THEME COMPATIBILITY LAYER ───────────────────────── */
+body, .main, .page { color: var(--text1); }
+
+.topbar,
+.metric-cell,
+.dataset-card,
+.dataset-filter-popover,
+.modal,
+.bench-card,
+.stat-card,
+.team-card,
+.quality-card,
+.diag-section,
+.qa-json-card,
+.pp-main-card,
+.pp-side-card,
+.pp-op,
+.pp-check,
+.pp-guide-step,
+.api-route-rail,
+.api-playground,
+.api-param,
+.app-module,
+.contrib-file-tile,
+.api-card,
+.bw-panel,
+.bw-progress,
+.bw-package-card,
+.bw-results-upload,
+.bw-paper-card,
+.bw-chartbox,
+.bw-result-kpis .bw-rstat,
+.bw-phead,
+.bw-recipe-panel,
+.bw-feature-block,
+.bw-upload-zone,
+.bw-file-row,
+.ml-card,
+.ml-package,
+.ml-detail,
+.ml-chip {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text1);
+}
+
+.dataset-search-panel,
+.datasets-landing,
+.bw-pbody,
+.bw-results .bw-pbody,
+.bw-tabs,
+.modal-body,
+.pp-config,
+.bw-cellcol,
+.bw-excluded,
+.bw-empty-plot,
+.ml-search input,
+.ml-filter select,
+.api-response-strip div,
+.bw-data-place,
+.bw-data-path,
+.bw-data-place code,
+.bw-pill-soft,
+.bw-result-controls select,
+.bw-feat-add,
+.bw-file-ic,
+.bw-import-btn {
+  background: var(--surface-alt) !important;
+  border-color: var(--border) !important;
+  color: var(--text2) !important;
+}
+
+input:not([type="file"]),
+textarea,
+select,
+.search-box input,
+.dataset-search input,
+.bw-input,
+.pp-field input,
+.pp-field select {
+  background: var(--input-bg) !important;
+  color: var(--text1) !important;
+  border-color: var(--border) !important;
+}
+
+input::placeholder,
+textarea::placeholder { color: var(--text4) !important; }
+
+input:focus,
+textarea:focus,
+select:focus,
+.search-box input:focus,
+.dataset-search input:focus {
+  border-color: var(--accent) !important;
+  background: var(--surface-raised) !important;
+  box-shadow: 0 0 0 4px var(--accent-light) !important;
+}
+
+.btn-outline,
+.topbar-btn,
+.bw-btn,
+.ml-btn,
+.dataset-filter-action,
+.dataset-filter-toggle,
+.view-btn,
+.filter-sort select,
+.bw-seg-btn,
+.bw-cancel-btn {
+  background: var(--surface) !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+
+.btn-outline:hover,
+.topbar-btn:hover,
+.bw-btn:hover,
+.ml-btn:hover,
+.dataset-filter-action:hover,
+.dataset-filter-toggle:hover,
+.view-btn:hover {
+  background: var(--bg3) !important;
+  color: var(--text1) !important;
+  border-color: var(--border2) !important;
+}
+
+.view-btn.active,
+.bw-seg-btn.active,
+.bw-model-card.selected,
+.bw-model-item.selected,
+.bw-feat.selected {
+  background: var(--accent-light) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.bw-split-card.selected .bw-split-ic,
+.bw-model-item.selected .bw-model-ic {
+  background: var(--surface-raised) !important;
+  color: var(--accent) !important;
+}
+
+.btn-primary,
+.dataset-contribute-btn,
+.topbar-search-btn,
+.bw-btn-primary,
+.bw-download,
+.bw-run,
+.ml-btn-primary,
+.dataset-filter-action.apply {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.dataset-contribute-btn:hover,
+.topbar-search-btn:hover,
+.bw-btn-primary:hover,
+.bw-download:hover,
+.bw-run:hover,
+.ml-btn-primary:hover,
+.dataset-filter-action.apply:hover {
+  background: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+}
+
+.page-title,
+.dataset-section-title h2,
+.pp-panel-title,
+.pp-side-title,
+.api-route-title,
+.api-card-title,
+.bw-results-title,
+.bw-chart-title,
+.ml-card-title,
+.ml-d-title { color: var(--text1) !important; }
+
+.page-desc,
+.metric-sub,
+.dc-refname,
+.dc-stat,
+.pp-panel-copy,
+.pp-op p,
+.pp-side-sub,
+.api-card-copy,
+.bw-results-desc,
+.bw-lg,
+.ml-card-copy { color: var(--text3) !important; }
+
+.dataset-grid,
+.metrics-panel,
+.bw-table,
+.model-table { background: var(--border) !important; }
+
+.model-table th,
+.bw-table th {
+  background: var(--bg3) !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+
+.model-table td,
+.bw-table td {
+  background: var(--surface) !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+
+.model-table tr:hover td,
+.bw-table tr:hover td,
+.dataset-card:hover,
+.metric-cell:hover {
+  background: var(--surface-alt) !important;
+}
+
+#page-home .home-metrics .metric-cell,
+#page-home .home-metrics .metric-cell:hover,
+#page-home .home-metrics,
+#page-datasets .dataset-grid,
+#page-datasets .dataset-card-grid,
+#page-datasets .dataset-card-grid .dataset-card,
+#page-datasets .dataset-card-grid .dataset-card:hover {
+  background: transparent !important;
+}
+
+.modal-backdrop { background: var(--overlay) !important; }
+.modal-link-row:hover { background: var(--accent-light) !important; border-color: var(--accent) !important; }
+
+.status-done { background: var(--green-bg) !important; color: var(--green) !important; }
+.status-wip { background: var(--amber-bg) !important; color: var(--amber) !important; }
+.status-pending { background: var(--bg3) !important; color: var(--text3) !important; }
+.status-skip { background: var(--red-bg) !important; color: var(--red) !important; }
+
+.filter-type-chemistry { --tag-fg: #9a6a06; --tag-bg: #fff7d6; --tag-border: #ead58a; }
+.filter-type-category { --tag-fg: var(--teal); --tag-bg: var(--teal-bg); --tag-border: color-mix(in srgb, var(--teal) 35%, var(--border)); }
+.filter-type-profile { --tag-fg: var(--purple); --tag-bg: var(--purple-bg); --tag-border: color-mix(in srgb, var(--purple) 35%, var(--border)); }
+.filter-type-form { --tag-fg: var(--text2); --tag-bg: var(--bg3); --tag-border: var(--border2); }
+.filter-type-domain { --tag-fg: var(--accent); --tag-bg: var(--accent-light); --tag-border: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+.filter-type-all { --tag-fg: var(--green); --tag-bg: var(--green-bg); --tag-border: color-mix(in srgb, var(--green) 35%, var(--border)); }
+
+[data-theme="dark"] .filter-type-chemistry {
+  --tag-fg: #fde68a;
+  --tag-bg: rgba(251,191,36,.14);
+  --tag-border: rgba(251,191,36,.28);
+}
+
+.code-block,
+.pp-output,
+.pp-copy-code,
+.api-code-card,
+.bw-package-command,
+pre {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  border-color: color-mix(in srgb, var(--border2) 65%, transparent) !important;
+}
+
+.qa-code,
+.api-code,
+.bw-command-code,
+.pp-output-code { color: var(--code-text) !important; }
+
+.bw-plot-axis { stroke: var(--chart-axis) !important; }
+.bw-plot-grid { stroke: var(--chart-grid) !important; }
+.bw-plot-label,
+.bw-plot-note,
+.bw-bar-label { fill: var(--text3) !important; }
+
+[data-theme="dark"] .home-hero,
+[data-theme="dark"] #page-home {
+  background: transparent !important;
+}
+
+[data-theme="dark"] .home-hero-art {
+  filter: drop-shadow(0 22px 46px rgba(0,0,0,.30));
+}
+
+[data-theme="dark"] #page-home .home-metrics .metric-cell {
+  background: transparent !important;
+  border-color: var(--border2) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+[data-theme="dark"] .oh-hero,
+[data-theme="dark"] .contribute-hero,
+[data-theme="dark"] .api-hero,
+[data-theme="dark"] .qa-hero {
+  border-color: var(--border2) !important;
+}
+
+@media (max-width: 760px) {
+  .topbar { padding: 10px 14px 10px 58px; gap: 8px; }
+  .search-box { flex: 1 1 auto; min-width: 0; }
+  .topbar-search-btn { padding: 0 12px; }
+}
 </style>
 </head>
 <body>
@@ -3031,19 +3881,15 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 <!-- ════════════════ SIDEBAR ════════════════ -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <rect width="32" height="32" rx="8" fill="#2563eb"/>
-      <path d="M10 22V10h4c3 0 4.5 1.5 4.5 4s-1.5 4-4.5 4h-1.5V22H10zm2.5-6.5H14c1.2 0 2-.7 2-1.8s-.8-1.7-2-1.7h-1.5v3.5z" fill="#fff"/>
-      <rect x="20" y="10" width="2.5" height="12" rx="1" fill="#60a5fa"/>
-    </svg>
-    <div>
-      <div class="sidebar-brand-text">BatteryLake</div>
-      <div class="sidebar-brand-sub">Data Intelligence Platform</div>
-    </div>
+    <img class="sidebar-brand-logo" id="sidebar-logo" src="assets/logo-light.png" alt="BatteryLake">
   </div>
 
   <div class="sidebar-section">Explore</div>
   <ul class="sidebar-nav">
+    <li><a onclick="showPage('home', this)" id="nav-home">
+      <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M9 20v-6h6v6"/></svg></span>
+      Home
+    </a></li>
     <li><a class="active" onclick="showPage('datasets', this)" id="nav-datasets">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
       Datasets <span class="nav-badge" id="ds-count-badge">—</span>
@@ -3117,205 +3963,147 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 </nav>
 
 <!-- ════════════════ MAIN ════════════════ -->
+<button class="hamburger sidebar-mobile-toggle" type="button" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Open navigation">
+  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
 <div class="main">
   <!-- TOP BAR -->
   <div class="topbar">
-    <button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-    </button>
-    <div class="search-box" id="search-box">
+    <div class="search-box" id="topbar-search-box">
       <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-      <input type="text" id="searchInput" placeholder="Search by year, material, institution, format… (e.g. NASA 2019 LFP 21700)" oninput="onSearchInput()">
-      <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="Clear search" title="Clear search">×</button>
+      <input type="text" id="topbarSearchInput" placeholder="Search datasets" aria-label="Search datasets">
     </div>
-    <div class="topbar-right">
-      <button class="btn-contribute" onclick="showPage('contribute', document.querySelector('[onclick*=contribute]'))" title="Contribute your battery dataset">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-        Contribute Dataset
-      </button>
-      <span class="sync-status" id="sync-status"></span>
-      <input type="file" id="csv-upload" accept=".csv,text/csv" style="display:none" onchange="handleLocalCSV(event)">
-      <button class="topbar-btn btn-outline sync-btn" id="upload-btn" onclick="document.getElementById('csv-upload').click()" title="Upload dataset_registry.csv from local">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-2px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload CSV
-      </button>
-      <button class="topbar-btn btn-outline sync-btn" id="sync-btn" onclick="syncFromGitHub()" title="Try fetching CSV from public GitHub URL">
-        <span class="sync-icon">⟳</span> Sync
-      </button>
+    <button class="topbar-search-btn" type="button" onclick="triggerTopbarSearch()">Search</button>
+    <button class="theme-toggle" type="button" id="theme-toggle" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Switch theme">
+      <svg class="theme-icon-sun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="theme-icon-moon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A8.5 8.5 0 1111.21 3 6.6 6.6 0 0021 12.79z"/></svg>
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PAGE: HOME
+       ═══════════════════════════════════════ -->
+  <div class="page" id="page-home">
+    <div class="home-hero">
+      <div class="home-hero-copy">
+        <h1>BatteryLake</h1>
+        <p>BatteryLake unifies curated battery datasets,<br> standardized metadata, and cycle intelligence for<br> reproducible battery research.</p>
+        <a class="home-learn-more" href="https://github.com/tianwen1209/batterylake" target="_blank" rel="noopener noreferrer">Learn More</a>
+      </div>
+      <img class="home-hero-art" src="assets/home.png" alt="" aria-hidden="true">
+    </div>
+
+    <div class="home-metrics-wrap">
+      <div class="metrics-panel home-metrics" id="metrics-panel" aria-label="BatteryLake platform metrics">
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-datasets">0</div>
+          <div class="metric-sub" id="m-datasets-sub">Curated datasets</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-labs">0</div>
+          <div class="metric-sub">Worldwide institutions</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-years">0</div>
+          <div class="metric-sub">Years span</div>
+          <div class="metric-sub metric-detail">2007–2026</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-cycles">0</div>
+          <div class="metric-sub" id="m-cycles-sub">Total cycles</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-cells">0</div>
+          <div class="metric-sub" id="m-cells-sub">Total cells</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-volume">0 <span class="metric-unit">GB</span></div>
+          <div class="metric-sub">Data volume</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════
        PAGE: DATASETS
        ═══════════════════════════════════════ -->
-  <div class="page active" id="page-datasets">
-    <div class="page-header">
+  <div class="page active datasets-landing" id="page-datasets">
+    <div class="page-header datasets-hero">
       <div class="page-title">Datasets</div>
-      <div class="page-desc">Curated battery cycling datasets for machine learning benchmarks. Uniformly processed via the BatteryLake ETL pipeline with standardized metadata, time-series, and cycle summaries.</div>
-    </div>
-
-    <!-- 4-STEP PLATFORM WORKFLOW OVERVIEW -->
-    <div class="workflow-overview">
-      <div class="wo-step" onclick="showPage('datasets', document.getElementById('nav-datasets'))" style="cursor:pointer;">
-        <div class="wo-num s1">1</div>
-        <div class="wo-title">Choose Your Data</div>
-        <div class="wo-desc">Browse catalog, preview metadata, apply domain-aware filters</div>
-      </div>
-      <div class="wo-step" onclick="showPage('preprocessing', document.querySelector('[onclick*=preprocessing]'))" style="cursor:pointer;">
-        <div class="wo-num s2">2</div>
-        <div class="wo-title">Smart Processing</div>
-        <div class="wo-desc">Cleaning, resampling, metadata harmonization, cycle analytics</div>
-      </div>
-      <div class="wo-step" onclick="showPage('quality', document.querySelector('[onclick*=quality]'))" style="cursor:pointer;">
-        <div class="wo-num s3">3</div>
-        <div class="wo-title">Quality Assurance</div>
-        <div class="wo-desc">Completeness, consistency, accuracy &amp; validity scoring</div>
-      </div>
-      <div class="wo-step" onclick="showPage('apis', document.querySelector('[onclick*=apis]'))" style="cursor:pointer;">
-        <div class="wo-num s4">4</div>
-        <div class="wo-title">Platform APIs</div>
-        <div class="wo-desc">Data download, benchmarking, feature engineering, interpretation</div>
+      <div class="page-desc" id="datasets-subtitle">Explore BatteryLake's curated catalog for benchmark-ready cycling, safety, impedance, and EV field datasets.</div>
+      <div class="datasets-actions">
+        <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
+        <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Contribute Dataset
+        </button>
       </div>
     </div>
 
-    <!-- ONBOARDING / CATALOG HERO -->
-    <div class="onboarding-hero">
-      <div class="oh-icon">
-        <svg width="28" height="28" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+    <div class="dataset-search-panel">
+      <div class="dataset-search-row">
+        <div class="dataset-search" id="search-box">
+          <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+          <input type="text" id="searchInput" placeholder="Search datasets" oninput="onSearchInput()">
+          <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="Clear search" title="Clear search">×</button>
+        </div>
+        <button class="dataset-filter-toggle" onclick="toggleDatasetFilters()" aria-expanded="false" aria-controls="dataset-filter-grid">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h18M7 12h10M10 19h4"/></svg>
+          Filters
+        </button>
       </div>
-      <div class="oh-body">
-        <div class="oh-title">Dataset Catalog &amp; Onboarding</div>
-        <div class="oh-desc">Browse metadata-rich battery datasets. Filter by chemistry, form factor, application domain, environment, and duty profile to find the perfect data for your research.</div>
-      </div>
-      <div class="oh-actions">
-        <button class="oh-btn oh-btn-primary" onclick="document.getElementById('searchInput').focus()">Browse Catalog</button>
-        <button class="oh-btn oh-btn-outline" onclick="showPage('contribute', document.querySelector('[onclick*=contribute]'))">Contribute Data</button>
+      <div class="applied-filter-chips" id="applied-filter-chips"></div>
+      <div class="dataset-filter-popover" id="dataset-filter-popover">
+        <div class="dataset-filter-all">
+          <button class="filter-tag filter-token filter-type-all" data-all-datasets="true" onclick="toggleAllDatasetsFilter(this)">All datasets</button>
+        </div>
+        <div class="dataset-filter-grid" id="dataset-filter-grid">
+          <div class="filter-group">
+            <span class="filter-label">Category</span>
+            <div class="filter-tag filter-token filter-type-category" data-cat="cycle_aging" onclick="toggleCatFilter(this)">Cycle Aging</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="eis" onclick="toggleCatFilter(this)">EIS</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="ev" onclick="toggleCatFilter(this)">EV Field</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="safety" onclick="toggleCatFilter(this)">Safety</div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Chemistry</span>
+            <div class="filter-tag filter-token filter-type-chemistry" data-chem="LCO" onclick="toggleChemFilter(this)">LCO</div>
+            <div class="filter-tag filter-token filter-type-chemistry" data-chem="LFP" onclick="toggleChemFilter(this)">LFP</div>
+            <div class="filter-tag filter-token filter-type-chemistry" data-chem="NCA" onclick="toggleChemFilter(this)">NCA</div>
+            <div class="filter-tag filter-token filter-type-chemistry" data-chem="NMC" onclick="toggleChemFilter(this)">NMC</div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Domain</span>
+            <div class="filter-tag filter-token filter-type-domain" data-domain="ev" onclick="toggleDomainFilter(this)">EV</div>
+            <div class="filter-tag filter-token filter-type-domain" data-domain="grid" onclick="toggleDomainFilter(this)">Grid</div>
+            <div class="filter-tag filter-token filter-type-domain" data-domain="lab" onclick="toggleDomainFilter(this)">Lab</div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Form</span>
+            <div class="filter-tag filter-token filter-type-form" data-form="18650" onclick="toggleFormFilter(this)">18650</div>
+            <div class="filter-tag filter-token filter-type-form" data-form="21700" onclick="toggleFormFilter(this)">21700</div>
+            <div class="filter-tag filter-token filter-type-form" data-form="Cyl" onclick="toggleFormFilter(this)">Cyl</div>
+            <div class="filter-tag filter-token filter-type-form" data-form="Pouch" onclick="toggleFormFilter(this)">Pouch</div>
+            <div class="filter-tag filter-token filter-type-form" data-form="Prismatic" onclick="toggleFormFilter(this)">Prismatic</div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Profile</span>
+            <div class="filter-tag filter-token filter-type-profile" data-duty="cccv" onclick="toggleDutyFilter(this)">CC/CV</div>
+            <div class="filter-tag filter-token filter-type-profile" data-duty="dynamic" onclick="toggleDutyFilter(this)">Dynamic</div>
+            <div class="filter-tag filter-token filter-type-profile" data-duty="multi" onclick="toggleDutyFilter(this)">Multi-rate</div>
+          </div>
+        </div>
+        <div class="dataset-filter-actions">
+          <button class="dataset-filter-action" onclick="clearPendingDatasetFilters()">Clear</button>
+          <button class="dataset-filter-action apply" onclick="applyDatasetFilters()">Apply</button>
+        </div>
       </div>
     </div>
 
-    <!-- 10-METRIC OVERVIEW PANEL -->
-    <div class="metrics-panel" id="metrics-panel">
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-          Datasets
-        </div>
-        <div class="metric-val accent" id="m-datasets">—</div>
-        <div class="metric-sub" id="m-datasets-sub">curated</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          Total Cells
-        </div>
-        <div class="metric-val" id="m-cells">—</div>
-        <div class="metric-sub" id="m-cells-sub">individual units</div>
-      </div>
-      <div class="metric-cell metric-featured-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><polyline points="21 4 21 10 15 10"/></svg>
-          Total Cycles
-        </div>
-        <div class="metric-val teal metric-featured" id="m-cycles">—</div>
-        <div class="metric-sub" id="m-cycles-sub">charge/discharge</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          Data Volume
-        </div>
-        <div class="metric-val purple" id="m-volume">—<span class="metric-unit">GB</span></div>
-        <div class="metric-sub">time-series + summaries</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
-          Source Labs
-        </div>
-        <div class="metric-val" id="m-labs">—</div>
-        <div class="metric-sub">worldwide institutions</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg>
-          Chemistries
-        </div>
-        <div class="metric-val green" id="m-chems">—</div>
-        <div class="metric-sub" id="m-chems-sub">LFP · NMC · LCO · NCA</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M22 11h-2a2 2 0 000 4h2"/></svg>
-          Form Factors
-        </div>
-        <div class="metric-val" id="m-forms">—</div>
-        <div class="metric-sub" id="m-forms-sub">18650 · 21700 · pouch …</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
-          Temperatures
-        </div>
-        <div class="metric-val amber" id="m-temps">—</div>
-        <div class="metric-sub" id="m-temps-sub">°C test conditions</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Year Span
-        </div>
-        <div class="metric-val" id="m-years">—</div>
-        <div class="metric-sub" id="m-years-sub">publication range</div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-label">
-          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Completed
-        </div>
-        <div class="metric-val green" id="m-done">—</div>
-        <div class="metric-sub" id="m-done-sub">ETL pipeline done</div>
-      </div>
-    </div>
-
-    <div class="filter-bar">
+    <div class="dataset-results-head">
       <span class="filter-count" id="filter-count">— datasets</span>
-      <div class="filter-group">
-        <span class="filter-label">Chemistry</span>
-        <div class="filter-tag" data-chem="LFP" onclick="toggleChemFilter(this)">LFP</div>
-        <div class="filter-tag" data-chem="NMC" onclick="toggleChemFilter(this)">NMC</div>
-        <div class="filter-tag" data-chem="LCO" onclick="toggleChemFilter(this)">LCO</div>
-        <div class="filter-tag" data-chem="NCA" onclick="toggleChemFilter(this)">NCA</div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Form</span>
-        <div class="filter-tag" data-form="18650" onclick="toggleFormFilter(this)">18650</div>
-        <div class="filter-tag" data-form="21700" onclick="toggleFormFilter(this)">21700</div>
-        <div class="filter-tag" data-form="Pouch" onclick="toggleFormFilter(this)">Pouch</div>
-        <div class="filter-tag" data-form="Prismatic" onclick="toggleFormFilter(this)">Prismatic</div>
-        <div class="filter-tag" data-form="Cyl" onclick="toggleFormFilter(this)">Cyl</div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Category</span>
-        <div class="filter-tag active" data-cat="all" onclick="toggleCatFilter(this)">All</div>
-        <div class="filter-tag" data-cat="cycle_aging" onclick="toggleCatFilter(this)">Cycle Aging</div>
-        <div class="filter-tag" data-cat="safety" onclick="toggleCatFilter(this)">Safety</div>
-        <div class="filter-tag" data-cat="eis" onclick="toggleCatFilter(this)">EIS</div>
-        <div class="filter-tag" data-cat="ev" onclick="toggleCatFilter(this)">EV Field</div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Domain</span>
-        <div class="filter-tag" data-domain="lab" onclick="toggleDomainFilter(this)">Lab</div>
-        <div class="filter-tag" data-domain="ev" onclick="toggleDomainFilter(this)">EV</div>
-        <div class="filter-tag" data-domain="grid" onclick="toggleDomainFilter(this)">Grid</div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Profile</span>
-        <div class="filter-tag" data-duty="cccv" onclick="toggleDutyFilter(this)">CC/CV</div>
-        <div class="filter-tag" data-duty="dynamic" onclick="toggleDutyFilter(this)">Dynamic</div>
-        <div class="filter-tag" data-duty="multi" onclick="toggleDutyFilter(this)">Multi-rate</div>
-      </div>
-      <div class="filter-spacer"></div>
-      <div class="filter-sort">
+      <div class="dataset-results-tools">
+        <div class="filter-sort">
         <select id="sort-select" onchange="changeSort(this.value)" aria-label="Sort datasets">
           <option value="newest">Newest first</option>
           <option value="oldest">Oldest first</option>
@@ -3323,6 +4111,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
           <option value="most-cycles">Most cycles</option>
           <option value="az">Name A–Z</option>
         </select>
+        </div>
       </div>
     </div>
 
@@ -3787,8 +4576,8 @@ bash run_benchmark.sh</pre>
               </div>
             </div>
             <div class="bw-legend" id="bw-curve-legend">
-              <span class="bw-lg"><i style="background:#111827"></i>Ground truth</span>
-              <span class="bw-lg"><i style="background:#2563eb"></i>Prediction</span>
+              <span class="bw-lg"><i style="background:var(--text1)"></i>Ground truth</span>
+              <span class="bw-lg"><i style="background:var(--accent)"></i>Prediction</span>
             </div>
             <div id="bw-curve-chart" class="bw-plot-host"><div class="bw-empty-plot">Upload predictions.csv to render the trajectory.</div></div>
           </div>
@@ -4105,6 +4894,7 @@ bash run_benchmark.sh</pre>
       <div class="team-grid">
         <div class="team-card"><div class="team-name">Liu Kefan</div><div class="team-role">Frontend Engineer</div></div>
         <div class="team-card"><div class="team-name">Cao Han</div><div class="team-role">Frontend Engineer</div></div>
+        <div class="team-card"><div class="team-name">Cai Yezi</div><div class="team-role">Frontend Engineer</div></div>
       </div>
 
       <h3>Affiliation</h3>
@@ -5128,10 +5918,6 @@ const FALLBACK_DATASETS = [
   { id:'dataset_29', name:'Stanford-Onori Calendar Aging', ref_name:'2025_Stanford_Onori_LiIon_Calendar_MultiT', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'Stanford Onori Lab; Li-ion calendar aging; decade-long; Lam et al. Joule 2025', doi:'https://osf.io/ju325/', processed_url:'', student:'—', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_30', name:'Beihang EV Fault Diagnosis', ref_name:'2025_Beihang_LiIon_EV-BMS_MultiChem_MultiT', status:'pending', category:'ev', chemistry:'Multi', cells:'515 EVs', form:'EV-BMS', cycles:0, size_mb:0, notes:'Beihang Univ; 515 real EVs; 18.2M BMS entries; 3 manufacturers; fault labels TR/EL/ISC/EA; Nat Commun 2025', doi:'https://doi.org/10.5281/zenodo.10656500', processed_url:'', student:'—', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
 
-  // ── Recently added public datasets (39–40) ──
-  { id:'dataset_39', name:'CALCE Battery Cycling Data', ref_name:'2017_CALCE_UMD_LCO_Prismatic_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'LCO', cells:'—', form:'Prismatic', cycles:0, size_mb:0, notes:'Univ. of Maryland CALCE; LCO prismatic cells (CS2 1100mAh / CX2 1350mAh); cycle aging, calendar, drive-cycle, partial-SOC; -40 to 55C', doi:'https://web.calce.umd.edu/batteries/data/', processed_url:'', student:'—', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_40', name:'CALB L148N58A Prismatic Characterization', ref_name:'2024_UniTS-Pavia_LiIon_Prismatic_58Ah_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'Unknown', cells:'11', form:'Prismatic', cycles:0, size_mb:0, notes:'Univ. of Trieste (ELISA) & Univ. of Pavia; CALB L148N58A 58Ah large prismatic; 11 cells; CCCV/CC, HPPC, EIS, WLTP/UDDS/US06 driving cycles; B-grade; Fasolato et al. 2024', doi:'https://doi.org/10.17632/ycx459r5c3.1', processed_url:'', student:'—', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-
   // ── Auxiliary physical datasets (31–35): not on main benchmark line, kept for reference ──
   { id:'dataset_31', name:'Mendeley NMC811-LFP Relaxation', ref_name:'2023_Mendeley_NMC811-LFP_18650_Relaxation_MultiT', status:'pending', category:'eis', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: relaxation/rest voltage; NMC811+LFP; SOH estimation reference', doi:'https://data.mendeley.com/datasets/y8nstxmdrg/1', processed_url:'', student:'—', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_32', name:'Figshare LFP Pouch EIS', ref_name:'2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT', status:'pending', category:'eis', chemistry:'LFP', cells:'—', form:'Pouch', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: EIS frequency sweep; 600 mAh LFP pouch; impedance spectra', doi:'https://figshare.com/articles/dataset/Li-ion_Batteries_EIS_measurements/23736582', processed_url:'', student:'—', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
@@ -5273,8 +6059,10 @@ function showToast(msg, type = 'info', duration = 3500) {
 async function syncFromGitHub(silent = false) {
   const btn = document.getElementById('sync-btn');
   const statusEl = document.getElementById('sync-status');
-  btn.classList.add('loading');
-  btn.disabled = true;
+  if (btn) {
+    btn.classList.add('loading');
+    btn.disabled = true;
+  }
 
   try {
     const res = await fetch(GITHUB_CSV_URL, { cache: 'no-store' });
@@ -5289,7 +6077,7 @@ async function syncFromGitHub(silent = false) {
 
     // Update UI
     refreshAll();
-    statusEl.innerHTML = '<span class="sync-dot live"></span> Live · ' + DATASETS.length + ' datasets';
+    if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Live · ' + DATASETS.length + ' datasets';
     if (!silent) showToast('Synced from GitHub — ' + DATASETS.length + ' datasets loaded', 'success');
   } catch (e) {
     console.warn('GitHub sync failed:', e.message);
@@ -5299,11 +6087,13 @@ async function syncFromGitHub(silent = false) {
     }
     refreshAll();
     const label = dataSource === 'local' ? 'Local' : 'Built-in';
-    statusEl.innerHTML = '<span class="sync-dot fallback"></span> ' + label + ' · ' + DATASETS.length + ' datasets';
+    if (statusEl) statusEl.innerHTML = '<span class="sync-dot fallback"></span> ' + label + ' · ' + DATASETS.length + ' datasets';
     if (!silent) showToast('GitHub fetch failed (private repo requires auth). Use "Upload CSV" instead.', 'error', 5000);
   } finally {
-    btn.classList.remove('loading');
-    btn.disabled = false;
+    if (btn) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
   }
 }
 
@@ -5326,7 +6116,7 @@ function handleLocalCSV(event) {
       DATASETS = parsed;
       dataSource = 'local';
       refreshAll();
-      statusEl.innerHTML = '<span class="sync-dot live"></span> Local · ' + DATASETS.length + ' datasets';
+      if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Local · ' + DATASETS.length + ' datasets';
       showToast('Loaded ' + DATASETS.length + ' datasets from ' + file.name, 'success');
     } catch (err) {
       console.error('CSV parse error:', err);
@@ -5351,6 +6141,7 @@ function handleLocalCSV(event) {
 function refreshAll() {
   document.getElementById('ds-count-badge').textContent = DATASETS.length;
   renderMetrics();
+  renderAppliedFilterChips();
   filterDatasets();
   renderTasks();
 
@@ -5401,108 +6192,67 @@ function extractYearFromRef(ref) {
 }
 
 function renderMetrics() {
-  const ds = DATASETS;
-  const n = ds.length;
+  animateHomeMetrics();
+}
 
-  // Total cells (sum numeric values, skip "—")
-  const totalCells = ds.reduce((a, d) => {
-    const v = parseInt(('' + d.cells).replace(/[^\d]/g, ''), 10);
-    return a + (isNaN(v) ? 0 : v);
-  }, 0);
+let homeMetricAnimation = null;
 
-  // Total cycles
-  const totalCycles = ds.reduce((a, d) => a + (Number(d.cycles) || 0), 0);
+function setHomeMetric(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
 
-  // Total data volume (MB → GB)
-  const totalMB = ds.reduce((a, d) => a + (Number(d.size_mb) || 0), 0);
-  const totalGB = totalMB / 1024;
+function animateHomeMetrics() {
+  const metricsEl = document.getElementById('metrics-panel');
+  if (!metricsEl) return;
 
-  // Unique chemistries
-  const chemSet = new Set();
-  ds.forEach(d => { if (d.chemistry && d.chemistry !== 'Unknown') {
-    // expand Multi into nothing (count Multi as one category)
-    chemSet.add(d.chemistry);
-  }});
+  const duration = 1400;
+  const final = {
+    datasets: 41,
+    labs: 34,
+    years: 19,
+    cyclesK: 331.8,
+    cells: 1499,
+    volumeGB: 9.7
+  };
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const render = progress => {
+    const p = ease(progress);
+    setHomeMetric('m-datasets', String(Math.round(final.datasets * p)));
+    setHomeMetric('m-labs', String(Math.round(final.labs * p)));
+    setHomeMetric('m-years', String(Math.round(final.years * p)));
+    setHomeMetric('m-cycles', `${(final.cyclesK * p).toFixed(1)}<span class="metric-unit">K</span>`);
+    setHomeMetric('m-cells', Math.round(final.cells * p).toLocaleString('en-US'));
+    setHomeMetric('m-volume', `${(final.volumeGB * p).toFixed(1)} <span class="metric-unit">GB</span>`);
+    if (progress >= 1) {
+      setHomeMetric('m-datasets', '41+');
+      setHomeMetric('m-labs', '34+');
+      setHomeMetric('m-years', '19');
+      setHomeMetric('m-cycles', '331.8<span class="metric-unit">K</span>');
+      setHomeMetric('m-cells', '1499+');
+      setHomeMetric('m-volume', '9.7 <span class="metric-unit">GB</span>');
+    }
+  };
 
-  // Form factors
-  const formSet = new Set();
-  ds.forEach(d => { if (d.form && d.form !== '—') formSet.add(d.form); });
-
-  // Source labs (unique)
-  const labSet = new Set();
-  ds.forEach(d => {
-    const s = extractSourceFromRef(d.ref_name);
-    if (s) labSet.add(s);
-  });
-
-  // Temperatures (unique numeric values)
-  const tempSet = new Set();
-  let hasMultiT = false;
-  ds.forEach(d => {
-    const t = extractTempFromRef(d.ref_name);
-    if (t === 'multi') hasMultiT = true;
-    else if (typeof t === 'number') tempSet.add(t);
-  });
-  const tempCount = tempSet.size + (hasMultiT ? 1 : 0);
-  const tempsList = [...tempSet].sort((a,b)=>a-b);
-  const tempMin = tempsList[0];
-  const tempMax = tempsList[tempsList.length - 1];
-
-  // Year span
-  const years = ds.map(d => extractYearFromRef(d.ref_name)).filter(Boolean);
-  const yMin = years.length ? Math.min(...years) : null;
-  const yMax = years.length ? Math.max(...years) : null;
-
-  // Completion
-  const done = ds.filter(d => d.status === 'done').length;
-  const pct = n > 0 ? Math.round(done / n * 100) : 0;
-
-  // ── Render ──
-  const fmt = v => v >= 1000 ? v.toLocaleString('en-US') : String(v);
-  document.getElementById('m-datasets').textContent = fmt(n);
-  document.getElementById('m-datasets-sub').textContent = 'curated';
-
-  document.getElementById('m-cells').textContent = totalCells > 0 ? fmt(totalCells) : '—';
-  document.getElementById('m-cells-sub').textContent = 'individual units';
-
-  document.getElementById('m-cycles').textContent = totalCycles > 0
-    ? (totalCycles >= 10000 ? (totalCycles/1000).toFixed(1) + 'K' : fmt(totalCycles))
-    : '—';
-  document.getElementById('m-cycles-sub').textContent = 'charge/discharge';
-
-  const volEl = document.getElementById('m-volume');
-  if (totalGB >= 1) {
-    volEl.innerHTML = totalGB.toFixed(1) + '<span class="metric-unit">GB</span>';
-  } else if (totalMB > 0) {
-    volEl.innerHTML = totalMB.toFixed(0) + '<span class="metric-unit">MB</span>';
-  } else {
-    volEl.textContent = '—';
+  if (homeMetricAnimation) cancelAnimationFrame(homeMetricAnimation);
+  if (prefersReducedMotion) {
+    render(1);
+    return;
   }
 
-  document.getElementById('m-labs').textContent = labSet.size > 0 ? fmt(labSet.size) : '—';
-
-  document.getElementById('m-chems').textContent = chemSet.size > 0 ? fmt(chemSet.size) : '—';
-  document.getElementById('m-chems-sub').textContent = [...chemSet].slice(0, 5).map(c => c === 'Multi' ? 'LCO' : c).join(' · ') || '—';
-
-  document.getElementById('m-forms').textContent = formSet.size > 0 ? fmt(formSet.size) : '—';
-  document.getElementById('m-forms-sub').textContent = [...formSet].slice(0, 4).join(' · ') || '—';
-
-  document.getElementById('m-temps').textContent = tempCount > 0 ? fmt(tempCount) : '—';
-  if (tempMin !== undefined && tempMax !== undefined) {
-    document.getElementById('m-temps-sub').textContent =
-      tempMin === tempMax ? `${tempMin}°C` : `${tempMin}–${tempMax}°C`;
-  }
-
-  const yearsEl = document.getElementById('m-years');
-  if (yMin && yMax) {
-    yearsEl.innerHTML = yMin === yMax ? String(yMin) : `${yMin}<span class="metric-unit">–${yMax}</span>`;
-    document.getElementById('m-years-sub').textContent = `${yMax - yMin + 1} years of data`;
-  } else {
-    yearsEl.textContent = '—';
-  }
-
-  document.getElementById('m-done').innerHTML = fmt(done) + '<span class="metric-unit">/' + n + '</span>';
-  document.getElementById('m-done-sub').textContent = `${pct}% ETL pipeline done`;
+  const start = performance.now();
+  const tick = now => {
+    const progress = Math.min((now - start) / duration, 1);
+    render(progress);
+    if (progress < 1) {
+      homeMetricAnimation = requestAnimationFrame(tick);
+    } else {
+      homeMetricAnimation = null;
+    }
+  };
+  render(0);
+  homeMetricAnimation = requestAnimationFrame(tick);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -5510,10 +6260,53 @@ function renderMetrics() {
    ══════════════════════════════════════════════════════════════ */
 let activeChems = new Set();
 let activeForms = new Set();
-let activeCategory = 'all';
+let activeCategories = new Set();
 let activeSort = 'newest';
 let activeDomains = new Set();
 let activeDuties = new Set();
+let allDatasetsApplied = false;
+let expandedDatasetCategories = new Set(['cycle_aging']);
+let pendingChems = new Set();
+let pendingForms = new Set();
+let pendingCategories = new Set();
+let pendingDomains = new Set();
+let pendingDuties = new Set();
+let pendingAllDatasets = false;
+
+const FILTER_TYPE_STYLES = {
+  chemistry: { cls: 'filter-type-chemistry' },
+  category: { cls: 'filter-type-category' },
+  profile: { cls: 'filter-type-profile' },
+  form: { cls: 'filter-type-form' },
+  domain: { cls: 'filter-type-domain' },
+  all: { cls: 'filter-type-all' },
+  status: { cls: 'filter-type-status' }
+};
+function filterTypeClass(type) {
+  return 'filter-token ' + ((FILTER_TYPE_STYLES[type] || FILTER_TYPE_STYLES.status).cls);
+}
+
+const DATASET_CATEGORIES = [
+  { key: 'cycle_aging', label: 'Cycle Aging', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><path d="M21 4v6h-6"/></svg>' },
+  { key: 'safety', label: 'Safety', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-5"/></svg>' },
+  { key: 'eis', label: 'EIS', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 17c3-9 5 3 8-6s5 3 8-4"/><path d="M4 20h16M4 4v16"/></svg>' },
+  { key: 'ev', label: 'EV Field', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17h10l2-7H5l2 7z"/><path d="M7 17l-1 3M17 17l1 3M8 10l1-4h6l1 4"/><circle cx="9" cy="20" r="1"/><circle cx="15" cy="20" r="1"/></svg>' }
+];
+
+function datasetCategoryToggleIcon(expanded) {
+  return expanded
+    ? '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>'
+    : '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+}
+
+function toggleDatasetCategorySection(cat) {
+  if (expandedDatasetCategories.has(cat)) {
+    expandedDatasetCategories.delete(cat);
+  } else {
+    expandedDatasetCategories.add(cat);
+  }
+  filterDatasets();
+}
 
 function getChemClass(chem) {
   if (!chem) return 'chem-Unknown';
@@ -5535,31 +6328,105 @@ function getCatClass(cat) {
 function getCatLabel(cat) {
   return { cycle_aging:'Cycle Aging', safety:'Safety', eis:'EIS/Impedance', ev:'EV Field Data' }[cat] || cat;
 }
-
-function renderDatasets(data) {
-  const grid = document.getElementById('dataset-grid');
-  if (data.length === 0) {
-    grid.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text3);background:var(--bg);">No datasets match your filters.</div>';
-    document.getElementById('filter-count').textContent = '0 datasets found';
-    return;
-  }
-  grid.innerHTML = data.map((d, i) => {
-    const year = extractYearFromRef(d.ref_name);
-    const cyclesNum = Number(d.cycles) || 0;
-    const cyclesFmt = cyclesNum > 0
-      ? (cyclesNum >= 1000 ? (cyclesNum/1000).toFixed(cyclesNum >= 10000 ? 0 : 1) + 'K' : cyclesNum)
-      : null;
-    return `
-    <div class="dataset-card" onclick="openModal(${i})" data-idx="${i}">
+function getSectionCatLabel(cat) {
+  const found = DATASET_CATEGORIES.find(c => c.key === cat);
+  return found ? found.label : getCatLabel(cat);
+}
+function getCategorySlug(cat) {
+  return { cycle_aging: 'cycle-aging', safety: 'safety', eis: 'eis', ev: 'ev-field' }[cat] || cat;
+}
+function getCategoryFromSlug(slug) {
+  return { 'cycle-aging': 'cycle_aging', safety: 'safety', eis: 'eis', 'ev-field': 'ev' }[slug] || null;
+}
+function hasAppliedDatasetFilters() {
+  return activeChems.size > 0 || activeForms.size > 0 || activeCategories.size > 0 || activeDomains.size > 0 || activeDuties.size > 0;
+}
+function hasSearchText() {
+  const input = document.getElementById('searchInput');
+  return !!(input && input.value.trim());
+}
+function isDatasetResultsMode() {
+  return hasSearchText() || hasAppliedDatasetFilters() || allDatasetsApplied;
+}
+function cloneSet(set) { return new Set(Array.from(set)); }
+function syncPendingFromActive() {
+  pendingChems = cloneSet(activeChems);
+  pendingForms = cloneSet(activeForms);
+  pendingCategories = cloneSet(activeCategories);
+  pendingDomains = cloneSet(activeDomains);
+  pendingDuties = cloneSet(activeDuties);
+  pendingAllDatasets = allDatasetsApplied;
+  syncFilterPopupTags();
+}
+function syncFilterPopupTags() {
+  document.querySelectorAll('.filter-tag[data-chem]').forEach(t => t.classList.toggle('active', pendingChems.has(t.dataset.chem)));
+  document.querySelectorAll('.filter-tag[data-form]').forEach(t => t.classList.toggle('active', pendingForms.has(t.dataset.form)));
+  document.querySelectorAll('.filter-tag[data-cat]').forEach(t => t.classList.toggle('active', pendingCategories.has(t.dataset.cat)));
+  document.querySelectorAll('.filter-tag[data-domain]').forEach(t => t.classList.toggle('active', pendingDomains.has(t.dataset.domain)));
+  document.querySelectorAll('.filter-tag[data-duty]').forEach(t => t.classList.toggle('active', pendingDuties.has(t.dataset.duty)));
+  const all = document.querySelector('.filter-tag[data-all-datasets]');
+  if (all) all.classList.toggle('active', pendingAllDatasets);
+}
+function clearPendingAllDatasets() {
+  pendingAllDatasets = false;
+  const all = document.querySelector('.filter-tag[data-all-datasets]');
+  if (all) all.classList.remove('active');
+}
+function updatePendingSet(set, value, el) {
+  clearPendingAllDatasets();
+  if (set.has(value)) set.delete(value); else set.add(value);
+  el.classList.toggle('active', set.has(value));
+}
+function inferDatasetDomains(d) {
+  const n = (d.notes || '').toLowerCase();
+  const c = d.category || '';
+  const out = [];
+  if (c === 'ev' || n.includes('ev') || n.includes('vehicle') || n.includes('bms') || n.includes('fleet')) out.push('EV');
+  if (n.includes('grid') || n.includes('storage') || n.includes('stationary')) out.push('Grid');
+  if (!out.length && (c === 'cycle_aging' || c === 'eis' || n.includes('lab') || n.includes('controlled'))) out.push('Lab');
+  return out;
+}
+function inferDatasetProfiles(d) {
+  const rn = (d.ref_name || '').toLowerCase();
+  const n = (d.notes || '').toLowerCase();
+  const out = [];
+  if (rn.includes('1c') || n.includes('cc/cv') || n.includes('cccv') || rn.includes('_1c_') || rn.match(/_\d+c_/i)) out.push('CC/CV');
+  if (n.includes('dynamic') || n.includes('drive cycle') || n.includes('pulse') || rn.includes('hppc')) out.push('Dynamic');
+  if (rn.includes('multic') || n.includes('multi-protocol') || n.includes('multi-condition') || n.includes('fast charging')) out.push('Multi-rate');
+  return out;
+}
+function renderAppliedFilterChips() {
+  const box = document.getElementById('applied-filter-chips');
+  if (!box) return;
+  const chips = [];
+  if (allDatasetsApplied) chips.push({ type: 'all', tokenType: 'all', value: 'all', label: 'All datasets' });
+  activeChems.forEach(v => chips.push({ type: 'chem', tokenType: 'chemistry', value: v, label: v }));
+  activeForms.forEach(v => chips.push({ type: 'form', tokenType: 'form', value: v, label: v }));
+  activeCategories.forEach(v => chips.push({ type: 'cat', tokenType: 'category', value: v, label: getSectionCatLabel(v) }));
+  activeDomains.forEach(v => chips.push({ type: 'domain', tokenType: 'domain', value: v, label: v.toUpperCase() === 'EV' ? 'EV' : v.charAt(0).toUpperCase() + v.slice(1) }));
+  activeDuties.forEach(v => chips.push({ type: 'duty', tokenType: 'profile', value: v, label: ({ cccv: 'CC/CV', dynamic: 'Dynamic', multi: 'Multi-rate' }[v] || v) }));
+  box.classList.toggle('has-chips', chips.length > 0);
+  box.innerHTML = chips.map(chip => `<span class="applied-chip ${filterTypeClass(chip.tokenType || 'status')}">${esc(chip.label)}<button aria-label="Remove ${esc(chip.label)} filter" onclick="removeAppliedFilter('${chip.type}','${escAttr(chip.value)}')">×</button></span>`).join('');
+}
+function datasetCardHTML(d) {
+  const cyclesNum = Number(d.cycles) || 0;
+  const cyclesFmt = cyclesNum > 0
+    ? (cyclesNum >= 1000 ? (cyclesNum/1000).toFixed(cyclesNum >= 10000 ? 0 : 1) + 'K' : cyclesNum)
+    : null;
+  const cardTags = [
+    d.category ? `<span class="dc-tag ${filterTypeClass('category')}">${getCatLabel(d.category)}</span>` : '',
+    d.chemistry ? `<span class="dc-tag ${filterTypeClass('chemistry')}">${esc(d.chemistry)}</span>` : '',
+    ...inferDatasetDomains(d).slice(0, 1).map(v => `<span class="dc-tag ${filterTypeClass('domain')}">${esc(v)}</span>`),
+    d.form && d.form !== '—' ? `<span class="dc-tag ${filterTypeClass('form')}">${esc(d.form)}</span>` : '',
+    ...inferDatasetProfiles(d).slice(0, 1).map(v => `<span class="dc-tag ${filterTypeClass('profile')}">${esc(v)}</span>`)
+  ].filter(Boolean).join('');
+  return `
+    <div class="dataset-card" onclick="openDatasetModal('${escAttr(d.id)}')">
       <div class="dc-top">
         <div class="dc-icon ${getChemClass(d.chemistry)}">${getChemLabel(d.chemistry).charAt(0)}</div>
         <div class="dc-body">
           <div class="dc-name">${esc(d.ref_name)}</div>
           <div class="dc-refname">${esc(d.name)}</div>
-        </div>
-        <div class="dc-status-col">
-          ${year ? `<span class="dc-year-badge">${year}</span>` : ''}
-          <div class="dc-version">${esc(d.id)}</div>
         </div>
       </div>
       <div class="dc-stats">
@@ -5574,18 +6441,59 @@ function renderDatasets(data) {
         ${cyclesFmt ? `<span class="dc-stat"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><polyline points="21 4 21 10 15 10"/></svg> <span class="stat-val">${cyclesFmt}</span> cycles</span>` : ''}
       </div>
       <div class="dc-tags">
-        <span class="dc-tag ${getCatClass(d.category)}">${getCatLabel(d.category)}</span>
-        <span class="dc-tag">${esc(d.chemistry)}</span>
+        ${cardTags}
       </div>
     </div>
-  `;}).join('');
-  document.getElementById('filter-count').textContent = data.length + ' datasets found';
+  `;
+}
+
+function renderDatasets(data) {
+  const grid = document.getElementById('dataset-grid');
+  const countEl = document.getElementById('filter-count');
+  const head = document.querySelector('.dataset-results-head');
+  const resultsMode = isDatasetResultsMode();
+  if (head) head.classList.toggle('browse', !resultsMode);
+  if (data.length === 0) {
+    grid.innerHTML = '<div class="dataset-empty">No datasets match your filters.</div>';
+    countEl.textContent = '0 datasets found';
+    return;
+  }
+
+  if (resultsMode) {
+    grid.innerHTML = `<div class="dataset-card-grid">${data.map(datasetCardHTML).join('')}</div>`;
+    countEl.textContent = data.length + ' datasets found';
+    return;
+  }
+
+  const viewCats = DATASET_CATEGORIES;
+
+  grid.innerHTML = viewCats.map(cat => {
+    const allForCat = data.filter(d => d.category === cat.key);
+    if (!allForCat.length) return '';
+    const expanded = expandedDatasetCategories.has(cat.key);
+    return `
+      <section class="dataset-section ${expanded ? 'is-expanded' : 'is-collapsed'}">
+        <div class="dataset-section-head" role="button" tabindex="0" aria-expanded="${expanded ? 'true' : 'false'}" onclick="toggleDatasetCategorySection('${cat.key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDatasetCategorySection('${cat.key}')}">
+          <div class="dataset-section-title">
+            <span class="dataset-section-icon ${getCatClass(cat.key)}">${cat.icon}</span>
+            <h2>${esc(cat.label)}</h2>
+            <span class="dataset-section-meta">${allForCat.length}</span>
+          </div>
+          <button class="dataset-see-all" type="button" aria-label="${expanded ? 'Collapse' : 'Expand'} ${escAttr(cat.label)}" onclick="event.stopPropagation();toggleDatasetCategorySection('${cat.key}')">${datasetCategoryToggleIcon(expanded)}</button>
+        </div>
+        ${expanded ? `<div class="dataset-card-grid">${allForCat.map(datasetCardHTML).join('')}</div>` : ''}
+      </section>
+    `;
+  }).join('') || '<div class="dataset-empty">No datasets match your filters.</div>';
+  countEl.textContent = data.length + ' datasets found';
 }
 
 // XSS-safe escape
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function escAttr(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
 
 function getFiltered() {
+  if (allDatasetsApplied) return sortDatasets(DATASETS, activeSort);
   const raw = document.getElementById('searchInput').value.trim().toLowerCase();
   // Multi-token search: split by whitespace, every token must match (AND logic)
   const tokens = raw ? raw.split(/\s+/).filter(Boolean) : [];
@@ -5603,8 +6511,8 @@ function getFiltered() {
       activeForms.forEach(f => { if (d.form && d.form.toLowerCase() === f.toLowerCase()) match = true; });
       if (!match) return false;
     }
-    // Category (single-select, 'all' = no filter)
-    if (activeCategory !== 'all' && d.category !== activeCategory) return false;
+    // Category (empty = no filter)
+    if (activeCategories.size > 0 && !activeCategories.has(d.category)) return false;
 
     // Domain filter (inferred from category/notes)
     if (activeDomains.size > 0) {
@@ -5666,24 +6574,13 @@ function sortDatasets(arr, mode) {
 function filterDatasets() { renderDatasets(getFiltered()); }
 
 function toggleChemFilter(el) {
-  const c = el.dataset.chem;
-  el.classList.toggle('active');
-  if (activeChems.has(c)) activeChems.delete(c); else activeChems.add(c);
-  filterDatasets();
+  updatePendingSet(pendingChems, el.dataset.chem, el);
 }
 function toggleFormFilter(el) {
-  const f = el.dataset.form;
-  el.classList.toggle('active');
-  if (activeForms.has(f)) activeForms.delete(f); else activeForms.add(f);
-  filterDatasets();
+  updatePendingSet(pendingForms, el.dataset.form, el);
 }
 function toggleCatFilter(el) {
-  const c = el.dataset.cat;
-  // single-select: clear all, activate this one
-  document.querySelectorAll('.filter-tag[data-cat]').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  activeCategory = c;
-  filterDatasets();
+  updatePendingSet(pendingCategories, el.dataset.cat, el);
 }
 function changeSort(mode) {
   activeSort = mode;
@@ -5691,16 +6588,125 @@ function changeSort(mode) {
 }
 
 function toggleDomainFilter(el) {
-  const d = el.dataset.domain;
-  el.classList.toggle('active');
-  if (activeDomains.has(d)) activeDomains.delete(d); else activeDomains.add(d);
-  filterDatasets();
+  updatePendingSet(pendingDomains, el.dataset.domain, el);
 }
 function toggleDutyFilter(el) {
-  const d = el.dataset.duty;
-  el.classList.toggle('active');
-  if (activeDuties.has(d)) activeDuties.delete(d); else activeDuties.add(d);
+  updatePendingSet(pendingDuties, el.dataset.duty, el);
+}
+
+function toggleDatasetFilters() {
+  const popover = document.getElementById('dataset-filter-popover');
+  const btn = document.querySelector('.dataset-filter-toggle');
+  const willOpen = !popover.classList.contains('open');
+  if (willOpen) syncPendingFromActive();
+  popover.classList.toggle('open', willOpen);
+  if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+}
+
+function closeDatasetFilters() {
+  const popover = document.getElementById('dataset-filter-popover');
+  const btn = document.querySelector('.dataset-filter-toggle');
+  if (popover) popover.classList.remove('open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+
+function toggleAllDatasetsFilter(el) {
+  pendingAllDatasets = !pendingAllDatasets;
+  if (pendingAllDatasets) {
+    pendingChems.clear();
+    pendingForms.clear();
+    pendingCategories.clear();
+    pendingDomains.clear();
+    pendingDuties.clear();
+  }
+  syncFilterPopupTags();
+}
+
+function applyDatasetFilters() {
+  allDatasetsApplied = pendingAllDatasets;
+  activeChems = pendingAllDatasets ? new Set() : cloneSet(pendingChems);
+  activeForms = pendingAllDatasets ? new Set() : cloneSet(pendingForms);
+  activeCategories = pendingAllDatasets ? new Set() : cloneSet(pendingCategories);
+  activeDomains = pendingAllDatasets ? new Set() : cloneSet(pendingDomains);
+  activeDuties = pendingAllDatasets ? new Set() : cloneSet(pendingDuties);
+  if (location.hash !== '#datasets') history.replaceState(null, '', '#datasets');
+  closeDatasetFilters();
+  renderAppliedFilterChips();
   filterDatasets();
+}
+
+function clearPendingDatasetFilters() {
+  pendingChems.clear();
+  pendingForms.clear();
+  pendingCategories.clear();
+  pendingDomains.clear();
+  pendingDuties.clear();
+  pendingAllDatasets = false;
+  activeChems.clear();
+  activeForms.clear();
+  activeCategories.clear();
+  activeDomains.clear();
+  activeDuties.clear();
+  allDatasetsApplied = false;
+  syncFilterPopupTags();
+  renderAppliedFilterChips();
+  filterDatasets();
+  closeDatasetFilters();
+}
+
+document.addEventListener('click', e => {
+  const popover = document.getElementById('dataset-filter-popover');
+  if (!popover || !popover.classList.contains('open')) return;
+  if (e.target.closest('#dataset-filter-popover') || e.target.closest('.dataset-filter-toggle')) return;
+  closeDatasetFilters();
+});
+
+function removeAppliedFilter(type, value) {
+  if (type === 'all') allDatasetsApplied = false;
+  if (type === 'chem') activeChems.delete(value);
+  if (type === 'form') activeForms.delete(value);
+  if (type === 'cat') activeCategories.delete(value);
+  if (type === 'domain') activeDomains.delete(value);
+  if (type === 'duty') activeDuties.delete(value);
+  syncPendingFromActive();
+  renderAppliedFilterChips();
+  filterDatasets();
+}
+
+function showDatasetCategory(cat) {
+  allDatasetsApplied = false;
+  activeChems.clear();
+  activeForms.clear();
+  activeCategories.clear();
+  activeCategories.add(cat);
+  activeDomains.clear();
+  activeDuties.clear();
+  syncPendingFromActive();
+  renderAppliedFilterChips();
+  showPage('datasets', document.getElementById('nav-datasets'), { preserveHash: true });
+  if (location.hash !== '#datasets') history.replaceState(null, '', '#datasets');
+  filterDatasets();
+}
+
+function showAllDatasetCategories() {
+  allDatasetsApplied = false;
+  activeChems.clear();
+  activeForms.clear();
+  activeCategories.clear();
+  activeDomains.clear();
+  activeDuties.clear();
+  syncPendingFromActive();
+  renderAppliedFilterChips();
+  history.replaceState(null, '', '#datasets');
+  filterDatasets();
+}
+
+function handleDatasetUpload(event) {
+  const files = Array.from(event.target.files || []);
+  if (files.length) {
+    showToast(files.length === 1 ? 'Selected ' + files[0].name + ' for contribution.' : 'Selected ' + files.length + ' files for contribution.', 'success');
+  }
+  event.target.value = '';
 }
 
 /* Search input handlers */
@@ -5708,6 +6714,11 @@ function onSearchInput() {
   const input = document.getElementById('searchInput');
   const box = document.getElementById('search-box');
   if (input.value) box.classList.add('has-text'); else box.classList.remove('has-text');
+  if (input.value.trim() && allDatasetsApplied) {
+    allDatasetsApplied = false;
+    syncPendingFromActive();
+    renderAppliedFilterChips();
+  }
   filterDatasets();
 }
 function clearSearch() {
@@ -5718,10 +6729,78 @@ function clearSearch() {
   filterDatasets();
 }
 
+function runDatasetSearch(query) {
+  const q = (query || '').trim();
+  if (!q) return false;
+  const datasetNav = document.getElementById('nav-datasets');
+  showPage('datasets', datasetNav);
+  const input = document.getElementById('searchInput');
+  const box = document.getElementById('search-box');
+  if (input) {
+    input.value = q;
+    if (box) box.classList.toggle('has-text', Boolean(q));
+  }
+  allDatasetsApplied = false;
+  syncPendingFromActive();
+  renderAppliedFilterChips();
+  filterDatasets();
+  if (input) input.focus();
+  return true;
+}
+
+function triggerTopbarSearch() {
+  const input = document.getElementById('topbarSearchInput');
+  if (!input) return;
+  runDatasetSearch(input.value);
+}
+window.triggerTopbarSearch = triggerTopbarSearch;
+
+function setTheme(theme) {
+  const resolved = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = resolved;
+  document.documentElement.style.colorScheme = resolved;
+  localStorage.setItem('bt-theme', resolved);
+  updateThemeLogo(resolved);
+  updateThemeToggle();
+}
+
+function toggleTheme() {
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+}
+window.toggleTheme = toggleTheme;
+
+function updateThemeLogo(theme) {
+  const logo = document.getElementById('sidebar-logo');
+  if (!logo) return;
+  const isDark = theme === 'dark';
+  const nextSrc = isDark ? 'assets/logo-dark.png' : 'assets/logo-light.png';
+  if (!logo.getAttribute('src')?.endsWith(nextSrc)) logo.src = nextSrc;
+}
+
+function updateThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+}
+
+function initTopbarControls() {
+  updateThemeLogo(document.documentElement.dataset.theme);
+  updateThemeToggle();
+  const input = document.getElementById('topbarSearchInput');
+  if (!input) return;
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      triggerTopbarSearch();
+    }
+  });
+}
+
 /* ── MODAL ── */
-function openModal(idx) {
-  const filtered = getFiltered();
-  const d = filtered[idx];
+function openDatasetModal(id) {
+  const d = DATASETS.find(item => item.id === id);
   if (!d) return;
   document.getElementById('modal-name').textContent = d.name;
   document.getElementById('modal-refname').textContent = d.ref_name;
@@ -5754,6 +6833,10 @@ function openModal(idx) {
     : `<button class="modal-link-row modal-link-row--dl" onclick="showToast('Processed data for this dataset is coming soon.','info')"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></button>`;
   linksEl.innerHTML = `<div class="modal-links-row">${srcBtn}${procBtn}</div>`;
   document.getElementById('modal').classList.add('show');
+}
+function openModal(idx) {
+  const d = getFiltered()[idx];
+  if (d) openDatasetModal(d.id);
 }
 function closeModal() { document.getElementById('modal').classList.remove('show'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
@@ -5950,7 +7033,7 @@ function ppCopyInspectCommand() {
 }
 
 /* ── PAGE NAVIGATION ── */
-function showPage(name, navEl) {
+function showPage(name, navEl, options = {}) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
   const page = document.getElementById('page-' + name);
@@ -5961,15 +7044,34 @@ function showPage(name, navEl) {
     ppRender();
     ppStageRender();
   }
-  if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+  if (!options.preserveHash && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
 }
 window.showPage = showPage;
 
 function applyInitialPageFromHash() {
   const name = (location.hash || '').replace(/^#/, '');
+  if (name.startsWith('datasets-')) {
+    const cat = getCategoryFromSlug(name.replace(/^datasets-/, ''));
+    if (cat) {
+      allDatasetsApplied = false;
+      activeChems.clear();
+      activeForms.clear();
+      activeCategories.clear();
+      activeCategories.add(cat);
+      activeDomains.clear();
+      activeDuties.clear();
+      syncPendingFromActive();
+      renderAppliedFilterChips();
+      showPage('datasets', document.getElementById('nav-datasets'), { preserveHash: true });
+      history.replaceState(null, '', '#datasets');
+      filterDatasets();
+      return;
+    }
+  }
   if (!name || !document.getElementById('page-' + name)) return;
   showPage(name, document.querySelector('.sidebar-nav a[onclick*="' + name + '"]'));
 }
+window.addEventListener('hashchange', applyInitialPageFromHash);
 
 const BW = { page: 1, pageSize: 6, selId: null, splitMode: 'manual', ratio: { train: 60, val: 20, test: 20 }, split: { train: [], val: [], test: [], excluded: [] }, f: { chem:'', form:'', inst:'', temp:'', q:'' } };
 let bwHasRun = false;
@@ -7970,10 +9072,13 @@ async function ppHandleReportUpload(event) {
    ══════════════════════════════════════════════════════════════ */
 (async function init() {
   // Render fallback immediately so page isn't blank
+  initTopbarControls();
   refreshAll();
   ppRender();
-  document.getElementById('sync-status').innerHTML =
-    '<span class="sync-dot fallback"></span> Built-in · ' + DATASETS.length + ' datasets';
+  const statusEl = document.getElementById('sync-status');
+  if (statusEl) {
+    statusEl.innerHTML = '<span class="sync-dot fallback"></span> Built-in · ' + DATASETS.length + ' datasets';
+  }
   applyInitialPageFromHash();
 
   // Attempt GitHub sync silently in background.
@@ -8461,8 +9566,8 @@ function bwLineChartSvg(rows, target, cell) {
     xTicks.map(v => '<text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 20) + '" text-anchor="middle">' + bwFmtMetric(v, 0) + '</text>').join('') +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + t + '" x2="' + l + '" y2="' + (h - b) + '"/>' +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + (h - b) + '" x2="' + (w - r) + '" y2="' + (h - b) + '"/>' +
-    '<polyline fill="none" stroke="#111827" stroke-width="2.3" points="' + truePts + '"/>' +
-    '<polyline fill="none" stroke="#2563eb" stroke-width="2.1" stroke-dasharray="5 4" points="' + predPts + '"/>' +
+    '<polyline fill="none" stroke="var(--text1)" stroke-width="2.3" points="' + truePts + '"/>' +
+    '<polyline fill="none" stroke="var(--accent)" stroke-width="2.1" stroke-dasharray="5 4" points="' + predPts + '"/>' +
     '<text class="bw-plot-label" x="' + ((w + l - r) / 2).toFixed(1) + '" y="' + (h - 4) + '" text-anchor="middle">Cycle</text>' +
     '<text class="bw-plot-label" x="15" y="' + ((h - b + t) / 2).toFixed(1) + '" text-anchor="middle" transform="rotate(-90 15 ' + ((h - b + t) / 2).toFixed(1) + ')">' + esc(target) + '</text>' +
     '<text class="bw-plot-note" x="' + (w - r) + '" y="16" text-anchor="end">' + esc(bwResultShortCell(cell)) + '</text>' +
@@ -8475,12 +9580,12 @@ function bwScatterSvg(rows, target) {
   const x = v => l + (Number(v) - min) / (max - min || 1) * (w - l - r);
   const y = v => t + (max - Number(v)) / (max - min || 1) * (h - t - b);
   const ticks = bwTicks(min, max, 5);
-  const points = data.map(d => '<circle cx="' + x(d.y_true).toFixed(1) + '" cy="' + y(d.y_pred).toFixed(1) + '" r="2.3" fill="#2563eb" fill-opacity=".38"/>').join('');
+  const points = data.map(d => '<circle cx="' + x(d.y_true).toFixed(1) + '" cy="' + y(d.y_pred).toFixed(1) + '" r="2.3" fill="var(--accent)" fill-opacity=".45"/>').join('');
   return '<svg class="bw-chart" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="xMidYMid meet">' +
     ticks.map(v => '<line class="bw-plot-grid" x1="' + l + '" y1="' + y(v).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(v).toFixed(1) + '"/><line class="bw-plot-grid" x1="' + x(v).toFixed(1) + '" y1="' + t + '" x2="' + x(v).toFixed(1) + '" y2="' + (h - b) + '"/><text class="bw-plot-label" x="' + (l - 10) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end">' + bwFmtMetric(v, 3) + '</text><text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 20) + '" text-anchor="middle">' + bwFmtMetric(v, 3) + '</text>').join('') +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + t + '" x2="' + l + '" y2="' + (h - b) + '"/>' +
     '<line class="bw-plot-axis" x1="' + l + '" y1="' + (h - b) + '" x2="' + (w - r) + '" y2="' + (h - b) + '"/>' +
-    '<line x1="' + x(min).toFixed(1) + '" y1="' + y(min).toFixed(1) + '" x2="' + x(max).toFixed(1) + '" y2="' + y(max).toFixed(1) + '" stroke="#111827" stroke-width="1.5" stroke-dasharray="5 4"/>' +
+    '<line x1="' + x(min).toFixed(1) + '" y1="' + y(min).toFixed(1) + '" x2="' + x(max).toFixed(1) + '" y2="' + y(max).toFixed(1) + '" stroke="var(--text1)" stroke-width="1.5" stroke-dasharray="5 4"/>' +
     points +
     '<text class="bw-plot-label" x="' + ((w + l - r) / 2).toFixed(1) + '" y="' + (h - 4) + '" text-anchor="middle">Ground truth ' + esc(target) + '</text>' +
     '<text class="bw-plot-label" x="15" y="' + ((h - b + t) / 2).toFixed(1) + '" text-anchor="middle" transform="rotate(-90 15 ' + ((h - b + t) / 2).toFixed(1) + ')">Predicted ' + esc(target) + '</text>' +
@@ -8495,7 +9600,7 @@ function bwErrorBarsSvg(rows) {
   const x = v => l + Number(v) / max * (w - l - r);
   const bars = data.map((d, i) => {
     const y = t + i * 22;
-    const color = i === 0 ? '#e23b46' : '#2563eb';
+    const color = i === 0 ? 'var(--red)' : 'var(--accent)';
     return '<text class="bw-bar-label" x="' + (l - 8) + '" y="' + (y + 11) + '" text-anchor="end">' + esc(bwResultShortCell(d.cell_id)) + '</text>' +
       '<rect x="' + l + '" y="' + y + '" width="' + Math.max(2, x(d.rmse) - l).toFixed(1) + '" height="' + barH + '" rx="3" fill="' + color + '" fill-opacity="' + (i === 0 ? '.9' : '.72') + '"/>' +
       '<text class="bw-plot-label" x="' + (x(d.rmse) + 6).toFixed(1) + '" y="' + (y + 11) + '">' + bwFmtMetric(d.rmse) + '</text>';
