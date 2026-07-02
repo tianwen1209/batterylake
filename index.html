@@ -3031,6 +3031,351 @@ select:focus-visible, [tabindex]:focus-visible {
   .ml-detail { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 94vw); height: 100vh; max-height: 100vh; border-radius: 0; z-index: 210; box-shadow: -14px 0 44px rgba(15,22,38,.20); }
 }
 
+/* Models catalog refresh */
+#page-models {
+  max-width: 1480px;
+}
+#page-models .page-header {
+  padding: 24px 0 28px;
+  margin-bottom: 8px;
+}
+#page-models .page-title {
+  font-size: 34px !important;
+}
+#page-models .page-desc {
+  max-width: 680px;
+}
+#page-models .model-search-panel {
+  margin: 10px 0 32px;
+  padding: 8px 0 10px;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#page-models #model-filter-popover {
+  right: 18px;
+}
+#page-models .ml-wrap {
+  display: block;
+  max-width: none;
+  margin: 0;
+}
+#page-models .ml-main {
+  width: 100%;
+}
+#page-models .model-results-head:not(.has-results) {
+  display: none;
+}
+#page-models .ml-group {
+  margin-top: 0;
+}
+#page-models .ml-group + .ml-group {
+  margin-top: 20px;
+}
+#page-models .ml-group-h {
+  display: none;
+}
+#page-models .ml-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: stretch;
+}
+#page-models .ml-card,
+#page-models .ml-card.wide {
+  --model-card-bg: var(--input-bg);
+  flex: 1 1 320px;
+  min-width: min(100%, 280px);
+  max-width: 420px;
+  min-height: 248px;
+  padding: 28px 30px 26px;
+  border-radius: 8px;
+  background: var(--model-card-bg) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent) !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+  z-index: 0;
+  transition: border-color .15s ease, transform .15s ease;
+}
+#page-models .edge-glow-hover-effect::before,
+#page-models .edge-glow-hover-effect::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .16s ease;
+  pointer-events: none;
+}
+#page-models .edge-glow-hover-effect::before {
+  inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(147,197,253,.36) 38%, rgba(125,211,252,.30) 72%, rgba(96,165,250,.20));
+}
+#page-models .edge-glow-hover-effect::after {
+  inset: -7px;
+  border-radius: 14px;
+  background:
+    radial-gradient(90% 70% at 50% 0%, rgba(147,197,253,.18), transparent 70%),
+    radial-gradient(80% 65% at 100% 50%, rgba(125,211,252,.14), transparent 72%),
+    radial-gradient(85% 70% at 0% 60%, rgba(96,165,250,.13), transparent 72%);
+  filter: blur(7px);
+}
+#page-models .edge-glow-hover-effect:hover::before {
+  opacity: 1;
+}
+#page-models .edge-glow-hover-effect:hover::after {
+  opacity: .62;
+}
+#page-models .ml-card.active {
+  border-color: color-mix(in srgb, var(--border) 70%, transparent) !important;
+  box-shadow: none !important;
+}
+[data-theme="dark"] #page-models .ml-card,
+[data-theme="dark"] #page-models .ml-card.wide {
+  --model-card-bg: var(--input-bg);
+  background: var(--input-bg) !important;
+}
+#page-models .dataset-filter-popover .filter-token:not(.active) {
+  background: var(--bg2) !important;
+  border-color: var(--border) !important;
+  color: var(--text3) !important;
+  box-shadow: none !important;
+}
+#page-models .filter-token.active,
+#page-models .filter-token.is-active,
+#page-models .dataset-filter-popover .filter-token.active {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tag-fg) 16%, transparent) !important;
+}
+#page-models .ml-type-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 23px;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 650;
+  background: color-mix(in srgb, var(--bg3) 76%, #fff) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent) !important;
+  color: var(--text2) !important;
+}
+#page-models .ml-card-head {
+  position: relative;
+  min-width: 0;
+}
+#page-models .ml-card-head-copy {
+  min-width: 0;
+  padding-right: 94px;
+}
+#page-models .ml-card-logo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 76px;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+#page-models .ml-card-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+  display: block;
+}
+#page-models .ml-card-logo-dark {
+  display: none !important;
+}
+[data-theme="dark"] #page-models .ml-card-logo-light {
+  display: none !important;
+}
+[data-theme="dark"] #page-models .ml-card-logo-dark {
+  display: block !important;
+}
+#page-models .ml-card-name {
+  margin-top: 18px;
+  font-size: 18.5px !important;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+#page-models .ml-card-desc {
+  flex: 0 0 auto;
+  margin: 18px 0 0;
+  max-width: 320px;
+  color: var(--text2);
+  font-size: 14.5px !important;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+#page-models .ml-card-actions {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+#page-models .ml-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text1);
+}
+#page-models .ml-card-arrow svg {
+  width: 23px;
+  height: 23px;
+}
+#page-models .ml-download-icon {
+  width: 37px;
+  height: 37px;
+  border: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text1);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+#page-models .ml-download-icon:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+#page-models .ml-download-icon svg {
+  width: 16px;
+  height: 16px;
+}
+#page-models .ml-package {
+  margin-top: 28px;
+}
+.model-detail-page-head {
+  max-width: 1080px;
+  margin: 0 auto 16px;
+}
+.model-back-btn {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text2);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 0 13px;
+  cursor: pointer;
+}
+.model-back-btn:hover {
+  background: var(--bg3);
+  color: var(--text1);
+  border-color: var(--border2);
+}
+.model-detail-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.model-detail-page .ml-d-close {
+  display: none;
+}
+.model-detail-page .ml-d-head {
+  align-items: center;
+}
+.model-detail-page .ml-d-name {
+  font-size: 28px !important;
+  font-family: var(--sans);
+}
+.model-detail-page .ml-d-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+  gap: 22px;
+  padding: 24px;
+}
+.model-detail-page .ml-d-sec {
+  min-width: 0;
+}
+.model-detail-page .ml-d-sec:nth-child(2),
+.model-detail-page .ml-d-sec:nth-child(6),
+.model-detail-page .ml-d-sec:nth-child(7) {
+  grid-column: 1 / -1;
+}
+.model-detail-page .ml-arch3d-stage {
+  height: 260px;
+}
+.model-detail-page .ml-package-files {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.model-detail-page .ml-package-files .ml-file {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg2);
+}
+.model-detail-page .ml-package-files .ml-file-d {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+@media (max-width: 900px) {
+  #page-models .ml-card,
+  #page-models .ml-card.wide {
+    max-width: none;
+  }
+  .model-detail-page .ml-d-body,
+  .model-detail-page .ml-d-chips {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  #page-models #model-filter-popover {
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+  #page-models .ml-card,
+  #page-models .ml-card.wide {
+    min-height: 232px;
+    padding: 24px;
+  }
+  #page-models .ml-card-name {
+    margin-top: 16px;
+    font-size: 17px !important;
+  }
+  #page-models .ml-card-desc {
+    margin-top: 16px;
+    font-size: 13.5px !important;
+  }
+  #page-models .ml-card-head-copy {
+    padding-right: 78px;
+  }
+  #page-models .ml-card-logo {
+    width: 62px;
+  }
+}
+
 /* ── 19 · GLOBAL UI TYPE SYSTEM ────────────────────────────────────
    bt-ui-system: final pass for consistent hierarchy across pages. */
 :root {
@@ -3956,9 +4301,9 @@ pre {
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 17l4-8 4 4 5-9"/></svg></span>
       Benchmarks
     </a></li>
-    <li><a onclick="showPage('models', this)">
+    <li><a onclick="showPage('models', this)" id="nav-models">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
-      Models <span class="nav-badge">7</span>
+      Models <span class="nav-badge">8</span>
     </a></li>
     <li style="display:none" data-internal="tasks-nav"><a onclick="showPage('tasks', this)">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
@@ -4691,62 +5036,84 @@ bash run_benchmark.sh</pre>
        ═══════════════════════════════════════ -->
   <div class="page" id="page-models">
     <div class="page-header">
-      <div class="page-title">Model Library</div>
-      <div class="page-desc">Download reference implementations and review supported tasks, input requirements, and model assumptions. Select a model to see its details on the right.</div>
+      <div class="page-title">Models</div>
+      <div class="page-desc">Download reference implementations and review supported tasks, input requirements, and model assumptions.</div>
     </div>
 
-    <div class="ml-wrap" id="ml-wrap">
-      <!-- LEFT · library -->
-      <div class="ml-main">
-        <div class="ml-toolbar">
-          <div class="ml-search">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            <input type="text" id="ml-search" placeholder="Search models by name or keyword…" oninput="mlRender()">
-          </div>
-          <label class="ml-filter">Task
-            <select id="ml-f-task" onchange="mlRender()"><option value="">All</option><option>SOH</option><option>RUL</option></select>
-          </label>
-          <label class="ml-filter">Type
-            <select id="ml-f-type" onchange="mlRender()"><option value="">All</option><option>Statistical</option><option>Ensemble</option><option>Gradient Boosting</option><option>Recurrent Neural Network</option><option>Attention Model</option><option>Convolutional Neural Network</option><option>Physics-Informed Neural Net</option></select>
-          </label>
-          <label class="ml-filter">Framework
-            <select id="ml-f-fw" onchange="mlRender()"><option value="">All</option><option>scikit-learn</option><option>XGBoost</option><option>PyTorch</option></select>
-          </label>
-          <label class="ml-filter">Status
-            <select id="ml-f-status" onchange="mlRender()"><option value="">All</option><option>Available</option><option>Recommended</option><option>Requires GPU</option><option>Experimental</option></select>
-          </label>
-          <span class="ml-clear" onclick="mlClear()">Clear</span>
+    <div class="dataset-search-panel model-search-panel">
+      <div class="dataset-search-row">
+        <div class="dataset-search" id="ml-search-box">
+          <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+          <input type="text" id="ml-search" placeholder="Search models" oninput="mlOnSearchInput()">
+          <button class="search-clear" id="ml-search-clear" onclick="mlClearSearch()" aria-label="Clear search" title="Clear search">×</button>
         </div>
-
-        <div id="ml-groups"></div>
-
-        <div class="ml-package">
-          <div class="ml-package-l">
-            <div class="ml-package-t">Baseline Models Package</div>
-            <div class="ml-package-d">All models ready to use in a Python environment.</div>
+        <button class="dataset-filter-toggle model-filter-toggle" onclick="mlToggleFilters()" aria-expanded="false" aria-controls="model-filter-grid">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h18M7 12h10M10 19h4"/></svg>
+          Filters
+        </button>
+      </div>
+      <div class="applied-filter-chips" id="ml-applied-filter-chips"></div>
+      <div class="dataset-filter-popover" id="model-filter-popover">
+        <div class="dataset-filter-grid" id="model-filter-grid">
+          <div class="filter-group">
+            <span class="filter-label">Framework</span>
+            <div class="filter-tag filter-token filter-type-domain" data-ml-framework="PyTorch" onclick="mlToggleFrameworkFilter(this)">PyTorch</div>
+            <div class="filter-tag filter-token filter-type-domain" data-ml-framework="scikit-learn" onclick="mlToggleFrameworkFilter(this)">scikit-learn</div>
+            <div class="filter-tag filter-token filter-type-domain" data-ml-framework="XGBoost" onclick="mlToggleFrameworkFilter(this)">XGBoost</div>
           </div>
-          <div class="ml-package-tree">
-            <span class="ml-tree-root"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> baseline_models/</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> linear_regression.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> lstm.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> pinn.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> random_forest.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> transformer.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> utils.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> xgboost.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> cnn.py</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> README.md</span>
+          <div class="filter-group">
+            <span class="filter-label">Status</span>
+            <div class="filter-tag filter-token filter-type-status" data-ml-status="Available" onclick="mlToggleStatusFilter(this)">Available</div>
+            <div class="filter-tag filter-token filter-type-status" data-ml-status="Experimental" onclick="mlToggleStatusFilter(this)">Experimental</div>
+            <div class="filter-tag filter-token filter-type-status" data-ml-status="Recommended" onclick="mlToggleStatusFilter(this)">Recommended</div>
+            <div class="filter-tag filter-token filter-type-status" data-ml-status="Requires GPU" onclick="mlToggleStatusFilter(this)">Requires GPU</div>
           </div>
-          <div class="ml-package-r">
-            <button class="ml-btn ml-btn-primary" onclick="showToast('Preparing baseline_models.zip…', 'info')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download All Models</button>
-            <div class="ml-package-meta">ZIP · ~1.2 MB</div>
+          <div class="filter-group">
+            <span class="filter-label">Task</span>
+            <div class="filter-tag filter-token filter-type-profile" data-ml-task="RUL" onclick="mlToggleTaskFilter(this)">RUL</div>
+            <div class="filter-tag filter-token filter-type-profile" data-ml-task="SOH" onclick="mlToggleTaskFilter(this)">SOH</div>
           </div>
+          <div class="filter-group">
+            <span class="filter-label">Type</span>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Attention Model" onclick="mlToggleTypeFilter(this)">Attention Model</div>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Convolutional Neural Network" onclick="mlToggleTypeFilter(this)">Convolutional Neural Network</div>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Ensemble" onclick="mlToggleTypeFilter(this)">Ensemble</div>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Gradient Boosting" onclick="mlToggleTypeFilter(this)">Gradient Boosting</div>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Physics-Informed Neural Network" onclick="mlToggleTypeFilter(this)">Physics-Informed Neural Network</div>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Recurrent Neural Network" onclick="mlToggleTypeFilter(this)">Recurrent Neural Network</div>
+            <div class="filter-tag filter-token filter-type-category" data-ml-type="Statistical" onclick="mlToggleTypeFilter(this)">Statistical</div>
+          </div>
+        </div>
+        <div class="dataset-filter-actions">
+          <button class="dataset-filter-action" onclick="mlClearFilters()">Clear</button>
+          <button class="dataset-filter-action apply" onclick="mlApplyFilters()">Apply</button>
         </div>
       </div>
-
-      <!-- RIGHT · detail panel -->
-      <aside class="ml-detail" id="ml-detail" aria-live="polite"></aside>
     </div>
+
+    <div class="dataset-results-head model-results-head">
+      <span class="filter-count" id="ml-count">— models</span>
+    </div>
+
+    <div class="ml-wrap no-detail" id="ml-wrap">
+      <div class="ml-main">
+        <div id="ml-groups"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PAGE: MODEL DETAILS
+       ═══════════════════════════════════════ -->
+  <div class="page" id="page-model-details">
+    <div class="model-detail-page-head">
+      <button class="model-back-btn" onclick="showModelsPage()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Models
+      </button>
+    </div>
+    <div class="model-detail-page" id="model-detail-page-content"></div>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -6718,6 +7085,12 @@ document.addEventListener('click', e => {
   if (e.target.closest('#dataset-filter-popover') || e.target.closest('.dataset-filter-toggle')) return;
   closeDatasetFilters();
 });
+document.addEventListener('click', e => {
+  const popover = document.getElementById('model-filter-popover');
+  if (!popover || !popover.classList.contains('open')) return;
+  if (e.target.closest('#model-filter-popover') || e.target.closest('.model-filter-toggle')) return;
+  mlCloseFilters();
+});
 
 function removeAppliedFilter(type, value) {
   if (type === 'all') allDatasetsApplied = false;
@@ -7091,6 +7464,8 @@ function ppCopyInspectCommand() {
 }
 
 /* ── PAGE NAVIGATION ── */
+var pendingInitialModelId = null;
+window.mlLibraryReady = false;
 function showPage(name, navEl, options = {}) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
@@ -7125,6 +7500,15 @@ function applyInitialPageFromHash() {
       filterDatasets();
       return;
     }
+  }
+  if (name.startsWith('model-')) {
+    const modelId = name.replace(/^model-/, '');
+    pendingInitialModelId = modelId;
+    if (window.mlLibraryReady && typeof renderModelDetailsPage === 'function') {
+      renderModelDetailsPage(modelId);
+      showPage('model-details', document.getElementById('nav-models'), { preserveHash: true });
+    }
+    return;
   }
   if (!name || !document.getElementById('page-' + name)) return;
   showPage(name, document.querySelector('.sidebar-nav a[onclick*="' + name + '"]'));
@@ -11847,7 +12231,7 @@ const MODELS_LIB = [
     arch:[{t:'Signal window',s:'1D / 2D map'},{t:'Conv blocks',s:'local filters'},{t:'Pooling',s:'downsample'},{t:'Flatten',s:'feature vector'},{t:'Dense head',s:'SOH / RUL'}],
     archNote:'Convolutional architecture: local filters capture peaks, slopes, and voltage-capacity motifs before dense regression.',
     files:[{n:'model.py',d:'CNN architecture',s:'4.0 KB'},{n:'train.py',d:'Training loop',s:'4.6 KB'},{n:'data.py',d:'Windowing + loaders',s:'3.5 KB'},{n:'config.yaml',d:'Default hyperparameters',s:'1.1 KB'},{n:'requirements.txt',d:'Python dependencies',s:'0.6 KB'}] },
-  { id:'pinn', name:'PINN', sub:'Physics-Informed Neural Net', group:'Physics-Informed', icon:'pinn',
+  { id:'pinn', name:'PINN', sub:'Physics-Informed Neural Network', group:'Physics-Informed', icon:'pinn',
     grad:'linear-gradient(135deg,#0d9488,#0f766e)', desc:'Incorporates physical laws to guide learning with limited data.',
     tasks:['SOH','RUL'], status:'Experimental', framework:'PyTorch', taskLabel:'SOH / RUL', difficulty:'Advanced', pyfile:'pinn.py',
     overview:'PINN models embed domain knowledge (e.g., electrochemical dynamics) into the loss function to improve generalization and data efficiency.',
@@ -11858,8 +12242,45 @@ const MODELS_LIB = [
     archNote:'Physics-informed architecture: neural predictions are optimized against both observed labels and battery-physics residuals.',
     files:[{n:'model.py',d:'PINN model architecture',s:'6.2 KB'},{n:'train.py',d:'Training script',s:'4.1 KB'},{n:'data.py',d:'Data loading utilities',s:'2.8 KB'},{n:'config.yaml',d:'Default hyperparameters',s:'1.3 KB'},{n:'requirements.txt',d:'Python dependencies',s:'0.6 KB'}] }
 ];
+const ML_PACKAGE_MODEL = {
+  id: 'baseline-package',
+  name: 'Baseline Models Package',
+  sub: 'All Models',
+  group: 'Package',
+  icon: 'boost',
+  grad: 'linear-gradient(135deg,#64748b,#475569)',
+  desc: 'All models ready to use in a Python environment.',
+  tasks: [],
+  status: 'Package',
+  framework: 'Python',
+  taskLabel: 'All reference models',
+  difficulty: 'Package',
+  pyfile: 'baseline_models.zip',
+  isPackage: true,
+  overview: 'A single package containing the complete set of BatteryLake baseline model files for local Python use.',
+  files: [
+    { n:'baseline_models/', d:'Package root', s:'folder' },
+    { n:'linear_regression.py', d:'Linear Regression implementation', s:'.py' },
+    { n:'lstm.py', d:'LSTM implementation', s:'.py' },
+    { n:'pinn.py', d:'PINN implementation', s:'.py' },
+    { n:'random_forest.py', d:'Random Forest implementation', s:'.py' },
+    { n:'transformer.py', d:'Transformer implementation', s:'.py' },
+    { n:'utils.py', d:'Shared model utilities', s:'.py' },
+    { n:'xgboost.py', d:'XGBoost implementation', s:'.py' },
+    { n:'cnn.py', d:'CNN implementation', s:'.py' },
+    { n:'README.md', d:'Package instructions', s:'.md' }
+  ]
+};
 
 let mlSel = 'linear';
+let activeModelFrameworks = new Set();
+let activeModelStatuses = new Set();
+let activeModelTasks = new Set();
+let activeModelTypes = new Set();
+let pendingModelFrameworks = new Set();
+let pendingModelStatuses = new Set();
+let pendingModelTasks = new Set();
+let pendingModelTypes = new Set();
 
 function mlStatusHTML(status) {
   const st = ML_STATUS[status] || { cls: '', dot: true };
@@ -11869,55 +12290,191 @@ function mlStatusHTML(status) {
 function mlTasksHTML(m) {
   return '<span class="ml-tasklbl">Tasks</span>' + m.tasks.map(t => '<span class="ml-task">' + t + '</span>').join('');
 }
-function mlBtns(m) {
-  return '<button class="ml-btn ml-btn-ghost" onclick="event.stopPropagation();mlSelect(\'' + m.id + '\')">View Details</button>'
-       + '<button class="ml-btn ml-btn-primary" onclick="event.stopPropagation();showToast(\'Downloading ' + m.pyfile + ' …\', \'info\')">' + ML_SVG.dl + ' Download .py</button>';
+function mlCatalogModels() {
+  return MODELS_LIB.concat([ML_PACKAGE_MODEL]);
+}
+function mlFindModel(id) {
+  return mlCatalogModels().find(x => x.id === id);
+}
+const ML_CARD_LOGOS = {
+  cnn: { light: 'assets/model-logos/1.png', dark: 'assets/model-logos/dark/1.png' },
+  linear: { light: 'assets/model-logos/2.png', dark: 'assets/model-logos/dark/2.png' },
+  lstm: { light: 'assets/model-logos/3.png', dark: 'assets/model-logos/dark/3.png' },
+  pinn: { light: 'assets/model-logos/4.png', dark: 'assets/model-logos/dark/4.png' },
+  rf: { light: 'assets/model-logos/5.png', dark: 'assets/model-logos/dark/5.png' },
+  transformer: { light: 'assets/model-logos/6.png', dark: 'assets/model-logos/dark/6.png' },
+  xgboost: { light: 'assets/model-logos/7.png', dark: 'assets/model-logos/dark/7.png' },
+  'baseline-package': { light: 'assets/model-logos/8.png', dark: 'assets/model-logos/dark/8.png' }
+};
+function mlDownloadModel(id) {
+  const m = mlFindModel(id);
+  if (!m) return;
+  showToast(m.isPackage ? 'Preparing baseline_models.zip...' : 'Downloading ' + m.pyfile + ' ...', 'info');
 }
 function mlCardHTML(m) {
-  return '<div class="ml-card' + (m.id === mlSel ? ' active' : '') + '" data-id="' + m.id + '" onclick="mlSelect(\'' + m.id + '\')">'
-    + '<div class="ml-card-top">'
-      + '<div class="ml-card-ic" style="background:' + m.grad + '">' + mlIcon(m.icon) + '</div>'
-      + '<div style="min-width:0"><div class="ml-card-name">' + m.name + '</div><div class="ml-card-sub">' + m.sub + '</div></div>'
-      + '<span class="ml-star" onclick="event.stopPropagation();this.classList.toggle(\'on\')" title="Favorite">' + ML_SVG.star + '</span>'
+  const logo = ML_CARD_LOGOS[m.id] || '';
+  return '<div class="ml-card edge-glow-hover-effect" role="button" tabindex="0" data-id="' + m.id + '" onclick="mlOpenDetails(\'' + m.id + '\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();mlOpenDetails(\'' + m.id + '\')}">'
+    + '<div class="ml-card-head">'
+      + '<div class="ml-card-head-copy">'
+        + '<span class="ml-type-badge">' + esc(m.sub) + '</span>'
+        + '<div class="ml-card-name">' + esc(m.name) + '</div>'
+      + '</div>'
+      + (logo ? '<span class="ml-card-logo" aria-hidden="true"><img class="ml-card-logo-light" src="' + logo.light + '" alt=""><img class="ml-card-logo-dark" src="' + logo.dark + '" alt=""></span>' : '')
     + '</div>'
-    + '<div class="ml-card-desc">' + m.desc + '</div>'
-    + '<div class="ml-card-foot">' + mlTasksHTML(m) + mlStatusHTML(m.status) + '</div>'
-    + '<div class="ml-card-btns">' + mlBtns(m) + '</div>'
+    + '<div class="ml-card-desc">' + esc(m.desc) + '</div>'
+    + '<div class="ml-card-actions">'
+      + '<span class="ml-card-arrow" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>'
+      + '<button class="ml-download-icon" type="button" onclick="event.stopPropagation();mlDownloadModel(\'' + m.id + '\')" aria-label="Download ' + escAttr(m.name) + (m.isPackage ? ' package' : ' Python file') + '" title="' + (m.isPackage ? 'Download package' : 'Download .py') + '">' + ML_SVG.dl + '</button>'
+    + '</div>'
   + '</div>';
 }
 function mlWideCardHTML(m) {
-  return '<div class="ml-card wide' + (m.id === mlSel ? ' active' : '') + '" data-id="' + m.id + '" onclick="mlSelect(\'' + m.id + '\')">'
-    + '<div class="ml-card-ic" style="background:' + m.grad + '">' + mlIcon(m.icon) + '</div>'
-    + '<div class="ml-wide-body">'
-      + '<div class="ml-card-name">' + m.name + '</div>'
-      + '<div class="ml-card-sub">' + m.sub + '</div>'
-      + '<div class="ml-card-desc" style="margin:7px 0 0">' + m.desc + '</div>'
-    + '</div>'
-    + '<div class="ml-wide-tasks">' + mlTasksHTML(m) + mlStatusHTML(m.status) + '</div>'
-    + '<div class="ml-card-btns">' + mlBtns(m) + '</div>'
-  + '</div>';
+  return mlCardHTML(m);
 }
 function mlVal(id) { const e = document.getElementById(id); return e ? e.value : ''; }
+function mlCloneSet(set) { return new Set(Array.from(set)); }
+function mlHasSearchText() {
+  const input = document.getElementById('ml-search');
+  return !!(input && input.value.trim());
+}
+function mlHasAppliedFilters() {
+  return activeModelFrameworks.size > 0 || activeModelStatuses.size > 0 || activeModelTasks.size > 0 || activeModelTypes.size > 0;
+}
+function mlIsResultsMode() {
+  return mlHasSearchText() || mlHasAppliedFilters();
+}
+function mlSyncPendingFromActive() {
+  pendingModelFrameworks = mlCloneSet(activeModelFrameworks);
+  pendingModelStatuses = mlCloneSet(activeModelStatuses);
+  pendingModelTasks = mlCloneSet(activeModelTasks);
+  pendingModelTypes = mlCloneSet(activeModelTypes);
+  mlSyncFilterPopupTags();
+}
+function mlSyncFilterPopupTags() {
+  document.querySelectorAll('[data-ml-framework]').forEach(t => t.classList.toggle('active', pendingModelFrameworks.has(t.dataset.mlFramework)));
+  document.querySelectorAll('[data-ml-status]').forEach(t => t.classList.toggle('active', pendingModelStatuses.has(t.dataset.mlStatus)));
+  document.querySelectorAll('[data-ml-task]').forEach(t => t.classList.toggle('active', pendingModelTasks.has(t.dataset.mlTask)));
+  document.querySelectorAll('[data-ml-type]').forEach(t => t.classList.toggle('active', pendingModelTypes.has(t.dataset.mlType)));
+}
+function mlUpdatePendingSet(set, value, el) {
+  if (set.has(value)) set.delete(value); else set.add(value);
+  el.classList.toggle('active', set.has(value));
+}
+function mlToggleFrameworkFilter(el) { mlUpdatePendingSet(pendingModelFrameworks, el.dataset.mlFramework, el); }
+function mlToggleStatusFilter(el) { mlUpdatePendingSet(pendingModelStatuses, el.dataset.mlStatus, el); }
+function mlToggleTaskFilter(el) { mlUpdatePendingSet(pendingModelTasks, el.dataset.mlTask, el); }
+function mlToggleTypeFilter(el) { mlUpdatePendingSet(pendingModelTypes, el.dataset.mlType, el); }
+function mlToggleFilters() {
+  const popover = document.getElementById('model-filter-popover');
+  const btn = document.querySelector('.model-filter-toggle');
+  if (!popover) return;
+  const willOpen = !popover.classList.contains('open');
+  if (willOpen) mlSyncPendingFromActive();
+  popover.classList.toggle('open', willOpen);
+  if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+}
+function mlCloseFilters() {
+  const popover = document.getElementById('model-filter-popover');
+  const btn = document.querySelector('.model-filter-toggle');
+  if (popover) popover.classList.remove('open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+function mlApplyFilters() {
+  activeModelFrameworks = mlCloneSet(pendingModelFrameworks);
+  activeModelStatuses = mlCloneSet(pendingModelStatuses);
+  activeModelTasks = mlCloneSet(pendingModelTasks);
+  activeModelTypes = mlCloneSet(pendingModelTypes);
+  mlCloseFilters();
+  mlRenderAppliedFilterChips();
+  mlRender();
+}
+function mlClearFilters() {
+  pendingModelFrameworks.clear();
+  pendingModelStatuses.clear();
+  pendingModelTasks.clear();
+  pendingModelTypes.clear();
+  activeModelFrameworks.clear();
+  activeModelStatuses.clear();
+  activeModelTasks.clear();
+  activeModelTypes.clear();
+  mlSyncFilterPopupTags();
+  mlRenderAppliedFilterChips();
+  mlRender();
+  mlCloseFilters();
+}
+function mlRenderAppliedFilterChips() {
+  const box = document.getElementById('ml-applied-filter-chips');
+  if (!box) return;
+  const chips = [];
+  activeModelFrameworks.forEach(v => chips.push({ type: 'framework', tokenType: 'domain', value: v, label: v }));
+  activeModelStatuses.forEach(v => chips.push({ type: 'status', tokenType: 'status', value: v, label: v }));
+  activeModelTasks.forEach(v => chips.push({ type: 'task', tokenType: 'profile', value: v, label: v }));
+  activeModelTypes.forEach(v => chips.push({ type: 'type', tokenType: 'category', value: v, label: v }));
+  box.classList.toggle('has-chips', chips.length > 0);
+  box.innerHTML = chips.map(chip => `<span class="applied-chip ${filterTypeClass(chip.tokenType)}">${esc(chip.label)}<button aria-label="Remove ${esc(chip.label)} filter" onclick="mlRemoveAppliedFilter('${chip.type}','${escAttr(chip.value)}')">×</button></span>`).join('');
+}
+function mlRemoveAppliedFilter(type, value) {
+  if (type === 'framework') activeModelFrameworks.delete(value);
+  if (type === 'status') activeModelStatuses.delete(value);
+  if (type === 'task') activeModelTasks.delete(value);
+  if (type === 'type') activeModelTypes.delete(value);
+  mlSyncPendingFromActive();
+  mlRenderAppliedFilterChips();
+  mlRender();
+}
+function mlOnSearchInput() {
+  const input = document.getElementById('ml-search');
+  const box = document.getElementById('ml-search-box');
+  if (box) box.classList.toggle('has-text', !!(input && input.value));
+  mlRender();
+}
+function mlClearSearch() {
+  const input = document.getElementById('ml-search');
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+  const box = document.getElementById('ml-search-box');
+  if (box) box.classList.remove('has-text');
+  mlRender();
+}
+function mlFilteredModels() {
+  const q = (mlVal('ml-search') || '').trim().toLowerCase();
+  const tokens = q ? q.split(/\s+/).filter(Boolean) : [];
+  return mlCatalogModels().filter(m => {
+    if (activeModelFrameworks.size > 0 && !activeModelFrameworks.has(m.framework)) return false;
+    if (activeModelStatuses.size > 0 && !activeModelStatuses.has(m.status)) return false;
+    if (activeModelTypes.size > 0 && !activeModelTypes.has(m.sub)) return false;
+    if (activeModelTasks.size > 0) {
+      let taskMatch = false;
+      activeModelTasks.forEach(t => { if (m.tasks.includes(t)) taskMatch = true; });
+      if (!taskMatch) return false;
+    }
+    if (tokens.length) {
+      const hay = [m.name, m.sub, m.desc, m.framework, m.group, m.status, m.taskLabel].join(' ').toLowerCase();
+      for (const t of tokens) {
+        if (!hay.includes(t)) return false;
+      }
+    }
+    return true;
+  }).sort((a, b) => {
+    if (a.isPackage && !b.isPackage) return 1;
+    if (!a.isPackage && b.isPackage) return -1;
+    return a.name.localeCompare(b.name);
+  });
+}
 function mlRender() {
   const groupsEl = document.getElementById('ml-groups'); if (!groupsEl) return;
-  const q = (mlVal('ml-search') || '').trim().toLowerCase();
-  const ft = mlVal('ml-f-task'), fty = mlVal('ml-f-type'), ffw = mlVal('ml-f-fw'), fst = mlVal('ml-f-status');
-  const list = MODELS_LIB.filter(m => {
-    if (ft && m.tasks.indexOf(ft) < 0) return false;
-    if (fty && m.sub !== fty) return false;
-    if (ffw && m.framework !== ffw) return false;
-    if (fst && m.status !== fst) return false;
-    if (q) { const hay = (m.name + ' ' + m.sub + ' ' + m.desc + ' ' + m.framework + ' ' + m.group).toLowerCase(); if (hay.indexOf(q) < 0) return false; }
-    return true;
-  });
+  const list = mlFilteredModels();
   let html = '';
-  ML_GROUPS.forEach(g => {
-    const ms = list.filter(m => m.group === g.name);
-    if (!ms.length) return;
-    const cards = ms.map(m => ms.length === 1 ? mlWideCardHTML(m) : mlCardHTML(m)).join('');
-    html += '<div class="ml-group"><div class="ml-group-h"><span class="ml-group-ic" style="background:' + g.grad + '">' + mlIcon(g.icon) + '</span>' + g.name + '</div><div class="ml-cards">' + cards + '</div></div>';
-  });
+  const cards = list.map(mlCardHTML).join('');
+  if (cards) html = '<div class="ml-group"><div class="ml-cards">' + cards + '</div></div>';
   groupsEl.innerHTML = html || '<div style="padding:44px;text-align:center;color:var(--text3)">No models match your filters.</div>';
+  const count = document.getElementById('ml-count');
+  const head = document.querySelector('#page-models .model-results-head');
+  const resultsMode = mlIsResultsMode();
+  if (head) head.classList.toggle('has-results', resultsMode);
+  if (count) count.textContent = resultsMode ? list.length + (list.length === 1 ? ' model found' : ' models found') : '';
 }
 function mlArchitectureHTML(m) {
   const layers = m.arch || [];
@@ -11974,12 +12531,13 @@ function mlArchitectureHTML(m) {
   + '</div>';
 }
 function mlDetailHTML(m) {
+  if (m.isPackage) return mlPackageDetailHTML(m);
   const st = ML_STATUS[m.status] || { cls: '' };
   return '<div class="ml-d-head">'
       + '<div class="ml-d-ic" style="background:' + m.grad + '">' + mlIcon(m.icon) + '</div>'
       + '<div style="flex:1;min-width:0"><div class="ml-d-name">' + m.name + '</div><div class="ml-d-sub">' + m.sub + '</div></div>'
       + '<span class="ml-d-badge ' + st.cls + '">' + m.status + '</span>'
-      + '<button class="ml-d-close" onclick="mlCloseDetail()" title="Close">&times;</button>'
+      + '<button class="ml-d-close" onclick="showModelsPage()" title="Close">&times;</button>'
     + '</div>'
     + '<div class="ml-d-chips">'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.code + ' Framework</span><span class="ml-chip-v">' + m.framework + '</span></div>'
@@ -11996,14 +12554,37 @@ function mlDetailHTML(m) {
         + m.files.map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + f.n + '</span><span class="ml-file-d">' + f.d + '</span><span class="ml-file-s">' + f.s + '</span></div>').join('')
       + '</div></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Quick Actions</div><div class="ml-actions">'
-        + '<button class="ml-btn ml-btn-primary" onclick="showToast(\'Downloading ' + m.pyfile + ' …\', \'info\')">' + ML_SVG.dl + ' Download Code</button>'
+        + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\')">' + ML_SVG.dl + ' Download Code</button>'
         + '<button class="ml-btn ml-btn-ghost" onclick="showToast(\'Opening ' + m.name + ' docs…\', \'info\')">' + ML_SVG.ext + ' Docs</button>'
         + '<button class="ml-btn ml-btn-ghost" onclick="showPage(\'benchmarks\', document.querySelector(\'.sidebar-nav a[onclick*=benchmarks]\'))">' + ML_SVG.play + ' Run Benchmark</button>'
       + '</div></div>'
     + '</div>';
 }
+function mlPackageDetailHTML(m) {
+  return '<div class="ml-d-head">'
+      + '<div class="ml-d-ic" style="background:' + m.grad + '">' + ML_SVG.file + '</div>'
+      + '<div style="flex:1;min-width:0"><div class="ml-d-name">' + esc(m.name) + '</div><div class="ml-d-sub">' + esc(m.sub) + '</div></div>'
+      + '<span class="ml-d-badge">' + esc(m.status) + '</span>'
+      + '<button class="ml-d-close" onclick="showModelsPage()" title="Close">&times;</button>'
+    + '</div>'
+    + '<div class="ml-d-chips">'
+      + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.code + ' Format</span><span class="ml-chip-v">Python package</span></div>'
+      + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.target + ' Coverage</span><span class="ml-chip-v">All baseline models</span></div>'
+      + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.bars + ' Files</span><span class="ml-chip-v">' + m.files.length + ' items</span></div>'
+    + '</div>'
+    + '<div class="ml-d-body">'
+      + '<div class="ml-d-sec"><div class="ml-d-h">Overview</div><p>' + esc(m.overview) + '</p></div>'
+      + '<div class="ml-d-sec"><div class="ml-d-h">Included Files</div><div class="ml-files ml-package-files">'
+        + m.files.map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + esc(f.n) + '</span><span class="ml-file-d">' + esc(f.d) + '</span><span class="ml-file-s">' + esc(f.s) + '</span></div>').join('')
+      + '</div></div>'
+      + '<div class="ml-d-sec"><div class="ml-d-h">Quick Actions</div><div class="ml-actions">'
+        + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\')">' + ML_SVG.dl + ' Download Package</button>'
+        + '<button class="ml-btn ml-btn-ghost" onclick="showPage(\'benchmarks\', document.querySelector(\'.sidebar-nav a[onclick*=benchmarks]\'))">' + ML_SVG.play + ' Run Benchmark</button>'
+      + '</div></div>'
+    + '</div>';
+}
 function mlSelect(id) {
-  const m = MODELS_LIB.find(x => x.id === id); if (!m) return;
+  const m = mlFindModel(id); if (!m) return;
   mlSel = id;
   const det = document.getElementById('ml-detail');
   if (det) det.innerHTML = mlDetailHTML(m);
@@ -12011,20 +12592,44 @@ function mlSelect(id) {
   document.querySelectorAll('.ml-card').forEach(c => c.classList.toggle('active', c.dataset.id === id));
   if (det && window.innerWidth <= 1080) det.scrollTop = 0;
 }
+function mlOpenDetails(id) {
+  const m = mlFindModel(id); if (!m) return;
+  mlSel = id;
+  renderModelDetailsPage(id);
+  showPage('model-details', document.getElementById('nav-models'), { preserveHash: true });
+  history.pushState(null, '', '#model-' + id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function renderModelDetailsPage(id) {
+  const m = mlFindModel(id) || MODELS_LIB[0];
+  if (!m) return;
+  mlSel = m.id;
+  const page = document.getElementById('model-detail-page-content');
+  if (page) page.innerHTML = mlDetailHTML(m);
+}
+function showModelsPage() {
+  showPage('models', document.getElementById('nav-models'), { preserveHash: true });
+  history.pushState(null, '', '#models');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function mlCloseDetail() {
   const wrap = document.getElementById('ml-wrap'); if (wrap) wrap.classList.add('no-detail');
   document.querySelectorAll('.ml-card.active').forEach(c => c.classList.remove('active'));
 }
 function mlClear() {
-  ['ml-f-task','ml-f-type','ml-f-fw','ml-f-status'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
-  const s = document.getElementById('ml-search'); if (s) s.value = '';
+  mlClearFilters();
+  mlClearSearch();
   mlRender();
 }
 function mlInit() {
   if (!document.getElementById('ml-groups')) return;
+  window.mlLibraryReady = true;
+  mlRenderAppliedFilterChips();
   mlRender();
-  mlSelect(mlSel);
-  if (window.innerWidth <= 1080) mlCloseDetail();
+  if (pendingInitialModelId && mlCatalogModels().some(m => m.id === pendingInitialModelId)) {
+    renderModelDetailsPage(pendingInitialModelId);
+    showPage('model-details', document.getElementById('nav-models'), { preserveHash: true });
+  }
 }
 mlInit();
 </script>
