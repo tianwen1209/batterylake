@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BatteryLake — Battery Data Intelligence Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+<title>BatteryLake - Battery Data Intelligence Platform</title>
+<link rel="icon" href="assets/batterylake_logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script>
 (() => {
   const storedTheme = localStorage.getItem('bt-theme');
@@ -15,9 +16,7 @@
 })();
 </script>
 <style>
-/* ══════════════════════════════════════════════════════════════
-   CSS VARIABLES & RESET
-   ══════════════════════════════════════════════════════════════ */
+/* CSS VARIABLES & RESET */
 :root {
   --bg: #ffffff;
   --bg2: #f7f8fb;
@@ -59,12 +58,10 @@
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body { font-family: var(--sans); background: var(--bg2); color: var(--text1); min-height: 100vh; }
 
-/* ══════════════════════════════════════════════════════════════
-   LAYOUT
-   ══════════════════════════════════════════════════════════════ */
+/* LAYOUT */
 .app { display: flex; min-height: 100vh; }
 
-/* ── SIDEBAR ── */
+/* SIDEBAR */
 .sidebar {
   width: var(--sidebar-w); min-height: 100vh; background: var(--sidebar-bg);
   position: fixed; top: 0; left: 0; z-index: 100;
@@ -110,10 +107,10 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .sidebar-footer a { color: var(--sidebar-text); text-decoration: none; }
 .sidebar-footer a:hover { color: var(--text1); }
 
-/* ── MAIN ── */
+/* MAIN */
 .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
 
-/* ── TOP BAR ── */
+/* TOP BAR */
 .topbar {
   background: var(--bg); border-bottom: 1px solid var(--border);
   padding: 12px 32px; display: flex; align-items: center; gap: 10px;
@@ -173,9 +170,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-hover); }
 
-/* ══════════════════════════════════════════════════════════════
-   PAGE CONTENT
-   ══════════════════════════════════════════════════════════════ */
+/* PAGE CONTENT */
 .page { display: none; padding: 28px 32px 60px; }
 .page.active { display: block; }
 
@@ -183,7 +178,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .page-title { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--text1); letter-spacing: -0.02em; }
 .page-desc { font-size: 15px; color: var(--text3); line-height: 1.6; margin-top: 6px; max-width: 720px; }
 
-/* ── METRICS PANEL (Dashboard overview) ── */
+/* METRICS PANEL (Dashboard overview) */
 .metrics-panel {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -247,7 +242,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .metric-val { font-size: 22px; }
 }
 
-/* ── FILTER BAR ── */
+/* FILTER BAR */
 .filter-bar { display: flex; align-items: center; gap: 10px 14px; margin: 18px 0 20px; flex-wrap: wrap; row-gap: 12px; }
 .filter-group {
   display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
@@ -305,7 +300,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .search-clear:hover { background: var(--border2); color: var(--text1); }
 .search-box.has-text .search-clear { display: inline-flex; }
 
-/* ── DATASET CARDS ── */
+/* DATASET CARDS */
 .dataset-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 10px; overflow: hidden; }
 .dataset-card {
   background: var(--bg); padding: 18px 22px;
@@ -363,17 +358,53 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .dc-tag.cat-eis,
 .dc-tag.cat-ev { background: var(--tag-bg, var(--bg3)); color: var(--tag-fg, var(--text3)); }
 
-/* ── KAGGLE-INSPIRED DATASETS LANDING ── */
+/* KAGGLE-INSPIRED DATASETS LANDING */
 .datasets-landing {
-  max-width: 1180px;
+  max-width: none;
 }
-.datasets-hero {
-  padding: 24px 0 28px;
-  margin-bottom: 8px;
+.visual-page-hero {
+  position: relative;
+  min-height: 344px;
+  padding: 32px 0;
+  margin-bottom: 18px;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
-.datasets-hero .page-title { font-size: 34px !important; }
-.datasets-hero .page-desc { max-width: 680px; }
-.datasets-actions { margin-top: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.visual-page-hero .page-title {
+  width: fit-content;
+  max-width: min(680px, 58%);
+  font-size: 34px !important;
+}
+.visual-page-hero .page-desc { max-width: min(680px, 58%); }
+.visual-page-hero .page-title,
+.visual-page-hero .page-desc,
+.visual-page-actions {
+  position: relative;
+  z-index: 2;
+}
+.visual-page-hero-art {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 50%;
+  width: min(454px, 44%);
+  height: auto;
+  max-height: calc(100% - 24px);
+  min-width: 0;
+  object-fit: contain;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 20px 42px rgba(15,23,42,.10));
+  pointer-events: none;
+  user-select: none;
+}
+@media (min-width: 901px) {
+  .models-hero-art { top: calc(50% - 22px); }
+}
+.visual-page-actions { width: fit-content; max-width: min(680px, 58%); margin-top: 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .dataset-upload-input { display: none; }
 .dataset-contribute-btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -557,7 +588,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .dataset-filter-popover { right: 12px; left: 12px; width: auto; }
 }
 
-/* ── DATASET DETAIL MODAL ── */
+/* DATASET DETAIL MODAL */
 .modal-overlay {
   display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
   z-index: 200; align-items: center; justify-content: center; padding: 24px;
@@ -608,9 +639,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .ci-yes { background: var(--green-bg); color: var(--green); }
 .ci-no { background: var(--bg3); color: var(--text4); }
 
-/* ══════════════════════════════════════════════════════════════
-   BENCHMARK PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* BENCHMARK PAGE */
 .bench-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 20px; }
 .bench-card {
   background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
@@ -635,9 +664,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .model-table tr:hover td { background: #fafbfd; }
 .model-table .best { font-weight: 700; color: var(--green); }
 
-/* ══════════════════════════════════════════════════════════════
-   NAMING PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* NAMING PAGE */
 .naming-formula {
   background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
   padding: 20px 24px; margin: 18px 0 24px; text-align: center;
@@ -657,10 +684,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .np-rate { background: #e0e7ff; color: #3730a3; }
 .np-temp { background: #ffedd5; color: #9a3412; }
 
-/* ══════════════════════════════════════════════════════════════
-   PIPELINE & DOCS
-   ══════════════════════════════════════════════════════════════ */
-/* ── Process / pipeline stepper ── */
+/* PIPELINE & DOCS */
+/* Process / pipeline stepper */
 .pipeline-flow {
   display: flex; align-items: flex-start; gap: 0;
   margin: 28px 0 10px; padding: 6px 4px 2px;
@@ -715,7 +740,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .stat-card .sc-val { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--accent); }
 .stat-card .sc-label { font-size: 13px; color: var(--text3); margin-top: 4px; }
 
-/* ── ABOUT PAGE ── */
+/* ABOUT PAGE */
 .about-content { max-width: 640px; line-height: 1.7; font-size: 15px; color: var(--text2); }
 .about-content h3 { font-family: var(--display); font-size: 20px; color: var(--text1); margin: 24px 0 8px; }
 .about-content p { margin-bottom: 12px; }
@@ -725,9 +750,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .team-name { font-weight: 600; font-size: 14px; color: var(--text1); }
 .team-role { font-size: 13px; color: var(--text3); margin-top: 2px; }
 
-/* ══════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
@@ -755,9 +778,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   box-shadow: var(--card-shadow);
 }
 
-/* ══════════════════════════════════════════════════════════════
-   WORKFLOW OVERVIEW (4-step)
-   ══════════════════════════════════════════════════════════════ */
+/* WORKFLOW OVERVIEW (4-step) */
 .workflow-overview {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 20px 0 24px;
   background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
@@ -788,9 +809,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 @media (max-width: 900px) { .workflow-overview { grid-template-columns: repeat(2, 1fr); } .wo-step:nth-child(2) { border-right: none; } }
 @media (max-width: 540px) { .workflow-overview { grid-template-columns: 1fr; } .wo-step { border-right: none; border-bottom: 1px solid var(--border); } .wo-step:last-child { border-bottom: none; } }
 
-/* ══════════════════════════════════════════════════════════════
-   ONBOARDING HERO
-   ══════════════════════════════════════════════════════════════ */
+/* ONBOARDING HERO */
 .onboarding-hero {
   background: linear-gradient(135deg, #1e3a5f 0%, #1b2a4a 100%);
   border-radius: 12px; padding: 28px 30px; margin-bottom: 20px;
@@ -813,9 +832,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .oh-btn-outline { background: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); }
 .oh-btn-outline:hover { background: rgba(255,255,255,0.14); }
 
-/* ══════════════════════════════════════════════════════════════
-   QUALITY PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* QUALITY PAGE */
 .qa-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(370px, .82fr);
@@ -1172,9 +1189,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .qa-signal-row { grid-template-columns: 68px minmax(0, 1fr) 40px; }
 }
 
-/* ══════════════════════════════════════════════════════════════
-   PREPROCESSING PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* PREPROCESSING PAGE */
 #page-preprocessing .page-title,
 #page-preprocessing .pp-title,
 #page-preprocessing .pp-panel-title,
@@ -1568,9 +1583,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .pp-step:not(:last-child)::after { display: none; }
 }
 
-/* ══════════════════════════════════════════════════════════════
-   API / APPLICATIONS PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* API / APPLICATIONS PAGE */
 #page-apis .page-title,
 #page-apis .api-console-title,
 #page-apis .api-panel-title,
@@ -1701,9 +1714,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .app-module strong { display: block; margin-top: 12px; color: var(--text1); font-size: 15px; font-weight: 850; }
 .app-module p { margin-top: 6px; color: var(--text3); font-size: 13px; line-height: 1.48; }
 
-/* ══════════════════════════════════════════════════════════════
-   CONTRIBUTE PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* CONTRIBUTE PAGE */
 #page-contribute > .contribute-hero,
 #page-contribute > h3,
 #page-contribute > .contrib-steps,
@@ -1810,9 +1821,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 
 @media (max-width: 700px) { .api-grid { grid-template-columns: 1fr; } }
 
-/* ══════════════════════════════════════════════════════════════
-   CONTRIBUTE PAGE
-   ══════════════════════════════════════════════════════════════ */
+/* CONTRIBUTE PAGE */
 .contribute-hero {
   background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
   border-radius: 14px; padding: 32px; color: #fff; margin-bottom: 24px;
@@ -1855,9 +1864,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 @media (max-width: 900px) { .contrib-steps { grid-template-columns: repeat(2, 1fr); } .contrib-req-grid { grid-template-columns: 1fr; } }
 @media (max-width: 540px) { .contrib-steps { grid-template-columns: 1fr; } }
 
-/* ══════════════════════════════════════════════════════════════
-   CTA BUTTON (topbar)
-   ══════════════════════════════════════════════════════════════ */
+/* CTA BUTTON (topbar) */
 .btn-contribute {
   background: linear-gradient(135deg, #16a34a, #15803d);
   color: #fff; font-weight: 600; border: none; padding: 8px 16px;
@@ -1867,7 +1874,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 }
 .btn-contribute:hover { background: linear-gradient(135deg, #15803d, #166534); transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
 
-/* ── Toast notification ── */
+/* Toast notification */
 .toast {
   position: fixed; bottom: 24px; right: 24px; z-index: 300;
   padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 500;
@@ -1879,7 +1886,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .toast.error { background: var(--red); color: #fff; }
 .toast.info { background: var(--accent); color: #fff; }
 
-/* ── Sync button states ── */
+/* Sync button states */
 .sync-btn { display: inline-flex; align-items: center; gap: 6px; }
 .sync-btn.loading .sync-icon { animation: spin 1s linear infinite; }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -1891,14 +1898,37 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .sync-dot.live { background: var(--green); }
 .sync-dot.fallback { background: var(--amber); }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="assets/vendor/papaparse.min.js"></script>
 
 <style id="bw-styles">
-/* ══════════════════════════════════════════════════════════════
-   BENCHMARK EXPERIMENT WORKSPACE  (scoped .bw-*, uses platform tokens)
-   ══════════════════════════════════════════════════════════════ */
-#page-benchmarks { padding-top: 18px; }
-#page-benchmarks .page-header { display: none; }
+/* BENCHMARK EXPERIMENT WORKSPACE (scoped .bw-*, uses platform tokens) */
+#page-benchmarks {
+  max-width: none;
+  padding-top: 30px;
+}
+#page-benchmarks .page-header:not(.visual-page-hero) { display: none; }
+.benchmark-start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(37,99,235,.24);
+  transition: background .15s, box-shadow .15s, transform .15s;
+}
+.benchmark-start-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 6px 16px rgba(37,99,235,.30);
+  transform: translateY(-1px);
+}
 .bw-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--card-shadow); overflow: hidden; }
 .bw-phead { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
 .bw-phnum { width: 24px; height: 24px; border-radius: 7px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 700; flex-shrink: 0; }
@@ -1906,53 +1936,20 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .bw-pbody { padding: 16px 18px; }
 
 /* progress stepper */
-.bw-progress { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px 22px; box-shadow: var(--card-shadow); margin-bottom: 16px; }
-.bw-pstep { display: flex; align-items: center; gap: 9px; }
+.bw-progress { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 0; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px 22px; box-shadow: var(--card-shadow); margin-bottom: 16px; scroll-margin-top: 92px; }
+.bw-pstep { display: flex; align-items: center; gap: 9px; border: 0; border-radius: 999px; padding: 3px 4px; background: transparent; font-family: var(--sans); cursor: pointer; transition: background .15s, color .15s; }
+.bw-pstep:hover { background: var(--bg2); }
+.bw-pstep:focus-visible { outline: 3px solid var(--accent-light); outline-offset: 2px; }
 .bw-pnum { width: 27px; height: 27px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 700; background: var(--bg3); color: var(--text3); border: 1px solid var(--border2); }
 .bw-pstep.active .bw-pnum { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
 .bw-plabel { font-size: 14px; font-weight: 600; color: var(--text3); }
 .bw-pstep.active .bw-plabel { color: var(--text1); }
 .bw-pstep.done .bw-pnum { background: var(--green); border-color: var(--green); color: #fff; box-shadow: 0 2px 8px rgba(22,163,74,0.3); }
 .bw-pstep.done .bw-plabel { color: var(--text1); }
+.bw-pstep.active.done .bw-pnum { outline: 3px solid rgba(37,99,235,.16); outline-offset: 2px; }
 .bw-pnum svg { width: 14px; height: 14px; }
 .bw-pline { flex: 1 1 16px; height: 2px; background: var(--border2); margin: 0 14px; min-width: 16px; border-radius: 2px; transition: background 0.3s ease; }
 .bw-pline.done { background: var(--green); }
-
-/* reduced-density run brief */
-.bw-brief { display: grid; grid-template-columns: minmax(280px, 0.78fr) 1.22fr; gap: 18px; align-items: stretch; margin-bottom: 18px; padding: 18px; border: 1px solid #d7e2f2; border-radius: 14px; background: linear-gradient(135deg, #ffffff 0%, #f6f9ff 62%, #eef5ff 100%); box-shadow: 0 18px 42px -34px rgba(37,99,235,0.45); }
-.bw-brief-kicker { color: var(--accent); font-size: 12px; font-weight: 850; line-height: 1.2; letter-spacing: 0.05em; text-transform: uppercase; }
-.bw-brief-title { margin-top: 6px; color: var(--text1); font-size: 22px; font-weight: 900; line-height: 1.05; }
-.bw-brief-copy { margin-top: 7px; max-width: 560px; color: var(--text3); font-size: 14px; line-height: 1.46; }
-.bw-quick-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-.bw-quick-card {
-  --quick-accent: var(--accent);
-  --quick-bg: #eff6ff;
-  position: relative;
-  min-height: 92px;
-  padding: 13px 13px 11px;
-  border: 1px solid color-mix(in srgb, var(--quick-accent) 26%, #dbe4f0);
-  border-radius: 12px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72)),
-    linear-gradient(135deg, var(--quick-bg), #fff);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.76), 0 12px 24px -22px color-mix(in srgb, var(--quick-accent) 52%, transparent);
-  overflow: hidden;
-}
-.bw-quick-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--quick-accent); }
-.bw-quick-card::after { content: ""; position: absolute; right: 10px; top: 10px; width: 34px; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--quick-accent) 10%, transparent); transform: rotate(12deg); }
-.bw-quick-card.is-primary { border-color: color-mix(in srgb, var(--quick-accent) 45%, #dbe4f0); background: linear-gradient(180deg, #fff, color-mix(in srgb, var(--quick-bg) 66%, #fff)); }
-.bw-quick-card.tone-dataset { --quick-accent: #2563eb; --quick-bg: #eaf1ff; }
-.bw-quick-card.tone-inputs { --quick-accent: #0d9488; --quick-bg: #e6fffb; }
-.bw-quick-card.tone-split { --quick-accent: #d97706; --quick-bg: #fff7e6; }
-.bw-quick-card.tone-model { --quick-accent: #7c3aed; --quick-bg: #f3edff; }
-.bw-quick-card.tone-export { --quick-accent: #16a34a; --quick-bg: #ebfdf2; }
-.bw-quick-top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 9px; }
-.bw-quick-icon { width: 28px; height: 28px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; color: var(--quick-accent); background: color-mix(in srgb, var(--quick-accent) 12%, #fff); border: 1px solid color-mix(in srgb, var(--quick-accent) 18%, #fff); }
-.bw-quick-icon svg { width: 15px; height: 15px; }
-.bw-quick-card .bw-qk { position: relative; z-index: 1; display: block; color: var(--text3); font-size: 12px; font-weight: 850; letter-spacing: 0.04em; text-transform: uppercase; }
-.bw-quick-card b { position: relative; z-index: 1; display: block; margin-top: 6px; color: var(--text1); font-size: 14px; font-weight: 850; line-height: 1.18; }
-.bw-quick-rail { position: absolute; left: 13px; right: 13px; bottom: 9px; height: 4px; border-radius: 999px; background: color-mix(in srgb, var(--quick-accent) 16%, #e5eaf2); overflow: hidden; }
-.bw-quick-rail::before { content: ""; display: block; height: 100%; width: var(--rail, 72%); border-radius: inherit; background: var(--quick-accent); }
 
 /* top stat cards */
 .bw-statgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px; }
@@ -1962,27 +1959,59 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .bw-stat-val { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--text1); line-height: 1; }
 .bw-stat-lbl { font-size: 13px; color: var(--text3); margin-top: 3px; }
 
-/* 3-col builder */
+/* step-by-step builder */
 .bw-grid {
-  --bw-panel-h: clamp(660px, calc(100vh - 260px), 760px);
-  display: grid;
-  grid-template-columns: minmax(420px, 1.18fr) minmax(390px, 1fr) minmax(300px, 0.82fr);
-  gap: 18px;
-  align-items: stretch;
+  display: block;
 }
 .bw-grid > .bw-panel {
-  height: var(--bw-panel-h);
+  min-height: clamp(560px, calc(100vh - 300px), 760px);
   display: flex;
   flex-direction: column;
-  min-height: 0;
 }
 .bw-grid > .bw-panel > .bw-pbody {
   flex: 1;
-  min-height: 0;
-  overflow-y: auto;
+  overflow: visible;
 }
+.bw-wizard-step { display: none !important; }
+.bw-wizard-step.is-active { display: flex !important; }
+.bw-results.bw-wizard-step.is-active { display: block !important; }
 .bw-grid > .bw-panel > .bw-pbody::-webkit-scrollbar { width: 7px; }
 .bw-grid > .bw-panel > .bw-pbody::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+.bw-wizard-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--card-shadow);
+}
+.bw-wizard-status {
+  display: none;
+}
+.bw-wizard-buttons { display: flex; align-items: center; gap: 8px; }
+.bw-wizard-btn {
+  min-width: 96px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border2);
+  background: var(--bg);
+  color: var(--text2);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, transform .15s;
+}
+.bw-wizard-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.bw-wizard-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.bw-wizard-btn[hidden] { display: none; }
+.bw-wizard-btn.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
+.bw-wizard-btn.primary:hover { background: var(--accent-hover); color: #fff; }
 .bw-advanced { margin-top: 14px; border: 1px solid var(--border); border-radius: 11px; background: #fbfdff; }
 .bw-advanced summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; cursor: pointer; color: var(--text1); font-size: 14px; font-weight: 850; }
 .bw-advanced summary::-webkit-details-marker { display: none; }
@@ -2337,8 +2366,6 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-viewlogs { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; cursor: pointer; }
 
 @media (max-width: 1200px) {
-  .bw-brief { grid-template-columns: 1fr; }
-  .bw-quick-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .bw-grid { grid-template-columns: 1fr; }
   .bw-grid > .bw-panel { height: auto; }
   .bw-grid > .bw-panel > .bw-pbody { overflow: visible; }
@@ -2355,11 +2382,12 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   }
 }
 @media (max-width: 700px) {
-  .bw-brief { padding: 15px; }
-  .bw-quick-grid { grid-template-columns: 1fr; }
   .bw-statgrid { grid-template-columns: repeat(2, 1fr); }
   .bw-split-row, .bw-cellcols, .bw-cfg-grid { grid-template-columns: 1fr; }
   .bw-model-row { grid-template-columns: repeat(2, 1fr); }
+  .bw-wizard-actions { align-items: stretch; flex-direction: column; }
+  .bw-wizard-buttons { width: 100%; }
+  .bw-wizard-btn { flex: 1; min-width: 0; }
   .bw-results-upload { grid-template-columns: 1fr; }
   .bw-results-upload::before { display: none; }
   .bw-results-upload-copy, .bw-results-actions, .bw-results-status { grid-column: auto; grid-row: auto; }
@@ -2368,14 +2396,9 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   .bw-resstats { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
-<!-- ════════════════════════════════════════════════════════════════
-     DESIGN POLISH LAYER  ·  added on top of the original styles
-     Purely visual: re-themes via design tokens + refines key
-     components. No markup/JS changes. Remove this <style> block to
-     revert to the original look.
-     ════════════════════════════════════════════════════════════════ -->
+<!-- DESIGN POLISH LAYER added on top of the original styles Purely visual: re themes via design tokens + refines key components. No markup JS changes. Remove this style block to revert to the original look. -->
 <style id="bt-polish">
-/* ── 1 · TOKEN SYSTEM (cascades through the whole app) ───────────── */
+/* 1 TOKEN SYSTEM (cascades through the whole app) */
 :root {
   --bg: #ffffff;
   --bg2: #f3f6fc;
@@ -2466,7 +2489,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   --chart-axis: #526985;
 }
 
-/* ── 2 · GLOBAL FEEL ─────────────────────────────────────────────── */
+/* 2 GLOBAL FEEL */
 html { -webkit-text-size-adjust: 100%; }
 body {
   -webkit-font-smoothing: antialiased;
@@ -2496,7 +2519,7 @@ select:focus-visible, [tabindex]:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 7px;
 }
 
-/* ── 3 · SIDEBAR ─────────────────────────────────────────────────── */
+/* 3 SIDEBAR */
 .sidebar {
   background: var(--bg2);
   border-right: 1px solid var(--divider);
@@ -2524,7 +2547,7 @@ select:focus-visible, [tabindex]:focus-visible {
 .sidebar-nav li a.active .nav-badge { background: var(--accent-soft); color: var(--sidebar-text-active); }
 .sidebar-footer { border-top: 1px solid var(--border); }
 
-/* ── 4 · TOP BAR ─────────────────────────────────────────────────── */
+/* 4 TOP BAR */
 .topbar {
   background: var(--topbar-bg);
   backdrop-filter: saturate(180%) blur(14px);
@@ -2535,18 +2558,18 @@ select:focus-visible, [tabindex]:focus-visible {
 .search-box input { border-radius: 10px; }
 .search-box input:focus { box-shadow: 0 0 0 4px var(--accent-light); }
 
-/* ── 5 · BUTTONS ─────────────────────────────────────────────────── */
+/* 5 BUTTONS */
 .topbar-btn, .oh-btn, .btn-contribute { border-radius: 9px; }
 .btn-outline { background: var(--bg); }
 .btn-outline:hover { background: var(--bg3); }
 .btn-primary { box-shadow: 0 2px 8px rgba(42,95,234,.28); }
 .btn-primary:hover { box-shadow: 0 5px 16px rgba(42,95,234,.38); transform: translateY(-1px); }
 
-/* ── 6 · HEADINGS ────────────────────────────────────────────────── */
+/* 6 HEADINGS */
 .page { padding-top: 30px; }
 .page-title { font-size: 30px; letter-spacing: -.025em; }
 
-/* ── 7 · METRIC PANEL ────────────────────────────────────────────── */
+/* 7 METRIC PANEL */
 .metrics-panel { border-radius: var(--radius-lg); box-shadow: var(--card-shadow); }
 .metric-cell { padding: 18px 18px 16px; }
 .metric-cell::after {
@@ -2562,13 +2585,13 @@ select:focus-visible, [tabindex]:focus-visible {
 .metric-val .metric-unit { font-size: 14px; }
 .metric-sub { font-size: 13px; }
 
-/* ── 8 · FILTER BAR ──────────────────────────────────────────────── */
+/* 8 FILTER BAR */
 .filter-tag { transition: background .15s, border-color .15s, box-shadow .15s, color .15s; }
 .filter-tag:hover { border-color: var(--border2); }
 .filter-tag.active { box-shadow: 0 2px 9px rgba(42,95,234,.30); }
 .filter-sort select { border-radius: 8px; }
 
-/* ── 9 · DATASET CARDS ───────────────────────────────────────────── */
+/* 9 DATASET CARDS */
 .dataset-grid { border-radius: var(--radius-lg); box-shadow: var(--card-shadow); }
 .dataset-card { position: relative; transition: background .14s ease; }
 .dataset-card::before {
@@ -2581,7 +2604,7 @@ select:focus-visible, [tabindex]:focus-visible {
 .dc-icon { border-radius: 10px; box-shadow: 0 3px 9px rgba(22,30,48,.18); }
 .dc-name { letter-spacing: -.01em; }
 
-/* ── 10 · GENERIC CARD SURFACES (radius + lift) ──────────────────── */
+/* 10 GENERIC CARD SURFACES (radius + lift) */
 .bench-card, .api-card, .preproc-card, .quality-card, .stat-card,
 .team-card, .contrib-step, .contrib-requirements, .diag-section,
 .naming-formula, .bw-panel, .bw-stat, .bw-progress {
@@ -2594,7 +2617,7 @@ select:focus-visible, [tabindex]:focus-visible {
 .team-card:hover { box-shadow: var(--card-shadow); border-color: var(--border2); }
 .bc-metric-val, .stat-card .sc-val { letter-spacing: -.01em; }
 
-/* ── 11 · HERO PANELS ────────────────────────────────────────────── */
+/* 11 HERO PANELS */
 .onboarding-hero {
   background:
     radial-gradient(620px 220px at 88% -25%, rgba(96,165,250,.30), transparent 60%),
@@ -2613,18 +2636,18 @@ select:focus-visible, [tabindex]:focus-visible {
 .workflow-overview { border-radius: var(--radius-lg); }
 .wo-num { box-shadow: 0 3px 9px rgba(22,30,48,.20); }
 
-/* ── 12 · TABLES ─────────────────────────────────────────────────── */
+/* 12 TABLES */
 .model-table th { background: linear-gradient(180deg, var(--bg3), #e6ecf6); color: var(--text2); }
 .model-table tr:hover td { background: #f6f9fe; }
 
-/* ── 13 · MODAL ──────────────────────────────────────────────────── */
+/* 13 MODAL */
 .modal-overlay {
   background: rgba(15,22,38,.46);
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
 }
 .modal { border-radius: 16px; box-shadow: 0 26px 72px rgba(15,22,38,.30); }
 
-/* ── 14 · BENCHMARK WORKSPACE ACCENTS ────────────────────────────── */
+/* 14 BENCHMARK WORKSPACE ACCENTS */
 .bw-phead { background: linear-gradient(180deg, #fbfcff, var(--bg)); }
 .bw-phnum { box-shadow: 0 2px 7px rgba(42,95,234,.32); }
 .bw-run { box-shadow: 0 5px 16px rgba(42,95,234,.30); }
@@ -2716,15 +2739,299 @@ select:focus-visible, [tabindex]:focus-visible {
 .bw-compute-btn { border: none; background: var(--accent); color: #fff; box-shadow: 0 3px 10px rgba(42,95,234,.28); }
 .bw-cancel-btn { border: 1px solid var(--accent); background: #fff; color: var(--accent); }
 .bw-feat-hint { font-size: 13px; color: var(--text4); margin-top: 10px; font-family: var(--mono); }
+.bw-step1-grid { display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(320px, 1fr); gap: 18px; align-items: stretch; }
+.bw-step1-col {
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, .08);
+  overflow: hidden;
+}
+.bw-step1-panel-title {
+  padding: 18px 22px;
+  background: #203f68;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 850;
+}
+.bw-step1-panel-body {
+  flex: 1;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+}
+.bw-dataset-tools { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: start; }
+.bw-dataset-tools .bw-search svg { left: 14px; width: 17px; height: 17px; }
+.bw-dataset-tools .bw-input {
+  height: 42px;
+  padding-left: 44px;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+}
+.bw-filter-menu { position: relative; margin: 0; border: 0; background: transparent; }
+.bw-filter-menu summary {
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid #9fc1f8;
+  background: #eff6ff;
+  color: #164a9f;
+  font-size: 13px;
+  font-weight: 850;
+}
+.bw-filter-menu summary svg { width: 16px; height: 16px; }
+.bw-filter-menu summary::after { display: none; }
+.bw-filter-menu .bw-advanced-body {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(560px, 72vw);
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 18px 38px rgba(15, 23, 42, .14);
+}
+.bw-step1-left .bw-tablewrap {
+  flex: 1;
+  max-height: none;
+  margin-top: 0;
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+}
+.bw-step1-left .bw-table th {
+  padding: 12px 16px;
+  background: #fff;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none !important;
+  border-bottom: 2px solid var(--border);
+}
+.bw-step1-left .bw-table td {
+  padding: 12px 16px;
+  color: #111827;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.bw-step1-left .bw-table tbody tr:nth-child(even) td { background: #f0f6ff; }
+.bw-step1-left .bw-table tbody tr:hover td { background: #eaf2ff; }
+.bw-step1-left .bw-rowsel td { background: #eaf2ff !important; }
+.bw-step1-left .bw-dsname { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bw-step1-left .bw-radio { width: 17px; height: 17px; border-color: #7b8494; }
+.bw-step1-left .bw-radio.on { border-color: var(--accent); }
+.bw-step1-left .bw-radio.on::after { inset: 3px; }
+.bw-step1-left .bw-pager {
+  justify-content: center;
+  margin-top: auto;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--border);
+}
+.bw-step1-right .bw-feature-block {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.bw-step1-right .bw-feature-head {
+  align-items: center;
+  margin-bottom: 14px;
+}
+.bw-step1-right .bw-field-lbl {
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.bw-step1-right .bw-feature-count {
+  font-size: 13px;
+  color: #6b7280;
+}
+.bw-step1-right .bw-feats { align-items: center; gap: 10px; }
+.bw-step1-right .bw-feat {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #eff6ff;
+  border-color: #b9d7ff;
+  color: #173f8a;
+  font-size: 13px;
+}
+.bw-step1-right .bw-feat-add {
+  width: max-content;
+  margin-top: 0;
+  border-style: dashed;
+  background: #fff;
+  color: #164a9f;
+  border-color: #b9d7ff;
+}
+.bw-step1-right .bw-formula-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.bw-step1-right .bw-formula-block summary {
+  padding: 0;
+  color: #1f2937;
+  cursor: default;
+  font-size: 15px;
+}
+.bw-step1-right .bw-formula-block summary::after { display: none; }
+.bw-step1-right .bw-formula-status {
+  margin-left: auto;
+  background: transparent;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+.bw-step1-right .bw-advanced-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0 0;
+}
+.bw-formula-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid #91efc3;
+  border-radius: 8px;
+  background: #cffade;
+  color: #065f46;
+  font-size: 14px;
+  font-weight: 750;
+}
+.bw-success-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: #047857;
+  color: #fff;
+}
+.bw-process-layout {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-top: 18px;
+}
+.bw-process-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bw-process-steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  min-height: 36px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 650;
+}
+.bw-process-steps li + li::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: -16px;
+  width: 2px;
+  height: 16px;
+  background: #d1d5db;
+}
+.bw-process-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #9ca3af;
+  color: #fff;
+  font-weight: 850;
+}
+.bw-process-steps li.done .bw-process-num { background: #203f68; }
+.bw-process-steps li.active .bw-process-num { background: #60a5fa; }
+.bw-process-upload {
+  width: max-content;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 850;
+  cursor: pointer;
+}
+.bw-preview-title {
+  color: #4b5563;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.bw-step1-right .bw-formula-preview {
+  margin-top: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f3f4f6;
+}
+.bw-step1-right .bw-formula-preview code {
+  padding: 0;
+  background: transparent;
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.bw-step1-right .bw-feat-hint {
+  color: var(--text3);
+  font-size: 13px;
+  margin-top: 18px;
+}
+.bw-compute-wide {
+  width: 100%;
+  height: 44px;
+  margin-top: auto;
+  font-size: 14px;
+}
 @media (max-width: 700px) {
   .bw-recipe-panel { grid-template-columns: 1fr; }
   .bw-recipe-meta { border-right: none; border-bottom: 1px solid var(--border); }
+  .bw-step1-grid { grid-template-columns: 1fr; }
+  .bw-dataset-tools, .bw-process-layout { grid-template-columns: 1fr; }
+  .bw-step1-panel-body { min-height: auto; padding: 18px; }
 }
 
-/* ── 15 · TOAST ──────────────────────────────────────────────────── */
+/* 15 TOAST */
 .toast { border-radius: 12px; box-shadow: 0 12px 30px rgba(15,22,38,.22); }
 
-/* ── 16 · PAGE TRANSITION ────────────────────────────────────────── */
+/* 16 PAGE TRANSITION */
 .page.active { animation: btFadeIn .26s cubic-bezier(.16,1,.3,1) both; }
 @keyframes btFadeIn {
   from { opacity: 0; transform: translateY(7px); }
@@ -2734,7 +3041,7 @@ select:focus-visible, [tabindex]:focus-visible {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
 
-/* ── 18 · MODEL LIBRARY PAGE ─────────────────────────────────────── */
+/* 18 MODEL LIBRARY PAGE */
 .ml-wrap { display: flex; gap: 22px; align-items: flex-start; margin-top: 6px; max-width: 1480px; margin-left: auto; margin-right: auto; }
 .ml-main { flex: 1 1 auto; min-width: 0; }
 
@@ -3012,7 +3319,7 @@ select:focus-visible, [tabindex]:focus-visible {
 .ml-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .ml-actions .ml-btn { flex: 1 1 auto; }
 
-/* type sizing — larger, more readable */
+/* type sizing larger, more readable */
 .ml-group-h { font-size: 15px; letter-spacing: .05em; }
 .ml-card-name { font-size: 16px; }
 .ml-card-sub { font-size: 14px; }
@@ -3034,16 +3341,6 @@ select:focus-visible, [tabindex]:focus-visible {
 /* Models catalog refresh */
 #page-models {
   max-width: 1480px;
-}
-#page-models .page-header {
-  padding: 24px 0 28px;
-  margin-bottom: 8px;
-}
-#page-models .page-title {
-  font-size: 34px !important;
-}
-#page-models .page-desc {
-  max-width: 680px;
 }
 #page-models .model-search-panel {
   margin: 10px 0 32px;
@@ -3376,8 +3673,7 @@ select:focus-visible, [tabindex]:focus-visible {
   }
 }
 
-/* ── 19 · GLOBAL UI TYPE SYSTEM ────────────────────────────────────
-   bt-ui-system: final pass for consistent hierarchy across pages. */
+/* 19 GLOBAL UI TYPE SYSTEM bt-ui-system: final pass for consistent hierarchy across pages. */
 :root {
   --type-page-title: 28px;
   --type-hero-title: 25px;
@@ -3405,7 +3701,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .pp-title,
 .api-console-title,
 .contrib-cockpit-title,
-.bw-brief-title,
 .bw-package-title,
 .diag-title,
 .qa-json-title,
@@ -3440,12 +3735,10 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .pp-kicker,
 .api-console-kicker,
 .contrib-cockpit-kicker,
-.bw-brief-kicker,
 .pp-panel-kicker,
 .api-rail-title,
 .qa-stat-k,
 .pp-status-k,
-.bw-quick-card .bw-qk,
 .bw-advanced-tag,
 .bw-command-head,
 .api-stat span,
@@ -3462,7 +3755,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .pp-kicker,
 .api-console-kicker,
 .contrib-cockpit-kicker,
-.bw-brief-kicker,
 .pp-panel-kicker,
 .api-rail-title,
 .modal-section-title,
@@ -3490,7 +3782,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .pp-title,
 .api-console-title,
 .contrib-cockpit-title,
-.bw-brief-title,
 .ch-title {
   font-size: var(--type-hero-title);
   line-height: 1.18;
@@ -3553,7 +3844,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .ml-d-h,
 .bw-ptitle,
 .bw-package-title,
-.bw-quick-card b,
 .bw-advanced summary,
 .ml-arch3d-title,
 .bw-chart-title,
@@ -3572,7 +3862,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .qa-hero-copy,
 .pp-copy,
 .pp-panel-copy,
-.bw-brief-copy,
 .bw-package-sub,
 .pp-op p,
 .pp-side-sub,
@@ -3652,11 +3941,11 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   color: color-mix(in srgb, var(--teal) 62%, var(--text3));
 }
 
-/* ── Home landing page ─────────────────────────────────────────── */
+/* Home landing page */
 #page-home {
   --home-font: 'Noto Sans', var(--sans);
   min-height: calc(100vh - 58px);
-  padding: 0 clamp(32px, 5.2vw, 82px) 96px;
+  padding: 0 32px 96px clamp(32px, 5.2vw, 82px);
   background:
     linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(247,250,255,.96) 54%, rgba(243,247,253,.98) 100%);
   font-family: var(--home-font);
@@ -3667,28 +3956,44 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   font-family: var(--home-font) !important;
 }
 .home-hero {
-  width: min(1180px, 100%);
+  width: 100%;
   min-height: clamp(412px, 37.2vw, 490px);
-  margin: 0 auto;
-  padding: clamp(118px, 14vh, 168px) 0 clamp(92px, 12vh, 146px);
+  margin: 0;
+  padding: clamp(88px, 10vh, 128px) 0 clamp(82px, 9vh, 118px);
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(430px, 0.95fr) minmax(440px, 1.05fr);
+  align-items: center;
+  column-gap: clamp(48px, 6vw, 96px);
 }
 .home-hero-copy {
   position: relative;
   z-index: 2;
-  width: min(46%, 560px);
-  min-width: 430px;
+  width: min(100%, 560px);
+  min-width: 0;
 }
 #page-home .home-hero h1 {
   width: fit-content;
   max-width: 720px;
   margin: 0;
-  font-family: 'Michroma', var(--home-font) !important;
-  font-size: clamp(26.88px, 3.456vw, 52.48px);
-  line-height: .94;
-  font-weight: 500;
-  letter-spacing: 0;
-  color: var(--text1);
+  line-height: 0;
+}
+.home-brand-wordmark {
+  display: block;
+  width: clamp(282px, 24vw, 356px);
+  height: auto;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, .52))
+    drop-shadow(0 4px 8px rgba(7, 85, 150, .12));
+}
+.home-brand-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .home-hero p {
   max-width: 680px;
@@ -3725,21 +4030,21 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   transform: translateY(-1px);
 }
 .home-hero-art {
-  position: absolute;
+  position: relative;
   z-index: 1;
-  right: clamp(-56px, -4vw, -24px);
-  top: clamp(44px, 6.2vw, 82px);
-  width: min(760px, calc(50% + 56px), calc(50vw - 144px));
-  min-width: 360px;
+  justify-self: end;
+  width: min(700px, 100%);
+  min-width: 0;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 22px 46px rgba(15,23,42,.10));
   pointer-events: none;
   user-select: none;
+  transform: translateX(clamp(-72px, -4.8vw, -34px));
 }
 .home-metrics-wrap {
-  width: min(1180px, 100%);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: clamp(34px, 5vw, 66px) 0 0;
   transform: translateY(-100px);
 }
@@ -3816,9 +4121,98 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 #page-home .home-metrics #m-datasets-sub {
   min-height: calc(2 * 1.22em);
 }
+.home-credit-strip {
+  margin-top: clamp(30px, 4.2vw, 52px);
+  padding: clamp(8px, 1.4vw, 14px) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) auto minmax(0, .88fr);
+  align-items: stretch;
+  gap: clamp(18px, 2.8vw, 34px);
+}
+.home-credit-group {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(14px, 2vw, 22px);
+}
+.home-credit-label {
+  font-size: clamp(15px, 1.45vw, 20px);
+  line-height: 1.22;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text2);
+}
+.home-credit-logos {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: 46px 78px;
+  align-items: center;
+  justify-items: center;
+  row-gap: 12px;
+}
+.home-credit-group:first-child {
+  align-items: center;
+}
+.home-credit-group:first-child .home-credit-label {
+  align-self: center;
+}
+.home-credit-group:first-child .home-credit-logos {
+  gap: 12px;
+}
+.home-credit-strip .home-credit-group:last-child {
+  grid-template-columns: 144px minmax(0, 1fr);
+  gap: 10px;
+  transform: translateX(-20px);
+}
+.home-credit-strip .home-credit-group:last-child .home-credit-label {
+  white-space: nowrap;
+}
+.home-logo-tile {
+  min-width: 0;
+  height: 42px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.home-logo-tile img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.home-logo-tile-cap { width: 224px; height: 46px; }
+.home-logo-tile-ntu { width: 224px; height: 54px; }
+.home-logo-tile-soda { width: 250px; height: 40px; }
+.home-logo-tile-astar { width: 230px; height: 78px; }
+.home-logo-tile-astar img { width: 210px; max-height: none; }
+.home-credit-divider {
+  width: 1px;
+  min-height: 64px;
+  background: linear-gradient(180deg, transparent, rgba(148,163,184,.7), transparent);
+}
 
 @media (max-width: 1020px) {
   #page-home .home-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-credit-strip {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .home-credit-divider {
+    width: 100%;
+    min-height: 1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(148,163,184,.62), transparent);
+  }
 }
 @media (min-width: 1180px) {
   .home-hero {
@@ -3826,21 +4220,84 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   }
 }
 @media (max-width: 1100px) {
-  .home-hero-copy { width: min(52%, 480px); min-width: 0; }
-  .home-hero-art { right: 0; width: min(52%, calc(50vw - 56px)); min-width: 300px; }
+  .home-hero {
+    grid-template-columns: minmax(0, 0.98fr) minmax(300px, 1.02fr);
+    column-gap: clamp(24px, 4vw, 52px);
+  }
+  .home-hero-copy { width: min(100%, 480px); min-width: 0; }
+  .home-hero-art { width: min(430px, 100%); transform: translateX(clamp(-34px, -3vw, -18px)); }
+}
+@media (max-width: 1320px) and (min-width: 901px) {
+  .visual-page-hero .page-title,
+  .visual-page-hero .page-desc,
+  .visual-page-actions {
+    max-width: calc(100% - min(360px, 38%) - 28px);
+  }
+  .visual-page-hero-art {
+    width: min(360px, 38%);
+  }
+}
+@media (max-width: 900px) {
+  .visual-page-hero {
+    min-height: 0;
+    overflow: visible;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 18px;
+  }
+  .visual-page-hero .page-title,
+  .visual-page-hero .page-desc,
+  .visual-page-actions {
+    max-width: 680px;
+  }
+  .visual-page-hero-art {
+    display: block;
+    position: relative;
+    right: auto;
+    top: auto;
+    width: min(454px, 100%);
+    max-height: none;
+    justify-self: center;
+    transform: none;
+  }
 }
 @media (max-width: 760px) {
   #page-home { padding-left: 20px; padding-right: 20px; padding-bottom: 64px; }
-  .home-hero { min-height: 319px; padding-top: 84px; padding-bottom: 72px; overflow: hidden; }
+  .home-hero {
+    display: block;
+    min-height: 319px;
+    padding-top: 84px;
+    padding-bottom: 72px;
+    overflow: hidden;
+  }
   .home-hero-copy { width: min(58%, 320px); min-width: 0; }
-  .home-hero-art { right: 0; top: 120px; width: min(58%, calc(51vw - 20px)); min-width: 230px; }
-  .home-hero h1 { font-size: clamp(21.76px, 6.272vw, 26.88px); }
+  .home-hero-art {
+    position: absolute;
+    right: 0;
+    top: 120px;
+    width: min(58%, calc(51vw - 20px));
+    min-width: 230px;
+    transform: none;
+  }
+  .home-brand-wordmark { width: clamp(210px, 46vw, 286px); }
   .home-hero p { font-size: clamp(15px, 4vw, 16px); }
   #page-home .home-metrics { grid-template-columns: 1fr; gap: 22px; }
   #page-home .home-metrics .metric-cell { min-height: 168px; padding: 28px; }
+  .home-credit-strip { padding: 18px; }
+  .home-credit-group { grid-template-columns: 1fr; gap: 12px; }
+  .home-credit-label { text-align: center; }
+  .home-credit-logos { flex-direction: column; align-items: center; }
+  .home-credit-group:first-child .home-credit-logos { align-items: center; }
+  .home-logo-tile-cap,
+  .home-logo-tile-ntu,
+  .home-logo-tile-soda,
+  .home-logo-tile-astar { flex: 0 0 auto; width: min(100%, 250px); }
+  .home-logo-tile { height: 44px; }
+  .home-logo-tile-astar { height: 72px; }
 }
 @media (min-width: 480px) and (max-width: 850px) {
   .home-hero {
+    display: block;
     min-height: 0;
     padding-top: clamp(78px, 10vw, 96px);
     padding-bottom: 38px;
@@ -3860,14 +4317,16 @@ body { font-size: var(--type-body); letter-spacing: 0; }
     min-width: 0;
     margin: 32px auto 0;
     transform-origin: center center;
-  }
-  .home-metrics-wrap {
-    padding-top: 0;
     transform: none;
   }
+	  .home-metrics-wrap {
+	    padding-top: 0;
+	    transform: none;
+	  }
 }
 @media (max-width: 479px) {
   .home-hero {
+    display: block;
     min-height: 0;
     padding-bottom: 34px;
     overflow: visible;
@@ -3880,8 +4339,10 @@ body { font-size: var(--type-body); letter-spacing: 0; }
     display: block;
     width: min(100%, 360px);
     min-width: 0;
-    margin: 28px auto 0;
-  }
+	    margin: 28px auto 0;
+    transform: none;
+	  }
+	  .home-credit-strip { margin-top: 24px; }
   .home-metrics-wrap {
     padding-top: 0;
     transform: none;
@@ -3981,7 +4442,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   font-size: 23px !important;
 }
 
-/* ── 16 · GLOBAL THEME COMPATIBILITY LAYER ───────────────────────── */
+/* 16 GLOBAL THEME COMPATIBILITY LAYER */
 body, .main, .page { color: var(--text1); }
 
 .topbar,
@@ -4271,17 +4732,1673 @@ pre {
   border-color: var(--border2) !important;
 }
 
+#page-benchmarks [data-bw-step="2"] > .bw-pbody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px !important;
+  background: #fff !important;
+}
+
+#page-benchmarks .bw-grid > [data-bw-step="2"].bw-panel {
+  min-height: 0;
+}
+
+#page-benchmarks .bw-grid > [data-bw-step="2"].bw-panel > .bw-pbody {
+  flex: 0 0 auto;
+}
+
+#page-benchmarks .bw-step2-control-card,
+#page-benchmarks .bw-step2-model-card,
+#page-benchmarks [data-bw-step="2"] > .bw-pbody > .bw-advanced {
+  background: #fff !important;
+  border: 1px solid #d7dce8 !important;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+#page-benchmarks .bw-step2-control-card {
+  display: grid;
+  grid-template-columns: minmax(280px, .48fr) minmax(280px, .52fr);
+  column-gap: 22px;
+  row-gap: 10px;
+  align-items: start;
+  padding: 16px 18px;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-task-row {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-field-lbl {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 10px;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-split-row {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-split-ctrl {
+  grid-column: 1 / -1;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-field-lbl {
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-multi-note {
+  color: var(--text3);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#page-benchmarks .bw-step2-control-card .bw-seg,
+#page-benchmarks .bw-step2-control-card .bw-split-row {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  border-radius: 8px;
+  background: #e9ecf5 !important;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, .18);
+}
+
+#page-benchmarks .bw-step2-control-card .bw-seg-btn,
+#page-benchmarks .bw-step2-control-card .bw-split-card {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 0 !important;
+  border-radius: 8px;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #374151 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+#page-benchmarks .bw-step2-control-card .bw-seg-btn.active,
+#page-benchmarks .bw-step2-control-card .bw-split-card.selected {
+  background: linear-gradient(180deg, #3d68df, #2956c8) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, .24) !important;
+}
+
+#page-benchmarks .bw-step2-control-card .bw-split-t {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+#page-benchmarks .bw-step2-control-card .bw-split-d,
+#page-benchmarks .bw-step2-control-card .bw-split-ic,
+#page-benchmarks .bw-step2-control-card .bw-split-check {
+  display: none !important;
+}
+
+#page-benchmarks .bw-step2-control-card {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "taskLabel splitLabel"
+    "taskControl splitControl";
+  column-gap: 22px;
+  row-gap: 9px;
+  align-items: start;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-task-row {
+  display: contents;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-task-row > .bw-field-lbl {
+  grid-area: taskLabel;
+  margin: 0;
+  align-self: end;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-task-row > .bw-seg {
+  grid-area: taskControl;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-field-lbl {
+  grid-area: splitLabel;
+  margin: 0;
+  align-self: end;
+}
+
+#page-benchmarks .bw-step2-control-card > .bw-split-row {
+  grid-area: splitControl;
+}
+
+#page-benchmarks .bw-step2-control-card .bw-seg,
+#page-benchmarks .bw-step2-control-card .bw-split-row {
+  height: 38px;
+  align-self: start;
+}
+
+@media (max-width: 760px) {
+  #page-benchmarks .bw-step2-control-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "taskLabel"
+      "taskControl"
+      "splitLabel"
+      "splitControl";
+  }
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cellcols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cellcol {
+  min-height: 64px;
+  padding: 14px 18px;
+  background: #fff !important;
+  border: 1px solid #d7dce8 !important;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cellcol-h {
+  display: inline-block;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cellcol-h span {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cellcol-sub {
+  display: inline-block;
+  margin: 0 0 0 5px;
+  color: var(--text3);
+  font-family: var(--sans);
+  font-size: 15px;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-chips {
+  min-height: 0;
+  max-height: none;
+  gap: 8px;
+  margin-top: 10px;
+  overflow: visible;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cell {
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, .04);
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-cell.train { background: #d8f2e3 !important; color: #059669 !important; }
+#page-benchmarks [data-bw-step="2"] .bw-cell.val { background: #fff4bf !important; color: #9a6b00 !important; }
+#page-benchmarks [data-bw-step="2"] .bw-cell.test { background: #ffd8de !important; color: #be123c !important; }
+#page-benchmarks [data-bw-step="2"] .bw-excluded,
+#page-benchmarks [data-bw-step="2"] .bw-drophint {
+  display: none !important;
+}
+
+#page-benchmarks [data-bw-step="2"] > .bw-pbody > .bw-field-lbl {
+  margin: 2px 0 -8px;
+}
+
+#page-benchmarks .bw-step2-model-card {
+  padding: 14px 18px 16px;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 0;
+  background: transparent !important;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-item {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 5px 10px 5px 6px;
+  border: 1px solid var(--border2) !important;
+  border-radius: 8px;
+  background: #fff !important;
+  color: var(--text1) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-item.selected {
+  background: linear-gradient(180deg, #3d68df, #2956c8) !important;
+  border-color: #2956c8 !important;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, .24) !important;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-ic {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #eef2f7 !important;
+  color: #55708d !important;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-item.selected .bw-model-ic {
+  background: rgba(255,255,255,.86) !important;
+  color: #2956c8 !important;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-name {
+  color: inherit !important;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+#page-benchmarks .bw-step2-model-card .bw-model-check {
+  display: none !important;
+}
+
+#page-benchmarks [data-bw-step="2"] > .bw-pbody > .bw-advanced {
+  margin-top: 2px;
+}
+
+#page-benchmarks [data-bw-step="2"] > .bw-pbody > .bw-advanced > summary {
+  min-height: 46px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-advanced-tag {
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #3d68df, #2956c8) !important;
+  color: #fff !important;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@media (max-width: 760px) {
+  #page-benchmarks [data-bw-step="2"] > .bw-pbody {
+    padding: 14px !important;
+  }
+
+  #page-benchmarks .bw-step2-control-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  #page-benchmarks .bw-step2-control-card > .bw-task-row,
+  #page-benchmarks .bw-step2-control-card > .bw-field-lbl,
+  #page-benchmarks .bw-step2-control-card > .bw-split-row,
+  #page-benchmarks .bw-step2-control-card > .bw-split-ctrl {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  #page-benchmarks .bw-step2-control-card .bw-seg,
+  #page-benchmarks .bw-step2-control-card .bw-split-row {
+    width: 100%;
+  }
+
+  #page-benchmarks .bw-step2-control-card .bw-seg-btn,
+  #page-benchmarks .bw-step2-control-card .bw-split-card {
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  #page-benchmarks [data-bw-step="2"] .bw-cellcol-h,
+  #page-benchmarks [data-bw-step="2"] .bw-field-lbl {
+    font-size: 12px;
+  }
+
+  #page-benchmarks [data-bw-step="2"] .bw-cellcol-sub,
+  #page-benchmarks .bw-step2-model-card .bw-model-name {
+    font-size: 13px;
+  }
+
+  #page-benchmarks [data-bw-step="2"] .bw-cell {
+    font-size: 13px;
+  }
+}
+
+#page-benchmarks .bw-progress {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+}
+
+#page-benchmarks .bw-pline {
+  display: none;
+}
+
+#page-benchmarks .bw-pstep {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  text-align: left;
+  color: var(--text3);
+  touch-action: manipulation;
+}
+
+#page-benchmarks .bw-pstep:hover {
+  background: var(--bg2);
+  border-color: var(--border);
+}
+
+#page-benchmarks .bw-pstep:focus-visible {
+  outline: 3px solid var(--accent-light);
+  outline-offset: 2px;
+}
+
+#page-benchmarks .bw-pnum {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-size: 13px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+}
+
+#page-benchmarks .bw-pcopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#page-benchmarks .bw-plabel {
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+#page-benchmarks .bw-psub {
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#page-benchmarks .bw-pstep.done .bw-pnum {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  box-shadow: none;
+}
+
+#page-benchmarks .bw-pstep.done .bw-plabel {
+  color: var(--text1);
+}
+
+#page-benchmarks .bw-pstep.active {
+  background: #eef4ff;
+  border-color: rgba(37,99,235,.45);
+  box-shadow: inset 0 0 0 1px rgba(37,99,235,.10);
+}
+
+#page-benchmarks .bw-pstep.active .bw-pnum {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(37,99,235,.20);
+}
+
+#page-benchmarks .bw-pstep.active.done .bw-pnum {
+  outline: 0;
+}
+
+#page-benchmarks .bw-pstep.active .bw-plabel {
+  color: var(--accent);
+}
+
+#page-benchmarks .bw-grid {
+  margin-top: 0;
+}
+
+#page-benchmarks .bw-grid > .bw-panel {
+  min-height: 0;
+  border-radius: 12px;
+  border-color: var(--border);
+  background: rgba(255,255,255,.98);
+  box-shadow: var(--card-shadow);
+}
+
+#page-benchmarks .bw-grid > .bw-panel > .bw-pbody {
+  padding: 16px 18px;
+}
+
+#page-benchmarks .bw-results {
+  margin-top: 0;
+}
+
+#page-benchmarks .bw-results.bw-wizard-step.is-active {
+  display: flex !important;
+  flex-direction: column;
+}
+
+#page-benchmarks .bw-wizard-actions {
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#page-benchmarks .bw-wizard-buttons {
+  margin-left: auto;
+}
+
+#page-benchmarks .bw-wizard-btn {
+  height: 38px;
+  min-width: 90px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+#page-benchmarks .bw-wizard-btn.primary {
+  box-shadow: 0 3px 10px rgba(37,99,235,.20);
+}
+
+#page-benchmarks [data-bw-step="3"] > .bw-pbody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-card-compact {
+  padding: 18px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-head {
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-kicker {
+  margin-bottom: 3px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-title {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-sub {
+  max-width: 560px;
+  font-size: 13px;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-label {
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-name {
+  margin-top: 6px;
+  background: var(--bg2);
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-main .bw-package-actions {
+  display: flex;
+  grid-template-columns: none;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 0;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-main .bw-download,
+#page-benchmarks [data-bw-step="3"] .bw-package-main .bw-copycmd {
+  width: auto;
+  min-width: 142px;
+  height: 38px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-manifest {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum {
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--bg2);
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum:nth-child(3),
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum:nth-child(5),
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum:nth-child(7),
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum:nth-child(8) {
+  display: none;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum-k {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-manifest .bw-sum-v {
+  max-width: 100%;
+  margin-top: 5px;
+  color: var(--text1);
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-data-place-compact {
+  display: grid;
+  grid-template-columns: minmax(180px, .85fr) minmax(0, 1.2fr);
+  gap: 10px 14px;
+  align-items: center;
+  margin-top: 12px;
+  padding: 11px 12px;
+  border-color: var(--border);
+  background: #f8fbff;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-data-place-compact .bw-data-path {
+  margin-top: 0;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-data-place-compact .bw-data-place-p {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  font-size: 12px;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-details {
+  margin-top: 0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-item {
+  min-height: 52px;
+  background: var(--bg2);
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-package-command {
+  margin-top: 0;
+  overflow-x: auto;
+}
+
+#page-benchmarks [data-bw-step="3"] .bw-command-code {
+  min-width: max-content;
+}
+
+#page-benchmarks [data-bw-step="3"] > .bw-pbody > .bw-package-actions,
+#page-benchmarks [data-bw-step="3"] > .bw-pbody > .bw-runnote,
+#page-benchmarks [data-bw-step="3"] > .bw-pbody > details:nth-of-type(3) {
+  display: none;
+}
+
+#page-benchmarks .bw-step1-col,
+#page-benchmarks [data-bw-step="2"] .bw-step2-control-card,
+#page-benchmarks [data-bw-step="2"] .bw-step2-model-card,
+#page-benchmarks [data-bw-step="3"] .bw-package-card-compact,
+#page-benchmarks [data-bw-step="4"] .bw-results-upload,
+#page-benchmarks [data-bw-step="4"] .bw-paper-card,
+#page-benchmarks [data-bw-step="4"] .bw-chartbox,
+#page-benchmarks [data-bw-step="4"] .bw-result-kpis .bw-rstat {
+  border: 1px solid var(--border) !important;
+  border-radius: 12px;
+  background: #fff !important;
+  box-shadow: var(--card-shadow);
+}
+
+#page-benchmarks .bw-step1-grid,
+#page-benchmarks [data-bw-step="2"] > .bw-pbody,
+#page-benchmarks [data-bw-step="3"] > .bw-pbody,
+#page-benchmarks [data-bw-step="4"] .bw-pbody {
+  gap: 12px;
+}
+
+#page-benchmarks .bw-step1-panel-title {
+  padding: 18px 18px 0;
+  background: #fff;
+  color: var(--text1);
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+#page-benchmarks .bw-step1-panel-title::before {
+  content: "Benchmark input";
+  display: block;
+  margin-bottom: 5px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+#page-benchmarks .bw-step1-right .bw-step1-panel-title::before {
+  content: "Feature setup";
+}
+
+#page-benchmarks .bw-step1-panel-body {
+  min-height: 0;
+  gap: 14px;
+  padding: 16px 18px 18px;
+}
+
+#page-benchmarks .bw-step1-left .bw-tablewrap {
+  flex: 0 1 auto;
+  border-radius: 9px;
+}
+
+#page-benchmarks .bw-step1-left .bw-pager {
+  margin-top: 2px;
+  padding-top: 12px;
+}
+
+#page-benchmarks .bw-step1-right .bw-feature-block,
+#page-benchmarks [data-bw-step="2"] .bw-step2-control-card,
+#page-benchmarks [data-bw-step="2"] .bw-step2-model-card,
+#page-benchmarks [data-bw-step="3"] .bw-package-card-compact,
+#page-benchmarks [data-bw-step="4"] .bw-results-upload {
+  padding: 18px;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-field-lbl,
+#page-benchmarks [data-bw-step="3"] .bw-package-kicker,
+#page-benchmarks [data-bw-step="4"] .bw-results-kicker {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+#page-benchmarks [data-bw-step="2"] .bw-step2-model-card .bw-field-lbl {
+  margin-bottom: 12px;
+}
+
+#page-benchmarks [data-bw-step="4"] .bw-tabs {
+  gap: 8px;
+  padding: 0 0 12px;
+  border-bottom: 0;
+  background: transparent;
+}
+
+#page-benchmarks [data-bw-step="4"] .bw-tab {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--text2);
+  box-shadow: none;
+}
+
+#page-benchmarks [data-bw-step="4"] .bw-tab.active {
+  border-color: rgba(37,99,235,.42);
+  background: #eef4ff;
+  color: var(--accent);
+}
+
+#page-benchmarks [data-bw-step="4"] .bw-results-upload {
+  margin-bottom: 12px;
+}
+
+#page-benchmarks [data-bw-step="4"] .bw-results-title {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+#page-benchmarks [data-bw-step="4"] .bw-result-kpis .bw-rstat {
+  min-height: 76px;
+}
+
+@media (max-width: 980px) {
+  #page-benchmarks .bw-progress {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-package-main,
+  #page-benchmarks [data-bw-step="3"] .bw-data-place-compact {
+    grid-template-columns: 1fr;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-package-actions {
+    justify-content: stretch;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-download,
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-copycmd {
+    flex: 1 1 0;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-manifest,
+  #page-benchmarks [data-bw-step="3"] .bw-package-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #page-benchmarks .bw-progress {
+    grid-template-columns: 1fr;
+  }
+
+  #page-benchmarks .bw-pstep {
+    min-height: 50px;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-package-actions,
+  #page-benchmarks [data-bw-step="3"] .bw-manifest,
+  #page-benchmarks [data-bw-step="3"] .bw-package-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-package-actions {
+    flex-direction: column;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-download,
+  #page-benchmarks [data-bw-step="3"] .bw-package-main .bw-copycmd {
+    width: 100%;
+  }
+
+  #page-benchmarks .bw-step1-right .bw-formula-block summary {
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+
+  #page-benchmarks .bw-step1-right .bw-formula-status {
+    margin-left: 0;
+    font-size: 12px;
+  }
+
+  #page-benchmarks [data-bw-step="3"] .bw-data-place-title {
+    white-space: normal;
+  }
+}
+
 @media (max-width: 760px) {
   .topbar { padding: 10px 14px 10px 58px; gap: 8px; }
   .search-box { flex: 1 1 auto; min-width: 0; }
   .topbar-search-btn { padding: 0 12px; }
+}
+
+/* Quality page header follows the Home/Datasets visual hero language. */
+#page-quality .quality-page-hero {
+  margin-bottom: 18px;
+}
+
+#page-quality .quality-page-hero .page-title {
+  max-width: min(640px, 55%);
+}
+
+#page-quality .quality-page-hero .page-desc {
+  max-width: min(690px, 57%);
+}
+
+#page-quality .quality-hero-art {
+  right: -10px;
+  width: min(520px, 46%);
+  max-height: calc(100% - 8px);
+  filter: drop-shadow(0 20px 42px rgba(15,23,42,.08));
+  mix-blend-mode: normal;
+}
+
+[data-theme="dark"] #page-quality .quality-hero-art {
+  mix-blend-mode: normal;
+  opacity: .9;
+}
+
+@media (max-width: 1320px) and (min-width: 901px) {
+  #page-quality .quality-page-hero .page-title,
+  #page-quality .quality-page-hero .page-desc {
+    max-width: calc(100% - min(410px, 42%) - 24px);
+  }
+
+  #page-quality .quality-hero-art {
+    width: min(410px, 42%);
+  }
+}
+
+@media (max-width: 900px) {
+  #page-quality .quality-page-hero .page-title,
+  #page-quality .quality-page-hero .page-desc {
+    max-width: 680px;
+  }
+
+  #page-quality .quality-hero-art {
+    right: auto;
+    width: min(520px, 100%);
+    justify-self: center;
+    mix-blend-mode: normal;
+  }
+}
+
+/* About: project-grade overview and contributor layout */
+#page-about {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+#page-about .about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, .75fr);
+  gap: 28px;
+  align-items: stretch;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background:
+    radial-gradient(700px 260px at 100% -30%, rgba(37,99,235,.15), transparent 62%),
+    linear-gradient(180deg, var(--surface, var(--bg)) 0%, var(--surface-alt, #f8fbff) 100%);
+  box-shadow: var(--card-shadow);
+}
+
+#page-about .about-kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .085em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+#page-about .about-hero h1 {
+  max-width: 720px;
+  margin: 10px 0 12px;
+  color: var(--text1);
+  font-family: var(--sans);
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+#page-about .about-hero p {
+  max-width: 740px;
+  margin: 0;
+  color: var(--text2);
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+#page-about .about-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+#page-about .about-primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 850;
+  text-decoration: none;
+  box-shadow: 0 5px 16px rgba(42,95,234,.25);
+}
+
+#page-about .about-primary-link:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+#page-about .about-affiliation-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255,255,255,.72);
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+#page-about .about-snapshot {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-content: center;
+}
+
+#page-about .about-snapshot-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 76px;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
+  border-radius: 14px;
+  background: rgba(255,255,255,.70);
+}
+
+#page-about .about-snapshot-card span {
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+#page-about .about-snapshot-card strong {
+  color: var(--text1);
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 800;
+  text-align: right;
+}
+
+#page-about .about-section {
+  margin-top: 22px;
+}
+
+#page-about .about-section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+#page-about .about-section-head h2,
+#page-about .about-info-card h2 {
+  margin: 4px 0 0;
+  color: var(--text1);
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+#page-about .about-section-head p {
+  margin: 0;
+  color: var(--text3);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+#page-about .about-team-block {
+  margin-top: 16px;
+}
+
+#page-about .team-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 9px;
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .085em;
+}
+
+#page-about .team-section-label::before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+#page-about .team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+#page-about .about-engineering-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#page-about .team-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 92px;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface, var(--bg));
+  box-shadow: var(--card-shadow);
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+#page-about .team-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-1px);
+}
+
+#page-about .team-avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+#page-about .team-name {
+  color: var(--text1);
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+#page-about .team-role {
+  margin-top: 4px;
+  color: var(--text3);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+#page-about .about-info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+
+#page-about .about-info-card {
+  min-height: 148px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface, var(--bg));
+  box-shadow: var(--card-shadow);
+}
+
+#page-about .about-info-card p {
+  margin: 10px 0 0;
+  color: var(--text3);
+  font-size: 14px;
+}
+
+#page-about .about-repo-card a {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+#page-about .about-repo-card a:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] #page-about .about-affiliation-pill,
+[data-theme="dark"] #page-about .about-snapshot-card {
+  background: rgba(15,23,42,.42);
+}
+
+@media (max-width: 980px) {
+  #page-about .about-hero,
+  #page-about .about-section-head,
+  #page-about .about-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #page-about .about-snapshot {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #page-about .about-engineering-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  #page-about {
+    padding-top: 18px;
+  }
+
+  #page-about .about-hero {
+    padding: 22px 20px;
+    border-radius: 16px;
+  }
+
+  #page-about .about-hero h1 {
+    font-size: 30px;
+  }
+
+  #page-about .about-primary-link,
+  #page-about .about-affiliation-pill {
+    width: 100%;
+  }
+
+  #page-about .about-snapshot,
+  #page-about .team-grid,
+  #page-about .about-engineering-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #page-about .about-snapshot-card {
+    min-height: 66px;
+  }
+}
+
+/* Naming Standard: clean reference-page layout */
+#page-naming {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+#page-naming .page-header {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 24px 30px 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background:
+    radial-gradient(680px 240px at 100% -45%, rgba(37,99,235,.14), transparent 62%),
+    var(--surface, var(--bg));
+  box-shadow: var(--card-shadow);
+}
+
+#page-naming .page-header::before {
+  content: "Reference Standard";
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+#page-naming .page-header::after {
+  content: "ref_name";
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255,255,255,.72);
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#page-naming .page-title {
+  margin-top: 12px;
+  font-size: 30px !important;
+}
+
+#page-naming .page-desc {
+  max-width: 760px;
+  margin-top: 8px;
+  color: var(--text2) !important;
+}
+
+#page-naming .naming-formula {
+  position: relative;
+  margin: 0 0 18px;
+  padding: 22px 20px 24px;
+  text-align: left;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  border-radius: 18px;
+  background:
+    radial-gradient(420px 180px at 12% 0%, rgba(37,99,235,.13), transparent 62%),
+    radial-gradient(420px 200px at 92% 14%, rgba(13,148,136,.11), transparent 64%),
+    linear-gradient(180deg, var(--surface, #fff) 0%, #f7fbff 100%);
+  box-shadow: 0 16px 42px -28px rgba(15,23,42,.35), var(--card-shadow);
+}
+
+#page-naming .naming-formula::before {
+  content: "Format Pattern";
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 3px solid var(--accent);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .085em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+#page-naming .naming-formula::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(37,99,235,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.055) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.7), transparent 72%);
+}
+
+#page-naming .naming-formula code {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  padding: 17px 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.36);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, #173b88 0%, #2563eb 52%, #0d9488 100%);
+  color: #fff;
+  font-size: clamp(13px, 1.25vw, 16px);
+  font-weight: 850;
+  letter-spacing: .045em;
+  line-height: 1.45;
+  text-align: center;
+  text-shadow: 0 1px 10px rgba(255,255,255,.20);
+  white-space: normal;
+  word-break: break-word;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 14px 28px -20px rgba(37,99,235,.70);
+}
+
+#page-naming .naming-formula code::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-125%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  animation: naming-code-sweep 5.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes naming-code-sweep {
+  0%, 52% { transform: translateX(-125%); }
+  78%, 100% { transform: translateX(125%); }
+}
+
+#page-naming .naming-parts {
+  position: relative;
+  z-index: 1;
+  counter-reset: naming-step;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 9px;
+  justify-content: stretch;
+  margin-top: 16px;
+}
+
+#page-naming .naming-part {
+  counter-increment: naming-step;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 74px;
+  padding: 13px 10px 12px 48px;
+  border: 1px solid color-mix(in srgb, var(--token-color) 34%, var(--border));
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62)),
+    var(--token-bg);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.22;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.62), 0 10px 22px -20px var(--token-color);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+#page-naming .naming-part:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--token-color) 64%, var(--border));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 16px 30px -22px var(--token-color);
+}
+
+#page-naming .naming-part::before {
+  content: counter(naming-step);
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 27px;
+  height: 27px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 999px;
+  background: var(--token-color);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 850;
+  box-shadow: 0 8px 16px -12px var(--token-color);
+}
+
+#page-naming .naming-part::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, var(--token-color), color-mix(in srgb, var(--token-color) 12%, transparent));
+  opacity: .55;
+}
+
+#page-naming .naming-part:last-child::after {
+  display: none;
+}
+
+#page-naming .np-year { --token-color: #d97706; --token-bg: #fffbeb; --token-border: #fde68a; }
+#page-naming .np-source { --token-color: #2563eb; --token-bg: #eff6ff; --token-border: #bfdbfe; }
+#page-naming .np-chem { --token-color: #0d9488; --token-bg: #f0fdfa; --token-border: #99f6e4; }
+#page-naming .np-form { --token-color: #7c3aed; --token-bg: #f5f3ff; --token-border: #ddd6fe; }
+#page-naming .np-rate { --token-color: #1d4ed8; --token-bg: #eef2ff; --token-border: #c7d2fe; }
+#page-naming .np-temp { --token-color: #dc2626; --token-bg: #fff1f2; --token-border: #fecdd3; }
+
+#page-naming .naming-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 10px !important;
+  color: var(--text1);
+  font-family: var(--sans) !important;
+  font-size: 16px !important;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+#page-naming .naming-section-title::before {
+  content: "";
+  width: 3px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+#page-naming .model-table {
+  margin: 0 0 18px !important;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 14px;
+  background: var(--surface, var(--bg)) !important;
+  box-shadow: var(--card-shadow);
+}
+
+#page-naming .model-table th {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--border) !important;
+  background: var(--bg3) !important;
+  color: var(--text2) !important;
+  font-size: 11.5px !important;
+}
+
+#page-naming .model-table td {
+  padding: 13px 16px !important;
+  background: var(--surface, var(--bg)) !important;
+  color: var(--text2) !important;
+}
+
+#page-naming .model-table td:first-child {
+  width: 220px;
+  color: var(--text1) !important;
+  font-weight: 750;
+}
+
+#page-naming .model-table td:nth-child(2) {
+  color: #294466 !important;
+  font-family: var(--mono) !important;
+  font-size: 12.5px !important;
+  word-break: break-word;
+}
+
+#page-naming .model-table tr:hover td {
+  background: var(--surface-alt, #f8fafc) !important;
+}
+
+#page-naming .naming-vocab-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 14px;
+  margin-top: 0 !important;
+}
+
+#page-naming .naming-vocab-grid .bench-card {
+  min-height: 166px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface, var(--bg));
+  box-shadow: var(--card-shadow);
+  transform: none;
+}
+
+#page-naming .naming-vocab-grid .bench-card:hover {
+  border-color: var(--border2);
+  box-shadow: var(--card-shadow-hover);
+  transform: none;
+}
+
+#page-naming .naming-vocab-grid .bc-title {
+  color: var(--text1);
+  font-size: 14.5px;
+  font-weight: 850;
+}
+
+#page-naming .naming-vocab-grid .bc-desc {
+  margin-top: 10px;
+  color: var(--text2) !important;
+  font-family: var(--mono) !important;
+  font-size: 12.5px !important;
+  line-height: 1.85 !important;
+}
+
+[data-theme="dark"] #page-naming .page-header::after {
+  background: rgba(15,23,42,.72);
+}
+
+[data-theme="dark"] #page-naming .naming-formula code {
+  background: linear-gradient(135deg, #10244f 0%, #1d4ed8 58%, #0f766e 100%);
+}
+
+[data-theme="dark"] #page-naming .naming-part {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+    color-mix(in srgb, var(--token-color) 16%, var(--bg));
+  border-color: color-mix(in srgb, var(--token-color) 34%, var(--border));
+  color: var(--text2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-naming .naming-formula code::after {
+    animation: none;
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  #page-naming .naming-parts,
+  #page-naming .naming-vocab-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #page-naming .naming-part::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  #page-naming {
+    padding-top: 18px;
+  }
+
+  #page-naming .page-header {
+    padding: 20px;
+  }
+
+  #page-naming .page-header::after {
+    position: static;
+    display: inline-flex;
+    margin-top: 14px;
+  }
+
+  #page-naming .naming-parts,
+  #page-naming .naming-vocab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #page-naming .naming-formula {
+    padding: 20px 16px;
+  }
+
+  #page-naming .naming-part {
+    min-height: 64px;
+  }
+
+  #page-naming .model-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  #page-naming .model-table td:first-child {
+    min-width: 150px;
+  }
+
+  #page-naming .model-table td:nth-child(2) {
+    min-width: 360px;
+  }
 }
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ════════════════ SIDEBAR ════════════════ -->
+<!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-brand">
     <img class="sidebar-brand-logo" id="sidebar-logo" src="assets/logo-light.png" alt="BatteryLake">
@@ -4295,15 +6412,15 @@ pre {
     </a></li>
     <li><a class="active" onclick="showPage('datasets', this)" id="nav-datasets">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
-      Datasets <span class="nav-badge" id="ds-count-badge">—</span>
+      Datasets <span class="nav-badge" id="ds-count-badge"></span>
     </a></li>
     <li><a onclick="showPage('benchmarks', this)">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 17l4-8 4 4 5-9"/></svg></span>
       Benchmarks
     </a></li>
-    <li><a onclick="showPage('models', this)" id="nav-models">
+    <li><a onclick="showPage('models', this)">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
-      Models <span class="nav-badge">8</span>
+      Models <span class="nav-badge">7</span>
     </a></li>
     <li style="display:none" data-internal="tasks-nav"><a onclick="showPage('tasks', this)">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
@@ -4355,8 +6472,7 @@ pre {
     </a></li>
     <li><a href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep" target="_blank">
       <span class="nav-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></span>
-      GitHub ↗
-    </a></li>
+      GitHub    </a></li>
   </ul>
 
   <div class="sidebar-footer">
@@ -4365,7 +6481,7 @@ pre {
   </div>
 </nav>
 
-<!-- ════════════════ MAIN ════════════════ -->
+<!-- MAIN -->
 <button class="hamburger sidebar-mobile-toggle" type="button" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Open navigation">
   <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
 </button>
@@ -4389,7 +6505,7 @@ pre {
   <div class="page" id="page-home">
     <div class="home-hero">
       <div class="home-hero-copy">
-        <h1>BatteryLake</h1>
+        <h1 aria-label="BatteryLake"><img class="home-brand-wordmark" src="assets/home-wordmark.png?v=2" alt="" aria-hidden="true"><span class="home-brand-text">BatteryLake</span></h1>
         <p>BatteryLake unifies curated battery datasets,<br> standardized metadata, and cycle intelligence for<br> reproducible battery research.</p>
         <a class="home-learn-more" href="https://github.com/tianwen1209/batterylake" target="_blank" rel="noopener noreferrer">Learn More</a>
       </div>
@@ -4409,7 +6525,7 @@ pre {
         <div class="metric-cell">
           <div class="metric-val accent" id="m-years">0</div>
           <div class="metric-sub">Years span</div>
-          <div class="metric-sub metric-detail">2007–2026</div>
+          <div class="metric-sub metric-detail">2007-2026</div>
         </div>
         <div class="metric-cell">
           <div class="metric-val accent" id="m-cycles">0</div>
@@ -4419,28 +6535,54 @@ pre {
           <div class="metric-val accent" id="m-cells">0</div>
           <div class="metric-sub" id="m-cells-sub">Total cells</div>
         </div>
-        <div class="metric-cell">
-          <div class="metric-val accent" id="m-volume">0 <span class="metric-unit">GB</span></div>
-          <div class="metric-sub">Data volume</div>
-        </div>
-      </div>
-    </div>
-  </div>
+	        <div class="metric-cell">
+	          <div class="metric-val accent" id="m-volume">0 <span class="metric-unit">GB</span></div>
+	          <div class="metric-sub">Data volume</div>
+	        </div>
+	      </div>
+	      <div class="home-credit-strip" aria-label="BatteryLake design and partner credits">
+	        <div class="home-credit-group">
+	          <div class="home-credit-label">Design by</div>
+	          <div class="home-credit-logos">
+	            <div class="home-logo-tile home-logo-tile-cap">
+	              <img src="assets/partners/cap-group-logo.png?v=4" alt="Cloud Application and Platform Group">
+	            </div>
+	            <div class="home-logo-tile home-logo-tile-ntu">
+	              <img src="assets/partners/ntu-logo.png?v=2" alt="Nanyang Technological University Singapore">
+	            </div>
+	          </div>
+	        </div>
+	        <div class="home-credit-divider" aria-hidden="true"></div>
+	        <div class="home-credit-group">
+	          <div class="home-credit-label">In partner with</div>
+	          <div class="home-credit-logos">
+	            <div class="home-logo-tile home-logo-tile-soda">
+	              <img src="assets/partners/soda-group-logo.png?v=2" alt="SODA Group">
+	            </div>
+	            <div class="home-logo-tile home-logo-tile-astar">
+	              <img src="assets/partners/astar-logo.png?v=1" alt="Agency for Science, Technology and Research Singapore">
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
 
   <!-- ═══════════════════════════════════════
        PAGE: DATASETS
        ═══════════════════════════════════════ -->
   <div class="page active datasets-landing" id="page-datasets">
-    <div class="page-header datasets-hero">
+    <div class="page-header datasets-hero visual-page-hero">
       <div class="page-title">Datasets</div>
-      <div class="page-desc" id="datasets-subtitle">Explore BatteryLake's curated catalog for benchmark-ready cycling, safety, impedance, and EV field datasets.</div>
-      <div class="datasets-actions">
+      <div class="page-desc" id="datasets-subtitle">Explore BatteryLake's curated catalog for benchmark-ready cycling, safety, impedance, and EV field datasets with different chemistry, charge/discharge conditions and operational environments.</div>
+      <div class="datasets-actions visual-page-actions">
         <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
         <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
           Contribute Dataset
         </button>
       </div>
+      <img class="datasets-hero-art visual-page-hero-art" src="assets/datasets-hero-reference.png?v=3" alt="" aria-hidden="true">
     </div>
 
     <div class="dataset-search-panel">
@@ -4448,7 +6590,7 @@ pre {
         <div class="dataset-search" id="search-box">
           <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
           <input type="text" id="searchInput" placeholder="Search datasets" oninput="onSearchInput()">
-          <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="Clear search" title="Clear search">×</button>
+          <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="Clear search" title="Clear search">?</button>
         </div>
         <button class="dataset-filter-toggle" onclick="toggleDatasetFilters()" aria-expanded="false" aria-controls="dataset-filter-grid">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h18M7 12h10M10 19h4"/></svg>
@@ -4504,7 +6646,7 @@ pre {
     </div>
 
     <div class="dataset-results-head">
-      <span class="filter-count" id="filter-count">— datasets</span>
+      <span class="filter-count" id="filter-count">0 datasets</span>
       <div class="dataset-results-tools">
         <div class="filter-sort">
         <select id="sort-select" onchange="changeSort(this.value)" aria-label="Sort datasets">
@@ -4512,7 +6654,7 @@ pre {
           <option value="oldest">Oldest first</option>
           <option value="most-cells">Most cells</option>
           <option value="most-cycles">Most cycles</option>
-          <option value="az">Name A–Z</option>
+          <option value="az">Name A-Z</option>
         </select>
         </div>
       </div>
@@ -4525,170 +6667,127 @@ pre {
        PAGE: BENCHMARKS
        ═══════════════════════════════════════ -->
   <div class="page" id="page-benchmarks">
-    <div class="page-header">
-      <div class="page-title">Benchmark Experiment Workspace</div>
-      <div class="page-desc">Configure SOH &amp; RUL benchmarking experiments, export a reproducible training package, then run it from terminal with the generated script.</div>
-    </div>
-
-    <!-- ── progress stepper ── -->
-    <div class="bw-progress">
-      <div class="bw-pstep active"><span class="bw-pnum">1</span><span class="bw-plabel">Dataset</span></div>
-      <span class="bw-pline"></span>
-      <div class="bw-pstep"><span class="bw-pnum">2</span><span class="bw-plabel">Cell Split</span></div>
-      <span class="bw-pline"></span>
-      <div class="bw-pstep"><span class="bw-pnum">3</span><span class="bw-plabel">Model</span></div>
-      <span class="bw-pline"></span>
-      <div class="bw-pstep"><span class="bw-pnum">4</span><span class="bw-plabel">Package</span></div>
-      <span class="bw-pline"></span>
-      <div class="bw-pstep"><span class="bw-pnum">5</span><span class="bw-plabel">Results</span></div>
-    </div>
-
-    <!-- Benchmark setup is now grouped into fewer decision surfaces. -->
-    <div class="bw-brief">
-      <div>
-        <div class="bw-brief-kicker">Benchmark run builder</div>
-        <div class="bw-brief-title">Set the run, then export the package.</div>
-        <div class="bw-brief-copy">Dataset, inputs, split, model, and export status stay synchronized in one run manifest.</div>
+    <div class="page-header benchmarks-hero visual-page-hero">
+      <div class="page-title">Benchmarks</div>
+      <div class="page-desc">Configure SOH &amp; RUL benchmarking experiments, build reproducible training packages, and compare model performance across curated BatteryLake datasets.</div>
+      <div class="benchmarks-actions visual-page-actions">
+        <button class="benchmark-start-btn" type="button" onclick="document.querySelector('#page-benchmarks .bw-progress').scrollIntoView({ block: 'start', behavior: 'smooth' })">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Start Benchmark Run
+        </button>
       </div>
-      <div class="bw-quick-grid">
-        <div class="bw-quick-card is-primary tone-dataset" style="--rail:88%">
-          <div class="bw-quick-top"><span class="bw-qk">Dataset</span><span class="bw-quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span></div>
-          <b id="bw-quick-ds">Select dataset</b>
-          <span class="bw-quick-rail"></span>
-        </div>
-        <div class="bw-quick-card tone-inputs" style="--rail:76%">
-          <div class="bw-quick-top"><span class="bw-qk">Inputs</span><span class="bw-quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 17c3-9 5 3 8-6s5 3 8-4"/><path d="M4 20h16M4 4v16"/></svg></span></div>
-          <b id="bw-quick-feats">3 raw + 12 formula</b>
-          <span class="bw-quick-rail"></span>
-        </div>
-        <div class="bw-quick-card tone-split" style="--rail:64%">
-          <div class="bw-quick-top"><span class="bw-qk">Split</span><span class="bw-quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 6h6a4 4 0 014 4v8"/><path d="M14 10a4 4 0 014-4h2"/><path d="M18 4l2 2-2 2M12 18l2 2 2-2"/></svg></span></div>
-          <b id="bw-quick-split">Manual split</b>
-          <span class="bw-quick-rail"></span>
-        </div>
-        <div class="bw-quick-card tone-model" style="--rail:42%">
-          <div class="bw-quick-top"><span class="bw-qk">Model</span><span class="bw-quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></span></div>
-          <b id="bw-quick-model">LSTM</b>
-          <span class="bw-quick-rail"></span>
-        </div>
-        <div class="bw-quick-card tone-export" style="--rail:58%">
-          <div class="bw-quick-top"><span class="bw-qk">Export</span><span class="bw-quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V7z"/><path d="M14 2v5h5"/><path d="M9 15l3 3 3-3M12 18V9"/></svg></span></div>
-          <b>Training package</b>
-          <span class="bw-quick-rail"></span>
-        </div>
-      </div>
+      <img class="benchmarks-hero-art visual-page-hero-art" src="assets/benchmarks-hero-reference.png?v=1" alt="" aria-hidden="true">
     </div>
 
-    <!-- ── 3-column builder ── -->
+    <!-- progress stepper -->
+    <div class="bw-progress" aria-label="Benchmark workflow steps">
+      <button class="bw-pstep active" type="button" data-bw-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">1</span><span class="bw-pcopy"><span class="bw-plabel">Dataset</span><span class="bw-psub">Select data and features</span></span></button>
+      <span class="bw-pline"></span>
+      <button class="bw-pstep" type="button" data-bw-step="2" onclick="bwWizardGo(2)"><span class="bw-pnum">2</span><span class="bw-pcopy"><span class="bw-plabel">Split &amp; Model</span><span class="bw-psub">Assign cells and baselines</span></span></button>
+      <span class="bw-pline"></span>
+      <button class="bw-pstep" type="button" data-bw-step="3" onclick="bwWizardGo(3)"><span class="bw-pnum">3</span><span class="bw-pcopy"><span class="bw-plabel">Package</span><span class="bw-psub">Export local scaffold</span></span></button>
+      <span class="bw-pline"></span>
+      <button class="bw-pstep" type="button" data-bw-step="4" onclick="bwWizardGo(4)"><span class="bw-pnum">4</span><span class="bw-pcopy"><span class="bw-plabel">Results</span><span class="bw-psub">Review metrics and plots</span></span></button>
+    </div>
+
+    <!-- step builder -->
     <div class="bw-grid">
 
-      <!-- PANEL 1 · Dataset & Cell Browser -->
-      <section class="bw-panel">
-        <div class="bw-phead"><span class="bw-phnum">1</span><span class="bw-ptitle">Dataset &amp; Features</span></div>
+      <!-- PANEL 1 Dataset & Cell Browser -->
+      <section class="bw-panel bw-wizard-step is-active" data-bw-step="1">
         <div class="bw-pbody">
-          <div class="bw-rowflex">
-            <div class="bw-search">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-              <input class="bw-input" id="bw-ds-search" placeholder="Search datasets…" oninput="bwSearchDatasets(this.value)">
-            </div>
-          </div>
-          <details class="bw-advanced">
-            <summary><span>Dataset filters</span><span class="bw-advanced-tag">Details</span></summary>
-            <div class="bw-advanced-body">
-              <div class="bw-ddrow">
-                <select class="bw-fsel" id="bw-f-chem" onchange="bwApplyFilters()"><option value="">Chemistry</option></select>
-                <select class="bw-fsel" id="bw-f-form" onchange="bwApplyFilters()"><option value="">Format</option></select>
-                <select class="bw-fsel" id="bw-f-inst" onchange="bwApplyFilters()"><option value="">Institution</option></select>
-                <select class="bw-fsel" id="bw-f-temp" onchange="bwApplyFilters()"><option value="">Temperature</option></select>
-                <span class="bw-clear" onclick="bwClearFilters()">Clear</span>
+          <div class="bw-step1-grid">
+            <div class="bw-step1-col bw-step1-left">
+              <div class="bw-step1-panel-title">Dataset Selection</div>
+              <div class="bw-step1-panel-body">
+              <div class="bw-dataset-tools">
+                <div class="bw-search">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  <input class="bw-input" id="bw-ds-search" placeholder="Search" oninput="bwSearchDatasets(this.value)">
+                </div>
+              <details class="bw-advanced bw-filter-menu">
+                <summary>
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+                  <span>Filters</span>
+                </summary>
+                <div class="bw-advanced-body">
+                  <div class="bw-ddrow">
+                    <select class="bw-fsel" id="bw-f-chem" onchange="bwApplyFilters()"><option value="">Chemistry</option></select>
+                    <select class="bw-fsel" id="bw-f-form" onchange="bwApplyFilters()"><option value="">Format</option></select>
+                    <select class="bw-fsel" id="bw-f-inst" onchange="bwApplyFilters()"><option value="">Institution</option></select>
+                    <select class="bw-fsel" id="bw-f-temp" onchange="bwApplyFilters()"><option value="">Temperature</option></select>
+                    <span class="bw-clear" onclick="bwClearFilters()">Clear</span>
+                  </div>
+                </div>
+              </details>
+              </div>
+              <div class="bw-tablewrap">
+                <table class="bw-table" id="bw-ds-table">
+                  <thead><tr><th>Dataset name</th><th>Chem</th><th>Cells</th><th>Cycles</th><th>Select</th></tr></thead>
+                  <tbody id="bw-ds-tbody"></tbody>
+                </table>
+              </div>
+              <div class="bw-pager">
+                <span class="bw-pager-info" id="bw-pager-info"></span>
+                <div class="bw-pager-btns" id="bw-pager-btns"></div>
+              </div>
               </div>
             </div>
-          </details>
 
-          <div class="bw-tablewrap">
-            <table class="bw-table" id="bw-ds-table">
-              <thead><tr><th></th><th>Dataset</th><th>Chem</th><th>Cells</th><th>Cycles</th><th>Form</th><th>Quality</th></tr></thead>
-              <tbody id="bw-ds-tbody"></tbody>
-            </table>
-          </div>
-          <div class="bw-pager">
-            <span class="bw-pager-info" id="bw-pager-info">—</span>
-            <div class="bw-pager-btns" id="bw-pager-btns"></div>
-          </div>
-
-          <div class="bw-feature-block">
-            <div class="bw-feature-head">
-              <div class="bw-field-lbl">Raw Input Signals <span class="bw-multi-note">· time-series channels</span></div>
-              <span class="bw-feature-count" id="bw-raw-count">3 selected</span>
-            </div>
-            <div class="bw-feats" id="bw-feats">
-              <button type="button" class="bw-feat selected" data-name="Voltage V(t)" onclick="bwToggleFeat(this)">Voltage V(t) <span class="bw-feat-x">×</span></button>
-              <button type="button" class="bw-feat selected" data-name="Current I(t)" onclick="bwToggleFeat(this)">Current I(t) <span class="bw-feat-x">×</span></button>
-              <button type="button" class="bw-feat selected" data-name="Temperature T(t)" onclick="bwToggleFeat(this)">Temperature T(t) <span class="bw-feat-x">×</span></button>
-              <button type="button" class="bw-feat bw-feat-add" onclick="bwMockAddSignal()">+ Add signal</button>
-            </div>
-          </div>
-
-          <details class="bw-feature-block bw-formula-block bw-advanced">
-            <summary><span>Formula Features</span><span class="bw-formula-status" id="bw-formula-status">Waiting for confirmation</span><span class="bw-advanced-tag">Details</span></summary>
-            <div class="bw-advanced-body">
-            <input type="file" id="bw-recipe-upload" accept=".txt" style="display:none" onchange="bwHandleRecipeUpload(event)">
-            <div class="bw-recipe-panel">
-              <div class="bw-recipe-meta">
-                <div class="bw-recipe-row"><span class="bw-recipe-k">Read status</span><span class="bw-recipe-v" id="bw-recipe-status">Ready</span></div>
-                <div class="bw-recipe-row"><span class="bw-recipe-k">Total features</span><span class="bw-recipe-v" id="bw-formula-count">12</span></div>
-                <div class="bw-recipe-row"><span class="bw-recipe-k">Custom file</span><span class="bw-recipe-v" id="bw-recipe-kind">Formula TXT</span></div>
-                <button type="button" class="bw-import-btn" onclick="document.getElementById('bw-recipe-upload').click()">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                  Import .txt
-                </button>
-                <ol class="bw-recipe-steps">
-                  <li class="done" data-step="1">Upload file</li>
-                  <li data-step="2">Validate syntax</li>
-                  <li data-step="3">Compute features</li>
-                </ol>
-              </div>
-              <div class="bw-recipe-main">
-                <div class="bw-rowflex bw-spread" style="margin-top:0;">
-                  <span class="bw-parse-ok">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    Parsed successfully
-                  </span>
-                  <button type="button" class="bw-browse-btn" onclick="document.getElementById('bw-recipe-upload').click()">Browse</button>
+            <div class="bw-step1-col bw-step1-right">
+              <div class="bw-step1-panel-title">Data Processing &amp; Features</div>
+              <div class="bw-step1-panel-body">
+              <div class="bw-feature-block">
+                <div class="bw-feature-head">
+                  <div class="bw-field-lbl">Raw Input Signals <span class="bw-multi-note">multi time-series channels</span></div>
+                  <span class="bw-feature-count" id="bw-raw-count">3 selected</span>
                 </div>
-                <div class="bw-file-card">
-                  <span class="bw-file-ic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-                  <span>
-                    <span class="bw-file-name" id="bw-recipe-file">feature_schema.txt</span>
-                    <span class="bw-file-size" id="bw-recipe-size">2.4 KB</span>
-                  </span>
-                  <span class="bw-file-ready">
-                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    Ready to parse
-                  </span>
-                </div>
-                <div class="bw-formula-preview">
-                  <code>voltage_mean = (1 / n) * sum(voltage_V)</code>
-                  <code>voltage_std = sqrt((1 / (n - 1)) * sum((voltage_V - voltage_mean)^2))</code>
-                  <code>accumulated_charge_Ah = integral(current_A, time_s) / 3600</code>
-                  <code>voltage_entropy = entropy(voltage_V, bins=20)</code>
-                </div>
-                <div class="bw-recipe-actions">
-                  <button type="button" class="bw-compute-btn" onclick="bwConfirmFeatures()">Confirm &amp; Compute</button>
-                  <button type="button" class="bw-cancel-btn">Cancel</button>
+                <div class="bw-feats" id="bw-feats">
+                  <button type="button" class="bw-feat selected" data-name="Voltage V(t)" onclick="bwToggleFeat(this)">Voltage V(t) <span class="bw-feat-x">?</span></button>
+                  <button type="button" class="bw-feat selected" data-name="Current I(t)" onclick="bwToggleFeat(this)">Current I(t) <span class="bw-feat-x">?</span></button>
+                  <button type="button" class="bw-feat selected" data-name="Temperature T(t)" onclick="bwToggleFeat(this)">Temperature T(t) <span class="bw-feat-x">?</span></button>
+                  <button type="button" class="bw-feat bw-feat-add" onclick="bwMockAddSignal()">+ Add Signal</button>
                 </div>
               </div>
+
+              <details open class="bw-feature-block bw-formula-block bw-advanced">
+                <summary onclick="event.preventDefault()"><span>Formula Features</span><span class="bw-formula-status" id="bw-formula-status">Waiting for confirmation</span></summary>
+                <div class="bw-advanced-body">
+                  <input type="file" id="bw-recipe-upload" accept=".txt" style="display:none" onchange="bwHandleRecipeUpload(event)">
+                  <div class="bw-formula-success">
+                    <span><span id="bw-recipe-file">feature_schema.txt</span> parsed successfully.</span>
+                    <span class="bw-success-check"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  </div>
+                  <div class="bw-process-layout">
+                    <ol class="bw-process-steps">
+                      <li class="done"><span class="bw-process-num">1</span><button type="button" class="bw-process-upload" onclick="document.getElementById('bw-recipe-upload').click()">Upload file</button></li>
+                      <li class="active"><span class="bw-process-num">2</span><span>Validate syntax</span></li>
+                      <li><span class="bw-process-num">3</span><span>Compute features</span></li>
+                    </ol>
+                    <div class="bw-process-preview">
+                      <div class="bw-preview-title">Preview</div>
+                      <div class="bw-formula-preview">
+                        <code>formula = Voltage V(t)</code>
+                        <code>formula = Current I(t)</code>
+                        <code>temperature = Gompert * (t) + 0 + C(t)</code>
+                        <code>temperature = Temperature 0 + T(t)</code>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bw-feat-hint" id="bw-feat-hint">3 raw signals + <span id="bw-formula-count">12</span> formula features  · <span id="bw-recipe-status">Ready</span>  · <span id="bw-recipe-kind">Formula TXT</span>  · <span id="bw-recipe-size">2.4 KB</span></div>
+                  <button type="button" class="bw-compute-btn bw-compute-wide" onclick="bwConfirmFeatures()">Confirm &amp; Compute</button>
+                </div>
+              </details>
+              </div>
             </div>
-            <div class="bw-feat-hint" id="bw-feat-hint">3 raw signals + 12 formula features</div>
-            </div>
-          </details>
+          </div>
         </div>
       </section>
 
-      <!-- PANEL 2 · Split Builder & Model Configuration -->
-      <section class="bw-panel">
-        <div class="bw-phead"><span class="bw-phnum">2</span><span class="bw-ptitle">Split Builder &amp; Model Configuration</span></div>
+      <!-- PANEL 2 Split Builder & Model Configuration -->
+      <section class="bw-panel bw-wizard-step" data-bw-step="2">
         <div class="bw-pbody">
+          <div class="bw-step2-control-card">
           <div class="bw-task-row">
             <div class="bw-field-lbl">Task</div>
             <div class="bw-seg">
@@ -4719,35 +6818,37 @@ pre {
             </div>
             <button class="bw-shuffle" onclick="bwShuffleSplit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg> Re-sample</button>
           </div>
+          </div>
 
           <div class="bw-cellcols">
             <div class="bw-cellcol" data-bucket="train" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
               <div class="bw-cellcol-h">Train Cells <span id="bw-train-pct">(60%)</span></div>
-              <div class="bw-cellcol-sub" id="bw-train-n">—</div>
+              <div class="bw-cellcol-sub" id="bw-train-n">&mdash;</div>
               <div class="bw-chips" id="bw-train-chips"></div>
             </div>
             <div class="bw-cellcol" data-bucket="val" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
               <div class="bw-cellcol-h">Validation <span id="bw-val-pct">(20%)</span></div>
-              <div class="bw-cellcol-sub" id="bw-val-n">—</div>
+              <div class="bw-cellcol-sub" id="bw-val-n">&mdash;</div>
               <div class="bw-chips" id="bw-val-chips"></div>
             </div>
             <div class="bw-cellcol" data-bucket="test" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
               <div class="bw-cellcol-h">Test Cells <span id="bw-test-pct">(20%)</span></div>
-              <div class="bw-cellcol-sub" id="bw-test-n">—</div>
+              <div class="bw-cellcol-sub" id="bw-test-n">&mdash;</div>
               <div class="bw-chips" id="bw-test-chips"></div>
             </div>
           </div>
           <div class="bw-excluded" data-bucket="excluded" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
             <div class="bw-excluded-h">
-              <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg> Excluded <span class="bw-excluded-note">— not used in train / val / test</span></span>
+              <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg> Excluded <span class="bw-excluded-note">not used in train / val / test</span></span>
               <span class="bw-excluded-n" id="bw-excluded-n">0 cells</span>
             </div>
             <div class="bw-chips bw-excluded-chips" id="bw-excluded-chips"></div>
           </div>
-          <div class="bw-drophint"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg> Drag cells between Train / Val / Test — or into Excluded to leave them out</div>
+          <div class="bw-drophint"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg> Drag cells between Train / Val / Test or into Excluded to leave them out</div>
 
-          <div class="bw-field-lbl">Model Selection <span class="bw-multi-note">· multi-select</span></div>
-          <div class="bw-model-list">
+          <div class="bw-step2-model-card">
+            <div class="bw-field-lbl">Model Selection <span class="bw-multi-note">multi-select</span></div>
+            <div class="bw-model-list">
             <div class="bw-model-item" onclick="bwToggleModel(this)">
               <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
               <span class="bw-model-name">Linear Regression</span>
@@ -4788,6 +6889,7 @@ pre {
               <span class="bw-model-name">PINN</span>
               <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
             </div>
+            </div>
           </div>
 
           <details class="bw-advanced">
@@ -4805,38 +6907,47 @@ pre {
         </div>
       </section>
 
-      <!-- PANEL 3 · Training Package -->
-      <section class="bw-panel">
-        <div class="bw-phead"><span class="bw-phnum">3</span><span class="bw-ptitle">Training Package</span></div>
+      <!-- PANEL 3 Training Package -->
+      <section class="bw-panel bw-wizard-step" data-bw-step="3">
         <div class="bw-pbody">
-          <div class="bw-package-card">
+          <div class="bw-package-card bw-package-card-compact">
             <div class="bw-package-head">
               <div>
-                <div class="bw-package-title">Export reproducible training scaffold</div>
-                <div class="bw-package-sub">The zip contains config, dataloader, selected model files, and scripts. Users add the whole processed dataset folder locally before training.</div>
+                <div class="bw-package-kicker">Training package</div>
+                <div class="bw-package-title">Ready to export</div>
+                <div class="bw-package-sub">Local scaffold with config, split, selected model, and run scripts.</div>
               </div>
               <span class="bw-package-status">Ready</span>
             </div>
 
-            <div class="bw-package-name">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 15h8M8 18h6"/></svg>
-              <span id="bw-package-filename">bt_benchmark_soh_lstm.zip</span>
+            <div class="bw-package-main">
+              <div class="bw-package-file">
+                <div class="bw-package-label">Package file</div>
+                <div class="bw-package-name">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 15h8M8 18h6"/></svg>
+                  <span id="bw-package-filename">bt_benchmark_soh_lstm.zip</span>
+                </div>
+              </div>
+              <div class="bw-package-actions">
+                <button class="bw-download" onclick="bwDownloadPackage()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Package</button>
+                <button class="bw-copycmd" onclick="bwCopyTerminalCommand()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Command</button>
+              </div>
             </div>
 
-            <div class="bw-data-place">
+            <div class="bw-data-place bw-data-place-compact">
               <div class="bw-data-place-h">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-                <span class="bw-data-place-title">Dataset placement</span>
+                <span class="bw-data-place-title">Place the processed dataset folder here</span>
               </div>
               <code class="bw-data-path" id="bw-data-folder">data/2026_NTUEEE_Ampace-Samsung_LFP-NMC_21700_2C_2C_25T/</code>
-              <div class="bw-data-place-p"><b>Put one complete processed dataset folder here.</b> The scripts scan it recursively and apply the Train / Validation / Test split from <code>split.json</code> automatically.</div>
+              <div class="bw-data-place-p">The package applies the selected split from <code>split.json</code> automatically.</div>
             </div>
 
             <div class="bw-sumlist bw-manifest">
-              <div class="bw-sum"><span class="bw-sum-k">Dataset</span><span class="bw-sum-v" id="bw-sum-ds">—</span></div>
+              <div class="bw-sum"><span class="bw-sum-k">Dataset</span><span class="bw-sum-v" id="bw-sum-ds"></span></div>
               <div class="bw-sum"><span class="bw-sum-k">Task</span><span class="bw-sum-v" id="bw-sum-task">SOH Estimation</span></div>
               <div class="bw-sum"><span class="bw-sum-k">Split Protocol</span><span class="bw-sum-v" id="bw-sum-split">Manual</span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Split</span><span class="bw-sum-v" id="bw-sum-splitn">—</span></div>
+              <div class="bw-sum"><span class="bw-sum-k">Split</span><span class="bw-sum-v" id="bw-sum-splitn"></span></div>
               <div class="bw-sum"><span class="bw-sum-k">Excluded</span><span class="bw-sum-v" id="bw-sum-excl">None</span></div>
               <div class="bw-sum"><span class="bw-sum-k">Model</span><span class="bw-sum-v" id="bw-sum-model">LSTM</span></div>
               <div class="bw-sum"><span class="bw-sum-k">Features</span><span class="bw-sum-v" id="bw-sum-feats">3 raw signals + 12 formula features</span></div>
@@ -4844,27 +6955,25 @@ pre {
             </div>
           </div>
 
-          <details class="bw-advanced">
-            <summary><span>Package Contents</span><span class="bw-advanced-tag">Details</span></summary>
+          <details class="bw-advanced bw-package-details">
+            <summary><span>Package files</span><span class="bw-advanced-tag">Details</span></summary>
             <div class="bw-advanced-body">
               <div class="bw-package-grid">
                 <div class="bw-package-item"><b>config.json</b><small>target, model, metric</small></div>
                 <div class="bw-package-item"><b>split.json</b><small>web train / val / test ratio</small></div>
                 <div class="bw-package-item"><b>features/feature_schema.txt</b><small>formula schema</small></div>
-                <div class="bw-package-item"><b>scripts/compute_features.py</b><small>cycle features</small></div>
                 <div class="bw-package-item"><b>models/&lt;selected&gt;.py</b><small>selected models only</small></div>
                 <div class="bw-package-item"><b>dataloader/battery_dataset.py</b><small>CSV loading</small></div>
-                <div class="bw-package-item"><b>scripts/prepare_split.py</b><small>web ratio split</small></div>
-                <div class="bw-package-item"><b>scripts/train.py</b><small>training entrypoint</small></div>
                 <div class="bw-package-item"><b>run_benchmark.sh</b><small>terminal run script</small></div>
-                <div class="bw-package-item"><b>scripts/export_results.py</b><small>outputs summary</small></div>
               </div>
             </div>
           </details>
 
-          <div class="bw-check-title">Terminal one-command run</div>
-          <div class="bw-package-command">
-            <div class="bw-command-head"><span>local terminal</span><span>macOS / Linux</span></div>
+          <details class="bw-advanced bw-package-details">
+            <summary><span>Terminal command</span><span class="bw-advanced-tag">Copyable</span></summary>
+            <div class="bw-advanced-body">
+              <div class="bw-package-command">
+                <div class="bw-command-head"><span>local terminal</span><span>macOS / Linux</span></div>
 <pre class="bw-command-code" id="bw-terminal-command">unzip bt_benchmark_soh_lstm.zip
 cd bt_benchmark_soh_lstm
 mkdir -p data
@@ -4873,14 +6982,17 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 bash run_benchmark.sh</pre>
-          </div>
+                </div>
+                <div class="bw-runnote"><span class="bw-dot-warn"></span> If the zip does not appear, open this page in Chrome or Safari.</div>
+              </div>
+            </details>
 
           <div class="bw-package-actions">
             <button class="bw-download" onclick="bwDownloadPackage()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Training Package</button>
             <button class="bw-copycmd" onclick="bwCopyTerminalCommand()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Terminal Command</button>
           </div>
           <div class="bw-runnote"><span class="bw-dot-warn"></span> If the zip does not appear, open this localhost page in Chrome or Safari; embedded preview browsers can block file downloads.</div>
-          <div class="bw-runnote"><span class="bw-dot-ok"></span> Zip scaffold only · put the complete processed dataset folder under data/ before running terminal commands.</div>
+          <div class="bw-runnote"><span class="bw-dot-ok"></span> Zip scaffold only - put the complete processed dataset folder under data/ before running terminal commands.</div>
 
           <details class="bw-advanced">
             <summary><span>Package Checklist</span><span class="bw-advanced-tag">Details</span></summary>
@@ -4898,9 +7010,8 @@ bash run_benchmark.sh</pre>
       </section>
     </div>
 
-    <!-- ── results & evaluation ── -->
-    <section class="bw-panel bw-results">
-      <div class="bw-phead"><span class="bw-phnum">4</span><span class="bw-ptitle">Results &amp; Evaluation</span></div>
+    <!-- results & evaluation -->
+    <section class="bw-panel bw-results bw-wizard-step" data-bw-step="4">
       <div class="bw-tabs">
         <button class="bw-tab active" onclick="bwJumpResultSection(this, 'bw-result-overview')">Overview</button>
         <button class="bw-tab" onclick="bwJumpResultSection(this, 'bw-result-leaderboard')">Leaderboard</button>
@@ -4928,22 +7039,22 @@ bash run_benchmark.sh</pre>
         <div class="bw-result-kpis" id="bw-result-kpis">
           <div class="bw-rstat">
             <div class="bw-rstat-h">Best Model</div>
-            <div class="bw-rstat-v">—</div>
+            <div class="bw-rstat-v">&mdash;</div>
             <div class="bw-rstat-s">Upload outputs first</div>
           </div>
           <div class="bw-rstat">
             <div class="bw-rstat-h">Test RMSE</div>
-            <div class="bw-rstat-v">—</div>
+            <div class="bw-rstat-v">&mdash;</div>
             <div class="bw-rstat-s">Lower is better</div>
           </div>
           <div class="bw-rstat">
             <div class="bw-rstat-h">Worst Cell</div>
-            <div class="bw-rstat-v">—</div>
+            <div class="bw-rstat-v">&mdash;</div>
             <div class="bw-rstat-s">Per-cell RMSE</div>
           </div>
           <div class="bw-rstat">
             <div class="bw-rstat-h">Generalization Gap</div>
-            <div class="bw-rstat-v">—</div>
+            <div class="bw-rstat-v">&mdash;</div>
             <div class="bw-rstat-s">Test minus validation RMSE</div>
           </div>
         </div>
@@ -4959,7 +7070,7 @@ bash run_benchmark.sh</pre>
               <span class="bw-pill-soft" id="bw-leaderboard-split">test split</span>
             </div>
             <table class="bw-table bw-lead">
-              <thead><tr><th>Rank</th><th>Model</th><th>RMSE ↓</th><th>MAE ↓</th><th>MAPE ↓</th><th>R2 ↑</th></tr></thead>
+              <thead><tr><th>Rank</th><th>Model</th><th>RMSE ↓</th><th>MAE ↓</th><th>MAPE ↓</th><th>R2 ↓</th></tr></thead>
               <tbody id="bw-leaderboard-body">
                 <tr><td colspan="6" class="bw-empty-cell">Upload outputs to populate the leaderboard.</td></tr>
               </tbody>
@@ -4988,12 +7099,12 @@ bash run_benchmark.sh</pre>
           <div class="bw-paper-card bw-evidence-card" id="bw-result-export">
             <div class="bw-paper-label">Reproducibility</div>
             <div class="bw-evidence-list" id="bw-evidence-list">
-              <div><span>Dataset</span><b>—</b></div>
-              <div><span>Task</span><b>—</b></div>
-              <div><span>Target</span><b>—</b></div>
-              <div><span>Prediction rows</span><b>—</b></div>
-              <div><span>Feature count</span><b>—</b></div>
-              <div><span>Files loaded</span><b>—</b></div>
+              <div><span>Dataset</span><b>&mdash;</b></div>
+              <div><span>Task</span><b>&mdash;</b></div>
+              <div><span>Target</span><b>&mdash;</b></div>
+              <div><span>Prediction rows</span><b>&mdash;</b></div>
+              <div><span>Feature count</span><b>&mdash;</b></div>
+              <div><span>Files loaded</span><b>&mdash;</b></div>
             </div>
           </div>
         </div>
@@ -5024,20 +7135,29 @@ bash run_benchmark.sh</pre>
       </div>
       <div class="bw-footbar">
         <span class="bw-fb"><b>Outputs</b> <span class="bw-mono" id="bw-foot-files">0 files</span></span>
-        <span class="bw-fb"><b>Models</b> <span id="bw-foot-models">—</span></span>
-        <span class="bw-fb"><b>Splits</b> <span id="bw-foot-splits">—</span></span>
+        <span class="bw-fb"><b>Models</b> <span id="bw-foot-models"></span></span>
+        <span class="bw-fb"><b>Splits</b> <span id="bw-foot-splits"></span></span>
         <span class="bw-fb bw-fb-right"><span class="bw-dot-warn" id="bw-foot-dot"></span> Status: <b id="bw-foot-status">Waiting for outputs</b></span>
       </div>
     </section>
+
+    <div class="bw-wizard-actions" aria-label="Benchmark step navigation">
+      <div class="bw-wizard-status" id="bw-wizard-status">Step 1 of 4 - Dataset</div>
+      <div class="bw-wizard-buttons">
+        <button class="bw-wizard-btn" type="button" id="bw-wizard-prev" onclick="bwWizardPrev()" hidden>Previous</button>
+        <button class="bw-wizard-btn primary" type="button" id="bw-wizard-next" onclick="bwWizardNext()">Next</button>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════
        PAGE: MODELS
        ═══════════════════════════════════════ -->
   <div class="page" id="page-models">
-    <div class="page-header">
-      <div class="page-title">Models</div>
-      <div class="page-desc">Download reference implementations and review supported tasks, input requirements, and model assumptions.</div>
+    <div class="page-header models-hero visual-page-hero">
+      <div class="page-title">Model Library</div>
+      <div class="page-desc">Download reference implementations and review supported tasks, input requirements, and model assumptions. Select a model to see its details on the right.</div>
+      <img class="models-hero-art visual-page-hero-art" src="assets/models-hero-reference.png?v=2" alt="" aria-hidden="true">
     </div>
 
     <div class="dataset-search-panel model-search-panel">
@@ -5122,7 +7242,7 @@ bash run_benchmark.sh</pre>
   <div class="page" id="page-tasks">
     <div class="page-header">
       <div class="page-title">Tasks</div>
-      <div class="page-desc">Dataset curation progress tracker — ETL pipeline status for each dataset across metadata, time-series, cycle summary, and QC stages.</div>
+      <div class="page-desc">Dataset curation progress tracker - ETL pipeline status for each dataset across metadata, time-series, cycle summary, and QC stages.</div>
     </div>
 
     <div class="stats-row" id="task-stats">
@@ -5152,16 +7272,16 @@ bash run_benchmark.sh</pre>
     <div class="naming-formula">
       <code>YYYY _ SOURCE _ CHEMISTRY _ FORMFACTOR _ CHRGC _ DCHRGC _ TEMPT</code>
       <div class="naming-parts">
-        <span class="naming-part np-year">YYYY · Year</span>
-        <span class="naming-part np-source">SOURCE · Lab / Institution</span>
-        <span class="naming-part np-chem">CHEMISTRY · LFP / NMC / LCO / NCA</span>
-        <span class="naming-part np-form">FORMFACTOR · 18650 / 21700 / Pouch / Prismatic</span>
-        <span class="naming-part np-rate">CHRGC / DCHRGC · C-rates</span>
-        <span class="naming-part np-temp">TEMPT · Temperature °C</span>
+        <span class="naming-part np-year">YYYY &middot; Year</span>
+        <span class="naming-part np-source">SOURCE &middot; Lab / Institution</span>
+        <span class="naming-part np-chem">CHEMISTRY &middot; LFP / NMC / LCO / NCA</span>
+        <span class="naming-part np-form">FORMFACTOR &middot; 18650 / 21700 / Pouch / Prismatic</span>
+        <span class="naming-part np-rate">CHRGC / DCHRGC &middot; C-rates</span>
+        <span class="naming-part np-temp">TEMPT &middot; Temperature &deg;C</span>
       </div>
     </div>
 
-    <h3 style="font-family:var(--display);font-size:18px;margin-bottom:10px;">Examples</h3>
+    <h3 class="naming-section-title">Examples</h3>
     <table class="model-table">
       <thead><tr><th>Dataset</th><th>ref_name</th></tr></thead>
       <tbody>
@@ -5172,19 +7292,19 @@ bash run_benchmark.sh</pre>
       </tbody>
     </table>
 
-    <h3 style="font-family:var(--display);font-size:18px;margin:28px 0 10px;">Field Vocabulary</h3>
-    <div class="bench-cards" style="margin-top:0;">
+    <h3 class="naming-section-title">Field Vocabulary</h3>
+    <div class="bench-cards naming-vocab-grid">
       <div class="bench-card">
         <div class="bc-title">Sources (25+)</div>
-        <div class="bc-desc" style="font-family:var(--mono);font-size:13px;line-height:1.8;">NASA_PCoE · CALCE_UMD · Stanford_MIT_TRI · Oxford_Howey · RWTH_Aachen · NTUEEE · SNL · HNEI · UL_Purdue · XJTU · KIT · Tsinghua · CMU_Bills · Stanford_Onori · TUM · Beihang · Imperial · ISU_ILCC · EVERLASTING_4TU · Mendeley · Figshare · Zenodo ...</div>
+        <div class="bc-desc" style="font-family:var(--mono);font-size:13px;line-height:1.8;">NASA_PCoE &middot; CALCE_UMD &middot; Stanford_MIT_TRI &middot; Oxford_Howey &middot; RWTH_Aachen &middot; NTUEEE &middot; SNL &middot; HNEI &middot; UL_Purdue &middot; XJTU &middot; KIT &middot; Tsinghua &middot; CMU_Bills &middot; Stanford_Onori &middot; TUM &middot; Beihang &middot; Imperial &middot; ISU_ILCC &middot; EVERLASTING_4TU &middot; Mendeley &middot; Figshare &middot; Zenodo ...</div>
       </div>
       <div class="bench-card">
         <div class="bc-title">Chemistries</div>
-        <div class="bc-desc" style="font-family:var(--mono);font-size:13px;line-height:1.8;">LFP · NMC · NMC811 · LCO · NCA · LiIon (generic) · MultiChem</div>
+        <div class="bc-desc" style="font-family:var(--mono);font-size:13px;line-height:1.8;">LFP &middot; NMC &middot; NMC811 &middot; LCO &middot; NCA &middot; LiIon (generic) &middot; MultiChem</div>
       </div>
       <div class="bench-card">
         <div class="bc-title">Form Factors</div>
-        <div class="bc-desc" style="font-family:var(--mono);font-size:13px;line-height:1.8;">18650 · 21700 · Pouch · Prismatic · Cyl · Auto · EV-BMS</div>
+        <div class="bc-desc" style="font-family:var(--mono);font-size:13px;line-height:1.8;">18650 &middot; 21700 &middot; Pouch &middot; Prismatic &middot; Cyl &middot; Auto &middot; EV-BMS</div>
       </div>
     </div>
   </div>
@@ -5237,11 +7357,11 @@ bash run_benchmark.sh</pre>
       </div>
       <div class="bench-card">
         <div class="bc-title">timeseries.parquet</div>
-        <div class="bc-desc">Raw measurement time-series: voltage_V, current_A, temperature_C, capacity_Ah, timestamp — per cycle per cell.</div>
+        <div class="bc-desc">Raw measurement time-series: voltage_V, current_A, temperature_C, capacity_Ah, timestamp - per cycle per cell.</div>
       </div>
       <div class="bench-card">
         <div class="bc-title">cycle_summary.csv</div>
-        <div class="bc-desc">Cycle-level aggregates: discharge capacity, charge capacity, coulombic efficiency, IR, cycle number — one row per cycle.</div>
+        <div class="bc-desc">Cycle-level aggregates: discharge capacity, charge capacity, coulombic efficiency, IR, cycle number - one row per cycle.</div>
       </div>
       <div class="bench-card">
         <div class="bc-title">dataset_note.md</div>
@@ -5253,8 +7373,8 @@ bash run_benchmark.sh</pre>
     <table class="model-table">
       <thead><tr><th>Part</th><th>Scope</th><th>Datasets</th></tr></thead>
       <tbody>
-        <tr><td><strong>Part 1</strong></td><td>Data Curation & ETL Pipeline</td><td>01–38 + Internal + EEE</td></tr>
-        <tr><td><strong>Part 2</strong></td><td>Benchmark Models & Evaluation</td><td>SOH + RUL × 5 models</td></tr>
+        <tr><td><strong>Part 1</strong></td><td>Data Curation & ETL Pipeline</td><td>01-38 + Internal + EEE</td></tr>
+        <tr><td><strong>Part 2</strong></td><td>Benchmark Models & Evaluation</td><td>SOH + RUL ? 5 models</td></tr>
       </tbody>
     </table>
   </div>
@@ -5296,47 +7416,115 @@ bash run_benchmark.sh</pre>
        PAGE: ABOUT
        ═══════════════════════════════════════ -->
   <div class="page" id="page-about">
-    <div class="page-header">
-      <div class="page-title">About</div>
-    </div>
-    <div class="about-content">
-      <p><strong>BatteryLake Benchmark</strong> is a comprehensive benchmark platform for lithium-ion battery prognostics and health management (PHM). The project curates, standardizes, and evaluates battery cycling datasets from research labs worldwide, enabling fair comparison of machine learning models for state-of-health estimation and remaining useful life prediction.</p>
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-hero-copy">
+        <div class="about-kicker">BatteryLake Benchmark</div>
+        <h1 id="about-title">Open benchmark infrastructure for battery PHM research.</h1>
+        <p><strong>BatteryLake Benchmark</strong> curates, standardizes, and evaluates lithium-ion battery cycling datasets from research labs worldwide, enabling fair comparison of machine learning models for state-of-health estimation and remaining useful life prediction.</p>
+        <div class="about-hero-actions">
+          <a class="about-primary-link" href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep" target="_blank" rel="noopener">View repository</a>
+          <span class="about-affiliation-pill">Nanyang Technological University, Singapore</span>
+        </div>
+      </div>
+      <div class="about-snapshot" aria-label="Project snapshot">
+        <div class="about-snapshot-card"><span>Curated datasets</span><strong>41</strong></div>
+        <div class="about-snapshot-card"><span>Prediction tasks</span><strong>SOH / RUL</strong></div>
+        <div class="about-snapshot-card"><span>Benchmark scope</span><strong>ETL + Models</strong></div>
+      </div>
+    </section>
 
-      <h3>Team</h3>
-
-      <div class="team-section-label">Project Supervisors</div>
-      <div class="team-grid">
-        <div class="team-card"><div class="team-name">Prof. Yonggang Wen</div><div class="team-role">Principal Investigator</div></div>
-        <div class="team-card"><div class="team-name">Wang Hao</div><div class="team-role">Research Fellow</div></div>
+    <section class="about-section about-team-section">
+      <div class="about-section-head">
+        <div>
+          <div class="about-kicker">Team</div>
+          <h2>Research and engineering contributors</h2>
+        </div>
+        <p>BatteryLake combines battery-domain supervision, benchmark research, and frontend engineering into one reproducible platform.</p>
       </div>
 
-      <div class="team-section-label">Core Researcher</div>
-      <div class="team-grid">
-        <div class="team-card"><div class="team-name">Zhu Tianwen</div><div class="team-role">PhD Candidate</div></div>
+      <div class="about-team-block">
+        <div class="team-section-label">Project Supervisors</div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">YW</div>
+            <div>
+              <div class="team-name">Prof. Yonggang Wen</div>
+              <div class="team-role">Principal Investigator</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">WH</div>
+            <div>
+              <div class="team-name">Dr Wang Hao</div>
+              <div class="team-role">Research Fellow</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="team-section-label">Web Engineering</div>
-      <div class="team-grid">
-        <div class="team-card"><div class="team-name">Liu Kefan</div><div class="team-role">Frontend Engineer</div></div>
-        <div class="team-card"><div class="team-name">Cao Han</div><div class="team-role">Frontend Engineer</div></div>
-        <div class="team-card"><div class="team-name">Cai Yezi</div><div class="team-role">Frontend Engineer</div></div>
+      <div class="about-team-block">
+        <div class="team-section-label">Core Researcher</div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">ZT</div>
+            <div>
+              <div class="team-name">Zhu Tianwen</div>
+              <div class="team-role">PhD Candidate</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <h3>Affiliation</h3>
-      <p>Nanyang Technological University, Singapore</p>
+      <div class="about-team-block">
+        <div class="team-section-label">Web Engineering</div>
+        <div class="team-grid about-engineering-grid">
+          <div class="team-card">
+            <div class="team-avatar">LK</div>
+            <div>
+              <div class="team-name">Liu Kefan</div>
+              <div class="team-role">Frontend Engineer</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">CH</div>
+            <div>
+              <div class="team-name">Cao Han</div>
+              <div class="team-role">Frontend Engineer</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">CY</div>
+            <div>
+              <div class="team-name">Cai Yezi</div>
+              <div class="team-role">Frontend Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h3>Repository</h3>
-      <p><a href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep" target="_blank" style="color:var(--accent);">github.com/tianwen1209/BatteryLake-Benchmark-DataPrep</a></p>
-    </div>
+    <section class="about-info-grid" aria-label="Project information">
+      <div class="about-info-card">
+        <div class="about-kicker">Affiliation</div>
+        <h2>Nanyang Technological University</h2>
+        <p>Singapore</p>
+      </div>
+      <div class="about-info-card about-repo-card">
+        <div class="about-kicker">Repository</div>
+        <h2>BatteryLake-Benchmark-DataPrep</h2>
+        <a href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep" target="_blank" rel="noopener">github.com/tianwen1209/BatteryLake-Benchmark-DataPrep</a>
+      </div>
+    </section>
   </div>
 
   <!-- ═══════════════════════════════════════
        PAGE: QUALITY ASSESSMENT
        ═══════════════════════════════════════ -->
   <div class="page" id="page-quality">
-    <div class="page-header">
-      <div class="page-title">Quality Assessment & Diagnostics</div>
+    <div class="page-header quality-page-hero visual-page-hero">
+      <div class="page-title">Quality Assessment</div>
       <div class="page-desc">Every dataset in BatteryLake is evaluated across four key quality dimensions to ensure scientific reliability. Assessments include physical plausibility checks and detailed JSON diagnostic reports.</div>
+      <img class="quality-hero-art visual-page-hero-art" src="assets/quality-assessment-hero-transparent.png?v=1" alt="" aria-hidden="true">
     </div>
 
     <section class="qa-hero">
@@ -5353,7 +7541,7 @@ bash run_benchmark.sh</pre>
       <div class="qa-hero-visual">
         <div class="qa-score-panel">
           <div class="qa-score-ring"><div><strong>0.96</strong><span>Overall</span></div></div>
-          <div class="qa-score-meta">Gate score · NASA PCoE</div>
+          <div class="qa-score-meta">Gate score - NASA PCoE</div>
           <div class="qa-chip-row">
             <span class="qa-chip">Ready</span>
             <span class="qa-chip warn">1 warning</span>
@@ -5361,7 +7549,7 @@ bash run_benchmark.sh</pre>
         </div>
         <div class="qa-signal-map" aria-label="Signal quality map">
           <div class="qa-signal-head">
-            <div><span>Signal QC Map</span><small>B20 · cycle 187 · normalized time</small></div>
+            <div><span>Signal QC Map</span><small>B20 - cycle 187 - normalized time</small></div>
             <span>cycle-level</span>
           </div>
           <div class="qa-signal-row">
@@ -5466,16 +7654,16 @@ bash run_benchmark.sh</pre>
             <div class="diag-title">Physical Plausibility Checks</div>
             <div class="diag-sub">High-signal checks that determine whether a dataset can safely enter preprocessing and benchmark training.</div>
           </div>
-          <span class="diag-badge">5 passed · 1 warning</span>
+          <span class="diag-badge">5 passed - 1 warning</span>
         </div>
         <ul class="diag-list">
           <li class="diag-item pass">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Voltage Range Validation</div><div class="diag-detail">All cell voltages within 2.0V–4.5V nominal operating range for the stated chemistry.</div></div>
+            <div><div class="diag-name">Voltage Range Validation</div><div class="diag-detail">All cell voltages within 2.0V-4.5V nominal operating range for the stated chemistry.</div></div>
           </li>
           <li class="diag-item pass">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Energy Balance Check</div><div class="diag-detail">Charge/discharge energy integral consistency; coulombic efficiency remains within 95–105% per cycle.</div></div>
+            <div><div class="diag-name">Energy Balance Check</div><div class="diag-detail">Charge/discharge energy integral consistency; coulombic efficiency remains within 95-105% per cycle.</div></div>
           </li>
           <li class="diag-item pass">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
@@ -5483,7 +7671,7 @@ bash run_benchmark.sh</pre>
           </li>
           <li class="diag-item warn">
             <div class="diag-icon warn"><svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path d="M12 7v6"/><path d="M12 17h.01"/><path d="M10.3 4.6h3.4L21 19H3z"/></svg></div>
-            <div><div class="diag-name">Temperature Consistency</div><div class="diag-detail">Cell surface temperature must remain within ±3°C of stated test condition; one dataset needs review.</div></div>
+            <div><div class="diag-name">Temperature Consistency</div><div class="diag-detail">Cell surface temperature must remain within 5°C of stated test condition; one dataset needs review.</div></div>
           </li>
           <li class="diag-item pass">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
@@ -5684,9 +7872,9 @@ outputs/processed_dataset/  ->  bt_benchmark_.../data/&lt;dataset_name&gt;/</pre
         <aside class="pp-side-card">
           <div class="pp-side-head"><div><div class="pp-side-title">Completion checks</div><div class="pp-side-sub">Click every check after the user confirms the operation.</div></div><span class="pp-progress-pill">1/6</span></div>
           <div class="pp-checklist">
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Adapter selected</strong><small>Pick the parser closest to the source file format.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Dataset ID filled</strong><small>Use the same ref_name style as the Dataset page when possible.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Raw data stays local</strong><small>The browser will not upload source cycling files.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Adapter selected</strong><small>Pick the parser closest to the source file format.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Dataset ID filled</strong><small>Use the same ref_name style as the Dataset page when possible.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Raw data stays local</strong><small>The browser will not upload source cycling files.</small></span></button>
           </div>
           <div class="pp-output"><div class="pp-output-head"><span>Package target</span><span>local</span></div><pre class="pp-output-code">raw/                # user copies original source files here
 schema/             # column_map.csv + cell_ranges.csv
@@ -5714,9 +7902,9 @@ outputs/            # processed dataset + report</pre></div>
         <aside class="pp-side-card">
           <div class="pp-side-head"><div><div class="pp-side-title">Completion checks</div><div class="pp-side-sub">Do not convert until the raw labels are mapped.</div></div><span class="pp-progress-pill">2/6</span></div>
           <div class="pp-checklist">
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Raw headers inspected</strong><small>outputs/raw_columns.csv lists the original labels from source files.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>I / V / T labels mapped</strong><small>Raw labels are assigned to current_A, voltage_V, and temperature_C.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Cell ranges understood</strong><small>Each cell can point to a source file and cycle window.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Raw headers inspected</strong><small>outputs/raw_columns.csv lists the original labels from source files.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>I / V / T labels mapped</strong><small>Raw labels are assigned to current_A, voltage_V, and temperature_C.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Cell ranges understood</strong><small>Each cell can point to a source file and cycle window.</small></span></button>
           </div>
           <div class="pp-output"><div class="pp-output-head"><span>Mapping files</span><span>schema</span></div><pre class="pp-output-code">outputs/raw_columns.csv
 schema/column_map.csv
@@ -5745,9 +7933,9 @@ schema/batterylake_schema.json</pre></div>
         <aside class="pp-side-card">
           <div class="pp-side-head"><div><div class="pp-side-title">Completion checks</div><div class="pp-side-sub">Download after the adapter and dataset name are correct.</div></div><span class="pp-progress-pill">3/6</span></div>
           <div class="pp-checklist">
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppDownloadPackage(); ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Zip downloaded</strong><small>Click here to generate the preprocessing package.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Package opened</strong><small>Confirm the zip contains raw/, schema/, adapters/, scripts/, and outputs/.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>No raw data uploaded</strong><small>The raw cycling files remain outside the browser.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppDownloadPackage(); ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Zip downloaded</strong><small>Click here to generate the preprocessing package.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Package opened</strong><small>Confirm the zip contains raw/, schema/, adapters/, scripts/, and outputs/.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>No raw data uploaded</strong><small>The raw cycling files remain outside the browser.</small></span></button>
           </div>
           <div class="pp-output"><div class="pp-output-head"><span>Zip tree</span><span>local</span></div><pre class="pp-output-code">raw/
 schema/batterylake_schema.json
@@ -5779,10 +7967,10 @@ outputs/</pre></div>
         <aside class="pp-side-card">
           <div class="pp-side-head"><div><div class="pp-side-title">Completion checks</div><div class="pp-side-sub">These checks mirror the local run sequence.</div></div><span class="pp-progress-pill">4/6</span></div>
           <div class="pp-checklist">
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Whole dataset folder copied</strong><small>raw/ contains one source dataset folder with all original files.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>I / V / T map edited</strong><small>column_map.csv uses actual raw labels from raw_columns.csv.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Terminal run finished</strong><small>run_preprocessing.sh completed without an error.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Processed dataset exists</strong><small>outputs/processed_dataset/ contains time-series, cycle-summary, and metadata CSV files.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Whole dataset folder copied</strong><small>raw/ contains one source dataset folder with all original files.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>I / V / T map edited</strong><small>column_map.csv uses actual raw labels from raw_columns.csv.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Terminal run finished</strong><small>run_preprocessing.sh completed without an error.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Processed dataset exists</strong><small>outputs/processed_dataset/ contains time-series, cycle-summary, and metadata CSV files.</small></span></button>
           </div>
           <div class="pp-output"><div class="pp-output-head"><span>Terminal</span><span>commands</span></div><pre class="pp-output-code">cd bt_preprocess_...
 python3 -m venv .venv
@@ -5814,9 +8002,9 @@ bash run_preprocessing.sh</pre></div>
         <aside class="pp-side-card">
           <div class="pp-side-head"><div><div class="pp-side-title">Completion checks</div><div class="pp-side-sub">Use the uploaded JSON report as evidence.</div></div><span class="pp-progress-pill">5/6</span></div>
           <div class="pp-checklist">
-            <button type="button" class="pp-check" aria-pressed="false" onclick="document.getElementById('pp-report-upload').click()"><span class="pp-check-icon">✓</span><span><strong>Report uploaded</strong><small>Select outputs/preprocessing_report.json from the local run.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Schema passed</strong><small>No blocking missing columns are listed in the report.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Counts reviewed</strong><small>File counts and row counts match the expected dataset scale.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="document.getElementById('pp-report-upload').click()"><span class="pp-check-icon"></span><span><strong>Report uploaded</strong><small>Select outputs/preprocessing_report.json from the local run.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Schema passed</strong><small>No blocking missing columns are listed in the report.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Counts reviewed</strong><small>File counts and row counts match the expected dataset scale.</small></span></button>
           </div>
           <input id="pp-report-upload" type="file" accept=".json,application/json" hidden onchange="ppHandleReportUpload(event)" />
           <div class="pp-output"><div class="pp-output-head"><span>Report</span><span id="pp-report-status">empty</span></div><pre class="pp-output-code" id="pp-report-summary">No report loaded.</pre></div>
@@ -5843,9 +8031,9 @@ bash run_preprocessing.sh</pre></div>
         <aside class="pp-side-card">
           <div class="pp-side-head"><div><div class="pp-side-title">Completion checks</div><div class="pp-side-sub">Finish only after the package is ready for Benchmark.</div></div><span class="pp-progress-pill">6/6</span></div>
           <div class="pp-checklist">
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Processed folder copied</strong><small>data/&lt;dataset_name&gt;/ contains all processed CSV files.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Benchmark package prepared</strong><small>The training package can see the dataset under data/.</small></span></button>
-            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon">✓</span><span><strong>Ready to train</strong><small>Use bash run_benchmark.sh in the Benchmark package.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Processed folder copied</strong><small>data/&lt;dataset_name&gt;/ contains all processed CSV files.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Benchmark package prepared</strong><small>The training package can see the dataset under data/.</small></span></button>
+            <button type="button" class="pp-check" aria-pressed="false" onclick="ppToggleCheck(this)"><span class="pp-check-icon"></span><span><strong>Ready to train</strong><small>Use bash run_benchmark.sh in the Benchmark package.</small></span></button>
           </div>
           <div class="pp-output"><div class="pp-output-head"><span>Handoff</span><span>folder</span></div><pre class="pp-output-code">bt_benchmark_.../
   data/
@@ -5959,7 +8147,7 @@ bash run_preprocessing.sh</pre></div>
     <table class="model-table">
       <thead><tr><th>Capability</th><th>Description</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td><strong>Noise filtering</strong></td><td>Savitzky–Golay, median, and rolling-window filters for voltage/current smoothing</td><td><span class="status-badge status-done">Active</span></td></tr>
+        <tr><td><strong>Noise filtering</strong></td><td>Savitzky-Golay, median, and rolling-window filters for voltage/current smoothing</td><td><span class="status-badge status-done">Active</span></td></tr>
         <tr><td><strong>Outlier detection</strong></td><td>IQR-based and domain-aware anomaly flagging (e.g. voltage spikes, current transients)</td><td><span class="status-badge status-done">Active</span></td></tr>
         <tr><td><strong>Cycle segmentation</strong></td><td>Automatic charge/discharge/rest detection from current polarity and voltage patterns</td><td><span class="status-badge status-done">Active</span></td></tr>
         <tr><td><strong>Capacity integration</strong></td><td>Trapezoidal and Simpson's rule integration for Ah capacity per half-cycle</td><td><span class="status-badge status-done">Active</span></td></tr>
@@ -6056,7 +8244,7 @@ for dataset in resp.json()["items"]:
 
     <div class="api-grid">
       <div class="api-card">
-        <div class="api-badge badge-open">● Open API</div>
+        <div class="api-badge badge-open">Open API</div>
         <div class="api-card-title">Data Download API</div>
         <div class="api-card-desc">Access harmonized, quality-assessed datasets via RESTful endpoints with embedded citations, metadata, and provenance tracking.</div>
         <ul class="api-features">
@@ -6068,7 +8256,7 @@ for dataset in resp.json()["items"]:
       </div>
 
       <div class="api-card">
-        <div class="api-badge badge-open">● Open API</div>
+        <div class="api-badge badge-open">Open API</div>
         <div class="api-card-title">Benchmark API</div>
         <div class="api-card-desc">Run standardized ML benchmarks across curated datasets with reproducible train/val/test splits and unified evaluation metrics.</div>
         <ul class="api-features">
@@ -6080,7 +8268,7 @@ for dataset in resp.json()["items"]:
       </div>
 
       <div class="api-card">
-        <div class="api-badge badge-coming">◐ Coming Soon</div>
+        <div class="api-badge badge-coming">Coming Soon</div>
         <div class="api-card-title">Feature Engineering</div>
         <div class="api-card-desc">Build custom feature extraction pipelines with interactive notebooks. Extract dQ/dV features, health indicators, and domain-specific signals for advanced analytics.</div>
         <ul class="api-features">
@@ -6092,7 +8280,7 @@ for dataset in resp.json()["items"]:
       </div>
 
       <div class="api-card">
-        <div class="api-badge badge-coming">◐ Coming Soon</div>
+        <div class="api-badge badge-coming">Coming Soon</div>
         <div class="api-card-title">Model Interpretation</div>
         <div class="api-card-desc">Understand model predictions with explainability tools. Visualize attention maps, feature importance, and identify key battery aging patterns driving predictions.</div>
         <ul class="api-features">
@@ -6143,12 +8331,12 @@ for dataset in resp.json()["items"]:
         <div class="contrib-panel-title">Readiness checklist</div>
         <div class="contrib-panel-sub">A submission should not move forward until these minimum conditions are visible.</div>
         <div class="contrib-check-row">
-          <span class="contrib-check-icon">✓</span>
+          <span class="contrib-check-icon"></span>
           <span><strong>Time-series channels</strong><small>Voltage, current, timestamp, and cell identifier are present.</small></span>
           <span class="contrib-check-tag">Required</span>
         </div>
         <div class="contrib-check-row">
-          <span class="contrib-check-icon">✓</span>
+          <span class="contrib-check-icon"></span>
           <span><strong>Experiment metadata</strong><small>Chemistry, nominal capacity, protocol, lab, and temperature are documented.</small></span>
           <span class="contrib-check-tag">Required</span>
         </div>
@@ -6158,7 +8346,7 @@ for dataset in resp.json()["items"]:
           <span class="contrib-check-tag">Preferred</span>
         </div>
         <div class="contrib-check-row">
-          <span class="contrib-check-icon">✓</span>
+          <span class="contrib-check-icon"></span>
           <span><strong>Protocol notes</strong><small>Rest periods, C-rates, formation cycles, and test cutoffs are explained.</small></span>
           <span class="contrib-check-tag">Required</span>
         </div>
@@ -6193,7 +8381,7 @@ for dataset in resp.json()["items"]:
 
     <div class="contribute-hero">
       <div class="ch-title">Share Your Battery Data with the Community</div>
-      <div class="ch-desc">Every contributed dataset is processed through our standardized pipeline, quality-assessed, and made available to researchers worldwide — with full attribution and DOI citation to your original work.</div>
+      <div class="ch-desc">Every contributed dataset is processed through our standardized pipeline, quality-assessed, and made available to researchers worldwide - with full attribution and DOI citation to your original work.</div>
     </div>
 
     <h3 style="font-family:var(--display);font-size:18px;margin-bottom:14px;">Contribution Workflow</h3>
@@ -6270,7 +8458,7 @@ for dataset in resp.json()["items"]:
 </div><!-- .main -->
 </div><!-- .app -->
 
-<!-- ════════════════ DETAIL MODAL ════════════════ -->
+<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-header">
@@ -6278,7 +8466,7 @@ for dataset in resp.json()["items"]:
         <div id="modal-name" style="font-size:18px;font-weight:600;color:var(--text1);"></div>
         <div id="modal-refname" style="font-family:var(--mono);font-size:13px;color:var(--text3);margin-top:4px;"></div>
       </div>
-      <button class="modal-close" onclick="closeModal()">×</button>
+      <button class="modal-close" onclick="closeModal()">?</button>
     </div>
     <div class="modal-body">
       <div class="modal-section">
