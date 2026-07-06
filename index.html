@@ -402,20 +402,62 @@
       <section class="bw-flow-step" data-bwr-panel="3">
         <div class="bw-flow-card">
           <div class="bw-step-title">Configure Data Partitioning</div>
-          <div class="bw-split-slider" id="bwr-split-slider" onpointerdown="bwSplitPointerDown(event)">
-            <div class="bw-split-seg train" id="bwr-split-train" data-tip="Trains models to learn aging patterns."><span id="bwr-split-train-label">Train: 24 Cells</span></div>
-            <div class="bw-split-seg val" id="bwr-split-val" data-tip="Tunes hyperparameters &amp; prevents overfitting."><span id="bwr-split-val-label">Val: 8 Cells</span></div>
-            <div class="bw-split-seg test" id="bwr-split-test" data-tip="Final benchmark evaluation for real-world accuracy."><span id="bwr-split-test-label">Test: 8 Cells</span></div>
-            <button class="bw-split-handle" id="bwr-handle-a" type="button" aria-label="Train validation boundary" data-handle="a"></button>
-            <button class="bw-split-handle" id="bwr-handle-b" type="button" aria-label="Validation test boundary" data-handle="b"></button>
+          <div class="bwr-split-protocol">
+            <div class="bwr-split-protocol-grid" role="group" aria-label="Split protocol">
+              <button class="bwr-split-protocol-card" type="button" data-bwr-protocol="Random" onclick="bwPickSplitProtocol(this,'Random')">
+                <span class="bwr-split-protocol-ic"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
+                <span class="bwr-split-protocol-title">Random</span>
+              </button>
+              <button class="bwr-split-protocol-card selected" type="button" data-bwr-protocol="Manual" onclick="bwPickSplitProtocol(this,'Manual')">
+                <span class="bwr-split-protocol-ic"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg></span>
+                <span class="bwr-split-protocol-title">Manual</span>
+              </button>
+            </div>
           </div>
-          <div class="bw-split-inputs">
-            <label><input id="bwr-input-train" aria-label="Train percentage" type="number" min="5" max="90" step="1" value="60" onchange="bwSplitInputCommit()"><span>%</span></label>
-            <label><input id="bwr-input-val" aria-label="Validation percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit()"><span>%</span></label>
-            <label><input id="bwr-input-test" aria-label="Test percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit()"><span>%</span></label>
+          <div class="bwr-random-ctrl" id="bwr-random-ctrl" hidden>
+            <div class="bw-split-slider" id="bwr-split-slider" onpointerdown="bwSplitPointerDown(event)">
+              <div class="bw-split-seg train" id="bwr-split-train" data-tip="Trains models to learn aging patterns."><span id="bwr-split-train-label">Train: 60%</span></div>
+              <div class="bw-split-seg val" id="bwr-split-val" data-tip="Tunes hyperparameters &amp; prevents overfitting."><span id="bwr-split-val-label">Validation: 20%</span></div>
+              <div class="bw-split-seg test" id="bwr-split-test" data-tip="Final benchmark evaluation for real-world accuracy."><span id="bwr-split-test-label">Test: 20%</span></div>
+              <button class="bw-split-handle" id="bwr-handle-a" type="button" aria-label="Train validation boundary" data-handle="a"></button>
+              <button class="bw-split-handle" id="bwr-handle-b" type="button" aria-label="Validation test boundary" data-handle="b"></button>
+            </div>
+            <div class="bwr-random-actions">
+              <div class="bw-split-inputs">
+                <label>Train: <input id="bwr-input-train" aria-label="Train percentage" type="number" min="5" max="90" step="1" value="60" onchange="bwSplitInputCommit('train')"><span>%</span></label>
+                <label>Validation: <input id="bwr-input-val" aria-label="Validation percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit('val')"><span>%</span></label>
+                <label>Test: <input id="bwr-input-test" aria-label="Test percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit('test')"><span>%</span></label>
+              </div>
+              <button class="bw-shuffle" type="button" onclick="bwShuffleSplit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg> Resample</button>
+            </div>
           </div>
           <div class="bw-light-error" id="bwr-split-error" role="status"></div>
           <div class="bw-split-tooltip" id="bwr-split-tooltip"></div>
+          <div class="bw-cellcols">
+            <div class="bw-cellcol" data-bucket="train" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
+              <div class="bw-cellcol-h">Train <span id="bwr-train-pct">(60%)</span></div>
+              <div class="bw-cellcol-sub" id="bwr-train-n">&mdash;</div>
+              <div class="bw-chips" id="bwr-train-chips"></div>
+            </div>
+            <div class="bw-cellcol" data-bucket="val" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
+              <div class="bw-cellcol-h">Validation <span id="bwr-val-pct">(20%)</span></div>
+              <div class="bw-cellcol-sub" id="bwr-val-n">&mdash;</div>
+              <div class="bw-chips" id="bwr-val-chips"></div>
+            </div>
+            <div class="bw-cellcol" data-bucket="test" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
+              <div class="bw-cellcol-h">Test <span id="bwr-test-pct">(20%)</span></div>
+              <div class="bw-cellcol-sub" id="bwr-test-n">&mdash;</div>
+              <div class="bw-chips" id="bwr-test-chips"></div>
+            </div>
+          </div>
+          <div class="bw-excluded" data-bucket="excluded" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
+            <div class="bw-excluded-h">
+              <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg> Excluded <span class="bw-excluded-note">not used in train / validation / test</span></span>
+              <span class="bw-excluded-n" id="bwr-excluded-n">0 cells</span>
+            </div>
+            <div class="bw-chips bw-excluded-chips" id="bwr-excluded-chips"></div>
+          </div>
+          <div class="bw-drophint"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg> Drag cells between Train / Validation / Test or into Excluded to leave them out</div>
         </div>
       </section>
 
@@ -506,7 +548,6 @@ bash run_benchmark.sh</pre>
               <span class="bw-lg"><i style="background:var(--red)"></i>Retirement Line 80%</span>
             </div>
             <div class="bw-chart-shell" id="bwr-trajectory-chart"></div>
-            <div class="bw-chart-tooltip" id="bwr-chart-tooltip"></div>
           </div>
         </div>
       </section>

@@ -3230,6 +3230,10 @@ pre {
   display: none !important;
 }
 #page-benchmarks .bw-flow {
+  --dataset-lift-bg: color-mix(in srgb, var(--bg) 96%, var(--accent-light));
+  --dataset-lift-border: color-mix(in srgb, var(--accent) 42%, var(--border));
+  --dataset-lift-shadow: 0 0 0 3px rgba(37,99,235,.09), 0 12px 28px rgba(37,99,235,.13), var(--card-shadow-hover);
+  --dataset-lift-transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease, background .16s ease;
   --bw-hover-bg: var(--dataset-lift-bg, color-mix(in srgb, var(--bg) 96%, var(--accent-light)));
   --bw-hover-border: var(--dataset-lift-border, color-mix(in srgb, var(--accent) 42%, var(--border)));
   --bw-hover-shadow: var(--dataset-lift-shadow, 0 0 0 3px rgba(37,99,235,.09), 0 12px 28px rgba(37,99,235,.13), var(--card-shadow-hover));
@@ -3939,6 +3943,31 @@ pre {
 #page-benchmarks .bwr-dataset-search-panel .dataset-search {
   flex: 1 1 auto;
 }
+#page-benchmarks .bwr-dataset-search-panel .dataset-search input:hover,
+#page-benchmarks .bwr-dataset-search-panel .dataset-search input:focus {
+  background: var(--dataset-lift-bg) !important;
+  border-color: var(--dataset-lift-border) !important;
+  box-shadow: var(--dataset-lift-shadow) !important;
+}
+#page-benchmarks .bwr-dataset-search-panel .filter-token {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+}
+#page-benchmarks .bwr-dataset-search-panel .dataset-filter-popover .filter-token:not(.active) {
+  background: var(--bg2) !important;
+  border-color: var(--border) !important;
+  color: var(--text3) !important;
+  box-shadow: none !important;
+}
+#page-benchmarks .bwr-dataset-search-panel .filter-token.active,
+#page-benchmarks .bwr-dataset-search-panel .filter-token.is-active,
+#page-benchmarks .bwr-dataset-search-panel .dataset-filter-popover .filter-token.active {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tag-fg) 16%, transparent) !important;
+}
 #page-benchmarks .bw-flow-datasets {
   display: block;
 }
@@ -3950,6 +3979,16 @@ pre {
 #page-benchmarks .bw-flow-datasets .dataset-card {
   background: transparent !important;
   cursor: pointer;
+  transition: var(--dataset-lift-transition);
+}
+#page-benchmarks .bw-flow-datasets .dataset-card::before {
+  display: none !important;
+}
+#page-benchmarks .bw-flow-datasets .dataset-card:hover {
+  background: var(--dataset-lift-bg) !important;
+  border-color: var(--dataset-lift-border) !important;
+  box-shadow: var(--dataset-lift-shadow) !important;
+  transform: translateY(-1px) !important;
 }
 #page-benchmarks .bw-flow-datasets .dataset-card.bwr-selected {
   border-color: var(--accent) !important;
@@ -3974,6 +4013,87 @@ pre {
   gap: 12px;
   margin-top: 14px;
   flex-wrap: wrap;
+}
+#page-benchmarks .bwr-split-protocol {
+  margin-top: 16px;
+}
+#page-benchmarks .bwr-split-protocol .bw-field-lbl {
+  margin: 0 0 10px;
+}
+#page-benchmarks .bwr-split-protocol-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+#page-benchmarks .bwr-split-protocol-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-areas: "icon title";
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 68px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text1);
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease, background .16s ease;
+}
+#page-benchmarks .bwr-split-protocol-card:hover {
+  background: var(--bw-hover-bg) !important;
+  border-color: var(--bw-hover-border) !important;
+  box-shadow: var(--bw-hover-shadow) !important;
+  transform: translateY(-1px);
+}
+#page-benchmarks .bwr-split-protocol-card.selected {
+  border-color: var(--accent) !important;
+  background: var(--accent-light) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 13%, transparent), var(--card-shadow) !important;
+}
+#page-benchmarks .bwr-split-protocol-ic {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+  color: var(--accent);
+}
+#page-benchmarks .bwr-split-protocol-card.selected .bwr-split-protocol-ic {
+  border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+  background: var(--surface);
+}
+#page-benchmarks .bwr-split-protocol-title {
+  grid-area: title;
+  min-width: 0;
+  color: var(--text1);
+  font-size: 15.5px;
+  font-weight: 850;
+  line-height: 1.25;
+}
+#page-benchmarks .bwr-split-protocol-desc {
+  display: none;
+}
+#page-benchmarks .bwr-random-ctrl[hidden] {
+  display: none !important;
+}
+#page-benchmarks .bwr-random-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+}
+#page-benchmarks .bwr-random-actions .bw-shuffle {
+  margin-top: 10px;
+  min-height: 36px;
+  white-space: nowrap;
 }
 #page-benchmarks .bw-split-slider {
   height: 76px;
@@ -4037,6 +4157,7 @@ pre {
   border: 0;
   background: transparent !important;
   color: var(--text2);
+  font-size: 13px;
 }
 #page-benchmarks .bw-split-inputs input {
   width: 46px;
@@ -4118,6 +4239,19 @@ pre {
 #page-benchmarks .bw-chart-shell svg {
   min-width: 560px;
 }
+#page-benchmarks .bw-chart-shell .bw-chart-tooltip {
+  position: absolute;
+  z-index: 6;
+  line-height: 1.45;
+}
+#page-benchmarks .bwr-chart-point {
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(37,99,235,.18));
+}
+#page-benchmarks .bwr-chart-hit {
+  cursor: pointer;
+  pointer-events: all;
+}
 @media (max-width: 840px) {
   #page-benchmarks .bw-wizard-actions.bw-flow-actions {
     display: grid;
@@ -4154,6 +4288,16 @@ pre {
 @media (max-width: 560px) {
   #page-benchmarks .bw-highlight-panel {
     grid-template-columns: 1fr;
+  }
+  #page-benchmarks .bwr-split-protocol-grid {
+    grid-template-columns: 1fr;
+  }
+  #page-benchmarks .bwr-random-actions {
+    grid-template-columns: 1fr;
+  }
+  #page-benchmarks .bwr-random-actions .bw-shuffle {
+    width: 100%;
+    justify-content: center;
   }
   #page-benchmarks .bwr-dataset-search-panel .dataset-search-row,
   #page-benchmarks .bw-wizard-buttons {

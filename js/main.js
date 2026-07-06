@@ -4820,17 +4820,42 @@ function bwRenderSplit() {
     + '" ondragstart="bwDragStart(event)" ondragend="bwDragEnd(event)">' + c + '</span>';
   const setHTML = (id, h) => { const e = document.getElementById(id); if (e) e.innerHTML = h; };
   const setT = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
-  ['train', 'val', 'test', 'excluded'].forEach(b => setHTML('bw-' + b + '-chips', (BW.split[b] || []).map(c => chip(c, b)).join('')));
+  const setAllHTML = (ids, h) => ids.forEach(id => setHTML(id, h));
+  const setAllT = (ids, v) => ids.forEach(id => setT(id, v));
+  ['train', 'val', 'test', 'excluded'].forEach(b => {
+    const html = (BW.split[b] || []).map(c => chip(c, b)).join('');
+    setAllHTML(['bw-' + b + '-chips', 'bwr-' + b + '-chips'], html);
+  });
   const total = BW.split.train.length + BW.split.val.length + BW.split.test.length;
+  const fallbackSplit = typeof BWR !== 'undefined' ? BWR.split : { train: 60, val: 20, test: 20 };
+  const trainPct = total ? Math.round(BW.split.train.length / total * 100) : (fallbackSplit.train || 60);
+  const valPct = total ? Math.round(BW.split.val.length / total * 100) : (fallbackSplit.val || 20);
+  const testPct = Math.max(0, 100 - trainPct - valPct);
+  const pcts = { train: trainPct, val: valPct, test: testPct };
   ['train', 'val', 'test'].forEach(b => {
-    setT('bw-' + b + '-n', BW.split[b].length + ' cells');
-    setT('bw-' + b + '-pct', '(' + (total ? Math.round(BW.split[b].length / total * 100) : 0) + '%)');
+    setAllT(['bw-' + b + '-n', 'bwr-' + b + '-n'], BW.split[b].length + ' cells');
+    setAllT(['bw-' + b + '-pct', 'bwr-' + b + '-pct'], '(' + pcts[b] + '%)');
   });
   const exN = (BW.split.excluded || []).length;
-  setT('bw-excluded-n', exN + ' cells');
+  setAllT(['bw-excluded-n', 'bwr-excluded-n'], exN + ' cells');
   setT('bw-sum-splitn', total ? 'Train ' + BW.split.train.length + ' · Val ' + BW.split.val.length + ' · Test ' + BW.split.test.length : '—');
   setT('bw-quick-split', total ? BW.split.train.length + ' / ' + BW.split.val.length + ' / ' + BW.split.test.length + ' cells' : 'Manual split');
   setT('bw-sum-excl', exN ? exN + ' cells' : 'None');
+  setT('bwr-split-train-label', 'Train: ' + pcts.train + '%');
+  setT('bwr-split-val-label', 'Validation: ' + pcts.val + '%');
+  setT('bwr-split-test-label', 'Test: ' + pcts.test + '%');
+  if (typeof BWR !== 'undefined') BWR.split = { ...pcts };
+  BW.ratio = { ...pcts };
+  const flow = document.getElementById('bw-flow');
+  if (flow) {
+    flow.style.setProperty('--train-pct', Math.max(5, pcts.train) + '%');
+    flow.style.setProperty('--val-pct', Math.max(5, pcts.val) + '%');
+    flow.style.setProperty('--test-pct', Math.max(5, pcts.test) + '%');
+  }
+  ['train', 'val', 'test'].forEach(key => {
+    const input = document.getElementById('bwr-input-' + key);
+    if (input && document.activeElement !== input) input.value = pcts[key];
+  });
   if (typeof bwUpdateProgress === 'function') bwUpdateProgress();
 }
 
@@ -6762,6 +6787,7 @@ var BWR = {
   datasetId: null,
   signals: new Set(),
   split: { train: 60, val: 20, test: 20 },
+  splitProtocol: 'Manual',
   splitError: false,
   models: new Set(),
   downloaded: false,
@@ -6786,6 +6812,8 @@ function bwFlowInit() {
   if (!document.getElementById('bw-flow')) return;
   document.querySelectorAll('#page-benchmarks > .bw-grid .bw-model-item.selected').forEach(el => el.classList.remove('selected'));
   BW.selId = null;
+  const randomCtrl = document.getElementById('bwr-random-ctrl');
+  if (randomCtrl) randomCtrl.hidden = BWR.splitProtocol !== 'Random';
   bwSyncDatasetFilterPopup();
   bwFlowRenderDatasets();
   bwApplySplit(BWR.split.train, BWR.split.val, BWR.split.test);
@@ -6995,6 +7023,24 @@ window.bwToggleModel = function(el) {
   bwUpdatePackagePreview();
   bwUpdateProgress();
 };
+window.bwPickSplitProtocol = function(el, name) {
+  document.querySelectorAll('#page-benchmarks .bw-flow .bwr-split-protocol-card').forEach(card => {
+    card.classList.toggle('selected', card === el);
+  });
+  BWR.splitProtocol = name;
+  BW.splitMode = name === 'Random' ? 'random' : 'manual';
+  const randomCtrl = document.getElementById('bwr-random-ctrl');
+  if (randomCtrl) randomCtrl.hidden = BW.splitMode !== 'random';
+  const sync = document.getElementById('bw-sum-split');
+  if (sync) sync.textContent = name;
+  if (BW.splitMode === 'random') {
+    BW.ratio = { ...BWR.split };
+    bwShuffleSplit();
+  } else {
+    bwRenderSplit();
+  }
+  bwUpdatePackagePreview();
+};
 
 function bwSelectedDataset() {
   return BWR.datasetId ? DATASETS.find(d => d.id === BWR.datasetId) : null;
@@ -7018,16 +7064,12 @@ function bwSyncSplitCells() {
     test: cells.slice(trainN + valN),
     excluded: []
   };
-  const setLabel = (id, label, count) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = label + ': ' + count + ' Cells';
-  };
-  setLabel('bwr-split-train-label', 'Train', BW.split.train.length);
-  setLabel('bwr-split-val-label', 'Val', BW.split.val.length);
-  setLabel('bwr-split-test-label', 'Test', testN);
+  BW.ratio = { ...BWR.split };
+  bwRenderSplit();
 }
 function bwApplySplit(train, val, test) {
   BWR.split = { train: Math.round(train), val: Math.round(val), test: Math.round(test) };
+  BW.ratio = { ...BWR.split };
   BWR.splitError = false;
   const flow = document.getElementById('bw-flow');
   if (flow) {
@@ -7051,7 +7093,12 @@ function bwApplySplit(train, val, test) {
   });
   const err = document.getElementById('bwr-split-error');
   if (err) err.textContent = '';
-  bwSyncSplitCells();
+  const activeCount = (BW.split.train || []).length + (BW.split.val || []).length + (BW.split.test || []).length;
+  if (activeCount || (BW.split.excluded || []).length) {
+    if (BW.splitMode === 'random') bwShuffleSplit(); else bwRenderSplit();
+  } else {
+    bwSyncSplitCells();
+  }
   bwUpdatePackagePreview();
   bwUpdateProgress();
 }
@@ -7089,21 +7136,70 @@ function bwSplitPointerUp() {
   BWR.dragHandle = null;
   window.removeEventListener('pointermove', bwSplitPointerMove);
 }
-window.bwSplitInputCommit = function() {
-  const train = Number(document.getElementById('bwr-input-train')?.value);
-  const val = Number(document.getElementById('bwr-input-val')?.value);
-  const test = Number(document.getElementById('bwr-input-test')?.value);
+function bwResetSplitInputs() {
+  ['train', 'val', 'test'].forEach(key => {
+    const input = document.getElementById('bwr-input-' + key);
+    if (input) input.value = BWR.split[key];
+  });
+}
+function bwSplitInputError(message) {
   const err = document.getElementById('bwr-split-error');
-  const invalid = !Number.isFinite(train) || !Number.isFinite(val) || !Number.isFinite(test)
-    || train < 5 || val < 5 || test < 5 || train > 100 || val > 100 || test > 100
-    || Math.round((train + val + test) * 100) / 100 !== 100;
-  if (invalid) {
-    BWR.splitError = true;
-    if (err) err.textContent = 'Enter valid percentages between 5 and 100 that add up to 100%.';
-    bwUpdateProgress();
+  if (err) err.textContent = message;
+  bwResetSplitInputs();
+  BWR.splitError = false;
+  bwUpdateProgress();
+}
+function bwReduceSplitBuckets(next, buckets, amount, min) {
+  let remaining = amount;
+  buckets.forEach(key => {
+    if (remaining <= 0) return;
+    const available = Math.max(0, next[key] - min);
+    const take = Math.min(available, remaining);
+    next[key] -= take;
+    remaining -= take;
+  });
+  return remaining <= 0;
+}
+function bwGrowSplitBuckets(next, buckets, amount) {
+  if (!buckets.length) return;
+  next[buckets[0]] += amount;
+}
+window.bwSplitInputCommit = function(changed) {
+  const key = changed || 'train';
+  const input = document.getElementById('bwr-input-' + key);
+  const value = input ? Number(input.value) : NaN;
+  const min = 5;
+  const max = 100 - (min * 2);
+  if (!['train', 'val', 'test'].includes(key) || !Number.isFinite(value) || value < min || value > max) {
+    bwSplitInputError('Enter a percentage between ' + min + ' and ' + max + '.');
     return;
   }
-  bwApplySplit(train, val, test);
+  const next = { train: BWR.split.train, val: BWR.split.val, test: BWR.split.test };
+  const rounded = Math.round(value);
+  const delta = rounded - next[key];
+  if (delta === 0) {
+    bwApplySplit(next.train, next.val, next.test);
+    return;
+  }
+  next[key] = rounded;
+  const adjacentOrder = {
+    train: ['val', 'test'],
+    val: ['train', 'test'],
+    test: ['val', 'train']
+  }[key];
+  if (delta > 0) {
+    if (!bwReduceSplitBuckets(next, adjacentOrder, delta, min)) {
+      bwSplitInputError('That split cannot be applied while keeping every section at least ' + min + '%.');
+      return;
+    }
+  } else {
+    bwGrowSplitBuckets(next, adjacentOrder, Math.abs(delta));
+  }
+  if (next.train < min || next.val < min || next.test < min || next.train + next.val + next.test !== 100) {
+    bwSplitInputError('That split cannot be applied. Train, Val, and Test must remain valid and total 100%.');
+    return;
+  }
+  bwApplySplit(next.train, next.val, next.test);
 };
 
 function bwStepValid(step) {
@@ -7116,7 +7212,8 @@ function bwStepValid(step) {
 }
 function bwSyncPackageState() {
   BW.selId = BWR.datasetId;
-  bwSyncSplitCells();
+  const activeCount = (BW.split.train || []).length + (BW.split.val || []).length + (BW.split.test || []).length;
+  if (activeCount) bwRenderSplit(); else bwSyncSplitCells();
   const taskSync = document.getElementById('bw-sum-task');
   if (taskSync) taskSync.textContent = BWR.task || 'SOH Estimation';
   bwUpdatePackagePreview();
@@ -7279,6 +7376,7 @@ window.bwRunAnotherBenchmark = function() {
   BWR.downloaded = false;
   BWR.uploaded = false;
   BWR.splitError = false;
+  BWR.splitProtocol = 'Manual';
   BWR.datasetPage = 1;
   BWR.filters = { q: '', all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() };
   BWR.pendingFilters = bwCloneFilterState(BWR.filters);
@@ -7291,6 +7389,11 @@ window.bwRunAnotherBenchmark = function() {
   if (dl) dl.textContent = 'Download Package (.zip)';
   const up = document.getElementById('bwr-upload-status');
   if (up) up.textContent = 'Waiting for local output folder';
+  document.querySelectorAll('#page-benchmarks .bw-flow .bwr-split-protocol-card').forEach(card => {
+    card.classList.toggle('selected', card.dataset.bwrProtocol === 'Manual');
+  });
+  const randomCtrl = document.getElementById('bwr-random-ctrl');
+  if (randomCtrl) randomCtrl.hidden = true;
   bwApplySplit(60, 20, 20);
   bwFlowRenderDatasets();
   bwUpdateProgress();
@@ -7310,6 +7413,10 @@ window.bwRenderMockTrajectory = function() {
   const host = document.getElementById('bwr-trajectory-chart');
   if (!host) return;
   const rows = bwMockTrajectoryRows();
+  host.onmouseleave = bwHideChartTip;
+  host.onmousemove = event => {
+    if (!event.target.closest?.('.bwr-chart-hit')) bwHideChartTip();
+  };
   const w = 820, h = 360, l = 64, r = 28, t = 30, b = 54;
   const xMin = rows[0].cycle, xMax = rows[rows.length - 1].cycle;
   const yMin = 76, yMax = 101;
@@ -7321,9 +7428,13 @@ window.bwRenderMockTrajectory = function() {
   const areaPts = rows.map(d => x(d.cycle).toFixed(1) + ',' + y(d.pred).toFixed(1)).join(' ') + ' ' + x(rows[rows.length - 1].cycle).toFixed(1) + ',' + (h - b) + ' ' + x(rows[0].cycle).toFixed(1) + ',' + (h - b);
   const points = rows.map(d => {
     const err = Math.abs(d.pred - d.truth);
-    return '<circle cx="' + x(d.cycle).toFixed(1) + '" cy="' + y(d.pred).toFixed(1) + '" r="8" fill="transparent" stroke="transparent" onmousemove="bwShowChartTip(event,' + d.cycle + ',' + d.truth.toFixed(2) + ',' + d.pred.toFixed(2) + ',' + err.toFixed(2) + ')" onmouseleave="bwHideChartTip()"></circle>';
+    const cx = x(d.cycle).toFixed(1);
+    const cy = y(d.pred).toFixed(1);
+    const args = [d.cycle, d.truth.toFixed(2), d.pred.toFixed(2), err.toFixed(2)].join(',');
+    return '<circle class="bwr-chart-point" cx="' + cx + '" cy="' + cy + '" r="3.8" fill="#2563eb" stroke="#fff" stroke-width="1.6"></circle>'
+      + '<circle class="bwr-chart-hit" cx="' + cx + '" cy="' + cy + '" r="10" fill="transparent" stroke="transparent" onmousemove="bwShowChartTip(event,' + args + ')"></circle>';
   }).join('');
-  host.innerHTML = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Per-cell prediction trajectory">'
+  host.innerHTML = '<div class="bw-chart-tooltip" id="bwr-chart-tooltip"></div><svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Per-cell prediction trajectory">'
     + '<defs><linearGradient id="bwrPredFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563eb" stop-opacity=".20"/><stop offset="100%" stop-color="#2563eb" stop-opacity="0"/></linearGradient></defs>'
     + yTicks.map(v => '<line class="bw-plot-grid" x1="' + l + '" y1="' + y(v).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(v).toFixed(1) + '"/><text class="bw-plot-label" x="' + (l - 10) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end">' + v + '%</text>').join('')
     + xTicks.map(v => '<text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 22) + '" text-anchor="middle">' + v + '</text>').join('')
@@ -7338,11 +7449,23 @@ window.bwRenderMockTrajectory = function() {
 };
 window.bwShowChartTip = function(event, cycle, truth, pred, err) {
   const tip = document.getElementById('bwr-chart-tooltip');
-  if (!tip) return;
+  const shell = document.getElementById('bwr-trajectory-chart');
+  if (!tip || !shell) return;
   tip.innerHTML = 'Cycle: ' + cycle + '<br>True SOH: ' + truth.toFixed(2) + '%<br>Pred SOH: ' + pred.toFixed(2) + '%<br>Error: ' + err.toFixed(2) + '%';
-  tip.style.left = (event.clientX + 14) + 'px';
-  tip.style.top = (event.clientY + 14) + 'px';
+  tip.style.left = '0px';
+  tip.style.top = '0px';
   tip.style.display = 'block';
+  const shellRect = shell.getBoundingClientRect();
+  const tipRect = tip.getBoundingClientRect();
+  let left = event.clientX - shellRect.left + shell.scrollLeft + 12;
+  let top = event.clientY - shellRect.top + shell.scrollTop - tipRect.height - 12;
+  if (top < shell.scrollTop + 8) top = event.clientY - shellRect.top + shell.scrollTop + 12;
+  const maxLeft = shell.scrollLeft + shell.clientWidth - tipRect.width - 8;
+  const maxTop = shell.scrollTop + shell.clientHeight - tipRect.height - 8;
+  left = Math.max(shell.scrollLeft + 8, Math.min(left, maxLeft));
+  top = Math.max(shell.scrollTop + 8, Math.min(top, maxTop));
+  tip.style.left = left + 'px';
+  tip.style.top = top + 'px';
 };
 window.bwHideChartTip = function() {
   const tip = document.getElementById('bwr-chart-tooltip');
