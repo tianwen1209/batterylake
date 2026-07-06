@@ -1145,21 +1145,39 @@ bash run_benchmark.sh</pre>
   <!-- ═══════════════════════════════════════
        PAGE: NAMING STANDARD
        ═══════════════════════════════════════ -->
-  <div class="page" id="page-naming">
-    <div class="page-header">
+  <div class="page naming-page" id="page-naming">
+    <div class="page-header naming-hero visual-page-hero">
       <div class="page-title">Naming Standard</div>
       <div class="page-desc">Standardized reference naming convention for all battery datasets in the BatteryLake Benchmark. Each dataset receives a machine-readable ref_name encoding key experimental parameters.</div>
+      <div class="naming-hero-tags visual-page-actions" aria-label="Naming standard fields">
+        <span>ref_name</span>
+        <span>machine readable</span>
+        <span>dataset metadata</span>
+      </div>
+      <img class="naming-hero-art visual-page-hero-art" src="assets/images/naming-hero-reference-transparent.png?v=1" alt="" aria-hidden="true">
     </div>
 
     <div class="naming-formula">
-      <code>YYYY _ SOURCE _ CHEMISTRY _ FORMFACTOR _ CHRGC _ DCHRGC _ TEMPT</code>
-      <div class="naming-parts">
-        <span class="naming-part np-year">YYYY &middot; Year</span>
-        <span class="naming-part np-source">SOURCE &middot; Lab / Institution</span>
-        <span class="naming-part np-chem">CHEMISTRY &middot; LFP / NMC / LCO / NCA</span>
-        <span class="naming-part np-form">FORMFACTOR &middot; 18650 / 21700 / Pouch / Prismatic</span>
-        <span class="naming-part np-rate">CHRGC / DCHRGC &middot; C-rates</span>
-        <span class="naming-part np-temp">TEMPT &middot; Temperature &deg;C</span>
+      <div class="naming-formula-head">
+        <div>
+          <div class="naming-formula-kicker">Format Pattern</div>
+          <div class="naming-formula-title">BatteryLake ref_name schema</div>
+        </div>
+        <div class="naming-formula-meta">7 fields &middot; underscore-delimited</div>
+      </div>
+      <div class="naming-pattern-shell" aria-label="BatteryLake ref_name format">
+        <code class="naming-pattern-code">
+          <span class="pattern-token np-year">YYYY</span><span class="pattern-sep">_</span><span class="pattern-token np-source">SOURCE</span><span class="pattern-sep">_</span><span class="pattern-token np-chem">CHEMISTRY</span><span class="pattern-sep">_</span><span class="pattern-token np-form">FORMFACTOR</span><span class="pattern-sep">_</span><span class="pattern-token np-charge">CHRGC</span><span class="pattern-sep">_</span><span class="pattern-token np-discharge">DCHRGC</span><span class="pattern-sep">_</span><span class="pattern-token np-temp">TEMPT</span>
+        </code>
+      </div>
+      <div class="naming-parts" aria-label="Field definitions">
+        <span class="naming-part np-year"><span class="naming-part-key">YYYY</span><span class="naming-part-desc">Dataset year</span><span class="naming-part-example">2007</span></span>
+        <span class="naming-part np-source"><span class="naming-part-key">SOURCE</span><span class="naming-part-desc">Lab or institution</span><span class="naming-part-example">NASA_PCoE</span></span>
+        <span class="naming-part np-chem"><span class="naming-part-key">CHEMISTRY</span><span class="naming-part-desc">Cell chemistry</span><span class="naming-part-example">LFP / NMC</span></span>
+        <span class="naming-part np-form"><span class="naming-part-key">FORMFACTOR</span><span class="naming-part-desc">Cell format</span><span class="naming-part-example">18650 / Pouch</span></span>
+        <span class="naming-part np-charge"><span class="naming-part-key">CHRGC</span><span class="naming-part-desc">Charge C-rate</span><span class="naming-part-example">1C / MultiC</span></span>
+        <span class="naming-part np-discharge"><span class="naming-part-key">DCHRGC</span><span class="naming-part-desc">Discharge C-rate</span><span class="naming-part-example">1C / MultiC</span></span>
+        <span class="naming-part np-temp"><span class="naming-part-key">TEMPT</span><span class="naming-part-desc">Temperature condition</span><span class="naming-part-example">25T</span></span>
       </div>
     </div>
 
@@ -1194,44 +1212,101 @@ bash run_benchmark.sh</pre>
   <!-- ═══════════════════════════════════════
        PAGE: PIPELINE
        ═══════════════════════════════════════ -->
-  <div class="page" id="page-pipeline">
-    <div class="page-header">
+  <div class="page reference-page pipeline-page" id="page-pipeline">
+    <div class="page-header reference-hero pipeline-hero visual-page-hero">
       <div class="page-title">ETL Pipeline</div>
       <div class="page-desc">Standardized data processing pipeline that converts heterogeneous raw battery data into a unified Parquet/CSV format for benchmark evaluation.</div>
+      <div class="reference-hero-tags visual-page-actions" aria-label="ETL pipeline outputs">
+        <span>raw to curated</span>
+        <span>schema validation</span>
+        <span>benchmark ready</span>
+      </div>
+      <img class="reference-hero-art pipeline-hero-art visual-page-hero-art" src="assets/images/etl-pipeline-hero-reference-transparent.png?v=2" alt="" aria-hidden="true">
     </div>
 
-    <div class="pipeline-flow">
-      <div class="pf-step done">
+    <div class="pipeline-flow etl-flow-card" aria-label="ETL pipeline orchestration">
+      <div class="etl-flow-head">
+        <div>
+          <div class="etl-flow-kicker">Pipeline orchestration</div>
+          <div class="etl-flow-title">Raw measurements to benchmark-ready assets</div>
+        </div>
+        <div class="etl-flow-summary" aria-label="Pipeline summary">
+          <span>7 stages</span>
+          <span>4 artifacts</span>
+          <span>QC gated</span>
+        </div>
+      </div>
+
+      <div class="etl-flow-lane">
+        <div class="etl-lane-label">Data Preparation</div>
+        <div class="etl-stage-row etl-stage-row-prep">
+          <div class="pf-step done" data-step="01">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
-        <div class="pf-label">Raw Data</div>
+            <div class="pf-copy">
+              <div class="pf-label">Raw Data</div>
+              <div class="pf-desc">Battery files, registry fields, source notes</div>
+              <span class="pf-status">Ready</span>
+            </div>
       </div>
-      <div class="pf-step done">
+          <div class="pf-step done" data-step="02">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 17l4 4 4-4"/><path d="M12 12v9"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg></div>
-        <div class="pf-label">Download &amp; Validate</div>
+            <div class="pf-copy">
+              <div class="pf-label">Download &amp; Validate</div>
+              <div class="pf-desc">Schema, units, ranges, missing channels</div>
+              <span class="pf-status">Checked</span>
+            </div>
       </div>
-      <div class="pf-step done">
+          <div class="pf-step done" data-step="03">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div>
-        <div class="pf-label">ETL Processing</div>
+            <div class="pf-copy">
+              <div class="pf-label">ETL Processing</div>
+              <div class="pf-desc">Normalize cycles into common tables</div>
+              <span class="pf-status">Curated</span>
+            </div>
+          </div>
       </div>
-      <div class="pf-step current">
+      </div>
+
+      <div class="etl-flow-lane">
+        <div class="etl-lane-label">Benchmark Execution</div>
+        <div class="etl-stage-row etl-stage-row-benchmark">
+          <div class="pf-step current" data-step="04">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg></div>
-        <div class="pf-label">Split Protocol</div>
+            <div class="pf-copy">
+              <div class="pf-label">Split Protocol</div>
+              <div class="pf-desc">Train / validation / test cell routing</div>
+              <span class="pf-status">Active</span>
+            </div>
       </div>
-      <div class="pf-step">
+          <div class="pf-step" data-step="05">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-        <div class="pf-label">Training</div>
+            <div class="pf-copy">
+              <div class="pf-label">Training</div>
+              <div class="pf-desc">Baseline SOH / RUL model package</div>
+              <span class="pf-status muted">Queued</span>
+            </div>
       </div>
-      <div class="pf-step">
+          <div class="pf-step" data-step="06">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
-        <div class="pf-label">Evaluation</div>
+            <div class="pf-copy">
+              <div class="pf-label">Evaluation</div>
+              <div class="pf-desc">RMSE, MAE, MAPE and diagnostics</div>
+              <span class="pf-status muted">Queued</span>
+            </div>
       </div>
-      <div class="pf-step">
+          <div class="pf-step" data-step="07">
         <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-        <div class="pf-label">Results</div>
+            <div class="pf-copy">
+              <div class="pf-label">Results</div>
+              <div class="pf-desc">Comparison plots and export package</div>
+              <span class="pf-status muted">Queued</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <h3 style="font-family:var(--display);font-size:18px;margin:24px 0 12px;">Output Schema</h3>
+    <h3 class="reference-section-title">Output Schema</h3>
     <div class="bench-cards">
       <div class="bench-card">
         <div class="bc-title">metadata.json</div>
@@ -1251,7 +1326,7 @@ bash run_benchmark.sh</pre>
       </div>
     </div>
 
-    <h3 style="font-family:var(--display);font-size:18px;margin:28px 0 12px;">Pipeline Scope</h3>
+    <h3 class="reference-section-title">Pipeline Scope</h3>
     <table class="model-table">
       <thead><tr><th>Part</th><th>Scope</th><th>Datasets</th></tr></thead>
       <tbody>
@@ -1264,34 +1339,48 @@ bash run_benchmark.sh</pre>
   <!-- ═══════════════════════════════════════
        PAGE: DOCS
        ═══════════════════════════════════════ -->
-  <div class="page" id="page-docs">
-    <div class="page-header">
+  <div class="page reference-page docs-page" id="page-docs">
+    <div class="page-header reference-hero docs-hero visual-page-hero">
       <div class="page-title">Documentation</div>
       <div class="page-desc">Technical reference for using the BatteryLake Benchmark datasets and evaluation framework.</div>
-    </div>
-    <div class="about-content">
-      <h3>Getting Started</h3>
-      <p>Clone the repository and install the conda environment:</p>
-      <div style="background:var(--bg3);border-radius:8px;padding:14px 18px;font-family:var(--mono);font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px;">
-        git clone https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep.git<br>
-        cd BatteryLake-Benchmark-DataPrep<br>
-        conda create -n batterylake python=3.10<br>
-        conda activate batterylake<br>
-        pip install -r requirements.txt
+      <div class="reference-hero-tags visual-page-actions" aria-label="Documentation topics">
+        <span>local setup</span>
+        <span>dataset registry</span>
+        <span>evaluation framework</span>
       </div>
-
-      <h3>Dataset Registry</h3>
-      <p>All datasets are tracked in <code style="font-family:var(--mono);font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:4px;">dataset_registry.csv</code> with columns: dataset_id, dataset_name, data_category, doi, source_url, assigned_student, ref_name, status, metadata_done, timeseries_done, cycle_summary_done, dataset_note_done, qc_done, last_updated, notes.</p>
-
-      <h3>Running ETL</h3>
-      <p>Each dataset has a dedicated ETL script in <code style="font-family:var(--mono);font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:4px;">scripts/</code> following the naming pattern <code style="font-family:var(--mono);font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:4px;">etl_dataset_XX.py</code>. Run with:</p>
-      <div style="background:var(--bg3);border-radius:8px;padding:14px 18px;font-family:var(--mono);font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px;">
-        python scripts/etl_dataset_01.py --input raw/dataset_01/ --output processed/dataset_01/
-      </div>
-
-      <h3>Evaluation</h3>
-      <p>The benchmark evaluation framework uses <code style="font-family:var(--mono);font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:4px;">evaluate.py</code> and <code style="font-family:var(--mono);font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:4px;">dataset_interface.py</code> to run all five baseline models across selected datasets and split protocols.</p>
+      <img class="reference-hero-art docs-hero-art visual-page-hero-art" src="assets/images/documentation-hero-reference-transparent.png?v=1" alt="" aria-hidden="true">
     </div>
+    <div class="docs-content">
+      <section class="docs-card">
+        <h3>Getting Started</h3>
+        <p>Clone the repository and install the conda environment.</p>
+        <div class="docs-code">
+          git clone https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep.git<br>
+          cd BatteryLake-Benchmark-DataPrep<br>
+          conda create -n batterylake python=3.10<br>
+          conda activate batterylake<br>
+          pip install -r requirements.txt
+        </div>
+      </section>
+
+      <section class="docs-card">
+        <h3>Dataset Registry</h3>
+        <p>All datasets are tracked in <code>dataset_registry.csv</code> with columns for dataset identity, DOI, source URL, assigned owner, ref_name, processing status, QC status, last update, and notes.</p>
+      </section>
+
+      <section class="docs-card">
+        <h3>Running ETL</h3>
+        <p>Each dataset has a dedicated ETL script in <code>scripts/</code> following the naming pattern <code>etl_dataset_XX.py</code>.</p>
+        <div class="docs-code">
+          python scripts/etl_dataset_01.py --input raw/dataset_01/ --output processed/dataset_01/
+        </div>
+      </section>
+
+      <section class="docs-card">
+        <h3>Evaluation</h3>
+        <p>The benchmark evaluation framework uses <code>evaluate.py</code> and <code>dataset_interface.py</code> to run baseline models across selected datasets and split protocols.</p>
+      </section>
+      </div>
   </div>
 
   <!-- ═══════════════════════════════════════
