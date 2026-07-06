@@ -5171,7 +5171,7 @@ pre {
 #page-naming .naming-section-title,
 #page-naming .model-table,
 #page-naming .naming-vocab-grid {
-  width: min(100%, 1120px);
+  width: min(100%, 1280px);
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -5596,7 +5596,7 @@ pre {
 #page-pipeline > .bench-cards,
 #page-pipeline > .model-table,
 #page-docs .docs-content {
-  width: min(100%, 1120px);
+  width: min(100%, 1280px);
   margin-left: auto !important;
   margin-right: auto !important;
 }
