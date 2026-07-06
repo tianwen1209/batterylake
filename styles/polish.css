@@ -5163,7 +5163,7 @@ pre {
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
   object-fit: contain;
-  filter: drop-shadow(0 20px 38px rgba(15,23,42,.08));
+  filter: saturate(.82) brightness(1.04) contrast(.94) drop-shadow(0 20px 38px rgba(15,23,42,.07));
   transform: translateY(-50%);
 }
 
@@ -5581,7 +5581,7 @@ pre {
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
   object-fit: contain;
-  filter: drop-shadow(0 20px 38px rgba(15,23,42,.08));
+  filter: saturate(.82) brightness(1.04) contrast(.94) drop-shadow(0 20px 38px rgba(15,23,42,.07));
   transform: translateY(-50%);
 }
 
