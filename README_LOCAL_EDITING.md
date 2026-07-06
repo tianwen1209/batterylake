@@ -6,7 +6,7 @@
 
 - `index.html`: 主网站页面，主要编辑入口。
 - `assets/`: 页面图片和本地脚本资源。
-- `reference-aws.html` / `reference-kaggle.html`: 原包里的参考页面，通常不用改。
+- `archive/reference-html/`: 临时参考 HTML 页面，通常不用改。
 - `README.md`: 原项目说明。
 
 ## 推荐预览方式
