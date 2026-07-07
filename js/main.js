@@ -4841,9 +4841,6 @@ function bwRenderSplit() {
   setT('bw-sum-splitn', total ? 'Train ' + BW.split.train.length + ' · Val ' + BW.split.val.length + ' · Test ' + BW.split.test.length : '—');
   setT('bw-quick-split', total ? BW.split.train.length + ' / ' + BW.split.val.length + ' / ' + BW.split.test.length + ' cells' : 'Manual split');
   setT('bw-sum-excl', exN ? exN + ' cells' : 'None');
-  setT('bwr-split-train-label', 'Train: ' + pcts.train + '%');
-  setT('bwr-split-val-label', 'Validation: ' + pcts.val + '%');
-  setT('bwr-split-test-label', 'Test: ' + pcts.test + '%');
   if (typeof BWR !== 'undefined') BWR.split = { ...pcts };
   BW.ratio = { ...pcts };
   const flow = document.getElementById('bw-flow');
@@ -6902,9 +6899,33 @@ function bwRenderDatasetPager(total, pages) {
     info.textContent = total ? start + '-' + end + ' of ' + total + ' datasets' : '0 datasets';
   }
   if (!box) return;
+  const pageItems = bwDatasetPagerItems(BWR.datasetPage, pages);
   box.innerHTML = '<button class="bw-pg bw-pg-nav" ' + (BWR.datasetPage > 1 ? 'onclick="bwGoDatasetPage(' + (BWR.datasetPage - 1) + ')"' : 'disabled') + '>‹</button>'
-    + '<button class="bw-pg active">' + BWR.datasetPage + '</button>'
+    + pageItems.map(item => item === 'dots'
+      ? '<span class="bw-pg-dots" aria-hidden="true">…</span>'
+      : '<button class="bw-pg ' + (item === BWR.datasetPage ? 'active' : '') + '" onclick="bwGoDatasetPage(' + item + ')"' + (item === BWR.datasetPage ? ' aria-current="page"' : '') + '>' + item + '</button>'
+    ).join('')
     + '<button class="bw-pg bw-pg-nav" ' + (BWR.datasetPage < pages ? 'onclick="bwGoDatasetPage(' + (BWR.datasetPage + 1) + ')"' : 'disabled') + '>›</button>';
+}
+
+function bwDatasetPagerItems(current, pages) {
+  if (pages <= 7) return Array.from({ length: pages }, (_, i) => i + 1);
+  const pagesToShow = new Set([1, pages, current]);
+  if (current <= 3) {
+    [2, 3].forEach(p => pagesToShow.add(p));
+  } else if (current >= pages - 2) {
+    [pages - 2, pages - 1].forEach(p => pagesToShow.add(p));
+  } else {
+    [current - 1, current + 1].forEach(p => pagesToShow.add(p));
+  }
+  const items = [];
+  let last = 0;
+  Array.from(pagesToShow).filter(p => p >= 1 && p <= pages).sort((a, b) => a - b).forEach(p => {
+    if (last && p - last > 1) items.push('dots');
+    items.push(p);
+    last = p;
+  });
+  return items;
 }
 
 function bwFlowRenderDatasets() {
@@ -6947,14 +6968,24 @@ window.bwToggleDatasetFilters = function() {
   const pop = document.getElementById('bwr-dataset-filter-popover');
   const btn = document.querySelector('#page-benchmarks .bwr-dataset-search-panel .dataset-filter-toggle');
   if (!pop) return;
-  const willOpen = !pop.classList.contains('open');
-  if (willOpen) {
-    BWR.pendingFilters = bwCloneFilterState(BWR.filters);
-    bwSyncDatasetFilterPopup();
-  }
-  pop.classList.toggle('open', willOpen);
-  if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  if (pop.classList.contains('open')) return;
+  BWR.pendingFilters = bwCloneFilterState(BWR.filters);
+  bwSyncDatasetFilterPopup();
+  pop.classList.add('open');
+  if (btn) btn.setAttribute('aria-expanded', 'true');
 };
+function bwCloseDatasetFilters() {
+  const pop = document.getElementById('bwr-dataset-filter-popover');
+  const btn = document.querySelector('#page-benchmarks .bwr-dataset-search-panel .dataset-filter-toggle');
+  if (pop) pop.classList.remove('open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('click', e => {
+  const pop = document.getElementById('bwr-dataset-filter-popover');
+  if (!pop || !pop.classList.contains('open')) return;
+  if (e.target.closest('#bwr-dataset-filter-popover') || e.target.closest('#page-benchmarks .bwr-dataset-search-panel .dataset-filter-toggle')) return;
+  bwCloseDatasetFilters();
+});
 window.bwToggleAllDatasetsFilter = function(el) {
   BWR.pendingFilters.all = !BWR.pendingFilters.all;
   if (BWR.pendingFilters.all) ['chem','form','cat','domain','duty'].forEach(k => BWR.pendingFilters[k].clear());
@@ -6976,9 +7007,7 @@ window.bwClearPendingDatasetFilters = function() {
 window.bwApplyDatasetFilters = function() {
   BWR.filters = Object.assign(bwCloneFilterState(BWR.pendingFilters), { q: BWR.filters.q });
   BWR.datasetPage = 1;
-  document.getElementById('bwr-dataset-filter-popover')?.classList.remove('open');
-  const btn = document.querySelector('#page-benchmarks .bwr-dataset-search-panel .dataset-filter-toggle');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
+  bwCloseDatasetFilters();
   bwFlowRenderDatasets();
 };
 window.bwRemoveAppliedDatasetFilter = function(type, value) {
@@ -6990,7 +7019,8 @@ window.bwRemoveAppliedDatasetFilter = function(type, value) {
   bwFlowRenderDatasets();
 };
 window.bwGoDatasetPage = function(page) {
-  BWR.datasetPage = Math.max(1, page);
+  const pages = Math.max(1, Math.ceil(bwFlowFilteredDatasets().length / BWR.datasetPageSize));
+  BWR.datasetPage = Math.min(pages, Math.max(1, page));
   bwFlowRenderDatasets();
 };
 window.bwSelectDataset = function(id) {

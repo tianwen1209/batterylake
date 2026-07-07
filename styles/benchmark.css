@@ -172,6 +172,8 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-pg { min-width: 27px; height: 27px; padding: 0 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text2); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
 .bw-pg:hover { border-color: var(--border2); background: var(--bg3); }
 .bw-pg.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.bw-pg:disabled { opacity: .45; cursor: not-allowed; }
+.bw-pg:disabled:hover { border-color: var(--border); background: var(--bg); }
 .bw-pg-dots { color: var(--text4); padding: 0 2px; }
 .bw-pg-nav { color: var(--text3); }
 
@@ -462,6 +464,97 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-fb-right { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; }
 .bw-viewlogs { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; cursor: pointer; }
 
+#page-benchmarks .bwr-dataset-search-panel .filter-token:not(.active) {
+  background: var(--bg2) !important;
+  border-color: var(--border) !important;
+  color: var(--text3) !important;
+  box-shadow: none !important;
+}
+#page-benchmarks .bwr-dataset-search-panel .filter-token.active {
+  background: var(--tag-bg) !important;
+  border-color: var(--tag-border) !important;
+  color: var(--tag-fg) !important;
+}
+#page-benchmarks .bwr-random-ctrl:not([hidden]) {
+  display: grid;
+  grid-template-columns: minmax(280px, 760px) auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+#page-benchmarks .bwr-random-ctrl .bw-split-slider {
+  height: 50px !important;
+  margin-top: 0 !important;
+  max-width: 760px;
+}
+#page-benchmarks .bwr-random-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+#page-benchmarks .bwr-random-actions .bw-shuffle {
+  height: 50px;
+  min-height: 50px !important;
+  margin-top: 0 !important;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+#page-benchmarks .bw-split-handle {
+  height: 62px !important;
+}
+#page-benchmarks .bw-split-seg > label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 8px;
+  color: var(--text1);
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+#page-benchmarks .bw-split-seg > label > span:first-child {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#page-benchmarks .bw-split-seg > label > span:last-child {
+  padding: 0;
+}
+#page-benchmarks .bw-split-seg input {
+  width: 42px;
+  height: 28px;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text1);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 850;
+  text-align: right;
+  outline: none;
+}
+#page-benchmarks .bw-split-seg input:hover,
+#page-benchmarks .bw-split-seg input:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+#page-benchmarks .bw-split-inputs {
+  display: none !important;
+}
+#page-benchmarks .bw-flow-models .bw-model-item {
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  padding-right: 14px;
+}
+#page-benchmarks .bw-flow-models .bw-model-check {
+  display: none !important;
+}
+
 @media (max-width: 1200px) {
   .bw-grid { grid-template-columns: 1fr; }
   .bw-grid > .bw-panel { height: auto; }
@@ -491,4 +584,13 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   .bw-results-actions { justify-content: flex-start; }
   .bw-result-kpis { grid-template-columns: 1fr; }
   .bw-resstats { grid-template-columns: repeat(2, 1fr); }
+  .bw-flow-pager { align-items: flex-start; flex-direction: column; }
+  .bw-pager-btns { max-width: 100%; flex-wrap: wrap; }
+  #page-benchmarks .bwr-random-ctrl:not([hidden]) {
+    grid-template-columns: 1fr;
+  }
+  #page-benchmarks .bwr-random-actions .bw-shuffle {
+    width: 100%;
+    justify-content: center;
+  }
 }

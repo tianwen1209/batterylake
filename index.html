@@ -409,18 +409,19 @@
           </div>
           <div class="bwr-random-ctrl" id="bwr-random-ctrl" hidden>
             <div class="bw-split-slider" id="bwr-split-slider" onpointerdown="bwSplitPointerDown(event)">
-              <div class="bw-split-seg train" id="bwr-split-train" data-tip="Trains models to learn aging patterns."><span id="bwr-split-train-label">Train: 60%</span></div>
-              <div class="bw-split-seg val" id="bwr-split-val" data-tip="Tunes hyperparameters &amp; prevents overfitting."><span id="bwr-split-val-label">Validation: 20%</span></div>
-              <div class="bw-split-seg test" id="bwr-split-test" data-tip="Final benchmark evaluation for real-world accuracy."><span id="bwr-split-test-label">Test: 20%</span></div>
+              <div class="bw-split-seg train" id="bwr-split-train" data-tip="Trains models to learn aging patterns.">
+                <label id="bwr-split-train-label"><span>Train</span><input id="bwr-input-train" aria-label="Train percentage" type="number" min="5" max="90" step="1" value="60" onchange="bwSplitInputCommit('train')"><span>%</span></label>
+              </div>
+              <div class="bw-split-seg val" id="bwr-split-val" data-tip="Tunes hyperparameters &amp; prevents overfitting.">
+                <label id="bwr-split-val-label"><span>Validation</span><input id="bwr-input-val" aria-label="Validation percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit('val')"><span>%</span></label>
+              </div>
+              <div class="bw-split-seg test" id="bwr-split-test" data-tip="Final benchmark evaluation for real-world accuracy.">
+                <label id="bwr-split-test-label"><span>Test</span><input id="bwr-input-test" aria-label="Test percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit('test')"><span>%</span></label>
+              </div>
               <button class="bw-split-handle" id="bwr-handle-a" type="button" aria-label="Train validation boundary" data-handle="a"></button>
               <button class="bw-split-handle" id="bwr-handle-b" type="button" aria-label="Validation test boundary" data-handle="b"></button>
             </div>
             <div class="bwr-random-actions">
-              <div class="bw-split-inputs">
-                <label>Train: <input id="bwr-input-train" aria-label="Train percentage" type="number" min="5" max="90" step="1" value="60" onchange="bwSplitInputCommit('train')"><span>%</span></label>
-                <label>Validation: <input id="bwr-input-val" aria-label="Validation percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit('val')"><span>%</span></label>
-                <label>Test: <input id="bwr-input-test" aria-label="Test percentage" type="number" min="5" max="90" step="1" value="20" onchange="bwSplitInputCommit('test')"><span>%</span></label>
-              </div>
               <button class="bw-shuffle" type="button" onclick="bwShuffleSplit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg> Resample</button>
             </div>
           </div>
@@ -428,17 +429,17 @@
           <div class="bw-split-tooltip" id="bwr-split-tooltip"></div>
           <div class="bw-cellcols">
             <div class="bw-cellcol" data-bucket="train" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-              <div class="bw-cellcol-h">Train <span id="bwr-train-pct">(60%)</span></div>
+              <div class="bw-cellcol-h">Train</div>
               <div class="bw-cellcol-sub" id="bwr-train-n">&mdash;</div>
               <div class="bw-chips" id="bwr-train-chips"></div>
             </div>
             <div class="bw-cellcol" data-bucket="val" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-              <div class="bw-cellcol-h">Validation <span id="bwr-val-pct">(20%)</span></div>
+              <div class="bw-cellcol-h">Validation</div>
               <div class="bw-cellcol-sub" id="bwr-val-n">&mdash;</div>
               <div class="bw-chips" id="bwr-val-chips"></div>
             </div>
             <div class="bw-cellcol" data-bucket="test" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-              <div class="bw-cellcol-h">Test <span id="bwr-test-pct">(20%)</span></div>
+              <div class="bw-cellcol-h">Test</div>
               <div class="bw-cellcol-sub" id="bwr-test-n">&mdash;</div>
               <div class="bw-chips" id="bwr-test-chips"></div>
             </div>
@@ -458,13 +459,13 @@
         <div class="bw-flow-card">
           <div class="bw-step-title">Select Benchmark Models</div>
           <div class="bw-flow-models">
-            <button class="bw-model-item" type="button" data-model-id="cnn" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/1.png" alt=""><img class="dark" src="assets/logos/models/dark/1.png" alt=""></span><span class="bw-model-name">CNN</span><span class="bw-model-check"></span></button>
-            <button class="bw-model-item" type="button" data-model-id="linear" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/2.png" alt=""><img class="dark" src="assets/logos/models/dark/2.png" alt=""></span><span class="bw-model-name">Linear Regression</span><span class="bw-model-check"></span></button>
-            <button class="bw-model-item" type="button" data-model-id="lstm" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/3.png" alt=""><img class="dark" src="assets/logos/models/dark/3.png" alt=""></span><span class="bw-model-name">LSTM</span><span class="bw-model-check"></span></button>
-            <button class="bw-model-item" type="button" data-model-id="pinn" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/4.png" alt=""><img class="dark" src="assets/logos/models/dark/4.png" alt=""></span><span class="bw-model-name">PINN</span><span class="bw-model-check"></span></button>
-            <button class="bw-model-item" type="button" data-model-id="rf" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/5.png" alt=""><img class="dark" src="assets/logos/models/dark/5.png" alt=""></span><span class="bw-model-name">Random Forest</span><span class="bw-model-check"></span></button>
-            <button class="bw-model-item" type="button" data-model-id="transformer" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/6.png" alt=""><img class="dark" src="assets/logos/models/dark/6.png" alt=""></span><span class="bw-model-name">Transformer</span><span class="bw-model-check"></span></button>
-            <button class="bw-model-item" type="button" data-model-id="xgboost" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/7.png" alt=""><img class="dark" src="assets/logos/models/dark/7.png" alt=""></span><span class="bw-model-name">XGBoost</span><span class="bw-model-check"></span></button>
+            <button class="bw-model-item" type="button" data-model-id="cnn" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/1.png" alt=""><img class="dark" src="assets/logos/models/dark/1.png" alt=""></span><span class="bw-model-name">CNN</span></button>
+            <button class="bw-model-item" type="button" data-model-id="linear" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/2.png" alt=""><img class="dark" src="assets/logos/models/dark/2.png" alt=""></span><span class="bw-model-name">Linear Regression</span></button>
+            <button class="bw-model-item" type="button" data-model-id="lstm" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/3.png" alt=""><img class="dark" src="assets/logos/models/dark/3.png" alt=""></span><span class="bw-model-name">LSTM</span></button>
+            <button class="bw-model-item" type="button" data-model-id="pinn" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/4.png" alt=""><img class="dark" src="assets/logos/models/dark/4.png" alt=""></span><span class="bw-model-name">PINN</span></button>
+            <button class="bw-model-item" type="button" data-model-id="rf" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/5.png" alt=""><img class="dark" src="assets/logos/models/dark/5.png" alt=""></span><span class="bw-model-name">Random Forest</span></button>
+            <button class="bw-model-item" type="button" data-model-id="transformer" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/6.png" alt=""><img class="dark" src="assets/logos/models/dark/6.png" alt=""></span><span class="bw-model-name">Transformer</span></button>
+            <button class="bw-model-item" type="button" data-model-id="xgboost" onclick="bwToggleModel(this)"><span class="bw-flow-logo"><img src="assets/logos/models/7.png" alt=""><img class="dark" src="assets/logos/models/dark/7.png" alt=""></span><span class="bw-model-name">XGBoost</span></button>
           </div>
         </div>
       </section>
@@ -554,475 +555,6 @@ bash run_benchmark.sh</pre>
       </div>
     </div>
 
-    <!-- progress stepper -->
-    <div class="bw-progress" aria-label="Benchmark workflow steps">
-      <button class="bw-pstep active" type="button" data-bw-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">1</span><span class="bw-pcopy"><span class="bw-plabel">Dataset</span><span class="bw-psub">Select data and features</span></span></button>
-      <span class="bw-pline"></span>
-      <button class="bw-pstep" type="button" data-bw-step="2" onclick="bwWizardGo(2)"><span class="bw-pnum">2</span><span class="bw-pcopy"><span class="bw-plabel">Split &amp; Model</span><span class="bw-psub">Assign cells and baselines</span></span></button>
-      <span class="bw-pline"></span>
-      <button class="bw-pstep" type="button" data-bw-step="3" onclick="bwWizardGo(3)"><span class="bw-pnum">3</span><span class="bw-pcopy"><span class="bw-plabel">Package</span><span class="bw-psub">Export local scaffold</span></span></button>
-      <span class="bw-pline"></span>
-      <button class="bw-pstep" type="button" data-bw-step="4" onclick="bwWizardGo(4)"><span class="bw-pnum">4</span><span class="bw-pcopy"><span class="bw-plabel">Results</span><span class="bw-psub">Review metrics and plots</span></span></button>
-    </div>
-
-    <!-- step builder -->
-    <div class="bw-grid">
-
-      <!-- PANEL 1 Dataset & Cell Browser -->
-      <section class="bw-panel bw-wizard-step is-active" data-bw-step="1">
-        <div class="bw-pbody">
-          <div class="bw-step1-grid">
-            <div class="bw-step1-col bw-step1-left">
-              <div class="bw-step1-panel-title">Dataset Selection</div>
-              <div class="bw-step1-panel-body">
-              <div class="bw-dataset-tools">
-                <div class="bw-search">
-                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                  <input class="bw-input" id="bw-ds-search" placeholder="Search" oninput="bwSearchDatasets(this.value)">
-                </div>
-              <details class="bw-advanced bw-filter-menu">
-                <summary>
-                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-                  <span>Filters</span>
-                </summary>
-                <div class="bw-advanced-body">
-                  <div class="bw-ddrow">
-                    <select class="bw-fsel" id="bw-f-chem" onchange="bwApplyFilters()"><option value="">Chemistry</option></select>
-                    <select class="bw-fsel" id="bw-f-form" onchange="bwApplyFilters()"><option value="">Format</option></select>
-                    <select class="bw-fsel" id="bw-f-inst" onchange="bwApplyFilters()"><option value="">Institution</option></select>
-                    <select class="bw-fsel" id="bw-f-temp" onchange="bwApplyFilters()"><option value="">Temperature</option></select>
-                    <span class="bw-clear" onclick="bwClearFilters()">Clear</span>
-                  </div>
-                </div>
-              </details>
-              </div>
-              <div class="bw-tablewrap">
-                <table class="bw-table" id="bw-ds-table">
-                  <thead><tr><th>Dataset name</th><th>Chem</th><th>Cells</th><th>Cycles</th><th>Select</th></tr></thead>
-                  <tbody id="bw-ds-tbody"></tbody>
-                </table>
-              </div>
-              <div class="bw-pager">
-                <span class="bw-pager-info" id="bw-pager-info"></span>
-                <div class="bw-pager-btns" id="bw-pager-btns"></div>
-              </div>
-              </div>
-            </div>
-
-            <div class="bw-step1-col bw-step1-right">
-              <div class="bw-step1-panel-title">Data Processing &amp; Features</div>
-              <div class="bw-step1-panel-body">
-              <div class="bw-feature-block">
-                <div class="bw-feature-head">
-                  <div class="bw-field-lbl">Raw Input Signals <span class="bw-multi-note">multi time-series channels</span></div>
-                  <span class="bw-feature-count" id="bw-raw-count">3 selected</span>
-                </div>
-                <div class="bw-feats" id="bw-feats">
-                  <button type="button" class="bw-feat selected" data-name="Voltage V(t)" onclick="bwToggleFeat(this)">Voltage V(t) <span class="bw-feat-x">?</span></button>
-                  <button type="button" class="bw-feat selected" data-name="Current I(t)" onclick="bwToggleFeat(this)">Current I(t) <span class="bw-feat-x">?</span></button>
-                  <button type="button" class="bw-feat selected" data-name="Temperature T(t)" onclick="bwToggleFeat(this)">Temperature T(t) <span class="bw-feat-x">?</span></button>
-                  <button type="button" class="bw-feat bw-feat-add" onclick="bwMockAddSignal()">+ Add Signal</button>
-                </div>
-              </div>
-
-              <details open class="bw-feature-block bw-formula-block bw-advanced">
-                <summary onclick="event.preventDefault()"><span>Formula Features</span><span class="bw-formula-status" id="bw-formula-status">Waiting for confirmation</span></summary>
-                <div class="bw-advanced-body">
-                  <input type="file" id="bw-recipe-upload" accept=".txt" style="display:none" onchange="bwHandleRecipeUpload(event)">
-                  <div class="bw-formula-success">
-                    <span><span id="bw-recipe-file">feature_schema.txt</span> parsed successfully.</span>
-                    <span class="bw-success-check"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                  </div>
-                  <div class="bw-process-layout">
-                    <ol class="bw-process-steps">
-                      <li class="done"><span class="bw-process-num">1</span><button type="button" class="bw-process-upload" onclick="document.getElementById('bw-recipe-upload').click()">Upload file</button></li>
-                      <li class="active"><span class="bw-process-num">2</span><span>Validate syntax</span></li>
-                      <li><span class="bw-process-num">3</span><span>Compute features</span></li>
-                    </ol>
-                    <div class="bw-process-preview">
-                      <div class="bw-preview-title">Preview</div>
-                      <div class="bw-formula-preview">
-                        <code>formula = Voltage V(t)</code>
-                        <code>formula = Current I(t)</code>
-                        <code>temperature = Gompert * (t) + 0 + C(t)</code>
-                        <code>temperature = Temperature 0 + T(t)</code>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="bw-feat-hint" id="bw-feat-hint">3 raw signals + <span id="bw-formula-count">12</span> formula features  · <span id="bw-recipe-status">Ready</span>  · <span id="bw-recipe-kind">Formula TXT</span>  · <span id="bw-recipe-size">2.4 KB</span></div>
-                  <button type="button" class="bw-compute-btn bw-compute-wide" onclick="bwConfirmFeatures()">Confirm &amp; Compute</button>
-                </div>
-              </details>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PANEL 2 Split Builder & Model Configuration -->
-      <section class="bw-panel bw-wizard-step" data-bw-step="2">
-        <div class="bw-pbody">
-          <div class="bw-step2-control-card">
-          <div class="bw-task-row">
-            <div class="bw-field-lbl">Task</div>
-            <div class="bw-seg">
-              <button class="bw-seg-btn active" onclick="bwTask(this,'SOH Estimation')">SOH Estimation</button>
-              <button class="bw-seg-btn" onclick="bwTask(this,'RUL Prediction')">RUL Prediction</button>
-            </div>
-          </div>
-
-          <div class="bw-field-lbl">Split Protocol</div>
-          <div class="bw-split-row">
-            <div class="bw-split-card" onclick="bwPickSplit(this,'Random')">
-              <div class="bw-split-ic"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></div>
-              <div class="bw-split-t">Random</div>
-              <div class="bw-split-d">Set ratios, then re-sample cells randomly into train / val / test.</div>
-            </div>
-            <div class="bw-split-card selected" onclick="bwPickSplit(this,'Manual')">
-              <span class="bw-split-check"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <div class="bw-split-ic"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg></div>
-              <div class="bw-split-t">Manual</div>
-              <div class="bw-split-d">Drag cells between columns to assign them by hand.</div>
-            </div>
-          </div>
-          <div class="bw-split-ctrl" id="bw-random-ctrl" style="display:none">
-            <div class="bw-ratio">
-              <label>Train <input type="number" id="bw-ratio-train" value="60" min="0" max="100" step="5" oninput="bwRatioInput()"><span>%</span></label>
-              <label>Val <input type="number" id="bw-ratio-val" value="20" min="0" max="100" step="5" oninput="bwRatioInput()"><span>%</span></label>
-              <label>Test <input type="number" id="bw-ratio-test" value="20" min="0" max="100" step="5" oninput="bwRatioInput()"><span>%</span></label>
-            </div>
-            <button class="bw-shuffle" onclick="bwShuffleSplit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg> Re-sample</button>
-          </div>
-          </div>
-
-          <div class="bw-cellcols">
-            <div class="bw-cellcol" data-bucket="train" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-              <div class="bw-cellcol-h">Train Cells <span id="bw-train-pct">(60%)</span></div>
-              <div class="bw-cellcol-sub" id="bw-train-n">&mdash;</div>
-              <div class="bw-chips" id="bw-train-chips"></div>
-            </div>
-            <div class="bw-cellcol" data-bucket="val" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-              <div class="bw-cellcol-h">Validation <span id="bw-val-pct">(20%)</span></div>
-              <div class="bw-cellcol-sub" id="bw-val-n">&mdash;</div>
-              <div class="bw-chips" id="bw-val-chips"></div>
-            </div>
-            <div class="bw-cellcol" data-bucket="test" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-              <div class="bw-cellcol-h">Test Cells <span id="bw-test-pct">(20%)</span></div>
-              <div class="bw-cellcol-sub" id="bw-test-n">&mdash;</div>
-              <div class="bw-chips" id="bw-test-chips"></div>
-            </div>
-          </div>
-          <div class="bw-excluded" data-bucket="excluded" ondragover="bwDragOver(event)" ondrop="bwDrop(event)">
-            <div class="bw-excluded-h">
-              <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg> Excluded <span class="bw-excluded-note">not used in train / val / test</span></span>
-              <span class="bw-excluded-n" id="bw-excluded-n">0 cells</span>
-            </div>
-            <div class="bw-chips bw-excluded-chips" id="bw-excluded-chips"></div>
-          </div>
-          <div class="bw-drophint"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg> Drag cells between Train / Val / Test or into Excluded to leave them out</div>
-
-          <div class="bw-step2-model-card">
-            <div class="bw-field-lbl">Model Selection <span class="bw-multi-note">multi-select</span></div>
-            <div class="bw-model-list">
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-              <span class="bw-model-name">Linear Regression</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg></span>
-              <span class="bw-model-name">Random Forest</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
-              <span class="bw-model-name">XGBoost</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item selected" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></span>
-              <span class="bw-model-name">LSTM</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="9" width="6" height="6" rx="1"/><rect x="15" y="9" width="6" height="6" rx="1"/><path d="M9 12h6M9 10l6 4M9 14l6-4"/></svg></span>
-              <span class="bw-model-name">Transformer</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span>
-              <span class="bw-model-name">CNN</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h3M14 6l3 5M14 18l3-5M12 8v8"/></svg></span>
-              <span class="bw-model-name">MLP</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            <div class="bw-model-item" onclick="bwToggleModel(this)">
-              <span class="bw-model-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18c4-10 12-10 16 0"/><path d="M4 12c4-6 12-6 16 0"/><path d="M6 18h12M8 12h8"/><circle cx="12" cy="6" r="2"/></svg></span>
-              <span class="bw-model-name">PINN</span>
-              <span class="bw-model-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
-            </div>
-            </div>
-          </div>
-
-          <details class="bw-advanced">
-            <summary><span>Advanced configuration</span><span class="bw-advanced-tag">Details</span></summary>
-            <div class="bw-advanced-body">
-              <div class="bw-cfg-grid">
-                <label class="bw-cfg"><span>Target</span><div class="bw-dd bw-dd-full">SOH (%) <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></label>
-                <label class="bw-cfg"><span>Output</span><div class="bw-dd bw-dd-full">Point Estimate <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></label>
-                <label class="bw-cfg"><span>Loss / Metric</span><div class="bw-dd bw-dd-full">RMSE <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></label>
-                <label class="bw-cfg"><span>Epochs</span><div class="bw-dd bw-dd-full">200 <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></label>
-              </div>
-              <button class="bw-moreopts">More options <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <!-- PANEL 3 Training Package -->
-      <section class="bw-panel bw-wizard-step" data-bw-step="3">
-        <div class="bw-pbody">
-          <div class="bw-package-card bw-package-card-compact">
-            <div class="bw-package-head">
-              <div>
-                <div class="bw-package-kicker">Training package</div>
-                <div class="bw-package-title">Ready to export</div>
-                <div class="bw-package-sub">Local scaffold with config, split, selected model, and run scripts.</div>
-              </div>
-              <span class="bw-package-status">Ready</span>
-            </div>
-
-            <div class="bw-package-main">
-              <div class="bw-package-file">
-                <div class="bw-package-label">Package file</div>
-                <div class="bw-package-name">
-                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 15h8M8 18h6"/></svg>
-                  <span id="bw-package-filename">bt_benchmark_soh_lstm.zip</span>
-                </div>
-              </div>
-              <div class="bw-package-actions">
-                <button class="bw-download" onclick="bwDownloadPackage()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Package</button>
-                <button class="bw-copycmd" onclick="bwCopyTerminalCommand()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Command</button>
-              </div>
-            </div>
-
-            <div class="bw-data-place bw-data-place-compact">
-              <div class="bw-data-place-h">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-                <span class="bw-data-place-title">Place the processed dataset folder here</span>
-              </div>
-              <code class="bw-data-path" id="bw-data-folder">data/2026_NTUEEE_Ampace-Samsung_LFP-NMC_21700_2C_2C_25T/</code>
-              <div class="bw-data-place-p">The package applies the selected split from <code>split.json</code> automatically.</div>
-            </div>
-
-            <div class="bw-sumlist bw-manifest">
-              <div class="bw-sum"><span class="bw-sum-k">Dataset</span><span class="bw-sum-v" id="bw-sum-ds"></span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Task</span><span class="bw-sum-v" id="bw-sum-task">SOH Estimation</span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Split Protocol</span><span class="bw-sum-v" id="bw-sum-split">Manual</span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Split</span><span class="bw-sum-v" id="bw-sum-splitn"></span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Excluded</span><span class="bw-sum-v" id="bw-sum-excl">None</span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Model</span><span class="bw-sum-v" id="bw-sum-model">LSTM</span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Features</span><span class="bw-sum-v" id="bw-sum-feats">3 raw signals + 12 formula features</span></div>
-              <div class="bw-sum"><span class="bw-sum-k">Metric</span><span class="bw-sum-v">RMSE, MAE, MAPE</span></div>
-            </div>
-          </div>
-
-          <details class="bw-advanced bw-package-details">
-            <summary><span>Package files</span><span class="bw-advanced-tag">Details</span></summary>
-            <div class="bw-advanced-body">
-              <div class="bw-package-grid">
-                <div class="bw-package-item"><b>config.json</b><small>target, model, metric</small></div>
-                <div class="bw-package-item"><b>split.json</b><small>web train / val / test ratio</small></div>
-                <div class="bw-package-item"><b>features/feature_schema.txt</b><small>formula schema</small></div>
-                <div class="bw-package-item"><b>models/&lt;selected&gt;.py</b><small>selected models only</small></div>
-                <div class="bw-package-item"><b>dataloader/battery_dataset.py</b><small>CSV loading</small></div>
-                <div class="bw-package-item"><b>run_benchmark.sh</b><small>terminal run script</small></div>
-              </div>
-            </div>
-          </details>
-
-          <details class="bw-advanced bw-package-details">
-            <summary><span>Terminal command</span><span class="bw-advanced-tag">Copyable</span></summary>
-            <div class="bw-advanced-body">
-              <div class="bw-package-command">
-                <div class="bw-command-head"><span>local terminal</span><span>macOS / Linux</span></div>
-<pre class="bw-command-code" id="bw-terminal-command">unzip bt_benchmark_soh_lstm.zip
-cd bt_benchmark_soh_lstm
-mkdir -p data
-# copy the whole processed dataset folder into data/ first
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-bash run_benchmark.sh</pre>
-                </div>
-                <div class="bw-runnote"><span class="bw-dot-warn"></span> If the zip does not appear, open this page in Chrome or Safari.</div>
-              </div>
-            </details>
-
-          <div class="bw-package-actions">
-            <button class="bw-download" onclick="bwDownloadPackage()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Training Package</button>
-            <button class="bw-copycmd" onclick="bwCopyTerminalCommand()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Terminal Command</button>
-          </div>
-          <div class="bw-runnote"><span class="bw-dot-warn"></span> If the zip does not appear, open this localhost page in Chrome or Safari; embedded preview browsers can block file downloads.</div>
-          <div class="bw-runnote"><span class="bw-dot-ok"></span> Zip scaffold only - put the complete processed dataset folder under data/ before running terminal commands.</div>
-
-          <details class="bw-advanced">
-            <summary><span>Package Checklist</span><span class="bw-advanced-tag">Details</span></summary>
-            <div class="bw-advanced-body">
-              <div class="bw-checks">
-                <div class="bw-chk"><span class="bw-chk-ic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Data placement guide<span class="bw-chk-tag">Ready</span></div>
-                <div class="bw-chk"><span class="bw-chk-ic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Split config<span class="bw-chk-tag">Ready</span></div>
-                <div class="bw-chk"><span class="bw-chk-ic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Model config<span class="bw-chk-tag">Ready</span></div>
-                <div class="bw-chk"><span class="bw-chk-ic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Input Features Ready<span class="bw-chk-tag">Ready</span></div>
-                <div class="bw-chk"><span class="bw-chk-ic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Run script<span class="bw-chk-tag">Ready</span></div>
-              </div>
-            </div>
-          </details>
-        </div>
-      </section>
-    </div>
-
-    <!-- results & evaluation -->
-    <section class="bw-panel bw-results bw-wizard-step" data-bw-step="4">
-      <div class="bw-tabs">
-        <button class="bw-tab active" onclick="bwJumpResultSection(this, 'bw-result-overview')">Overview</button>
-        <button class="bw-tab" onclick="bwJumpResultSection(this, 'bw-result-leaderboard')">Leaderboard</button>
-        <button class="bw-tab" onclick="bwJumpResultSection(this, 'bw-result-curve')">Per-cell Prediction</button>
-        <button class="bw-tab" onclick="bwJumpResultSection(this, 'bw-result-errors')">Error Analysis</button>
-        <button class="bw-tab" onclick="bwJumpResultSection(this, 'bw-result-export')">Export</button>
-      </div>
-      <div class="bw-pbody">
-        <div class="bw-results-upload" id="bw-result-overview">
-          <input id="bw-outputs-folder" type="file" webkitdirectory directory multiple hidden onchange="bwHandleOutputsUpload(event)">
-          <input id="bw-outputs-files" type="file" multiple accept=".json,.csv,.txt,.md" hidden onchange="bwHandleOutputsUpload(event)">
-          <div class="bw-results-upload-copy">
-            <div class="bw-results-kicker">Local evaluation viewer</div>
-            <div class="bw-results-title">Upload benchmark outputs and inspect model behavior.</div>
-            <div class="bw-results-desc">Expected files: <span class="bw-mono">metrics.json</span>, <span class="bw-mono">predictions.csv</span>, and optional <span class="bw-mono">per_cell_metrics.csv</span>.</div>
-          </div>
-          <div class="bw-results-actions">
-            <button class="bw-btn bw-btn-primary" onclick="document.getElementById('bw-outputs-folder').click()">Upload Outputs Folder</button>
-            <button class="bw-btn bw-btn-ghost" onclick="document.getElementById('bw-outputs-files').click()">Select Output Files</button>
-            <button class="bw-btn bw-btn-ghost" onclick="bwClearResultsUpload()">Clear</button>
-          </div>
-          <div class="bw-results-status" id="bw-results-status">No outputs loaded</div>
-        </div>
-
-        <div class="bw-result-kpis" id="bw-result-kpis">
-          <div class="bw-rstat">
-            <div class="bw-rstat-h">Best Model</div>
-            <div class="bw-rstat-v">&mdash;</div>
-            <div class="bw-rstat-s">Upload outputs first</div>
-          </div>
-          <div class="bw-rstat">
-            <div class="bw-rstat-h">Test RMSE</div>
-            <div class="bw-rstat-v">&mdash;</div>
-            <div class="bw-rstat-s">Lower is better</div>
-          </div>
-          <div class="bw-rstat">
-            <div class="bw-rstat-h">Worst Cell</div>
-            <div class="bw-rstat-v">&mdash;</div>
-            <div class="bw-rstat-s">Per-cell RMSE</div>
-          </div>
-          <div class="bw-rstat">
-            <div class="bw-rstat-h">Generalization Gap</div>
-            <div class="bw-rstat-v">&mdash;</div>
-            <div class="bw-rstat-s">Test minus validation RMSE</div>
-          </div>
-        </div>
-
-        <div class="bw-results-grid bw-results-paper-grid">
-
-          <div class="bw-tablewrap bw-paper-card" id="bw-result-leaderboard">
-            <div class="bw-paper-card-head">
-              <div>
-                <div class="bw-paper-label">Table 1</div>
-                <div class="bw-chart-title">Model Ranking on Held-out Test Cells</div>
-              </div>
-              <span class="bw-pill-soft" id="bw-leaderboard-split">test split</span>
-            </div>
-            <table class="bw-table bw-lead">
-              <thead><tr><th>Rank</th><th>Model</th><th>RMSE ↓</th><th>MAE ↓</th><th>MAPE ↓</th><th>R2 ↓</th></tr></thead>
-              <tbody id="bw-leaderboard-body">
-                <tr><td colspan="6" class="bw-empty-cell">Upload outputs to populate the leaderboard.</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="bw-chartbox bw-paper-card bw-wide-figure" id="bw-result-curve">
-            <div class="bw-paper-card-head">
-              <div>
-                <div class="bw-paper-label">Figure 1</div>
-                <div class="bw-chart-title" id="bw-curve-title">Per-cell Prediction Trajectory</div>
-              </div>
-              <div class="bw-result-controls">
-                <select id="bw-result-model" onchange="bwRenderResultsFigures()"><option>No model</option></select>
-                <select id="bw-result-split" onchange="bwRenderResultsFigures()"><option>test</option></select>
-                <select id="bw-result-cell" onchange="bwRenderResultsFigures()"><option>No cell</option></select>
-              </div>
-            </div>
-            <div class="bw-legend" id="bw-curve-legend">
-              <span class="bw-lg"><i style="background:var(--text1)"></i>Ground truth</span>
-              <span class="bw-lg"><i style="background:var(--accent)"></i>Prediction</span>
-            </div>
-            <div id="bw-curve-chart" class="bw-plot-host"><div class="bw-empty-plot">Upload predictions.csv to render the trajectory.</div></div>
-          </div>
-
-          <div class="bw-paper-card bw-evidence-card" id="bw-result-export">
-            <div class="bw-paper-label">Reproducibility</div>
-            <div class="bw-evidence-list" id="bw-evidence-list">
-              <div><span>Dataset</span><b>&mdash;</b></div>
-              <div><span>Task</span><b>&mdash;</b></div>
-              <div><span>Target</span><b>&mdash;</b></div>
-              <div><span>Prediction rows</span><b>&mdash;</b></div>
-              <div><span>Feature count</span><b>&mdash;</b></div>
-              <div><span>Files loaded</span><b>&mdash;</b></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bw-paper-figure-row">
-          <div class="bw-chartbox bw-paper-card" id="bw-result-scatter">
-            <div class="bw-paper-card-head">
-              <div>
-                <div class="bw-paper-label">Figure 2</div>
-                <div class="bw-chart-title">Predicted vs. Ground Truth</div>
-              </div>
-              <span class="bw-pill-soft" id="bw-scatter-note">held-out split</span>
-            </div>
-            <div id="bw-scatter-chart" class="bw-plot-host"><div class="bw-empty-plot">Upload predictions.csv to render the scatter plot.</div></div>
-          </div>
-
-          <div class="bw-chartbox bw-paper-card" id="bw-result-errors">
-            <div class="bw-paper-card-head">
-              <div>
-                <div class="bw-paper-label">Figure 3</div>
-                <div class="bw-chart-title">Per-cell Error Distribution</div>
-              </div>
-              <span class="bw-pill-soft">RMSE by cell</span>
-            </div>
-            <div id="bw-error-chart" class="bw-plot-host"><div class="bw-empty-plot">Upload per_cell_metrics.csv or predictions.csv to render per-cell errors.</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="bw-footbar">
-        <span class="bw-fb"><b>Outputs</b> <span class="bw-mono" id="bw-foot-files">0 files</span></span>
-        <span class="bw-fb"><b>Models</b> <span id="bw-foot-models"></span></span>
-        <span class="bw-fb"><b>Splits</b> <span id="bw-foot-splits"></span></span>
-        <span class="bw-fb bw-fb-right"><span class="bw-dot-warn" id="bw-foot-dot"></span> Status: <b id="bw-foot-status">Waiting for outputs</b></span>
-      </div>
-    </section>
-
-    <div class="bw-wizard-actions" aria-label="Benchmark step navigation">
-      <div class="bw-wizard-status" id="bw-wizard-status">Step 1 of 4 - Dataset</div>
-      <div class="bw-wizard-buttons">
-        <button class="bw-wizard-btn" type="button" id="bw-wizard-prev" onclick="bwWizardPrev()" hidden>Previous</button>
-        <button class="bw-wizard-btn primary" type="button" id="bw-wizard-next" onclick="bwWizardNext()">Next</button>
-      </div>
-    </div>
   </div>
 
   <!-- ═══════════════════════════════════════
