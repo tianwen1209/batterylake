@@ -971,6 +971,9 @@ select:focus-visible, [tabindex]:focus-visible {
 #page-models #model-filter-popover {
   right: 18px;
 }
+#page-models #model-filter-grid .filter-group {
+  align-content: flex-start;
+}
 #page-models .ml-wrap {
   display: block;
   max-width: none;
@@ -4156,7 +4159,7 @@ pre {
   width: 22px;
   height: 88px;
   border: 3px solid var(--surface);
-  background: linear-gradient(180deg, #3b82f6, #1d4ed8) !important;
+  background: linear-gradient(180deg, #60a5fa, #3b82f6) !important;
   box-shadow: 0 10px 20px rgba(37,99,235,.28), 0 0 0 1px rgba(37,99,235,.18);
 }
 #page-benchmarks .bw-split-handle::before {

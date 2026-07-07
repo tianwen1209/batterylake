@@ -1098,6 +1098,8 @@ function selectPrepTask(task) {
   activePrepTask = task === 'metadata' ? 'metadata' : 'raw';
   document.getElementById('taskRawCard')?.classList.toggle('active', activePrepTask === 'raw');
   document.getElementById('taskMetadataCard')?.classList.toggle('active', activePrepTask === 'metadata');
+  const metadataPanel = document.getElementById('metadataTaskPanel');
+  if (metadataPanel) metadataPanel.hidden = activePrepTask !== 'metadata';
   if (activePrepTask === 'raw') {
     prepToast('Task 1 selected: convert raw measurement files.');
     prepAgentNote('Task 1 selected. I should inspect true raw battery measurement files and prepare conversion into timeseries and cycle_summary outputs.');
@@ -1686,8 +1688,7 @@ function getQueuedPrepFiles(input = document.getElementById('prepFileInput')) {
   return Array.from(prepDroppedFiles || input?.files || []);
 }
 
-function updatePrepFileNote(files, source = 'selected') {
-  const note = document.getElementById('prepFileNote');
+function updatePrepFileNote(files) {
   const dropZone = document.getElementById('prepDropZone');
   const selected = document.getElementById('prepSelectedFiles');
   if (!files.length) {
@@ -1698,12 +1699,6 @@ function updatePrepFileNote(files, source = 'selected') {
     }
     return;
   }
-  const first = files[0]._batteryTwinPath || files[0].webkitRelativePath || files[0].name;
-  const verb = source === 'dropped' ? 'dropped' : 'selected';
-  const message = files.length === 1
-    ? `${first} ${verb}. Click Run AI inspection.`
-    : `${files.length} files ${verb}. Click Run AI inspection.`;
-  if (note) note.textContent = message;
   dropZone?.classList.add('has-files');
   if (selected) {
     const names = files.slice(0, 3).map(file => file._batteryTwinPath || file.webkitRelativePath || file.name).join(', ');
@@ -1717,7 +1712,7 @@ function updatePrepFileNote(files, source = 'selected') {
 function handlePrepFileInput(event) {
   const files = Array.from(event?.target?.files || []);
   prepDroppedFiles = files.length ? files : null;
-  updatePrepFileNote(files, 'selected');
+  updatePrepFileNote(files);
   if (files.length) prepToast(`${files.length} file(s) queued for AI inspection.`);
 }
 
@@ -1729,9 +1724,7 @@ function clearPrepQueuedFiles(event) {
   if (input) input.value = '';
   const folderInput = document.getElementById('prepFolderInput');
   if (folderInput) folderInput.value = '';
-  const note = document.getElementById('prepFileNote');
-  if (note) note.textContent = 'No raw data inspected yet. Tabular formats are sampled; unknown formats still contribute filename and extension evidence.';
-  updatePrepFileNote([], 'selected');
+  updatePrepFileNote([]);
   prepToast('Queued files cleared.');
 }
 
@@ -1909,7 +1902,7 @@ if (prepDropZone) {
   prepDropZone.addEventListener('drop', async event => {
     const files = await collectPrepDroppedFiles(event.dataTransfer);
     prepDroppedFiles = files;
-    updatePrepFileNote(files, 'dropped');
+    updatePrepFileNote(files);
     if (!files.length) prepToast('No files were dropped.');
   });
 }

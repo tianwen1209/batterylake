@@ -1289,20 +1289,20 @@ bash run_benchmark.sh</pre>
   <div class="page" id="page-preprocessing">
     <div class="prep-shell">
       <span class="prep-kicker">Evidence-first workflow</span>
-      <h1 class="prep-title">BatteryTwin agentic preprocessing has two separate jobs.</h1>
-      <p class="prep-lead">Task 1 converts true raw measurement files into <code>timeseries</code> and <code>cycle_summary</code>. Task 2 reads source pages, GitHub pages, DOI pages and papers to produce BatteryLake-compatible <code>dataset_metadata.csv</code>.</p>
+      <h1 class="prep-title">Preprocessing</h1>
+      <p class="prep-lead">Convert raw battery data or source evidence into BatteryLake-ready preprocessing outputs.</p>
 
       <div class="prep-task-grid" aria-label="BatteryTwin preprocessing tasks">
         <div class="prep-task-card active" id="taskRawCard" onclick="selectPrepTask('raw')">
           <div class="prep-task-kicker">Task 1</div>
           <div class="prep-task-title">Raw data conversion</div>
-          <div class="prep-task-copy">Use this for real battery measurement files or folders: CSV, XLSX, MAT, JSON, Parquet, HDF5, TXT, Arbin/Neware/Maccor exports, or local paths.</div>
+          <div class="prep-task-output">Input: Raw measurement files</div>
           <div class="prep-task-output">Output: *_timeseries.csv + *_cycle_summary.csv</div>
         </div>
         <div class="prep-task-card" id="taskMetadataCard" onclick="selectPrepTask('metadata')">
           <div class="prep-task-kicker">Task 2</div>
           <div class="prep-task-title">Metadata extraction</div>
-          <div class="prep-task-copy">Use this for source URLs, project pages, GitHub repos, DOI/DataCite JSON and papers. It reads description/protocol text, not large raw data files.</div>
+          <div class="prep-task-output">Input: Source URLs, GitHub repos, DOI pages and papers</div>
           <div class="prep-task-output">Output: dataset_metadata.csv + source evidence</div>
         </div>
       </div>
@@ -1318,7 +1318,7 @@ bash run_benchmark.sh</pre>
       <section class="prep-card prep-stage active" data-prep-stage="1">
         <div class="prep-card-head">
           <span class="prep-card-index">1</span>
-          <div><div class="prep-card-title">Task 1: upload raw measurement data, then let the AI agent inspect it.</div><div class="prep-card-desc">Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.</div></div>
+          <div><div class="prep-card-title">Task 1: Upload raw measurement data</div><div class="prep-card-desc">Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.</div></div>
         </div>
         <div class="prep-card-body source-grid">
           <div>
@@ -1326,7 +1326,7 @@ bash run_benchmark.sh</pre>
               <input id="prepFileInput" type="file" multiple hidden onchange="handlePrepFileInput(event)">
               <input id="prepFolderInput" type="file" multiple webkitdirectory directory hidden onchange="handlePrepFileInput(event)">
               <span class="drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
-              <span><span class="drop-title">Choose or drop almost any raw file or folder</span><span class="drop-note" id="prepFileNote">No raw data inspected yet. Tabular formats are sampled; unknown formats still contribute filename and extension evidence.</span></span>
+              <span><span class="drop-title">Choose or drop almost any raw file or folder</span></span>
             </label>
             <div class="prep-selected-files" id="prepSelectedFiles">No files queued.</div>
             <div style="margin-top:10px;"><button class="prep-btn secondary" type="button" onclick="document.getElementById('prepFolderInput').click()">Choose folder</button></div>
@@ -1336,16 +1336,9 @@ bash run_benchmark.sh</pre>
               <button class="prep-btn" type="button" onclick="runPrepFileInspection()">Run AI inspection</button>
               <button class="prep-btn secondary" type="button" onclick="runPrepInspection()">Inspect path</button>
             </div>
-            <div class="ai-agent-strip">
+            <div class="ai-agent-strip" id="metadataTaskPanel" hidden>
               <div class="ai-agent-copy">
-                <div class="ai-agent-title">BatteryTwin AI Assistant is the inspection agent</div>
-                <div class="ai-agent-sub">During upload analysis, the assistant opens, records the inspection context, and summarizes the inferred fields before you confirm them.</div>
-              </div>
-              <button class="prep-btn ai-agent-open" type="button" onclick="openBatteryTwinAgent()">Open agent</button>
-            </div>
-            <div class="ai-agent-strip" id="metadataTaskPanel">
-              <div class="ai-agent-copy">
-                <div class="ai-agent-title">Task 2: metadata extraction workflow</div>
+                <div class="prep-card-title">Task 2: Metadata extraction</div>
                 <div class="ai-agent-sub">Start with the dataset source URL. The agent checks what the source page can support, reports missing BatteryLake fields, then uses an optional paper URL to fill the gaps before you manually confirm the final metadata.</div>
                 <div class="metadata-flow-grid">
                   <div>
