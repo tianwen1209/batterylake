@@ -27,6 +27,8 @@
   --teal:   #0e9b8e;  --teal-bg:   #e5f7f4;
   --purple: #7a45e6;  --purple-bg: #f1ecfe;
 
+  --ai-panel-w: 400px;
+
   --sidebar-bg: var(--bg2);
   --sidebar-hover: #e9eef7;
   --sidebar-active: #eaf1ff;
@@ -166,7 +168,9 @@ select:focus-visible, [tabindex]:focus-visible {
 .btn-primary:hover { box-shadow: 0 5px 16px rgba(42,95,234,.38); transform: translateY(-1px); }
 
 /* 6 HEADINGS */
-.page { padding-top: 30px; }
+.page { padding-top: 30px; padding-bottom: 160px; }
+@media (max-width: 768px) { .page { padding-bottom: 148px; } }
+@media (max-width: 480px) { .page { padding-bottom: 140px; } }
 .page-title { font-size: 30px; letter-spacing: -.025em; }
 
 /* 7 METRIC PANEL */
@@ -1888,7 +1892,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   }
 }
 @media (max-width: 760px) {
-  #page-home { padding-left: 20px; padding-right: 20px; padding-bottom: 64px; }
+  #page-home { padding-left: 20px; padding-right: 20px; padding-bottom: 148px; }
   .home-hero {
     display: block;
     min-height: 319px;
@@ -4010,17 +4014,6 @@ pre {
   background: var(--accent-light) !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 13%, transparent), var(--card-shadow) !important;
 }
-#page-benchmarks .bw-flow-datasets .dataset-card.bwr-selected::after {
-  content: "";
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: inset 0 0 0 4px var(--surface);
-}
 #page-benchmarks .bw-flow-pager {
   display: flex;
   justify-content: flex-end;
@@ -4134,14 +4127,32 @@ pre {
   white-space: nowrap;
 }
 #page-benchmarks .bw-split-seg.train {
-  background: linear-gradient(135deg, rgba(20,184,166,.23), rgba(34,197,94,.18));
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--green-bg) 92%, var(--green)),
+    color-mix(in srgb, var(--green-bg) 58%, var(--green))
+  );
+  color: color-mix(in srgb, var(--green) 88%, var(--text1));
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  box-shadow: inset 0 3px 0 color-mix(in srgb, var(--green) 32%, transparent);
   border-radius: 15px 0 0 15px;
 }
 #page-benchmarks .bw-split-seg.val {
-  background: linear-gradient(135deg, rgba(59,130,246,.22), rgba(125,211,252,.20));
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--amber-bg) 92%, var(--amber)),
+    color-mix(in srgb, var(--amber-bg) 58%, var(--amber))
+  );
+  color: color-mix(in srgb, var(--amber) 88%, var(--text1));
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  box-shadow: inset 0 3px 0 color-mix(in srgb, var(--amber) 32%, transparent);
 }
 #page-benchmarks .bw-split-seg.test {
-  background: linear-gradient(135deg, rgba(99,102,241,.20), rgba(147,197,253,.18));
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--red-bg) 92%, var(--red)),
+    color-mix(in srgb, var(--red-bg) 58%, var(--red))
+  );
+  color: color-mix(in srgb, var(--red) 88%, var(--text1));
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  box-shadow: inset 0 3px 0 color-mix(in srgb, var(--red) 32%, transparent);
   border-radius: 0 15px 15px 0;
 }
 #page-benchmarks .bw-split-handle {
@@ -6064,10 +6075,18 @@ pre {
 }
 
 /* Final UI fixes: floating assistant and narrow Preprocessing layouts. */
+/* AI assistant layout (push drawer):
+   - The collapsed FAB is raised above the bottom-right toast zone so it no
+     longer sits on top of page notifications.
+   - The expanded panel is a full-height right-edge drawer. On desktop it
+     pushes `.main` aside via margin-right so page content is never covered;
+     on narrower screens there isn't room to push, so it overlays instead.
+   - The FAB is hidden while the panel is open so only one control occupies
+     the corner at a time. */
 .ai-chat-widget {
   position: fixed !important;
   right: 24px;
-  bottom: 24px;
+  bottom: 86px;
   z-index: 1100;
   width: auto !important;
   height: auto !important;
@@ -6088,6 +6107,7 @@ pre {
   justify-content: center;
   padding: 0;
   pointer-events: auto;
+  transition: opacity .2s ease, transform .2s ease;
 }
 .ai-chat-widget .ai-chat-fab-label { display: none; }
 .ai-chat-widget .ai-battery-bot {
@@ -6095,19 +6115,83 @@ pre {
   height: 38px;
   display: block;
 }
+body.ai-panel-open .ai-chat-widget .ai-chat-fab {
+  opacity: 0;
+  transform: scale(.82);
+  pointer-events: none;
+}
 .ai-chat-widget .ai-chat-panel {
   position: fixed !important;
-  top: 88px;
-  right: 24px;
-  bottom: 24px;
-  width: min(410px, calc(100vw - 48px));
-  max-height: calc(100vh - 112px);
-  display: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: min(var(--ai-panel-w), 100vw);
+  max-height: none;
+  border-radius: 0;
+  border-width: 0 0 0 1px;
+  box-shadow: -18px 0 48px rgba(15,23,42,.18);
+  display: flex;
   flex-direction: column;
   overflow: hidden;
-  pointer-events: auto;
+  transform: translateX(100%);
+  visibility: hidden;
+  pointer-events: none;
+  /* Keep the panel focusable/visible throughout the slide-out, then drop it
+     from the a11y tree and tab order once fully off-screen. */
+  transition: transform .28s ease, visibility 0s linear .28s;
 }
-.ai-chat-widget .ai-chat-panel.open { display: flex; }
+.ai-chat-widget .ai-chat-panel.open {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform .28s ease, visibility 0s linear 0s;
+}
+/* Push page content aside (instead of covering it) while the panel is open. */
+.main {
+  transition: margin-right .28s ease;
+}
+body.ai-panel-open .main {
+  margin-right: var(--ai-panel-w);
+}
+/* .prep-toast shares the assistant's corner; keep it clear of the raised FAB. */
+.prep-toast {
+  bottom: 166px;
+}
+@media (max-width: 760px) {
+  .ai-chat-widget {
+    right: 16px;
+    bottom: 78px;
+  }
+  .ai-chat-widget .ai-chat-fab {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+  }
+  .ai-chat-widget .ai-chat-panel {
+    width: min(360px, 92vw);
+  }
+  /* Not enough width to push content aside; the panel overlays instead. */
+  body.ai-panel-open .main {
+    margin-right: 0;
+  }
+  .prep-toast {
+    bottom: 142px;
+  }
+}
+@media (max-width: 480px) {
+  .ai-chat-widget {
+    right: 12px;
+    bottom: 74px;
+  }
+  .ai-chat-widget .ai-chat-fab {
+    width: 52px;
+    height: 52px;
+  }
+  .ai-chat-widget .ai-chat-panel {
+    width: 100vw;
+  }
+}
 
 @media (max-width: 560px) {
   .topbar { padding-right: 10px; }
@@ -6133,7 +6217,7 @@ pre {
     max-width: 100vw !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
-    padding-bottom: 112px !important;
+    padding-bottom: 170px !important;
     overflow-x: hidden;
     scroll-margin-top: 76px;
   }
@@ -6235,22 +6319,5 @@ pre {
   }
   #page-preprocessing .ai-field-row {
     grid-template-columns: 1fr;
-  }
-  .ai-chat-widget {
-    right: 12px;
-    bottom: 12px;
-  }
-  .ai-chat-widget .ai-chat-fab {
-    width: 52px;
-    height: 52px;
-    border-radius: 16px;
-  }
-  .ai-chat-widget .ai-chat-panel {
-    left: 10px;
-    right: 10px;
-    top: 72px;
-    bottom: 10px;
-    width: auto;
-    max-height: calc(100vh - 82px);
   }
 }

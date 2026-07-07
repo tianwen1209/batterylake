@@ -88,6 +88,14 @@
     return item.querySelector('.ai-msg-text');
   }
 
+  function setPanelOpen(isOpen) {
+    panel.classList.toggle('open', isOpen);
+    // Body-level flag drives the push-layout + FAB-hide CSS so the panel
+    // and the rest of the page layout always agree on open/closed state.
+    document.body.classList.toggle('ai-panel-open', isOpen);
+    if (isOpen) input.focus();
+  }
+
   function setTyping(bubble) {
     bubble.innerHTML = '<span class="ai-typing" aria-label="Thinking"><span></span><span></span><span></span></span>';
   }
@@ -166,11 +174,8 @@
     throw lastError || new Error('All AI backend endpoints failed.');
   }
 
-  toggle.addEventListener('click', () => {
-    panel.classList.toggle('open');
-    if (panel.classList.contains('open')) input.focus();
-  });
-  close.addEventListener('click', () => panel.classList.remove('open'));
+  toggle.addEventListener('click', () => setPanelOpen(!panel.classList.contains('open')));
+  close.addEventListener('click', () => setPanelOpen(false));
   input.addEventListener('input', resizeInput);
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -180,7 +185,7 @@
   });
   suggestions.forEach(button => {
     button.addEventListener('click', () => {
-      panel.classList.add('open');
+      setPanelOpen(true);
       sendMessage(button.dataset.prompt || button.textContent);
     });
   });
@@ -192,17 +197,16 @@
 
   window.batteryTwinAI = {
     open() {
-      panel.classList.add('open');
-      input.focus();
+      setPanelOpen(true);
     },
     addBotNote(text) {
-      panel.classList.add('open');
+      setPanelOpen(true);
       const time = new Date().toISOString();
       addMessage(text, 'bot', { time });
       saveMessage(text, 'bot', time);
     },
     send(message) {
-      panel.classList.add('open');
+      setPanelOpen(true);
       return sendMessage(message);
     }
   };

@@ -476,25 +476,24 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   color: var(--tag-fg) !important;
 }
 #page-benchmarks .bwr-random-ctrl:not([hidden]) {
-  display: grid;
-  grid-template-columns: minmax(280px, 760px) auto;
-  align-items: center;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 18px;
 }
 #page-benchmarks .bwr-random-ctrl .bw-split-slider {
   height: 50px !important;
   margin-top: 0 !important;
-  max-width: 760px;
 }
 #page-benchmarks .bwr-random-actions {
   display: flex !important;
   align-items: center !important;
-  gap: 0 !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
 }
 #page-benchmarks .bwr-random-actions .bw-shuffle {
-  height: 50px;
-  min-height: 50px !important;
+  height: 36px;
+  min-height: 36px !important;
   margin-top: 0 !important;
   padding: 0 16px;
   white-space: nowrap;
@@ -586,9 +585,6 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   .bw-resstats { grid-template-columns: repeat(2, 1fr); }
   .bw-flow-pager { align-items: flex-start; flex-direction: column; }
   .bw-pager-btns { max-width: 100%; flex-wrap: wrap; }
-  #page-benchmarks .bwr-random-ctrl:not([hidden]) {
-    grid-template-columns: 1fr;
-  }
   #page-benchmarks .bwr-random-actions .bw-shuffle {
     width: 100%;
     justify-content: center;
