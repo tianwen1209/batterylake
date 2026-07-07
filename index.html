@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="styles/benchmark.css">
 <!-- DESIGN POLISH LAYER: visual tokens and component refinements. -->
 <link rel="stylesheet" href="styles/polish.css">
+<!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
+<link rel="stylesheet" href="styles/showcase.css">
 </head>
 <body>
 <div class="app">
@@ -121,17 +123,88 @@
   <!-- ═══════════════════════════════════════
        PAGE: HOME
        ═══════════════════════════════════════ -->
-  <div class="page" id="page-home">
-    <div class="home-hero">
-      <div class="home-hero-copy">
-        <h1 aria-label="BatteryLake"><img class="home-brand-wordmark" src="assets/logos/home-wordmark.png?v=2" alt="" aria-hidden="true"><span class="home-brand-text">BatteryLake</span></h1>
-        <p>BatteryLake unifies curated battery datasets,<br> standardized metadata, and cycle intelligence for<br> reproducible battery research.</p>
-        <a class="home-learn-more" href="https://github.com/tianwen1209/batterylake" target="_blank" rel="noopener noreferrer">Learn More</a>
-      </div>
-      <img class="home-hero-art" src="assets/images/home.png" alt="" aria-hidden="true">
-    </div>
+  <div class="page sc-home" id="page-home">
 
-    <div class="home-metrics-wrap">
+    <!-- ── HERO ─────────────────────────────────────────────── -->
+    <section class="sc-hero">
+      <div class="sc-hero-bg" aria-hidden="true"></div>
+      <div class="sc-hero-grid" aria-hidden="true"></div>
+
+      <div class="sc-hero-copy">
+        <span class="sc-hero-eyebrow reveal"><span class="dot"></span> Live · Battery Data Intelligence Platform</span>
+        <h1 class="sc-hero-title reveal" style="--d:70ms">Battery data,<br><span class="grad">research-ready.</span></h1>
+        <p class="sc-hero-sub reveal" style="--d:140ms">BatteryLake unifies the world's fragmented battery cycling datasets into one standardized, quality-assessed foundation — so models are compared on science, not on preprocessing luck.</p>
+        <div class="sc-hero-ctas reveal" style="--d:210ms">
+          <a class="sc-btn sc-btn-primary" onclick="showPage('datasets', document.getElementById('nav-datasets'))">
+            Explore Datasets
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="sc-btn sc-btn-ghost" href="https://github.com/tianwen1209/batterylake" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.51 11.51 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+        <div class="sc-hero-proof reveal" style="--d:280ms">
+          <div class="sc-proof"><strong>41+</strong><span>Curated datasets</span></div>
+          <div class="sc-proof"><strong>331.8K</strong><span>Standardized cycles</span></div>
+          <div class="sc-proof"><strong>34+</strong><span>Source institutions</span></div>
+          <div class="sc-proof"><strong>19 yrs</strong><span>2007 – 2026</span></div>
+        </div>
+      </div>
+
+      <div class="sc-hero-visual reveal rv-scale" style="--d:200ms">
+        <div class="sc-hero-art-frame">
+          <div class="sc-browser">
+            <div class="sc-browser-bar">
+              <i></i><i></i><i></i>
+              <span class="sc-browser-url">batterylake.org / datasets ?quality=ready</span>
+            </div>
+            <div class="sc-browser-body">
+              <div class="sc-mock-row">
+                <span class="sc-mock-chem lco">LCO</span>
+                <span class="sc-mock-name"><b>2007_NASA_PCoE_LCO_18650_1C_1C_25T</b><span>NASA Prognostics CoE</span></span>
+                <span class="sc-mock-cells">34 cells</span>
+                <span class="sc-mock-q">0.96</span>
+              </div>
+              <div class="sc-mock-row">
+                <span class="sc-mock-chem lfp">LFP</span>
+                <span class="sc-mock-name"><b>2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T</b><span>Stanford · MIT · TRI</span></span>
+                <span class="sc-mock-cells">124 cells</span>
+                <span class="sc-mock-q">0.94</span>
+              </div>
+              <div class="sc-mock-row">
+                <span class="sc-mock-chem nmc">NMC</span>
+                <span class="sc-mock-name"><b>2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT</b><span>Imperial College London</span></span>
+                <span class="sc-mock-cells">21 cells</span>
+                <span class="sc-mock-q">0.92</span>
+              </div>
+              <div class="sc-mock-row">
+                <span class="sc-mock-chem lfp">LFP</span>
+                <span class="sc-mock-name"><b>2026_NTUEEE_Ampace-Samsung_LFP-NMC_21700_2C_2C_25T</b><span>NTU EEE · Singapore</span></span>
+                <span class="sc-mock-cells">16 cells</span>
+                <span class="sc-mock-q">0.95</span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-chip-float c1">
+            <span class="sc-chip-ic sc-chip-soh">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 17c3-1 4.5-7 7.5-7s3.5 5 6 5 3-3.5 4.5-6"/></svg>
+            </span>
+            <span><b>SOH 94.2%</b><span>cycle 187 · B0005</span></span>
+            <svg class="sc-spark-mini" width="56" height="26" viewBox="0 0 56 26"><path d="M2 6C10 7 16 9 24 12C32 15 40 18 54 21"/></svg>
+          </div>
+          <div class="sc-chip-float c2">
+            <span class="sc-chip-ic sc-chip-qc">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/><path d="M9 12l2.1 2.1L15.6 9.4"/></svg>
+            </span>
+            <span><b>Quality gate passed</b><span>26 validation rules</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── METRICS BAND (ids consumed by js/main.js) ────────── -->
+    <div class="home-metrics-wrap reveal" style="--d:80ms">
       <div class="metrics-panel home-metrics" id="metrics-panel" aria-label="BatteryLake platform metrics">
         <div class="metric-cell">
           <div class="metric-val accent" id="m-datasets">0</div>
@@ -154,38 +227,211 @@
           <div class="metric-val accent" id="m-cells">0</div>
           <div class="metric-sub" id="m-cells-sub">Total cells</div>
         </div>
-	        <div class="metric-cell">
-	          <div class="metric-val accent" id="m-volume">0 <span class="metric-unit">GB</span></div>
-	          <div class="metric-sub">Data volume</div>
-	        </div>
-	      </div>
-	      <div class="home-credit-strip" aria-label="BatteryLake design and partner credits">
-	        <div class="home-credit-group">
-	          <div class="home-credit-label">Design by</div>
-	          <div class="home-credit-logos">
-	            <div class="home-logo-tile home-logo-tile-cap">
-	              <img src="assets/logos/partners/cap-group-logo.png?v=4" alt="Cloud Application and Platform Group">
-	            </div>
-	            <div class="home-logo-tile home-logo-tile-ntu">
-	              <img src="assets/logos/partners/ntu-logo.png?v=2" alt="Nanyang Technological University Singapore">
-	            </div>
-	          </div>
-	        </div>
-	        <div class="home-credit-divider" aria-hidden="true"></div>
-	        <div class="home-credit-group">
-	          <div class="home-credit-label">In partner with</div>
-	          <div class="home-credit-logos">
-	            <div class="home-logo-tile home-logo-tile-soda">
-	              <img src="assets/logos/partners/soda-group-logo.png?v=2" alt="SODA Group">
-	            </div>
-	            <div class="home-logo-tile home-logo-tile-astar">
-	              <img src="assets/logos/partners/astar-logo.png?v=1" alt="Agency for Science, Technology and Research Singapore">
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+        <div class="metric-cell">
+          <div class="metric-val accent" id="m-volume">0 <span class="metric-unit">GB</span></div>
+          <div class="metric-sub">Data volume</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HOW IT WORKS ─────────────────────────────────────── -->
+    <section class="sc-section">
+      <div class="sc-section-head reveal">
+        <span class="sc-kicker">How it works</span>
+        <div class="sc-section-title">From raw lab exports to comparable results</div>
+        <div class="sc-section-sub">Every dataset travels the same auditable path, so downstream numbers mean the same thing everywhere.</div>
+      </div>
+      <div class="sc-flow">
+        <div class="sc-flow-step reveal" style="--d:0ms">
+          <div class="sc-flow-link" aria-hidden="true"></div>
+          <div class="sc-flow-node">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          </div>
+          <b>Curate &amp; Ingest</b>
+          <span>41+ public and lab datasets, tracked with DOI-level provenance.</span>
+        </div>
+        <div class="sc-flow-step reveal" style="--d:110ms">
+          <div class="sc-flow-link" aria-hidden="true"></div>
+          <div class="sc-flow-node">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/><path d="M18 11v8M15 16l3 3 3-3"/></svg>
+          </div>
+          <b>Standardize</b>
+          <span>One ETL pipeline, one schema: metadata, time-series, cycle summaries.</span>
+        </div>
+        <div class="sc-flow-step reveal" style="--d:220ms">
+          <div class="sc-flow-link" aria-hidden="true"></div>
+          <div class="sc-flow-node">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/><path d="M9 12l2.1 2.1L15.6 9.4"/></svg>
+          </div>
+          <b>Quality Gate</b>
+          <span>26 physical-plausibility and schema rules score every dataset.</span>
+        </div>
+        <div class="sc-flow-step reveal" style="--d:330ms">
+          <div class="sc-flow-link" aria-hidden="true"></div>
+          <div class="sc-flow-node">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 17l4-8 4 4 5-9"/></svg>
+          </div>
+          <b>Benchmark &amp; Share</b>
+          <span>Reproducible SOH / RUL runs with pinned splits and unified metrics.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRODUCT SHOWCASE ─────────────────────────────────── -->
+    <section class="sc-section">
+      <div class="sc-section-head reveal">
+        <span class="sc-kicker">Platform</span>
+        <div class="sc-section-title">One workspace for the full research loop</div>
+        <div class="sc-section-sub">Browse, benchmark, and audit — each surface is built on the same standardized data core.</div>
+      </div>
+
+      <div class="sc-feature">
+        <div class="sc-feature-copy reveal rv-left">
+          <span class="sc-kicker">Benchmarks</span>
+          <h3>Reproducible experiments, not preprocessing folklore</h3>
+          <p>Configure SOH and RUL runs with explicit cell-level splits, pinned seeds, and a shared metric suite. Every result ships as a portable training package.</p>
+          <ul class="sc-feature-list">
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Random, temporal, and cross-cell split protocols</li>
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> 7 reference models — Ridge to Transformer and PINN</li>
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> RMSE · MAE · MAPE reported on identical folds</li>
+          </ul>
+          <a class="sc-feature-link" onclick="showPage('benchmarks', null)">Open the benchmark workbench
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="sc-feature-visual reveal rv-right">
+          <div class="sc-panel-mock">
+            <div class="sc-panel-mock-head"><b>Split protocol — cross-cell</b><span class="sc-pill-mini">seed 42</span></div>
+            <div class="sc-split-mock">
+              <div class="sc-split-line"><span>Train</span><div class="sc-bar sc-bar-train"><i style="--w:62%; --d:100ms"></i></div><em>62%</em></div>
+              <div class="sc-split-line"><span>Val</span><div class="sc-bar sc-bar-val"><i style="--w:18%; --d:260ms"></i></div><em>18%</em></div>
+              <div class="sc-split-line"><span>Test</span><div class="sc-bar sc-bar-test"><i style="--w:20%; --d:420ms"></i></div><em>20%</em></div>
+            </div>
+            <div class="sc-metric-strip">
+              <div class="sc-metric-box"><span>RMSE</span><b>0.0121</b></div>
+              <div class="sc-metric-box"><span>MAE</span><b>0.0094</b></div>
+              <div class="sc-metric-box"><span>MAPE</span><b>1.08%</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-feature flip">
+        <div class="sc-feature-copy reveal rv-right">
+          <span class="sc-kicker">Quality</span>
+          <h3>An auditable gate before any model sees the data</h3>
+          <p>Completeness, consistency, accuracy, and validity are scored per dataset. Machine-readable diagnostic reports approve or block downstream training.</p>
+          <ul class="sc-feature-list">
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Physical plausibility: voltage windows, energy balance</li>
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Signal-level QC maps for V(t), I(t), T(t), Qd(n)</li>
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> JSON reports wired into the benchmark pipeline</li>
+          </ul>
+          <a class="sc-feature-link" onclick="showPage('quality', null)">See the quality methodology
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="sc-feature-visual reveal rv-left">
+          <div class="sc-panel-mock">
+            <div class="sc-panel-mock-head"><b>Quality gate — NASA PCoE</b><span class="sc-pill-mini">ready</span></div>
+            <div class="sc-gate-mock">
+              <div class="sc-ring-wrap">
+                <svg width="118" height="118" viewBox="0 0 118 118">
+                  <defs>
+                    <linearGradient id="scRingGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#2a5fea"/>
+                      <stop offset="100%" stop-color="#0e9b8e"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="sc-ring-track" cx="59" cy="59" r="48"/>
+                  <circle class="sc-ring-val" cx="59" cy="59" r="48" style="--off:12"/>
+                </svg>
+                <div class="sc-ring-label"><b>0.96</b><span>overall</span></div>
+              </div>
+              <div class="sc-gate-checks">
+                <div class="sc-gate-check ok"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Voltage range 2.0–4.5 V</div>
+                <div class="sc-gate-check ok"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Coulombic efficiency 95–105%</div>
+                <div class="sc-gate-check warn"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 7v6M12 17h.01M10.3 4.6h3.4L21 19H3z"/></svg> Temperature drift — 1 review</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-feature">
+        <div class="sc-feature-copy reveal rv-left">
+          <span class="sc-kicker">APIs</span>
+          <h3>The same platform, programmable</h3>
+          <p>Query the catalog, stream cell time-series, and launch benchmark runs from code. Responses carry provenance and quality scores by default.</p>
+          <ul class="sc-feature-list">
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> RESTful endpoints with token auth</li>
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Parquet, CSV, and JSON exports</li>
+            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg> Embedded DOI citations in every response</li>
+          </ul>
+          <a class="sc-feature-link" onclick="showPage('apis', null)">Explore the developer console
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="sc-feature-visual reveal rv-right">
+          <div class="sc-panel-mock" style="padding:0; overflow:hidden;">
+            <div class="sc-browser-bar">
+              <i></i><i></i><i></i>
+              <span class="sc-browser-url">GET api.batterylake.org/v1/datasets</span>
+            </div>
+            <pre class="api-code" style="margin:0; border-radius:0;">import requests
+
+resp = requests.get(
+  <span class="accent">"https://api.batterylake.org/v1/datasets"</span>,
+  params={"chemistry": "LFP", "quality": "ready"}
+)
+
+for ds in resp.json()["items"]:
+  print(ds["ref_name"], ds["quality_score"])</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────── -->
+    <section class="sc-cta reveal rv-scale">
+      <div>
+        <h3>Start with research-ready battery data today.</h3>
+        <p>Browse the catalog, download standardized packages, or contribute your lab's datasets to the community.</p>
+      </div>
+      <div class="sc-cta-actions">
+        <a class="sc-btn sc-btn-ondark" onclick="showPage('datasets', document.getElementById('nav-datasets'))">Browse Catalog</a>
+        <a class="sc-btn sc-btn-outline-ondark" onclick="showPage('contribute', null)">Contribute Data</a>
+      </div>
+    </section>
+
+    <!-- ── CREDITS ──────────────────────────────────────────── -->
+    <div class="home-metrics-wrap reveal">
+      <div class="home-credit-strip" aria-label="BatteryLake design and partner credits">
+        <div class="home-credit-group">
+          <div class="home-credit-label">Design by</div>
+          <div class="home-credit-logos">
+            <div class="home-logo-tile home-logo-tile-cap">
+              <img src="assets/logos/partners/cap-group-logo.png?v=4" alt="Cloud Application and Platform Group">
+            </div>
+            <div class="home-logo-tile home-logo-tile-ntu">
+              <img src="assets/logos/partners/ntu-logo.png?v=2" alt="Nanyang Technological University Singapore">
+            </div>
+          </div>
+        </div>
+        <div class="home-credit-divider" aria-hidden="true"></div>
+        <div class="home-credit-group">
+          <div class="home-credit-label">In partner with</div>
+          <div class="home-credit-logos">
+            <div class="home-logo-tile home-logo-tile-soda">
+              <img src="assets/logos/partners/soda-group-logo.png?v=2" alt="SODA Group">
+            </div>
+            <div class="home-logo-tile home-logo-tile-astar">
+              <img src="assets/logos/partners/astar-logo.png?v=1" alt="Agency for Science, Technology and Research Singapore">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════
        PAGE: DATASETS
@@ -1024,19 +1270,31 @@ bash run_benchmark.sh</pre>
     </div>
 
     <section class="qa-hero">
-      <div class="qa-hero-main">
+      <div class="qa-hero-main reveal rv-left">
         <div class="qa-kicker">Pipeline Gate</div>
         <div class="qa-hero-title">Dataset quality is scored before a benchmark run.</div>
         <div class="qa-hero-copy">BatteryLake combines coverage checks, schema validation, physical plausibility, and time-series integrity into one auditable diagnostic layer. Each dataset receives a machine-readable report that can block or approve downstream training.</div>
         <div class="qa-hero-stats">
-          <div class="qa-stat"><div class="qa-stat-k">Checked Datasets</div><div class="qa-stat-v">41</div></div>
-          <div class="qa-stat"><div class="qa-stat-k">Validation Rules</div><div class="qa-stat-v">26</div></div>
+          <div class="qa-stat"><div class="qa-stat-k">Checked Datasets</div><div class="qa-stat-v" data-count="41">0</div></div>
+          <div class="qa-stat"><div class="qa-stat-k">Validation Rules</div><div class="qa-stat-v" data-count="26">0</div></div>
           <div class="qa-stat"><div class="qa-stat-k">Export Format</div><div class="qa-stat-v">JSON</div></div>
         </div>
       </div>
-      <div class="qa-hero-visual">
+      <div class="qa-hero-visual reveal rv-right" style="--d:120ms">
         <div class="qa-score-panel">
-          <div class="qa-score-ring"><div><strong>0.96</strong><span>Overall</span></div></div>
+          <div class="qa-ring-svg">
+            <svg width="128" height="128" viewBox="0 0 128 128">
+              <defs>
+                <linearGradient id="qaRingGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#34d399"/>
+                  <stop offset="100%" stop-color="#0e9b8e"/>
+                </linearGradient>
+              </defs>
+              <circle class="track" cx="64" cy="64" r="52"/>
+              <circle class="val" cx="64" cy="64" r="52" style="--off:13"/>
+            </svg>
+            <div class="qa-ring-center"><strong>0.96</strong><span>Overall</span></div>
+          </div>
           <div class="qa-score-meta">Gate score - NASA PCoE</div>
           <div class="qa-chip-row">
             <span class="qa-chip">Ready</span>
@@ -1048,7 +1306,7 @@ bash run_benchmark.sh</pre>
             <div><span>Signal QC Map</span><small>B20 - cycle 187 - normalized time</small></div>
             <span>cycle-level</span>
           </div>
-          <div class="qa-signal-row">
+          <div class="qa-signal-row" style="--d:200ms">
             <span class="qa-signal-name">Voltage<em>V(t)</em></span>
             <svg class="qa-spark v" viewBox="0 0 170 42" aria-hidden="true">
               <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
@@ -1060,7 +1318,7 @@ bash run_benchmark.sh</pre>
             </svg>
             <span class="qa-signal-status pass">pass</span>
           </div>
-          <div class="qa-signal-row">
+          <div class="qa-signal-row" style="--d:340ms">
             <span class="qa-signal-name">Current<em>I(t)</em></span>
             <svg class="qa-spark i" viewBox="0 0 170 42" aria-hidden="true">
               <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
@@ -1072,7 +1330,7 @@ bash run_benchmark.sh</pre>
             </svg>
             <span class="qa-signal-status pass">pass</span>
           </div>
-          <div class="qa-signal-row">
+          <div class="qa-signal-row" style="--d:480ms">
             <span class="qa-signal-name">Temp.<em>T(t)</em></span>
             <svg class="qa-spark t" viewBox="0 0 170 42" aria-hidden="true">
               <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
@@ -1084,7 +1342,7 @@ bash run_benchmark.sh</pre>
             </svg>
             <span class="qa-signal-status warn">warn</span>
           </div>
-          <div class="qa-signal-row">
+          <div class="qa-signal-row" style="--d:620ms">
             <span class="qa-signal-name">Capacity<em>Qd(n)</em></span>
             <svg class="qa-spark c" viewBox="0 0 170 42" aria-hidden="true">
               <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
@@ -1101,7 +1359,7 @@ bash run_benchmark.sh</pre>
     </section>
 
     <div class="qa-dimension-grid">
-      <div class="quality-card qc-completeness" data-code="QC-01">
+      <div class="quality-card qc-completeness reveal" data-dim="completeness" style="--d:0ms" data-code="QC-01">
         <div class="qc-top">
           <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.4"/><path d="M8 4v16M16 4v16M4 8h16M4 16h16"/><path d="M8 8h8v8H8z" opacity=".48"/></svg></div>
           <div class="qc-score">0.97</div>
@@ -1111,7 +1369,7 @@ bash run_benchmark.sh</pre>
         <div class="qa-progress" style="--score:97%;"><span></span></div>
         <div class="qa-card-foot"><span>Missing channels</span><span>2.1%</span></div>
       </div>
-      <div class="quality-card qc-consistency" data-code="QC-02">
+      <div class="quality-card qc-consistency reveal" data-dim="consistency" style="--d:90ms" data-code="QC-02">
         <div class="qc-top">
           <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M4 18h16M4 6v12"/><path d="M5 14c2.4 0 2.6-6 5-6s2.6 8 5 8 2.8-5 5-5"/><path d="M8 4v3M14 4v3M20 4v3"/></svg></div>
           <div class="qc-score">0.95</div>
@@ -1121,7 +1379,7 @@ bash run_benchmark.sh</pre>
         <div class="qa-progress" style="--score:95%;"><span></span></div>
         <div class="qa-card-foot"><span>Sequence issues</span><span>3 flags</span></div>
       </div>
-      <div class="quality-card qc-accuracy" data-code="QC-03">
+      <div class="quality-card qc-accuracy reveal" data-dim="accuracy" style="--d:180ms" data-code="QC-03">
         <div class="qc-top">
           <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><path d="M16.5 7.5l-3.2 3.2"/></svg></div>
           <div class="qc-score">0.92</div>
@@ -1131,7 +1389,7 @@ bash run_benchmark.sh</pre>
         <div class="qa-progress" style="--score:92%;"><span></span></div>
         <div class="qa-card-foot"><span>Physical checks</span><span>5 / 6 pass</span></div>
       </div>
-      <div class="quality-card qc-validity" data-code="QC-04">
+      <div class="quality-card qc-validity reveal" data-dim="validity" style="--d:270ms" data-code="QC-04">
         <div class="qc-top">
           <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/><path d="M9 12.2l2.1 2.1L15.8 9"/><path d="M8 7.2h8"/></svg></div>
           <div class="qc-score">1.00</div>
@@ -1144,7 +1402,7 @@ bash run_benchmark.sh</pre>
     </div>
 
     <div class="qa-workbench">
-      <section class="diag-section">
+      <section class="diag-section reveal rv-left">
         <div class="diag-head">
           <div>
             <div class="diag-title">Physical Plausibility Checks</div>
@@ -1153,34 +1411,34 @@ bash run_benchmark.sh</pre>
           <span class="diag-badge">5 passed - 1 warning</span>
         </div>
         <ul class="diag-list">
-          <li class="diag-item pass">
+          <li class="diag-item pass reveal" style="--d:0ms">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
             <div><div class="diag-name">Voltage Range Validation</div><div class="diag-detail">All cell voltages within 2.0V-4.5V nominal operating range for the stated chemistry.</div></div>
           </li>
-          <li class="diag-item pass">
+          <li class="diag-item pass reveal" style="--d:70ms">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
             <div><div class="diag-name">Energy Balance Check</div><div class="diag-detail">Charge/discharge energy integral consistency; coulombic efficiency remains within 95-105% per cycle.</div></div>
           </li>
-          <li class="diag-item pass">
+          <li class="diag-item pass reveal" style="--d:140ms">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
             <div><div class="diag-name">Capacity Monotonicity</div><div class="diag-detail">Degradation trajectory follows expected non-increasing trend with allowable recovery windows.</div></div>
           </li>
-          <li class="diag-item warn">
+          <li class="diag-item warn reveal" style="--d:210ms">
             <div class="diag-icon warn"><svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path d="M12 7v6"/><path d="M12 17h.01"/><path d="M10.3 4.6h3.4L21 19H3z"/></svg></div>
             <div><div class="diag-name">Temperature Consistency</div><div class="diag-detail">Cell surface temperature must remain within 5°C of stated test condition; one dataset needs review.</div></div>
           </li>
-          <li class="diag-item pass">
+          <li class="diag-item pass reveal" style="--d:280ms">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
             <div><div class="diag-name">Timestamp Integrity</div><div class="diag-detail">Monotonically increasing timestamps with no negative intervals or unreasonable gaps above 24h.</div></div>
           </li>
-          <li class="diag-item pass">
+          <li class="diag-item pass reveal" style="--d:350ms">
             <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
             <div><div class="diag-name">Current Direction Consistency</div><div class="diag-detail">Charge and discharge current signs follow one convention throughout the dataset.</div></div>
           </li>
         </ul>
       </section>
 
-      <section class="qa-json-card">
+      <section class="qa-json-card reveal rv-right" style="--d:120ms">
         <div class="qa-json-head">
           <div class="qa-json-title">Diagnostic Output</div>
           <span class="qa-json-pill">quality_report.json</span>
@@ -1188,10 +1446,10 @@ bash run_benchmark.sh</pre>
         <pre class="qa-code">{
   <span class="k">"dataset_id"</span>: "dataset_03",
   <span class="k">"quality_score"</span>: {
-    <span class="k">"completeness"</span>: <span class="n">0.97</span>,
-    <span class="k">"consistency"</span>: <span class="n">0.95</span>,
-    <span class="k">"accuracy"</span>: <span class="n">0.92</span>,
-    <span class="k">"validity"</span>: <span class="n">1.00</span>
+    <span class="qa-line" data-dim="completeness"><span class="k">"completeness"</span>: <span class="n">0.97</span></span>,
+    <span class="qa-line" data-dim="consistency"><span class="k">"consistency"</span>: <span class="n">0.95</span></span>,
+    <span class="qa-line" data-dim="accuracy"><span class="k">"accuracy"</span>: <span class="n">0.92</span></span>,
+    <span class="qa-line" data-dim="validity"><span class="k">"validity"</span>: <span class="n">1.00</span></span>
   },
   <span class="k">"overall"</span>: <span class="n">0.96</span>,
   <span class="k">"gate"</span>: "ready_with_warning",
@@ -1525,53 +1783,64 @@ bash run_benchmark.sh</pre>
       <div class="page-desc">Access open APIs for data download and benchmarking, or develop end-to-end applications with feature engineering and model interpretation on the BatteryLake platform.</div>
     </div>
 
-    <section class="api-console">
+    <section class="api-console reveal">
       <div class="api-console-head">
         <div>
           <div class="api-console-kicker">Developer console</div>
           <div class="api-console-title">Explore endpoints as a working platform surface, not a brochure.</div>
-          <div class="api-console-copy">The page now groups the public data API, benchmark execution API, and planned analysis applications into a single console pattern: choose a route, inspect required parameters, preview the response, then decide which app surface to launch.</div>
+          <div class="api-console-copy">Choose a route from the library, inspect its parameters, preview the request, then run a simulated call to see the exact response shape the platform returns.</div>
         </div>
         <div class="api-console-stats">
-          <div class="api-stat"><span>Live routes</span><strong>12</strong></div>
-          <div class="api-stat"><span>Formats</span><strong>4</strong></div>
+          <div class="api-stat"><span>Live routes</span><strong data-count="12">0</strong></div>
+          <div class="api-stat"><span>Formats</span><strong data-count="4">0</strong></div>
           <div class="api-stat"><span>Auth mode</span><strong>Token</strong></div>
         </div>
       </div>
       <div class="api-console-body">
-        <nav class="api-route-rail" aria-label="API route groups">
+        <nav class="api-route-rail" id="api-route-rail" aria-label="API route groups">
           <div class="api-rail-title">Route library</div>
-          <div class="api-route active"><span class="api-method">GET</span><span><strong>Dataset catalog</strong><span>List datasets, metadata, DOI, and readiness.</span></span></div>
-          <div class="api-route"><span class="api-method">GET</span><span><strong>Cell time-series</strong><span>Stream voltage, current, and temperature by cell.</span></span></div>
-          <div class="api-route"><span class="api-method post">POST</span><span><strong>Benchmark run</strong><span>Create SOH or RUL experiments from selected data.</span></span></div>
-          <div class="api-route"><span class="api-method post">POST</span><span><strong>Feature recipe</strong><span>Submit formula features for preprocessing.</span></span></div>
+          <div class="api-route active" data-route="catalog"><span class="api-method">GET</span><span><strong>Dataset catalog</strong><span>List datasets, metadata, DOI, and readiness.</span></span></div>
+          <div class="api-route" data-route="timeseries"><span class="api-method">GET</span><span><strong>Cell time-series</strong><span>Stream voltage, current, and temperature by cell.</span></span></div>
+          <div class="api-route" data-route="benchmark"><span class="api-method post">POST</span><span><strong>Benchmark run</strong><span>Create SOH or RUL experiments from selected data.</span></span></div>
+          <div class="api-route" data-route="recipe"><span class="api-method post">POST</span><span><strong>Feature recipe</strong><span>Submit formula features for preprocessing.</span></span></div>
         </nav>
 
-        <section class="api-endpoint-board">
+        <section class="api-endpoint-board api-swap" id="api-board-swap">
           <div class="api-panel-top">
             <div>
-              <div class="api-panel-title">Dataset catalog endpoint</div>
-              <div class="api-panel-sub">Designed for search, filtering, and benchmark preparation. The response returns only datasets that pass the required ETL and quality gates.</div>
+              <div class="api-panel-title" id="api-ep-title">Dataset catalog endpoint</div>
+              <div class="api-panel-sub" id="api-ep-sub">Designed for search, filtering, and benchmark preparation. The response returns only datasets that pass the required ETL and quality gates.</div>
             </div>
-            <span class="api-status-pill">Available</span>
+            <span class="api-status-pill" id="api-ep-status">Available</span>
           </div>
-          <div class="api-endpoint-path"><span>GET</span>/v1/datasets?chemistry=LCO&quality=ready</div>
-          <div class="api-param-grid">
+          <div class="api-endpoint-path" id="api-ep-path"><span>GET</span>/v1/datasets?chemistry=LCO&amp;quality=ready</div>
+          <div class="api-param-grid" id="api-ep-params">
             <div class="api-param"><span>chemistry</span><strong>LCO | LFP | NMC</strong></div>
             <div class="api-param"><span>format</span><strong>CSV | Parquet</strong></div>
             <div class="api-param"><span>split_ready</span><strong>true</strong></div>
           </div>
-          <div class="api-response-strip">
+          <div class="api-response-strip" id="api-ep-fields">
             <div>dataset_id</div>
             <div>cell_count</div>
             <div>cycle_count</div>
             <div>quality_score</div>
           </div>
+          <div class="api-run-row">
+            <button class="api-run-btn" id="api-run-btn" type="button">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+              Run request
+            </button>
+            <span class="api-run-status" id="api-run-status"></span>
+          </div>
+          <div class="api-response-view" id="api-response-view">
+            <div class="api-response-head"><span>response · application/json</span><span class="code-200">200 OK</span></div>
+            <pre class="api-response-body" id="api-response-body"></pre>
+          </div>
         </section>
 
-        <aside class="api-code-panel">
-          <div class="api-code-head"><span>Request preview</span><span>Python</span></div>
-          <pre class="api-code">import requests
+        <aside class="api-code-panel api-swap" id="api-code-swap">
+          <div class="api-code-head"><span>Request preview</span><button class="api-copy-btn" id="api-copy-btn" type="button">copy</button></div>
+          <pre class="api-code" id="api-ep-code">import requests
 
 resp = requests.get(
   <span class="accent">"https://api.batterylake.org/v1/datasets"</span>,
@@ -1585,7 +1854,7 @@ for dataset in resp.json()["items"]:
       </div>
     </section>
 
-    <section class="app-workbench">
+    <section class="app-workbench reveal">
       <div class="api-panel-top">
         <div>
           <div class="app-workbench-title">Application workbench</div>
@@ -1594,14 +1863,14 @@ for dataset in resp.json()["items"]:
         <span class="api-status-pill">3 surfaces</span>
       </div>
       <div class="app-workbench-grid">
-        <div class="app-module"><span>Benchmark</span><strong>Experiment Builder</strong><p>Pick datasets, split cells, select models, and run comparable SOH/RUL benchmarks.</p></div>
-        <div class="app-module"><span>Features</span><strong>Formula Studio</strong><p>Upload custom signal formulas and compute cycle-level model inputs from raw curves.</p></div>
-        <div class="app-module"><span>Explain</span><strong>Interpretation Lab</strong><p>Inspect feature importance, attention maps, and degradation signals after training.</p></div>
+        <div class="app-module reveal" style="--d:0ms"><span>Benchmark</span><strong>Experiment Builder</strong><p>Pick datasets, split cells, select models, and run comparable SOH/RUL benchmarks.</p></div>
+        <div class="app-module reveal" style="--d:110ms"><span>Features</span><strong>Formula Studio</strong><p>Upload custom signal formulas and compute cycle-level model inputs from raw curves.</p></div>
+        <div class="app-module reveal" style="--d:220ms"><span>Explain</span><strong>Interpretation Lab</strong><p>Inspect feature importance, attention maps, and degradation signals after training.</p></div>
       </div>
     </section>
 
     <div class="api-grid">
-      <div class="api-card">
+      <div class="api-card reveal" style="--d:0ms">
         <div class="api-badge badge-open">Open API</div>
         <div class="api-card-title">Data Download API</div>
         <div class="api-card-desc">Access harmonized, quality-assessed datasets via RESTful endpoints with embedded citations, metadata, and provenance tracking.</div>
@@ -1613,7 +1882,7 @@ for dataset in resp.json()["items"]:
         </ul>
       </div>
 
-      <div class="api-card">
+      <div class="api-card reveal" style="--d:90ms">
         <div class="api-badge badge-open">Open API</div>
         <div class="api-card-title">Benchmark API</div>
         <div class="api-card-desc">Run standardized ML benchmarks across curated datasets with reproducible train/val/test splits and unified evaluation metrics.</div>
@@ -1625,7 +1894,7 @@ for dataset in resp.json()["items"]:
         </ul>
       </div>
 
-      <div class="api-card">
+      <div class="api-card reveal" style="--d:180ms">
         <div class="api-badge badge-coming">Coming Soon</div>
         <div class="api-card-title">Feature Engineering</div>
         <div class="api-card-desc">Build custom feature extraction pipelines with interactive notebooks. Extract dQ/dV features, health indicators, and domain-specific signals for advanced analytics.</div>
@@ -1637,7 +1906,7 @@ for dataset in resp.json()["items"]:
         </ul>
       </div>
 
-      <div class="api-card">
+      <div class="api-card reveal" style="--d:270ms">
         <div class="api-badge badge-coming">Coming Soon</div>
         <div class="api-card-title">Model Interpretation</div>
         <div class="api-card-desc">Understand model predictions with explainability tools. Visualize attention maps, feature importance, and identify key battery aging patterns driving predictions.</div>
@@ -1650,16 +1919,29 @@ for dataset in resp.json()["items"]:
       </div>
     </div>
 
-    <h3 style="font-family:var(--display);font-size:18px;margin:28px 0 10px;">Platform Roadmap</h3>
-    <table class="model-table">
-      <thead><tr><th>Module</th><th>Type</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Data Download API</strong></td><td>Open API</td><td><span class="status-badge status-done">Available</span></td></tr>
-        <tr><td><strong>Benchmark API</strong></td><td>Open API</td><td><span class="status-badge status-wip">In Progress</span></td></tr>
-        <tr><td><strong>Feature Engineering</strong></td><td>E2E Application</td><td><span class="status-badge status-pending">Planned</span></td></tr>
-        <tr><td><strong>Model Interpretation</strong></td><td>E2E Application</td><td><span class="status-badge status-pending">Planned</span></td></tr>
-      </tbody>
-    </table>
+    <h3 class="reveal" style="font-family:var(--display);font-size:18px;margin:28px 0 10px;">Platform Roadmap</h3>
+    <div class="api-roadmap reveal">
+      <div class="api-roadmap-item">
+        <span class="api-roadmap-dot done"></span>
+        <div><b>Data Download API</b><p>Open API — harmonized dataset access with provenance and citations.</p></div>
+        <span class="api-roadmap-status done">Available</span>
+      </div>
+      <div class="api-roadmap-item">
+        <span class="api-roadmap-dot wip"></span>
+        <div><b>Benchmark API</b><p>Open API — reproducible SOH / RUL experiment execution.</p></div>
+        <span class="api-roadmap-status wip">In Progress</span>
+      </div>
+      <div class="api-roadmap-item">
+        <span class="api-roadmap-dot plan"></span>
+        <div><b>Feature Engineering</b><p>End-to-end application — dQ/dV, health indicators, formula features.</p></div>
+        <span class="api-roadmap-status plan">Planned</span>
+      </div>
+      <div class="api-roadmap-item">
+        <span class="api-roadmap-dot plan"></span>
+        <div><b>Model Interpretation</b><p>End-to-end application — SHAP, attention maps, attribution.</p></div>
+        <span class="api-roadmap-status plan">Planned</span>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -1927,5 +2209,6 @@ for dataset in resp.json()["items"]:
   </section>
 </div>
 <script src="js/assistant.js"></script>
+<script src="js/showcase.js"></script>
 </body>
 </html>
