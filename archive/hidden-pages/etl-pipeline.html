@@ -1,0 +1,130 @@
+<!--
+Archived from index.html on 2026-07-07.
+Restore by moving this section back before PAGE: DOCS and re-adding the sidebar item:
+<li><a onclick="showPage('pipeline', this)">ETL Pipeline</a></li>
+-->
+
+<!-- PAGE: PIPELINE -->
+<div class="page reference-page pipeline-page" id="page-pipeline">
+  <div class="page-header reference-hero pipeline-hero visual-page-hero">
+    <div class="page-title">ETL Pipeline</div>
+    <div class="page-desc">Standardized data processing pipeline that converts heterogeneous raw battery data into a unified Parquet/CSV format for benchmark evaluation.</div>
+    <div class="reference-hero-tags visual-page-actions" aria-label="ETL pipeline outputs">
+      <span>raw to curated</span>
+      <span>schema validation</span>
+      <span>benchmark ready</span>
+    </div>
+    <img class="reference-hero-art pipeline-hero-art visual-page-hero-art" src="assets/images/etl-pipeline-hero-reference-transparent.png?v=4" alt="" aria-hidden="true">
+  </div>
+
+  <div class="pipeline-flow etl-flow-card" aria-label="ETL pipeline orchestration">
+    <div class="etl-flow-head">
+      <div>
+        <div class="etl-flow-kicker">Pipeline orchestration</div>
+        <div class="etl-flow-title">Raw measurements to benchmark-ready assets</div>
+      </div>
+      <div class="etl-flow-summary" aria-label="Pipeline summary">
+        <span>7 stages</span>
+        <span>4 artifacts</span>
+        <span>QC gated</span>
+      </div>
+    </div>
+
+    <div class="etl-flow-lane">
+      <div class="etl-lane-label">Data Preparation</div>
+      <div class="etl-stage-row etl-stage-row-prep">
+        <div class="pf-step done" data-step="01">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">Raw Data</div>
+            <div class="pf-desc">Battery files, registry fields, source notes</div>
+            <span class="pf-status">Ready</span>
+          </div>
+        </div>
+        <div class="pf-step done" data-step="02">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 17l4 4 4-4"/><path d="M12 12v9"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">Download &amp; Validate</div>
+            <div class="pf-desc">Schema, units, ranges, missing channels</div>
+            <span class="pf-status">Checked</span>
+          </div>
+        </div>
+        <div class="pf-step done" data-step="03">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">ETL Processing</div>
+            <div class="pf-desc">Normalize cycles into common tables</div>
+            <span class="pf-status">Curated</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="etl-flow-lane">
+      <div class="etl-lane-label">Benchmark Execution</div>
+      <div class="etl-stage-row etl-stage-row-benchmark">
+        <div class="pf-step current" data-step="04">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">Split Protocol</div>
+            <div class="pf-desc">Train / validation / test cell routing</div>
+            <span class="pf-status">Active</span>
+          </div>
+        </div>
+        <div class="pf-step" data-step="05">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">Training</div>
+            <div class="pf-desc">Baseline SOH / RUL model package</div>
+            <span class="pf-status muted">Queued</span>
+          </div>
+        </div>
+        <div class="pf-step" data-step="06">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">Evaluation</div>
+            <div class="pf-desc">RMSE, MAE, MAPE and diagnostics</div>
+            <span class="pf-status muted">Queued</span>
+          </div>
+        </div>
+        <div class="pf-step" data-step="07">
+          <div class="pf-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="pf-copy">
+            <div class="pf-label">Results</div>
+            <div class="pf-desc">Comparison plots and export package</div>
+            <span class="pf-status muted">Queued</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="reference-section-title">Output Schema</h3>
+  <div class="bench-cards">
+    <div class="bench-card">
+      <div class="bc-title">metadata.json</div>
+      <div class="bc-desc">Cell-level metadata: chemistry, form factor, nominal capacity, source lab, test conditions, publication DOI.</div>
+    </div>
+    <div class="bench-card">
+      <div class="bc-title">timeseries.parquet</div>
+      <div class="bc-desc">Raw measurement time-series: voltage_V, current_A, temperature_C, capacity_Ah, timestamp - per cycle per cell.</div>
+    </div>
+    <div class="bench-card">
+      <div class="bc-title">cycle_summary.csv</div>
+      <div class="bc-desc">Cycle-level aggregates: discharge capacity, charge capacity, coulombic efficiency, IR, cycle number - one row per cycle.</div>
+    </div>
+    <div class="bench-card">
+      <div class="bc-title">dataset_note.md</div>
+      <div class="bc-desc">Human-readable documentation: data provenance, known issues, preprocessing decisions, and usage recommendations.</div>
+    </div>
+  </div>
+
+  <h3 class="reference-section-title">Pipeline Scope</h3>
+  <table class="model-table">
+    <thead><tr><th>Part</th><th>Scope</th><th>Datasets</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Part 1</strong></td><td>Data Curation &amp; ETL Pipeline</td><td>01-38 + Internal + EEE</td></tr>
+      <tr><td><strong>Part 2</strong></td><td>Benchmark Models &amp; Evaluation</td><td>SOH + RUL - 5 models</td></tr>
+    </tbody>
+  </table>
+</div>
