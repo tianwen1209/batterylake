@@ -1225,8 +1225,13 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .prep-kicker { display: none; }
 .prep-title { font-family: var(--sans); font-size: 23px; margin-top: 0; font-weight: 750; letter-spacing: -.01em; }
 .prep-lead { max-width: 980px; font-size: 14px; margin-top: 5px; }
+#page-preprocessing .prep-page-hero { margin-bottom: 18px; }
+#page-preprocessing .prep-page-hero .page-title { max-width: min(640px, 55%); }
+#page-preprocessing .prep-page-hero .page-desc { max-width: min(690px, 57%); }
 .prep-task-card { min-height: auto; }
 .prep-task-output + .prep-task-output { margin-top: 6px; }
+.prep-task-panel { min-width: 0; }
+.prep-task-panel[hidden] { display: none !important; }
 .prep-steps { grid-template-columns: repeat(5, 1fr); margin: 20px 0; gap: 10px; }
 .prep-step { padding: 11px 12px; border-radius: 10px; cursor: pointer; }
 .prep-step-num { width: 30px; height: 30px; flex-basis: 30px; }
@@ -1256,6 +1261,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .skill-package-value { padding: 11px 12px; border: 1px solid var(--border); border-radius: 8px; background: #fff; font: 600 12px var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ai-agent-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 14px; padding: 12px 14px; border: 1px solid #bfdbfe; border-radius: 10px; background: #f8fbff; }
 #metadataTaskPanel[hidden] { display: none; }
+#metadataTaskPanel { align-items: stretch; }
+#metadataTaskPanel .ai-agent-copy { width: 100%; flex: 1 1 auto; }
 .ai-agent-copy { min-width: 0; }
 .ai-agent-title { color: var(--text1); font-size: 13px; font-weight: 750; }
 .ai-agent-sub { color: var(--text3); font-size: 12px; line-height: 1.45; margin-top: 2px; }
@@ -1264,8 +1271,9 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .ai-inspect-title { color: var(--text1); font-size: 15px; font-weight: 750; }
 .ai-inspect-sub { color: var(--text3); font-size: 12.5px; line-height: 1.45; margin-top: 3px; max-width: 760px; }
 .ai-inspect-summary { color: var(--text2); font: 700 11px var(--mono); white-space: nowrap; padding: 5px 10px; border: 1px solid var(--border); border-radius: 999px; background: #fff; }
-.ai-field-table { display: flex; flex-direction: column; margin: 0 28px 28px 102px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #fff; }
-.ai-field-row { display: grid; grid-template-columns: 170px minmax(150px, 1fr) minmax(220px, 1.45fr) 130px minmax(190px, 1fr); gap: 14px; align-items: start; padding: 14px 16px; border-top: 1px solid #edf0f5; }
+.ai-field-table { display: flex; flex-direction: column; margin: 0 28px 28px 102px; border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; overflow-y: hidden; background: #fff; -webkit-overflow-scrolling: touch; }
+.ai-field-row { display: grid; grid-template-columns: minmax(140px, .85fr) minmax(150px, 1fr) minmax(240px, 1.35fr) minmax(120px, .7fr) minmax(190px, 1fr); min-width: 980px; gap: 14px; align-items: start; padding: 14px 16px; border-top: 1px solid #edf0f5; }
+.ai-field-row > * { min-width: 0; }
 .ai-field-row:first-child { border-top: 0; }
 .ai-field-row.is-confirmed { background: #fbfcff; }
 .ai-field-label { color: var(--text3); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
@@ -1298,7 +1306,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .analysis-summary { grid-template-columns: 1fr 1fr; }
   .summary-stat { border-left: 0; }
   .channel-grid { grid-template-columns: repeat(2,1fr); }
-  .ai-field-row { grid-template-columns: 1fr 1fr; }
+  .ai-field-row { grid-template-columns: minmax(150px, 1fr) minmax(160px, 1fr) minmax(220px, 1.3fr); min-width: 760px; }
   .ai-inspect-head, .ai-field-table, .ai-refname-card, .file-role-panel { margin-left: 28px; }
 }
 @media (max-width: 820px) {
@@ -1350,6 +1358,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .evidence-table { min-width: 760px; }
   .evidence-scroll { overflow-x: auto; }
   .prep-card-body, .analysis-summary, .evidence-scroll, .ai-inspect-head, .ai-field-table, .ai-refname-card, .file-role-panel { margin-left: 14px; margin-right: 14px; }
+  .ai-field-table { overflow-x: visible; }
+  .ai-field-row { min-width: 0; grid-template-columns: 1fr; }
   .ai-agent-strip, .ai-inspect-head { align-items: stretch; flex-direction: column; }
   .prep-card-head { padding: 20px 14px 16px; }
   .skill-package-grid { grid-template-columns: 1fr; }

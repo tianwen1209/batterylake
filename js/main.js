@@ -1045,7 +1045,7 @@ const BATTERYLAKE_METADATA_FIELDS = [
 let prepAIState = prepAIFields.map(field => ({
   ...field,
   value: '',
-  evidence: 'No inspection yet - upload raw data and run AI inspection.',
+  evidence: 'No inspection yet',
   confidence: 0,
   confirmed: false,
   pending: true
@@ -1096,14 +1096,23 @@ function prepAgentNote(message) {
 
 function selectPrepTask(task) {
   activePrepTask = task === 'metadata' ? 'metadata' : 'raw';
+  if (prepStage !== 1) showPrepStage(1);
   document.getElementById('taskRawCard')?.classList.toggle('active', activePrepTask === 'raw');
   document.getElementById('taskMetadataCard')?.classList.toggle('active', activePrepTask === 'metadata');
+  const rawPanel = document.getElementById('rawTaskPanel');
   const metadataPanel = document.getElementById('metadataTaskPanel');
+  const sectionTitle = document.getElementById('prepTaskSectionTitle');
+  const sectionDesc = document.getElementById('prepTaskSectionDesc');
+  if (rawPanel) rawPanel.hidden = activePrepTask !== 'raw';
   if (metadataPanel) metadataPanel.hidden = activePrepTask !== 'metadata';
   if (activePrepTask === 'raw') {
+    if (sectionTitle) sectionTitle.textContent = 'Task 1: Upload raw measurement data';
+    if (sectionDesc) sectionDesc.textContent = 'Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.';
     prepToast('Task 1 selected: convert raw measurement files.');
     prepAgentNote('Task 1 selected. I should inspect true raw battery measurement files and prepare conversion into timeseries and cycle_summary outputs.');
   } else {
+    if (sectionTitle) sectionTitle.textContent = 'Task 2: Metadata extraction';
+    if (sectionDesc) sectionDesc.textContent = 'Use source pages, GitHub repositories, DOI pages and papers to produce BatteryLake-compatible metadata.';
     prepToast('Task 2 selected: extract dataset metadata from source pages.');
     prepAgentNote('Task 2 selected. I should read source pages, GitHub/DOI pages or papers, then fill dataset_metadata.csv fields with evidence. Metadata-only files should not be treated as raw measurement data.');
   }
@@ -1427,7 +1436,7 @@ function renderAIFieldTable() {
         </div>
         <div>
           <div class="ai-field-mini">Source evidence</div>
-          <div class="ai-field-ev">${esc(field.evidence || 'No evidence yet.')}</div>
+          <div class="ai-field-ev">${esc(field.evidence || 'No inspection yet')}</div>
         </div>
         <div>
           <div class="ai-field-mini">Confidence</div>

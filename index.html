@@ -1282,9 +1282,10 @@ bash run_benchmark.sh</pre>
        ═══════════════════════════════════════ -->
   <div class="page" id="page-preprocessing">
     <div class="prep-shell">
-      <span class="prep-kicker">Evidence-first workflow</span>
-      <h1 class="prep-title">Preprocessing</h1>
-      <p class="prep-lead">Convert raw battery data or source evidence into BatteryLake-ready preprocessing outputs.</p>
+      <div class="page-header quality-page-hero visual-page-hero prep-page-hero">
+        <div class="page-title">Preprocessing</div>
+        <div class="page-desc">Convert raw battery data or source evidence into BatteryLake-ready preprocessing outputs.</div>
+      </div>
 
       <div class="prep-task-grid" aria-label="BatteryTwin preprocessing tasks">
         <div class="prep-task-card active" id="taskRawCard" onclick="selectPrepTask('raw')">
@@ -1312,27 +1313,36 @@ bash run_benchmark.sh</pre>
       <section class="prep-card prep-stage active" data-prep-stage="1">
         <div class="prep-card-head">
           <span class="prep-card-index">1</span>
-          <div><div class="prep-card-title">Task 1: Upload raw measurement data</div><div class="prep-card-desc">Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.</div></div>
+          <div><div class="prep-card-title" id="prepTaskSectionTitle">Task 1: Upload raw measurement data</div><div class="prep-card-desc" id="prepTaskSectionDesc">Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.</div></div>
         </div>
-        <div class="prep-card-body source-grid">
-          <div>
-            <label class="drop-zone" id="prepDropZone" for="prepFileInput">
-              <input id="prepFileInput" type="file" multiple hidden onchange="handlePrepFileInput(event)">
-              <input id="prepFolderInput" type="file" multiple webkitdirectory directory hidden onchange="handlePrepFileInput(event)">
-              <span class="drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
-              <span><span class="drop-title">Choose or drop almost any raw file or folder</span></span>
-            </label>
-            <div class="prep-selected-files" id="prepSelectedFiles">No files queued.</div>
-            <div style="margin-top:10px;"><button class="prep-btn secondary" type="button" onclick="document.getElementById('prepFolderInput').click()">Choose folder</button></div>
-            <div class="source-or">or provide a path accessible to your AI agent</div>
-            <div class="path-row">
-              <input class="prep-input" id="prepPath" value="" placeholder="Paste a real local file or folder path, e.g. C:\Users\41604\Downloads\data.json" aria-label="Dataset path">
-              <button class="prep-btn" type="button" onclick="runPrepFileInspection()">Run AI inspection</button>
-              <button class="prep-btn secondary" type="button" onclick="runPrepInspection()">Inspect path</button>
+        <div class="prep-card-body">
+          <div class="prep-task-panel source-grid" id="rawTaskPanel">
+            <div>
+              <label class="drop-zone" id="prepDropZone" for="prepFileInput">
+                <input id="prepFileInput" type="file" multiple hidden onchange="handlePrepFileInput(event)">
+                <input id="prepFolderInput" type="file" multiple webkitdirectory directory hidden onchange="handlePrepFileInput(event)">
+                <span class="drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
+                <span><span class="drop-title">Choose or drop almost any raw file or folder</span></span>
+              </label>
+              <div class="prep-selected-files" id="prepSelectedFiles">No files queued.</div>
+              <div style="margin-top:10px;"><button class="prep-btn secondary" type="button" onclick="document.getElementById('prepFolderInput').click()">Choose folder</button></div>
+              <div class="source-or">or provide a path accessible to your AI agent</div>
+              <div class="path-row">
+                <input class="prep-input" id="prepPath" value="" placeholder="Paste a real local file or folder path, e.g. C:\Users\41604\Downloads\data.json" aria-label="Dataset path">
+                <button class="prep-btn" type="button" onclick="runPrepFileInspection()">Run AI inspection</button>
+                <button class="prep-btn secondary" type="button" onclick="runPrepInspection()">Inspect path</button>
+              </div>
             </div>
-            <div class="ai-agent-strip" id="metadataTaskPanel" hidden>
+            <aside class="inspect-scope">
+              <div class="scope-title">The AI checks first</div>
+              <ul class="scope-list">
+                <li>Folder structure and filenames</li><li>Sheets, MAT keys and nested fields</li><li>Headers, units and sample rows</li><li>Context, schema and validator files</li><li>Existing output directory contents</li>
+              </ul>
+              <p class="privacy-note">Full files are not loaded into the browser. The generated skill instructs the local agent to inspect and process them in place.</p>
+            </aside>
+          </div>
+          <div class="prep-task-panel ai-agent-strip" id="metadataTaskPanel" hidden>
               <div class="ai-agent-copy">
-                <div class="prep-card-title">Task 2: Metadata extraction</div>
                 <div class="ai-agent-sub">Start with the dataset source URL. The agent checks what the source page can support, reports missing BatteryLake fields, then uses an optional paper URL to fill the gaps before you manually confirm the final metadata.</div>
                 <div class="metadata-flow-grid">
                   <div>
@@ -1374,15 +1384,7 @@ bash run_benchmark.sh</pre>
                 </label>
               </div>
             </div>
-            <div class="inspect-progress" id="inspectProgress"><span></span></div>
-          </div>
-          <aside class="inspect-scope">
-            <div class="scope-title">The AI checks first</div>
-            <ul class="scope-list">
-              <li>Folder structure and filenames</li><li>Sheets, MAT keys and nested fields</li><li>Headers, units and sample rows</li><li>Context, schema and validator files</li><li>Existing output directory contents</li>
-            </ul>
-            <p class="privacy-note">Full files are not loaded into the browser. The generated skill instructs the local agent to inspect and process them in place.</p>
-          </aside>
+          <div class="inspect-progress" id="inspectProgress"><span></span></div>
         </div>
       </section>
 
