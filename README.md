@@ -236,12 +236,11 @@ Every dataset keeps attribution to its original source. **Please cite the underl
 
 Developed at **Nanyang Technological University, Singapore**.
 
-| Role | Member |
+| Group | Members |
 |---|---|
-| **Principal Investigator** | Prof. Yonggang Wen |
-| **Research Fellow** | Wang Hao |
-| **Core Researcher** | Zhu Tianwen |
-| **Web Engineering** | Liu Kefan · Cao Han |
+| **Project Supervisors** | Prof. Yonggang Wen *(Principal Investigator)* · Dr Wang Hao *(Research Fellow)* |
+| **Core Researcher** | Zhu Tianwen *(PhD Candidate)* |
+| **Web Engineering** | Liu Kefan · Cao Han · Cai Yezi *(Frontend Engineers)* |
 
 ---
 
