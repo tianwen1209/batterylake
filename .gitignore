@@ -2,6 +2,7 @@
 batterytwin.html
 
 # Local-only files (kept on disk, not pushed to GitHub)
+.cursor/
 batterytwin_v2.html
 index0703.html
 batterytwin-preprocessing/

@@ -1327,7 +1327,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .contrib-req-title,
 .ml-package-t,
 .ml-d-name,
-.qa-hero-title,
 .pp-title,
 .api-console-title,
 .contrib-cockpit-title,
@@ -1361,13 +1360,11 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .bw-field-lbl,
 .bw-check-title,
 .ml-group-h,
-.qa-kicker,
 .pp-kicker,
 .api-console-kicker,
 .contrib-cockpit-kicker,
 .pp-panel-kicker,
 .api-rail-title,
-.qa-stat-k,
 .pp-status-k,
 .bw-advanced-tag,
 .bw-command-head,
@@ -1381,7 +1378,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   text-transform: uppercase;
   letter-spacing: .085em !important;
 }
-.qa-kicker,
 .pp-kicker,
 .api-console-kicker,
 .contrib-cockpit-kicker,
@@ -1400,7 +1396,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 }
 .metric-label,
 .filter-label,
-.qa-stat-k,
 .pp-status-k,
 .api-stat span,
 .contrib-stat span,
@@ -1408,7 +1403,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .contrib-file-tile span {
   color: var(--text3);
 }
-.qa-hero-title,
 .pp-title,
 .api-console-title,
 .contrib-cockpit-title,
@@ -1486,10 +1480,8 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .page p,
 .page li,
 .bc-desc,
-.qc-desc,
 .diag-detail,
 .diag-sub,
-.qa-hero-copy,
 .pp-copy,
 .pp-panel-copy,
 .bw-package-sub,
@@ -1536,8 +1528,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .bw-stat-val,
 .bw-rstat-v,
 .qc-score,
-.qa-score-ring strong,
-.qa-stat-v,
+.qc-overall-ring-center strong,
 .pp-status-v,
 .api-stat strong,
 .contrib-stat strong,
@@ -2086,6 +2077,7 @@ body, .main, .page { color: var(--text1); }
 .quality-card,
 .diag-section,
 .qa-json-card,
+.qa-upload-panel,
 .pp-main-card,
 .pp-side-card,
 .pp-op,
@@ -2138,7 +2130,8 @@ body, .main, .page { color: var(--text1); }
 .bw-result-controls select,
 .bw-feat-add,
 .bw-file-ic,
-.bw-import-btn {
+.bw-import-btn,
+.qa-results-bar {
   background: var(--surface-alt) !important;
   border-color: var(--border) !important;
   color: var(--text2) !important;
@@ -2358,9 +2351,13 @@ pre {
 [data-theme="dark"] .oh-hero,
 [data-theme="dark"] .contribute-hero,
 [data-theme="dark"] .api-hero,
-[data-theme="dark"] .qa-hero {
+[data-theme="dark"] .qa-upload-panel {
   border-color: var(--border2) !important;
 }
+
+[data-theme="dark"] .qc-overall-ring::after { background: var(--surface) !important; }
+[data-theme="dark"] .qc-overall-ring { background: conic-gradient(var(--qc-color) calc(var(--pct) * 3.6deg), var(--bg3) 0deg) !important; }
+[data-theme="dark"] .qa-progress { background: var(--bg3) !important; }
 
 #page-benchmarks [data-bw-step="2"] > .bw-pbody {
   display: flex;

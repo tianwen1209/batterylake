@@ -1269,181 +1269,128 @@ bash run_benchmark.sh</pre>
       <img class="quality-hero-art visual-page-hero-art" src="assets/images/quality-assessment-hero-transparent.png?v=1" alt="" aria-hidden="true">
     </div>
 
-    <section class="qa-hero">
-      <div class="qa-hero-main reveal rv-left">
-        <div class="qa-kicker">Pipeline Gate</div>
-        <div class="qa-hero-title">Dataset quality is scored before a benchmark run.</div>
-        <div class="qa-hero-copy">BatteryLake combines coverage checks, schema validation, physical plausibility, and time-series integrity into one auditable diagnostic layer. Each dataset receives a machine-readable report that can block or approve downstream training.</div>
-        <div class="qa-hero-stats">
-          <div class="qa-stat"><div class="qa-stat-k">Checked Datasets</div><div class="qa-stat-v" data-count="41">0</div></div>
-          <div class="qa-stat"><div class="qa-stat-k">Validation Rules</div><div class="qa-stat-v" data-count="26">0</div></div>
-          <div class="qa-stat"><div class="qa-stat-k">Export Format</div><div class="qa-stat-v">JSON</div></div>
-        </div>
-      </div>
-      <div class="qa-hero-visual reveal rv-right" style="--d:120ms">
-        <div class="qa-score-panel">
-          <div class="qa-ring-svg">
-            <svg width="128" height="128" viewBox="0 0 128 128">
-              <defs>
-                <linearGradient id="qaRingGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#34d399"/>
-                  <stop offset="100%" stop-color="#0e9b8e"/>
-                </linearGradient>
-              </defs>
-              <circle class="track" cx="64" cy="64" r="52"/>
-              <circle class="val" cx="64" cy="64" r="52" style="--off:13"/>
-            </svg>
-            <div class="qa-ring-center"><strong>0.96</strong><span>Overall</span></div>
-          </div>
-          <div class="qa-score-meta">Gate score - NASA PCoE</div>
-          <div class="qa-chip-row">
-            <span class="qa-chip">Ready</span>
-            <span class="qa-chip warn">1 warning</span>
-          </div>
-        </div>
-        <div class="qa-signal-map" aria-label="Signal quality map">
-          <div class="qa-signal-head">
-            <div><span>Signal QC Map</span><small>B20 - cycle 187 - normalized time</small></div>
-            <span>cycle-level</span>
-          </div>
-          <div class="qa-signal-row" style="--d:200ms">
-            <span class="qa-signal-name">Voltage<em>V(t)</em></span>
-            <svg class="qa-spark v" viewBox="0 0 170 42" aria-hidden="true">
-              <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
-              <path class="qa-spark-band" d="M8 9H166V16H8z"/>
-              <path class="qa-spark-axis" d="M8 36H166"/>
-              <path class="qa-spark-area" d="M8 35C18 31 29 22 43 15C55 9 68 8 90 9C102 10 107 17 114 21C129 25 142 31 166 35V38H8Z"/>
-              <path class="qa-spark-path" d="M8 35C18 31 29 22 43 15C55 9 68 8 90 9C102 10 107 17 114 21C129 25 142 31 166 35"/>
-              <circle class="qa-spark-dot" cx="90" cy="9" r="2.5"/>
-            </svg>
-            <span class="qa-signal-status pass">pass</span>
-          </div>
-          <div class="qa-signal-row" style="--d:340ms">
-            <span class="qa-signal-name">Current<em>I(t)</em></span>
-            <svg class="qa-spark i" viewBox="0 0 170 42" aria-hidden="true">
-              <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
-              <path class="qa-spark-axis" d="M8 24H166"/>
-              <path class="qa-spark-area" d="M8 14H48V24H67V34H129V24H166V38H8Z"/>
-              <path class="qa-spark-path" d="M8 14H48V24H67V34H129V24H166"/>
-              <circle class="qa-spark-dot" cx="48" cy="14" r="2.5"/>
-              <circle class="qa-spark-dot" cx="129" cy="34" r="2.5"/>
-            </svg>
-            <span class="qa-signal-status pass">pass</span>
-          </div>
-          <div class="qa-signal-row" style="--d:480ms">
-            <span class="qa-signal-name">Temp.<em>T(t)</em></span>
-            <svg class="qa-spark t" viewBox="0 0 170 42" aria-hidden="true">
-              <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
-              <path class="qa-spark-band" d="M8 10H166V18H8z"/>
-              <path class="qa-spark-axis" d="M8 36H166"/>
-              <path class="qa-spark-area" d="M8 32C28 32 35 18 53 17C72 16 78 31 96 31C115 31 123 20 139 19C153 18 160 26 166 29V38H8Z"/>
-              <path class="qa-spark-path" d="M8 32C28 32 35 18 53 17C72 16 78 31 96 31C115 31 123 20 139 19C153 18 160 26 166 29"/>
-              <circle class="qa-spark-dot" cx="53" cy="17" r="2.5"/>
-            </svg>
-            <span class="qa-signal-status warn">warn</span>
-          </div>
-          <div class="qa-signal-row" style="--d:620ms">
-            <span class="qa-signal-name">Capacity<em>Qd(n)</em></span>
-            <svg class="qa-spark c" viewBox="0 0 170 42" aria-hidden="true">
-              <path class="qa-spark-grid" d="M18 6V36M52 6V36M86 6V36M120 6V36M154 6V36M8 12H166M8 24H166M8 36H166"/>
-              <path class="qa-spark-axis" d="M8 36H166"/>
-              <path class="qa-spark-area" d="M8 10C31 11 47 13 65 16C86 19 105 23 125 27C140 30 153 32 166 33V38H8Z"/>
-              <path class="qa-spark-path" d="M8 10C31 11 47 13 65 16C86 19 105 23 125 27C140 30 153 32 166 33"/>
-              <circle class="qa-spark-dot" cx="166" cy="33" r="2.5"/>
-            </svg>
-            <span class="qa-signal-status pass">pass</span>
-          </div>
-          <div class="qa-signal-footer"><span>27.4k cycles scanned</span><strong>1 review band</strong></div>
-        </div>
+    <section class="qa-upload-panel reveal">
+      <label class="drop-zone qa-drop-zone" id="qaDropZone" for="qaFileInput">
+        <input id="qaFileInput" type="file" accept=".csv,.json,.parquet,.h5,.hdf5,.txt" hidden onchange="handleQualityFileInput(event)">
+        <span class="drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
+        <span class="drop-title">Upload a dataset to assess</span>
+      </label>
+      <div class="qa-upload-actions">
+        <div class="prep-selected-files" id="qaSelectedFile">No file selected.</div>
+        <button class="prep-btn" id="qaRunBtn" type="button" onclick="runQualityAssessment()" disabled>Run Assessment</button>
       </div>
     </section>
 
-    <div class="qa-dimension-grid">
-      <div class="quality-card qc-completeness reveal" data-dim="completeness" style="--d:0ms" data-code="QC-01">
-        <div class="qc-top">
-          <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.4"/><path d="M8 4v16M16 4v16M4 8h16M4 16h16"/><path d="M8 8h8v8H8z" opacity=".48"/></svg></div>
-          <div class="qc-score">0.97</div>
+    <section class="qa-results" id="qaResults">
+      <div class="qa-results-bar reveal" id="qaResultsBar">
+        <div class="qa-results-info">
+          <span class="qa-results-file" id="qaResultsFile">dataset_03.csv</span>
+          <span class="qa-results-sep">&middot;</span>
+          <span class="qa-results-time" id="qaResultsTime">Assessed 14:32</span>
+          <span class="qa-chip" id="qaGateChip">Ready</span>
+          <span class="qa-chip warn" id="qaGateWarnChip">1 warning</span>
         </div>
-        <div class="qc-label">Completeness</div>
-        <div class="qc-desc">Data coverage and availability across all cycles and measurement channels.</div>
-        <div class="qa-progress" style="--score:97%;"><span></span></div>
-        <div class="qa-card-foot"><span>Missing channels</span><span>2.1%</span></div>
       </div>
-      <div class="quality-card qc-consistency reveal" data-dim="consistency" style="--d:90ms" data-code="QC-02">
-        <div class="qc-top">
-          <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M4 18h16M4 6v12"/><path d="M5 14c2.4 0 2.6-6 5-6s2.6 8 5 8 2.8-5 5-5"/><path d="M8 4v3M14 4v3M20 4v3"/></svg></div>
-          <div class="qc-score">0.95</div>
-        </div>
-        <div class="qc-label">Consistency</div>
-        <div class="qc-desc">Internal logical consistency: monotonic timestamps, cycle numbering, and pattern adherence.</div>
-        <div class="qa-progress" style="--score:95%;"><span></span></div>
-        <div class="qa-card-foot"><span>Sequence issues</span><span>3 flags</span></div>
-      </div>
-      <div class="quality-card qc-accuracy reveal" data-dim="accuracy" style="--d:180ms" data-code="QC-03">
-        <div class="qc-top">
-          <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><path d="M16.5 7.5l-3.2 3.2"/></svg></div>
-          <div class="qc-score">0.92</div>
-        </div>
-        <div class="qc-label">Accuracy</div>
-        <div class="qc-desc">Physical plausibility: voltage range, energy balance, coulombic efficiency bounds.</div>
-        <div class="qa-progress" style="--score:92%;"><span></span></div>
-        <div class="qa-card-foot"><span>Physical checks</span><span>5 / 6 pass</span></div>
-      </div>
-      <div class="quality-card qc-validity reveal" data-dim="validity" style="--d:270ms" data-code="QC-04">
-        <div class="qc-top">
-          <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/><path d="M9 12.2l2.1 2.1L15.8 9"/><path d="M8 7.2h8"/></svg></div>
-          <div class="qc-score">1.00</div>
-        </div>
-        <div class="qc-label">Validity</div>
-        <div class="qc-desc">Schema compliance, column type correctness, required field presence, value range validity.</div>
-        <div class="qa-progress" style="--score:100%;"><span></span></div>
-        <div class="qa-card-foot"><span>Schema errors</span><span>0</span></div>
-      </div>
-    </div>
 
-    <div class="qa-workbench">
-      <section class="diag-section reveal rv-left">
-        <div class="diag-head">
-          <div>
-            <div class="diag-title">Physical Plausibility Checks</div>
-            <div class="diag-sub">High-signal checks that determine whether a dataset can safely enter preprocessing and benchmark training.</div>
+      <div class="qa-score-row">
+        <div class="quality-card qc-completeness reveal" data-dim="completeness" style="--d:0ms" data-code="QC-01">
+          <div class="qc-top">
+            <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.4"/><path d="M8 4v16M16 4v16M4 8h16M4 16h16"/><path d="M8 8h8v8H8z" opacity=".48"/></svg></div>
+            <div class="qc-score">0.97</div>
           </div>
-          <span class="diag-badge">5 passed - 1 warning</span>
+          <div class="qc-label">Completeness</div>
+          <div class="qa-progress" style="--score:97%;"><span></span></div>
+          <div class="qa-card-foot"><span>Missing channels</span><span>2.1%</span></div>
         </div>
-        <ul class="diag-list">
-          <li class="diag-item pass reveal" style="--d:0ms">
-            <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Voltage Range Validation</div><div class="diag-detail">All cell voltages within 2.0V-4.5V nominal operating range for the stated chemistry.</div></div>
-          </li>
-          <li class="diag-item pass reveal" style="--d:70ms">
-            <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Energy Balance Check</div><div class="diag-detail">Charge/discharge energy integral consistency; coulombic efficiency remains within 95-105% per cycle.</div></div>
-          </li>
-          <li class="diag-item pass reveal" style="--d:140ms">
-            <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Capacity Monotonicity</div><div class="diag-detail">Degradation trajectory follows expected non-increasing trend with allowable recovery windows.</div></div>
-          </li>
-          <li class="diag-item warn reveal" style="--d:210ms">
-            <div class="diag-icon warn"><svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path d="M12 7v6"/><path d="M12 17h.01"/><path d="M10.3 4.6h3.4L21 19H3z"/></svg></div>
-            <div><div class="diag-name">Temperature Consistency</div><div class="diag-detail">Cell surface temperature must remain within 5°C of stated test condition; one dataset needs review.</div></div>
-          </li>
-          <li class="diag-item pass reveal" style="--d:280ms">
-            <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Timestamp Integrity</div><div class="diag-detail">Monotonically increasing timestamps with no negative intervals or unreasonable gaps above 24h.</div></div>
-          </li>
-          <li class="diag-item pass reveal" style="--d:350ms">
-            <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
-            <div><div class="diag-name">Current Direction Consistency</div><div class="diag-detail">Charge and discharge current signs follow one convention throughout the dataset.</div></div>
-          </li>
-        </ul>
-      </section>
+        <div class="quality-card qc-consistency reveal" data-dim="consistency" style="--d:90ms" data-code="QC-02">
+          <div class="qc-top">
+            <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M4 18h16M4 6v12"/><path d="M5 14c2.4 0 2.6-6 5-6s2.6 8 5 8 2.8-5 5-5"/><path d="M8 4v3M14 4v3M20 4v3"/></svg></div>
+            <div class="qc-score">0.95</div>
+          </div>
+          <div class="qc-label">Consistency</div>
+          <div class="qa-progress" style="--score:95%;"><span></span></div>
+          <div class="qa-card-foot"><span>Sequence issues</span><span>3 flags</span></div>
+        </div>
+        <div class="quality-card qc-accuracy reveal" data-dim="accuracy" style="--d:180ms" data-code="QC-03">
+          <div class="qc-top">
+            <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><path d="M16.5 7.5l-3.2 3.2"/></svg></div>
+            <div class="qc-score">0.92</div>
+          </div>
+          <div class="qc-label">Accuracy</div>
+          <div class="qa-progress" style="--score:92%;"><span></span></div>
+          <div class="qa-card-foot"><span>Physical checks</span><span>5 / 6 pass</span></div>
+        </div>
+        <div class="quality-card qc-validity reveal" data-dim="validity" style="--d:270ms" data-code="QC-04">
+          <div class="qc-top">
+            <div class="qc-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/><path d="M9 12.2l2.1 2.1L15.8 9"/><path d="M8 7.2h8"/></svg></div>
+            <div class="qc-score">1.00</div>
+          </div>
+          <div class="qc-label">Validity</div>
+          <div class="qa-progress" style="--score:100%;"><span></span></div>
+          <div class="qa-card-foot"><span>Schema errors</span><span>0</span></div>
+        </div>
+        <div class="quality-card qc-overall reveal" data-dim="overall" style="--d:360ms" data-code="QA-00">
+          <div class="qc-overall-ring" style="--pct:96" id="qaOverallRing">
+            <div class="qc-overall-ring-center"><strong id="qaOverallScore">0.96</strong></div>
+          </div>
+          <div class="qc-overall-meta">
+            <div class="qc-label">Overall Score</div>
+            <div class="qa-chip-row">
+              <span class="qa-chip" id="qaOverallGateChip">Ready</span>
+              <span class="qa-chip warn" id="qaOverallWarnChip">1 warning</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <section class="qa-json-card reveal rv-right" style="--d:120ms">
-        <div class="qa-json-head">
-          <div class="qa-json-title">Diagnostic Output</div>
-          <span class="qa-json-pill">quality_report.json</span>
-        </div>
-        <pre class="qa-code">{
+      <div class="qa-workbench">
+        <section class="diag-section reveal">
+          <div class="diag-head">
+            <div>
+              <div class="diag-title">Physical Plausibility Checks</div>
+              <div class="diag-sub">High-signal checks that determine whether a dataset can safely enter preprocessing and benchmark training.</div>
+            </div>
+            <span class="diag-badge" id="qaDiagBadge">5 passed - 1 warning</span>
+          </div>
+          <ul class="diag-list" id="qaDiagList">
+            <li class="diag-item pass reveal" style="--d:0ms">
+              <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+              <div><div class="diag-name">Voltage Range Validation</div><div class="diag-detail">All cell voltages within 2.0V-4.5V nominal operating range for the stated chemistry.</div></div>
+            </li>
+            <li class="diag-item pass reveal" style="--d:70ms">
+              <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+              <div><div class="diag-name">Energy Balance Check</div><div class="diag-detail">Charge/discharge energy integral consistency; coulombic efficiency remains within 95-105% per cycle.</div></div>
+            </li>
+            <li class="diag-item pass reveal" style="--d:140ms">
+              <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+              <div><div class="diag-name">Capacity Monotonicity</div><div class="diag-detail">Degradation trajectory follows expected non-increasing trend with allowable recovery windows.</div></div>
+            </li>
+            <li class="diag-item warn reveal" style="--d:210ms">
+              <div class="diag-icon warn"><svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path d="M12 7v6"/><path d="M12 17h.01"/><path d="M10.3 4.6h3.4L21 19H3z"/></svg></div>
+              <div><div class="diag-name">Temperature Consistency</div><div class="diag-detail">Cell surface temperature must remain within 5°C of stated test condition; one dataset needs review.</div></div>
+            </li>
+            <li class="diag-item pass reveal" style="--d:280ms">
+              <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+              <div><div class="diag-name">Timestamp Integrity</div><div class="diag-detail">Monotonically increasing timestamps with no negative intervals or unreasonable gaps above 24h.</div></div>
+            </li>
+            <li class="diag-item pass reveal" style="--d:350ms">
+              <div class="diag-icon pass"><svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+              <div><div class="diag-name">Current Direction Consistency</div><div class="diag-detail">Charge and discharge current signs follow one convention throughout the dataset.</div></div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="qa-json-card reveal" style="--d:120ms">
+          <div class="qa-json-head">
+            <div class="qa-json-head-left">
+              <div class="qa-json-title">Diagnostic Output</div>
+              <span class="qa-json-pill">quality_report.json</span>
+            </div>
+            <button class="prep-btn" id="qaDownloadBtn" type="button" onclick="downloadQualityReport()">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-2px;margin-right:5px;"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>Download Report
+            </button>
+          </div>
+          <pre class="qa-code" id="qaCode">{
   <span class="k">"dataset_id"</span>: "dataset_03",
   <span class="k">"quality_score"</span>: {
     <span class="qa-line" data-dim="completeness"><span class="k">"completeness"</span>: <span class="n">0.97</span></span>,
@@ -1460,8 +1407,9 @@ bash run_benchmark.sh</pre>
   ],
   <span class="k">"generated_at"</span>: "2026-04-28T12:00:00Z"
 }</pre>
-      </section>
-    </div>
+        </section>
+      </div>
+    </section>
   </div>
 
   <!-- ═══════════════════════════════════════

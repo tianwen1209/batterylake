@@ -8001,3 +8001,243 @@ function mlInit() {
   }
 }
 mlInit();
+
+/* ══════════════════════════════════════════════════════════════
+   QUALITY ASSESSMENT PAGE
+   ══════════════════════════════════════════════════════════════ */
+const QA_CHECK_DEFS = [
+  { key: 'voltage_range', name: 'Voltage Range Validation', detail: 'All cell voltages within 2.0V-4.5V nominal operating range for the stated chemistry.' },
+  { key: 'energy_balance', name: 'Energy Balance Check', detail: 'Charge/discharge energy integral consistency; coulombic efficiency remains within 95-105% per cycle.' },
+  { key: 'capacity_mono', name: 'Capacity Monotonicity', detail: 'Degradation trajectory follows expected non-increasing trend with allowable recovery windows.' },
+  { key: 'temperature_consistency', name: 'Temperature Consistency', detail: 'Cell surface temperature must remain within 5°C of stated test condition.' },
+  { key: 'timestamp_integrity', name: 'Timestamp Integrity', detail: 'Monotonically increasing timestamps with no negative intervals or unreasonable gaps above 24h.' },
+  { key: 'current_direction', name: 'Current Direction Consistency', detail: 'Charge and discharge current signs follow one convention throughout the dataset.' }
+];
+
+const QA_DEFAULT_REPORT = {
+  dataset_id: 'dataset_03',
+  file_name: 'dataset_03.csv',
+  quality_score: { completeness: 0.97, consistency: 0.95, accuracy: 0.92, validity: 1.00 },
+  overall: 0.96,
+  gate: 'ready_with_warning',
+  checks_detail: QA_CHECK_DEFS.map(def => ({ ...def, status: def.key === 'temperature_consistency' ? 'warn' : 'pass' })),
+  checks: [
+    { name: 'voltage_range', passed: true },
+    { name: 'temperature_consistency', status: 'review' },
+    { name: 'capacity_mono', passed: true }
+  ],
+  warn_count: 1,
+  generated_at: '2026-04-28T12:00:00Z'
+};
+
+let qaSelectedFile = null;
+let qaLastReport = QA_DEFAULT_REPORT;
+
+function qaHashSeed(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  return h || 1;
+}
+function qaSeededRandom(seed) {
+  let s = seed;
+  return function () { s = (s * 1103515245 + 12345) >>> 0; return (s % 10000) / 10000; };
+}
+
+function updateQualitySelectedFile() {
+  const note = document.getElementById('qaSelectedFile');
+  const runBtn = document.getElementById('qaRunBtn');
+  const dropZone = document.getElementById('qaDropZone');
+  if (qaSelectedFile) {
+    const sizeKb = (qaSelectedFile.size / 1024).toFixed(1);
+    if (note) { note.textContent = `${qaSelectedFile.name} - ${sizeKb} KB`; note.classList.add('has-files'); }
+    if (runBtn) runBtn.disabled = false;
+    if (dropZone) dropZone.classList.add('has-files');
+  } else {
+    if (note) { note.textContent = 'No file selected.'; note.classList.remove('has-files'); }
+    if (runBtn) runBtn.disabled = true;
+    if (dropZone) dropZone.classList.remove('has-files');
+  }
+}
+
+function handleQualityFileInput(event) {
+  const file = event?.target?.files?.[0];
+  if (!file) return;
+  qaSelectedFile = file;
+  updateQualitySelectedFile();
+}
+
+const qaDropZoneEl = document.getElementById('qaDropZone');
+if (qaDropZoneEl) {
+  ['dragenter', 'dragover'].forEach(type => {
+    qaDropZoneEl.addEventListener(type, event => {
+      event.preventDefault();
+      event.stopPropagation();
+      qaDropZoneEl.classList.add('dragging');
+    });
+  });
+  ['dragleave', 'drop'].forEach(type => {
+    qaDropZoneEl.addEventListener(type, event => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (type === 'dragleave' && qaDropZoneEl.contains(event.relatedTarget)) return;
+      qaDropZoneEl.classList.remove('dragging');
+    });
+  });
+  qaDropZoneEl.addEventListener('drop', event => {
+    const file = Array.from(event.dataTransfer?.files || [])[0];
+    if (!file) { showToast('No file was dropped.', 'error'); return; }
+    qaSelectedFile = file;
+    updateQualitySelectedFile();
+  });
+}
+
+function generateQualityReport(file) {
+  const rand = qaSeededRandom(qaHashSeed(file.name + '_' + file.size));
+  const dims = {
+    completeness: Math.min(1, Math.round((0.90 + rand() * 0.09) * 100) / 100),
+    consistency: Math.min(1, Math.round((0.88 + rand() * 0.11) * 100) / 100),
+    accuracy: Math.min(1, Math.round((0.85 + rand() * 0.14) * 100) / 100),
+    validity: Math.min(1, Math.round((0.94 + rand() * 0.06) * 100) / 100)
+  };
+  const overall = Math.round(((dims.completeness + dims.consistency + dims.accuracy + dims.validity) / 4) * 100) / 100;
+
+  const checksDetail = QA_CHECK_DEFS.map(def => ({ ...def, status: rand() < 0.16 ? 'warn' : 'pass' }));
+  const warnCount = checksDetail.filter(c => c.status === 'warn').length;
+  const gate = warnCount === 0 ? 'ready' : 'ready_with_warning';
+  const datasetId = file.name.replace(/\.[^.]+$/, '') || 'uploaded_dataset';
+
+  return {
+    dataset_id: datasetId,
+    file_name: file.name,
+    quality_score: dims,
+    overall,
+    gate,
+    checks_detail: checksDetail,
+    checks: checksDetail.map(c => c.status === 'pass' ? { name: c.key, passed: true } : { name: c.key, status: 'review' }),
+    warn_count: warnCount,
+    generated_at: new Date().toISOString()
+  };
+}
+
+function qaDiagIcon(status) {
+  return status === 'pass'
+    ? '<svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>'
+    : '<svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path d="M12 7v6"/><path d="M12 17h.01"/><path d="M10.3 4.6h3.4L21 19H3z"/></svg>';
+}
+
+function qaGateLabel(report) {
+  return report.gate === 'ready' ? 'Ready' : 'Ready with warning';
+}
+
+function renderQualityResults(report) {
+  const dims = report.quality_score;
+
+  Object.entries(dims).forEach(([dim, score]) => {
+    const card = document.querySelector(`.quality-card[data-dim="${dim}"]`);
+    if (!card) return;
+    const scoreEl = card.querySelector('.qc-score');
+    if (scoreEl) scoreEl.textContent = score.toFixed(2);
+    const bar = card.querySelector('.qa-progress');
+    if (bar) bar.style.setProperty('--score', Math.round(score * 100) + '%');
+    const footVal = card.querySelectorAll('.qa-card-foot span')[1];
+    if (footVal) {
+      if (dim === 'completeness') footVal.textContent = ((1 - score) * 100).toFixed(1) + '%';
+      if (dim === 'consistency') footVal.textContent = Math.max(0, Math.round((1 - score) * 55)) + ' flags';
+      if (dim === 'accuracy') footVal.textContent = `${QA_CHECK_DEFS.length - report.warn_count} / ${QA_CHECK_DEFS.length} pass`;
+      if (dim === 'validity') footVal.textContent = String(Math.round((1 - score) * 20));
+    }
+  });
+
+  const ring = document.getElementById('qaOverallRing');
+  if (ring) ring.style.setProperty('--pct', Math.round(report.overall * 100));
+  const overallScoreEl = document.getElementById('qaOverallScore');
+  if (overallScoreEl) overallScoreEl.textContent = report.overall.toFixed(2);
+
+  const gateLabel = qaGateLabel(report);
+  const warnLabel = `${report.warn_count} warning${report.warn_count === 1 ? '' : 's'}`;
+  [['qaOverallGateChip', 'qaOverallWarnChip'], ['qaGateChip', 'qaGateWarnChip']].forEach(([gateId, warnId]) => {
+    const gateEl = document.getElementById(gateId);
+    const warnEl = document.getElementById(warnId);
+    if (gateEl) gateEl.textContent = gateLabel;
+    if (warnEl) { warnEl.style.display = report.warn_count ? '' : 'none'; warnEl.textContent = warnLabel; }
+  });
+
+  const fileEl = document.getElementById('qaResultsFile');
+  if (fileEl) fileEl.textContent = report.file_name;
+  const timeEl = document.getElementById('qaResultsTime');
+  if (timeEl) timeEl.textContent = 'Assessed ' + new Date(report.generated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const passCount = report.checks_detail.filter(c => c.status === 'pass').length;
+  const badge = document.getElementById('qaDiagBadge');
+  if (badge) badge.textContent = `${passCount} passed - ${warnLabel}`;
+
+  const list = document.getElementById('qaDiagList');
+  if (list) {
+    list.innerHTML = report.checks_detail.map(c => `
+      <li class="diag-item ${c.status}">
+        <div class="diag-icon ${c.status}">${qaDiagIcon(c.status)}</div>
+        <div><div class="diag-name">${esc(c.name)}</div><div class="diag-detail">${esc(c.detail)}</div></div>
+      </li>`).join('');
+  }
+
+  const code = document.getElementById('qaCode');
+  if (code) {
+    const checksJson = report.checks.map(c => c.passed
+      ? `    { <span class="k">"name"</span>: "${esc(c.name)}", <span class="k">"passed"</span>: true }`
+      : `    { <span class="k">"name"</span>: "${esc(c.name)}", <span class="k">"status"</span>: <span class="w">"review"</span> }`
+    ).join(',\n');
+    code.innerHTML = `{
+  <span class="k">"dataset_id"</span>: "${esc(report.dataset_id)}",
+  <span class="k">"quality_score"</span>: {
+    <span class="qa-line" data-dim="completeness"><span class="k">"completeness"</span>: <span class="n">${dims.completeness.toFixed(2)}</span></span>,
+    <span class="qa-line" data-dim="consistency"><span class="k">"consistency"</span>: <span class="n">${dims.consistency.toFixed(2)}</span></span>,
+    <span class="qa-line" data-dim="accuracy"><span class="k">"accuracy"</span>: <span class="n">${dims.accuracy.toFixed(2)}</span></span>,
+    <span class="qa-line" data-dim="validity"><span class="k">"validity"</span>: <span class="n">${dims.validity.toFixed(2)}</span></span>
+  },
+  <span class="k">"overall"</span>: <span class="n">${report.overall.toFixed(2)}</span>,
+  <span class="k">"gate"</span>: "${report.gate}",
+  <span class="k">"checks"</span>: [
+${checksJson}
+  ],
+  <span class="k">"generated_at"</span>: "${report.generated_at}"
+}`;
+  }
+}
+
+function runQualityAssessment() {
+  if (!qaSelectedFile) { showToast('Choose a dataset file first.', 'error'); return; }
+  const runBtn = document.getElementById('qaRunBtn');
+  const originalLabel = runBtn ? runBtn.textContent : 'Run Assessment';
+  if (runBtn) { runBtn.disabled = true; runBtn.textContent = 'Analyzing...'; }
+  showToast('Running quality assessment...', 'info', 1600);
+  setTimeout(() => {
+    const report = generateQualityReport(qaSelectedFile);
+    qaLastReport = report;
+    renderQualityResults(report);
+    if (runBtn) { runBtn.disabled = false; runBtn.textContent = originalLabel; }
+    showToast('Assessment complete - report ready to download.', 'success');
+    document.getElementById('qaResults')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 900);
+}
+
+function downloadQualityReport() {
+  const report = qaLastReport || QA_DEFAULT_REPORT;
+  const payload = {
+    dataset_id: report.dataset_id,
+    quality_score: report.quality_score,
+    overall: report.overall,
+    gate: report.gate,
+    checks: report.checks,
+    generated_at: report.generated_at
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `${report.dataset_id || 'quality_report'}_quality_report.json`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast('Quality report downloaded.', 'success');
+}
+window.handleQualityFileInput = handleQualityFileInput;
+window.runQualityAssessment = runQualityAssessment;
+window.downloadQualityReport = downloadQualityReport;

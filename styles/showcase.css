@@ -474,7 +474,7 @@
 /* interactive dimension cards */
 .quality-card { cursor: pointer; position: relative; }
 .quality-card::after {
-  content: "view in report"; position: absolute; right: 16px; bottom: 14px;
+  content: "view in report"; position: absolute; left: 18px; right: 18px; bottom: 13px;
   font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent); opacity: 0; transform: translateY(4px);
   transition: opacity .2s ease, transform .2s ease;
