@@ -194,13 +194,6 @@
     <div class="page-header datasets-hero visual-page-hero">
       <div class="page-title">Datasets</div>
       <div class="page-desc" id="datasets-subtitle">Explore BatteryLake's curated catalog for benchmark-ready cycling, safety, impedance, and EV field datasets with different chemistry, charge/discharge conditions and operational environments.</div>
-      <div class="datasets-actions visual-page-actions">
-        <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
-        <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-          Contribute Dataset
-        </button>
-      </div>
       <img class="datasets-hero-art visual-page-hero-art" src="assets/images/datasets-hero-reference.png?v=3" alt="" aria-hidden="true">
     </div>
 
@@ -2141,9 +2134,16 @@ for dataset in resp.json()["items"]:
        PAGE: CONTRIBUTE
        ═══════════════════════════════════════ -->
   <div class="page" id="page-contribute">
-    <div class="page-header">
+    <div class="page-header contribute-upload-hero visual-page-hero">
       <div class="page-title">Contribute Dataset</div>
       <div class="page-desc">Help advance battery research by contributing your experimental data to the BatteryLake platform. All contributions undergo our standardized ETL and quality assessment pipeline.</div>
+      <div class="contribute-actions visual-page-actions">
+        <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
+        <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Contribute Dataset
+        </button>
+      </div>
     </div>
 
     <section class="contrib-cockpit">

@@ -942,6 +942,21 @@ select:focus-visible, [tabindex]:focus-visible {
 #page-models {
   max-width: 1480px;
 }
+#page-contribute .contribute-upload-hero .page-title {
+  font-family: var(--display);
+  letter-spacing: -.025em;
+}
+#page-contribute .contribute-upload-hero::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 50%;
+  width: min(454px, 44%);
+  height: min(260px, calc(100% - 24px));
+  transform: translateY(-50%);
+  pointer-events: none;
+}
 #page-models .model-search-panel {
   margin: 10px 0 32px;
   padding: 8px 0 10px;
