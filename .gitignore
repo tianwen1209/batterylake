@@ -1,6 +1,17 @@
 .DS_Store
 batterytwin.html
 
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
 # Local-only files (kept on disk, not pushed to GitHub)
 .cursor/
 batterytwin_v2.html

@@ -135,10 +135,33 @@
     setTyping(loading);
 
     try {
-      await new Promise(resolve => window.setTimeout(resolve, 180));
-      const reply = 'AI Assistant UI placeholder - backend connection is not enabled yet. The Preprocessing page workflows can still be reviewed and used.';
+      const response = await fetch('http://127.0.0.1:8000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: cleanMessage })
+      });
+
+      let reply = '';
+      if (response.ok) {
+        const data = await response.json();
+        reply = data.reply || data.response || data.message || '[No AI response]';
+      } else {
+        let errorMsg = '';
+        try {
+          const errorData = await response.json();
+          errorMsg = errorData.error || JSON.stringify(errorData);
+        } catch {
+          errorMsg = response.statusText || 'Unknown error';
+        }
+        reply = `AI backend error: ${errorMsg}`;
+      }
+
       loading.textContent = reply;
       saveMessage(reply, 'bot', loadingTime);
+    } catch (err) {
+      const errorReply = `Failed to connect to AI backend: ${err.message}`;
+      loading.textContent = errorReply;
+      saveMessage(errorReply, 'bot', loadingTime);
     } finally {
       input.disabled = false;
       sendButton.disabled = false;
