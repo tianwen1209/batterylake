@@ -1672,6 +1672,14 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   padding: clamp(34px, 5vw, 66px) 0 0;
   transform: translateY(-100px);
 }
+
+.sc-hero-wordmark {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+  max-width: min(560px, 100%);
+  vertical-align: -0.12em;
+}
 #page-home .home-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1721,6 +1729,16 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   overflow: hidden;
+}
+
+/* When the AI assistant panel pushes the page inwards, mimic the existing
+   smaller-width layout so metric values never clip. */
+body.ai-panel-open #page-home .home-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body.ai-panel-open #page-home .home-metrics .metric-val {
+  font-size: clamp(40px, 3.8vw, 60px) !important;
+  overflow: visible;
 }
 #page-home .home-metrics .metric-unit {
   margin-left: .1em;
