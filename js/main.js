@@ -2136,7 +2136,10 @@ function applyInitialPageFromHash() {
     }
     return;
   }
-  if (!name || !document.getElementById('page-' + name)) return;
+  if (!name || !document.getElementById('page-' + name)) {
+    showPage('home', document.getElementById('nav-home'));
+    return;
+  }
   showPage(name, document.querySelector('.sidebar-nav a[onclick*="' + name + '"]'));
 }
 window.addEventListener('hashchange', applyInitialPageFromHash);
