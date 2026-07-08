@@ -1065,14 +1065,11 @@ function showPrepStage(stage) {
   });
   const previous = document.getElementById('prepPrevious');
   const next = document.getElementById('prepNext');
-  const count = document.getElementById('prepStepCount');
   if (previous) previous.disabled = prepStage === 1;
   if (next) {
     next.disabled = prepStage === 5;
     next.textContent = prepStage === 5 ? 'Complete' : 'Next';
   }
-  if (count) count.textContent = `Step ${prepStage} of 5`;
-  document.getElementById('page-preprocessing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function setPrepBusy(busy) {

@@ -1311,7 +1311,6 @@ bash run_benchmark.sh</pre>
 
       <section class="prep-card prep-stage active" data-prep-stage="1">
         <div class="prep-card-head">
-          <span class="prep-card-index">1</span>
           <div><div class="prep-card-title" id="prepTaskSectionTitle">Task 1: Upload raw measurement data</div><div class="prep-card-desc" id="prepTaskSectionDesc">Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.</div></div>
         </div>
         <div class="prep-card-body">
@@ -1389,7 +1388,6 @@ bash run_benchmark.sh</pre>
 
       <section class="prep-card analysis-panel prep-stage" id="analysisPanel" data-prep-stage="2">
         <div class="prep-card-head">
-          <span class="prep-card-index">2</span>
           <div><div class="prep-card-title">AI inspection results - review and confirm</div><div class="prep-card-desc">Confirm only what is correct. Anything unconfirmed is written as Unknown and excluded from the generated ref_name.</div></div>
         </div>
         <div class="analysis-summary">
@@ -1436,7 +1434,7 @@ bash run_benchmark.sh</pre>
       </section>
 
       <section class="prep-card prep-stage" data-prep-stage="3">
-        <div class="prep-card-head"><span class="prep-card-index">3</span><div><div class="prep-card-title">Scientific mapping plan</div><div class="prep-card-desc">The required outputs adapt to the experiment type. Fields that do not scientifically exist remain empty — they are never fabricated.</div></div></div>
+        <div class="prep-card-head"><div><div class="prep-card-title">Scientific mapping plan</div><div class="prep-card-desc">The required outputs adapt to the experiment type. Fields that do not scientifically exist remain empty — they are never fabricated.</div></div></div>
         <div class="prep-card-body">
           <div class="type-tabs"><button class="type-tab" type="button">Cycle aging</button><button class="type-tab active" type="button">Calendar aging</button><button class="type-tab" type="button">Characterization</button><button class="type-tab" type="button">Thermal abuse</button></div>
           <div class="channel-grid">
@@ -1451,7 +1449,6 @@ bash run_benchmark.sh</pre>
 
       <section class="prep-card prep-stage" data-prep-stage="4">
         <div class="prep-card-head">
-          <span class="prep-card-index">4</span>
           <div><div class="prep-card-title">Download the dataset-specific BatteryTwin skill.</div><div class="prep-card-desc">The package is generated from the inspected evidence and your confirmed corrections, not from an unverified form.</div></div>
         </div>
         <div class="prep-card-body">
@@ -1466,7 +1463,7 @@ bash run_benchmark.sh</pre>
       </section>
 
       <section class="prep-card prep-stage" data-prep-stage="5">
-        <div class="prep-card-head"><span class="prep-card-index">5</span><div><div class="prep-card-title">Validation, fallbacks and output audit</div><div class="prep-card-desc">The generated skill verifies that its supporting files actually work and records every fallback or destructive-risk decision.</div></div></div>
+        <div class="prep-card-head"><div><div class="prep-card-title">Validation, fallbacks and output audit</div><div class="prep-card-desc">The generated skill verifies that its supporting files actually work and records every fallback or destructive-risk decision.</div></div></div>
         <div class="prep-card-body">
           <div class="validation-grid">
             <div class="validation-card"><div class="validation-head"><span class="validation-title">BatteryTwin schema</span><span class="validation-badge pass">Readable</span></div><p class="validation-text"><code>schema.json</code> parsed successfully. Required fields will be selected according to dataset type.</p></div>
@@ -1478,9 +1475,8 @@ bash run_benchmark.sh</pre>
         </div>
         <div class="prep-actions"><span class="prep-actions-note">Schema compliance and SOH/RUL benchmark eligibility are reported separately.</span><span class="prep-action-buttons"><button class="prep-btn secondary" type="button" onclick="downloadPrepManifest()">Export inspection manifest</button></span></div>
       </section>
-      <div class="prep-wizard-footer">
+      <div class="prep-wizard-footer" aria-label="Preprocessing step navigation">
         <button class="prep-btn secondary" id="prepPrevious" type="button" onclick="showPrepStage(prepStage - 1)" disabled>Previous</button>
-        <span class="prep-step-count" id="prepStepCount">Step 1 of 5</span>
         <button class="prep-btn" id="prepNext" type="button" onclick="showPrepStage(prepStage + 1)">Next</button>
       </div>
     </div>

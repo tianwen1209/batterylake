@@ -6204,6 +6204,28 @@ body.ai-panel-open .main {
   }
 }
 
+/* PREPROCESSING PAGE REFINEMENTS */
+#page-preprocessing .prep-wizard-footer {
+  border-top: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#page-preprocessing .ai-field-table {
+  width: auto;
+  max-width: 100%;
+}
+@media (max-width: 1100px) and (min-width: 701px) {
+  #page-preprocessing .ai-field-row {
+    grid-template-columns: minmax(88px, .68fr) minmax(96px, .72fr) minmax(128px, .92fr) minmax(76px, .48fr) minmax(108px, .72fr);
+    gap: 8px;
+    padding: 10px;
+  }
+  #page-preprocessing .ai-field-value,
+  #page-preprocessing .ai-field-ev {
+    font-size: 12.5px;
+  }
+}
+
 @media (max-width: 560px) {
   .topbar { padding-right: 10px; }
   .topbar-search-btn {
