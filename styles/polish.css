@@ -3319,8 +3319,7 @@ pre {
 }
 #page-benchmarks .bw-choice-card:hover,
 #page-benchmarks .bw-flow-dataset-card:hover,
-#page-benchmarks .bw-flow-models .bw-model-item:hover,
-#page-benchmarks .bw-local-card:hover {
+#page-benchmarks .bw-flow-models .bw-model-item:hover {
   background: var(--bw-hover-bg) !important;
   border-color: var(--bw-hover-border) !important;
   box-shadow: var(--bw-hover-shadow) !important;
@@ -3631,8 +3630,9 @@ pre {
   position: relative;
   max-width: 100%;
   overflow: hidden;
+  border: 1px solid #dbeafe;
   border-radius: 10px;
-  background: var(--code-bg);
+  background: #f8fbff;
 }
 #page-benchmarks .bw-code-wrap .bw-copycmd {
   position: absolute;
@@ -3643,9 +3643,17 @@ pre {
   min-width: 72px !important;
   height: 30px !important;
   padding: 0 10px !important;
+  border: 1px solid #2563eb !important;
   border-radius: 7px !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
   justify-content: center;
   box-shadow: none !important;
+}
+#page-benchmarks .bw-code-wrap .bw-copycmd:hover {
+  border-color: #1d4ed8 !important;
+  background: #1d4ed8 !important;
+  color: #ffffff !important;
 }
 #page-benchmarks .bw-code-wrap pre {
   max-width: 100%;
@@ -3654,6 +3662,9 @@ pre {
   padding: 48px 16px 16px;
   overflow: auto;
   white-space: pre;
+  background: #f8fbff !important;
+  color: #172033 !important;
+  border-color: transparent !important;
 }
 #page-benchmarks .bw-upload-card.is-next {
   border-color: var(--accent) !important;
