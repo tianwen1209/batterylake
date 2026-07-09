@@ -65,6 +65,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .sidebar-brand-sub { font-size: 13px; color: var(--sidebar-section); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
 
 .sidebar-section { padding: 20px 18px 6px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sidebar-section); }
+.sidebar-section { padding: 20px 18px 6px; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0.1em; color: var(--sidebar-section); }
 .sidebar-nav { list-style: none; padding: 4px 8px; }
 .sidebar-nav li a {
   display: flex; align-items: center; gap: 10px;

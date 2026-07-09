@@ -1680,6 +1680,13 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   max-width: min(560px, 100%);
   vertical-align: -0.12em;
 }
+
+/* Home showcase "tags" should keep their original casing (override the
+   showcase layer's uppercase transform without touching typography). */
+#page-home .sc-hero-eyebrow,
+#page-home .sc-kicker {
+  text-transform: none;
+}
 #page-home .home-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
