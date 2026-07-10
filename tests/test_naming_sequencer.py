@@ -38,6 +38,10 @@ class NamingSequencerContractTest(unittest.TestCase):
             r"#naming-sequencer\s+\.naming-parts\s*\{[^}]*justify-content:\s*center",
         )
         self.assertIn("flex: 0 1 calc((100% - 33px) / 4)", self.css)
+        self.assertRegex(
+            self.css,
+            r"@media \(max-width: 900px\)\s*\{\s*#naming-sequencer \.naming-part \{ flex-basis: calc\(\(100% - 11px\) / 2\); \}",
+        )
         self.assertIn("@media (prefers-reduced-motion: reduce)", self.css)
         self.assertIn('[data-theme="dark"] #naming-sequencer', self.css)
 

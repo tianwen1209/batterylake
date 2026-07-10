@@ -6645,7 +6645,7 @@ body.ai-panel-open .main {
   background: linear-gradient(90deg, transparent, rgba(148,163,184,.15), transparent);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   #naming-sequencer .naming-part { flex-basis: calc((100% - 11px) / 2); }
   #naming-sequencer .naming-formula-head { display: block; }
   #naming-sequencer .naming-formula-meta { margin-top: 13px; }
