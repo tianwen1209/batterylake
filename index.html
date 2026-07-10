@@ -914,28 +914,31 @@ bash run_benchmark.sh</pre>
       <img class="naming-hero-art visual-page-hero-art" src="assets/images/naming-hero-reference-transparent.png?v=3" alt="" aria-hidden="true">
     </div>
 
-    <div class="naming-formula">
+    <div class="naming-formula" id="naming-sequencer">
       <div class="naming-formula-head">
         <div>
-          <div class="naming-formula-kicker">Format Pattern</div>
-          <div class="naming-formula-title">BatteryLake ref_name schema</div>
+          <div class="naming-formula-kicker">Format pattern &middot; Connected</div>
+          <div class="naming-formula-title">BatteryLake reference name sequencer</div>
         </div>
-        <div class="naming-formula-meta">7 fields &middot; underscore-delimited</div>
+        <div class="naming-formula-meta">Inspecting <strong id="naming-sequencer-status">Field 1 of 7</strong></div>
       </div>
-      <div class="naming-pattern-shell" aria-label="BatteryLake ref_name format">
+      <div class="naming-pattern-shell" aria-label="Assembled BatteryLake reference name">
+        <div class="naming-pattern-label">Assembled reference name</div>
         <code class="naming-pattern-code">
-          <span class="pattern-token np-year">YYYY</span><span class="pattern-sep">_</span><span class="pattern-token np-source">SOURCE</span><span class="pattern-sep">_</span><span class="pattern-token np-chem">CHEMISTRY</span><span class="pattern-sep">_</span><span class="pattern-token np-form">FORMFACTOR</span><span class="pattern-sep">_</span><span class="pattern-token np-charge">CHRGC</span><span class="pattern-sep">_</span><span class="pattern-token np-discharge">DCHRGC</span><span class="pattern-sep">_</span><span class="pattern-token np-temp">TEMPT</span>
+          <span class="pattern-token np-year" data-field-index="0">2007</span><span class="pattern-sep">_</span><span class="pattern-token np-source" data-field-index="1">NASA_PCoE</span><span class="pattern-sep">_</span><span class="pattern-token np-chem" data-field-index="2">LCO</span><span class="pattern-sep">_</span><span class="pattern-token np-form" data-field-index="3">18650</span><span class="pattern-sep">_</span><span class="pattern-token np-charge" data-field-index="4">1C</span><span class="pattern-sep">_</span><span class="pattern-token np-discharge" data-field-index="5">1C</span><span class="pattern-sep">_</span><span class="pattern-token np-temp" data-field-index="6">25T</span>
         </code>
       </div>
+      <div class="naming-signal-track" aria-hidden="true"><span class="naming-signal" id="naming-sequencer-signal"></span></div>
       <div class="naming-parts" aria-label="Field definitions">
-        <span class="naming-part np-year"><span class="naming-part-key">YYYY</span><span class="naming-part-desc">Dataset year</span><span class="naming-part-example">2007</span></span>
-        <span class="naming-part np-source"><span class="naming-part-key">SOURCE</span><span class="naming-part-desc">Lab or institution</span><span class="naming-part-example">NASA_PCoE</span></span>
-        <span class="naming-part np-chem"><span class="naming-part-key">CHEMISTRY</span><span class="naming-part-desc">Cell chemistry</span><span class="naming-part-example">LFP / NMC</span></span>
-        <span class="naming-part np-form"><span class="naming-part-key">FORMFACTOR</span><span class="naming-part-desc">Cell format</span><span class="naming-part-example">18650 / Pouch</span></span>
-        <span class="naming-part np-charge"><span class="naming-part-key">CHRGC</span><span class="naming-part-desc">Charge C-rate</span><span class="naming-part-example">1C / MultiC</span></span>
-        <span class="naming-part np-discharge"><span class="naming-part-key">DCHRGC</span><span class="naming-part-desc">Discharge C-rate</span><span class="naming-part-example">1C / MultiC</span></span>
-        <span class="naming-part np-temp"><span class="naming-part-key">TEMPT</span><span class="naming-part-desc">Temperature condition</span><span class="naming-part-example">25T</span></span>
+        <button class="naming-part np-year" type="button" data-field-index="0"><span class="naming-part-number">01</span><span class="naming-part-key">Year</span><span class="naming-part-desc">Dataset year</span><span class="naming-part-example">2007</span></button>
+        <button class="naming-part np-source" type="button" data-field-index="1"><span class="naming-part-number">02</span><span class="naming-part-key">Source</span><span class="naming-part-desc">Lab or institution</span><span class="naming-part-example">NASA_PCoE</span></button>
+        <button class="naming-part np-chem" type="button" data-field-index="2"><span class="naming-part-number">03</span><span class="naming-part-key">Chemistry</span><span class="naming-part-desc">Cell chemistry</span><span class="naming-part-example">LFP / NMC</span></button>
+        <button class="naming-part np-form" type="button" data-field-index="3"><span class="naming-part-number">04</span><span class="naming-part-key">Form factor</span><span class="naming-part-desc">Cell format</span><span class="naming-part-example">18650 / Pouch</span></button>
+        <button class="naming-part np-charge" type="button" data-field-index="4"><span class="naming-part-number">05</span><span class="naming-part-key">Charge rate</span><span class="naming-part-desc">Charging C-rate</span><span class="naming-part-example">1C / MultiC</span></button>
+        <button class="naming-part np-discharge" type="button" data-field-index="5"><span class="naming-part-number">06</span><span class="naming-part-key">Discharge rate</span><span class="naming-part-desc">Discharging C-rate</span><span class="naming-part-example">1C / MultiC</span></button>
+        <button class="naming-part np-temp" type="button" data-field-index="6"><span class="naming-part-number">07</span><span class="naming-part-key">Temperature</span><span class="naming-part-desc">Test temperature</span><span class="naming-part-example">25T</span></button>
       </div>
+      <div class="naming-sequencer-hint"><span><strong>Interaction:</strong> automatic field walkthrough; hover or focus to inspect one field.</span><span>7 fields &middot; underscore-delimited</span></div>
     </div>
 
     <h3 class="naming-section-title">Examples</h3>
@@ -1936,6 +1939,7 @@ for dataset in resp.json()["items"]:
   </div>
 </div>
 <script src="js/main.js"></script>
+<script src="js/naming-sequencer.js"></script>
 <div class="ai-chat-widget" aria-live="polite">
   <button class="ai-chat-fab" id="aiChatToggle" type="button" aria-label="Open AI assistant">
     <svg class="ai-battery-bot" viewBox="0 0 48 48" aria-hidden="true">

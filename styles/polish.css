@@ -6379,3 +6379,294 @@ body.ai-panel-open .main {
     grid-template-columns: 1fr;
   }
 }
+
+/* Naming Standard: approved light digital-laboratory field sequencer. */
+#naming-sequencer {
+  --signal-position: 5%;
+  --signal-color: #b86606;
+  padding: 26px;
+  border-color: color-mix(in srgb, var(--accent) 15%, var(--border));
+  border-radius: 20px;
+  background:
+    linear-gradient(rgba(37,99,235,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.035) 1px, transparent 1px),
+    color-mix(in srgb, var(--surface, #fff) 96%, transparent);
+  background-size: 28px 28px, 28px 28px, auto;
+  box-shadow: 0 26px 60px -38px rgba(23,52,98,.45), inset 0 1px rgba(255,255,255,.9);
+}
+
+#naming-sequencer::before {
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #22d3ee 50%, #2dd4bf);
+  box-shadow: 0 2px 14px rgba(34,211,238,.3);
+}
+
+#naming-sequencer .naming-formula-head { margin-bottom: 20px; }
+
+#naming-sequencer .naming-formula-kicker {
+  gap: 9px;
+  color: color-mix(in srgb, var(--accent) 82%, var(--text2));
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#naming-sequencer .naming-formula-kicker::before {
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--surface, #fff);
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.14), 0 0 12px rgba(34,197,94,.38);
+}
+
+#naming-sequencer .naming-formula-title {
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+}
+
+#naming-sequencer .naming-formula-meta {
+  min-height: 34px;
+  padding: 7px 13px;
+  color: var(--text2);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#naming-sequencer .naming-formula-meta strong {
+  margin-left: 5px;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+#naming-sequencer .naming-pattern-shell {
+  position: relative;
+  overflow: hidden;
+  padding: 17px 18px 18px;
+  border-color: color-mix(in srgb, var(--accent) 18%, var(--border));
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--surface, #fff), color-mix(in srgb, var(--accent-light) 72%, #fff) 62%, color-mix(in srgb, #ccfbf1 45%, var(--surface, #fff)));
+}
+
+#naming-sequencer .naming-pattern-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  transform: translateX(-190px) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.94), transparent);
+  animation: naming-sequencer-scan 4.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes naming-sequencer-scan {
+  0%, 52% { transform: translateX(-190px) skewX(-18deg); }
+  82%, 100% { transform: translateX(1120px) skewX(-18deg); }
+}
+
+#naming-sequencer .naming-pattern-label {
+  color: var(--text3);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#naming-sequencer .naming-pattern-code {
+  position: relative;
+  z-index: 1;
+  margin-top: 11px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--mono);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+#naming-sequencer .pattern-token {
+  min-height: 0;
+  padding: 2px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--text1);
+  font-size: 16px;
+  font-weight: 600;
+  transition: color .22s ease, background .22s ease, box-shadow .22s ease;
+}
+
+#naming-sequencer .pattern-token.is-active {
+  color: var(--token-color);
+  background: color-mix(in srgb, var(--token-color) 11%, var(--surface, #fff));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--token-color) 9%, transparent);
+}
+
+#naming-sequencer .pattern-sep {
+  color: var(--text3);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#naming-sequencer .naming-signal-track {
+  position: relative;
+  height: 30px;
+  margin: 5px 10px 0;
+}
+
+#naming-sequencer .naming-signal-track::before {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 15px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(37,99,235,.12), rgba(14,165,233,.45), rgba(45,212,191,.18));
+}
+
+#naming-sequencer .naming-signal {
+  position: absolute;
+  left: var(--signal-position);
+  top: 10px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--surface, #fff);
+  border-radius: 50%;
+  background: var(--signal-color);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal-color) 14%, transparent), 0 0 18px var(--signal-color);
+  transition: left .48s cubic-bezier(.2,.8,.2,1), background .22s ease;
+}
+
+#naming-sequencer .naming-parts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 11px;
+  margin-top: 0;
+}
+
+#naming-sequencer .naming-part {
+  position: relative;
+  flex: 0 1 calc((100% - 33px) / 4);
+  display: grid;
+  min-width: 0;
+  min-height: 110px;
+  padding: 16px 14px 14px 48px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--bg2) 72%, var(--surface, #fff));
+  color: var(--text1);
+  font-family: var(--sans);
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+}
+
+#naming-sequencer .naming-part-number {
+  position: absolute;
+  left: 13px;
+  top: 15px;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--token-color) 11%, var(--surface, #fff));
+  color: color-mix(in srgb, var(--token-color) 82%, var(--text1));
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#naming-sequencer .naming-part-key {
+  color: color-mix(in srgb, var(--token-color) 76%, var(--text1));
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+#naming-sequencer .naming-part-desc {
+  margin-top: 8px;
+  color: var(--text1);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#naming-sequencer .naming-part-example {
+  margin-top: 7px;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#naming-sequencer .naming-part.is-active,
+#naming-sequencer .naming-part:hover,
+#naming-sequencer .naming-part:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--token-color) 60%, var(--border));
+  background: color-mix(in srgb, var(--token-color) 7%, var(--surface, #fff));
+  box-shadow: 0 15px 30px -22px color-mix(in srgb, var(--token-color) 62%, transparent), inset 3px 0 var(--token-color);
+  outline: none;
+}
+
+#naming-sequencer .naming-part:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent), 0 15px 30px -22px color-mix(in srgb, var(--token-color) 62%, transparent), inset 3px 0 var(--token-color);
+}
+
+#naming-sequencer .naming-sequencer-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 15px;
+  color: var(--text3);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#naming-sequencer .naming-sequencer-hint strong {
+  color: color-mix(in srgb, var(--accent) 62%, var(--text2));
+}
+
+[data-theme="dark"] #naming-sequencer {
+  background-color: color-mix(in srgb, var(--surface, #0f172a) 94%, transparent);
+  box-shadow: 0 26px 60px -38px rgba(0,0,0,.72);
+}
+
+[data-theme="dark"] #naming-sequencer .naming-pattern-shell::after {
+  background: linear-gradient(90deg, transparent, rgba(148,163,184,.15), transparent);
+}
+
+@media (max-width: 760px) {
+  #naming-sequencer .naming-part { flex-basis: calc((100% - 11px) / 2); }
+  #naming-sequencer .naming-formula-head { display: block; }
+  #naming-sequencer .naming-formula-meta { margin-top: 13px; }
+  #naming-sequencer .naming-pattern-code { justify-content: flex-start; }
+}
+
+@media (max-width: 480px) {
+  #naming-sequencer { padding: 20px; }
+  #naming-sequencer .naming-part { flex-basis: 100%; }
+  #naming-sequencer .naming-sequencer-hint { display: block; }
+  #naming-sequencer .naming-sequencer-hint span:last-child { display: block; margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #naming-sequencer .naming-pattern-shell::after {
+    display: none;
+    animation: none;
+  }
+  #naming-sequencer .pattern-token,
+  #naming-sequencer .naming-signal,
+  #naming-sequencer .naming-part {
+    transition: none;
+  }
+}
