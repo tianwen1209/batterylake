@@ -4817,7 +4817,7 @@ function bwRenderCells(d, n) {
   tb.innerHTML = html || '<tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text3)">No cell-level data for this dataset.</td></tr>';
 }
 
-function bwRenderSplit() {
+function bwRenderSplit(skipProgress) {
   const chip = (c, b) => '<span class="bw-cell ' + b + '" draggable="true" data-cell="' + c + '" data-bucket="' + b
     + '" ondragstart="bwDragStart(event)" ondragend="bwDragEnd(event)">' + c + '</span>';
   const setHTML = (id, h) => { const e = document.getElementById(id); if (e) e.innerHTML = h; };
@@ -4855,7 +4855,7 @@ function bwRenderSplit() {
     const input = document.getElementById('bwr-input-' + key);
     if (input && document.activeElement !== input) input.value = pcts[key];
   });
-  if (typeof bwUpdateProgress === 'function') bwUpdateProgress();
+  if (!skipProgress && typeof bwUpdateProgress === 'function') bwUpdateProgress();
 }
 
 /* ── drag & drop: move cells between Train / Val / Test ── */
@@ -6708,11 +6708,12 @@ function bwZipBlob(files) {
 }
 async function bwDownloadPackage() {
   const sel = BW.selId ? DATASETS.find(d => d.id === BW.selId) : null;
+  const models = typeof bwSelectedModels === 'function' ? bwSelectedModels() : [];
   const ok = sel && bwCellNum(sel) > 0 && BW.split.train.length > 0 && BW.split.val.length > 0 && BW.split.test.length > 0
-    && document.querySelectorAll('.bw-model-item.selected').length > 0;
+    && (models && models.length > 0);
   if (!ok) {
     if (typeof showToast === 'function') showToast('Complete dataset, cell split and model before exporting the training package', 'error');
-    return;
+    return false;
   }
   const manifest = bwBuildManifest(sel);
   const info = bwPackageInfo(sel);
@@ -6731,9 +6732,11 @@ async function bwDownloadPackage() {
     bwPackageExported = true;
     bwUpdateProgress();
     if (typeof showToast === 'function') showToast('Download started. If no zip appears, open this page in Chrome or Safari and try again.', 'success', 6500);
+    return true;
   } catch (err) {
     URL.revokeObjectURL(url);
     if (typeof showToast === 'function') showToast('This embedded browser blocked the zip download. Open the localhost page in Chrome or Safari.', 'error', 7000);
+    return false;
   }
 }
 async function bwCopyTerminalCommand() {
@@ -7245,7 +7248,7 @@ function bwStepValid(step) {
 function bwSyncPackageState() {
   BW.selId = BWR.datasetId;
   const activeCount = (BW.split.train || []).length + (BW.split.val || []).length + (BW.split.test || []).length;
-  if (activeCount) bwRenderSplit(); else bwSyncSplitCells();
+  if (activeCount) bwRenderSplit(true); else bwSyncSplitCells();
   const taskSync = document.getElementById('bw-sum-task');
   if (taskSync) taskSync.textContent = BWR.task || 'SOH Estimation';
   bwUpdatePackagePreview();
@@ -7319,16 +7322,15 @@ window.bwFlowDownloadPackage = async function() {
   const btn = document.getElementById('bwr-download-btn');
   try {
     // Frontend scaffold export for now. Connect this handler to a backend package builder when available.
-    if (typeof bwDownloadPackage === 'function') await bwDownloadPackage();
+    const started = (typeof bwDownloadPackage === 'function') ? await bwDownloadPackage() : false;
+    if (!started) return;
     BWR.downloaded = true;
-    if (btn) btn.textContent = 'Package Ready';
+    if (btn) btn.textContent = 'Download Package (.zip)';
     document.getElementById('bwr-upload-card')?.classList.add('is-next');
     if (typeof showToast === 'function') showToast('Package prepared. Upload your local run output when training finishes.', 'success');
   } catch (err) {
-    BWR.downloaded = true;
-    if (btn) btn.textContent = 'Package Ready';
-    document.getElementById('bwr-upload-card')?.classList.add('is-next');
-    if (typeof showToast === 'function') showToast('Mock package state ready. Backend export can be connected later.', 'info');
+    // If anything unexpected happens, don't claim the package is ready.
+    if (typeof showToast === 'function') showToast('Download failed. Please try again in Chrome or Safari.', 'error');
   }
 };
 window.bwCopyTerminalCommand = async function() {
