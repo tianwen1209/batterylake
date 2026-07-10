@@ -3692,8 +3692,9 @@ pre {
   border-color: transparent !important;
 }
 #page-benchmarks .bw-upload-card.is-next {
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent), var(--card-shadow-hover);
+  /* Keep Upload card border consistent with other Local Run cards. */
+  border-color: var(--border) !important;
+  box-shadow: var(--card-shadow) !important;
 }
 #page-benchmarks .bw-upload-box {
   display: flex;
@@ -3712,9 +3713,10 @@ pre {
 }
 #page-benchmarks .bw-upload-box:hover,
 #page-benchmarks .bw-upload-box.dragover {
-  border-color: var(--accent);
-  background: var(--accent-light);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+  /* Remove accent highlight; match neutral Local Run card styling. */
+  border-color: var(--border2);
+  background: var(--surface-alt);
+  box-shadow: none;
 }
 #page-benchmarks .bw-upload-box small {
   color: var(--text3);
