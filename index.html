@@ -1286,21 +1286,6 @@ bash run_benchmark.sh</pre>
         <div class="page-desc">Convert raw battery data or source evidence into BatteryLake-ready preprocessing outputs.</div>
       </div>
 
-      <div class="prep-task-grid" aria-label="BatteryTwin preprocessing tasks">
-        <div class="prep-task-card active" id="taskRawCard" onclick="selectPrepTask('raw')">
-          <div class="prep-task-kicker">Task 1</div>
-          <div class="prep-task-title">Raw data conversion</div>
-          <div class="prep-task-output">Input: Raw measurement files</div>
-          <div class="prep-task-output">Output: *_timeseries.csv + *_cycle_summary.csv</div>
-        </div>
-        <div class="prep-task-card" id="taskMetadataCard" onclick="selectPrepTask('metadata')">
-          <div class="prep-task-kicker">Task 2</div>
-          <div class="prep-task-title">Metadata extraction</div>
-          <div class="prep-task-output">Input: Source URLs, GitHub repos, DOI pages and papers</div>
-          <div class="prep-task-output">Output: dataset_metadata.csv + source evidence</div>
-        </div>
-      </div>
-
       <div class="prep-steps" aria-label="Preprocessing workflow">
         <div class="prep-step active" data-stage-nav="1" onclick="showPrepStage(1)"><span class="prep-step-num">1</span><span class="prep-step-label">Dataset context</span></div>
         <div class="prep-step" data-stage-nav="2" onclick="showPrepStage(2)"><span class="prep-step-num">2</span><span class="prep-step-label">AI results</span></div>
@@ -1310,12 +1295,15 @@ bash run_benchmark.sh</pre>
       </div>
 
       <section class="prep-card prep-stage active" data-prep-stage="1">
-        <div class="prep-card-head">
-          <div><div class="prep-card-title" id="prepTaskSectionTitle">Task 1: Upload raw measurement data</div><div class="prep-card-desc" id="prepTaskSectionDesc">Use this only for true source measurement files. Metadata-only files are useful evidence, but cannot produce timeseries or cycle_summary.</div></div>
-        </div>
         <div class="prep-card-body">
-          <div class="prep-task-panel source-grid" id="rawTaskPanel">
-            <div>
+          <div class="prep-step1-tasks">
+            <section class="prep-task-section" id="rawTaskPanel" aria-labelledby="rawTaskTitle">
+              <div class="prep-task-section-head">
+                <div class="prep-card-title" id="rawTaskTitle">Task 1: Upload raw measurement data</div>
+                <div class="prep-card-desc"><span>Input: Raw measurement files</span><span>Output: *_timeseries.csv + *_cycle_summary.csv</span></div>
+              </div>
+              <div class="prep-task-section-body source-grid">
+                <div>
               <label class="drop-zone" id="prepDropZone" for="prepFileInput">
                 <input id="prepFileInput" type="file" multiple hidden onchange="handlePrepFileInput(event)">
                 <input id="prepFolderInput" type="file" multiple webkitdirectory directory hidden onchange="handlePrepFileInput(event)">
@@ -1330,16 +1318,22 @@ bash run_benchmark.sh</pre>
                 <button class="prep-btn" type="button" onclick="runPrepFileInspection()">Run AI inspection</button>
                 <button class="prep-btn secondary" type="button" onclick="runPrepInspection()">Inspect path</button>
               </div>
-            </div>
-            <aside class="inspect-scope">
-              <div class="scope-title">The AI checks first</div>
-              <ul class="scope-list">
-                <li>Folder structure and filenames</li><li>Sheets, MAT keys and nested fields</li><li>Headers, units and sample rows</li><li>Context, schema and validator files</li><li>Existing output directory contents</li>
-              </ul>
-              <p class="privacy-note">Full files are not loaded into the browser. The generated skill instructs the local agent to inspect and process them in place.</p>
-            </aside>
-          </div>
-          <div class="prep-task-panel ai-agent-strip" id="metadataTaskPanel" hidden>
+                </div>
+                <aside class="inspect-scope">
+                  <div class="scope-title">The AI checks first</div>
+                  <ul class="scope-list">
+                    <li>Folder structure and filenames</li><li>Sheets, MAT keys and nested fields</li><li>Headers, units and sample rows</li><li>Context, schema and validator files</li><li>Existing output directory contents</li>
+                  </ul>
+                  <p class="privacy-note">Full files are not loaded into the browser. The generated skill instructs the local agent to inspect and process them in place.</p>
+                </aside>
+              </div>
+            </section>
+            <section class="prep-task-section" id="metadataTaskPanel" aria-labelledby="metadataTaskTitle">
+              <div class="prep-task-section-head">
+                <div class="prep-card-title" id="metadataTaskTitle">Task 2: Metadata extraction</div>
+                <div class="prep-card-desc"><span>Input: Source URLs, GitHub repos, DOI pages and papers</span><span>Output: dataset_metadata.csv + source evidence</span></div>
+              </div>
+              <div class="prep-task-section-body ai-agent-strip">
               <div class="ai-agent-copy">
                 <div class="ai-agent-sub">Start with the dataset source URL. The agent checks what the source page can support, reports missing BatteryLake fields, then uses an optional paper URL to fill the gaps before you manually confirm the final metadata.</div>
                 <div class="metadata-flow-grid">
@@ -1381,7 +1375,9 @@ bash run_benchmark.sh</pre>
                   <span>I reviewed the values, evidence and missing fields. Generate dataset_metadata.csv from the confirmed rows only.</span>
                 </label>
               </div>
-            </div>
+              </div>
+            </section>
+          </div>
           <div class="inspect-progress" id="inspectProgress"><span></span></div>
         </div>
       </section>
@@ -1581,7 +1577,7 @@ bash run_benchmark.sh</pre>
        PAGE: APIS & APPLICATIONS
        ═══════════════════════════════════════ -->
   <div class="page" id="page-apis">
-    <div class="page-header">
+    <div class="page-header visual-page-hero api-page-hero">
       <div class="page-title">Platform APIs & Applications</div>
       <div class="page-desc">Access open APIs for data download and benchmarking, or develop end-to-end applications with feature engineering and model interpretation on the BatteryLake platform.</div>
     </div>

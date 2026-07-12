@@ -1075,17 +1075,14 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .prep-card-title { font-size: 17px; font-weight: 700; }
 .prep-card-desc { margin-top: 3px; color: var(--text3); font-size: 13px; line-height: 1.5; }
 .prep-card-body { padding: 20px; }
-.prep-task-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 0 20px; }
-.prep-task-card {
-  border: 1px solid var(--border); border-radius: 12px; background: #fff; padding: 16px;
-  cursor: pointer; transition: .16s ease; min-height: 124px;
-}
-.prep-task-card:hover { border-color: #a9c0fa; background: #fbfdff; }
-.prep-task-card.active { border-color: var(--accent); background: #f7f9ff; box-shadow: 0 0 0 2px rgba(37,99,235,.08); }
-.prep-task-kicker { color: var(--accent); font: 800 11px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
-.prep-task-title { margin-top: 7px; color: var(--text1); font-size: 16px; font-weight: 800; }
-.prep-task-copy { margin-top: 6px; color: var(--text3); font-size: 12.5px; line-height: 1.5; }
-.prep-task-output { margin-top: 10px; color: var(--text2); font: 700 11px var(--mono); }
+.prep-step1-tasks { display: grid; gap: 0; }
+.prep-task-section { min-width: 0; }
+.prep-task-section-head { padding: 18px 20px; }
+.prep-task-section-head .prep-card-desc { display: block; }
+.prep-task-section-head .prep-card-desc span { display: block; }
+.prep-task-section-head .prep-card-desc span + span { margin-top: 1px; }
+.prep-task-section-body { padding: 20px; }
+.prep-task-section-body.ai-agent-strip { margin-top: 0; border: 0; border-radius: 0; }
 .source-grid { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 16px; }
 .drop-zone {
   min-height: 148px; border: 1.5px dashed #9db4df; border-radius: 11px; background: #f8faff;
@@ -1229,10 +1226,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 #page-preprocessing .prep-page-hero { margin-bottom: 18px; }
 #page-preprocessing .prep-page-hero .page-title { max-width: min(640px, 55%); }
 #page-preprocessing .prep-page-hero .page-desc { max-width: min(690px, 57%); }
-.prep-task-card { min-height: auto; }
-.prep-task-output + .prep-task-output { margin-top: 6px; }
-.prep-task-panel { min-width: 0; }
-.prep-task-panel[hidden] { display: none !important; }
+.prep-task-section { min-width: 0; }
 .prep-steps { grid-template-columns: repeat(5, 1fr); margin: 20px 0; gap: 10px; }
 .prep-step { padding: 11px 12px; border-radius: 10px; cursor: pointer; }
 .prep-step-num { width: 30px; height: 30px; flex-basis: 30px; }
@@ -1246,6 +1240,16 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .prep-card-title { font-size: 18px; }
 .prep-card-desc { font-size: 13.5px; }
 .prep-card-body { margin: 0 28px 28px; padding: 20px; border: 1px solid var(--border); border-radius: 12px; background: #f4f6fb; }
+#page-preprocessing [data-prep-stage="1"] { background: var(--bg); }
+#page-preprocessing [data-prep-stage="1"] > .prep-card-body { margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+#page-preprocessing [data-prep-stage="1"] .prep-task-section { border: 0; border-radius: 0; background: transparent; overflow: visible; }
+#page-preprocessing [data-prep-stage="1"] .prep-task-section + .prep-task-section { border-top: 1px solid var(--border); }
+#page-preprocessing [data-prep-stage="1"] .prep-task-section-head { padding: 27px 28px 20px; border: 0; background: transparent; }
+#page-preprocessing [data-prep-stage="1"] .prep-task-section-body {
+  margin: 0 28px 28px; padding: 20px; border: 1px solid var(--border);
+  border-radius: 12px; background: #f4f6fb;
+}
+#page-preprocessing [data-prep-stage="1"] .prep-task-section-body.ai-agent-strip { border: 1px solid var(--border); border-radius: 12px; }
 .analysis-summary { margin: 0 28px; border: 1px solid var(--border); border-bottom: 0; border-radius: 12px 12px 0 0; }
 .evidence-scroll { margin: 0 28px 28px; border: 1px solid var(--border); border-radius: 0 0 12px 12px; overflow: auto; }
 .validation-grid, .channel-grid { background: transparent; }
@@ -1293,8 +1297,6 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .skill-package-label { color: var(--text3); font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 6px; }
 .skill-package-value { padding: 11px 12px; border: 1px solid var(--border); border-radius: 8px; background: #fff; font: 600 12px var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ai-agent-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 14px; padding: 12px 14px; border: 1px solid #bfdbfe; border-radius: 10px; background: #f8fbff; }
-#metadataTaskPanel[hidden] { display: none; }
-#metadataTaskPanel { align-items: stretch; }
 #metadataTaskPanel .ai-agent-copy { width: 100%; flex: 1 1 auto; }
 .ai-agent-copy { min-width: 0; }
 .ai-agent-title { color: var(--text1); font-size: 13px; font-weight: 750; }
@@ -1425,7 +1427,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   }
   #page-preprocessing,
   #page-preprocessing .prep-shell,
-  #page-preprocessing .prep-task-card,
+  #page-preprocessing .prep-task-section,
   #page-preprocessing .prep-card,
   #page-preprocessing .prep-card-body {
     min-width: 0;
@@ -1449,6 +1451,13 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   .prep-lead { font-size: 13px; }
   .prep-card-head {
     gap: 10px;
+  }
+  #page-preprocessing [data-prep-stage="1"] .prep-task-section-head {
+    padding: 20px 14px 16px;
+  }
+  #page-preprocessing [data-prep-stage="1"] .prep-task-section-body {
+    margin-left: 12px;
+    margin-right: 12px;
   }
   .prep-card-title { font-size: 16px; }
   .prep-card-body,
@@ -1818,6 +1827,9 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 #page-contribute .contrib-panel-title { font-family: var(--sans); letter-spacing: 0; }
 #page-apis .page-title,
 #page-contribute .page-title { font-size: 28px; font-weight: 800; }
+#page-apis .api-page-hero { margin-bottom: 18px; }
+#page-apis .api-page-hero .page-title { max-width: min(640px, 55%); }
+#page-apis .api-page-hero .page-desc { max-width: min(690px, 57%); }
 #page-apis > .api-grid,
 #page-apis > h3,
 #page-apis > table.model-table { display: none; }
