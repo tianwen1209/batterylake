@@ -8040,7 +8040,7 @@ const QA_CHECK_DEFS = [
 
 const QA_DEFAULT_REPORT = {
   dataset_id: 'dataset_03',
-  file_name: 'dataset_03.csv',
+  file_name: 'dataset_03_quality_assesment.json',
   quality_score: { completeness: 0.97, consistency: 0.95, accuracy: 0.92, validity: 1.00 },
   overall: 0.96,
   gate: 'ready_with_warning',
