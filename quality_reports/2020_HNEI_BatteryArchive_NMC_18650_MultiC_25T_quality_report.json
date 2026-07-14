@@ -1,0 +1,78 @@
+{
+  "dataset_id": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T",
+  "file_name": "timeseries.csv",
+  "quality_score": {
+    "completeness": 1.0,
+    "consistency": 1.0,
+    "accuracy": 1.0,
+    "validity": 1.0
+  },
+  "overall": 1.0,
+  "gate": "ready",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "pass"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "pass"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "pass"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "pass"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "pass"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "passed": true
+    },
+    {
+      "name": "energy_balance",
+      "passed": true
+    },
+    {
+      "name": "capacity_mono",
+      "passed": true
+    },
+    {
+      "name": "temperature_consistency",
+      "passed": true
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "passed": true
+    }
+  ],
+  "warn_count": 0,
+  "generated_at": "2026-07-13T04:24:53Z"
+}

@@ -953,13 +953,15 @@ function openDatasetModal(id) {
   linksSec.style.display = 'block';
   const extIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
   const dlIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+  const qaIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M8 15l2.3-4.2 2.4 2 3.3-6.1"/></svg>`;
   const srcBtn = hasDoi
     ? `<a class="modal-link-row" href="${esc(d.doi)}" target="_blank"><span class="modal-link-label">Source Dataset</span><span class="modal-link-val">${esc(d.doi)} ${extIcon}</span></a>`
     : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn modal-link-btn-na">${extIcon} Source</span></div>`;
   const procBtn = hasProcessed
     ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.processed_url)}" target="_blank"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></a>`
     : `<button class="modal-link-row modal-link-row--dl" onclick="showToast('Processed data for this dataset is coming soon.','info')"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></button>`;
-  linksEl.innerHTML = `<div class="modal-links-row">${srcBtn}${procBtn}</div>`;
+  const qaBtn = `<button class="modal-link-row modal-link-row--dl" type="button" onclick="closeModal(); showDatasetQuality('${esc(d.id)}')"><span class="modal-link-label">Quality Report</span><span class="modal-link-dl-btn">${qaIcon} View</span></button>`;
+  linksEl.innerHTML = `<div class="modal-links-row">${srcBtn}${procBtn}${qaBtn}</div>`;
   document.getElementById('modal').classList.add('show');
 }
 function openModal(idx) {
@@ -2076,6 +2078,9 @@ function showPage(name, navEl, options = {}) {
     ppRender();
     ppStageRender();
   }
+  if (name === 'quality' && !options.skipQualityLoad && typeof ensureQualityPageReady === 'function') {
+    void ensureQualityPageReady(options.qualityDatasetId || null);
+  }
   if (!options.preserveHash && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
 }
 window.showPage = showPage;
@@ -2107,6 +2112,15 @@ function applyInitialPageFromHash() {
       renderModelDetailsPage(modelId);
       showPage('model-details', document.getElementById('nav-models'), { preserveHash: true });
     }
+    return;
+  }
+  if (name.startsWith('quality-') || name.startsWith('quality/')) {
+    const datasetId = name.replace(/^quality[-/]/, '');
+    showPage('quality', document.querySelector('.sidebar-nav a[onclick*="quality"]'), {
+      preserveHash: true,
+      qualityDatasetId: datasetId || null
+    });
+    history.replaceState(null, '', datasetId ? '#quality-' + datasetId : '#quality');
     return;
   }
   if (!name || !document.getElementById('page-' + name)) {
@@ -8009,6 +8023,9 @@ const QA_DEFAULT_REPORT = {
 
 let qaSelectedFile = null;
 let qaLastReport = QA_DEFAULT_REPORT;
+let qaActiveDatasetId = null;
+let qaPageInitialized = false;
+let qaHasAssessed = false;
 
 function qaHashSeed(str) {
   let h = 0;
@@ -8024,13 +8041,19 @@ function updateQualitySelectedFile() {
   const note = document.getElementById('qaSelectedFile');
   const runBtn = document.getElementById('qaRunBtn');
   const dropZone = document.getElementById('qaDropZone');
+  const dropTitle = dropZone?.querySelector('.drop-title');
   if (qaSelectedFile) {
     const sizeKb = (qaSelectedFile.size / 1024).toFixed(1);
-    if (note) { note.textContent = `${qaSelectedFile.name} - ${sizeKb} KB`; note.classList.add('has-files'); }
+    if (note) {
+      note.textContent = `${qaSelectedFile.name} · ${sizeKb} KB`;
+      note.classList.add('has-files');
+    }
+    if (dropTitle) dropTitle.textContent = qaSelectedFile.name;
     if (runBtn) runBtn.disabled = false;
     if (dropZone) dropZone.classList.add('has-files');
   } else {
     if (note) { note.textContent = 'No file selected.'; note.classList.remove('has-files'); }
+    if (dropTitle) dropTitle.textContent = 'Upload a dataset to assess';
     if (runBtn) runBtn.disabled = true;
     if (dropZone) dropZone.classList.remove('has-files');
   }
@@ -8106,7 +8129,36 @@ function qaGateLabel(report) {
   return report.gate === 'ready' ? 'Ready' : 'Ready with warning';
 }
 
-function renderQualityResults(report) {
+function setQualityExampleMode(isExample) {
+  const results = document.getElementById('qaResults');
+  if (results) results.classList.toggle('qa-is-example', !!isExample);
+
+  let badge = document.getElementById('qaExampleBadge');
+  if (!badge && results) {
+    badge = document.createElement('span');
+    badge.id = 'qaExampleBadge';
+    badge.className = 'qa-example-badge';
+    badge.textContent = 'Example Data';
+    const info = document.querySelector('#qaResultsBar .qa-results-info');
+    if (info) info.insertAdjacentElement('afterbegin', badge);
+    else results.insertAdjacentElement('afterbegin', badge);
+  }
+  if (!badge) return;
+
+  if (isExample) {
+    badge.hidden = false;
+    badge.removeAttribute('hidden');
+    badge.style.display = '';
+  } else {
+    badge.hidden = true;
+    badge.setAttribute('hidden', '');
+    badge.style.display = 'none';
+  }
+}
+
+function renderQualityResults(report, options = {}) {
+  const isExample = options.isExample === true;
+  setQualityExampleMode(isExample);
   const dims = report.quality_score;
 
   Object.entries(dims).forEach(([dim, score]) => {
@@ -8187,24 +8239,45 @@ function runQualityAssessment() {
   const originalLabel = runBtn ? runBtn.textContent : 'Run Assessment';
   if (runBtn) { runBtn.disabled = true; runBtn.textContent = 'Analyzing...'; }
   showToast('Running quality assessment...', 'info', 1600);
-  setTimeout(() => {
-    const report = generateQualityReport(qaSelectedFile);
+
+  (async () => {
+    const stem = String(qaSelectedFile.name || '').replace(/\.[^.]+$/, '');
+    let report = await loadQualityReport(stem);
+    if (!report) {
+      const match = DATASETS.find(d =>
+        d.id === stem ||
+        d.ref_name === stem ||
+        stem === d.id + '_timeseries' ||
+        stem === d.ref_name + '_timeseries'
+      );
+      if (match) report = await loadQualityReport(match.id);
+    }
+    // Path A offline fallback when no precomputed report exists for this file.
+    if (!report) report = generateQualityReport(qaSelectedFile);
+
     qaLastReport = report;
-    renderQualityResults(report);
+    qaActiveDatasetId = report.dataset_id || stem;
+    qaHasAssessed = true;
+    renderQualityResults(report, { isExample: false });
     if (runBtn) { runBtn.disabled = false; runBtn.textContent = originalLabel; }
     showToast('Assessment complete - report ready to download.', 'success');
     document.getElementById('qaResults')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 900);
+  })().catch(() => {
+    if (runBtn) { runBtn.disabled = false; runBtn.textContent = originalLabel; }
+    showToast('Quality assessment failed.', 'error');
+  });
 }
 
 function downloadQualityReport() {
   const report = qaLastReport || QA_DEFAULT_REPORT;
   const payload = {
     dataset_id: report.dataset_id,
+    file_name: report.file_name,
     quality_score: report.quality_score,
     overall: report.overall,
     gate: report.gate,
     checks: report.checks,
+    warn_count: report.warn_count,
     generated_at: report.generated_at
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
@@ -8215,6 +8288,91 @@ function downloadQualityReport() {
   URL.revokeObjectURL(link.href);
   showToast('Quality report downloaded.', 'success');
 }
+
+/** Path A — fetch a precomputed report; returns null if none exists yet. */
+async function loadQualityReport(datasetId) {
+  if (!datasetId) return null;
+  const candidates = [datasetId];
+  const match = DATASETS.find(d => d.id === datasetId || d.ref_name === datasetId);
+  if (match) {
+    if (!candidates.includes(match.id)) candidates.push(match.id);
+    if (match.ref_name && !candidates.includes(match.ref_name)) candidates.push(match.ref_name);
+  }
+  for (const id of candidates) {
+    try {
+      const res = await fetch(`quality_reports/${id}_quality_report.json`, { cache: 'no-store' });
+      if (!res.ok) continue;
+      return await res.json();
+    } catch { /* try next candidate */ }
+  }
+  return null;
+}
+
+async function showDatasetQuality(datasetId) {
+  const nav = document.querySelector('.sidebar-nav a[onclick*="quality"]');
+  showPage('quality', nav, { preserveHash: true, skipQualityLoad: true });
+  if (datasetId) history.replaceState(null, '', '#quality-' + datasetId);
+  else history.replaceState(null, '', '#quality');
+
+  document.getElementById('qaCatalogSelect')?.closest('.qa-catalog-picker')?.remove();
+
+  const report = await loadQualityReport(datasetId);
+  if (report) {
+    qaLastReport = report;
+    qaActiveDatasetId = datasetId;
+    qaHasAssessed = true;
+    qaPageInitialized = true;
+    renderQualityResults(report, { isExample: false });
+    document.getElementById('qaResults')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return report;
+  }
+  showToast('No precomputed quality report for this dataset yet.', 'info');
+  return null;
+}
+
+async function ensureQualityPageReady(datasetId) {
+  // Remove any leftover catalog picker from earlier builds.
+  document.getElementById('qaCatalogSelect')?.closest('.qa-catalog-picker')?.remove();
+
+  // Deep-link / modal: load a real catalog report and clear the example label.
+  if (datasetId) {
+    const report = await loadQualityReport(datasetId);
+    if (report) {
+      qaLastReport = report;
+      qaActiveDatasetId = datasetId;
+      qaHasAssessed = true;
+      qaPageInitialized = true;
+      renderQualityResults(report, { isExample: false });
+      return;
+    }
+  }
+
+  if (qaPageInitialized && qaHasAssessed) return;
+  qaPageInitialized = true;
+  qaHasAssessed = false;
+  qaLastReport = QA_DEFAULT_REPORT;
+  renderQualityResults(QA_DEFAULT_REPORT, { isExample: true });
+}
+
 window.handleQualityFileInput = handleQualityFileInput;
 window.runQualityAssessment = runQualityAssessment;
 window.downloadQualityReport = downloadQualityReport;
+window.loadQualityReport = loadQualityReport;
+window.showDatasetQuality = showDatasetQuality;
+
+// Ensure Example data badge + results mode are correct once this block has loaded.
+(function initQualityPageOnReady() {
+  const hash = (location.hash || '').replace(/^#/, '');
+  const deepId = hash.startsWith('quality-') || hash.startsWith('quality/')
+    ? hash.replace(/^quality[-/]/, '')
+    : null;
+  if (deepId) {
+    void ensureQualityPageReady(deepId);
+    return;
+  }
+  if (document.getElementById('page-quality')?.classList.contains('active') || hash === 'quality') {
+    void ensureQualityPageReady(null);
+    return;
+  }
+  setQualityExampleMode(true);
+})();

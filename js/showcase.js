@@ -81,29 +81,14 @@
     io.observe(panel);
   }
 
-  /* ── 4. Quality page: dimension cards ↔ JSON report sync ──── */
+  /* ── 4. Quality page score cards are fully static ──────────── */
   function initQualityCards() {
-    var cards = document.querySelectorAll('#page-quality .quality-card');
-    var lines = document.querySelectorAll('#page-quality .qa-code .qa-line');
-    if (!cards.length) return;
-    cards.forEach(function (card) {
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      function select() {
-        var key = card.getAttribute('data-dim');
-        var isSel = card.classList.contains('qa-selected');
-        cards.forEach(function (c) { c.classList.remove('qa-selected'); });
-        lines.forEach(function (l) { l.classList.remove('hl'); });
-        if (isSel) return; // toggle off
-        card.classList.add('qa-selected');
-        lines.forEach(function (l) {
-          if (l.getAttribute('data-dim') === key) l.classList.add('hl');
-        });
-      }
-      card.addEventListener('click', select);
-      card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
-      });
+    document.querySelectorAll('#page-quality .quality-card').forEach(function (card) {
+      card.removeAttribute('tabindex');
+      card.removeAttribute('role');
+      card.classList.remove('qa-selected');
+      card.style.pointerEvents = 'none';
+      card.style.cursor = 'default';
     });
   }
 

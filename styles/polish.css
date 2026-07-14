@@ -2386,6 +2386,36 @@ pre {
 [data-theme="dark"] .qc-overall-ring::after { background: var(--surface) !important; }
 [data-theme="dark"] .qc-overall-ring { background: conic-gradient(var(--qc-color) calc(var(--pct) * 3.6deg), var(--bg3) 0deg) !important; }
 [data-theme="dark"] .qa-progress { background: var(--bg3) !important; }
+[data-theme="dark"] .qa-example-badge {
+  background: color-mix(in srgb, var(--amber) 18%, var(--surface)) !important;
+  border-color: rgba(217,119,6,.30) !important;
+}
+[data-theme="dark"] #page-quality .quality-card,
+[data-theme="dark"] #page-quality .quality-card:hover,
+[data-theme="dark"] #page-quality .quality-card:focus,
+[data-theme="dark"] #page-quality .quality-card:active,
+[data-theme="dark"] #page-quality .quality-card.qa-selected {
+  border-color: var(--border) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.18) !important;
+  transform: none !important;
+  transition: none !important;
+  cursor: default !important;
+  pointer-events: none !important;
+}
+[data-theme="dark"] #page-quality .quality-card::after {
+  content: none !important;
+  display: none !important;
+}
+[data-theme="dark"] .diag-item {
+  background: linear-gradient(180deg, var(--surface), var(--surface-alt)) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] .diag-icon {
+  background: var(--surface) !important;
+}
+[data-theme="dark"] #page-quality .qa-code {
+  background: var(--code-bg) !important;
+}
 
 #page-benchmarks [data-bw-step="2"] > .bw-pbody {
   display: flex;

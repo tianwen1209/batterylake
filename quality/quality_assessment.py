@@ -330,7 +330,7 @@ def assess_dataset(path, dataset_id: str | None = None, chemistry: str | None = 
     return {
         "dataset_id": dataset_id,
         "file_name": path.name,
-        "chemistry": chem if chem != "_DEFAULT" else "unknown",
+        "chemistry": "unknown" if chem == "_default" else chem,
         "n_rows": int(len(df)),
         "resolved_columns": cols,
         "quality_score": dims,
@@ -351,4 +351,11 @@ def report_to_frontend_schema(report: dict) -> dict:
     """Strip backend-only fields, keeping exactly what the page + downloaded JSON use."""
     keep = ("dataset_id", "file_name", "quality_score", "overall", "gate",
             "checks_detail", "checks", "warn_count", "generated_at")
-    return {k: report[k] for k in keep if k in report}
+    out = {k: report[k] for k in keep if k in report}
+    # Contract for checks_detail: key, name, detail, status (no backend score/note).
+    if "checks_detail" in out:
+        out["checks_detail"] = [
+            {k: c[k] for k in ("key", "name", "detail", "status") if k in c}
+            for c in out["checks_detail"]
+        ]
+    return out

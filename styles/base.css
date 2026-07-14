@@ -601,7 +601,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .modal-notes { font-size: 14px; color: var(--text2); line-height: 1.6; background: var(--bg2); padding: 12px 16px; border-radius: 8px; }
 .modal-link { color: var(--accent); text-decoration: none; font-size: 14px; display: block; margin-bottom: 8px; }
 .modal-link:hover { text-decoration: underline; }
-.modal-links-row { display: flex; gap: 10px; }
+.modal-links-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .modal-link-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0; text-decoration: none; background: var(--bg); cursor: pointer; flex: 1; box-sizing: border-box; transition: border-color .15s, background .15s; }
 .modal-link-row:hover { border-color: var(--accent); background: #f0f4ff; }
 .modal-link-label { font-size: 12px; font-weight: 600; color: var(--text3); flex-shrink: 0; }
@@ -838,6 +838,48 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .qa-upload-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .qa-upload-actions .prep-selected-files { margin-top: 0; min-width: 170px; }
 .qa-upload-actions .prep-btn { white-space: nowrap; }
+.qa-upload-actions .prep-selected-files.has-files {
+  color: var(--text1);
+  font-weight: 700;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.qa-drop-zone.has-files .drop-title {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.qa-example-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  background: color-mix(in srgb, var(--amber) 14%, #fff);
+  color: var(--amber);
+  border: 1px solid rgba(217,119,6,.22);
+  flex-shrink: 0;
+}
+.qa-example-badge[hidden],
+#qaResults:not(.qa-is-example) .qa-example-badge {
+  display: none !important;
+}
+#qaResults.qa-is-example .qa-example-badge {
+  display: inline-flex !important;
+}
+#qaResults.qa-is-example .qa-results-bar {
+  border-style: dashed;
+}
+#qaResults.qa-is-example .quality-card,
+#qaResults.qa-is-example .diag-section,
+#qaResults.qa-is-example .qa-json-card {
+  opacity: .92;
+}
 
 .qa-results-bar {
   display: flex;
@@ -883,26 +925,35 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .qc-overall-meta .qc-label { margin-bottom: 8px; }
 .qc-overall-meta .qa-chip-row { justify-content: flex-start; }
 
-#page-quality {
-  --dataset-lift-border: color-mix(in srgb, var(--accent) 42%, var(--border));
-  --dataset-lift-shadow: 0 0 0 3px rgba(37,99,235,.09), 0 12px 28px rgba(37,99,235,.13), var(--card-shadow-hover);
-}
 .quality-card {
   background:
     linear-gradient(180deg, rgba(255,255,255,.99) 0%, rgba(248,250,252,.98) 100%);
   border: 1px solid rgba(203,213,225,.76);
   border-radius: 14px;
-  padding: 18px 18px 36px;
-  transition: box-shadow .16s ease, border-color .16s ease;
+  padding: 18px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 12px 28px rgba(15,23,42,.055);
+  cursor: default;
+  transition: none;
+  transform: none;
+  pointer-events: none;
+  user-select: text;
 }
-.quality-card:hover {
-  border-color: var(--dataset-lift-border, var(--border2)) !important;
-  box-shadow: var(--dataset-lift-shadow, var(--card-shadow-hover)) !important;
+.quality-card:hover,
+.quality-card:focus,
+.quality-card:focus-visible,
+.quality-card:active,
+.quality-card.qa-selected {
+  border-color: rgba(203,213,225,.76);
+  box-shadow: 0 12px 28px rgba(15,23,42,.055);
+  cursor: default;
+  transition: none;
+  transform: none;
+  outline: none;
 }
 .quality-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: var(--qc-color); }
+.quality-card::after { content: none !important; display: none !important; }
 .qc-completeness { --qc-color: var(--accent); --qc-bg: var(--accent-light); }
 .qc-consistency { --qc-color: var(--teal); --qc-bg: var(--teal-bg); }
 .qc-accuracy { --qc-color: var(--green); --qc-bg: var(--green-bg); }

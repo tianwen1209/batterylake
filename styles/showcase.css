@@ -471,22 +471,34 @@
 .reveal .qa-progress span { width: 0 !important; transition: width 1.15s cubic-bezier(.22,.61,.36,1) .25s; }
 .reveal.in-view .qa-progress span { width: var(--score) !important; }
 
-/* interactive dimension cards */
-.quality-card { cursor: pointer; position: relative; }
-.quality-card::after {
-  content: "view in report"; position: absolute; left: 18px; right: 18px; bottom: 13px;
-  font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-  color: var(--accent); opacity: 0; transform: translateY(4px);
-  transition: opacity .2s ease, transform .2s ease;
-  pointer-events: none;
+/* Quality score cards: fully static — no hover, click, or "view in report". */
+#page-quality .quality-card,
+#page-quality .quality-card:hover,
+#page-quality .quality-card:focus,
+#page-quality .quality-card:focus-visible,
+#page-quality .quality-card:active,
+#page-quality .quality-card.qa-selected {
+  cursor: default !important;
+  pointer-events: none !important;
+  transform: none !important;
+  transition: none !important;
+  outline: none !important;
+  border-color: rgba(203,213,225,.76) !important;
+  box-shadow: 0 12px 28px rgba(15,23,42,.055) !important;
 }
-.quality-card:hover::after { opacity: .85; transform: none; }
-.quality-card.qa-selected {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--border)) !important;
-  box-shadow: 0 0 0 3px var(--accent-soft), var(--card-shadow-hover) !important;
+#page-quality .quality-card::after,
+#page-quality .quality-card:hover::after,
+#page-quality .quality-card:focus::after,
+#page-quality .quality-card.qa-selected::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
-.qa-code .qa-line { display: inline; transition: background .25s ease; border-radius: 4px; }
-.qa-code .qa-line.hl { background: color-mix(in srgb, var(--accent) 30%, transparent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+
+.qa-code .qa-line { display: inline; border-radius: 4px; }
+.qa-code .qa-line.hl { background: transparent; box-shadow: none; }
 
 /* ═══════════════════════════════════════════════════════════════
    3. PLATFORM APIs — interactive console
