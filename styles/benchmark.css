@@ -185,7 +185,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-pill { font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 11px; }
 
 /* field labels */
-.bw-field-lbl { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin: 16px 0 9px; }
+.bw-field-lbl { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: capitalize; letter-spacing: 0.05em; margin: 16px 0 9px; }
 .bw-field-lbl:first-child { margin-top: 0; }
 
 /* segmented task toggle */
@@ -284,7 +284,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-sum:last-child { border-bottom: none; }
 .bw-sum-k { font-size: 13px; color: var(--text3); flex-shrink: 0; }
 .bw-sum-v { font-size: 13px; font-weight: 600; color: var(--text1); text-align: right; }
-.bw-check-title { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin: 18px 0 10px; }
+.bw-check-title { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: capitalize; letter-spacing: 0.05em; margin: 18px 0 10px; }
 .bw-checks { display: flex; flex-direction: column; gap: 8px; }
 .bw-chk { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 500; color: var(--text1); }
 .bw-chk-ic { width: 19px; height: 19px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -317,7 +317,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-package-item b { display: block; font-family: var(--mono); font-size: 12px; font-weight: 800; color: var(--text1); line-height: 1.2; }
 .bw-package-item small { display: block; margin-top: 4px; font-size: 12px; line-height: 1.25; color: var(--text3); }
 .bw-package-command { margin-top: 10px; border-radius: 12px; overflow: hidden; background: #17223a; border: 1px solid #263758; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
-.bw-command-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; background: rgba(255,255,255,0.06); color: #cbd5e1; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+.bw-command-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; background: rgba(255,255,255,0.06); color: #cbd5e1; font-size: 12px; font-weight: 800; text-transform: capitalize; letter-spacing: 0.05em; }
 .bw-command-code { margin: 0; padding: 12px; white-space: pre-wrap; color: #e8f0ff; font-family: var(--mono); font-size: 12px; line-height: 1.55; }
 .bw-package-actions { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
 .bw-download,
@@ -369,7 +369,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   display: block;
 }
 .bw-results-upload-copy { grid-column: 2; min-width: 0; }
-.bw-results-kicker { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--accent); margin-bottom: 3px; }
+.bw-results-kicker { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0; text-transform: capitalize; color: var(--accent); margin-bottom: 3px; }
 .bw-results-title { font-size: 17px; font-weight: 800; color: var(--text1); letter-spacing: 0; line-height: 1.25; }
 .bw-results-desc { font-size: 12.5px; color: var(--text3); margin-top: 3px; line-height: 1.45; }
 .bw-results-actions { grid-column: 3; grid-row: 1 / 3; display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
@@ -406,7 +406,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-results .bw-mono { font-family: var(--sans); font-size: inherit; }
 .bw-results .bw-table th {
   font-family: var(--sans);
-  text-transform: none !important;
+  text-transform: capitalize !important;
   letter-spacing: 0 !important;
   font-size: 12.5px !important;
   font-weight: 700 !important;
@@ -423,7 +423,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
   box-shadow: 0 1px 2px rgba(15,23,42,.03);
 }
 .bw-paper-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 10px; }
-.bw-paper-label { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--text4); margin-bottom: 3px; }
+.bw-paper-label { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0; text-transform: capitalize; color: var(--text4); margin-bottom: 3px; }
 .bw-chart-title { font-size: 14px; font-weight: 800; color: var(--text1); line-height: 1.25; }
 .bw-pill-soft { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 999px; padding: 5px 9px; background: #f8fafc; color: var(--text3); font-size: 12px; font-weight: 700; white-space: nowrap; }
 .bw-result-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
@@ -443,7 +443,7 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-evidence-list { display: grid; gap: 0; margin-top: 8px; border-top: 1px solid var(--border); }
 .bw-evidence-list div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--border); }
 .bw-evidence-list div:last-child { border-bottom: none; }
-.bw-evidence-list span { font-size: 12px; color: var(--text4); font-weight: 700; text-transform: none; letter-spacing: 0; }
+.bw-evidence-list span { font-size: 12px; color: var(--text4); font-weight: 700; text-transform: capitalize; letter-spacing: 0; }
 .bw-evidence-list b { font-size: 13px; color: var(--text2); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bw-resstats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .bw-rstat { border: 1px solid var(--border); border-radius: 10px; padding: 13px 14px; }

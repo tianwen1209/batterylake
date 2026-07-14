@@ -419,7 +419,7 @@ select:focus-visible, [tabindex]:focus-visible {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0;
-  text-transform: none !important;
+  text-transform: capitalize !important;
   border-bottom: 2px solid var(--border);
 }
 .bw-step1-left .bw-table td {
@@ -455,7 +455,7 @@ select:focus-visible, [tabindex]:focus-visible {
   font-size: 15px;
   font-weight: 850;
   letter-spacing: 0;
-  text-transform: none;
+  text-transform: capitalize;
 }
 .bw-step1-right .bw-feature-count {
   font-size: 13px;
@@ -663,7 +663,7 @@ select:focus-visible, [tabindex]:focus-visible {
 
 /* groups + cards */
 .ml-group { margin-top: 22px; }
-.ml-group-h { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); margin-bottom: 12px; }
+.ml-group-h { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; text-transform: capitalize; letter-spacing: .07em; color: var(--text3); margin-bottom: 12px; }
 .ml-group-ic { width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
 .ml-group-ic svg { width: 13px; height: 13px; }
 .ml-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(296px, 1fr)); gap: 14px; }
@@ -1379,7 +1379,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   font-size: var(--type-kicker) !important;
   line-height: 1.2;
   font-weight: 850 !important;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: .085em !important;
 }
 .pp-kicker,
@@ -1680,13 +1680,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   width: auto;
   max-width: min(560px, 100%);
   vertical-align: -0.12em;
-}
-
-/* Home showcase "tags" should keep their original casing (override the
-   showcase layer's uppercase transform without touching typography). */
-#page-home .sc-hero-eyebrow,
-#page-home .sc-kicker {
-  text-transform: none;
 }
 
 /* Keep section-title orphans from wrapping alone; widen head slightly so
@@ -2011,7 +2004,7 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
 .bw-table th {
   font-size: 12px !important;
   font-weight: 850 !important;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: .07em;
   color: var(--text3);
 }
@@ -2037,10 +2030,6 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
     --type-dashboard-metric-featured: 33px;
   }
   .page { padding-left: 20px; padding-right: 20px; }
-}
-#page-datasets .dataset-filter-grid .filter-label {
-  text-transform: none !important;
-  letter-spacing: 0 !important;
 }
 #page-datasets .dataset-grid {
   display: block;
@@ -2361,9 +2350,33 @@ pre {
 }
 
 .qa-code,
-.api-code,
 .bw-command-code,
 .pp-output-code { color: var(--code-text) !important; }
+
+/* Request preview: light content box + readable syntax on white */
+.api-code-panel {
+  background: #ffffff !important;
+  color: var(--text2) !important;
+  border-color: var(--border) !important;
+}
+.api-code-panel .api-code-head { color: var(--text3) !important; }
+pre.api-code,
+.api-code {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border-color: transparent !important;
+}
+.api-code .accent { color: #1d4ed8 !important; }
+.api-code-panel .api-copy-btn {
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border)) !important;
+  background: color-mix(in srgb, #fff 86%, var(--accent-light)) !important;
+  color: var(--accent) !important;
+}
+.api-code-panel .api-copy-btn:hover {
+  background: var(--accent-light) !important;
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border)) !important;
+  color: var(--accent-hover) !important;
+}
 
 .bw-plot-axis { stroke: var(--chart-axis) !important; }
 .bw-plot-grid { stroke: var(--chart-grid) !important; }
@@ -2492,7 +2505,7 @@ pre {
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: .08em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-benchmarks [data-bw-step="2"] .bw-multi-note {
@@ -2742,7 +2755,7 @@ pre {
   color: #fff !important;
   font-size: 12px;
   font-weight: 800;
-  text-transform: none;
+  text-transform: capitalize;
   letter-spacing: 0;
 }
 
@@ -2972,7 +2985,7 @@ pre {
   font-size: 12px;
   font-weight: 850;
   letter-spacing: .04em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-benchmarks [data-bw-step="3"] .bw-package-title {
@@ -3157,7 +3170,7 @@ pre {
   font-size: 12px;
   font-weight: 850;
   letter-spacing: .04em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-benchmarks .bw-step1-right .bw-step1-panel-title::before {
@@ -3195,7 +3208,7 @@ pre {
   font-size: 12px;
   font-weight: 850;
   letter-spacing: .04em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-benchmarks [data-bw-step="2"] .bw-step2-model-card .bw-field-lbl {
@@ -3789,7 +3802,7 @@ pre {
   font-size: 12px;
   font-weight: 850;
   letter-spacing: .04em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 #page-benchmarks .bw-results-main-title {
   margin-top: 4px;
@@ -4484,7 +4497,7 @@ pre {
   font-weight: 850;
   letter-spacing: .085em;
   line-height: 1.2;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-about .about-hero h1 {
@@ -4572,7 +4585,7 @@ pre {
   font-size: 12px;
   font-weight: 850;
   letter-spacing: .07em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-about .about-snapshot-card strong {
@@ -5223,7 +5236,7 @@ pre {
   font-size: 11px;
   font-weight: 850;
   letter-spacing: .08em;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-naming .page-header::after {
@@ -5278,7 +5291,7 @@ pre {
   font-weight: 850;
   letter-spacing: .085em;
   line-height: 1.2;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-naming .naming-formula::after {
@@ -5696,7 +5709,7 @@ pre {
   font-weight: 850;
   letter-spacing: .08em;
   line-height: 1.2;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-naming .naming-formula-kicker::before {
@@ -6101,7 +6114,7 @@ pre {
   font-weight: 850;
   letter-spacing: .08em;
   line-height: 1.2;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 #page-pipeline .etl-flow-title {

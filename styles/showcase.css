@@ -65,7 +65,7 @@
 .sc-hero-eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 6px 14px; border-radius: 999px;
-  font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: capitalize;
   color: var(--accent);
   background: var(--accent-light);
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
@@ -226,7 +226,7 @@
 .sc-section-head { max-width: 660px; margin: 0 auto 46px; text-align: center; }
 .sc-kicker {
   display: inline-block; font-size: 12.5px; font-weight: 700;
-  letter-spacing: .09em; text-transform: uppercase;
+  letter-spacing: .09em; text-transform: capitalize;
   color: var(--accent); background: var(--accent-light);
   padding: 5px 13px; border-radius: 999px; margin-bottom: 14px;
 }
@@ -357,7 +357,7 @@
   background: var(--surface-alt); border: 1px solid var(--border);
   border-radius: 11px; padding: 11px 13px;
 }
-.sc-metric-box span { display: block; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--text4); margin-bottom: 3px; }
+.sc-metric-box span { display: block; font-size: 10.5px; letter-spacing: .05em; text-transform: capitalize; color: var(--text4); margin-bottom: 3px; }
 .sc-metric-box b { font-family: var(--mono); font-size: 16px; font-weight: 600; color: var(--text1); }
 /* quality gate mock: ring + checks */
 .sc-gate-mock { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
@@ -375,7 +375,7 @@
   align-items: center; justify-content: center;
 }
 .sc-ring-label b { font-family: var(--mono); font-size: 23px; font-weight: 600; color: var(--text1); }
-.sc-ring-label span { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--text4); }
+.sc-ring-label span { font-size: 10.5px; text-transform: capitalize; letter-spacing: .07em; color: var(--text4); }
 .sc-gate-checks { display: grid; gap: 8px; }
 .sc-gate-check {
   display: flex; align-items: center; gap: 10px;
@@ -553,12 +553,17 @@
 .api-code-head { position: relative; }
 .api-copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 4px 12px; border-radius: 7px; border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06); cursor: pointer;
-  font-family: var(--mono); font-size: 11px; color: #cbd5e1;
-  transition: background .15s ease, color .15s ease;
+  padding: 4px 12px; border-radius: 7px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  background: color-mix(in srgb, #fff 86%, var(--accent-light)); cursor: pointer;
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
-.api-copy-btn:hover { background: rgba(255,255,255,.13); color: #fff; }
+.api-copy-btn:hover {
+  background: var(--accent-light);
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border));
+  color: var(--accent-hover);
+}
 
 /* roadmap timeline restyle */
 .api-roadmap { max-width: 100%; display: grid; gap: 0; margin-top: 8px; }
@@ -581,7 +586,7 @@
 .api-roadmap-item b { display: block; font-size: 14.5px; color: var(--text1); margin-bottom: 3px; }
 .api-roadmap-item p { font-size: 13px; color: var(--text3); margin: 0; line-height: 1.5; }
 .api-roadmap-status {
-  font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: capitalize;
   padding: 4px 12px; border-radius: 999px; white-space: nowrap; margin-top: 3px;
 }
 .api-roadmap-status.done { color: var(--green); background: var(--green-bg); }
