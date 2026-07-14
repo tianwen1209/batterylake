@@ -998,14 +998,6 @@ bash run_benchmark.sh</pre>
       </section>
 
       <section class="docs-card">
-        <h3>Running ETL</h3>
-        <p>Each dataset has a dedicated ETL script in <code>scripts/</code> following the naming pattern <code>etl_dataset_XX.py</code>.</p>
-        <div class="docs-code">
-          python scripts/etl_dataset_01.py --input raw/dataset_01/ --output processed/dataset_01/
-        </div>
-      </section>
-
-      <section class="docs-card">
         <h3>Evaluation</h3>
         <p>The benchmark evaluation framework uses <code>evaluate.py</code> and <code>dataset_interface.py</code> to run baseline models across selected datasets and split protocols.</p>
       </section>
@@ -1896,9 +1888,8 @@ for dataset in resp.json()["items"]:
         <div class="contrib-panel-sub">Each contribution passes through the same checks used by the platform.</div>
         <div class="contrib-validation-flow">
           <div class="contrib-validation-step"><span class="contrib-validation-num">1</span><span><strong>Schema parse</strong><small>Column mapping, unit detection, and required metadata validation.</small></span></div>
-          <div class="contrib-validation-step"><span class="contrib-validation-num">2</span><span><strong>ETL dry run</strong><small>Cycle segmentation, cleaning, and summary extraction are tested.</small></span></div>
-          <div class="contrib-validation-step"><span class="contrib-validation-num">3</span><span><strong>Quality report</strong><small>Physical plausibility, missingness, and consistency scores are generated.</small></span></div>
-          <div class="contrib-validation-step"><span class="contrib-validation-num">4</span><span><strong>Catalog publish</strong><small>Dataset is added with provenance, citation, and benchmark readiness.</small></span></div>
+          <div class="contrib-validation-step"><span class="contrib-validation-num">2</span><span><strong>Quality report</strong><small>Physical plausibility, missingness, and consistency scores are generated.</small></span></div>
+          <div class="contrib-validation-step"><span class="contrib-validation-num">3</span><span><strong>Catalog publish</strong><small>Dataset is added with provenance, citation, and benchmark readiness.</small></span></div>
         </div>
       </section>
     </div>

@@ -2051,7 +2051,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .contrib-file-tile strong { display: block; margin-top: 8px; color: var(--text1); font-size: 14px; font-weight: 850; }
 .contrib-file-tile small { display: block; margin-top: 5px; color: var(--text3); font-size: 12px; line-height: 1.35; }
 .contrib-validation-flow { display: grid; gap: 10px; margin-top: 14px; }
-.contrib-validation-lane .contrib-validation-flow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.contrib-validation-lane .contrib-validation-flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .contrib-validation-step {
   display: grid;
   grid-template-columns: 34px minmax(0, 1fr);
