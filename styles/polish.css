@@ -944,7 +944,8 @@ select:focus-visible, [tabindex]:focus-visible {
 
 /* Models catalog refresh */
 #page-models {
-  max-width: 1480px;
+  max-width: none;
+  width: 100%;
 }
 #page-contribute .contribute-upload-hero .page-title {
   font-family: var(--display);
@@ -4782,6 +4783,410 @@ pre {
 
   #page-about .about-snapshot-card {
     min-height: 66px;
+  }
+}
+
+/* TERMS & CITATION */
+#page-terms {
+  min-width: 0;
+  overflow-x: clip;
+}
+
+#page-terms .terms-page-hero {
+  margin-bottom: 18px;
+}
+
+#page-terms .terms-page-hero .page-title {
+  max-width: min(640px, 55%);
+}
+
+#page-terms .terms-page-hero .page-desc {
+  max-width: min(690px, 57%);
+}
+
+#page-terms .terms-hero-art {
+  right: 0;
+  width: min(454px, 44%);
+  max-height: calc(100% - 24px);
+  filter: drop-shadow(0 20px 42px rgba(15, 23, 42, .08));
+}
+
+[data-theme="dark"] #page-terms .terms-hero-art {
+  opacity: .92;
+}
+
+@media (max-width: 1320px) and (min-width: 901px) {
+  #page-terms .terms-page-hero .page-title,
+  #page-terms .terms-page-hero .page-desc {
+    max-width: calc(100% - min(360px, 38%) - 28px);
+  }
+
+  #page-terms .terms-hero-art {
+    width: min(360px, 38%);
+  }
+}
+
+@media (max-width: 900px) {
+  #page-terms .terms-page-hero .page-title,
+  #page-terms .terms-page-hero .page-desc {
+    max-width: 680px;
+  }
+
+  #page-terms .terms-hero-art {
+    right: auto;
+    width: min(454px, 100%);
+    max-height: none;
+  }
+}
+
+#page-terms .terms-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: none;
+  width: 100%;
+  min-width: 0;
+  padding-bottom: 8px;
+}
+
+#page-terms .terms-card {
+  min-width: 0;
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface, var(--bg));
+  box-shadow: var(--card-shadow);
+  color: var(--text2);
+}
+
+#page-terms .terms-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+#page-terms .terms-card-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+#page-terms .terms-card h2 {
+  margin: 0;
+  color: var(--text1);
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+#page-terms .terms-card > p {
+  margin: 0 0 12px;
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+#page-terms .terms-card > p:last-child {
+  margin-bottom: 0;
+}
+
+#page-terms .terms-licence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+#page-terms .terms-point {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg2) 55%, var(--surface, var(--bg)));
+  box-shadow: none;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+#page-terms .terms-point:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow: var(--card-shadow);
+  background: var(--surface, var(--bg));
+}
+
+#page-terms .terms-point-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .04em;
+}
+
+#page-terms .terms-point p {
+  margin: 0;
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+@media (max-width: 760px) {
+  #page-terms .terms-licence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-terms .terms-point,
+  #page-terms .terms-publication,
+  #page-terms .terms-bibtex-wrap {
+    transition: none;
+  }
+
+  #page-terms .terms-point:hover,
+  #page-terms .terms-publication:hover,
+  #page-terms .terms-bibtex-wrap:hover {
+    transform: none;
+  }
+}
+
+#page-terms .terms-citation-stack {
+  display: grid;
+  gap: 12px;
+  margin: 4px 0 0;
+}
+
+#page-terms .terms-publication {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg2) 72%, #fff);
+  box-shadow: var(--card-shadow);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+#page-terms .terms-pub-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+#page-terms .terms-pub-body {
+  min-width: 0;
+  flex: 1;
+}
+
+#page-terms .terms-paper-title {
+  color: var(--text1);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+#page-terms .terms-paper-authors {
+  margin-top: 6px;
+  color: var(--text3);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+#page-terms .terms-bibtex-wrap {
+  min-width: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: none;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+#page-terms .terms-publication:hover,
+#page-terms .terms-bibtex-wrap:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow: var(--card-shadow);
+}
+
+#page-terms .terms-bibtex-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: none;
+  background: #fff;
+}
+
+#page-terms .terms-copy-btn {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, #fff 86%, var(--accent-light));
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+#page-terms .terms-copy-btn:hover {
+  background: var(--accent-light);
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border));
+}
+
+#page-terms .terms-bibtex {
+  margin: 0;
+  padding: 14px 16px 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  color: #374151;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 2;
+  background: #fff !important;
+}
+
+#page-terms .terms-bibtex .bt-type {
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+#page-terms .terms-bibtex .bt-key {
+  color: #9f1239;
+  font-weight: 600;
+}
+
+#page-terms .terms-bibtex .bt-field {
+  color: #6b21a8;
+  font-weight: 600;
+}
+
+#page-terms .terms-bibtex .bt-value {
+  color: #166534;
+}
+
+#page-terms .terms-bibtex .bt-punct {
+  color: #4b5563;
+}
+
+#page-terms .terms-citation-notes {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+#page-terms .terms-citation-notes p {
+  margin: 0;
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+[data-theme="dark"] #page-terms .terms-point {
+  background: color-mix(in srgb, var(--bg3) 60%, var(--surface));
+}
+
+[data-theme="dark"] #page-terms .terms-point:hover {
+  background: var(--surface);
+}
+
+[data-theme="dark"] #page-terms .terms-publication {
+  background: color-mix(in srgb, var(--bg3) 70%, var(--surface));
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex-wrap {
+  background: var(--surface);
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex-head {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+  color: var(--text3);
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex {
+  background: var(--surface) !important;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex .bt-type {
+  color: #93c5fd;
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex .bt-key {
+  color: #fda4af;
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex .bt-field {
+  color: #d8b4fe;
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex .bt-value {
+  color: #86efac;
+}
+
+[data-theme="dark"] #page-terms .terms-bibtex .bt-punct {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] #page-terms .terms-copy-btn {
+  background: color-mix(in srgb, var(--surface) 70%, var(--accent-light));
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  color: var(--accent);
+}
+
+[data-theme="dark"] #page-terms .terms-copy-btn:hover {
+  background: var(--accent-light);
+}
+
+@media (max-width: 640px) {
+  #page-terms .terms-card {
+    padding: 18px;
+  }
+
+  #page-terms .terms-bibtex {
+    font-size: 12px;
   }
 }
 

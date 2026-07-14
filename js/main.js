@@ -2062,6 +2062,39 @@ function ppCopyInspectCommand() {
   ppCopyText(cmd.trim(), 'Inspect command copied.');
 }
 
+async function copyTermsBibTeX() {
+  const block = document.getElementById('terms-bibtex');
+  const btn = document.getElementById('terms-copy-btn');
+  const text = block ? block.textContent.replace(/^\n+/, '').replace(/\n+$/, '') : '';
+  if (!text) return;
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.left = '-9999px';
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');
+      area.remove();
+    }
+    if (btn) {
+      const previous = btn.textContent;
+      btn.textContent = 'Copied';
+      clearTimeout(copyTermsBibTeX._timer);
+      copyTermsBibTeX._timer = setTimeout(() => {
+        btn.textContent = previous || 'Copy BibTeX';
+      }, 1600);
+    }
+  } catch (_) {
+    showToast('Copy failed. Select the BibTeX block manually.', 'error');
+  }
+}
+window.copyTermsBibTeX = copyTermsBibTeX;
+
 /* ── PAGE NAVIGATION ── */
 var pendingInitialModelId = null;
 window.mlLibraryReady = false;
