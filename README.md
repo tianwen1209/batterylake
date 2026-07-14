@@ -249,12 +249,14 @@ Developed at **Nanyang Technological University, Singapore**.
 If BatteryLake supports your research, please cite:
 
 ```bibtex
-@misc{batterylake2026,
-  title  = {BatteryLake: An Open Data Foundation for Lithium-Ion Battery Prognostics and Health Management},
-  author = {Zhu, Tianwen and Wang, Hao and Wen, Yonggang},
-  year   = {2026},
-  note   = {Nanyang Technological University},
-  url    = {https://github.com/tianwen1209/batterylake}
+@misc{zhu2026batterylakeagenticphysicsgroundedcuration,
+      title={BatteryLake: Agentic, Physics-Grounded Curation of Heterogeneous Battery Aging Data and Benchmarking}, 
+      author={Tianwen Zhu and Hao Wang and Yonggang Wen},
+      year={2026},
+      eprint={2607.09762},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2607.09762}, 
 }
 ```
 
