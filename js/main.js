@@ -2114,6 +2114,10 @@ function showPage(name, navEl, options = {}) {
   if (name === 'quality' && !options.skipQualityLoad && typeof ensureQualityPageReady === 'function') {
     void ensureQualityPageReady(options.qualityDatasetId || null);
   }
+  if (name === 'home' && window.BatteryLakeVisitorMap &&
+      typeof window.BatteryLakeVisitorMap.init === 'function') {
+    window.BatteryLakeVisitorMap.init();
+  }
   if (!options.preserveHash && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
 }
 window.showPage = showPage;

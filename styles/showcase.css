@@ -593,6 +593,103 @@
 .api-roadmap-status.wip  { color: var(--accent); background: var(--accent-light); }
 .api-roadmap-status.plan { color: var(--text3); background: var(--bg3); }
 
+/* global reach — visitor map */
+.sc-reach-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(220px, 0.55fr);
+  gap: 22px;
+  align-items: stretch;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.sc-reach-map-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 54px color-mix(in srgb, var(--accent) 9%, rgba(15,22,38,.14));
+  overflow: hidden;
+  height: 100%;
+  min-height: 380px;
+  isolation: isolate; /* keep Leaflet pane z-index inside the frame */
+}
+.sc-reach-map {
+  width: 100%;
+  height: 420px;
+  background: var(--surface-alt);
+}
+.sc-reach-map .leaflet-container {
+  font-family: inherit;
+  background: var(--surface-alt);
+}
+.sc-reach-map .leaflet-control-attribution {
+  font-size: 10px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text3);
+  border: none;
+}
+.sc-reach-map .leaflet-control-attribution a { color: var(--text2); }
+.sc-reach-map .leaflet-control-zoom a {
+  background: var(--surface);
+  color: var(--text1);
+  border-color: var(--border);
+  width: 30px; height: 30px; line-height: 30px;
+}
+.sc-reach-map .leaflet-control-zoom a:hover { background: var(--accent-light); color: var(--accent); }
+.sc-reach-map .leaflet-tooltip {
+  background: var(--surface);
+  color: var(--text1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  padding: 8px 11px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.sc-reach-map .leaflet-tooltip::before { border-top-color: var(--border); }
+.sc-reach-stats { min-width: 0; }
+.sc-reach-stats-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 54px color-mix(in srgb, var(--accent) 9%, rgba(15,22,38,.14));
+  padding: 22px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.sc-reach-stats-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.sc-reach-stats-head b { font-size: 14px; color: var(--text1); }
+.sc-reach-stat {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 15px;
+}
+.sc-reach-stat-label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.sc-reach-stat-value {
+  display: block;
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text1);
+  line-height: 1.15;
+}
+.sc-reach-stats-note {
+  margin: auto 0 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text3);
+}
+
 /* ── responsive ─────────────────────────────────────────────── */
 @media (max-width: 1080px) {
   .sc-hero { grid-template-columns: 1fr; gap: 54px; padding-top: 44px; }
@@ -603,6 +700,23 @@
   .sc-flow { grid-template-columns: repeat(2, 1fr); row-gap: 34px; }
   .sc-flow-step:nth-child(2) .sc-flow-link { display: none; }
   .sc-cta { flex-direction: column; text-align: center; padding: 44px 30px; }
+  .sc-reach-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .sc-reach-stats { order: -1; }
+  .sc-reach-map-frame { min-height: 320px; }
+  .sc-reach-map { height: 340px; }
+  .sc-reach-stats-card {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 12px;
+    padding: 18px;
+  }
+  .sc-reach-stats-head { flex: 1 1 100%; }
+  .sc-reach-stat { flex: 1 1 140px; }
+  .sc-reach-stats-note { flex: 1 1 100%; margin: 0; }
 }
 @media (max-width: 640px) {
   .sc-hero-proof { gap: 18px; }
@@ -611,4 +725,7 @@
   .sc-chip-float.c1 { right: -4px; top: -16px; }
   .sc-chip-float.c2 { left: -4px; }
   .sc-gate-mock { grid-template-columns: 1fr; justify-items: center; }
+  .sc-reach-map { height: 280px; }
+  .sc-reach-map-frame { min-height: 280px; }
+  .sc-reach-stat-value { font-size: 24px; }
 }
