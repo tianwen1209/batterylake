@@ -10,6 +10,7 @@
   "overall": 1.0,
   "gate": "ready",
   "checks_detail": [
+    {
       "key": "voltage_range",
       "name": "Voltage Range Validation",
       "detail": "All cell voltages within nominal operating range for the stated chemistry.",
