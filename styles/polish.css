@@ -1688,6 +1688,15 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 #page-home .sc-kicker {
   text-transform: none;
 }
+
+/* Keep section-title orphans from wrapping alone; widen head slightly so
+   full titles fit on one line at desktop sizes without changing other pages. */
+#page-home .sc-section-head {
+  max-width: min(720px, 100%);
+}
+#page-home .sc-section-title {
+  text-wrap: pretty;
+}
 #page-home .home-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
