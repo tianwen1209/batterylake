@@ -5604,7 +5604,7 @@ pre {
   width: auto;
   min-height: 344px;
   margin: 0 auto clamp(20px, 2.4vw, 30px);
-  padding: 26px 0 38px;
+  padding: 32px 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -5635,30 +5635,9 @@ pre {
   line-height: 1.55;
 }
 
-#page-naming .naming-hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  max-width: min(680px, 58%);
-  margin-top: 18px;
-}
-
-#page-naming .naming-hero-tags span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 0 12px;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--bg) 84%, var(--accent-light));
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-}
-
 #page-naming .naming-hero-art {
   right: 0;
-  top: calc(50% - 2px);
+  top: 50%;
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
   object-fit: contain;
@@ -6022,7 +6001,7 @@ pre {
   width: auto;
   min-height: 344px;
   margin: 0 auto clamp(20px, 2.4vw, 30px);
-  padding: 26px 0 38px;
+  padding: 32px 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -6050,8 +6029,7 @@ pre {
   line-height: 1.55;
 }
 
-#page-pipeline .reference-hero-tags,
-#page-docs .reference-hero-tags {
+#page-pipeline .reference-hero-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -6059,8 +6037,7 @@ pre {
   margin-top: 18px;
 }
 
-#page-pipeline .reference-hero-tags span,
-#page-docs .reference-hero-tags span {
+#page-pipeline .reference-hero-tags span {
   display: inline-flex;
   align-items: center;
   min-height: 30px;
@@ -6076,18 +6053,12 @@ pre {
 #page-pipeline .reference-hero-art,
 #page-docs .reference-hero-art {
   right: 0;
-  top: calc(50% - 2px);
+  top: 50%;
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
   object-fit: contain;
   filter: saturate(.82) brightness(1.04) contrast(.94) drop-shadow(0 20px 38px rgba(15,23,42,.07));
   transform: translateY(-50%);
-}
-
-#page-docs .reference-hero .page-title,
-#page-docs .reference-hero .page-desc,
-#page-docs .reference-hero-tags {
-  transform: translateY(-10.84375px);
 }
 
 #page-pipeline .pipeline-flow,
@@ -6467,15 +6438,8 @@ pre {
   #page-pipeline .reference-hero .page-desc,
   #page-pipeline .reference-hero-tags,
   #page-docs .reference-hero .page-title,
-  #page-docs .reference-hero .page-desc,
-  #page-docs .reference-hero-tags {
+  #page-docs .reference-hero .page-desc {
     max-width: 100%;
-  }
-
-  #page-docs .reference-hero .page-title,
-  #page-docs .reference-hero .page-desc,
-  #page-docs .reference-hero-tags {
-    transform: none;
   }
 
   #page-docs .docs-content {
