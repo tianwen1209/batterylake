@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="styles/polish.css">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css">
-<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 </head>
 <body>
 <div class="app">
@@ -383,39 +382,29 @@ for ds in resp.json()["items"]:
       </div>
     </section>
 
-    <!-- ── GLOBAL REACH ─────────────────────────────────────── -->
+    <!-- ── PLATFORM USAGE ───────────────────────────────────── -->
     <section class="sc-section sc-reach" aria-labelledby="reach-title">
       <div class="sc-section-head reveal">
-        <span class="sc-kicker">Visitors</span>
-        <div class="sc-section-title" id="reach-title">Global Reach</div>
-        <div class="sc-section-sub">See where BatteryLake visitors are exploring from around the world.</div>
+        <span class="sc-kicker">Impact</span>
+        <div class="sc-section-title" id="reach-title">Platform Usage</div>
+        <div class="sc-section-sub">How researchers engage with BatteryLake.</div>
       </div>
 
-      <div class="sc-reach-layout">
-        <div class="sc-reach-map-wrap reveal rv-left">
-          <div class="sc-reach-map-frame">
-            <div id="visitor-map" class="sc-reach-map" role="img" aria-label="Interactive world map of approximate visitor regions"></div>
-          </div>
-        </div>
-
-        <aside class="sc-reach-stats reveal rv-right" aria-label="Visitor statistics">
-          <div class="sc-reach-stats-card">
-            <div class="sc-reach-stats-head">
-              <b>Visitor snapshot</b>
-              <span class="sc-pill-mini">sample data</span>
-            </div>
-            <div class="sc-reach-stat">
-              <span class="sc-reach-stat-label">Total visits</span>
-              <strong class="sc-reach-stat-value" id="visitor-stat-visits">—</strong>
-            </div>
-            <div class="sc-reach-stat">
-              <span class="sc-reach-stat-label">Visitor countries</span>
-              <strong class="sc-reach-stat-value" id="visitor-stat-regions">—</strong>
-            </div>
-            <p class="sc-reach-stats-note">Markers show approximate city or country activity. Circles scale with visit volume — denser color means higher traffic.</p>
-          </div>
-        </aside>
+      <div class="sc-reach-grid" aria-label="Platform usage statistics">
+        <article class="sc-reach-card reveal" style="--d:0ms">
+          <strong class="sc-reach-value" id="stat-website-visits">12.4k</strong>
+          <span class="sc-reach-label">Total Website Visits</span>
+        </article>
+        <article class="sc-reach-card reveal" style="--d:80ms">
+          <strong class="sc-reach-value" id="stat-dataset-downloads">3.2k</strong>
+          <span class="sc-reach-label">Total Dataset Downloads</span>
+        </article>
+        <article class="sc-reach-card reveal" style="--d:160ms">
+          <strong class="sc-reach-value" id="stat-skill-downloads">1.8k</strong>
+          <span class="sc-reach-label">Total Skill Downloads</span>
+        </article>
       </div>
+      <p class="sc-reach-footnote reveal">Placeholder values — replace with Google Analytics when available.</p>
     </section>
 
     <!-- ── CTA ──────────────────────────────────────────────── -->
@@ -2103,7 +2092,5 @@ for dataset in resp.json()["items"]:
 </div>
 <script src="js/assistant.js"></script>
 <script src="js/showcase.js"></script>
-<script src="assets/vendor/leaflet/leaflet.js"></script>
-<script src="js/visitor-map.js"></script>
 </body>
 </html>

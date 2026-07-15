@@ -1688,6 +1688,45 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 #page-home .sc-section-title {
   text-wrap: pretty;
 }
+
+/* Platform usage stat cards — align with home metric surfaces */
+#page-home .sc-reach-card {
+  border: 1px solid rgba(191,219,254,.78);
+  border-radius: 8px;
+  background: transparent;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.92) inset,
+    0 12px 28px rgba(15,23,42,.055),
+    0 0 24px rgba(37,99,235,.08);
+}
+#page-home .sc-reach-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, rgba(191,219,254,.78));
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.92) inset,
+    0 16px 34px rgba(15,23,42,.08),
+    0 0 28px rgba(37,99,235,.12);
+}
+#page-home .sc-reach-value {
+  font-family: var(--sans);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: transparent;
+  background: linear-gradient(115deg, #1d4ed8 0%, #2563eb 44%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+[data-theme="dark"] #page-home .sc-reach-card {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.04) inset,
+    0 14px 32px rgba(0,0,0,.28);
+}
+[data-theme="dark"] #page-home .sc-reach-value {
+  background: linear-gradient(115deg, #60a5fa 0%, #38bdf8 55%, #2dd4bf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 #page-home .home-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
