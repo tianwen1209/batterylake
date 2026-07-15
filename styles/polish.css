@@ -1560,7 +1560,8 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .api-status-pill,
 .contrib-status-pill,
 .contrib-action-bar a,
-.ml-btn {
+.ml-btn,
+.modal-link-dl-btn {
   font-size: var(--type-caption);
   font-weight: 800;
 }

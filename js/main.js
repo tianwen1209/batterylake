@@ -383,7 +383,7 @@ function animateHomeMetrics() {
 let activeChems = new Set();
 let activeForms = new Set();
 let activeCategories = new Set();
-let activeSort = 'newest';
+let activeSort = 'oldest';
 let activeDomains = new Set();
 let activeDuties = new Set();
 let allDatasetsApplied = false;
@@ -690,7 +690,15 @@ function sortDatasets(arr, mode) {
     case 'newest':
     default:            copy.sort((a,b) => yearOf(b) - yearOf(a)); break;
   }
-  return copy;
+  // Keep the TBD placeholder dataset at the bottom of the catalog.
+  const pinned = [];
+  for (let i = copy.length - 1; i >= 0; i--) {
+    const d = copy[i];
+    if (d.id === 'dataset_internal' || d.ref_name === 'TBD_NTU_Internal_LiIon_TBD_TBD_TBD') {
+      pinned.unshift(copy.splice(i, 1)[0]);
+    }
+  }
+  return copy.concat(pinned);
 }
 
 function filterDatasets() { renderDatasets(getFiltered()); }
@@ -955,7 +963,7 @@ function openDatasetModal(id) {
   const dlIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
   const qaIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M8 15l2.3-4.2 2.4 2 3.3-6.1"/></svg>`;
   const srcBtn = hasDoi
-    ? `<a class="modal-link-row" href="${esc(d.doi)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'source_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Source Dataset</span><span class="modal-link-val">${esc(d.doi)} ${extIcon}</span></a>`
+    ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.doi)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'source_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn">${extIcon} Source</span></a>`
     : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn modal-link-btn-na">${extIcon} Source</span></div>`;
   const procBtn = hasProcessed
     ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.processed_url)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'processed_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></a>`
