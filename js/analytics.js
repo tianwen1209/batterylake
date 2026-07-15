@@ -29,16 +29,23 @@
     contribute: 'Contribute Dataset'
   };
 
+  var DATASET_DOWNLOAD_TYPES = {
+    source_dataset: true,
+    processed_dataset: true
+  };
+
+  var SKILL_SOURCES = {
+    benchmarks_package: true,
+    quality_assessment: true,
+    preprocessing_skill: true
+  };
+
   function callGtag() {
     try {
       if (typeof window.gtag === 'function') {
         window.gtag.apply(window, arguments);
       }
     } catch (_) { /* no-op if blocked or unavailable */ }
-  }
-
-  function currentSourcePage() {
-    return location.pathname + location.search + (location.hash || '#home');
   }
 
   function pageTitleForHash() {
@@ -51,6 +58,7 @@
     return 'BatteryLake — ' + label;
   }
 
+  /** One page_view per distinct hash path; skips duplicates on the same load. */
   function trackPageView() {
     try {
       var pagePath = location.pathname + location.search + (location.hash || '#home');
@@ -64,27 +72,34 @@
     } catch (_) { /* never break navigation */ }
   }
 
+  /**
+   * Dataset details popup: Source Dataset link or Processed Dataset download.
+   * params: { download_type, dataset_id?, dataset_name? }
+   */
   function trackDatasetDownload(params) {
     try {
       params = params || {};
-      var payload = {
-        source_page: params.source_page || currentSourcePage()
-      };
-      if (params.dataset_id) payload.dataset_id = params.dataset_id;
-      if (params.dataset_name) payload.dataset_name = params.dataset_name;
+      var downloadType = String(params.download_type || '');
+      if (!DATASET_DOWNLOAD_TYPES[downloadType]) return;
+      var payload = { download_type: downloadType };
+      if (params.dataset_id) payload.dataset_id = String(params.dataset_id);
+      if (params.dataset_name) payload.dataset_name = String(params.dataset_name);
       callGtag('event', 'dataset_download', payload);
     } catch (_) { /* no-op */ }
   }
 
+  /**
+   * Skill counters: benchmarks package, quality Run Assessment, preprocessing skill.
+   * params: { skill_source }
+   */
   function trackSkillDownload(params) {
     try {
       params = params || {};
-      var payload = {
-        source_page: params.source_page || currentSourcePage()
-      };
-      if (params.skill_name) payload.skill_name = params.skill_name;
-      if (params.file_name) payload.file_name = params.file_name;
-      callGtag('event', 'preprocessing_skill_download', payload);
+      var skillSource = String(params.skill_source || '');
+      if (!SKILL_SOURCES[skillSource]) return;
+      callGtag('event', 'skill_download', {
+        skill_source: skillSource
+      });
     } catch (_) { /* no-op */ }
   }
 

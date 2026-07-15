@@ -955,10 +955,10 @@ function openDatasetModal(id) {
   const dlIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
   const qaIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M8 15l2.3-4.2 2.4 2 3.3-6.1"/></svg>`;
   const srcBtn = hasDoi
-    ? `<a class="modal-link-row" href="${esc(d.doi)}" target="_blank"><span class="modal-link-label">Source Dataset</span><span class="modal-link-val">${esc(d.doi)} ${extIcon}</span></a>`
+    ? `<a class="modal-link-row" href="${esc(d.doi)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'source_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Source Dataset</span><span class="modal-link-val">${esc(d.doi)} ${extIcon}</span></a>`
     : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn modal-link-btn-na">${extIcon} Source</span></div>`;
   const procBtn = hasProcessed
-    ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.processed_url)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></a>`
+    ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.processed_url)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'processed_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></a>`
     : `<button class="modal-link-row modal-link-row--dl" onclick="showToast('Processed data for this dataset is coming soon.','info')"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></button>`;
   const qaBtn = `<button class="modal-link-row modal-link-row--dl" type="button" onclick="closeModal(); showDatasetQuality('${esc(d.id)}')"><span class="modal-link-label">Quality Report</span><span class="modal-link-dl-btn">${qaIcon} View</span></button>`;
   linksEl.innerHTML = `<div class="modal-links-row">${srcBtn}${procBtn}${qaBtn}</div>`;
@@ -1828,15 +1828,8 @@ function downloadPrepManifest() {
 }
 
 function generatePrepSkill() {
-  const skillName = (document.getElementById('skillPackageName')?.textContent || '').trim()
-    || 'BatteryLake Preprocessing Skill';
-  const fileName = /\.zip$/i.test(skillName) ? skillName : skillName + '.zip';
   if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackSkillDownload === 'function') {
-    window.BatteryLakeAnalytics.trackSkillDownload({
-      skill_name: skillName,
-      file_name: fileName,
-      source_page: location.pathname + location.search + (location.hash || '#preprocessing')
-    });
+    window.BatteryLakeAnalytics.trackSkillDownload({ skill_source: 'preprocessing_skill' });
   }
   prepToast('Skill plan confirmed — package is ready to generate.');
 }
@@ -4101,17 +4094,13 @@ function ppDownloadPackage() {
   const a = document.createElement('a');
   a.href = url;
   a.download = packageName + '.zip';
-  if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackSkillDownload === 'function') {
-    window.BatteryLakeAnalytics.trackSkillDownload({
-      skill_name: root,
-      file_name: packageName + '.zip',
-      source_page: location.pathname + location.search + (location.hash || '#preprocessing')
-    });
-  }
   document.body.appendChild(a);
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
+  if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackSkillDownload === 'function') {
+    window.BatteryLakeAnalytics.trackSkillDownload({ skill_source: 'preprocessing_skill' });
+  }
   showToast('BatteryLake skill generated: ' + a.download, 'success');
 }
 
@@ -7371,6 +7360,9 @@ window.bwFlowDownloadPackage = async function() {
     // Frontend scaffold export for now. Connect this handler to a backend package builder when available.
     const started = (typeof bwDownloadPackage === 'function') ? await bwDownloadPackage() : false;
     if (!started) return;
+    if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackSkillDownload === 'function') {
+      window.BatteryLakeAnalytics.trackSkillDownload({ skill_source: 'benchmarks_package' });
+    }
     BWR.downloaded = true;
     if (btn) btn.textContent = 'Download Package (.zip)';
     document.getElementById('bwr-upload-card')?.classList.add('is-next');
@@ -8295,6 +8287,9 @@ ${checksJson}
 
 function runQualityAssessment() {
   if (!qaSelectedFile) { showToast('Choose a dataset file first.', 'error'); return; }
+  if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackSkillDownload === 'function') {
+    window.BatteryLakeAnalytics.trackSkillDownload({ skill_source: 'quality_assessment' });
+  }
   const runBtn = document.getElementById('qaRunBtn');
   const originalLabel = runBtn ? runBtn.textContent : 'Run Assessment';
   if (runBtn) { runBtn.disabled = true; runBtn.textContent = 'Analyzing...'; }

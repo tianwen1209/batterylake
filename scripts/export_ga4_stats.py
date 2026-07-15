@@ -122,7 +122,7 @@ def main() -> int:
         client, property_name, end_date, "dataset_download"
     )
     skill_downloads = fetch_event_count(
-        client, property_name, end_date, "preprocessing_skill_download"
+        client, property_name, end_date, "skill_download"
     )
 
     payload = {
