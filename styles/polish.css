@@ -1326,7 +1326,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 .page-title,
 .page h3,
 .oh-title,
-.about-content h3,
 .ch-title,
 .contrib-req-title,
 .ml-package-t,
@@ -1430,7 +1429,6 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   color: var(--text1);
 }
 .oh-title,
-.about-content h3,
 .page h3 {
   font-size: var(--type-section-title) !important;
   line-height: 1.24;
@@ -1911,6 +1909,9 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
     max-height: none;
     justify-self: center;
     transform: none;
+  }
+  .visual-page-hero-art:empty {
+    display: none;
   }
 }
 @media (max-width: 760px) {
@@ -4467,27 +4468,7 @@ pre.api-code,
   }
 }
 
-/* About: project-grade overview and contributor layout */
-#page-about {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding-top: 24px;
-}
-
-#page-about .about-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(280px, .75fr);
-  gap: 28px;
-  align-items: stretch;
-  padding: 30px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background:
-    radial-gradient(700px 260px at 100% -30%, rgba(37,99,235,.15), transparent 62%),
-    linear-gradient(180deg, var(--surface, var(--bg)) 0%, var(--surface-alt, #f8fbff) 100%);
-  box-shadow: var(--card-shadow);
-}
-
+/* About: contributor layout below shared visual-page-hero */
 #page-about .about-kicker {
   display: inline-flex;
   align-items: center;
@@ -4500,104 +4481,8 @@ pre.api-code,
   text-transform: capitalize;
 }
 
-#page-about .about-hero h1 {
-  max-width: 720px;
-  margin: 10px 0 12px;
-  color: var(--text1);
-  font-family: var(--sans);
-  font-size: clamp(30px, 3.2vw, 44px);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: 0;
-}
-
-#page-about .about-hero p {
-  max-width: 740px;
-  margin: 0;
-  color: var(--text2);
-  font-size: 15.5px;
-  line-height: 1.65;
-}
-
-#page-about .about-hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 22px;
-}
-
-#page-about .about-primary-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid var(--accent);
-  border-radius: 10px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 850;
-  text-decoration: none;
-  box-shadow: 0 5px 16px rgba(42,95,234,.25);
-}
-
-#page-about .about-primary-link:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
-}
-
-#page-about .about-affiliation-pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: rgba(255,255,255,.72);
-  color: var(--text2);
-  font-size: 13px;
-  font-weight: 750;
-}
-
-#page-about .about-snapshot {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  align-content: center;
-}
-
-#page-about .about-snapshot-card {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 16px;
-  align-items: center;
-  min-height: 76px;
-  padding: 16px;
-  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
-  border-radius: 14px;
-  background: rgba(255,255,255,.70);
-}
-
-#page-about .about-snapshot-card span {
-  color: var(--text3);
-  font-size: 12px;
-  font-weight: 850;
-  letter-spacing: .07em;
-  text-transform: capitalize;
-}
-
-#page-about .about-snapshot-card strong {
-  color: var(--text1);
-  font-family: var(--mono);
-  font-size: 18px;
-  font-weight: 800;
-  text-align: right;
-}
-
 #page-about .about-section {
-  margin-top: 22px;
+  margin-top: 4px;
 }
 
 #page-about .about-section-head {
@@ -4748,20 +4633,10 @@ pre.api-code,
   text-decoration: underline;
 }
 
-[data-theme="dark"] #page-about .about-affiliation-pill,
-[data-theme="dark"] #page-about .about-snapshot-card {
-  background: rgba(15,23,42,.42);
-}
-
 @media (max-width: 980px) {
-  #page-about .about-hero,
   #page-about .about-section-head,
   #page-about .about-info-grid {
     grid-template-columns: 1fr;
-  }
-
-  #page-about .about-snapshot {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   #page-about .about-engineering-grid {
@@ -4770,32 +4645,9 @@ pre.api-code,
 }
 
 @media (max-width: 640px) {
-  #page-about {
-    padding-top: 18px;
-  }
-
-  #page-about .about-hero {
-    padding: 22px 20px;
-    border-radius: 16px;
-  }
-
-  #page-about .about-hero h1 {
-    font-size: 30px;
-  }
-
-  #page-about .about-primary-link,
-  #page-about .about-affiliation-pill {
-    width: 100%;
-  }
-
-  #page-about .about-snapshot,
   #page-about .team-grid,
   #page-about .about-engineering-grid {
     grid-template-columns: 1fr;
-  }
-
-  #page-about .about-snapshot-card {
-    min-height: 66px;
   }
 }
 

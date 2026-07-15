@@ -384,6 +384,11 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   pointer-events: none;
   user-select: none;
 }
+/* Empty placeholders (no artwork yet) still reserve the right-side footprint */
+.visual-page-hero-art:empty {
+  aspect-ratio: 4 / 3;
+  filter: none;
+}
 @media (min-width: 901px) {
   .models-hero-art { top: calc(50% - 22px); }
 }
@@ -723,10 +728,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .stat-card .sc-val { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--accent); }
 .stat-card .sc-label { font-size: 13px; color: var(--text3); margin-top: 4px; }
 
-/* ABOUT PAGE */
-.about-content { max-width: 640px; line-height: 1.7; font-size: 15px; color: var(--text2); }
-.about-content h3 { font-family: var(--display); font-size: 20px; color: var(--text1); margin: 24px 0 8px; }
-.about-content p { margin-bottom: 12px; }
+/* ABOUT PAGE — team cards; page hero uses shared .visual-page-hero */
 .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 10px; }
 .team-section-label { font-size: 12px; font-weight: 600; text-transform: capitalize; letter-spacing: 0.08em; color: var(--text3); margin-top: 20px; margin-bottom: 2px; }
 .team-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
