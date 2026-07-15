@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   BatteryLake analytics — GA4 page views, custom download events,
+   BatteryLake analytics — GA4 page views, custom download/run events,
    and public site-stats counters. Safe when gtag is blocked.
    ═══════════════════════════════════════════════════════════════ */
 (function () {
@@ -38,6 +38,16 @@
     benchmarks_package: true,
     quality_assessment: true,
     preprocessing_skill: true
+  };
+
+  var MODEL_DOWNLOAD_SOURCES = {
+    model_detail: true,
+    model_card: true
+  };
+
+  var modelStatsCache = {
+    downloads: Object.create(null),
+    runs: Object.create(null)
   };
 
   function callGtag() {
@@ -97,8 +107,83 @@
       params = params || {};
       var skillSource = String(params.skill_source || '');
       if (!SKILL_SOURCES[skillSource]) return;
-      callGtag('event', 'skill_download', {
+      callGtag('event', 'skill_use', {
         skill_source: skillSource
+      });
+    } catch (_) { /* no-op */ }
+  }
+
+  /**
+   * Model library: detail Download Code/Package or card quick-download.
+   * params: { model_id, download_source: 'model_detail' | 'model_card' }
+   */
+  function trackModelDownload(params) {
+    try {
+      params = params || {};
+      var modelId = String(params.model_id || '');
+      var downloadSource = String(params.download_source || '');
+      if (!modelId || !MODEL_DOWNLOAD_SOURCES[downloadSource]) return;
+      callGtag('event', 'model_download', {
+        model_id: modelId,
+        download_source: downloadSource
+      });
+    } catch (_) { /* no-op */ }
+  }
+
+  /**
+   * Model library: detail Run Benchmark.
+   * params: { model_id }
+   */
+  function trackModelRun(params) {
+    try {
+      params = params || {};
+      var modelId = String(params.model_id || '');
+      if (!modelId) return;
+      callGtag('event', 'model_run', {
+        model_id: modelId
+      });
+    } catch (_) { /* no-op */ }
+  }
+
+  function normalizeModelCountMap(raw) {
+    var out = Object.create(null);
+    if (!raw || typeof raw !== 'object') return out;
+    Object.keys(raw).forEach(function (key) {
+      var n = Number(raw[key]);
+      out[key] = Number.isFinite(n) && n > 0 ? Math.floor(n) : 0;
+    });
+    return out;
+  }
+
+  function getModelStatCount(modelId, kind) {
+    var map = kind === 'runs' ? modelStatsCache.runs : modelStatsCache.downloads;
+    var n = map[String(modelId || '')];
+    if (n === null || n === undefined || Number.isNaN(Number(n))) return 0;
+    return Number(n) || 0;
+  }
+
+  function getModelUsage(modelId) {
+    return {
+      downloads: getModelStatCount(modelId, 'downloads'),
+      runs: getModelStatCount(modelId, 'runs')
+    };
+  }
+
+  function formatUsageLabel(count, singular, plural) {
+    var n = Number(count) || 0;
+    return numberFmt.format(n) + ' ' + (n === 1 ? singular : plural);
+  }
+
+  function refreshModelUsageTags() {
+    try {
+      document.querySelectorAll('[data-ml-stat][data-model-id]').forEach(function (el) {
+        var modelId = el.getAttribute('data-model-id') || '';
+        var kind = el.getAttribute('data-ml-stat');
+        if (kind === 'runs') {
+          el.textContent = formatUsageLabel(getModelStatCount(modelId, 'runs'), 'run', 'runs');
+        } else if (kind === 'downloads') {
+          el.textContent = formatUsageLabel(getModelStatCount(modelId, 'downloads'), 'download', 'downloads');
+        }
       });
     } catch (_) { /* no-op */ }
   }
@@ -142,12 +227,18 @@
 
   function applySiteStats(data) {
     if (!data || typeof data !== 'object') {
+      modelStatsCache.downloads = Object.create(null);
+      modelStatsCache.runs = Object.create(null);
       setStatsLoading();
+      refreshModelUsageTags();
       return;
     }
     setStatValue('stat-website-visits', data.total_visits);
     setStatValue('stat-dataset-downloads', data.dataset_downloads);
-    setStatValue('stat-skill-downloads', data.skill_downloads);
+    setStatValue('stat-skill-downloads', data.skill_uses);
+    modelStatsCache.downloads = normalizeModelCountMap(data.model_downloads);
+    modelStatsCache.runs = normalizeModelCountMap(data.model_runs);
+    refreshModelUsageTags();
     var note = document.getElementById('stat-updated-note');
     if (note) {
       var text = formatUpdatedNote(data.updated_at);
@@ -158,6 +249,9 @@
 
   function loadSiteStats() {
     setStatsLoading();
+    modelStatsCache.downloads = Object.create(null);
+    modelStatsCache.runs = Object.create(null);
+    refreshModelUsageTags();
     fetch(STATS_URL, { cache: 'no-store' })
       .then(function (res) {
         if (!res.ok) throw new Error('stats ' + res.status);
@@ -165,7 +259,10 @@
       })
       .then(applySiteStats)
       .catch(function () {
+        modelStatsCache.downloads = Object.create(null);
+        modelStatsCache.runs = Object.create(null);
         setStatsLoading();
+        refreshModelUsageTags();
       });
   }
 
@@ -174,6 +271,9 @@
     trackPageView: trackPageView,
     trackDatasetDownload: trackDatasetDownload,
     trackSkillDownload: trackSkillDownload,
+    trackModelDownload: trackModelDownload,
+    trackModelRun: trackModelRun,
+    getModelUsage: getModelUsage,
     loadSiteStats: loadSiteStats
   };
 

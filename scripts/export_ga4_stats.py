@@ -109,6 +109,53 @@ def fetch_event_count(
     return _sum_metric_rows(client.run_report(request))
 
 
+def fetch_event_counts_by_model_id(
+    client: BetaAnalyticsDataClient,
+    property_name: str,
+    end_date: str,
+    event_name: str,
+) -> dict[str, int]:
+    """Aggregate event counts keyed by custom event parameter model_id.
+
+    Requires a GA4 event-scoped custom dimension mapped to parameter model_id
+    (API name: customEvent:model_id). Returns {} if the dimension is missing.
+    """
+    request = RunReportRequest(
+        property=property_name,
+        dimensions=[Dimension(name="customEvent:model_id")],
+        metrics=[Metric(name="eventCount")],
+        date_ranges=[DateRange(start_date=START_DATE, end_date=end_date)],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                string_filter=Filter.StringFilter(value=event_name),
+            )
+        ),
+    )
+    try:
+        response = client.run_report(request)
+    except Exception as exc:  # noqa: BLE001 — keep daily export resilient
+        print(
+            f"Warning: could not fetch {event_name} by model_id ({exc})",
+            file=sys.stderr,
+        )
+        return {}
+
+    counts: dict[str, int] = {}
+    for row in response.rows or []:
+        model_id = (row.dimension_values[0].value or "").strip()
+        if not model_id or model_id == "(not set)":
+            continue
+        try:
+            value = int(row.metric_values[0].value or 0)
+        except (TypeError, ValueError):
+            continue
+        if value <= 0:
+            continue
+        counts[model_id] = counts.get(model_id, 0) + value
+    return counts
+
+
 def main() -> int:
     property_id = _require_env("GA4_PROPERTY_ID")
     sa_json = _require_env("GA4_SERVICE_ACCOUNT_JSON")
@@ -121,22 +168,32 @@ def main() -> int:
     dataset_downloads = fetch_event_count(
         client, property_name, end_date, "dataset_download"
     )
-    skill_downloads = fetch_event_count(
-        client, property_name, end_date, "skill_download"
+    skill_uses = fetch_event_count(
+        client, property_name, end_date, "skill_use"
+    )
+    model_downloads = fetch_event_counts_by_model_id(
+        client, property_name, end_date, "model_download"
+    )
+    model_runs = fetch_event_counts_by_model_id(
+        client, property_name, end_date, "model_run"
     )
 
     payload = {
         "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "total_visits": total_visits,
         "dataset_downloads": dataset_downloads,
-        "skill_downloads": skill_downloads,
+        "skill_uses": skill_uses,
+        "model_downloads": model_downloads,
+        "model_runs": model_runs,
     }
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(
         f"Wrote {OUTPUT_PATH.relative_to(REPO_ROOT)} "
-        f"(visits={total_visits}, datasets={dataset_downloads}, skills={skill_downloads})"
+        f"(visits={total_visits}, datasets={dataset_downloads}, skills={skill_uses}, "
+        f"model_downloads={sum(model_downloads.values())}, "
+        f"model_runs={sum(model_runs.values())})"
     )
     return 0
 

@@ -7702,6 +7702,40 @@ function mlStatusHTML(status) {
 function mlTasksHTML(m) {
   return '<span class="ml-tasklbl">Tasks</span>' + m.tasks.map(t => '<span class="ml-task">' + t + '</span>').join('');
 }
+function mlUsageCounts(m) {
+  if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.getModelUsage === 'function') {
+    return window.BatteryLakeAnalytics.getModelUsage(m && m.id);
+  }
+  return { downloads: 0, runs: 0 };
+}
+function mlFormatUsageCount(n, singular, plural) {
+  const count = Number(n) || 0;
+  return count + ' ' + (count === 1 ? singular : plural);
+}
+function mlUsageTagsHTML(m) {
+  const usage = mlUsageCounts(m);
+  const st = ML_STATUS[m.status] || { cls: '' };
+  const badgeCls = 'ml-d-badge' + (st.cls ? ' ' + st.cls : '');
+  return '<div class="ml-d-tags" aria-label="Model status and usage">'
+    + '<span class="' + badgeCls + '">' + esc(m.status) + '</span>'
+    + '<span class="ml-usage-tag ml-usage-downloads" data-ml-stat="downloads" data-model-id="' + escAttr(m.id) + '">' + mlFormatUsageCount(usage.downloads, 'download', 'downloads') + '</span>'
+    + '<span class="ml-usage-tag ml-usage-runs" data-ml-stat="runs" data-model-id="' + escAttr(m.id) + '">' + mlFormatUsageCount(usage.runs, 'run', 'runs') + '</span>'
+  + '</div>';
+}
+function mlDetailHeadHTML(m) {
+  const iconHTML = m.isPackage ? ML_SVG.file : mlIcon(m.icon);
+  return '<div class="ml-d-head">'
+      + '<div class="ml-d-ic" style="background:' + m.grad + '">' + iconHTML + '</div>'
+      + '<div class="ml-d-head-meta">'
+        + '<div class="ml-d-head-copy">'
+          + '<div class="ml-d-name">' + esc(m.name) + '</div>'
+          + '<div class="ml-d-sub">' + esc(m.sub) + '</div>'
+        + '</div>'
+        + mlUsageTagsHTML(m)
+      + '</div>'
+      + '<button class="ml-d-close" onclick="showModelsPage()" title="Close">&times;</button>'
+    + '</div>';
+}
 function mlCatalogModels() {
   return MODELS_LIB.concat([ML_PACKAGE_MODEL]);
 }
@@ -7718,10 +7752,23 @@ const ML_CARD_LOGOS = {
   xgboost: { light: 'assets/logos/models/7.png', dark: 'assets/logos/models/dark/7.png' },
   'baseline-package': { light: 'assets/logos/models/8.png', dark: 'assets/logos/models/dark/8.png' }
 };
-function mlDownloadModel(id) {
+function mlDownloadModel(id, source) {
   const m = mlFindModel(id);
   if (!m) return;
+  if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackModelDownload === 'function') {
+    window.BatteryLakeAnalytics.trackModelDownload({
+      model_id: id,
+      download_source: source === 'model_card' ? 'model_card' : 'model_detail'
+    });
+  }
   showToast(m.isPackage ? 'Preparing baseline_models.zip...' : 'Downloading ' + m.pyfile + ' ...', 'info');
+}
+function mlRunBenchmark(id) {
+  if (!mlFindModel(id)) return;
+  if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackModelRun === 'function') {
+    window.BatteryLakeAnalytics.trackModelRun({ model_id: id });
+  }
+  showPage('benchmarks', document.querySelector('.sidebar-nav a[onclick*=benchmarks]'));
 }
 function mlCardHTML(m) {
   const logo = ML_CARD_LOGOS[m.id] || '';
@@ -7736,7 +7783,7 @@ function mlCardHTML(m) {
     + '<div class="ml-card-desc">' + esc(m.desc) + '</div>'
     + '<div class="ml-card-actions">'
       + '<span class="ml-card-arrow" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>'
-      + '<button class="ml-download-icon" type="button" onclick="event.stopPropagation();mlDownloadModel(\'' + m.id + '\')" aria-label="Download ' + escAttr(m.name) + (m.isPackage ? ' package' : ' Python file') + '" title="' + (m.isPackage ? 'Download package' : 'Download .py') + '">' + ML_SVG.dl + '</button>'
+      + '<button class="ml-download-icon" type="button" onclick="event.stopPropagation();mlDownloadModel(\'' + m.id + '\', \'model_card\')" aria-label="Download ' + escAttr(m.name) + (m.isPackage ? ' package' : ' Python file') + '" title="' + (m.isPackage ? 'Download package' : 'Download .py') + '">' + ML_SVG.dl + '</button>'
     + '</div>'
   + '</div>';
 }
@@ -7944,13 +7991,7 @@ function mlArchitectureHTML(m) {
 }
 function mlDetailHTML(m) {
   if (m.isPackage) return mlPackageDetailHTML(m);
-  const st = ML_STATUS[m.status] || { cls: '' };
-  return '<div class="ml-d-head">'
-      + '<div class="ml-d-ic" style="background:' + m.grad + '">' + mlIcon(m.icon) + '</div>'
-      + '<div style="flex:1;min-width:0"><div class="ml-d-name">' + m.name + '</div><div class="ml-d-sub">' + m.sub + '</div></div>'
-      + '<span class="ml-d-badge ' + st.cls + '">' + m.status + '</span>'
-      + '<button class="ml-d-close" onclick="showModelsPage()" title="Close">&times;</button>'
-    + '</div>'
+  return mlDetailHeadHTML(m)
     + '<div class="ml-d-chips">'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.code + ' Framework</span><span class="ml-chip-v">' + m.framework + '</span></div>'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.target + ' Task</span><span class="ml-chip-v">' + m.taskLabel + '</span></div>'
@@ -7966,19 +8007,14 @@ function mlDetailHTML(m) {
         + m.files.map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + f.n + '</span><span class="ml-file-d">' + f.d + '</span><span class="ml-file-s">' + f.s + '</span></div>').join('')
       + '</div></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Quick Actions</div><div class="ml-actions">'
-        + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\')">' + ML_SVG.dl + ' Download Code</button>'
+        + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\', \'model_detail\')">' + ML_SVG.dl + ' Download Code</button>'
         + '<button class="ml-btn ml-btn-ghost" onclick="showToast(\'Opening ' + m.name + ' docs…\', \'info\')">' + ML_SVG.ext + ' Docs</button>'
-        + '<button class="ml-btn ml-btn-ghost" onclick="showPage(\'benchmarks\', document.querySelector(\'.sidebar-nav a[onclick*=benchmarks]\'))">' + ML_SVG.play + ' Run Benchmark</button>'
+        + '<button class="ml-btn ml-btn-ghost" onclick="mlRunBenchmark(\'' + m.id + '\')">' + ML_SVG.play + ' Run Benchmark</button>'
       + '</div></div>'
     + '</div>';
 }
 function mlPackageDetailHTML(m) {
-  return '<div class="ml-d-head">'
-      + '<div class="ml-d-ic" style="background:' + m.grad + '">' + ML_SVG.file + '</div>'
-      + '<div style="flex:1;min-width:0"><div class="ml-d-name">' + esc(m.name) + '</div><div class="ml-d-sub">' + esc(m.sub) + '</div></div>'
-      + '<span class="ml-d-badge">' + esc(m.status) + '</span>'
-      + '<button class="ml-d-close" onclick="showModelsPage()" title="Close">&times;</button>'
-    + '</div>'
+  return mlDetailHeadHTML(m)
     + '<div class="ml-d-chips">'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.code + ' Format</span><span class="ml-chip-v">Python package</span></div>'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.target + ' Coverage</span><span class="ml-chip-v">All baseline models</span></div>'
@@ -7990,8 +8026,8 @@ function mlPackageDetailHTML(m) {
         + m.files.map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + esc(f.n) + '</span><span class="ml-file-d">' + esc(f.d) + '</span><span class="ml-file-s">' + esc(f.s) + '</span></div>').join('')
       + '</div></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Quick Actions</div><div class="ml-actions">'
-        + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\')">' + ML_SVG.dl + ' Download Package</button>'
-        + '<button class="ml-btn ml-btn-ghost" onclick="showPage(\'benchmarks\', document.querySelector(\'.sidebar-nav a[onclick*=benchmarks]\'))">' + ML_SVG.play + ' Run Benchmark</button>'
+        + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\', \'model_detail\')">' + ML_SVG.dl + ' Download Package</button>'
+        + '<button class="ml-btn ml-btn-ghost" onclick="mlRunBenchmark(\'' + m.id + '\')">' + ML_SVG.play + ' Run Benchmark</button>'
       + '</div></div>'
     + '</div>';
 }

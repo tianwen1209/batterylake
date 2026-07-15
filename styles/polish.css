@@ -724,12 +724,43 @@ select:focus-visible, [tabindex]:focus-visible {
 .ml-d-head { display: flex; align-items: flex-start; gap: 13px; padding: 20px 20px 16px; border-bottom: 1px solid var(--border); }
 .ml-d-ic { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; box-shadow: 0 4px 11px rgba(22,30,48,.2); }
 .ml-d-ic svg { width: 24px; height: 24px; }
+.ml-d-head-meta {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 12px;
+}
+.ml-d-head-copy { min-width: 0; }
 .ml-d-name { font-size: 19px; font-weight: 700; color: var(--text1); font-family: var(--display); letter-spacing: -.01em; }
 .ml-d-sub { font-size: 13px; color: var(--text3); margin-top: 2px; }
-.ml-d-badge { align-self: flex-start; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.ml-d-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.ml-d-badge,
+.ml-usage-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  line-height: 1.2;
+}
 .ml-d-badge.avail, .ml-d-badge.rec { background: var(--green-bg); color: var(--green); }
 .ml-d-badge.gpu { background: var(--amber-bg); color: var(--amber); }
 .ml-d-badge.exp { background: var(--purple-bg); color: var(--purple); }
+.ml-usage-downloads { background: var(--accent-light); color: var(--accent); }
+.ml-usage-runs { background: var(--teal-bg); color: var(--teal); }
 .ml-d-close { background: none; border: none; cursor: pointer; color: var(--text3); font-size: 22px; line-height: 1; padding: 2px 4px; flex-shrink: 0; }
 .ml-d-close:hover { color: var(--text1); }
 .ml-d-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
@@ -1278,6 +1309,15 @@ select:focus-visible, [tabindex]:focus-visible {
   }
 }
 @media (max-width: 640px) {
+  .ml-d-head-meta {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .ml-d-tags {
+    margin-left: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
   #page-models #model-filter-popover {
     right: 12px;
     left: 12px;
