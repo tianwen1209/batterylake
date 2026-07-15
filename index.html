@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BatteryLake - Battery Data Intelligence Platform</title>
 <link rel="icon" href="assets/logos/batterylake_logo.png">
+<!-- Google tag (GA4) — page_view sent manually for hash routes -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5C061K2R5M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5C061K2R5M', { send_page_view: false });
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="js/theme-init.js"></script>
 <link rel="stylesheet" href="styles/base.css">
@@ -392,19 +400,19 @@ for ds in resp.json()["items"]:
 
       <div class="sc-reach-grid" aria-label="Platform usage statistics">
         <article class="sc-reach-card reveal" style="--d:0ms">
-          <strong class="sc-reach-value" id="stat-website-visits">12.4k</strong>
-          <span class="sc-reach-label">Total Website Visits</span>
+          <strong class="sc-reach-value" id="stat-website-visits">—</strong>
+          <span class="sc-reach-label">Total Visits</span>
         </article>
         <article class="sc-reach-card reveal" style="--d:80ms">
-          <strong class="sc-reach-value" id="stat-dataset-downloads">3.2k</strong>
-          <span class="sc-reach-label">Total Dataset Downloads</span>
+          <strong class="sc-reach-value" id="stat-dataset-downloads">—</strong>
+          <span class="sc-reach-label">Dataset Downloads</span>
         </article>
         <article class="sc-reach-card reveal" style="--d:160ms">
-          <strong class="sc-reach-value" id="stat-skill-downloads">1.8k</strong>
-          <span class="sc-reach-label">Total Skill Downloads</span>
+          <strong class="sc-reach-value" id="stat-skill-downloads">—</strong>
+          <span class="sc-reach-label">Skill Downloads</span>
         </article>
       </div>
-      <p class="sc-reach-footnote reveal">Placeholder values — replace with Google Analytics when available.</p>
+      <p class="sc-reach-footnote reveal" id="stat-updated-note" hidden></p>
     </section>
 
     <!-- ── CTA ──────────────────────────────────────────────── -->
@@ -2016,6 +2024,7 @@ for dataset in resp.json()["items"]:
     </div>
   </div>
 </div>
+<script src="js/analytics.js"></script>
 <script src="js/main.js"></script>
 <script src="js/naming-sequencer.js"></script>
 <div class="ai-chat-widget" aria-live="polite">
