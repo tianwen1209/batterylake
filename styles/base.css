@@ -370,6 +370,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   z-index: 2;
 }
 .visual-page-hero-art {
+  display: block; /* kill inline baseline gap under transparent PNGs */
+  vertical-align: middle;
   position: absolute;
   z-index: 1;
   right: 0;
@@ -380,7 +382,12 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   min-width: 0;
   object-fit: contain;
   transform: translateY(-50%);
-  filter: drop-shadow(0 20px 42px rgba(15,23,42,.10));
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  /* drop-shadow draws along semi-transparent PNG edges → fake bottom border */
+  filter: none;
   pointer-events: none;
   user-select: none;
 }

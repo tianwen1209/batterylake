@@ -4420,6 +4420,11 @@ pre.api-code,
 /* Quality page header follows the Home/Datasets visual hero language. */
 #page-quality .quality-page-hero {
   margin-bottom: 18px;
+  border: 0;
+  border-bottom: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: visible; /* avoid clipping former drop-shadow into a hard edge */
 }
 
 #page-quality .quality-page-hero .page-title {
@@ -4431,10 +4436,16 @@ pre.api-code,
 }
 
 #page-quality .quality-hero-art {
+  display: block;
+  vertical-align: middle;
   right: -10px;
   width: min(520px, 46%);
   max-height: calc(100% - 8px);
-  filter: drop-shadow(0 20px 42px rgba(15,23,42,.08));
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  filter: none;
   mix-blend-mode: normal;
 }
 
@@ -4673,7 +4684,7 @@ pre.api-code,
   right: 0;
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
-  filter: drop-shadow(0 20px 42px rgba(15, 23, 42, .08));
+  filter: none;
 }
 
 [data-theme="dark"] #page-terms .terms-hero-art {
@@ -5471,9 +5482,11 @@ pre.api-code,
   margin: 0 auto clamp(20px, 2.4vw, 30px);
   padding: 32px 0;
   border: 0;
+  border-bottom: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+  overflow: visible;
 }
 
 #page-naming .naming-hero::before,
@@ -5501,12 +5514,17 @@ pre.api-code,
 }
 
 #page-naming .naming-hero-art {
+  display: block;
   right: 0;
   top: 50%;
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
   object-fit: contain;
-  filter: saturate(.82) brightness(1.04) contrast(.94) drop-shadow(0 20px 38px rgba(15,23,42,.07));
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  filter: none; /* was saturate+drop-shadow — drop-shadow edged the PNG */
   transform: translateY(-50%);
 }
 
@@ -5868,9 +5886,11 @@ pre.api-code,
   margin: 0 auto clamp(20px, 2.4vw, 30px);
   padding: 32px 0;
   border: 0;
+  border-bottom: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+  overflow: visible;
 }
 
 #page-pipeline .reference-hero .page-title,
@@ -5917,12 +5937,17 @@ pre.api-code,
 
 #page-pipeline .reference-hero-art,
 #page-docs .reference-hero-art {
+  display: block;
   right: 0;
   top: 50%;
   width: min(454px, 44%);
   max-height: calc(100% - 24px);
   object-fit: contain;
-  filter: saturate(.82) brightness(1.04) contrast(.94) drop-shadow(0 20px 38px rgba(15,23,42,.07));
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  filter: none; /* was saturate+drop-shadow — drop-shadow edged the PNG */
   transform: translateY(-50%);
 }
 
