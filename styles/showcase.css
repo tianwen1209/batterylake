@@ -637,14 +637,18 @@
       color-mix(in srgb, var(--accent-light) 55%, var(--bg2)) 0%,
       var(--bg2) 100%
     );
+  isolation: isolate;
 }
 .sc-reach-map {
   width: 100%;
   height: 100%;
+  z-index: 1;
+  background: var(--bg2);
 }
 .sc-reach-map-empty {
   position: absolute;
   inset: 0;
+  z-index: 450;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -654,7 +658,8 @@
   font-size: 13.5px;
   line-height: 1.5;
   color: var(--text3);
-  background: transparent;
+  background: color-mix(in srgb, var(--surface, var(--bg)) 72%, transparent);
+  pointer-events: none;
 }
 .sc-reach-map-empty[hidden] {
   display: none;
@@ -662,13 +667,14 @@
 .sc-reach-map-legend {
   position: absolute;
   left: 12px;
-  bottom: 10px;
+  bottom: 28px;
+  z-index: 450;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 4px 8px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--surface, var(--bg)) 88%, transparent);
+  background: color-mix(in srgb, var(--surface, var(--bg)) 90%, transparent);
   pointer-events: none;
 }
 .sc-reach-map-legend[hidden] {
@@ -691,6 +697,65 @@
     color-mix(in srgb, var(--accent) 28%, transparent),
     var(--accent)
   );
+}
+
+/* Leaflet chrome — keep only zoom + attribution, themed to BatteryLake */
+.sc-reach-map-panel .leaflet-control-zoom {
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(22, 30, 48, 0.06);
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+}
+.sc-reach-map-panel .leaflet-control-zoom a {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: var(--text2) !important;
+  background: var(--surface, var(--bg)) !important;
+  border-bottom-color: var(--border) !important;
+}
+.sc-reach-map-panel .leaflet-control-zoom a:hover {
+  color: var(--text1) !important;
+  background: var(--bg3) !important;
+}
+.sc-reach-map-panel .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--surface, var(--bg)) 88%, transparent) !important;
+  color: var(--text4) !important;
+  font-size: 10px;
+  max-width: 55%;
+  margin: 0 !important;
+  padding: 2px 6px !important;
+}
+.sc-reach-map-panel .leaflet-control-attribution a {
+  color: var(--text3) !important;
+}
+.sc-reach-map-leaflet-tooltip {
+  background: var(--surface, var(--bg)) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  color: var(--text1) !important;
+  box-shadow: 0 4px 14px rgba(22, 30, 48, 0.12) !important;
+  padding: 0 !important;
+}
+.sc-reach-map-leaflet-tooltip::before {
+  border-top-color: var(--surface, var(--bg)) !important;
+}
+.sc-reach-map-tooltip {
+  padding: 8px 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.sc-reach-map-tooltip-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: var(--text1);
+}
+.sc-reach-map-tooltip-meta {
+  color: var(--text3);
 }
 .sc-reach-grid {
   display: flex;

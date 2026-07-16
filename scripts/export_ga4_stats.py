@@ -20,9 +20,11 @@ from typing import Any
 START_DATE = "2026-07-15"
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = REPO_ROOT / "assets" / "data" / "site-stats.json"
+CITY_COORDS_PATH = REPO_ROOT / "scripts" / "data" / "city-coordinates.json"
 SCOPES = ("https://www.googleapis.com/auth/analytics.readonly",)
 LOCATION_METRIC = "activeUsers"
 LOCATION_LIMIT = 200
+CITY_LOCATION_LIMIT = 250
 
 
 def _require_env(name: str) -> str:
@@ -181,6 +183,54 @@ def _is_unknown_country(country: str, country_code: str) -> bool:
     return False
 
 
+def _is_unknown_city(city: str) -> bool:
+    name = (city or "").strip()
+    return not name or name.lower() in {"(not set)", "unknown", "not set", "null"}
+
+
+def load_city_coordinates() -> dict[str, list[float]]:
+    """Static city-center lookup keyed by 'CC|city' (casefold). No network calls."""
+    if not CITY_COORDS_PATH.exists():
+        return {}
+    try:
+        raw = json.loads(CITY_COORDS_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    if not isinstance(raw, dict):
+        return {}
+    out: dict[str, list[float]] = {}
+    for key, value in raw.items():
+        if not isinstance(value, (list, tuple)) or len(value) < 2:
+            continue
+        try:
+            out[str(key)] = [float(value[0]), float(value[1])]
+        except (TypeError, ValueError):
+            continue
+    return out
+
+
+def lookup_city_coordinates(
+    coords_lookup: dict[str, list[float]],
+    country_code: str,
+    city: str,
+) -> list[float] | None:
+    code = (country_code or "").strip().upper()
+    name = (city or "").strip()
+    if not code or not name:
+        return None
+    key = f"{code}|{name.casefold()}"
+    hit = coords_lookup.get(key)
+    if hit:
+        return hit
+    # Mild normalization for common GA4 variants.
+    alt = name.replace(".", "").replace(",", "").strip().casefold()
+    if alt != name.casefold():
+        hit = coords_lookup.get(f"{code}|{alt}")
+        if hit:
+            return hit
+    return None
+
+
 def normalize_country_rows(rows: list[tuple[str, str, int]]) -> list[dict[str, Any]]:
     """Aggregate GA4 country rows into map-ready country records.
 
@@ -225,6 +275,61 @@ def normalize_country_rows(rows: list[tuple[str, str, int]]) -> list[dict[str, A
     countries = list(by_code.values())
     countries.sort(key=lambda row: (-int(row["visitors"]), row["countryCode"]))
     return countries
+
+
+def normalize_city_rows(
+    rows: list[tuple[str, str, str, int]],
+    coords_lookup: dict[str, list[float]] | None = None,
+) -> list[dict[str, Any]]:
+    """Aggregate GA4 city rows into map-ready city records with static centers.
+
+    Cities without a static coordinate match are omitted (frontend falls back to
+    country-level markers). Unknown / (not set) cities are never exported.
+    """
+    coords_lookup = coords_lookup if coords_lookup is not None else load_city_coordinates()
+    by_key: dict[tuple[str, str], dict[str, Any]] = {}
+
+    for country, country_code, city, visitors in rows:
+        try:
+            count = int(visitors)
+        except (TypeError, ValueError):
+            continue
+        if count <= 0:
+            continue
+
+        name = (country or "").strip()
+        code = (country_code or "").strip().upper()
+        city_name = (city or "").strip()
+        if _is_unknown_country(name, code) or _is_unknown_city(city_name):
+            continue
+
+        coord = lookup_city_coordinates(coords_lookup, code, city_name)
+        if not coord:
+            continue
+
+        key = (code, city_name.casefold())
+        existing = by_key.get(key)
+        if existing:
+            existing["visitors"] = int(existing["visitors"]) + count
+        else:
+            by_key[key] = {
+                "country": name,
+                "countryCode": code,
+                "city": city_name,
+                "visitors": count,
+                "lng": coord[0],
+                "lat": coord[1],
+            }
+
+    cities = list(by_key.values())
+    cities.sort(
+        key=lambda row: (
+            -int(row["visitors"]),
+            row["countryCode"],
+            str(row["city"]).casefold(),
+        )
+    )
+    return cities
 
 
 def fetch_visitors_by_country(
@@ -282,6 +387,60 @@ def fetch_visitors_by_country(
     return normalize_country_rows(raw_rows)
 
 
+def fetch_visitors_by_city(
+    client,
+    property_name: str,
+    end_date: str,
+    coords_lookup: dict[str, list[float]] | None = None,
+) -> list[dict[str, Any]] | None:
+    """City-level activeUsers. Returns None on query failure, list on success."""
+    from google.analytics.data_v1beta.types import (
+        DateRange,
+        Dimension,
+        Metric,
+        OrderBy,
+        RunReportRequest,
+    )
+
+    request = RunReportRequest(
+        property=property_name,
+        dimensions=[
+            Dimension(name="country"),
+            Dimension(name="countryId"),
+            Dimension(name="city"),
+        ],
+        metrics=[Metric(name=LOCATION_METRIC)],
+        date_ranges=[DateRange(start_date=START_DATE, end_date=end_date)],
+        order_bys=[
+            OrderBy(
+                metric=OrderBy.MetricOrderBy(metric_name=LOCATION_METRIC),
+                desc=True,
+            )
+        ],
+        limit=CITY_LOCATION_LIMIT,
+    )
+    try:
+        response = client.run_report(request)
+    except Exception as exc:  # noqa: BLE001 — keep daily export resilient
+        print(
+            f"Warning: could not fetch visitors by city ({exc})",
+            file=sys.stderr,
+        )
+        return None
+
+    raw_rows: list[tuple[str, str, str, int]] = []
+    for row in response.rows or []:
+        country = (row.dimension_values[0].value or "").strip()
+        country_code = (row.dimension_values[1].value or "").strip()
+        city = (row.dimension_values[2].value or "").strip()
+        try:
+            visitors = int(row.metric_values[0].value or 0)
+        except (TypeError, ValueError):
+            continue
+        raw_rows.append((country, country_code, city, visitors))
+    return normalize_city_rows(raw_rows, coords_lookup=coords_lookup)
+
+
 def read_previous_locations() -> dict[str, Any] | None:
     """Return the previous locations block from site-stats.json, if valid."""
     if not OUTPUT_PATH.exists():
@@ -296,7 +455,8 @@ def read_previous_locations() -> dict[str, Any] | None:
     if not isinstance(locations, dict):
         return None
     countries = locations.get("countries")
-    if not isinstance(countries, list):
+    cities = locations.get("cities")
+    if not isinstance(countries, list) and not isinstance(cities, list):
         return None
     return locations
 
@@ -306,6 +466,7 @@ def build_locations_payload(
     *,
     updated_at: str,
     end_date: str,
+    cities: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     return {
         "updatedAt": updated_at,
@@ -315,6 +476,7 @@ def build_locations_payload(
             "endDate": end_date,
         },
         "countries": countries,
+        "cities": cities if cities is not None else [],
     }
 
 
@@ -323,21 +485,32 @@ def resolve_locations_payload(
     *,
     updated_at: str,
     end_date: str,
+    fetched_cities: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Build locations JSON, preserving prior data when the GA4 query fails."""
-    if fetched_countries is None:
+    """Build locations JSON, preserving prior data when location queries fail."""
+    if fetched_countries is None and fetched_cities is None:
         previous = read_previous_locations()
         if previous is not None:
             print(
-                "Warning: location query failed; preserving previous locations data",
+                "Warning: location queries failed; preserving previous locations data",
                 file=sys.stderr,
             )
             return previous
-        return build_locations_payload([], updated_at=updated_at, end_date=end_date)
+        return build_locations_payload(
+            [],
+            updated_at=updated_at,
+            end_date=end_date,
+            cities=[],
+        )
+
+    countries = fetched_countries if fetched_countries is not None else []
+    # City query failure → keep country markers only (graceful fallback).
+    cities = fetched_cities if fetched_cities is not None else []
     return build_locations_payload(
-        fetched_countries,
+        countries,
         updated_at=updated_at,
         end_date=end_date,
+        cities=cities,
     )
 
 
@@ -362,12 +535,17 @@ def main() -> int:
     model_runs = fetch_event_counts_by_model_id(
         client, property_name, end_date, "model_run"
     )
+    coords_lookup = load_city_coordinates()
     location_countries = fetch_visitors_by_country(client, property_name, end_date)
+    location_cities = fetch_visitors_by_city(
+        client, property_name, end_date, coords_lookup=coords_lookup
+    )
     updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     locations = resolve_locations_payload(
         location_countries,
         updated_at=updated_at,
         end_date=end_date,
+        fetched_cities=location_cities,
     )
 
     payload = {
@@ -383,12 +561,13 @@ def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     country_count = len(locations.get("countries") or [])
+    city_count = len(locations.get("cities") or [])
     print(
         f"Wrote {OUTPUT_PATH.relative_to(REPO_ROOT)} "
         f"(visits={total_visits}, datasets={dataset_downloads}, skills={skill_uses}, "
         f"model_downloads={sum(model_downloads.values())}, "
         f"model_runs={sum(model_runs.values())}, "
-        f"countries={country_count})"
+        f"countries={country_count}, cities={city_count})"
     )
     return 0
 

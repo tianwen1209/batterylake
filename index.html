@@ -15,6 +15,7 @@
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="js/theme-init.js"></script>
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="styles/base.css">
 <script src="assets/vendor/papaparse.min.js"></script>
 
@@ -411,8 +412,8 @@ for ds in resp.json()["items"]:
             <div
               class="sc-reach-map"
               id="reach-visitor-map"
-              role="img"
-              aria-label="World map of visitor activity by country"
+              role="region"
+              aria-label="Interactive world map of visitor activity"
             ></div>
             <p class="sc-reach-map-empty" id="reach-map-empty" hidden>
               Visitor location data will appear after the next analytics update.
@@ -424,7 +425,7 @@ for ds in resp.json()["items"]:
           </div>
           <div class="sc-reach-grid" aria-label="Platform usage statistics">
             <div class="sc-reach-item">
-              <span class="sc-reach-label">Total Visits</span>
+              <span class="sc-reach-label">Total Pageviews</span>
               <strong class="sc-reach-value" id="stat-website-visits">—</strong>
             </div>
             <div class="sc-reach-item">
