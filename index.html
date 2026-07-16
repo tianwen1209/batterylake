@@ -408,33 +408,35 @@ for ds in resp.json()["items"]:
       <div class="sc-reach-bar reveal">
         <span class="sc-reach-title" id="reach-title">Platform Usage</span>
         <div class="sc-reach-card">
-          <div class="sc-reach-map-panel">
-            <div
-              class="sc-reach-map"
-              id="reach-visitor-map"
-              role="region"
-              aria-label="Interactive world map of visitor activity"
-            ></div>
-            <p class="sc-reach-map-empty" id="reach-map-empty" hidden>
-              Visitor location data will appear after the next analytics update.
-            </p>
-            <div class="sc-reach-map-legend" id="reach-map-legend" hidden>
-              <span class="sc-reach-map-legend-label">Visitor Activity</span>
-              <span class="sc-reach-map-legend-scale" aria-hidden="true"></span>
+          <div class="sc-reach-layout">
+            <div class="sc-reach-map-panel">
+              <div
+                class="sc-reach-map"
+                id="reach-visitor-map"
+                role="region"
+                aria-label="Interactive world map of visitor activity"
+              ></div>
+              <p class="sc-reach-map-empty" id="reach-map-empty" hidden>
+                Visitor location data will appear after the next analytics update.
+              </p>
+              <div class="sc-reach-map-legend" id="reach-map-legend" hidden>
+                <span class="sc-reach-map-legend-label">Visitor Activity</span>
+                <span class="sc-reach-map-legend-scale" aria-hidden="true"></span>
+              </div>
             </div>
-          </div>
-          <div class="sc-reach-grid" aria-label="Platform usage statistics">
-            <div class="sc-reach-item">
-              <span class="sc-reach-label">Total Pageviews</span>
-              <strong class="sc-reach-value" id="stat-website-visits">—</strong>
-            </div>
-            <div class="sc-reach-item">
-              <span class="sc-reach-label">Dataset Downloads</span>
-              <strong class="sc-reach-value" id="stat-dataset-downloads">—</strong>
-            </div>
-            <div class="sc-reach-item">
-              <span class="sc-reach-label">Skill Downloads</span>
-              <strong class="sc-reach-value" id="stat-skill-downloads">—</strong>
+            <div class="sc-reach-grid" aria-label="Platform usage statistics">
+              <div class="sc-reach-item">
+                <span class="sc-reach-label">Total Visits</span>
+                <strong class="sc-reach-value" id="stat-website-visits">—</strong>
+              </div>
+              <div class="sc-reach-item">
+                <span class="sc-reach-label">Dataset Downloads</span>
+                <strong class="sc-reach-value" id="stat-dataset-downloads">—</strong>
+              </div>
+              <div class="sc-reach-item">
+                <span class="sc-reach-label">Skill Downloads</span>
+                <strong class="sc-reach-value" id="stat-skill-downloads">—</strong>
+              </div>
             </div>
           </div>
           <p class="sc-reach-footnote" id="stat-updated-note" hidden></p>

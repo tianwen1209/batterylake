@@ -1742,9 +1742,15 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 [data-theme="dark"] #page-home .sc-reach-value {
   color: var(--text2);
 }
+#page-home .sc-reach-label {
+  color: var(--text4);
+}
 #page-home .sc-reach-card {
   background: var(--surface);
   box-shadow: none;
+}
+#page-home .sc-reach-layout {
+  min-width: 0;
 }
 [data-theme="dark"] #page-home .sc-reach-map-panel {
   background:

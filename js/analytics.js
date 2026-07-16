@@ -64,10 +64,18 @@
     savedView: null
   };
 
-  var MAP_DEFAULT_CENTER = [20, 0];
-  var MAP_DEFAULT_ZOOM = 2;
+  // Asia-Pacific framing: Singapore near center, zoomed out enough that SEA
+  // does not dominate the panel. Users can still zoom/drag freely.
+  var MAP_DEFAULT_CENTER = [5, 105];
+  var MAP_DEFAULT_ZOOM = 1.5;
   var MAP_MIN_ZOOM = 1;
   var MAP_MAX_ZOOM = 10;
+
+  // Marker radius uses a restrained sqrt scale with hard clamps (px).
+  var MARKER_RADIUS_MIN = 3.5;
+  var MARKER_RADIUS_MAX = 18;
+  /** Floor for the sqrt reference so sparse/small datasets stay subtle. */
+  var MARKER_RADIUS_VISITORS_FLOOR = 64;
 
   var TILE_URLS = {
     light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
@@ -263,7 +271,7 @@
     }
   }
 
-  function formatUpdatedNote(iso) {
+  function formatUpdatedNoteDateOnly(iso) {
     if (!iso) return '';
     try {
       var d = new Date(iso);
@@ -276,6 +284,31 @@
       return 'Updated ' + dateFmt.format(d);
     } catch (_) {
       return '';
+    }
+  }
+
+  /** Full SGT stamp from analytics updatedAt; falls back to date-only if needed. */
+  function formatUpdatedNote(iso) {
+    if (!iso) return '';
+    try {
+      var d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return '';
+      var datePart = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Singapore',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      }).format(d);
+      var timePart = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Singapore',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(d).replace(/\u202f/g, ' ');
+      if (!datePart || !timePart) return formatUpdatedNoteDateOnly(iso);
+      return 'Last updated · ' + datePart + ' · ' + timePart + ' SGT';
+    } catch (_) {
+      return formatUpdatedNoteDateOnly(iso);
     }
   }
 
@@ -446,16 +479,20 @@
   }
 
   function radiusForVisitors(value, maxVisitors) {
-    var minSize = 6;
-    var maxSize = 22;
-    if (!maxVisitors || maxVisitors <= 0) return minSize;
-    var t = Math.sqrt(Math.max(0, value) / maxVisitors);
-    return Math.round(minSize + t * (maxSize - minSize));
+    var visitors = Math.max(0, Number(value) || 0);
+    if (visitors <= 0) return MARKER_RADIUS_MIN;
+    // Non-linear (sqrt) scale with a stable floor so counts under ~20 stay
+    // small even when they are the largest point on a sparse map.
+    var reference = Math.max(MARKER_RADIUS_VISITORS_FLOOR, Number(maxVisitors) || 0);
+    var t = Math.sqrt(Math.min(visitors, reference) / reference);
+    return Math.round((MARKER_RADIUS_MIN + t * (MARKER_RADIUS_MAX - MARKER_RADIUS_MIN)) * 10) / 10;
   }
 
   function opacityForVisitors(value, maxVisitors) {
-    if (!maxVisitors || maxVisitors <= 0) return 0.7;
-    var t = Math.sqrt(Math.max(0, value) / maxVisitors);
+    var visitors = Math.max(0, Number(value) || 0);
+    if (visitors <= 0) return 0.42;
+    var reference = Math.max(MARKER_RADIUS_VISITORS_FLOOR, Number(maxVisitors) || 0);
+    var t = Math.sqrt(Math.min(visitors, reference) / reference);
     return Math.round((0.42 + t * 0.48) * 100) / 100;
   }
 
@@ -713,7 +750,8 @@
     refreshModelUsageTags();
     var note = document.getElementById('stat-updated-note');
     if (note) {
-      var text = formatUpdatedNote(data.updated_at);
+      var updatedAt = (data.locations && data.locations.updatedAt) || data.updated_at || null;
+      var text = formatUpdatedNote(updatedAt);
       if (resolveLocations(data).isDevSample) {
         text = text ? text + ' · Dev sample locations' : 'Dev sample locations (?demoLocations=1)';
       }
