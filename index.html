@@ -390,31 +390,6 @@ for ds in resp.json()["items"]:
       </div>
     </section>
 
-    <!-- ── PLATFORM USAGE ───────────────────────────────────── -->
-    <section class="sc-section sc-reach" aria-labelledby="reach-title">
-      <div class="sc-section-head reveal">
-        <span class="sc-kicker">Impact</span>
-        <div class="sc-section-title" id="reach-title">Platform Usage</div>
-        <div class="sc-section-sub">How researchers engage with BatteryLake.</div>
-      </div>
-
-      <div class="sc-reach-grid" aria-label="Platform usage statistics">
-        <article class="sc-reach-card reveal" style="--d:0ms">
-          <strong class="sc-reach-value" id="stat-website-visits">—</strong>
-          <span class="sc-reach-label">Total Visits</span>
-        </article>
-        <article class="sc-reach-card reveal" style="--d:80ms">
-          <strong class="sc-reach-value" id="stat-dataset-downloads">—</strong>
-          <span class="sc-reach-label">Dataset Downloads</span>
-        </article>
-        <article class="sc-reach-card reveal" style="--d:160ms">
-          <strong class="sc-reach-value" id="stat-skill-downloads">—</strong>
-          <span class="sc-reach-label">Skill Uses</span>
-        </article>
-      </div>
-      <p class="sc-reach-footnote reveal" id="stat-updated-note" hidden></p>
-    </section>
-
     <!-- ── CTA ──────────────────────────────────────────────── -->
     <section class="sc-cta reveal rv-scale">
       <div>
@@ -424,6 +399,28 @@ for ds in resp.json()["items"]:
       <div class="sc-cta-actions">
         <a class="sc-btn sc-btn-ondark" onclick="showPage('datasets', document.getElementById('nav-datasets'))">Browse Catalog</a>
         <a class="sc-btn sc-btn-outline-ondark" onclick="showPage('contribute', null)">Contribute Data</a>
+      </div>
+    </section>
+
+    <!-- ── PLATFORM USAGE (supporting metadata) ─────────────── -->
+    <section class="sc-section sc-reach" aria-labelledby="reach-title">
+      <div class="sc-reach-bar reveal">
+        <span class="sc-reach-title" id="reach-title">Platform Usage</span>
+        <div class="sc-reach-grid" aria-label="Platform usage statistics">
+          <div class="sc-reach-item">
+            <strong class="sc-reach-value" id="stat-website-visits">—</strong>
+            <span class="sc-reach-label">Total Visits</span>
+          </div>
+          <div class="sc-reach-item">
+            <strong class="sc-reach-value" id="stat-dataset-downloads">—</strong>
+            <span class="sc-reach-label">Dataset Downloads</span>
+          </div>
+          <div class="sc-reach-item">
+            <strong class="sc-reach-value" id="stat-skill-downloads">—</strong>
+            <span class="sc-reach-label">Skill Uses</span>
+          </div>
+        </div>
+        <p class="sc-reach-footnote" id="stat-updated-note" hidden></p>
       </div>
     </section>
 
