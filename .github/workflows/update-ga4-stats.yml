@@ -2,26 +2,14 @@ name: Update GA4 site stats
 
 on:
   schedule:
-    # Temporary test: 14, 29, 44 and 59 minutes past every hour
-    - cron: "14,29,44,59 * * * *"
-
-    # - cron: "20 9 * * *"
-    #   timezone: "Asia/Singapore"
+    # Update at 5:20 PM UTC (Singapore time 1:20 AM the next day)
+    - cron: "20 17 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  schedule-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show trigger information
-        run: |
-          echo "Event: ${{ github.event_name }}"
-          echo "UTC time: $(date -u)"
-          echo "Singapore time: $(TZ=Asia/Singapore date)"
-          
   export-stats:
     runs-on: ubuntu-latest
     steps:
