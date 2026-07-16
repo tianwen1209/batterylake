@@ -4,7 +4,7 @@ on:
   schedule:
     # 09:20 Singapore time (UTC+8) ≈ 01:20 UTC
     # Test: 11:35 Singapore time (UTC+8) = 03:35 UTC
-    - cron: "05 6 * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
