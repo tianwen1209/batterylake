@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-16T09:25:07Z",
-  "total_visits": 359,
+  "updated_at": "2026-07-16T18:35:57Z",
+  "total_visits": 367,
   "dataset_downloads": 1,
   "skill_uses": 3,
   "model_downloads": {
@@ -12,7 +12,7 @@
     "linear": 3
   },
   "locations": {
-    "updatedAt": "2026-07-16T09:25:07Z",
+    "updatedAt": "2026-07-16T18:35:57Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
