@@ -1,17 +1,23 @@
 {
-  "updated_at": "2026-07-16T04:26:17Z",
+  "updated_at": "2026-07-16T04:29:05Z",
   "total_visits": 229,
   "dataset_downloads": 0,
   "skill_uses": 0,
   "model_downloads": {},
   "model_runs": {},
   "locations": {
-    "updatedAt": "2026-07-16T02:29:27Z",
+    "updatedAt": "2026-07-16T04:29:05Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
       "endDate": "2026-07-16"
     },
-    "countries": []
+    "countries": [
+      {
+        "country": "Singapore",
+        "countryCode": "SG",
+        "visitors": 14
+      }
+    ]
   }
 }
