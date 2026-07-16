@@ -1,12 +1,18 @@
 {
-  "updated_at": "2026-07-16T05:01:06Z",
-  "total_visits": 237,
-  "dataset_downloads": 0,
+  "updated_at": "2026-07-16T07:53:58Z",
+  "total_visits": 320,
+  "dataset_downloads": 1,
   "skill_uses": 0,
-  "model_downloads": {},
-  "model_runs": {},
+  "model_downloads": {
+    "cnn": 9,
+    "linear": 3
+  },
+  "model_runs": {
+    "cnn": 7,
+    "linear": 3
+  },
   "locations": {
-    "updatedAt": "2026-07-16T05:01:06Z",
+    "updatedAt": "2026-07-16T07:53:58Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
@@ -16,7 +22,7 @@
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 15
+        "visitors": 17
       }
     ],
     "cities": [
@@ -24,7 +30,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 14,
+        "visitors": 16,
         "lng": 103.85,
         "lat": 1.29
       }
