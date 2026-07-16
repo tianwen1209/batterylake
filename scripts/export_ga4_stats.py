@@ -15,22 +15,14 @@ import os
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
-
-from google.analytics.data_v1beta import BetaAnalyticsDataClient
-from google.analytics.data_v1beta.types import (
-    DateRange,
-    Dimension,
-    Filter,
-    FilterExpression,
-    Metric,
-    RunReportRequest,
-)
-from google.oauth2 import service_account
+from typing import Any
 
 START_DATE = "2026-07-15"
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = REPO_ROOT / "assets" / "data" / "site-stats.json"
 SCOPES = ("https://www.googleapis.com/auth/analytics.readonly",)
+LOCATION_METRIC = "activeUsers"
+LOCATION_LIMIT = 200
 
 
 def _require_env(name: str) -> str:
@@ -70,7 +62,10 @@ def _sum_metric_rows(response) -> int:
     return total
 
 
-def _build_client(sa_json: str) -> BetaAnalyticsDataClient:
+def _build_client(sa_json: str):
+    from google.analytics.data_v1beta import BetaAnalyticsDataClient
+    from google.oauth2 import service_account
+
     info = json.loads(sa_json)
     credentials = service_account.Credentials.from_service_account_info(
         info,
@@ -79,7 +74,9 @@ def _build_client(sa_json: str) -> BetaAnalyticsDataClient:
     return BetaAnalyticsDataClient(credentials=credentials)
 
 
-def fetch_screen_page_views(client: BetaAnalyticsDataClient, property_name: str, end_date: str) -> int:
+def fetch_screen_page_views(client, property_name: str, end_date: str) -> int:
+    from google.analytics.data_v1beta.types import DateRange, Metric, RunReportRequest
+
     request = RunReportRequest(
         property=property_name,
         metrics=[Metric(name="screenPageViews")],
@@ -89,11 +86,20 @@ def fetch_screen_page_views(client: BetaAnalyticsDataClient, property_name: str,
 
 
 def fetch_event_count(
-    client: BetaAnalyticsDataClient,
+    client,
     property_name: str,
     end_date: str,
     event_name: str,
 ) -> int:
+    from google.analytics.data_v1beta.types import (
+        DateRange,
+        Dimension,
+        Filter,
+        FilterExpression,
+        Metric,
+        RunReportRequest,
+    )
+
     request = RunReportRequest(
         property=property_name,
         dimensions=[Dimension(name="eventName")],
@@ -110,7 +116,7 @@ def fetch_event_count(
 
 
 def fetch_event_counts_by_model_id(
-    client: BetaAnalyticsDataClient,
+    client,
     property_name: str,
     end_date: str,
     event_name: str,
@@ -120,6 +126,15 @@ def fetch_event_counts_by_model_id(
     Requires a GA4 event-scoped custom dimension mapped to parameter model_id
     (API name: customEvent:model_id). Returns {} if the dimension is missing.
     """
+    from google.analytics.data_v1beta.types import (
+        DateRange,
+        Dimension,
+        Filter,
+        FilterExpression,
+        Metric,
+        RunReportRequest,
+    )
+
     request = RunReportRequest(
         property=property_name,
         dimensions=[Dimension(name="customEvent:model_id")],
@@ -156,6 +171,176 @@ def fetch_event_counts_by_model_id(
     return counts
 
 
+def _is_unknown_country(country: str, country_code: str) -> bool:
+    name = (country or "").strip()
+    code = (country_code or "").strip().upper()
+    if not name or name.lower() in {"(not set)", "unknown", "not set"}:
+        return True
+    if not code or code in {"(NOT SET)", "ZZ", "UNKNOWN"}:
+        return True
+    return False
+
+
+def normalize_country_rows(rows: list[tuple[str, str, int]]) -> list[dict[str, Any]]:
+    """Aggregate GA4 country rows into map-ready country records.
+
+    - Coerces visitors to int and drops non-positive counts.
+    - Aggregates empty / (not set) rows as Unknown (omitted from output;
+      map rendering must never show Unknown).
+    - Aggregates duplicate country codes.
+    - Returns countries sorted by visitors descending.
+    """
+    by_code: dict[str, dict[str, Any]] = {}
+    unknown_visitors = 0
+
+    for country, country_code, visitors in rows:
+        try:
+            count = int(visitors)
+        except (TypeError, ValueError):
+            continue
+        if count <= 0:
+            continue
+
+        name = (country or "").strip()
+        code = (country_code or "").strip().upper()
+        if _is_unknown_country(name, code):
+            unknown_visitors += count
+            continue
+
+        existing = by_code.get(code)
+        if existing:
+            existing["visitors"] = int(existing["visitors"]) + count
+            if name and (not existing["country"] or existing["country"] == "Unknown"):
+                existing["country"] = name
+        else:
+            by_code[code] = {
+                "country": name,
+                "countryCode": code,
+                "visitors": count,
+            }
+
+    # unknown_visitors is intentionally not exported — map must never render Unknown.
+    _ = unknown_visitors
+
+    countries = list(by_code.values())
+    countries.sort(key=lambda row: (-int(row["visitors"]), row["countryCode"]))
+    return countries
+
+
+def fetch_visitors_by_country(
+    client,
+    property_name: str,
+    end_date: str,
+) -> list[dict[str, Any]] | None:
+    """Country-level activeUsers with ISO country codes.
+
+    Returns a sorted list on success (possibly empty).
+    Returns None when the GA4 report fails so callers can preserve prior data.
+    """
+    from google.analytics.data_v1beta.types import (
+        DateRange,
+        Dimension,
+        Metric,
+        OrderBy,
+        RunReportRequest,
+    )
+
+    request = RunReportRequest(
+        property=property_name,
+        dimensions=[
+            Dimension(name="country"),
+            Dimension(name="countryId"),
+        ],
+        metrics=[Metric(name=LOCATION_METRIC)],
+        date_ranges=[DateRange(start_date=START_DATE, end_date=end_date)],
+        order_bys=[
+            OrderBy(
+                metric=OrderBy.MetricOrderBy(metric_name=LOCATION_METRIC),
+                desc=True,
+            )
+        ],
+        limit=LOCATION_LIMIT,
+    )
+    try:
+        response = client.run_report(request)
+    except Exception as exc:  # noqa: BLE001 — keep daily export resilient
+        print(
+            f"Warning: could not fetch visitors by country ({exc})",
+            file=sys.stderr,
+        )
+        return None
+
+    raw_rows: list[tuple[str, str, int]] = []
+    for row in response.rows or []:
+        country = (row.dimension_values[0].value or "").strip()
+        country_code = (row.dimension_values[1].value or "").strip()
+        try:
+            visitors = int(row.metric_values[0].value or 0)
+        except (TypeError, ValueError):
+            continue
+        raw_rows.append((country, country_code, visitors))
+    return normalize_country_rows(raw_rows)
+
+
+def read_previous_locations() -> dict[str, Any] | None:
+    """Return the previous locations block from site-stats.json, if valid."""
+    if not OUTPUT_PATH.exists():
+        return None
+    try:
+        previous = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(previous, dict):
+        return None
+    locations = previous.get("locations")
+    if not isinstance(locations, dict):
+        return None
+    countries = locations.get("countries")
+    if not isinstance(countries, list):
+        return None
+    return locations
+
+
+def build_locations_payload(
+    countries: list[dict[str, Any]],
+    *,
+    updated_at: str,
+    end_date: str,
+) -> dict[str, Any]:
+    return {
+        "updatedAt": updated_at,
+        "metric": LOCATION_METRIC,
+        "dateRange": {
+            "startDate": START_DATE,
+            "endDate": end_date,
+        },
+        "countries": countries,
+    }
+
+
+def resolve_locations_payload(
+    fetched_countries: list[dict[str, Any]] | None,
+    *,
+    updated_at: str,
+    end_date: str,
+) -> dict[str, Any]:
+    """Build locations JSON, preserving prior data when the GA4 query fails."""
+    if fetched_countries is None:
+        previous = read_previous_locations()
+        if previous is not None:
+            print(
+                "Warning: location query failed; preserving previous locations data",
+                file=sys.stderr,
+            )
+            return previous
+        return build_locations_payload([], updated_at=updated_at, end_date=end_date)
+    return build_locations_payload(
+        fetched_countries,
+        updated_at=updated_at,
+        end_date=end_date,
+    )
+
+
 def main() -> int:
     property_id = _require_env("GA4_PROPERTY_ID")
     sa_json = _require_env("GA4_SERVICE_ACCOUNT_JSON")
@@ -177,23 +362,33 @@ def main() -> int:
     model_runs = fetch_event_counts_by_model_id(
         client, property_name, end_date, "model_run"
     )
+    location_countries = fetch_visitors_by_country(client, property_name, end_date)
+    updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    locations = resolve_locations_payload(
+        location_countries,
+        updated_at=updated_at,
+        end_date=end_date,
+    )
 
     payload = {
-        "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "updated_at": updated_at,
         "total_visits": total_visits,
         "dataset_downloads": dataset_downloads,
         "skill_uses": skill_uses,
         "model_downloads": model_downloads,
         "model_runs": model_runs,
+        "locations": locations,
     }
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    country_count = len(locations.get("countries") or [])
     print(
         f"Wrote {OUTPUT_PATH.relative_to(REPO_ROOT)} "
         f"(visits={total_visits}, datasets={dataset_downloads}, skills={skill_uses}, "
         f"model_downloads={sum(model_downloads.values())}, "
-        f"model_runs={sum(model_runs.values())})"
+        f"model_runs={sum(model_runs.values())}, "
+        f"countries={country_count})"
     )
     return 0
 

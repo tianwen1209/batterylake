@@ -4,5 +4,14 @@
   "dataset_downloads": 0,
   "skill_uses": 0,
   "model_downloads": {},
-  "model_runs": {}
+  "model_runs": {},
+  "locations": {
+    "updatedAt": "2026-07-16T02:29:27Z",
+    "metric": "activeUsers",
+    "dateRange": {
+      "startDate": "2026-07-15",
+      "endDate": "2026-07-16"
+    },
+    "countries": []
+  }
 }

@@ -593,13 +593,13 @@
 .api-roadmap-status.wip  { color: var(--accent); background: var(--accent-light); }
 .api-roadmap-status.plan { color: var(--text3); background: var(--bg3); }
 
-/* platform usage — quiet supporting metadata (not KPI cards) */
+/* platform usage — quiet supporting metadata with visitor map */
 .sc-reach {
   padding-top: 12px;
   padding-bottom: 8px;
 }
 .sc-reach-bar {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 18px 8px 6px;
   text-align: center;
@@ -613,44 +613,124 @@
   text-transform: none;
   color: var(--text3);
 }
+.sc-reach-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+  background: var(--surface, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 12px;
+  padding: 14px 14px 12px;
+}
+.sc-reach-map-panel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  min-height: 180px;
+  max-height: 420px;
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent-light) 55%, var(--bg2)) 0%,
+      var(--bg2) 100%
+    );
+}
+.sc-reach-map {
+  width: 100%;
+  height: 100%;
+}
+.sc-reach-map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px 28px;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text3);
+  background: transparent;
+}
+.sc-reach-map-empty[hidden] {
+  display: none;
+}
+.sc-reach-map-legend {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface, var(--bg)) 88%, transparent);
+  pointer-events: none;
+}
+.sc-reach-map-legend[hidden] {
+  display: none;
+}
+.sc-reach-map-legend-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text3);
+  white-space: nowrap;
+}
+.sc-reach-map-legend-scale {
+  display: inline-block;
+  width: 72px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent) 28%, transparent),
+    var(--accent)
+  );
+}
 .sc-reach-grid {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: center;
-  gap: 10px 0;
+  gap: 8px 0;
   margin: 0 auto;
+  padding: 0 4px 2px;
 }
 .sc-reach-item {
   display: inline-flex;
   align-items: baseline;
-  gap: 6px;
-  padding: 0 18px;
+  gap: 8px;
+  padding: 0 16px;
   border-right: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
 }
 .sc-reach-item:last-child {
   border-right: 0;
 }
+.sc-reach-label {
+  display: inline;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text4);
+  white-space: nowrap;
+}
 .sc-reach-value {
   display: inline;
-  font-family: var(--mono);
-  font-size: 14.5px;
+  font-family: var(--sans);
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.3;
   color: var(--text2);
   font-variant-numeric: tabular-nums;
 }
-.sc-reach-label {
-  display: inline;
-  font-size: 13.5px;
-  font-weight: 400;
-  line-height: 1.35;
-  color: var(--text4);
-  white-space: nowrap;
-}
 .sc-reach-footnote {
-  margin: 12px auto 0;
+  margin: 0 auto;
   text-align: center;
   font-size: 12px;
   line-height: 1.4;
@@ -668,6 +748,10 @@
   .sc-flow { grid-template-columns: repeat(2, 1fr); row-gap: 34px; }
   .sc-flow-step:nth-child(2) .sc-flow-link { display: none; }
   .sc-cta { flex-direction: column; text-align: center; padding: 44px 30px; }
+  .sc-reach-map-panel {
+    aspect-ratio: 16 / 9;
+    max-height: 340px;
+  }
 }
 @media (max-width: 640px) {
   .sc-hero-proof { gap: 18px; }
@@ -677,6 +761,12 @@
   .sc-chip-float.c2 { left: -4px; }
   .sc-gate-mock { grid-template-columns: 1fr; justify-items: center; }
   .sc-reach-bar { padding-top: 16px; }
+  .sc-reach-card { padding: 12px 10px 10px; gap: 12px; }
+  .sc-reach-map-panel {
+    aspect-ratio: 4 / 3;
+    min-height: 160px;
+    max-height: 260px;
+  }
   .sc-reach-grid {
     flex-direction: column;
     align-items: center;

@@ -1737,10 +1737,22 @@ body { font-size: var(--type-body); letter-spacing: 0; }
 #page-home .sc-reach-value {
   font-family: var(--sans);
   font-weight: 600;
-  color: var(--text3);
+  color: var(--text2);
 }
 [data-theme="dark"] #page-home .sc-reach-value {
-  color: var(--text3);
+  color: var(--text2);
+}
+#page-home .sc-reach-card {
+  background: var(--surface);
+  box-shadow: none;
+}
+[data-theme="dark"] #page-home .sc-reach-map-panel {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent-light) 40%, var(--bg3)) 0%,
+      var(--bg3) 100%
+    );
 }
 
 #page-home .home-metrics {
