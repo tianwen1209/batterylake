@@ -2,9 +2,11 @@ name: Update GA4 site stats
 
 on:
   schedule:
-    # 09:20 Singapore time (UTC+8) ≈ 01:20 UTC
-    # Test: 11:35 Singapore time (UTC+8) = 03:35 UTC
-    - cron: "*/5 * * * *"
+    # Temporary test: 14, 29, 44 and 59 minutes past every hour
+    - cron: "14,29,44,59 * * * *"
+    
+    # - cron: "20 9 * * *"
+    #   timezone: "Asia/Singapore"
   workflow_dispatch:
 
 permissions:
