@@ -63,7 +63,8 @@ let DATASETS = [...FALLBACK_DATASETS];
 let dataSource = 'fallback'; // 'github' or 'fallback'
 
 /* ══════════════════════════════════════════════════════════════
-   TEMP: hide selected datasets from the Datasets catalog UI only.
+   TEMP: hide selected datasets from Datasets catalog + Benchmarks
+   Step 1 (dataset selection) UI only.
    Underlying DATASETS / CSV data is unchanged. Empty both sets to restore.
    ══════════════════════════════════════════════════════════════ */
 const HIDDEN_FROM_CATALOG_IDS = new Set([
@@ -81,7 +82,7 @@ function isHiddenFromCatalog(d) {
   return !!(d && (HIDDEN_FROM_CATALOG_IDS.has(d.id) || HIDDEN_FROM_CATALOG_REF_NAMES.has(d.ref_name)));
 }
 
-/** Datasets page list/search/filter/count source (excludes temporarily hidden rows). */
+/** Visible dataset list for catalog / Benchmarks Step 1 (excludes temporarily hidden rows). */
 function getCatalogDatasets() {
   return DATASETS.filter(d => !isHiddenFromCatalog(d));
 }
@@ -4807,6 +4808,7 @@ function bwPopulateFilters() {
 
 function bwFiltered() {
   return DATASETS.filter(d => {
+    if (isHiddenFromCatalog(d)) return false;
     if (BW.f.chem && d.chemistry !== BW.f.chem) return false;
     if (BW.f.form && d.form !== BW.f.form) return false;
     if (BW.f.inst && extractSourceFromRef(d.ref_name) !== BW.f.inst) return false;
@@ -5092,7 +5094,7 @@ function bwBuildManifest(sel) {
       ref_name: sel.ref_name,
       chemistry: sel.chemistry,
       form_factor: sel.form,
-      cells: bwCellNum(sel),
+      cells: bwCellNum(sel) || activeTotal || null,
       cycles: Number(sel.cycles) || null,
       notes: sel.notes || ''
     },
@@ -6789,7 +6791,14 @@ function bwZipBlob(files) {
 async function bwDownloadPackage() {
   const sel = BW.selId ? DATASETS.find(d => d.id === BW.selId) : null;
   const models = typeof bwSelectedModels === 'function' ? bwSelectedModels() : [];
-  const ok = sel && bwCellNum(sel) > 0 && BW.split.train.length > 0 && BW.split.val.length > 0 && BW.split.test.length > 0
+  // Catalog cell counts are often unknown ("—"). Rebuild synthetic split cells when needed
+  // so export matches the wizard, which already allows those datasets through.
+  const activeCount = (BW.split.train || []).length + (BW.split.val || []).length + (BW.split.test || []).length;
+  if (sel && !activeCount && typeof bwSyncSplitCells === 'function') bwSyncSplitCells();
+  const ok = !!sel
+    && (BW.split.train || []).length > 0
+    && (BW.split.val || []).length > 0
+    && (BW.split.test || []).length > 0
     && (models && models.length > 0);
   if (!ok) {
     if (typeof showToast === 'function') showToast('Complete dataset, cell split and model before exporting the training package', 'error');
@@ -6836,8 +6845,14 @@ window.bwDownloadPackage = bwDownloadPackage;
 window.bwCopyTerminalCommand = bwCopyTerminalCommand;
 function bwRunBenchmark() {
   const sel = BW.selId ? DATASETS.find(d => d.id === BW.selId) : null;
-  const ok = sel && bwCellNum(sel) > 0 && BW.split.train.length > 0 && BW.split.val.length > 0 && BW.split.test.length > 0
-    && document.querySelectorAll('.bw-model-item.selected').length > 0;
+  const activeCount = (BW.split.train || []).length + (BW.split.val || []).length + (BW.split.test || []).length;
+  if (sel && !activeCount && typeof bwSyncSplitCells === 'function') bwSyncSplitCells();
+  const models = typeof bwSelectedModels === 'function' ? bwSelectedModels() : [];
+  const ok = !!sel
+    && (BW.split.train || []).length > 0
+    && (BW.split.val || []).length > 0
+    && (BW.split.test || []).length > 0
+    && models.length > 0;
   if (!ok) { if (typeof showToast === 'function') showToast('Finish Dataset, Cell Split and Model first', 'error'); return; }
   bwPackageExported = true;
   bwHasRun = true;
@@ -6927,6 +6942,7 @@ function bwFlowFilteredDatasets() {
   const q = BWR.filters.q;
   const f = BWR.filters;
   return bwFlowSortedDatasets(DATASETS.filter(d => {
+    if (isHiddenFromCatalog(d)) return false;
     if (q) {
       const hay = [d.name, d.ref_name, d.notes, d.chemistry, d.form].join(' ').toLowerCase();
       if (!hay.includes(q)) return false;
@@ -7016,6 +7032,14 @@ function bwDatasetPagerItems(current, pages) {
 function bwFlowRenderDatasets() {
   const box = document.getElementById('bwr-dataset-list');
   if (!box) return;
+  // Drop stale selection if the chosen dataset was temporarily hidden.
+  if (BWR.datasetId) {
+    const selected = DATASETS.find(d => d.id === BWR.datasetId);
+    if (selected && isHiddenFromCatalog(selected)) {
+      BWR.datasetId = null;
+      BW.selId = null;
+    }
+  }
   const list = bwFlowFilteredDatasets();
   const pages = Math.max(1, Math.ceil(list.length / BWR.datasetPageSize));
   if (BWR.datasetPage > pages) BWR.datasetPage = pages;
@@ -7109,6 +7133,8 @@ window.bwGoDatasetPage = function(page) {
   bwFlowRenderDatasets();
 };
 window.bwSelectDataset = function(id) {
+  const d = DATASETS.find(x => x.id === id);
+  if (!d || isHiddenFromCatalog(d)) return;
   BWR.datasetId = id;
   BW.selId = id;
   bwFlowRenderDatasets();
@@ -7158,7 +7184,10 @@ window.bwPickSplitProtocol = function(el, name) {
 };
 
 function bwSelectedDataset() {
-  return BWR.datasetId ? DATASETS.find(d => d.id === BWR.datasetId) : null;
+  if (!BWR.datasetId) return null;
+  const d = DATASETS.find(x => x.id === BWR.datasetId);
+  if (!d || isHiddenFromCatalog(d)) return null;
+  return d;
 }
 function bwFlowDatasetCellCount() {
   const ds = bwSelectedDataset();
