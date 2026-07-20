@@ -178,7 +178,7 @@ A typical workflow, end to end:
 
 ### 1 · Find your data
 
-Open **Datasets**, then search or filter by chemistry, form factor, category, domain, or duty profile. Click any dataset card to inspect its metadata, ETL progress, and notes — the detail view links to both the **original source** (DOI) and the **processed download**.
+Open **Datasets**, then search or filter by chemistry, form factor, category, domain, or duty profile. Click any dataset card to inspect its metadata, Processed Data Files Check, and notes — the detail view links to both the **original source** (DOI) and the **processed download**.
 
 ### 2 · Load it in Python
 
