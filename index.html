@@ -1379,11 +1379,10 @@ bash run_benchmark.sh</pre>
       </div>
 
       <div class="prep-steps" aria-label="Preprocessing workflow">
-        <div class="prep-step active" data-stage-nav="1" onclick="showPrepStage(1)"><span class="prep-step-num">1</span><span class="prep-step-label">Dataset context</span></div>
-        <div class="prep-step" data-stage-nav="2" onclick="showPrepStage(2)"><span class="prep-step-num">2</span><span class="prep-step-label">AI results</span></div>
-        <div class="prep-step" data-stage-nav="3" onclick="showPrepStage(3)"><span class="prep-step-num">3</span><span class="prep-step-label">Confirm mapping</span></div>
-        <div class="prep-step" data-stage-nav="4" onclick="showPrepStage(4)"><span class="prep-step-num">4</span><span class="prep-step-label">Download skill</span></div>
-        <div class="prep-step" data-stage-nav="5" onclick="showPrepStage(5)"><span class="prep-step-num">5</span><span class="prep-step-label">Verification</span></div>
+        <div class="prep-step active" data-stage-nav="1" onclick="showPrepStage(1)"><span class="prep-step-num">1</span><span class="prep-step-label">Upload Dataset</span></div>
+        <div class="prep-step" data-stage-nav="2" onclick="showPrepStage(2)"><span class="prep-step-num">2</span><span class="prep-step-label">Review &amp; Edit Metadata</span></div>
+        <div class="prep-step" data-stage-nav="3" onclick="showPrepStage(3)"><span class="prep-step-num">3</span><span class="prep-step-label">Download Preprocessing Skill</span></div>
+        <div class="prep-step" data-stage-nav="4" onclick="showPrepStage(4)"><span class="prep-step-num">4</span><span class="prep-step-label">Upload Report &amp; Verification</span></div>
       </div>
 
       <section class="prep-card prep-stage active" data-prep-stage="1">
@@ -1483,7 +1482,7 @@ bash run_benchmark.sh</pre>
           <div class="summary-stat"><strong>0 / 9</strong><span>fields inferred</span></div><div class="summary-stat"><strong>9</strong><span>need confirmation</span></div><div class="summary-stat"><strong>-</strong><span>overall confidence</span></div>
         </div>
         <div class="file-role-panel" id="fileRolePanel">
-          <div class="file-role-card unknown"><strong>No files classified yet</strong><span>Upload raw data for Task 1 or provide a source URL for Task 2.</span></div>
+          <div class="file-role-card queued"><strong>No files queued yet</strong><span>Upload raw data for Task 1 or provide a source URL for Task 2.</span></div>
         </div>
         <div class="ai-inspect-head">
           <div>
@@ -1522,22 +1521,8 @@ bash run_benchmark.sh</pre>
       </section>
 
       <section class="prep-card prep-stage" data-prep-stage="3">
-        <div class="prep-card-head"><div><div class="prep-card-title">Scientific mapping plan</div><div class="prep-card-desc">The required outputs adapt to the experiment type. Fields that do not scientifically exist remain empty — they are never fabricated.</div></div></div>
-        <div class="prep-card-body">
-          <div class="type-tabs"><button class="type-tab" type="button">Cycle aging</button><button class="type-tab active" type="button">Calendar aging</button><button class="type-tab" type="button">Characterization</button><button class="type-tab" type="button">Thermal abuse</button></div>
-          <div class="channel-grid">
-            <div class="channel-card"><div class="channel-name">voltage_V</div><div class="channel-state">Mapped · Voltage [V]</div></div><div class="channel-card"><div class="channel-name">current_A</div><div class="channel-state">Mapped · Current [mA] → A</div></div>
-            <div class="channel-card optional"><div class="channel-name">cycle_index</div><div class="channel-state">Optional · RPT only</div></div><div class="channel-card"><div class="channel-name">capacity_Ah</div><div class="channel-state">Derived from RPT blocks</div></div>
-            <div class="channel-card optional"><div class="channel-name">SOH / RUL</div><div class="channel-state">Not required for schema</div></div><div class="channel-card"><div class="channel-name">temperature_C</div><div class="channel-state">Mapped · Chamber temp</div></div>
-            <div class="channel-card extended"><div class="channel-name">dT_dt_C_per_s</div><div class="channel-state">Preserve as extension</div></div><div class="channel-card extended"><div class="channel-name">storage_time_h</div><div class="channel-state">Preserve as extension</div></div>
-          </div>
-          <div class="science-note"><strong>Important distinction:</strong> this dataset can be BatteryTwin schema-compliant while still being unsuitable for an SOH/RUL benchmark. Benchmark eligibility is assessed separately and reports the missing scientific prerequisites.</div>
-        </div>
-      </section>
-
-      <section class="prep-card prep-stage" data-prep-stage="4">
         <div class="prep-card-head">
-          <div><div class="prep-card-title">Download the dataset-specific BatteryTwin skill.</div><div class="prep-card-desc">The package is generated from the inspected evidence and your confirmed corrections, not from an unverified form.</div></div>
+          <div><div class="prep-card-title">Download the dataset-specific BatteryLake skill.</div><div class="prep-card-desc">The package is generated from the inspected evidence and your confirmed corrections, not from an unverified form.</div></div>
         </div>
         <div class="prep-card-body">
           <div class="skill-package-grid">
@@ -1546,20 +1531,42 @@ bash run_benchmark.sh</pre>
             <div class="skill-package-field"><div class="skill-package-label">Included files</div><div class="skill-package-value">SKILL.md + schema + context + validator</div></div>
           </div>
           <div class="science-note">The skill instructs the local agent to re-check source evidence, preserve extended physical channels, archive existing outputs and record all fallbacks before writing processed data.</div>
-          <div style="margin-top:16px;"><button class="prep-btn" type="button" onclick="generatePrepSkill()">Download BatteryTwin Skill</button></div>
+          <div style="margin-top:16px;"><button class="prep-btn" type="button" onclick="generatePrepSkill()">Download BatteryLake Skill</button></div>
+          <div class="prep-run-label">Run locally after download</div>
+          <pre class="prep-run-prompt">Ask your AI agent:
+Use the BatteryLake preprocessing skill in this folder.
+Process my raw battery dataset at /path/to/raw_dataset.
+Write outputs/processed_dataset/ and outputs/preprocessing_report.json.
+Do not guess I / V / T / time / cycle fields without source evidence.</pre>
         </div>
       </section>
 
-      <section class="prep-card prep-stage" data-prep-stage="5">
-        <div class="prep-card-head"><div><div class="prep-card-title">Validation, fallbacks and output audit</div><div class="prep-card-desc">The generated skill verifies that its supporting files actually work and records every fallback or destructive-risk decision.</div></div></div>
+      <section class="prep-card prep-stage" data-prep-stage="4">
+        <div class="prep-card-head"><div><div class="prep-card-title">Verification and Benchmark handoff</div><div class="prep-card-desc">Upload outputs/preprocessing_report.json after the local AI run. The browser only reads this small report; raw battery files stay local.</div></div></div>
         <div class="prep-card-body">
-          <div class="validation-grid">
-            <div class="validation-card"><div class="validation-head"><span class="validation-title">BatteryTwin schema</span><span class="validation-badge pass">Readable</span></div><p class="validation-text"><code>schema.json</code> parsed successfully. Required fields will be selected according to dataset type.</p></div>
-            <div class="validation-card"><div class="validation-head"><span class="validation-title">Dataset context</span><span class="validation-badge warn">Draft needed</span></div><p class="validation-text">No context file found. The skill will generate a draft from DOI, README and workbook metadata for user confirmation.</p></div>
-            <div class="validation-card"><div class="validation-head"><span class="validation-title">Bundled validator</span><span class="validation-badge warn">Fallback ready</span></div><p class="validation-text">Executable check failed in the sampled environment. Built-in validation will run and the failure reason will be logged.</p></div>
-            <div class="validation-card"><div class="validation-head"><span class="validation-title">Output directory</span><span class="validation-badge warn">12 old files</span></div><p class="validation-text">Existing outputs will be archived to a timestamped directory before new files are written.</p></div>
+          <div class="prep-verify-actions">
+            <button class="prep-btn" type="button" onclick="document.getElementById('prepReportUpload').click()">Upload preprocessing_report.json</button>
+            <input id="prepReportUpload" type="file" accept=".json,application/json" hidden onchange="ppHandleReportUpload(event)" />
           </div>
-          <div class="audit-strip"><div class="audit-item"><strong>1.8%</strong><span>missing values</span></div><div class="audit-item"><strong>37</strong><span>anomalies to flag</span></div><div class="audit-item"><strong>3</strong><span>unit conversions</span></div><div class="audit-item"><strong>4</strong><span>unmapped fields retained in audit</span></div></div>
+          <div class="prep-report-summary" id="prepReportSummary">No preprocessing report loaded.</div>
+          <div class="skill-package-grid prep-verify-grid">
+            <div class="skill-package-field">
+              <div class="skill-package-label">Status</div>
+              <input class="prep-input" id="prepVerifyStatus" value="Upload report first" readonly />
+            </div>
+            <div class="skill-package-field">
+              <div class="skill-package-label">Benchmark ready</div>
+              <input class="prep-input" id="prepVerifyReady" value="-" readonly />
+            </div>
+            <div class="skill-package-field">
+              <div class="skill-package-label">Dataset folder</div>
+              <input class="prep-input" value="outputs/processed_dataset/" readonly />
+            </div>
+          </div>
+          <div class="prep-report-summary" id="prepVerificationSummary">Upload preprocessing_report.json to verify schema status, file counts, exported cells, warnings, and Benchmark readiness.</div>
+          <pre class="prep-run-prompt">If benchmark_ready is true, copy:
+outputs/processed_dataset/  -&gt;  bt_benchmark_.../data/&lt;dataset_name&gt;/</pre>
+          <div class="audit-strip"><div class="audit-item"><strong>—</strong><span>missing values</span></div><div class="audit-item"><strong>—</strong><span>anomalies to flag</span></div><div class="audit-item"><strong>—</strong><span>unit conversions</span></div><div class="audit-item"><strong>—</strong><span>unmapped fields retained in audit</span></div></div>
         </div>
         <div class="prep-actions"><span class="prep-action-buttons"><button class="prep-btn secondary" type="button" onclick="downloadPrepManifest()">Export inspection manifest</button></span></div>
       </section>

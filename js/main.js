@@ -1098,7 +1098,7 @@ let prepAIState = prepAIFields.map(field => ({
 }));
 
 function showPrepStage(stage) {
-  prepStage = Math.max(1, Math.min(5, Number(stage) || 1));
+  prepStage = Math.max(1, Math.min(4, Number(stage) || 1));
   document.querySelectorAll('[data-prep-stage]').forEach(panel => {
     panel.classList.toggle('active', Number(panel.dataset.prepStage) === prepStage);
   });
@@ -1113,8 +1113,8 @@ function showPrepStage(stage) {
   const next = document.getElementById('prepNext');
   if (previous) previous.disabled = prepStage === 1;
   if (next) {
-    next.disabled = prepStage === 5;
-    next.textContent = prepStage === 5 ? 'Complete' : 'Next';
+    next.disabled = prepStage === 4;
+    next.textContent = prepStage === 4 ? 'Complete' : 'Next';
   }
 }
 
@@ -1125,16 +1125,6 @@ function setPrepBusy(busy) {
   progress.classList.toggle('show', busy);
   bar.style.width = busy ? '72%' : '100%';
   if (!busy) window.setTimeout(() => { progress.classList.remove('show'); bar.style.width = '0'; }, 450);
-}
-
-function openBatteryTwinAgent() {
-  if (window.batteryTwinAI?.open) window.batteryTwinAI.open();
-}
-
-function prepAgentNote(message) {
-  if (window.batteryTwinAI?.addBotNote) {
-    window.batteryTwinAI.addBotNote(message);
-  }
 }
 
 function isMetadataMissing(row) {
@@ -1163,7 +1153,6 @@ async function fetchMetadataExtraction(url, sourceType) {
     return data;
   } catch (error) {
     const fallback = buildMetadataFallback(url, sourceType, error);
-    prepAgentNote(`Metadata backend is unavailable, so I generated a conservative browser-side ${sourceType} draft. Missing fields remain "${METADATA_MISSING_VALUE}" and supplementary files may need checking later.`);
     return fallback;
   }
 }
@@ -1171,7 +1160,7 @@ async function fetchMetadataExtraction(url, sourceType) {
 function buildMetadataFallback(url, sourceType, error) {
   const rows = BATTERYLAKE_METADATA_FIELDS.map(field => {
     let value = METADATA_MISSING_VALUE;
-    let evidence = `${sourceType === 'paper' ? 'Paper' : 'Source page'} could not be read by the local backend; do not guess this field. Supplementary files may need separate checking.`;
+    let evidence = `${sourceType === 'paper' ? 'Paper' : 'Source page'} could not be fetched automatically. Leave blank or fill manually from the page or supplementary files.`;
     let confidence = 0;
     let status = 'missing';
     if (field === 'source_url' && sourceType === 'source') {
@@ -1192,7 +1181,7 @@ function buildMetadataFallback(url, sourceType, error) {
     source_url: url,
     source_type: sourceType,
     status: 'frontend_fallback',
-    message: error?.message || 'Metadata backend unavailable.',
+    message: 'Manual metadata review',
     fields: rows
   };
 }
@@ -1210,8 +1199,6 @@ async function runMetadataSourceCheck() {
     prepToast('Paste a dataset source URL first.');
     return;
   }
-  openBatteryTwinAgent();
-  prepAgentNote(`Checking dataset source URL for BatteryLake metadata: ${url}. Missing values will stay as "${METADATA_MISSING_VALUE}" until a paper URL supports them.`);
   setPrepBusy(true);
   try {
     metadataSourceExtraction = await fetchMetadataExtraction(url, 'source');
@@ -1221,12 +1208,8 @@ async function runMetadataSourceCheck() {
     renderMetadataResult(currentMetadataExtraction);
     const missing = summarizeMetadataMissing(currentMetadataExtraction);
     prepToast(missing.length ? `${missing.length} fields still need paper evidence.` : 'Source URL filled all tracked metadata fields.');
-    prepAgentNote(missing.length
-      ? `Source URL check finished. Missing fields: ${missing.join(', ')}. Add a paper URL to fill the gaps.`
-      : 'Source URL check finished. No missing tracked fields were detected.');
   } catch (error) {
     prepToast(error.message || 'Could not extract metadata.');
-    prepAgentNote('Source URL metadata extraction failed. Check that app.py is running and the URL is reachable.');
   } finally {
     setPrepBusy(false);
   }
@@ -1263,8 +1246,6 @@ async function runMetadataPaperCheck() {
     prepToast('Paste a paper URL or DOI first.');
     return;
   }
-  openBatteryTwinAgent();
-  prepAgentNote(`Reading paper URL to fill source-page metadata gaps: ${url}. I will only replace missing or weaker fields with paper-supported evidence.`);
   setPrepBusy(true);
   try {
     metadataPaperExtraction = await fetchMetadataExtraction(url, 'paper');
@@ -1273,12 +1254,8 @@ async function runMetadataPaperCheck() {
     renderMetadataResult(currentMetadataExtraction);
     const missing = summarizeMetadataMissing(currentMetadataExtraction);
     prepToast(missing.length ? `${missing.length} fields still need manual missing status.` : 'Paper evidence filled the tracked metadata fields.');
-    prepAgentNote(missing.length
-      ? `Paper check finished. Fields still not stated: ${missing.join(', ')}. You can confirm them as missing if that is acceptable.`
-      : 'Paper check finished. Review the merged metadata and confirm the rows before downloading.');
   } catch (error) {
     prepToast(error.message || 'Could not extract paper metadata.');
-    prepAgentNote('Paper URL metadata extraction failed. Check that app.py is running and the paper URL is reachable.');
   } finally {
     setPrepBusy(false);
   }
@@ -1465,6 +1442,10 @@ function renderAIFieldTable() {
         </div>
       </div>`;
   }).join('');
+  updatePrepAIDerivedUI();
+}
+
+function updatePrepAIDerivedUI() {
   const confirmed = prepAIState.filter(field => field.confirmed).length;
   const summary = document.getElementById('aiInspectSummary');
   if (summary) summary.textContent = `${confirmed} / ${prepAIState.length} fields confirmed`;
@@ -1489,10 +1470,38 @@ function resetPrepSummary() {
 
 function overridePrepAIField(input) {
   const key = input.getAttribute('data-ai-field');
+  const value = input.value;
+  const wasConfirmed = prepAIState.some(field => field.key === key && field.confirmed);
   prepAIState = prepAIState.map(field => field.key === key
-    ? { ...field, value: input.value.trim(), confirmed: false, pending: !input.value.trim() }
+    ? { ...field, value, confirmed: false, pending: !value.trim() }
     : field);
-  renderAIFieldTable();
+
+  // Update adjacent UI in place — do not re-render the table (that remounts
+  // inputs and steals focus after every keystroke).
+  const row = input.closest('.ai-field-row');
+  if (row) {
+    const valueEl = row.querySelector('.ai-field-value');
+    if (valueEl) {
+      if (value.trim()) valueEl.textContent = value;
+      else valueEl.innerHTML = '<em>Unknown</em>';
+    }
+    if (wasConfirmed) {
+      row.classList.remove('is-confirmed');
+      row.classList.add('is-pending');
+      const status = row.querySelector('.ai-status');
+      if (status) {
+        status.className = 'ai-status warn';
+        status.textContent = 'Needs confirmation';
+      }
+      const btn = row.querySelector('button.prep-btn');
+      if (btn) {
+        btn.className = 'prep-btn ai-btn-confirm';
+        btn.textContent = 'Confirm';
+        btn.setAttribute('onclick', `togglePrepAIConfirm('${key}', true)`);
+      }
+    }
+  }
+  updatePrepAIDerivedUI();
 }
 
 function togglePrepAIConfirm(key, confirmed) {
@@ -1507,8 +1516,6 @@ function togglePrepAIConfirm(key, confirmed) {
 
 async function requestInspection(url, options) {
   setPrepBusy(true);
-  openBatteryTwinAgent();
-  prepAgentNote('I am inspecting the uploaded raw battery data now: structure, file names, headers, units, sample rows, and BatteryTwin schema clues.');
   try {
     const response = await fetch(url, options);
     const text = await response.text();
@@ -1520,21 +1527,53 @@ async function requestInspection(url, options) {
     updatePrepAIStateFromInspection(data);
     const aiNote = data.ai_status?.used
       ? ` App AI added ${data.ai_status.accepted_fields || 0} evidence-backed field(s).`
-      : ` ${data.ai_status?.reason || ''}`;
-    prepToast(`Real inspection complete.${aiNote}`);
-    prepAgentNote(`Inspection complete. I inferred ${data.inferred_count || 0} field(s), left ${data.pending_count || 0} for confirmation, and prepared the BatteryTwin skill context from confirmed evidence only.`);
+      : '';
+    prepToast(`Inspection complete.${aiNote}`);
     showPrepStage(2);
   } catch (error) {
     const data = buildInspectionFallback(url, options, error);
     currentInspectionManifest = data;
     renderInspectionResult(data);
     updatePrepAIStateFromInspection(data);
-    prepToast('Backend unavailable. Showing conservative file-role inspection.');
-    prepAgentNote('I could not complete the inspection through the local backend, so I classified files conservatively from names and extensions. Metadata-only files still cannot generate timeseries.csv or cycle_summary.csv.');
+    prepToast('Reviewing filenames in the browser. Fill or confirm fields below, then continue.');
     showPrepStage(2);
   } finally {
     setPrepBusy(false);
   }
+}
+
+function inferBrowserPrepHints(fileNames) {
+  const names = (fileNames || []).map(name => String(name || '').trim()).filter(Boolean);
+  const corpus = names.join(' ').toLowerCase();
+  const yearMatch = corpus.match(/(?:^|[^0-9])((?:19|20)\d{2})(?:[^0-9]|$)/);
+  const chemistry = ([
+    ['nmc811', 'NMC811'], ['nmc', 'NMC'], ['lfp', 'LFP'], ['nca', 'NCA'],
+    ['lco', 'LCO'], ['lmno', 'LMNO'], ['graphite', 'Graphite']
+  ].find(([token]) => corpus.includes(token)) || [])[1] || '';
+  const form = (['21700', '18650', '26650', '4680', 'pouch', 'prismatic'].find(token => corpus.includes(token)) || '');
+  const rates = Array.from(new Set((corpus.match(/(?:^|[^a-z0-9.])(\d+(?:\.\d+)?)\s*c(?:rate)?\b/gi) || [])
+    .map(token => token.replace(/^[^0-9]*/, '').replace(/\s+/g, '').replace(/crate/i, 'C').replace(/c$/i, 'C'))));
+  const temperatures = Array.from(new Set((corpus.match(/(?:^|[^0-9])(-?\d{1,3})\s*°?\s*c\b/gi) || [])
+    .map(token => token.replace(/^[^0-9-]*/, '').replace(/\s+/g, '').replace(/°/g, '').replace(/c$/i, ' °C'))));
+  const cellIds = new Set();
+  names.forEach(name => {
+    const stem = String(name).replace(/\.[^.]+$/, '');
+    const match = stem.match(/(?:cell|bat|battery|sample|c)[_-]?(\d{1,4})/i);
+    if (match) cellIds.add(match[0]);
+  });
+  const extensions = Array.from(new Set(names.map(name => {
+    const ext = (name.toLowerCase().match(/\.([a-z0-9]+)$/) || [,''])[1];
+    return ext ? ext.toUpperCase() : '';
+  }).filter(Boolean)));
+  return {
+    data_format: extensions.length ? extensions.join(' + ') : '',
+    year: yearMatch ? yearMatch[1] : '',
+    chemistry,
+    form_factor: form ? (form === 'pouch' || form === 'prismatic' ? form[0].toUpperCase() + form.slice(1) : form) : '',
+    c_rate: rates.length ? rates.join(', ') : '',
+    temperature: temperatures.length ? temperatures.join(', ') : '',
+    cell_count: cellIds.size ? String(cellIds.size) : ''
+  };
 }
 
 function buildInspectionFallback(url, options, error) {
@@ -1544,89 +1583,43 @@ function buildInspectionFallback(url, options, error) {
   const listedFiles = files.length
     ? files.map(file => classifyPrepFile(file._batteryTwinPath || file.webkitRelativePath || file.name))
     : [classifyPrepFile(path || 'local path')];
-  const measurementCount = listedFiles.filter(file => file.file_role === 'measurement_data').length;
-  const metadataCount = listedFiles.filter(file => file.file_role === 'metadata_only').length;
+  const fileNames = listedFiles.map(file => file.filename);
+  const hints = inferBrowserPrepHints(fileNames);
+  const measurementCount = listedFiles.filter(file => file.file_role === 'measurement_data' || file.file_role === 'archive').length;
+  const field = (name, value, evidence, confidence = 0) => ({
+    name,
+    value: value || '',
+    evidence,
+    confidence: value ? confidence : 0,
+    pending: !value
+  });
   const fields = [
-    {
-      name: 'Data format',
-      value: files.length ? summarizePrepExtensions(files) : inferPrepPathFormat(path),
-      evidence: files.length ? 'Derived from queued file extensions.' : 'Derived from the local path text.',
-      confidence: files.length || path ? 0.7 : 0,
-      pending: !(files.length || path)
-    },
-    {
-      name: 'Cell count',
-      value: measurementCount ? String(measurementCount) : '',
-      evidence: measurementCount ? 'One measurement-like source file is treated as one tentative cell until the backend inspects the raw contents.' : 'No measurement-like files were detected.',
-      confidence: measurementCount ? 0.45 : 0,
-      pending: !measurementCount
-    },
-    {
-      name: 'Source / lab',
-      value: '',
-      evidence: 'Not available from filenames alone. Check the source page, README, paper, or supplementary files.',
-      confidence: 0,
-      pending: true
-    },
-    {
-      name: 'Chemistry',
-      value: '',
-      evidence: 'Not inferred from dataset name or common battery models.',
-      confidence: 0,
-      pending: true
-    },
-    {
-      name: 'Form factor',
-      value: '',
-      evidence: 'Not inferred from filename patterns; source evidence is required.',
-      confidence: 0,
-      pending: true
-    },
-    {
-      name: 'C-rate',
-      value: '',
-      evidence: 'Not guessed without stated protocol or measurable nominal capacity/current evidence.',
-      confidence: 0,
-      pending: true
-    },
-    {
-      name: 'Temperature',
-      value: '',
-      evidence: 'Not guessed from common experiment settings.',
-      confidence: 0,
-      pending: true
-    },
-    {
-      name: 'Year',
-      value: '',
-      evidence: 'Not available from browser-side inspection.',
-      confidence: 0,
-      pending: true
-    },
-    {
-      name: 'License',
-      value: '',
-      evidence: 'Use Task 2 source-page metadata or paper evidence to confirm the license.',
-      confidence: 0,
-      pending: true
-    }
+    field('Data format', hints.data_format || (files.length ? summarizePrepExtensions(files) : inferPrepPathFormat(path)), files.length || path ? 'Derived from queued filenames or extensions.' : 'Enter a value manually if known.', 0.75),
+    field('Year', hints.year, hints.year ? 'Four-digit year token found in a filename.' : 'Leave blank or type the year if you know it.', 0.7),
+    field('Source / lab', '', 'Not available from filenames alone. Fill manually or use Task 2 metadata URLs.', 0),
+    field('Chemistry', hints.chemistry, hints.chemistry ? 'Chemistry token found in a filename.' : 'Leave blank or type the chemistry if you know it.', 0.7),
+    field('Form factor', hints.form_factor, hints.form_factor ? 'Form-factor token found in a filename.' : 'Leave blank or type the form factor if you know it.', 0.75),
+    field('C-rate', hints.c_rate, hints.c_rate ? 'C-rate token found in a filename.' : 'Leave blank or type the C-rate if you know it.', 0.65),
+    field('Temperature', hints.temperature, hints.temperature ? 'Temperature token found in a filename.' : 'Leave blank or type the temperature if you know it.', 0.7),
+    field('Cell count', hints.cell_count || (measurementCount ? String(measurementCount) : ''), hints.cell_count ? 'Cell-like identifiers counted from filenames.' : (measurementCount ? 'Tentative count from queued measurement or archive files.' : 'Leave blank or type the cell count if you know it.'), hints.cell_count ? 0.7 : 0.4),
+    field('License', '', 'Fill manually or confirm via Task 2 source/paper metadata.', 0)
   ];
   return {
     status: 'frontend_fallback',
-    message: error?.message || 'Inspection backend unavailable.',
+    message: 'Browser filename review',
     file_count: listedFiles.length,
     sampled_count: 0,
-    inferred_count: fields.filter(field => !field.pending).length,
-    pending_count: fields.filter(field => field.pending).length,
-    overall_confidence: measurementCount ? 0.32 : 0.1,
+    inferred_count: fields.filter(item => !item.pending).length,
+    pending_count: fields.filter(item => item.pending).length,
+    overall_confidence: fields.filter(item => !item.pending).length ? 0.45 : 0.15,
     files: listedFiles,
     fields,
-    ai_status: { used: false, reason: 'Frontend fallback; backend app.py routes are unavailable.' },
+    ai_status: { used: false, reason: 'Filename review in the browser.' },
     audit: {
-      missing_percent: measurementCount ? 75 : 100,
+      missing_percent: 0,
       anomalies: 0,
       unit_conversions: 0,
-      unmapped_fields: metadataCount
+      unmapped_fields: 0
     },
     mappings: {}
   };
@@ -1637,25 +1630,33 @@ function classifyPrepFile(name) {
   const lower = filename.toLowerCase();
   const ext = (lower.match(/\.([a-z0-9]+)$/) || [,''])[1];
   const metadataOnly = ['pdf', 'html', 'htm', 'md', 'ris', 'bib'];
+  const archives = ['zip', 'tar', 'gz', 'tgz', '7z', 'rar'];
   const measurement = ['csv', 'xlsx', 'xls', 'mat', 'json', 'parquet', 'txt', 'tsv', 'h5', 'hdf5'];
+  if (archives.includes(ext)) {
+    return {
+      filename,
+      file_role: 'archive',
+      role_reason: 'Archive queued. The local preprocessing agent will inspect its contents after you download the skill.'
+    };
+  }
   if (metadataOnly.includes(ext) || /readme|datacite|citation|paper|license|metadata/.test(lower)) {
     return {
       filename,
       file_role: 'metadata_only',
-      role_reason: 'DataCite JSON, README files, paper PDFs, webpage HTML, and similar evidence files are metadata-only unless raw measurements are present.'
+      role_reason: 'Treated as metadata or documentation evidence from the filename.'
     };
   }
   if (measurement.includes(ext)) {
     return {
       filename,
       file_role: 'measurement_data',
-      role_reason: 'Extension is compatible with raw battery measurement inspection; confirm voltage/current/time/cycle fields before conversion.'
+      role_reason: 'Filename extension looks compatible with raw battery measurements.'
     };
   }
   return {
     filename,
-    file_role: 'unknown',
-    role_reason: 'The browser cannot verify this path or folder contents without the local inspection backend.'
+    file_role: 'queued',
+    role_reason: 'Queued for preprocessing. Fill dataset context manually if automatic clues are incomplete.'
   };
 }
 
@@ -1706,7 +1707,6 @@ function runPrepFileInspection() {
   }
   const form = new FormData();
   files.forEach(file => form.append('files', file, file._batteryTwinPath || file.webkitRelativePath || file.name));
-  prepAgentNote(`Uploading ${files.length} queued file(s) to the local inspection backend now.`);
   requestInspection('http://127.0.0.1:8000/api/inspect', { method: 'POST', body: form });
 }
 
@@ -1732,7 +1732,6 @@ function updatePrepFileNote(files) {
     selected.classList.add('has-files');
     selected.innerHTML = `<span>Queued: ${esc(names + more)}</span><button class="prep-clear-files" type="button" onclick="clearPrepQueuedFiles(event)">Clear</button>`;
   }
-  prepAgentNote(`I have ${files.length} raw file(s) queued for BatteryTwin inspection. Click Run AI inspection when ready.`);
 }
 
 function handlePrepFileInput(event) {
@@ -1756,10 +1755,14 @@ function clearPrepQueuedFiles(event) {
 
 function renderInspectionResult(data) {
   const summary = document.querySelector('#analysisPanel .analysis-summary');
+  const isFallback = data.status === 'frontend_fallback';
   if (summary) {
-    const aiLabel = data.ai_status?.used ? 'local + app AI' : 'local inspection';
+    const title = isFallback ? 'Ready for manual review' : 'Inspection complete';
+    const sub = isFallback
+      ? `${data.file_count} file(s) queued · fill empty fields below before downloading the skill`
+      : `${data.file_count} files · ${data.sampled_count} sampled · ${data.ai_status?.used ? 'local + app AI' : 'local inspection'}`;
     summary.innerHTML = `
-      <div class="summary-main"><span class="summary-icon">✓</span><span><span class="summary-title">Inspection complete</span><span class="summary-sub">${data.file_count} files · ${data.sampled_count} sampled · ${aiLabel}</span></span></div>
+      <div class="summary-main"><span class="summary-icon">✓</span><span><span class="summary-title">${title}</span><span class="summary-sub">${sub}</span></span></div>
       <div class="summary-stat"><strong>${data.inferred_count} / ${data.fields.length}</strong><span>fields inferred</span></div>
       <div class="summary-stat"><strong>${data.pending_count}</strong><span>need confirmation</span></div>
       <div class="summary-stat"><strong>${Number(data.overall_confidence).toFixed(2)}</strong><span>overall confidence</span></div>`;
@@ -1776,27 +1779,12 @@ function renderInspectionResult(data) {
       <td><button class="field-edit" onclick="editPrepField(this)">${field.pending ? 'Confirm' : 'Edit'}</button></td></tr>`;
   }).join('');
   const audit = document.querySelector('.audit-strip');
-  if (audit && data.audit) {
+  if (audit && data.audit && !isFallback) {
     audit.innerHTML = `<div class="audit-item"><strong>${data.audit.missing_percent}%</strong><span>missing values in sample</span></div>
       <div class="audit-item"><strong>${data.audit.anomalies}</strong><span>sample anomalies flagged</span></div>
       <div class="audit-item"><strong>${data.audit.unit_conversions}</strong><span>unit conversions suggested</span></div>
       <div class="audit-item"><strong>${data.audit.unmapped_fields}</strong><span>unmapped source fields</span></div>`;
   }
-  const activeType = data.fields.find(field => field.name === 'Dataset type' && !field.pending)?.value;
-  if (activeType) {
-    document.querySelectorAll('.type-tab').forEach(tab => {
-      const keyword = tab.textContent.trim().split(' ')[0].toLowerCase();
-      tab.classList.toggle('active', activeType.toLowerCase().includes(keyword));
-    });
-  }
-  const mapping = data.mappings || {};
-  document.querySelectorAll('.channel-card').forEach(card => {
-    const name = card.querySelector('.channel-name')?.textContent.trim();
-    const state = card.querySelector('.channel-state');
-    if (!state || !(name in mapping)) return;
-    state.textContent = mapping[name] ? `Mapped · ${mapping[name]}` : 'Not found · may remain empty';
-    card.classList.toggle('optional', !mapping[name]);
-  });
   const safeParts = data.fields
     .filter(field => !field.pending && ['Year', 'Source / lab', 'Chemistry', 'Form factor'].includes(field.name))
     .map(field => String(field.value).replace(/[^a-z0-9]+/gi, '_').replace(/^_|_$/g, ''))
@@ -1812,19 +1800,21 @@ function renderFileRolePanel(files) {
   const panel = document.getElementById('fileRolePanel');
   if (!panel) return;
   if (!files.length) {
-    panel.innerHTML = '<div class="file-role-card unknown"><strong>No files classified yet</strong><span>Upload raw data for Task 1 or provide a source URL for Task 2.</span></div>';
+    panel.innerHTML = '<div class="file-role-card queued"><strong>No files queued yet</strong><span>Upload raw data for Task 1 or provide a source URL for Task 2.</span></div>';
     return;
   }
   const labels = {
-    measurement_data: ['measurement', 'Raw measurement data', 'Can be used for Task 1 conversion if voltage/current/time/cycle fields are mapped.'],
-    metadata_only: ['metadata', 'Metadata-only evidence', 'Use for Task 2 metadata extraction; it cannot generate timeseries or cycle_summary by itself.'],
-    unknown: ['unknown', 'Unknown file role', 'Needs review before assigning to Task 1 or Task 2.']
+    measurement_data: ['measurement', 'Raw measurement data', 'Filename suggests measurement content for Task 1.'],
+    metadata_only: ['metadata', 'Metadata evidence', 'Useful for Task 2 context; not a timeseries source by itself.'],
+    archive: ['archive', 'Dataset archive', 'ZIP/archive queued. The local agent inspects contents after skill download.'],
+    queued: ['queued', 'Queued source file', 'Included in this preprocessing package context.'],
+    unknown: ['queued', 'Queued source file', 'Included in this preprocessing package context.']
   };
   panel.innerHTML = files.slice(0, 6).map(file => {
-    const role = file.file_role || 'unknown';
-    const [klass, title, fallback] = labels[role] || labels.unknown;
+    const role = file.file_role || 'queued';
+    const [klass, title, fallback] = labels[role] || labels.queued;
     const reason = file.role_reason || fallback;
-    return `<div class="file-role-card ${klass}"><strong>${esc(title)}</strong><span>${esc(file.filename || 'file')} - ${esc(reason)}</span></div>`;
+    return `<div class="file-role-card ${klass}"><strong>${esc(title)}</strong><span>${esc(file.filename || 'file')} — ${esc(reason)}</span></div>`;
   }).join('');
 }
 
@@ -1872,11 +1862,97 @@ function downloadPrepManifest() {
   prepToast('Inspection manifest exported.');
 }
 
+function prepAIFieldValue(key, { confirmedOnly = false } = {}) {
+  const field = prepAIState.find(item => item.key === key);
+  if (!field) return '';
+  if (confirmedOnly && !field.confirmed) return '';
+  return String(field.value || '').trim();
+}
+
+function normalizePrepSourceFormat(raw) {
+  const text = String(raw || '').toLowerCase();
+  if (!text) return 'mixed_unknown';
+  if (text.includes('mat') || text.includes('matlab')) return 'matlab_mat';
+  if (text.includes('hdf') || text.includes('h5')) return 'hdf5';
+  if (text.includes('xls') || text.includes('excel')) return 'excel_workbook';
+  if (text.includes('txt') || text.includes('log')) return 'text_logs';
+  if (text.includes('batteryarchive') || text.includes('processed')) return 'processed_csv';
+  if (text.includes('csv')) return 'csv_folder';
+  if (text.includes('mixed') || text.includes('unknown')) return 'mixed_unknown';
+  return text.replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 64) || 'mixed_unknown';
+}
+
+function buildPrepSkillConfig() {
+  const year = ppNameToken(prepAIFieldValue('year', { confirmedOnly: true }) || prepAIFieldValue('year'), 'YYYY');
+  const source = ppNameToken(prepAIFieldValue('source_lab', { confirmedOnly: true }) || prepAIFieldValue('source_lab'), 'SOURCE');
+  const chemistry = ppNameToken(prepAIFieldValue('chemistry', { confirmedOnly: true }) || prepAIFieldValue('chemistry'), 'CHEMISTRY');
+  const formFactor = ppNameToken(prepAIFieldValue('form_factor', { confirmedOnly: true }) || prepAIFieldValue('form_factor'), 'FORMFACTOR');
+  const rateRaw = prepAIFieldValue('c_rate', { confirmedOnly: true }) || prepAIFieldValue('c_rate');
+  const chargeRate = ppRateToken(rateRaw, 'CHRG');
+  const dischargeRate = ppRateToken(rateRaw, 'DCHRG');
+  const temperature = ppTempToken(prepAIFieldValue('temperature', { confirmedOnly: true }) || prepAIFieldValue('temperature'), 'TEMP');
+  const naming = {
+    year,
+    source,
+    chemistry,
+    form_factor: formFactor,
+    charge_c_rate: chargeRate,
+    discharge_c_rate: dischargeRate,
+    temperature
+  };
+  const datasetId = prepConfirmedRefName();
+  const sourceFormat = normalizePrepSourceFormat(
+    prepAIFieldValue('data_format', { confirmedOnly: true }) || prepAIFieldValue('data_format')
+  );
+  const cellCountParsed = parseInt(prepAIFieldValue('cell_count', { confirmedOnly: true }) || prepAIFieldValue('cell_count'), 10);
+  const cellCount = Number.isFinite(cellCountParsed) && cellCountParsed > 0 ? cellCountParsed : 1;
+  const cellIdRule = 'from_source_file_names';
+  return {
+    adapter: ppAdapterForFormat(sourceFormat),
+    source_format: sourceFormat,
+    dataset_id: datasetId,
+    cell_count: cellCount,
+    cell_id_rule: cellIdRule,
+    cell_id_rule_label: ppCellIdRuleLabel(cellIdRule),
+    cell_id_mode: cellIdRule,
+    naming,
+    output_root: 'outputs/processed_dataset',
+    raw_schema: null,
+    source_files: [],
+    source_file: '',
+    column_mapping: {},
+    current_sign_standard: 'charge_positive_discharge_negative',
+    time_series_columns: PP_TS_COLUMNS,
+    cycle_summary_columns: PP_CYCLE_COLUMNS,
+    metadata_columns: PP_METADATA_COLUMNS
+  };
+}
+
 function generatePrepSkill() {
+  const config = buildPrepSkillConfig();
+  if (!config.dataset_id || config.dataset_id === 'UNKNOWN_UNKNOWN_UNKNOWN_UNKNOWN') {
+    prepToast('Confirm dataset naming fields in Step 2 before downloading the skill.');
+    return;
+  }
+  if (!config.cell_count || config.cell_count < 1) {
+    prepToast('Cell count must be at least 1.');
+    return;
+  }
+  const root = ppSkillRootName();
+  const packageName = ppSkillPackageName(config.dataset_id);
+  const blob = bwZipBlob(ppBuildSkillFiles(root, config));
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = packageName + '.zip';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
   if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackSkillDownload === 'function') {
     window.BatteryLakeAnalytics.trackSkillDownload({ skill_source: 'preprocessing_skill' });
   }
-  prepToast('Skill plan confirmed — package is ready to generate.');
+  prepToast('BatteryLake skill generated: ' + a.download);
 }
 
 async function readPrepDropEntry(entry, prefix = '') {
@@ -1935,14 +2011,6 @@ if (prepDropZone) {
     if (!files.length) prepToast('No files were dropped.');
   });
 }
-
-document.querySelectorAll('.type-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    tab.parentElement.querySelectorAll('.type-tab').forEach(item => item.classList.remove('active'));
-    tab.classList.add('active');
-    prepToast(`${tab.textContent.trim()} requirements selected.`);
-  });
-});
 
 /* ── PREPROCESSING WIZARD ── */
 var PP = { step: 0 };
@@ -4150,57 +4218,50 @@ function ppDownloadPackage() {
 }
 
 function ppRenderReport(report) {
+  const counts = report && report.counts ? report.counts : {};
+  const reportSummaryLines = [
+    'dataset_id: ' + (report.dataset_id || '-'),
+    'adapter: ' + (report.adapter || '-'),
+    'status: ' + (report.status || '-'),
+    'benchmark_ready: ' + String(!!report.benchmark_ready),
+    'time_series_files: ' + (counts.time_series_files || 0),
+    'cycle_summary_files: ' + (counts.cycle_summary_files || 0),
+    'metadata_rows: ' + (counts.metadata_rows || 0),
+    'errors: ' + ((report.errors || []).length)
+  ].join('\n');
+  const verifySummaryLines = [
+    'dataset_id: ' + (report.dataset_id || '-'),
+    'status: ' + (report.status || '-'),
+    'benchmark_ready: ' + String(!!report.benchmark_ready),
+    'cells: ' + (counts.cells || 0),
+    'time_series_files: ' + (counts.time_series_files || 0),
+    'cycle_summary_files: ' + (counts.cycle_summary_files || 0),
+    'metadata_rows: ' + (counts.metadata_rows || 0),
+    'warnings: ' + ((report.warnings || []).length),
+    'errors: ' + ((report.errors || []).length)
+  ].join('\n');
+
   const gate = document.getElementById('pp-report-gate');
   const ready = document.getElementById('pp-report-ready');
   const status = document.getElementById('pp-report-status');
   const summary = document.getElementById('pp-report-summary');
-  const counts = report && report.counts ? report.counts : {};
   if (gate) gate.value = report.status || 'unknown';
   if (ready) ready.value = report.benchmark_ready ? 'Yes' : 'No';
   if (status) status.textContent = report.status || 'loaded';
-  if (summary) {
-    summary.textContent = [
-      'dataset_id: ' + (report.dataset_id || '-'),
-      'adapter: ' + (report.adapter || '-'),
-      'status: ' + (report.status || '-'),
-      'benchmark_ready: ' + String(!!report.benchmark_ready),
-      'time_series_files: ' + (counts.time_series_files || 0),
-      'cycle_summary_files: ' + (counts.cycle_summary_files || 0),
-      'metadata_rows: ' + (counts.metadata_rows || 0),
-      'errors: ' + ((report.errors || []).length)
-    ].join('\n');
-  }
+  if (summary) summary.textContent = reportSummaryLines;
+
   const summary2 = document.getElementById('pp2-report-summary');
-  if (summary2) {
-    summary2.textContent = [
-      'dataset_id: ' + (report.dataset_id || '-'),
-      'adapter: ' + (report.adapter || '-'),
-      'status: ' + (report.status || '-'),
-      'benchmark_ready: ' + String(!!report.benchmark_ready),
-      'time_series_files: ' + (counts.time_series_files || 0),
-      'cycle_summary_files: ' + (counts.cycle_summary_files || 0),
-      'metadata_rows: ' + (counts.metadata_rows || 0),
-      'errors: ' + ((report.errors || []).length)
-    ].join('\n');
-  }
-  const verifyStatus = document.getElementById('pp2-verify-status');
-  const verifyReady = document.getElementById('pp2-verify-ready');
-  const verifySummary = document.getElementById('pp2-verification-summary');
+  if (summary2) summary2.textContent = reportSummaryLines;
+
+  const prepReportSummary = document.getElementById('prepReportSummary');
+  if (prepReportSummary) prepReportSummary.textContent = reportSummaryLines;
+
+  const verifyStatus = document.getElementById('pp2-verify-status') || document.getElementById('prepVerifyStatus');
+  const verifyReady = document.getElementById('pp2-verify-ready') || document.getElementById('prepVerifyReady');
+  const verifySummary = document.getElementById('pp2-verification-summary') || document.getElementById('prepVerificationSummary');
   if (verifyStatus) verifyStatus.value = report.status || 'unknown';
   if (verifyReady) verifyReady.value = report.benchmark_ready ? 'Yes' : 'No';
-  if (verifySummary) {
-    verifySummary.textContent = [
-      'dataset_id: ' + (report.dataset_id || '-'),
-      'status: ' + (report.status || '-'),
-      'benchmark_ready: ' + String(!!report.benchmark_ready),
-      'cells: ' + (counts.cells || 0),
-      'time_series_files: ' + (counts.time_series_files || 0),
-      'cycle_summary_files: ' + (counts.cycle_summary_files || 0),
-      'metadata_rows: ' + (counts.metadata_rows || 0),
-      'warnings: ' + ((report.warnings || []).length),
-      'errors: ' + ((report.errors || []).length)
-    ].join('\n');
-  }
+  if (verifySummary) verifySummary.textContent = verifySummaryLines;
 }
 
 async function ppHandleReportUpload(event) {
@@ -4213,8 +4274,11 @@ async function ppHandleReportUpload(event) {
     const panel = document.querySelector('#page-preprocessing [data-pp-panel="4"]');
     const uploadCheck = panel && panel.querySelector('.pp-check');
     if (uploadCheck && !uploadCheck.classList.contains('done')) ppToggleCheck(uploadCheck);
-    showToast('Preprocessing report loaded.', report.benchmark_ready ? 'success' : 'info');
+    const message = 'Preprocessing report loaded.';
+    if (typeof prepToast === 'function') prepToast(message);
+    showToast(message, report.benchmark_ready ? 'success' : 'info');
   } catch (err) {
+    if (typeof prepToast === 'function') prepToast('Cannot read this report JSON.');
     showToast('Cannot read this report JSON.', 'error');
   }
 }
