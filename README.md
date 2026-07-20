@@ -240,7 +240,7 @@ Developed at **Nanyang Technological University, Singapore**.
 |---|---|
 | **Project Supervisors** | Prof. Yonggang Wen *(Principal Investigator)* · Dr Wang Hao *(Research Fellow)* |
 | **Core Researcher** | Zhu Tianwen *(PhD Candidate)* |
-| **Web Engineering** | Liu Kefan · Cao Han · Cai Yezi *(Frontend Engineers)* |
+| **Web Engineering** | Cai Yezi *(Frontend Engineer)* |
 
 ---
 

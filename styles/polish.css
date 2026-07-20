@@ -4625,10 +4625,6 @@ pre.api-code,
   margin: 0;
 }
 
-#page-about .about-engineering-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 #page-about .team-card {
   display: flex;
   align-items: center;
@@ -4722,15 +4718,10 @@ pre.api-code,
   #page-about .about-info-grid {
     grid-template-columns: 1fr;
   }
-
-  #page-about .about-engineering-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 640px) {
-  #page-about .team-grid,
-  #page-about .about-engineering-grid {
+  #page-about .team-grid {
     grid-template-columns: 1fr;
   }
 }
