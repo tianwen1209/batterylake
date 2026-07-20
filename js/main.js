@@ -63,6 +63,30 @@ let DATASETS = [...FALLBACK_DATASETS];
 let dataSource = 'fallback'; // 'github' or 'fallback'
 
 /* ══════════════════════════════════════════════════════════════
+   TEMP: hide selected datasets from the Datasets catalog UI only.
+   Underlying DATASETS / CSV data is unchanged. Empty both sets to restore.
+   ══════════════════════════════════════════════════════════════ */
+const HIDDEN_FROM_CATALOG_IDS = new Set([
+  'dataset_eee',
+  'dataset_internal_MSE',
+  'dataset_internal',
+]);
+const HIDDEN_FROM_CATALOG_REF_NAMES = new Set([
+  '2026_NTU_Ampace-Samsung_LFP-NMC_21700_2C_2C_25T',
+  '2026_NTU_Internal_LFP-NCA_MultiForm_MultiC_MultiT',
+  'TBD_NTU_Internal_LiIon_TBD_TBD_TBD',
+]);
+
+function isHiddenFromCatalog(d) {
+  return !!(d && (HIDDEN_FROM_CATALOG_IDS.has(d.id) || HIDDEN_FROM_CATALOG_REF_NAMES.has(d.ref_name)));
+}
+
+/** Datasets page list/search/filter/count source (excludes temporarily hidden rows). */
+function getCatalogDatasets() {
+  return DATASETS.filter(d => !isHiddenFromCatalog(d));
+}
+
+/* ══════════════════════════════════════════════════════════════
    CSV → DATASETS PARSER
    ══════════════════════════════════════════════════════════════ */
 function extractChemistry(refName, notes) {
@@ -199,7 +223,7 @@ async function syncFromGitHub(silent = false) {
 
     // Update UI
     refreshAll();
-    if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Live · ' + DATASETS.length + ' datasets';
+    if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Live · ' + getCatalogDatasets().length + ' datasets';
     if (!silent) showToast('Synced from GitHub — ' + DATASETS.length + ' datasets loaded', 'success');
   } catch (e) {
     console.warn('GitHub sync failed:', e.message);
@@ -209,7 +233,7 @@ async function syncFromGitHub(silent = false) {
     }
     refreshAll();
     const label = dataSource === 'local' ? 'Local' : 'Built-in';
-    if (statusEl) statusEl.innerHTML = '<span class="sync-dot fallback"></span> ' + label + ' · ' + DATASETS.length + ' datasets';
+    if (statusEl) statusEl.innerHTML = '<span class="sync-dot fallback"></span> ' + label + ' · ' + getCatalogDatasets().length + ' datasets';
     if (!silent) showToast('GitHub fetch failed (private repo requires auth). Use "Upload CSV" instead.', 'error', 5000);
   } finally {
     if (btn) {
@@ -238,7 +262,7 @@ function handleLocalCSV(event) {
       DATASETS = parsed;
       dataSource = 'local';
       refreshAll();
-      if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Local · ' + DATASETS.length + ' datasets';
+      if (statusEl) statusEl.innerHTML = '<span class="sync-dot live"></span> Local · ' + getCatalogDatasets().length + ' datasets';
       showToast('Loaded ' + DATASETS.length + ' datasets from ' + file.name, 'success');
     } catch (err) {
       console.error('CSV parse error:', err);
@@ -261,7 +285,7 @@ function handleLocalCSV(event) {
    REFRESH ALL PAGES
    ══════════════════════════════════════════════════════════════ */
 function refreshAll() {
-  document.getElementById('ds-count-badge').textContent = DATASETS.length;
+  document.getElementById('ds-count-badge').textContent = getCatalogDatasets().length;
   renderMetrics();
   renderAppliedFilterChips();
   filterDatasets();
@@ -615,12 +639,13 @@ function esc(s) { const d = document.createElement('div'); d.textContent = s || 
 function escAttr(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
 
 function getFiltered() {
-  if (allDatasetsApplied) return sortDatasets(DATASETS, activeSort);
+  const catalog = getCatalogDatasets();
+  if (allDatasetsApplied) return sortDatasets(catalog, activeSort);
   const raw = document.getElementById('searchInput').value.trim().toLowerCase();
   // Multi-token search: split by whitespace, every token must match (AND logic)
   const tokens = raw ? raw.split(/\s+/).filter(Boolean) : [];
 
-  const filtered = DATASETS.filter(d => {
+  const filtered = catalog.filter(d => {
     // Chemistry (multi-select, OR within group)
     if (activeChems.size > 0) {
       let match = false;
@@ -937,7 +962,7 @@ function initTopbarControls() {
 /* ── MODAL ── */
 function openDatasetModal(id) {
   const d = DATASETS.find(item => item.id === id);
-  if (!d) return;
+  if (!d || isHiddenFromCatalog(d)) return;
   document.getElementById('modal-name').textContent = d.name;
   document.getElementById('modal-refname').textContent = d.ref_name;
   document.getElementById('modal-details').innerHTML = `
@@ -4194,7 +4219,7 @@ async function ppHandleReportUpload(event) {
   if (typeof renderAIFieldTable === 'function') renderAIFieldTable();
   const statusEl = document.getElementById('sync-status');
   if (statusEl) {
-    statusEl.innerHTML = '<span class="sync-dot fallback"></span> Built-in · ' + DATASETS.length + ' datasets';
+    statusEl.innerHTML = '<span class="sync-dot fallback"></span> Built-in · ' + getCatalogDatasets().length + ' datasets';
   }
   applyInitialPageFromHash();
 })();
