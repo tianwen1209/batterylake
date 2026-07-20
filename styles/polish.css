@@ -149,6 +149,20 @@ select:focus-visible, [tabindex]:focus-visible {
 .sidebar-nav li a.active .nav-badge { background: var(--accent-soft); color: var(--sidebar-text-active); }
 .sidebar-footer { border-top: 1px solid var(--border); }
 
+/* Match base compact sidebar rules with polish spacing */
+@media (max-height: 760px) {
+  .sidebar-brand { padding: 10px 18px; }
+  .sidebar-section { padding: 12px 16px 4px; }
+  .sidebar-brand + .sidebar-section { padding-top: 0; }
+  .sidebar-nav { padding: 0 8px 2px; }
+  .sidebar-nav li a { padding: 7px 12px; }
+}
+@media (max-height: 560px) {
+  .sidebar-brand { padding: 8px 14px; }
+  .sidebar-section { padding: 8px 14px 2px; }
+  .sidebar-nav li a { padding: 5px 10px; }
+}
+
 /* 4 TOP BAR */
 .topbar {
   background: var(--topbar-bg);
