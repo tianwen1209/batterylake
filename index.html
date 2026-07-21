@@ -775,8 +775,9 @@ for ds in resp.json()["items"]:
 <pre class="bw-command-code" id="bw-terminal-command">unzip bt_benchmark_soh_lstm.zip
 cd bt_benchmark_soh_lstm
 mkdir -p data
-# copy the whole processed dataset folder into data/ first
+# copy the processed dataset folder OR a .zip of it into data/
 # example: cp -R /path/to/2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T data/
+# example: cp /path/to/2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T.zip data/
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -790,7 +791,7 @@ bash run_benchmark.sh</pre>
               <input id="bw-outputs-files" type="file" multiple accept=".json,.csv,.txt,.md" hidden onchange="bwFlowHandleUpload(event)">
               <div class="bw-upload-box" id="bwr-upload-box" onclick="bwOpenUploadChooser()" ondragover="bwUploadDragOver(event)" ondragleave="bwUploadDragLeave(event)" ondrop="bwUploadDrop(event)">
                 <span>Drag &amp; drop the output folder here, or click to browse</span>
-                <small>Expected: metrics.json, predictions.csv, and optional per_cell_metrics.csv</small>
+                <small>Expected: metrics.json, predictions.csv, and predictions/&lt;cell&gt;.csv (one file per cell, every cycle)</small>
               </div>
               <div class="bw-upload-status" id="bwr-upload-status">Waiting for local output folder</div>
             </div>
@@ -809,8 +810,8 @@ bash run_benchmark.sh</pre>
           <div class="bw-section-row">
             <div class="bw-section-title">Performance Highlights</div>
             <div class="bw-highlight-panel">
-              <div class="bw-highlight-card"><span>Best Model</span><strong>LSTM-Battery-v2</strong></div>
-              <div class="bw-highlight-card"><span>Test RMSE</span><strong>0.0124</strong></div>
+              <div class="bw-highlight-card"><span>Best Model</span><strong id="bwr-best-model">—</strong></div>
+              <div class="bw-highlight-card"><span>Test RMSE</span><strong id="bwr-test-rmse">—</strong></div>
             </div>
           </div>
 
@@ -818,14 +819,12 @@ bash run_benchmark.sh</pre>
             <div class="bw-chart-toolbar">
               <div class="bw-section-title">Per-Cell Prediction Trajectory</div>
               <div class="bw-result-controls">
-                <select id="bwr-cell-select" onchange="bwRenderMockTrajectory()"><option>Cell_01 (Tesla 2170)</option><option>Cell_02 (Tesla 2170)</option><option>Cell_03 (Tesla 2170)</option></select>
-                <select id="bwr-metric-select" onchange="bwRenderMockTrajectory()"><option>State of Health (SOH)</option><option>Remaining Useful Life (RUL)</option></select>
+                <select id="bwr-cell-select" onchange="bwRenderResultsTrajectory()" aria-label="Select cell"></select>
+                <select id="bwr-metric-select" onchange="bwRenderResultsTrajectory()" aria-label="Select metric">
+                  <option value="SOH">State of Health (SOH)</option>
+                  <option value="RUL">Remaining Useful Life (RUL)</option>
+                </select>
               </div>
-            </div>
-            <div class="bw-legend">
-              <span class="bw-lg"><i style="background:#0f172a"></i>Ground Truth</span>
-              <span class="bw-lg"><i style="background:var(--accent)"></i>Predicted Value</span>
-              <span class="bw-lg"><i style="background:var(--red)"></i>Retirement Line 80%</span>
             </div>
             <div class="bw-chart-shell" id="bwr-trajectory-chart"></div>
           </div>

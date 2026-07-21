@@ -4474,21 +4474,52 @@ function bwFirst(row, keys) {
 }
 function bwNormalizePredictions(rows) {
   return rows.map(row => {
-    const yTrue = bwNum(bwFirst(row, ['y_true', 'true', 'target', 'label', 'SOH', 'RUL']));
+    const cycle = bwNum(bwFirst(row, ['cycle_number', 'cycle_id', 'cycle', 'Cycle'])) ?? 0;
+    const sohTrue = bwNum(bwFirst(row, ['SOH_true', 'soh_true', 'SOH', 'soh']));
+    const sohPred = bwNum(bwFirst(row, ['SOH_pred', 'soh_pred', 'pred_SOH', 'pred_soh']));
+    const rulTrue = bwNum(bwFirst(row, ['RUL_true', 'rul_true', 'RUL', 'rul']));
+    const rulPred = bwNum(bwFirst(row, ['RUL_pred', 'rul_pred', 'pred_RUL', 'pred_rul']));
+    const yTrue = bwNum(bwFirst(row, ['y_true', 'true', 'target', 'label']));
     const yPred = bwNum(bwFirst(row, ['y_pred', 'pred', 'prediction', 'estimate']));
+    const target = String(bwFirst(row, ['target', 'Target']) || '').trim().toUpperCase();
+    let resolvedTrue = yTrue;
+    let resolvedPred = yPred;
+    if (!Number.isFinite(resolvedTrue)) {
+      if (target === 'RUL') resolvedTrue = rulTrue;
+      else if (target === 'SOH') resolvedTrue = sohTrue;
+      else resolvedTrue = Number.isFinite(sohTrue) ? sohTrue : rulTrue;
+    }
+    if (!Number.isFinite(resolvedPred)) {
+      if (target === 'RUL') resolvedPred = rulPred;
+      else if (target === 'SOH') resolvedPred = sohPred;
+      else resolvedPred = Number.isFinite(sohPred) ? sohPred : rulPred;
+    }
     return {
       model: String(bwFirst(row, ['model', 'Model']) || 'Model').trim(),
+      adapter: String(bwFirst(row, ['adapter', 'Adapter']) || '').trim(),
       split: String(bwFirst(row, ['split', 'Split']) || 'test').trim().toLowerCase(),
       cell_id: String(bwFirst(row, ['cell_id', 'cell', 'battery_id', 'Battery']) || 'cell').trim(),
-      cycle_id: bwNum(bwFirst(row, ['cycle_id', 'cycle', 'Cycle'])) ?? 0,
-      y_true: yTrue,
-      y_pred: yPred
+      cycle_id: cycle,
+      cycle_number: cycle,
+      SOH_true: sohTrue,
+      SOH_pred: sohPred,
+      RUL_true: rulTrue,
+      RUL_pred: rulPred,
+      y_true: resolvedTrue,
+      y_pred: resolvedPred,
+      target: target || (Number.isFinite(sohTrue) || Number.isFinite(sohPred) ? 'SOH' : 'RUL')
     };
-  }).filter(row => Number.isFinite(row.y_true) && Number.isFinite(row.y_pred));
+  }).filter(row => Number.isFinite(row.cycle_number) && (
+    (Number.isFinite(row.SOH_true) && Number.isFinite(row.SOH_pred)) ||
+    (Number.isFinite(row.RUL_true) && Number.isFinite(row.RUL_pred)) ||
+    (Number.isFinite(row.y_true) && Number.isFinite(row.y_pred)) ||
+    Number.isFinite(row.SOH_true) || Number.isFinite(row.RUL_true)
+  ));
 }
 function bwNormalizeMetricRows(rows) {
   return rows.map(row => ({
     model: String(bwFirst(row, ['model', 'Model']) || 'Model').trim(),
+    adapter: String(bwFirst(row, ['adapter', 'Adapter']) || '').trim(),
     split: String(bwFirst(row, ['split', 'Split']) || 'test').trim().toLowerCase(),
     mae: bwNum(bwFirst(row, ['mae', 'MAE'])),
     rmse: bwNum(bwFirst(row, ['rmse', 'RMSE'])),
@@ -4558,11 +4589,106 @@ function bwResultShortCell(cell) {
   return text.length > 28 ? '...' + text.slice(-25) : text;
 }
 function bwBestMetricRows(results) {
+  const best = bwResolveBestModel(results);
   const rows = (results.metrics || []).filter(r => Number.isFinite(Number(r.rmse)));
   if (!rows.length) return [];
   const splits = bwUnique(rows.map(r => r.split));
   const primary = splits.includes('test') ? 'test' : bwPreferTest(splits)[0];
-  return rows.filter(r => r.split === primary).sort((a, b) => Number(a.rmse) - Number(b.rmse));
+  const ranked = rows.filter(r => r.split === primary).slice().sort((a, b) => Number(a.rmse) - Number(b.rmse));
+  if (!best || !best.model) return ranked;
+  const preferred = ranked.filter(r => r.model === best.model && (!best.adapter || r.adapter === best.adapter));
+  const rest = ranked.filter(r => !(r.model === best.model && (!best.adapter || r.adapter === best.adapter)));
+  return preferred.concat(rest);
+}
+function bwMinMaxNorm(values) {
+  const nums = values.map(Number).filter(Number.isFinite);
+  if (!nums.length) return values.map(() => 0);
+  const lo = Math.min(...nums), hi = Math.max(...nums);
+  if (hi === lo) return values.map(() => 0);
+  return values.map(v => Number.isFinite(Number(v)) ? (Number(v) - lo) / (hi - lo) : 0);
+}
+function bwSelectBestModelFromMetrics(metricRows) {
+  const rows = (metricRows || []).map(r => ({
+    ...r,
+    adapter: String(r.adapter || ''),
+    split: String(r.split || '').toLowerCase(),
+    rmse: Number(r.rmse),
+    mae: Number(r.mae),
+    r2: Number(r.r2)
+  }));
+  const test = rows.filter(r => r.split === 'test' && Number.isFinite(r.rmse));
+  if (!test.length) return null;
+  const valMap = new Map();
+  rows.filter(r => r.split === 'val' || r.split === 'validation').forEach(r => {
+    valMap.set(r.model + '\u0001' + r.adapter, r.r2);
+  });
+  const scored = test.map(r => {
+    const r2Val = valMap.get(r.model + '\u0001' + r.adapter);
+    const r2Gap = Number.isFinite(r2Val) && Number.isFinite(r.r2) ? r2Val - r.r2 : null;
+    return { ...r, r2_val: r2Val, r2_gap: r2Gap, r2_test: r.r2 };
+  });
+  let candidates = scored.filter(r => Number.isFinite(r.r2_test) && r.r2_test >= 0.7 && Number.isFinite(r.r2_gap) && r.r2_gap <= 0.15);
+  let selection = 'weighted_minmax';
+  if (!candidates.length) {
+    candidates = scored.slice();
+    selection = 'fallback_lowest_test_rmse';
+  }
+  if (!candidates.length) return null;
+  if (selection === 'fallback_lowest_test_rmse') {
+    candidates.sort((a, b) => a.rmse - b.rmse || (a.mae || 0) - (b.mae || 0));
+    const best = candidates[0];
+    return {
+      model: best.model,
+      adapter: best.adapter,
+      split: 'test',
+      selection,
+      score: best.rmse,
+      rmse: best.rmse,
+      mae: best.mae,
+      r2: best.r2_test,
+      r2_val: best.r2_val,
+      r2_gap: best.r2_gap
+    };
+  }
+  const rmseN = bwMinMaxNorm(candidates.map(r => r.rmse));
+  const maeN = bwMinMaxNorm(candidates.map(r => r.mae));
+  const r2N = bwMinMaxNorm(candidates.map(r => r.r2_test));
+  const ranked = candidates.map((r, i) => ({
+    ...r,
+    score: 0.5 * rmseN[i] + 0.3 * maeN[i] + 0.2 * (1 - r2N[i])
+  })).sort((a, b) => a.score - b.score || a.rmse - b.rmse);
+  const best = ranked[0];
+  return {
+    model: best.model,
+    adapter: best.adapter,
+    split: 'test',
+    selection,
+    score: best.score,
+    rmse: best.rmse,
+    mae: best.mae,
+    r2: best.r2_test,
+    r2_val: best.r2_val,
+    r2_gap: best.r2_gap
+  };
+}
+function bwResolveBestModel(results) {
+  if (!results) return null;
+  const fromJson = results.metricsJson && results.metricsJson.best_model;
+  if (fromJson && fromJson.model) {
+    return {
+      model: String(fromJson.model),
+      adapter: String(fromJson.adapter || ''),
+      split: String(fromJson.split || 'test').toLowerCase(),
+      selection: fromJson.selection || 'metrics.json',
+      score: bwNum(fromJson.score),
+      rmse: bwNum(fromJson.rmse),
+      mae: bwNum(fromJson.mae),
+      r2: bwNum(fromJson.r2),
+      r2_val: bwNum(fromJson.r2_val),
+      r2_gap: bwNum(fromJson.r2_gap)
+    };
+  }
+  return bwSelectBestModelFromMetrics(results.metrics || []);
 }
 function bwSetSelectOptions(sel, values, selected) {
   if (!sel) return;
@@ -4575,30 +4701,10 @@ async function bwHandleOutputsUpload(event) {
   if (!files.length) return;
   const status = document.getElementById('bw-results-status');
   if (status) status.textContent = 'Reading ' + files.length + ' local files...';
-  const targets = {};
-  for (const file of files) {
-    const base = bwResultBasename(file);
-    if (['metrics.json', 'predictions.csv', 'per_cell_metrics.csv', 'training_log.csv', 'summary.md'].includes(base) && !targets[base]) {
-      targets[base] = { file, text: await file.text() };
-    }
-  }
   try {
-    const metricsJson = targets['metrics.json'] ? JSON.parse(targets['metrics.json'].text) : {};
-    const predictions = targets['predictions.csv'] ? bwNormalizePredictions(bwParseCsvRows(targets['predictions.csv'].text)) : [];
-    const metricRows = metricsJson.metrics ? bwNormalizeMetricRows(metricsJson.metrics) : bwMetricsFromPredictions(predictions, ['model', 'split']);
-    const perCellRows = targets['per_cell_metrics.csv']
-      ? bwNormalizePerCellRows(bwParseCsvRows(targets['per_cell_metrics.csv'].text))
-      : bwMetricsFromPredictions(predictions, ['model', 'split', 'cell_id']);
-    if (!metricRows.length && !predictions.length) throw new Error('No valid metrics or predictions found.');
-    BW.results = {
-      files: Object.keys(targets).sort(),
-      metricsJson,
-      metrics: metricRows,
-      predictions,
-      perCell: perCellRows.filter(row => row.cell_id),
-      log: targets['training_log.csv'] ? targets['training_log.csv'].text : ''
-    };
+    BW.results = await bwParseOutputsFiles(files);
     bwRenderResults();
+    bwRenderFlowResults();
     if (typeof showToast === 'function') showToast('Outputs loaded: ' + BW.results.files.join(', '), 'success');
   } catch (err) {
     if (status) status.textContent = 'Could not parse outputs: ' + err.message;
@@ -4606,6 +4712,50 @@ async function bwHandleOutputsUpload(event) {
   } finally {
     event.target.value = '';
   }
+}
+async function bwParseOutputsFiles(files) {
+  const targets = {};
+  const perCellPredictionFiles = [];
+  for (const file of files) {
+    const rel = String(file.webkitRelativePath || file.name || '').replace(/\\/g, '/');
+    const base = rel.split('/').pop().toLowerCase();
+    if (['metrics.json', 'predictions.csv', 'per_cell_metrics.csv', 'training_log.csv', 'summary.md'].includes(base) && !targets[base]) {
+      targets[base] = { file, text: await file.text(), rel };
+    } else if (base.endsWith('.csv') && /(?:^|\/)predictions\/[^/]+\.csv$/i.test(rel) && base !== 'predictions.csv') {
+      perCellPredictionFiles.push({ file, text: await file.text(), rel, base });
+    }
+  }
+  const metricsJson = targets['metrics.json'] ? JSON.parse(targets['metrics.json'].text) : {};
+  let predictions = targets['predictions.csv'] ? bwNormalizePredictions(bwParseCsvRows(targets['predictions.csv'].text)) : [];
+  if (!predictions.length && perCellPredictionFiles.length) {
+    perCellPredictionFiles.forEach(item => {
+      const rows = bwNormalizePredictions(bwParseCsvRows(item.text));
+      const fallbackCell = item.base.replace(/\.csv$/i, '');
+      rows.forEach(row => {
+        if (!row.cell_id || row.cell_id === 'cell') row.cell_id = fallbackCell;
+        if (!row.split) row.split = 'test';
+        if (!row.model && metricsJson.best_model && metricsJson.best_model.model) row.model = metricsJson.best_model.model;
+        predictions.push(row);
+      });
+    });
+  }
+  const metricRows = metricsJson.metrics
+    ? bwNormalizeMetricRows(metricsJson.metrics)
+    : bwMetricsFromPredictions(predictions.filter(r => Number.isFinite(r.y_true) && Number.isFinite(r.y_pred)), ['model', 'split']);
+  const perCellRows = targets['per_cell_metrics.csv']
+    ? bwNormalizePerCellRows(bwParseCsvRows(targets['per_cell_metrics.csv'].text))
+    : bwMetricsFromPredictions(predictions.filter(r => Number.isFinite(r.y_true) && Number.isFinite(r.y_pred)), ['model', 'split', 'cell_id']);
+  if (!metricRows.length && !predictions.length) throw new Error('No valid metrics or predictions found.');
+  const filesLoaded = Object.keys(targets).sort().concat(perCellPredictionFiles.map(f => f.rel || f.base));
+  return {
+    files: filesLoaded,
+    metricsJson,
+    metrics: metricRows,
+    predictions,
+    perCell: perCellRows.filter(row => row.cell_id),
+    log: targets['training_log.csv'] ? targets['training_log.csv'].text : '',
+    perCellFiles: perCellPredictionFiles.map(f => f.rel || f.base)
+  };
 }
 function bwClearResultsUpload() {
   BW.results = null;
@@ -4634,15 +4784,14 @@ function bwRenderResultKpis(results) {
     ].map(item => '<div class="bw-rstat"><div class="bw-rstat-h">' + item[0] + '</div><div class="bw-rstat-v">' + item[1] + '</div><div class="bw-rstat-s">' + item[2] + '</div></div>').join('');
     return;
   }
-  const bestRows = bwBestMetricRows(results);
-  const best = bestRows[0] || {};
-  const val = (results.metrics || []).find(r => r.model === best.model && (r.split === 'val' || r.split === 'validation'));
-  const test = (results.metrics || []).find(r => r.model === best.model && r.split === 'test') || best;
-  const gap = val && test ? Number(test.rmse) - Number(val.rmse) : null;
-  const worst = (results.perCell || []).filter(r => r.model === best.model && r.split === (test.split || best.split)).sort((a, b) => Number(b.rmse) - Number(a.rmse))[0];
+  const best = bwResolveBestModel(results) || {};
+  const val = (results.metrics || []).find(r => r.model === best.model && (!best.adapter || r.adapter === best.adapter) && (r.split === 'val' || r.split === 'validation'));
+  const test = (results.metrics || []).find(r => r.model === best.model && (!best.adapter || r.adapter === best.adapter) && r.split === 'test') || best;
+  const gap = val && test && Number.isFinite(Number(test.rmse)) && Number.isFinite(Number(val.rmse)) ? Number(test.rmse) - Number(val.rmse) : null;
+  const worst = (results.perCell || []).filter(r => r.model === best.model && r.split === (test.split || best.split || 'test')).sort((a, b) => Number(b.rmse) - Number(a.rmse))[0];
   const cards = [
-    ['Best Model', best.model || '—', best.rmse != null ? 'RMSE ' + bwFmtMetric(best.rmse) + ' on ' + best.split : 'No metric row'],
-    ['Test RMSE', bwFmtMetric(test.rmse), 'MAE ' + bwFmtMetric(test.mae) + ' · R2 ' + bwFmtMetric(test.r2, 3)],
+    ['Best Model', best.model || '—', best.rmse != null ? 'RMSE ' + bwFmtMetric(best.rmse) + ' on test' : 'No metric row'],
+    ['Test RMSE', bwFmtMetric(best.rmse != null ? best.rmse : test.rmse), 'MAE ' + bwFmtMetric(best.mae != null ? best.mae : test.mae) + ' · R2 ' + bwFmtMetric(best.r2 != null ? best.r2 : test.r2, 3)],
     ['Worst Cell', worst ? bwResultShortCell(worst.cell_id) : '—', worst ? 'RMSE ' + bwFmtMetric(worst.rmse) : 'Upload per-cell metrics'],
     ['Generalization Gap', gap == null ? '—' : bwFmtMetric(gap), val ? 'test − val RMSE' : 'Validation split unavailable']
   ];
@@ -4758,6 +4907,76 @@ function bwDomain(values, pad = 0.04) {
 }
 function bwTicks(min, max, count) {
   return Array.from({ length: count }, (_, i) => min + (max - min) * i / Math.max(1, count - 1));
+}
+/** Nice whole-number cycle ticks from the x-range only (does not alter plotted data). */
+function bwCycleAxisTicks(xMin, xMax, targetCount = 6) {
+  if (!Number.isFinite(xMin) || !Number.isFinite(xMax)) return [];
+  const lo = Math.min(xMin, xMax);
+  const hi = Math.max(xMin, xMax);
+  if (hi === lo) return [Math.round(lo)];
+
+  const span = hi - lo;
+  const rough = span / Math.max(1, targetCount - 1);
+  const niceSteps = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000, 10000];
+
+  let step = niceSteps.find(s => s >= rough);
+  if (!step) {
+    const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+    const scaled = rough / pow;
+    step = (scaled <= 1 ? 1 : scaled <= 2 ? 2 : scaled <= 5 ? 5 : 10) * pow;
+  }
+
+  // Keep roughly 4–8 readable ticks across the range.
+  let count = Math.floor(span / step) + 1;
+  while (count > 8) {
+    const idx = niceSteps.indexOf(step);
+    if (idx >= 0 && idx < niceSteps.length - 1) step = niceSteps[idx + 1];
+    else step *= 2;
+    count = Math.floor(span / step) + 1;
+  }
+  while (count < 3 && step > 1) {
+    const idx = niceSteps.indexOf(step);
+    if (idx > 0) step = niceSteps[idx - 1];
+    else break;
+    count = Math.floor(span / step) + 1;
+  }
+
+  const start = Math.ceil(lo / step) * step;
+  const end = Math.floor(hi / step) * step;
+  if (start > end) return [Math.round(lo), Math.round(hi)].filter((v, i, arr) => arr.indexOf(v) === i);
+
+  const ticks = [];
+  for (let i = 0, v = start; v <= end + step * 1e-9; i += 1, v = start + i * step) {
+    ticks.push(Math.round(v));
+  }
+  return ticks;
+}
+/** SOH percent ticks in 5% steps, never above 100. */
+function bwSohPercentTicks(minPct, maxPct = 100) {
+  const top = Math.min(100, Math.ceil(maxPct / 5) * 5);
+  let bottom = Math.floor(minPct / 5) * 5;
+  if (!Number.isFinite(bottom)) bottom = 80;
+  if (bottom >= top) bottom = Math.max(0, top - 5);
+  const ticks = [];
+  for (let v = bottom; v <= top; v += 5) ticks.push(v);
+  return ticks;
+}
+/** Nice integer ticks for RUL / general numeric axes. */
+function bwNiceIntTicks(min, max, targetCount = 6) {
+  if (!Number.isFinite(min) || !Number.isFinite(max)) return [];
+  if (min === max) return [Math.round(min)];
+  const span = max - min;
+  const rough = span / Math.max(1, targetCount - 1);
+  const pow = Math.pow(10, Math.floor(Math.log10(Math.max(rough, 1e-9))));
+  const candidates = [1, 2, 2.5, 5, 10].map(m => m * pow);
+  let step = candidates.find(s => span / s <= targetCount) || candidates[candidates.length - 1];
+  step = Math.max(1, Math.round(step));
+  const start = Math.ceil(min / step) * step;
+  const ticks = [];
+  for (let v = start; v <= max + 1e-9; v += step) ticks.push(Math.round(v));
+  if (!ticks.length || ticks[0] !== Math.round(min)) ticks.unshift(Math.round(min));
+  if (ticks[ticks.length - 1] !== Math.round(max)) ticks.push(Math.round(max));
+  return [...new Set(ticks)];
 }
 function bwLineChartSvg(rows, target, cell) {
   const data = bwDownsample(rows, 520);
@@ -5118,8 +5337,9 @@ function bwUpdatePackagePreview() {
       'unzip ' + info.zip,
       'cd ' + info.root,
       'mkdir -p data',
-      '# copy the whole processed dataset folder into data/ first',
+      '# copy the processed dataset folder OR a .zip of it into data/',
       '# example: cp -R /path/to/' + datasetFolder + ' data/',
+      '# example: cp /path/to/' + datasetFolder + '.zip data/',
       'python3 -m venv .venv',
       'source .venv/bin/activate',
       'pip install -r requirements.txt',
@@ -5239,13 +5459,20 @@ function bwReadmeMd(manifest) {
     '',
     '## 1. Put the dataset folder in place',
     '',
-    'Copy the whole processed BatteryLake dataset folder into `data/`. Do not extract CSV files one by one. The scripts search recursively under `data/`, so the original processed dataset folder structure can stay unchanged.',
+    'Copy the whole processed BatteryLake dataset folder into `data/`, or place a `.zip` of that folder under `data/`. Do not extract CSV files one by one. The scripts search recursively under `data/` (including nested folders), and `run_benchmark.sh` unpacks any `.zip` archives into `data/_extracted/` before training.',
     '',
-    'Example:',
+    'Example (folder):',
     '',
     '```bash',
     'mkdir -p data',
     'cp -R /path/to/' + datasetFolder + ' data/',
+    '```',
+    '',
+    'Example (zip):',
+    '',
+    '```bash',
+    'mkdir -p data',
+    'cp /path/to/' + datasetFolder + '.zip data/',
     '```',
     '',
     'Expected layout after copying:',
@@ -5253,7 +5480,14 @@ function bwReadmeMd(manifest) {
     '```text',
     'data/',
     '  ' + datasetFolder + '/',
-    '    ... keep the processed dataset files exactly as exported',
+    '    ... nested folders are fine; keep *_timeseries.csv and *_cycle_summary.csv',
+    '```',
+    '',
+    'or:',
+    '',
+    '```text',
+    'data/',
+    '  ' + datasetFolder + '.zip',
     '```',
     '',
     'You do not need to create separate train, validation, or test folders. `split.json` stores the cell split selected on the Benchmark page, and the scripts use it automatically.',
@@ -5296,7 +5530,7 @@ function bwReadmeMd(manifest) {
     'bash run_benchmark.sh',
     '```',
     '',
-    '`run_benchmark.sh` first writes `features/features.csv` from the time-series files, then writes `splits/train.csv`, `splits/val.csv`, and `splits/test.csv` from the web-selected train/validation/test ratio. The model training script reads those split files directly.',
+    '`run_benchmark.sh` first unpacks any `.zip` files under `data/`, then writes `features/features.csv` from the time-series files, then writes `splits/train.csv`, `splits/val.csv`, and `splits/test.csv` from the web-selected train/validation/test ratio. The model training script reads those split files directly.',
     '',
     '## 4. Selected benchmark',
     '',
@@ -5310,17 +5544,20 @@ function bwReadmeMd(manifest) {
     'The scripts write:',
     '',
     '- `features/features.csv`',
-    '- `outputs/metrics.json`',
-    '- `outputs/predictions.csv`',
+    '- `outputs/metrics.json` (includes `metrics` rows and `best_model`)',
+    '- `outputs/predictions.csv` (all models/splits; one row per cell cycle)',
+    '- `outputs/predictions/<cell_id>.csv` (best-model test trajectories with `cycle_number`, `SOH`, `RUL`, and pred columns)',
     '- `outputs/per_cell_metrics.csv`',
     '- `outputs/training_log.csv`',
     '- `outputs/summary.md`',
     '- `outputs/*.joblib` for scikit-learn models and `outputs/*.pt` for PyTorch models',
     '- `splits/train.csv`, `splits/val.csv`, `splits/test.csv`',
     '',
+    'Upload the whole `outputs/` folder back to BatteryLake Step 6. Best Model is chosen from `metrics.json` by matching val/test rows on model+adapter, filtering `r2_test < 0.7` or `r2_gap > 0.15`, then minimizing `0.5*norm(rmse_test)+0.3*norm(mae_test)+0.2*(1-norm(r2_test))`.',
+    '',
     '## Notes',
     '',
-    'The current scaffold separates feature computation, split generation, and model training. Classical models are trained with scikit-learn. LSTM, CNN, MLP, PINN, and Transformer selections are trained with the PyTorch baseline implementations under `models/` using sliding cell/cycle feature sequences.'
+    'The current scaffold separates feature computation, split generation, and model training. Classical models are trained with scikit-learn. LSTM, CNN, MLP, PINN, and Transformer selections are trained with the PyTorch baseline implementations under `models/` using sliding cell/cycle feature sequences. Prediction exports keep every cycle for each cell so Step 6 can plot Cycle vs SOH or Cycle vs RUL.'
   ].join('\n') + '\n';
 }
 function bwDataloaderPy() {
@@ -6417,6 +6654,137 @@ function bwComputeFeaturesPy() {
     '    main()'
   ].join('\n') + '\n';
 }
+function bwPrepareDataPy() {
+  return [
+    'import argparse',
+    'import shutil',
+    'import zipfile',
+    'from pathlib import Path',
+    '',
+    'JUNK_NAME_PARTS = ("__macosx", ".ds_store")',
+    'MAX_ZIP_DEPTH = 2',
+    '',
+    'def is_junk_path(path):',
+    '    text = str(path).replace("\\\\", "/").lower()',
+    '    return any(part in text for part in JUNK_NAME_PARTS)',
+    '',
+    'def list_zips(root):',
+    '    return sorted([',
+    '        p for p in Path(root).rglob("*.zip")',
+    '        if p.is_file() and not is_junk_path(p)',
+    '    ])',
+    '',
+    'def count_marker_csvs(root, marker):',
+    '    return len([',
+    '        p for p in Path(root).rglob("*.csv")',
+    '        if marker in p.name.lower() and not is_junk_path(p)',
+    '    ])',
+    '',
+    'def unique_extract_dir(extracted_root, zip_path, data_root):',
+    '    try:',
+    '        rel = zip_path.relative_to(data_root)',
+    '        stem_parts = list(rel.with_suffix("").parts)',
+    '    except ValueError:',
+    '        stem_parts = [zip_path.stem]',
+    '    safe = "_".join(part.replace(" ", "_") for part in stem_parts if part and part != "_extracted")',
+    '    safe = "".join(ch if (ch.isalnum() or ch in ("-", "_", ".")) else "_" for ch in safe).strip("._") or zip_path.stem',
+    '    out = extracted_root / safe',
+    '    if not out.exists():',
+    '        return out',
+    '    # Same zip path maps to the same folder; collision from different zips gets a suffix.',
+    '    marker = out / ".batterylake_source_zip"',
+    '    if marker.exists() and marker.read_text(encoding="utf-8").strip() == str(zip_path.resolve()):',
+    '        return out',
+    '    idx = 2',
+    '    while True:',
+    '        candidate = extracted_root / ("%s_%d" % (safe, idx))',
+    '        if not candidate.exists():',
+    '            return candidate',
+    '        idx += 1',
+    '',
+    'def should_skip_extract(zip_path, dest):',
+    '    if not dest.exists():',
+    '        return False',
+    '    marker = dest / ".batterylake_source_zip"',
+    '    if not marker.exists():',
+    '        return False',
+    '    if marker.read_text(encoding="utf-8").strip() != str(zip_path.resolve()):',
+    '        return False',
+    '    try:',
+    '        newest = max((p.stat().st_mtime for p in dest.rglob("*") if p.is_file()), default=dest.stat().st_mtime)',
+    '    except OSError:',
+    '        return False',
+    '    return newest >= zip_path.stat().st_mtime',
+    '',
+    'def safe_extract(zip_path, dest):',
+    '    dest.mkdir(parents=True, exist_ok=True)',
+    '    with zipfile.ZipFile(zip_path, "r") as zf:',
+    '        for info in zf.infolist():',
+    '            name = info.filename.replace("\\\\", "/")',
+    '            if not name or name.endswith("/") or is_junk_path(name):',
+    '                continue',
+    '            # Prevent zip-slip',
+    '            target = (dest / name).resolve()',
+    '            if not str(target).startswith(str(dest.resolve())):',
+    '                raise RuntimeError("Refusing to extract unsafe path from %s: %s" % (zip_path, info.filename))',
+    '            target.parent.mkdir(parents=True, exist_ok=True)',
+    '            with zf.open(info, "r") as src, open(target, "wb") as out:',
+    '                shutil.copyfileobj(src, out)',
+    '    (dest / ".batterylake_source_zip").write_text(str(zip_path.resolve()) + "\\n", encoding="utf-8")',
+    '',
+    'def extract_zips(data_root, max_depth=MAX_ZIP_DEPTH):',
+    '    data_root = Path(data_root)',
+    '    extracted_root = data_root / "_extracted"',
+    '    extracted_root.mkdir(parents=True, exist_ok=True)',
+    '    extracted = []',
+    '    skipped = []',
+    '    seen = set()',
+    '    for depth in range(max_depth):',
+    '        zips = [p for p in list_zips(data_root) if str(p.resolve()) not in seen]',
+    '        if not zips:',
+    '            break',
+    '        progress = False',
+    '        for zip_path in zips:',
+    '            seen.add(str(zip_path.resolve()))',
+    '            dest = unique_extract_dir(extracted_root, zip_path, data_root)',
+    '            if should_skip_extract(zip_path, dest):',
+    '                skipped.append(str(zip_path))',
+    '                continue',
+    '            if dest.exists():',
+    '                shutil.rmtree(dest)',
+    '            print("Extracting %s -> %s" % (zip_path, dest))',
+    '            safe_extract(zip_path, dest)',
+    '            extracted.append(str(zip_path))',
+    '            progress = True',
+    '        if not progress:',
+    '            break',
+    '    return extracted, skipped',
+    '',
+    'def main():',
+    '    parser = argparse.ArgumentParser(description="Unpack dataset zip archives under data/ for the benchmark pipeline.")',
+    '    parser.add_argument("--data-root", default="data")',
+    '    parser.add_argument("--max-zip-depth", type=int, default=MAX_ZIP_DEPTH)',
+    '    args = parser.parse_args()',
+    '    data_root = Path(args.data_root)',
+    '    if not data_root.exists():',
+    '        data_root.mkdir(parents=True, exist_ok=True)',
+    '    extracted, skipped = extract_zips(data_root, max_depth=max(1, int(args.max_zip_depth)))',
+    '    ts_count = count_marker_csvs(data_root, "timeseries")',
+    '    cs_count = count_marker_csvs(data_root, "cycle_summary")',
+    '    print("Prepared data root: %s" % data_root)',
+    '    print("Extracted archives: %d" % len(extracted))',
+    '    print("Skipped up-to-date archives: %d" % len(skipped))',
+    '    print("timeseries CSV files: %d" % ts_count)',
+    '    print("cycle_summary CSV files: %d" % cs_count)',
+    '    if ts_count <= 0:',
+    '        raise SystemExit("No *timeseries*.csv files found under %s after zip preparation. Copy a processed dataset folder or place a .zip that contains nested *_timeseries.csv files." % data_root)',
+    '    if cs_count <= 0:',
+    '        raise SystemExit("No *cycle_summary*.csv files found under %s after zip preparation. The dataset must include *_cycle_summary.csv files for SOH/RUL labels." % data_root)',
+    '',
+    'if __name__ == "__main__":',
+    '    main()'
+  ].join('\n') + '\n';
+}
 function bwPrepareSplitPy() {
   return [
     'import argparse',
@@ -6449,6 +6817,9 @@ function bwPrepareSplitPy() {
     '    frame = frame.dropna(subset=["cell_id", "cycle_id", target]).copy()',
     '    if frame.empty:',
     '        raise ValueError("No usable rows after filtering empty target column %s. Provide already-processed data with labels for the selected task." % target)',
+    '    cycles_per_cell = frame.groupby(frame["cell_id"].astype(str))["cycle_id"].nunique()',
+    '    if int(cycles_per_cell.max()) <= 1:',
+    '        raise ValueError("Split source has only one cycle per cell. Feature/label tables must keep one row per cycle (cell_id + cycle_id) so predictions can plot Cycle vs SOH/RUL.")',
     '    parts, resolved = split_by_ratio(frame, split)',
     '    write_split_files(parts, ROOT / args.out)',
     '    resolved["target_column"] = target',
@@ -6555,18 +6926,146 @@ def scale_for_torch(train, val, test, cols):
     test_out[cols] = pd.DataFrame(test_values, columns=cols, index=test_out.index)
     return train_out, val_out, test_out
 
-def append_predictions(pred_frames, rows, model_name, split_name, y_true, y_pred, meta, adapter):
+def prediction_meta(part, target):
+    cols = ["cell_id", "cycle_id"]
+    for col in ["SOH", "RUL"]:
+        if col in part.columns and col not in cols:
+            cols.append(col)
+    if target in part.columns and target not in cols:
+        cols.append(target)
+    return part[cols].reset_index(drop=True)
+
+def append_predictions(pred_frames, rows, model_name, split_name, y_true, y_pred, meta, adapter, target):
     metrics = metric_dict(y_true, y_pred)
-    metrics.update({"model": model_name, "split": split_name, "adapter": adapter})
+    metrics.update({"model": model_name, "split": split_name, "adapter": adapter or ""})
     rows.append(metrics)
+    cycle_number = pd.to_numeric(meta["cycle_id"], errors="coerce")
+    soh_true = pd.to_numeric(meta["SOH"], errors="coerce") if "SOH" in meta.columns else pd.Series(np.nan, index=meta.index)
+    rul_true = pd.to_numeric(meta["RUL"], errors="coerce") if "RUL" in meta.columns else pd.Series(np.nan, index=meta.index)
+    if target == "SOH" and soh_true.isna().all():
+        soh_true = pd.Series(np.asarray(y_true, dtype=float), index=meta.index)
+    if target == "RUL" and rul_true.isna().all():
+        rul_true = pd.Series(np.asarray(y_true, dtype=float), index=meta.index)
+    soh_pred = pd.Series(np.asarray(y_pred, dtype=float), index=meta.index) if target == "SOH" else pd.Series(np.nan, index=meta.index)
+    rul_pred = pd.Series(np.asarray(y_pred, dtype=float), index=meta.index) if target == "RUL" else pd.Series(np.nan, index=meta.index)
     pred_frames.append(pd.DataFrame({
         "model": model_name,
+        "adapter": adapter or "",
         "split": split_name,
-        "cell_id": meta["cell_id"].values,
-        "cycle_id": meta["cycle_id"].values,
-        "y_true": y_true,
-        "y_pred": y_pred
+        "cell_id": meta["cell_id"].astype(str).values,
+        "cycle_id": cycle_number.values,
+        "cycle_number": cycle_number.values,
+        "SOH_true": soh_true.values,
+        "SOH_pred": soh_pred.values,
+        "RUL_true": rul_true.values,
+        "RUL_pred": rul_pred.values,
+        "SOH": soh_true.values,
+        "RUL": rul_true.values,
+        "y_true": np.asarray(y_true, dtype=float),
+        "y_pred": np.asarray(y_pred, dtype=float),
+        "target": target
     }))
+
+def minmax_norm(series):
+    values = pd.to_numeric(series, errors="coerce")
+    lo = values.min(skipna=True)
+    hi = values.max(skipna=True)
+    if not np.isfinite(lo) or not np.isfinite(hi) or hi == lo:
+        return pd.Series(np.zeros(len(values)), index=values.index, dtype=float)
+    return (values - lo) / (hi - lo)
+
+def select_best_model(metrics_df):
+    if metrics_df is None or metrics_df.empty:
+        return None
+    table = metrics_df.copy()
+    table["adapter"] = table.get("adapter", "").fillna("").astype(str)
+    table["model"] = table["model"].astype(str)
+    table["split"] = table["split"].astype(str).str.lower()
+    test = table[table["split"] == "test"].copy()
+    val = table[table["split"].isin(["val", "validation"])].copy()
+    if test.empty:
+        return None
+    val_r2 = val[["model", "adapter", "r2"]].rename(columns={"r2": "r2_val"})
+    merged = test.merge(val_r2, on=["model", "adapter"], how="left")
+    merged["r2_test"] = pd.to_numeric(merged["r2"], errors="coerce")
+    merged["r2_val"] = pd.to_numeric(merged["r2_val"], errors="coerce")
+    merged["r2_gap"] = merged["r2_val"] - merged["r2_test"]
+    merged["rmse_test"] = pd.to_numeric(merged["rmse"], errors="coerce")
+    merged["mae_test"] = pd.to_numeric(merged["mae"], errors="coerce")
+    candidates = merged[
+        (merged["r2_test"].fillna(-np.inf) >= 0.7) &
+        (merged["r2_gap"].fillna(np.inf) <= 0.15)
+    ].copy()
+    fallback = False
+    if candidates.empty:
+        candidates = merged.dropna(subset=["rmse_test"]).copy()
+        fallback = True
+    if candidates.empty:
+        return None
+    if fallback:
+        best = candidates.sort_values(["rmse_test", "mae_test"], ascending=[True, True]).iloc[0]
+        score = float(best["rmse_test"]) if np.isfinite(best["rmse_test"]) else None
+    else:
+        candidates["score"] = (
+            0.5 * minmax_norm(candidates["rmse_test"]) +
+            0.3 * minmax_norm(candidates["mae_test"]) +
+            0.2 * (1.0 - minmax_norm(candidates["r2_test"]))
+        )
+        best = candidates.sort_values(["score", "rmse_test"], ascending=[True, True]).iloc[0]
+        score = float(best["score"]) if np.isfinite(best["score"]) else None
+    return {
+        "model": str(best["model"]),
+        "adapter": str(best.get("adapter", "") or ""),
+        "split": "test",
+        "score": score,
+        "selection": "fallback_lowest_test_rmse" if fallback else "weighted_minmax",
+        "rmse": float(best["rmse_test"]) if np.isfinite(best["rmse_test"]) else None,
+        "mae": float(best["mae_test"]) if np.isfinite(best["mae_test"]) else None,
+        "r2": float(best["r2_test"]) if np.isfinite(best["r2_test"]) else None,
+        "r2_val": float(best["r2_val"]) if np.isfinite(best.get("r2_val", np.nan)) else None,
+        "r2_gap": float(best["r2_gap"]) if np.isfinite(best.get("r2_gap", np.nan)) else None,
+        "filters": {"r2_test_min": 0.7, "r2_gap_max": 0.15}
+    }
+
+def safe_cell_filename(cell_id):
+    text = "".join(ch if (str(ch).isalnum() or ch in ("-", "_", ".")) else "_" for ch in str(cell_id))
+    return text.strip("._") or "cell"
+
+def write_per_cell_predictions(preds, out, best):
+    pred_dir = out / "predictions"
+    if pred_dir.exists():
+        for path in pred_dir.glob("*.csv"):
+            path.unlink()
+    pred_dir.mkdir(parents=True, exist_ok=True)
+    if preds is None or preds.empty or not best:
+        return []
+    subset = preds[
+        (preds["model"].astype(str) == str(best["model"])) &
+        (preds["split"].astype(str).str.lower() == "test")
+    ].copy()
+    if "adapter" in subset.columns and best.get("adapter") is not None:
+        subset = subset[subset["adapter"].fillna("").astype(str) == str(best.get("adapter") or "")]
+    written = []
+    for cell_id, group in subset.groupby(subset["cell_id"].astype(str), sort=True):
+        frame = group.sort_values("cycle_number" if "cycle_number" in group.columns else "cycle_id").copy()
+        export = pd.DataFrame({
+            "cycle_number": pd.to_numeric(frame.get("cycle_number", frame.get("cycle_id")), errors="coerce"),
+            "SOH": pd.to_numeric(frame.get("SOH_true", frame.get("SOH")), errors="coerce"),
+            "RUL": pd.to_numeric(frame.get("RUL_true", frame.get("RUL")), errors="coerce"),
+            "SOH_pred": pd.to_numeric(frame.get("SOH_pred"), errors="coerce"),
+            "RUL_pred": pd.to_numeric(frame.get("RUL_pred"), errors="coerce"),
+            "SOH_true": pd.to_numeric(frame.get("SOH_true", frame.get("SOH")), errors="coerce"),
+            "RUL_true": pd.to_numeric(frame.get("RUL_true", frame.get("RUL")), errors="coerce"),
+            "y_true": pd.to_numeric(frame.get("y_true"), errors="coerce"),
+            "y_pred": pd.to_numeric(frame.get("y_pred"), errors="coerce"),
+            "model": frame.get("model", best["model"]),
+            "split": frame.get("split", "test"),
+            "cell_id": cell_id
+        })
+        path = pred_dir / ("%s.csv" % safe_cell_filename(cell_id))
+        export.to_csv(path, index=False)
+        written.append(str(path.relative_to(out)))
+    return written
 
 def run_sklearn_model(model_name, train, val, test, target, cols, rows, pred_frames, log_lines, out):
     model, adapter = build_model(model_name)
@@ -6575,8 +7074,8 @@ def run_sklearn_model(model_name, train, val, test, target, cols, rows, pred_fra
     joblib.dump(pipe, out / ("%s.joblib" % model_slug(model_name)))
     for split_name, part in [("val", val), ("test", test)]:
         pred = pipe.predict(part[cols])
-        meta = part[["cell_id", "cycle_id"]].reset_index(drop=True)
-        append_predictions(pred_frames, rows, model_name, split_name, part[target].values, pred, meta, adapter)
+        meta = prediction_meta(part, target)
+        append_predictions(pred_frames, rows, model_name, split_name, part[target].values, pred, meta, adapter, target)
     log_lines.append("trained model=%s adapter=%s target=%s features=%d train_rows=%d" % (model_name, adapter or "sklearn", target, len(cols), len(train)))
 
 def run_torch_model(model_name, train, val, test, target, cols, config, rows, pred_frames, log_lines, out):
@@ -6593,8 +7092,12 @@ def run_torch_model(model_name, train, val, test, target, cols, config, rows, pr
         model.save(str(out / ("%s.pt" % model_slug(model_name))))
         for split_name, part in [("val", val_s), ("test", test_s)]:
             x, y, meta = build_sequence_arrays(part, target, cols, seq_len)
+            for col in ["SOH", "RUL", target]:
+                if col in part.columns and col not in meta.columns:
+                    lookup = part[["cell_id", "cycle_id", col]].drop_duplicates(["cell_id", "cycle_id"])
+                    meta = meta.merge(lookup, on=["cell_id", "cycle_id"], how="left")
             pred = np.asarray(model.predict(x), dtype=float).reshape(-1)
-            append_predictions(pred_frames, rows, model_name, split_name, y, pred, meta, "pytorch_sequence")
+            append_predictions(pred_frames, rows, model_name, split_name, y, pred, meta, "pytorch_sequence", target)
         log_lines.append("trained model=%s adapter=pytorch_sequence target=%s features=%d sequence_length=%d train_rows=%d" % (model_name, target, len(cols), seq_len, len(train)))
     except ModuleNotFoundError as err:
         if "torch" in str(err).lower():
@@ -6632,21 +7135,45 @@ def main():
         else:
             run_sklearn_model(model_name, train, val, test, target, cols, rows, pred_frames, log_lines, out)
     metrics_df = pd.DataFrame(rows)
-    preds = pd.concat(pred_frames, ignore_index=True)
-    per_cell = preds.groupby(["model", "split", "cell_id"])[["y_true", "y_pred"]].apply(lambda g: pd.Series(metric_dict(g["y_true"], g["y_pred"]))).reset_index()
+    preds = pd.concat(pred_frames, ignore_index=True) if pred_frames else pd.DataFrame()
+    if not preds.empty:
+        cycle_counts = preds.groupby(["model", "split", "cell_id"], dropna=False)["cycle_number"].nunique()
+        if (cycle_counts <= 1).all():
+            raise ValueError(
+                "predictions.csv would contain only one cycle per cell. "
+                "Check that features/features.csv and splits/*.csv keep one row per cycle "
+                "(cell_id + cycle_id), including SOH/RUL labels for every cycle."
+            )
+    per_cell = pd.DataFrame()
+    if not preds.empty:
+        per_cell = preds.groupby(["model", "split", "cell_id"])[["y_true", "y_pred"]].apply(
+            lambda g: pd.Series(metric_dict(g["y_true"], g["y_pred"]))
+        ).reset_index()
+    best = select_best_model(metrics_df)
+    cell_files = write_per_cell_predictions(preds, out, best)
     metrics = {
         "dataset": config.get("dataset", {}),
         "task": config.get("task", {}),
         "target_column": target,
         "features": cols,
         "split_files": {k: str(v) for k, v in paths.items()},
-        "metrics": metrics_df.to_dict(orient="records")
+        "metrics": metrics_df.to_dict(orient="records"),
+        "best_model": best,
+        "prediction_files": {
+            "combined": "predictions.csv",
+            "per_cell_dir": "predictions/",
+            "per_cell": cell_files
+        }
     }
     (out / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
-    preds.to_csv(out / "predictions.csv", index=False)
-    per_cell.to_csv(out / "per_cell_metrics.csv", index=False)
+    if not preds.empty:
+        preds.to_csv(out / "predictions.csv", index=False)
+    if not per_cell.empty:
+        per_cell.to_csv(out / "per_cell_metrics.csv", index=False)
     (out / "training_log.csv").write_text("\\n".join(log_lines) + "\\n", encoding="utf-8")
     print(metrics_df.to_string(index=False))
+    if best:
+        print("Best model: %s (test RMSE=%s, score=%s)" % (best.get("model"), best.get("rmse"), best.get("score")))
     print("Wrote outputs to %s" % out)
 
 if __name__ == "__main__":
@@ -6672,10 +7199,26 @@ function bwExportResultsPy() {
     '    lines = ["# Benchmark Results", ""]',
     '    lines.append("Dataset: `%s`" % metrics.get("dataset", {}).get("id", ""))',
     '    lines.append("Task: `%s`" % metrics.get("task", {}).get("name", ""))',
+    '    best = metrics.get("best_model") or {}',
+    '    if best:',
+    '        lines.append("Best Model: `%s`" % best.get("model", ""))',
+    '        lines.append("Test RMSE: `%s`" % best.get("rmse", ""))',
+    '        lines.append("Selection: `%s`" % best.get("selection", ""))',
     '    lines.append("")',
     '    table = pd.DataFrame(metrics.get("metrics", []))',
     '    if not table.empty:',
     '        lines.append(table.to_markdown(index=False))',
+    '    pred_dir = root / "predictions"',
+    '    if pred_dir.exists():',
+    '        cell_files = sorted(p.name for p in pred_dir.glob("*.csv"))',
+    '        lines.append("")',
+    '        lines.append("## Per-cell prediction files")',
+    '        lines.append("Directory: `outputs/predictions/`")',
+    '        lines.append("Files: %d" % len(cell_files))',
+    '        for name in cell_files[:20]:',
+    '            lines.append("- `%s`" % name)',
+    '        if len(cell_files) > 20:',
+    '            lines.append("- ...")',
     '    if metrics.get("warnings"):',
     '        lines.append("")',
     '        lines.append("## Warnings")',
@@ -6693,14 +7236,16 @@ function bwRunBenchmarkSh() {
     '#!/usr/bin/env bash',
     'set -euo pipefail',
     '',
+    'python scripts/prepare_data.py --data-root data',
+    '',
     'if ! find data -name "*timeseries*.csv" -print -quit | grep -q .; then',
     '  echo "No *_timeseries*.csv files found under data/."',
-    '  echo "Copy the whole processed dataset folder into data/ before running."',
+    '  echo "Copy a processed dataset folder into data/, or place a .zip containing nested timeseries/cycle_summary CSVs."',
     '  exit 1',
     'fi',
     'if ! find data -name "*cycle_summary*.csv" -print -quit | grep -q .; then',
     '  echo "No *_cycle_summary*.csv files found under data/."',
-    '  echo "The dataset folder under data/ must contain a *_cycle_summary*.csv file for SOH/RUL labels."',
+    '  echo "The dataset under data/ must contain a *_cycle_summary*.csv file for SOH/RUL labels."',
     '  exit 1',
     'fi',
     '',
@@ -6750,6 +7295,7 @@ function bwBuildPackageFiles(root, manifest) {
     { name: root + '/models/benchmark_models.py', data: bwModelsPy() },
     { name: root + '/features/feature_schema.txt', data: bwFeatureSchemaText() },
     { name: root + '/scripts/compute_features.py', data: bwComputeFeaturesPy() },
+    { name: root + '/scripts/prepare_data.py', data: bwPrepareDataPy() },
     { name: root + '/scripts/prepare_split.py', data: bwPrepareSplitPy() },
     { name: root + '/scripts/train.py', data: bwTrainPy() },
     { name: root + '/scripts/export_results.py', data: bwExportResultsPy() }
@@ -6978,7 +7524,7 @@ function bwFlowInit() {
   bwSyncDatasetFilterPopup();
   bwFlowRenderDatasets();
   bwApplySplit(BWR.split.train, BWR.split.val, BWR.split.test);
-  bwRenderMockTrajectory();
+  bwRenderFlowResults();
   bwUpdateProgress();
 }
 
@@ -7472,7 +8018,7 @@ window.bwWizardNext = function() {
   BWR.completed.add(BWR.current);
   if (BWR.current < 6) BWR.current += 1;
   bwUpdateProgress();
-  if (BWR.current === 6) bwRenderMockTrajectory();
+  if (BWR.current === 6) bwRenderFlowResults();
 };
 window.bwWizardPrev = function() {
   if (BWR.current > 1) {
@@ -7561,13 +8107,36 @@ window.bwFlowHandleUpload = function(event) {
   event.target.value = '';
 };
 function bwFlowMarkUploaded(files) {
-  BWR.uploaded = true;
-  const card = document.getElementById('bwr-upload-card');
+  bwFlowIngestOutputs(files);
+}
+async function bwFlowIngestOutputs(files) {
+  const list = Array.from(files || []);
   const status = document.getElementById('bwr-upload-status');
-  if (card) card.classList.add('uploaded');
-  if (status) status.textContent = files.length ? 'Upload ready: ' + files.length + ' item' + (files.length === 1 ? '' : 's') + ' selected.' : 'Upload ready: output folder selected.';
-  if (typeof showToast === 'function') showToast('Output folder accepted for this local run.', 'success');
-  bwUpdateProgress();
+  const card = document.getElementById('bwr-upload-card');
+  if (!list.length) {
+    if (status) status.textContent = 'No files selected.';
+    return;
+  }
+  if (status) status.textContent = 'Reading ' + list.length + ' local file' + (list.length === 1 ? '' : 's') + '...';
+  try {
+    BW.results = await bwParseOutputsFiles(list);
+    BWR.uploaded = true;
+    if (card) card.classList.add('uploaded');
+    if (status) {
+      const nPred = (BW.results.predictions || []).length;
+      const nCells = bwUnique((BW.results.predictions || []).map(r => r.cell_id)).length;
+      status.textContent = 'Loaded ' + BW.results.files.length + ' file(s) · ' + nPred + ' prediction rows · ' + nCells + ' cell(s)';
+    }
+    bwRenderFlowResults();
+    if (typeof showToast === 'function') showToast('Outputs loaded for View Results.', 'success');
+    bwUpdateProgress();
+  } catch (err) {
+    BWR.uploaded = false;
+    if (card) card.classList.remove('uploaded');
+    if (status) status.textContent = 'Could not parse outputs: ' + err.message;
+    if (typeof showToast === 'function') showToast('Could not parse outputs: ' + err.message, 'error');
+    bwUpdateProgress();
+  }
 }
 window.bwToggleExportMenu = function() {
   document.getElementById('bwr-export-dropdown')?.classList.toggle('open');
@@ -7591,6 +8160,7 @@ window.bwRunAnotherBenchmark = function() {
   BWR.filters = { q: '', all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() };
   BWR.pendingFilters = bwCloneFilterState(BWR.filters);
   BW.selId = null;
+  BW.results = null;
   document.querySelectorAll('#page-benchmarks .bw-flow .selected').forEach(el => el.classList.remove('selected'));
   const search = document.getElementById('bwr-ds-search');
   if (search) search.value = '';
@@ -7606,70 +8176,268 @@ window.bwRunAnotherBenchmark = function() {
   if (randomCtrl) randomCtrl.hidden = true;
   bwApplySplit(60, 20, 20);
   bwFlowRenderDatasets();
+  bwRenderFlowResults();
   bwUpdateProgress();
 };
 
-function bwMockTrajectoryRows() {
-  const cell = document.getElementById('bwr-cell-select')?.value || 'Cell_01 (Tesla 2170)';
-  const offset = cell.includes('02') ? .35 : cell.includes('03') ? -.25 : 0;
-  return Array.from({ length: 16 }, (_, i) => {
-    const cycle = 40 + i * 32;
-    const truth = 99 - i * 1.28 + offset - Math.max(0, i - 8) * .22;
-    const pred = truth + (Math.sin(i * 1.35) * .28) + .06;
-    return { cycle, truth, pred };
-  });
+function bwFlowBestPredictions(results) {
+  if (!results || !results.predictions || !results.predictions.length) return [];
+  const best = bwResolveBestModel(results);
+  let rows = results.predictions.slice();
+  const testRows = rows.filter(r => r.split === 'test');
+  if (testRows.length) rows = testRows;
+  if (best && best.model) {
+    const matched = rows.filter(r => r.model === best.model && (!best.adapter || r.adapter === best.adapter));
+    if (matched.length) rows = matched;
+  }
+  return rows;
 }
-window.bwRenderMockTrajectory = function() {
+function bwTrajectoryMetricKey() {
+  const sel = document.getElementById('bwr-metric-select');
+  const raw = String(sel?.value || 'SOH').toUpperCase();
+  return raw.includes('RUL') ? 'RUL' : 'SOH';
+}
+function bwTrajectoryRowsForCell(results, cellId, metric) {
+  const rows = bwFlowBestPredictions(results).filter(r => r.cell_id === cellId)
+    .sort((a, b) => Number(a.cycle_number ?? a.cycle_id) - Number(b.cycle_number ?? b.cycle_id));
+  return rows.map(r => {
+    const cycle = Number(r.cycle_number ?? r.cycle_id);
+    let truth = metric === 'RUL' ? r.RUL_true : r.SOH_true;
+    let pred = metric === 'RUL' ? r.RUL_pred : r.SOH_pred;
+    if (!Number.isFinite(truth) && String(r.target || '').toUpperCase() === metric) truth = r.y_true;
+    if (!Number.isFinite(pred) && String(r.target || '').toUpperCase() === metric) pred = r.y_pred;
+    if (!Number.isFinite(truth) && metric === 'SOH') truth = r.y_true;
+    if (!Number.isFinite(pred) && metric === 'SOH') pred = r.y_pred;
+    return { cycle, truth, pred };
+  }).filter(d => Number.isFinite(d.cycle) && (Number.isFinite(d.truth) || Number.isFinite(d.pred)));
+}
+function bwRenderFlowHighlights(results) {
+  const bestEl = document.getElementById('bwr-best-model');
+  const rmseEl = document.getElementById('bwr-test-rmse');
+  if (!results) {
+    if (bestEl) bestEl.textContent = '—';
+    if (rmseEl) rmseEl.textContent = '—';
+    return;
+  }
+  const best = bwResolveBestModel(results);
+  if (bestEl) bestEl.textContent = best?.model || '—';
+  if (rmseEl) rmseEl.textContent = best && best.rmse != null ? bwFmtMetric(best.rmse) : '—';
+}
+function bwRenderFlowCellOptions(results) {
+  const cellSel = document.getElementById('bwr-cell-select');
+  if (!cellSel) return;
+  const old = cellSel.value;
+  if (!results) {
+    bwSetSelectOptions(cellSel, [], '');
+    cellSel.innerHTML = '<option value="">Upload outputs to choose a cell</option>';
+    return;
+  }
+  const cells = bwUnique(bwFlowBestPredictions(results).map(r => r.cell_id)).sort();
+  if (!cells.length) {
+    cellSel.innerHTML = '<option value="">No cells found in predictions</option>';
+    return;
+  }
+  bwSetSelectOptions(cellSel, cells, old);
+}
+function bwRenderFlowResults() {
+  const results = BW.results;
+  bwRenderFlowHighlights(results);
+  bwRenderFlowCellOptions(results);
+  const metricSel = document.getElementById('bwr-metric-select');
+  if (metricSel && results?.metricsJson?.target_column) {
+    const target = String(results.metricsJson.target_column).toUpperCase();
+    if ((target === 'SOH' || target === 'RUL') && Array.from(metricSel.options).some(o => o.value === target)) {
+      metricSel.value = target;
+    }
+  }
+  bwRenderResultsTrajectory();
+}
+window.bwRenderResultsTrajectory = function() {
   const host = document.getElementById('bwr-trajectory-chart');
   if (!host) return;
-  const rows = bwMockTrajectoryRows();
-  host.onmouseleave = bwHideChartTip;
-  host.onmousemove = event => {
-    if (!event.target.closest?.('.bwr-chart-hit')) bwHideChartTip();
-  };
+  const results = BW.results;
+  const metric = bwTrajectoryMetricKey();
+  if (!results) {
+    host._bwrTipPoints = [];
+    host.onmousemove = null;
+    host.onmouseleave = null;
+    host.innerHTML = '<div class="bw-empty-plot">Upload the local outputs/ folder in Step 5 to render Cycle vs ' + metric + '.</div>';
+    return;
+  }
+  const cell = document.getElementById('bwr-cell-select')?.value;
+  const rows = cell ? bwTrajectoryRowsForCell(results, cell, metric) : [];
+  if (!rows.length) {
+    host._bwrTipPoints = [];
+    host.onmousemove = null;
+    host.onmouseleave = null;
+    host.innerHTML = '<div class="bw-empty-plot">No cycle-level ' + metric + ' predictions for this cell. Expected outputs/predictions/&lt;cell&gt;.csv with cycle_number, SOH, and RUL.</div>';
+    return;
+  }
+  const plotRows = rows.filter(d => Number.isFinite(d.truth) || Number.isFinite(d.pred));
+  const truthRows = plotRows.filter(d => Number.isFinite(d.truth));
+  const predRows = plotRows.filter(d => Number.isFinite(d.pred));
   const w = 820, h = 360, l = 64, r = 28, t = 30, b = 54;
-  const xMin = rows[0].cycle, xMax = rows[rows.length - 1].cycle;
-  const yMin = 76, yMax = 101;
-  const x = v => l + (v - xMin) / (xMax - xMin) * (w - l - r);
-  const y = v => t + (yMax - v) / (yMax - yMin) * (h - t - b);
-  const line = key => rows.map(d => x(d.cycle).toFixed(1) + ',' + y(d[key]).toFixed(1)).join(' ');
-  const yTicks = [80, 85, 90, 95, 100];
-  const xTicks = [40, 168, 296, 424, 520];
-  const areaPts = rows.map(d => x(d.cycle).toFixed(1) + ',' + y(d.pred).toFixed(1)).join(' ') + ' ' + x(rows[rows.length - 1].cycle).toFixed(1) + ',' + (h - b) + ' ' + x(rows[0].cycle).toFixed(1) + ',' + (h - b);
-  const points = rows.map(d => {
-    const err = Math.abs(d.pred - d.truth);
-    const cx = x(d.cycle).toFixed(1);
-    const cy = y(d.pred).toFixed(1);
-    const args = [d.cycle, d.truth.toFixed(2), d.pred.toFixed(2), err.toFixed(2)].join(',');
-    return '<circle class="bwr-chart-point" cx="' + cx + '" cy="' + cy + '" r="3.8" fill="#2563eb" stroke="#fff" stroke-width="1.6"></circle>'
-      + '<circle class="bwr-chart-hit" cx="' + cx + '" cy="' + cy + '" r="10" fill="transparent" stroke="transparent" onmousemove="bwShowChartTip(event,' + args + ')"></circle>';
-  }).join('');
+  const xMin = Math.min(...plotRows.map(d => d.cycle));
+  const xMax = Math.max(...plotRows.map(d => d.cycle));
+  const yVals = plotRows.flatMap(d => [d.truth, d.pred]).filter(Number.isFinite);
+  const sohIsFraction = metric === 'SOH' && Math.max(...yVals) <= 1.5;
+  let yMin;
+  let yMax;
+  let yTicks;
+  let retirementY = null;
+  const fmtY = v => {
+    if (metric === 'SOH') {
+      const pct = sohIsFraction ? v * 100 : v;
+      return Math.round(pct) + '%';
+    }
+    return bwFmtMetric(v, Math.abs(v) >= 100 ? 0 : 2);
+  };
+  if (metric === 'SOH') {
+    const yValsPct = yVals.map(v => sohIsFraction ? v * 100 : v);
+    const dataMinPct = Math.min(...yValsPct);
+    const yTicksPct = bwSohPercentTicks(Math.min(dataMinPct, 80), 100);
+    yMin = sohIsFraction ? yTicksPct[0] / 100 : yTicksPct[0];
+    yMax = sohIsFraction ? 1 : 100;
+    yTicks = yTicksPct.map(p => sohIsFraction ? p / 100 : p);
+    retirementY = sohIsFraction ? 0.8 : 80;
+  } else {
+    yMin = Math.min(...yVals);
+    yMax = Math.max(...yVals);
+    if (yMin === yMax) {
+      yMin -= 1;
+      yMax += 1;
+    }
+    const yPad = (yMax - yMin) * 0.06 || 0.01;
+    yMin -= yPad;
+    yMax += yPad;
+    yTicks = bwNiceIntTicks(yMin, yMax, 6);
+  }
+  const clampY = v => {
+    const n = Number(v);
+    if (!Number.isFinite(n)) return n;
+    if (metric === 'SOH') return Math.min(Math.max(n, yMin), yMax);
+    return n;
+  };
+  const x = v => l + (Number(v) - xMin) / (xMax - xMin || 1) * (w - l - r);
+  const y = v => t + (yMax - clampY(v)) / (yMax - yMin || 1) * (h - t - b);
+  const truthLine = truthRows.map(d => x(d.cycle).toFixed(1) + ',' + y(d.truth).toFixed(1)).join(' ');
+  const predLine = predRows.map(d => x(d.cycle).toFixed(1) + ',' + y(d.pred).toFixed(1)).join(' ');
+  const xTicks = bwCycleAxisTicks(xMin, xMax, 6);
+  const tipScale = sohIsFraction ? 100 : 1;
+  const tipUnit = metric === 'SOH' ? '%' : '';
+  const areaPts = predRows.length
+    ? predRows.map(d => x(d.cycle).toFixed(1) + ',' + y(d.pred).toFixed(1)).join(' ') + ' ' + x(predRows[predRows.length - 1].cycle).toFixed(1) + ',' + (h - b) + ' ' + x(predRows[0].cycle).toFixed(1) + ',' + (h - b)
+    : '';
+  const tipPoints = predRows.map(d => {
+    const truth = Number.isFinite(d.truth) ? d.truth : d.pred;
+    const err = Number.isFinite(d.truth) ? Math.abs(d.pred - d.truth) : 0;
+    return {
+      cycle: d.cycle,
+      cx: x(d.cycle),
+      cy: y(d.pred),
+      truth: (truth * tipScale).toFixed(2),
+      pred: (d.pred * tipScale).toFixed(2),
+      err: (err * tipScale).toFixed(2),
+      metric,
+      unit: tipUnit
+    };
+  });
+  host._bwrTipPoints = tipPoints;
+  host._bwrPlotBounds = { l, r: w - r, t, b: h - b };
+  host.onmouseleave = bwHideChartTip;
+  host.onmousemove = bwHandleTrajectoryHover;
   host.innerHTML = '<div class="bw-chart-tooltip" id="bwr-chart-tooltip"></div><svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Per-cell prediction trajectory">'
     + '<defs><linearGradient id="bwrPredFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563eb" stop-opacity=".20"/><stop offset="100%" stop-color="#2563eb" stop-opacity="0"/></linearGradient></defs>'
-    + yTicks.map(v => '<line class="bw-plot-grid" x1="' + l + '" y1="' + y(v).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(v).toFixed(1) + '"/><text class="bw-plot-label" x="' + (l - 10) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end">' + v + '%</text>').join('')
-    + xTicks.map(v => '<text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 22) + '" text-anchor="middle">' + v + '</text>').join('')
+    + yTicks.map(v => '<line class="bw-plot-grid" x1="' + l + '" y1="' + y(v).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(v).toFixed(1) + '"/><text class="bw-plot-label" x="' + (l - 10) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end">' + fmtY(v) + '</text>').join('')
+    + xTicks.map(v => '<text class="bw-plot-label" x="' + x(v).toFixed(1) + '" y="' + (h - 22) + '" text-anchor="middle">' + Math.round(v) + '</text>').join('')
     + '<line class="bw-plot-axis" x1="' + l + '" y1="' + t + '" x2="' + l + '" y2="' + (h - b) + '"/><line class="bw-plot-axis" x1="' + l + '" y1="' + (h - b) + '" x2="' + (w - r) + '" y2="' + (h - b) + '"/>'
-    + '<polygon points="' + areaPts + '" fill="url(#bwrPredFade)"/>'
-    + '<line x1="' + l + '" y1="' + y(80).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(80).toFixed(1) + '" stroke="#38bdf8" stroke-width="1.7" stroke-dasharray="6 5"/>'
-    + '<polyline fill="none" stroke="#0f172a" stroke-width="2.5" points="' + line('truth') + '"/><polyline fill="none" stroke="#2563eb" stroke-width="2.6" points="' + line('pred') + '"/>'
-    + points
-    + '<text class="bw-plot-label" x="' + ((w + l - r) / 2).toFixed(1) + '" y="' + (h - 4) + '" text-anchor="middle">Cycles</text>'
-    + '<text class="bw-plot-label" x="17" y="' + ((h - b + t) / 2).toFixed(1) + '" text-anchor="middle" transform="rotate(-90 17 ' + ((h - b + t) / 2).toFixed(1) + ')">SOH (%)</text>'
+    + (areaPts ? '<polygon points="' + areaPts + '" fill="url(#bwrPredFade)"/>' : '')
+    + (retirementY != null ? '<line x1="' + l + '" y1="' + y(retirementY).toFixed(1) + '" x2="' + (w - r) + '" y2="' + y(retirementY).toFixed(1) + '" stroke="#38bdf8" stroke-width="1.7" stroke-dasharray="6 5"/>' : '')
+    + (truthLine ? '<polyline fill="none" stroke="#0f172a" stroke-width="2.5" points="' + truthLine + '"/>' : '')
+    + (predLine ? '<polyline class="bwr-pred-line" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" points="' + predLine + '"/>' : '')
+    + (predLine ? '<polyline class="bwr-pred-hit" fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" points="' + predLine + '"/>' : '')
+    + '<line class="bwr-chart-guide" id="bwr-chart-guide" x1="0" y1="' + t + '" x2="0" y2="' + (h - b) + '" opacity="0"/>'
+    + '<circle class="bwr-chart-hover" id="bwr-chart-hover" cx="0" cy="0" r="4.6" opacity="0"></circle>'
+    + '<text class="bw-plot-label" x="' + ((w + l - r) / 2).toFixed(1) + '" y="' + (h - 4) + '" text-anchor="middle">Cycle Number</text>'
+    + '<text class="bw-plot-label" x="17" y="' + ((h - b + t) / 2).toFixed(1) + '" text-anchor="middle" transform="rotate(-90 17 ' + ((h - b + t) / 2).toFixed(1) + ')">' + (metric === 'SOH' ? 'SOH' : 'RUL') + '</text>'
     + '</svg>';
 };
-window.bwShowChartTip = function(event, cycle, truth, pred, err) {
+window.bwRenderMockTrajectory = function() {
+  bwRenderResultsTrajectory();
+};
+function bwSvgLocalPoint(svg, event) {
+  if (!svg || !event) return null;
+  const ctm = svg.getScreenCTM();
+  if (!ctm) return null;
+  const pt = svg.createSVGPoint();
+  pt.x = event.clientX;
+  pt.y = event.clientY;
+  return pt.matrixTransform(ctm.inverse());
+}
+function bwNearestTipPoint(points, local, bounds) {
+  if (!points?.length || !local) return null;
+  if (bounds) {
+    if (local.x < bounds.l - 8 || local.x > bounds.r + 8 || local.y < bounds.t - 8 || local.y > bounds.b + 8) return null;
+  }
+  let best = null;
+  let bestDx = Infinity;
+  for (let i = 0; i < points.length; i++) {
+    const dx = Math.abs(points[i].cx - local.x);
+    if (dx < bestDx) {
+      bestDx = dx;
+      best = points[i];
+    }
+  }
+  if (!best) return null;
+  const dy = Math.abs(best.cy - local.y);
+  if (bestDx > 28 || dy > 42) return null;
+  return best;
+}
+window.bwHandleTrajectoryHover = function(event) {
+  const shell = document.getElementById('bwr-trajectory-chart');
+  if (!shell) return;
+  const svg = shell.querySelector('svg');
+  const local = bwSvgLocalPoint(svg, event);
+  const point = bwNearestTipPoint(shell._bwrTipPoints, local, shell._bwrPlotBounds);
+  if (!point) {
+    bwHideChartTip();
+    return;
+  }
+  bwShowChartTip(event, point.cycle, point.truth, point.pred, point.err, point.metric, point.unit, point.cx, point.cy);
+};
+window.bwShowChartTip = function(event, cycle, truth, pred, err, metric, unit, cx, cy) {
   const tip = document.getElementById('bwr-chart-tooltip');
   const shell = document.getElementById('bwr-trajectory-chart');
   if (!tip || !shell) return;
-  tip.innerHTML = 'Cycle: ' + cycle + '<br>True SOH: ' + truth.toFixed(2) + '%<br>Pred SOH: ' + pred.toFixed(2) + '%<br>Error: ' + err.toFixed(2) + '%';
+  const label = metric || bwTrajectoryMetricKey();
+  const suffix = unit || (label === 'SOH' ? '%' : '');
+  tip.innerHTML =
+    '<div class="bw-chart-tooltip-head">Cycle <strong>' + cycle + '</strong></div>' +
+    '<div class="bw-chart-tooltip-grid">' +
+      '<span>True ' + label + '</span><strong>' + truth + suffix + '</strong>' +
+      '<span>Pred ' + label + '</span><strong>' + pred + suffix + '</strong>' +
+      '<span>Error</span><strong>' + err + suffix + '</strong>' +
+    '</div>';
+  const hover = document.getElementById('bwr-chart-hover');
+  const guide = document.getElementById('bwr-chart-guide');
+  if (hover && Number.isFinite(Number(cx)) && Number.isFinite(Number(cy))) {
+    hover.setAttribute('cx', Number(cx).toFixed(1));
+    hover.setAttribute('cy', Number(cy).toFixed(1));
+    hover.setAttribute('opacity', '1');
+  }
+  if (guide && Number.isFinite(Number(cx))) {
+    guide.setAttribute('x1', Number(cx).toFixed(1));
+    guide.setAttribute('x2', Number(cx).toFixed(1));
+    guide.setAttribute('opacity', '1');
+  }
   tip.style.left = '0px';
   tip.style.top = '0px';
   tip.style.display = 'block';
   const shellRect = shell.getBoundingClientRect();
   const tipRect = tip.getBoundingClientRect();
-  let left = event.clientX - shellRect.left + shell.scrollLeft + 12;
-  let top = event.clientY - shellRect.top + shell.scrollTop - tipRect.height - 12;
-  if (top < shell.scrollTop + 8) top = event.clientY - shellRect.top + shell.scrollTop + 12;
+  let left = event.clientX - shellRect.left + shell.scrollLeft + 14;
+  let top = event.clientY - shellRect.top + shell.scrollTop - tipRect.height - 14;
+  if (top < shell.scrollTop + 8) top = event.clientY - shellRect.top + shell.scrollTop + 14;
   const maxLeft = shell.scrollLeft + shell.clientWidth - tipRect.width - 8;
   const maxTop = shell.scrollTop + shell.clientHeight - tipRect.height - 8;
   left = Math.max(shell.scrollLeft + 8, Math.min(left, maxLeft));
@@ -7680,6 +8448,10 @@ window.bwShowChartTip = function(event, cycle, truth, pred, err) {
 window.bwHideChartTip = function() {
   const tip = document.getElementById('bwr-chart-tooltip');
   if (tip) tip.style.display = 'none';
+  const hover = document.getElementById('bwr-chart-hover');
+  if (hover) hover.setAttribute('opacity', '0');
+  const guide = document.getElementById('bwr-chart-guide');
+  if (guide) guide.setAttribute('opacity', '0');
 };
 
 bwFlowInit();
