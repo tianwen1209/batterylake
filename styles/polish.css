@@ -4033,13 +4033,6 @@ pre.api-code,
   flex: 1 1 140px;
   min-width: min(100%, 140px);
 }
-#page-benchmarks #bwr-metric-select {
-  flex: 1 1 264px;
-  min-width: min(100%, 264px);
-  font-size: 12.5px;
-  letter-spacing: -.01em;
-  field-sizing: content;
-}
 #page-benchmarks .bw-chart-shell {
   position: relative;
   min-height: 380px;
@@ -4168,8 +4161,7 @@ pre.api-code,
     justify-content: stretch;
   }
   #page-benchmarks .bw-result-controls select,
-  #page-benchmarks #bwr-cell-select,
-  #page-benchmarks #bwr-metric-select {
+  #page-benchmarks #bwr-cell-select {
     flex: 1 1 100%;
     width: 100%;
     min-width: 0;
@@ -4203,9 +4195,6 @@ pre.api-code,
   }
   #page-benchmarks .bw-highlight-card strong {
     font-size: 19px;
-  }
-  #page-benchmarks #bwr-metric-select {
-    font-size: 12px;
   }
 }
 

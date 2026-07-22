@@ -3619,11 +3619,37 @@ def build_timeseries(raw, mapping, cell_id, start_cycle, end_cycle, source_path=
     out["cell_id"] = cell_id
     if out["cycle_id"].isna().all():
         out["cycle_id"] = file_index + 1
-    out["cycle_id"] = pd.to_numeric(out["cycle_id"], errors="coerce").fillna(1).astype(int)
+    out["cycle_id"] = pd.to_numeric(out["cycle_id"], errors="coerce")
     if out["cycle_id"].nunique(dropna=True) <= 1:
-        out["cycle_id"] = file_index + 1
+        # Prefer inferring cycle boundaries over collapsing the whole file to one cycle.
+        inferred = pd.Series(np.ones(len(out), dtype=int), index=out.index)
+        t = pd.to_numeric(out["time_s"], errors="coerce")
+        if t.notna().any():
+            resets = t.diff() < -1.0
+            if int(resets.fillna(False).sum()) > 0:
+                inferred = resets.fillna(False).cumsum() + 1
+        if int(inferred.nunique()) <= 1:
+            for col in ("discharge_capacity_Ah", "charge_capacity_Ah"):
+                if col not in out.columns:
+                    continue
+                cap = pd.to_numeric(out[col], errors="coerce")
+                drops = cap.diff() < -0.5
+                if int(drops.fillna(False).sum()) > 0:
+                    inferred = drops.fillna(False).cumsum() + 1
+                    break
+        if int(inferred.nunique()) <= 1 and "step_type" in out.columns:
+            st = out["step_type"].astype(str).str.lower()
+            is_d = st.eq("discharge")
+            starts = is_d & ~is_d.shift(fill_value=False)
+            if int(starts.sum()) > 1:
+                inferred = starts.cumsum().replace(0, 1)
+        if int(inferred.nunique()) > 1:
+            out["cycle_id"] = inferred.astype(int) + int(cycle_offset)
+        else:
+            out["cycle_id"] = (int(cycle_offset) + 1) if cycle_offset else (file_index + 1)
     else:
-        out["cycle_id"] = out["cycle_id"] + cycle_offset
+        out["cycle_id"] = out["cycle_id"].fillna(1).astype(int) + cycle_offset
+    out["cycle_id"] = pd.to_numeric(out["cycle_id"], errors="coerce").fillna(1).astype(int)
     if start_cycle:
         out = out[out["cycle_id"] >= int(start_cycle)]
     if end_cycle:
@@ -5496,7 +5522,7 @@ function bwReadmeMd(manifest) {
     '',
     'You do not need to create separate train, validation, or test folders. `split.json` stores the cell split selected on the Benchmark page, and the scripts use it automatically.',
     '',
-    'Required time-series columns:',
+    'Required time-series columns (optional when cycle_summary already has per-cycle labels/features):',
     '',
     '- `cell_id`',
     '- `cycle_id` or `cycle_index`',
@@ -5511,7 +5537,7 @@ function bwReadmeMd(manifest) {
     '- `cycle_id` or `cycle_index`',
     '- `' + manifest.task.target_column + '` for this selected task, or a positive capacity column so the script can derive SOH/RUL',
     '',
-    'The scripts compute features from time-series current, voltage, and temperature using `features/feature_schema.txt`, then merge the features back with cycle-summary labels. If SOH/RUL is empty, the split script derives SOH from each cell capacity normalized by its maximum positive capacity, and derives RUL from the first SOH <= 0.8 cycle.',
+    'The scripts prefer cycle-summary labels (`cycle_summary_first`) and treat time-series as optional. When time-series files are present, features are computed from current/voltage/temperature using `features/feature_schema.txt` and merged back with cycle-summary labels. If `cycle_id` is constant in a time-series file, the feature script infers cycle boundaries from time resets, capacity drops, or discharge runs. If SOH/RUL is empty, the split script derives SOH from each cell capacity normalized by its maximum positive capacity, and derives RUL from the first SOH <= 0.8 cycle.',
     '',
     '## 2. Feature schema',
     '',
@@ -5534,7 +5560,7 @@ function bwReadmeMd(manifest) {
     'bash run_benchmark.sh',
     '```',
     '',
-    '`run_benchmark.sh` first unpacks any `.zip` files under `data/`, then writes `features/features.csv` from the time-series files, then writes `splits/train.csv`, `splits/val.csv`, and `splits/test.csv` from the web-selected train/validation/test ratio. The model training script reads those split files directly.',
+    '`run_benchmark.sh` first unpacks any `.zip` files under `data/`, then writes `features/features.csv` from cycle-summary and optional time-series files, then writes `splits/train.csv`, `splits/val.csv`, and `splits/test.csv` from the web-selected train/validation/test ratio. The model training script reads those split files directly.',
     '',
     '## 4. Selected benchmark',
     '',
@@ -5575,10 +5601,13 @@ function bwDataloaderPy() {
     '    return sorted([p for p in root.rglob("*.csv") if marker in p.name.lower()])',
     '',
     'def _processed_csvs(data_root):',
+    '    root = Path(data_root)',
+    '    preferred = root / "features.csv"',
+    '    if preferred.exists():',
+    '        return [preferred]',
     '    files = _csvs(data_root, "cycle_summary")',
     '    if files:',
     '        return files',
-    '    root = Path(data_root)',
     '    return sorted([',
     '        p for p in root.rglob("*.csv")',
     '        if "metadata" not in p.name.lower() and "timeseries" not in p.name.lower()',
@@ -5701,12 +5730,17 @@ function bwDataloaderPy() {
     '    xs, ys, meta = [], [], []',
     '    data = frame.dropna(subset=["cell_id", "cycle_id", target]).copy()',
     '    data["cycle_id"] = pd.to_numeric(data["cycle_id"], errors="coerce")',
-    '    data = data.dropna(subset=["cycle_id"]).sort_values(["cell_id", "cycle_id"])',
+    '    # Prefer original dataset cycle indices when feature scaling overwrote cycle_id.',
+    '    if "_orig_cycle_id" in data.columns:',
+    '        data["_orig_cycle_id"] = pd.to_numeric(data["_orig_cycle_id"], errors="coerce")',
+    '    else:',
+    '        data["_orig_cycle_id"] = data["cycle_id"]',
+    '    data = data.dropna(subset=["cycle_id", "_orig_cycle_id"]).sort_values(["cell_id", "cycle_id"])',
     '    for cell_id, group in data.groupby("cell_id", sort=True):',
     '        g = group.sort_values("cycle_id")',
     '        values = g[feature_cols].to_numpy(dtype=np.float32)',
     '        targets = g[target].to_numpy(dtype=np.float32)',
-    '        cycles = g["cycle_id"].to_numpy()',
+    '        cycles = g["_orig_cycle_id"].to_numpy()',
     '        for idx in range(len(g)):',
     '            start = max(0, idx - seq_len + 1)',
     '            window = values[start:idx + 1]',
@@ -6240,18 +6274,95 @@ function bwComputeFeaturesPy() {
     'def csvs(data_root, marker):',
     '    return sorted([p for p in Path(data_root).rglob("*.csv") if marker in p.name.lower()])',
     '',
+    'def max_cycles_per_cell(frame):',
+    '    if frame is None or len(frame) == 0 or "cell_id" not in frame.columns or "cycle_id" not in frame.columns:',
+    '        return 0',
+    '    return int(frame.groupby(frame["cell_id"].astype(str))["cycle_id"].nunique().max())',
+    '',
+    'def infer_cycle_ids(frame):',
+    '    """Recover cycle_id when preprocessing left a constant cycle index."""',
+    '    data = frame.copy()',
+    '    n = len(data)',
+    '    if n == 0:',
+    '        return data, False',
+    '    if "cycle_id" in data.columns:',
+    '        existing = pd.to_numeric(data["cycle_id"], errors="coerce")',
+    '        if int(existing.nunique(dropna=True)) > 1:',
+    '            data["cycle_id"] = existing',
+    '            return data, False',
+    '    cycle = np.ones(n, dtype=int)',
+    '    if "time_s" in data.columns:',
+    '        t = pd.to_numeric(data["time_s"], errors="coerce").to_numpy(dtype=float)',
+    '        resets = np.zeros(n, dtype=bool)',
+    '        resets[1:] = np.isfinite(t[1:]) & np.isfinite(t[:-1]) & ((t[1:] - t[:-1]) < -1.0)',
+    '        if int(resets.sum()) > 0:',
+    '            cycle = np.cumsum(resets) + 1',
+    '    if len(np.unique(cycle)) <= 1:',
+    '        for col in ("discharge_capacity_Ah", "charge_capacity_Ah"):',
+    '            if col not in data.columns:',
+    '                continue',
+    '            cap = pd.to_numeric(data[col], errors="coerce").to_numpy(dtype=float)',
+    '            if int(np.isfinite(cap).sum()) < 10:',
+    '                continue',
+    '            drops = np.zeros(n, dtype=bool)',
+    '            delta = np.diff(cap)',
+    '            drops[1:] = np.isfinite(delta) & (delta < -0.5)',
+    '            if int(drops.sum()) > 0:',
+    '                cycle = np.cumsum(drops) + 1',
+    '                break',
+    '    if len(np.unique(cycle)) <= 1 and "step_type" in data.columns:',
+    '        st = data["step_type"].astype(str).str.lower().to_numpy()',
+    '        is_d = st == "discharge"',
+    '        starts = np.zeros(n, dtype=bool)',
+    '        starts[0] = bool(is_d[0]) if n else False',
+    '        if n > 1:',
+    '            starts[1:] = is_d[1:] & ~is_d[:-1]',
+    '        if int(starts.sum()) > 1:',
+    '            cycle = np.cumsum(starts)',
+    '            cycle = np.where(cycle == 0, 1, cycle)',
+    '    data["cycle_id"] = cycle.astype(int)',
+    '    return data, int(pd.Series(cycle).nunique()) > 1',
+    '',
+    'def summarize_cycles_from_timeseries(ts):',
+    '    rows = []',
+    '    for (cell_id, cycle_id), g in ts.groupby(["cell_id", "cycle_id"], sort=True):',
+    '        g = g.sort_values("time_s") if "time_s" in g.columns else g',
+    '        t = pd.to_numeric(g["time_s"], errors="coerce").to_numpy(dtype=float) if "time_s" in g.columns else np.array([])',
+    '        i = pd.to_numeric(g["current_A"], errors="coerce").to_numpy(dtype=float) if "current_A" in g.columns else np.array([])',
+    '        discharge = charge = np.nan',
+    '        if len(t) > 1 and len(i) == len(t):',
+    '            dt = np.diff(t)',
+    '            cur = 0.5 * (i[:-1] + i[1:])',
+    '            discharge = float(np.nansum(np.maximum(-cur, 0) * dt) / 3600.0)',
+    '            charge = float(np.nansum(np.maximum(cur, 0) * dt) / 3600.0)',
+    '        disc_col = pd.to_numeric(g["discharge_capacity_Ah"], errors="coerce") if "discharge_capacity_Ah" in g.columns else pd.Series(dtype=float)',
+    '        capacity = float(disc_col.max()) if len(disc_col) and disc_col.notna().any() else discharge',
+    '        temp = pd.to_numeric(g["temperature_C"], errors="coerce") if "temperature_C" in g.columns else pd.Series(dtype=float)',
+    '        rows.append({',
+    '            "cell_id": cell_id,',
+    '            "cycle_id": int(cycle_id),',
+    '            "capacity_Ah": capacity,',
+    '            "SOH": np.nan,',
+    '            "RUL": np.nan,',
+    '            "charge_capacity_Ah": charge,',
+    '            "discharge_capacity_Ah": discharge if discharge == discharge else capacity,',
+    '            "temperature_max_C": float(temp.max()) if len(temp) and temp.notna().any() else np.nan,',
+    '            "temperature_avg_C": float(temp.mean()) if len(temp) and temp.notna().any() else np.nan,',
+    '        })',
+    '    return pd.DataFrame(rows)',
+    '',
     'def iter_timeseries_frames(data_root):',
     '    files = csvs(data_root, "timeseries")',
-    '    if not files:',
-    '        raise FileNotFoundError("No *_timeseries*.csv files found under data/.")',
     '    for path in files:',
     '        df = pd.read_csv(path)',
     '        if "cycle_id" not in df.columns and "cycle_index" in df.columns:',
     '            df = df.rename(columns={"cycle_index": "cycle_id"})',
-    '        required = ["cell_id", "cycle_id", "time_s", "voltage_V", "current_A", "temperature_C"]',
+    '        required = ["cell_id", "time_s", "voltage_V", "current_A", "temperature_C"]',
     '        missing = [c for c in required if c not in df.columns]',
     '        if missing:',
     '            raise ValueError("%s missing required time-series columns: %s" % (path, ", ".join(missing)))',
+    '        if "cycle_id" not in df.columns:',
+    '            df["cycle_id"] = 1',
     '        df["source_file"] = str(path)',
     '        numeric_required = ["cycle_id", "time_s", "voltage_V", "current_A", "temperature_C"]',
     '        for col in df.columns:',
@@ -6260,7 +6371,7 @@ function bwComputeFeaturesPy() {
     '            converted = pd.to_numeric(df[col], errors="coerce")',
     '            if col in numeric_required or converted.notna().any():',
     '                df[col] = converted',
-    '        yield df.dropna(subset=["cell_id", "cycle_id", "time_s"])',
+    '        yield df.dropna(subset=["cell_id", "time_s"])',
     '',
     'def load_cycle_summary(data_root):',
     '    files = csvs(data_root, "cycle_summary")',
@@ -6634,18 +6745,50 @@ function bwComputeFeaturesPy() {
     '    parser.add_argument("--schema", default="features/feature_schema.txt")',
     '    parser.add_argument("--out", default="features/features.csv")',
     '    args = parser.parse_args()',
+    '    summary = load_cycle_summary(args.data_root)',
+    '    ts_files = csvs(args.data_root, "timeseries")',
+    '    if not ts_files and summary.empty:',
+    '        raise FileNotFoundError("No *_timeseries*.csv or *_cycle_summary*.csv files found under data/.")',
+    '    # cycle_summary_first / timeseries_optional: labels alone are enough for tabular models.',
+    '    if not ts_files:',
+    '        out = summary.copy()',
+    '        out_path = Path(args.out)',
+    '        out_path.parent.mkdir(parents=True, exist_ok=True)',
+    '        out.to_csv(out_path, index=False)',
+    '        print("No timeseries files found; wrote %d cycle-summary rows to %s" % (len(out), out_path))',
+    '        print("cycles_per_cell_max=%d cells=%d" % (max_cycles_per_cell(out), out["cell_id"].nunique() if len(out) else 0))',
+    '        return',
     '    window_expr, feature_defs = read_schema(args.schema)',
     '    feature_frames = []',
+    '    repaired_frames = []',
+    '    inferred_any = False',
     '    fast_default = is_default_schema(feature_defs)',
     '    for ts in iter_timeseries_frames(args.data_root):',
+    '        before = int(ts.groupby(ts["cell_id"].astype(str))["cycle_id"].nunique().max()) if (len(ts) and "cycle_id" in ts.columns) else 0',
+    '        ts, inferred = infer_cycle_ids(ts)',
+    '        ts = ts.dropna(subset=["cell_id", "cycle_id", "time_s"])',
+    '        after = int(ts.groupby(ts["cell_id"].astype(str))["cycle_id"].nunique().max()) if len(ts) else 0',
+    '        if inferred or after > max(before, 1):',
+    '            inferred_any = True',
+    '            print("Inferred cycle_id for timeseries cell(s): cycles/cell %d -> %d" % (max(before, 1), after))',
+    '        repaired_frames.append(ts)',
     '        if fast_default:',
     '            feature_frames.append(compute_default_features_fast(ts, window_expr))',
     '        else:',
     '            feature_frames.append(compute_features(ts, window_expr, feature_defs))',
     '    features = pd.concat(feature_frames, ignore_index=True).drop_duplicates(["cell_id", "cycle_id"], keep="last")',
-    '    summary = load_cycle_summary(args.data_root)',
+    '    repaired_ts = pd.concat(repaired_frames, ignore_index=True) if repaired_frames else pd.DataFrame()',
+    '    if inferred_any and max_cycles_per_cell(summary) <= 1 and len(repaired_ts):',
+    '        rebuilt = summarize_cycles_from_timeseries(repaired_ts)',
+    '        if max_cycles_per_cell(rebuilt) > max_cycles_per_cell(summary):',
+    '            print("Rebuilt cycle_summary from inferred timeseries cycles (%d -> %d cycles/cell max)." % (max_cycles_per_cell(summary), max_cycles_per_cell(rebuilt)))',
+    '            summary = rebuilt',
     '    if not summary.empty:',
-    '        out = summary.merge(features, on=["cell_id", "cycle_id"], how="left")',
+    '        # Prefer the side that preserves one row per aging cycle.',
+    '        if max_cycles_per_cell(features) > max_cycles_per_cell(summary):',
+    '            out = features.merge(summary, on=["cell_id", "cycle_id"], how="left", suffixes=("", "_summary"))',
+    '        else:',
+    '            out = summary.merge(features, on=["cell_id", "cycle_id"], how="left", suffixes=("", "_feature"))',
     '    else:',
     '        out = features',
     '    out_path = Path(args.out)',
@@ -6653,6 +6796,7 @@ function bwComputeFeaturesPy() {
     '    out.to_csv(out_path, index=False)',
     '    output_feature_count = len([c for c in features.columns if c not in ["cell_id", "cycle_id", "feature_window_rows"]])',
     '    print("Wrote %d rows and %d output formula features to %s" % (len(out), output_feature_count, out_path))',
+    '    print("cycles_per_cell_max=%d cells=%d" % (max_cycles_per_cell(out), out["cell_id"].nunique() if len(out) else 0))',
     '',
     'if __name__ == "__main__":',
     '    main()'
@@ -6780,10 +6924,10 @@ function bwPrepareDataPy() {
     '    print("Skipped up-to-date archives: %d" % len(skipped))',
     '    print("timeseries CSV files: %d" % ts_count)',
     '    print("cycle_summary CSV files: %d" % cs_count)',
-    '    if ts_count <= 0:',
-    '        raise SystemExit("No *timeseries*.csv files found under %s after zip preparation. Copy a processed dataset folder or place a .zip that contains nested *_timeseries.csv files." % data_root)',
     '    if cs_count <= 0:',
     '        raise SystemExit("No *cycle_summary*.csv files found under %s after zip preparation. The dataset must include *_cycle_summary.csv files for SOH/RUL labels." % data_root)',
+    '    if ts_count <= 0:',
+    '        print("No *timeseries*.csv files found under %s; cycle_summary-only mode will be used." % data_root)',
     '',
     'if __name__ == "__main__":',
     '    main()'
@@ -6823,7 +6967,7 @@ function bwPrepareSplitPy() {
     '        raise ValueError("No usable rows after filtering empty target column %s. Provide already-processed data with labels for the selected task." % target)',
     '    cycles_per_cell = frame.groupby(frame["cell_id"].astype(str))["cycle_id"].nunique()',
     '    if int(cycles_per_cell.max()) <= 1:',
-    '        raise ValueError("Split source has only one cycle per cell. Feature/label tables must keep one row per cycle (cell_id + cycle_id) so predictions can plot Cycle vs SOH/RUL.")',
+    '        raise ValueError("Split source has only one cycle per cell (cells=%d, rows=%d, max_cycles_per_cell=%d). Feature/label tables must keep one row per cycle (cell_id + cycle_id). If the raw dataset has many cycles, cycle_id was likely collapsed to 1 during preprocessing; re-run compute_features.py (it now infers cycle boundaries) or re-process with a mapped cycle_id column." % (int(cycles_per_cell.size), int(len(frame)), int(cycles_per_cell.max())))',
     '    parts, resolved = split_by_ratio(frame, split)',
     '    write_split_files(parts, ROOT / args.out)',
     '    resolved["target_column"] = target',
@@ -6922,6 +7066,11 @@ def scale_for_torch(train, val, test, cols):
     imputer = SimpleImputer(strategy="median")
     scaler = StandardScaler()
     train_out, val_out, test_out = train.copy(), val.copy(), test.copy()
+    # Keep original cycle indices for prediction exports. cycle_id may also be a
+    # model feature and will be overwritten below with StandardScaler z-scores.
+    for frame in (train_out, val_out, test_out):
+        if "cycle_id" in frame.columns:
+            frame["_orig_cycle_id"] = pd.to_numeric(frame["cycle_id"], errors="coerce")
     train_values = scaler.fit_transform(imputer.fit_transform(train[cols]))
     val_values = scaler.transform(imputer.transform(val[cols]))
     test_values = scaler.transform(imputer.transform(test[cols]))
@@ -7094,11 +7243,14 @@ def run_torch_model(model_name, train, val, test, target, cols, config, rows, pr
         model = cls(cfg)
         model.fit(train_loader, val_loader, cfg)
         model.save(str(out / ("%s.pt" % model_slug(model_name))))
-        for split_name, part in [("val", val_s), ("test", test_s)]:
-            x, y, meta = build_sequence_arrays(part, target, cols, seq_len)
+        # Join labels from unscaled frames using original cycle_id values.
+        for split_name, part_s, part_raw in [("val", val_s, val), ("test", test_s, test)]:
+            x, y, meta = build_sequence_arrays(part_s, target, cols, seq_len)
             for col in ["SOH", "RUL", target]:
-                if col in part.columns and col not in meta.columns:
-                    lookup = part[["cell_id", "cycle_id", col]].drop_duplicates(["cell_id", "cycle_id"])
+                if col in part_raw.columns and col not in meta.columns:
+                    lookup = part_raw[["cell_id", "cycle_id", col]].copy()
+                    lookup["cycle_id"] = pd.to_numeric(lookup["cycle_id"], errors="coerce")
+                    lookup = lookup.drop_duplicates(["cell_id", "cycle_id"])
                     meta = meta.merge(lookup, on=["cell_id", "cycle_id"], how="left")
             pred = np.asarray(model.predict(x), dtype=float).reshape(-1)
             append_predictions(pred_frames, rows, model_name, split_name, y, pred, meta, "pytorch_sequence", target)
@@ -7242,15 +7394,14 @@ function bwRunBenchmarkSh() {
     '',
     'python scripts/prepare_data.py --data-root data',
     '',
-    'if ! find data -name "*timeseries*.csv" -print -quit | grep -q .; then',
-    '  echo "No *_timeseries*.csv files found under data/."',
-    '  echo "Copy a processed dataset folder into data/, or place a .zip containing nested timeseries/cycle_summary CSVs."',
-    '  exit 1',
-    'fi',
     'if ! find data -name "*cycle_summary*.csv" -print -quit | grep -q .; then',
     '  echo "No *_cycle_summary*.csv files found under data/."',
     '  echo "The dataset under data/ must contain a *_cycle_summary*.csv file for SOH/RUL labels."',
     '  exit 1',
+    'fi',
+    'if ! find data -name "*timeseries*.csv" -print -quit | grep -q .; then',
+    '  echo "No *_timeseries*.csv files found under data/."',
+    '  echo "Continuing with cycle_summary only (timeseries_optional=true)."',
     'fi',
     '',
     'python scripts/compute_features.py --data-root data --schema features/feature_schema.txt --out features/features.csv',
@@ -7763,6 +7914,7 @@ window.bwSelectTask = function(task) {
   if (sync) sync.textContent = task;
   bwUpdatePackagePreview();
   bwUpdateProgress();
+  if (BWR.current === 6) bwRenderFlowResults();
 };
 window.bwToggleFeat = function(el) {
   const name = el.dataset.name || el.textContent.trim();
@@ -8197,9 +8349,7 @@ function bwFlowBestPredictions(results) {
   return rows;
 }
 function bwTrajectoryMetricKey() {
-  const sel = document.getElementById('bwr-metric-select');
-  const raw = String(sel?.value || 'SOH').toUpperCase();
-  return raw.includes('RUL') ? 'RUL' : 'SOH';
+  return bwTaskKey() === 'rul' ? 'RUL' : 'SOH';
 }
 function bwTrajectoryRowsForCell(results, cellId, metric) {
   const rows = bwFlowBestPredictions(results).filter(r => r.cell_id === cellId)
@@ -8247,20 +8397,21 @@ function bwRenderFlowResults() {
   const results = BW.results;
   bwRenderFlowHighlights(results);
   bwRenderFlowCellOptions(results);
-  const metricSel = document.getElementById('bwr-metric-select');
-  if (metricSel && results?.metricsJson?.target_column) {
-    const target = String(results.metricsJson.target_column).toUpperCase();
-    if ((target === 'SOH' || target === 'RUL') && Array.from(metricSel.options).some(o => o.value === target)) {
-      metricSel.value = target;
-    }
-  }
   bwRenderResultsTrajectory();
+}
+function bwUpdateTrajectoryLegend(metric) {
+  const label = metric === 'RUL' ? 'RUL' : 'SOH';
+  const trueEl = document.getElementById('bwr-legend-true');
+  const predEl = document.getElementById('bwr-legend-pred');
+  if (trueEl) trueEl.textContent = 'True ' + label;
+  if (predEl) predEl.textContent = 'Pred ' + label;
 }
 window.bwRenderResultsTrajectory = function() {
   const host = document.getElementById('bwr-trajectory-chart');
   if (!host) return;
   const results = BW.results;
   const metric = bwTrajectoryMetricKey();
+  bwUpdateTrajectoryLegend(metric);
   if (!results) {
     host._bwrTipPoints = [];
     host.onmousemove = null;

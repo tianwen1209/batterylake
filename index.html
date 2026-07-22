@@ -820,11 +820,11 @@ bash run_benchmark.sh</pre>
               <div class="bw-section-title">Per-Cell Prediction Trajectory</div>
               <div class="bw-result-controls">
                 <select id="bwr-cell-select" onchange="bwRenderResultsTrajectory()" aria-label="Select cell"></select>
-                <select id="bwr-metric-select" onchange="bwRenderResultsTrajectory()" aria-label="Select metric">
-                  <option value="SOH">State of Health (SOH)</option>
-                  <option value="RUL">Remaining Useful Life (RUL)</option>
-                </select>
               </div>
+            </div>
+            <div class="bw-legend" id="bwr-trajectory-legend" aria-label="Trajectory chart legend">
+              <span class="bw-lg"><i style="background:#0f172a"></i><span id="bwr-legend-true">True SOH</span></span>
+              <span class="bw-lg"><i style="background:var(--accent)"></i><span id="bwr-legend-pred">Pred SOH</span></span>
             </div>
             <div class="bw-chart-shell" id="bwr-trajectory-chart"></div>
           </div>
