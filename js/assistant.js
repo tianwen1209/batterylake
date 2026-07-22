@@ -153,13 +153,13 @@
         } catch {
           errorMsg = response.statusText || 'Unknown error';
         }
-        reply = `AI backend error: ${errorMsg}`;
+        reply = 'AI Assistant is coming soon. This feature will be available in a future update.';
       }
 
       loading.textContent = reply;
       saveMessage(reply, 'bot', loadingTime);
     } catch (err) {
-      const errorReply = `Failed to connect to AI backend: ${err.message}`;
+      const errorReply = 'AI Assistant is coming soon. This feature will be available in a future update.';
       loading.textContent = errorReply;
       saveMessage(errorReply, 'bot', loadingTime);
     } finally {
