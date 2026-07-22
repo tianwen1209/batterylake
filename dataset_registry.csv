@@ -40,8 +40,8 @@ dataset_internal_MSE,NTU MSE Internal Battery Dataset,cycle_aging,NTU MSE Intern
 dataset_36,Imperial College 21700 Cycle Aging (Kirkaldy 2024),cycle_aging,https://doi.org/10.5281/zenodo.10637534,https://zenodo.org/records/10637534,Liu Kefan,,processing,yes,yes,yes,yes,no,2026/4/2,LG M50T/GBM50T 21700; 3 temps (10/25/40C); 4 SoC ranges; CSV format; J.Power Sources 2024
 dataset_37,Munich Multistage Aging Samsung 21700 (Stroebl 2024),cycle_aging,https://doi.org/10.1038/s41597-024-03859-z,https://figshare.com/,Liu Kefan,,processing,yes,yes,yes,yes,no,2026/4/2,279x Samsung INR21700-50E; 71 aging conditions; calendar+cycle; CSV; Scientific Data 2024
 dataset_38,ISU-ILCC Battery Aging Dataset (Thelen 2023),cycle_aging,https://zenodo.org/records/7271567,https://iastate.figshare.com/articles/dataset/22582234,Liu Kefan,,processing,yes,yes,yes,yes,no,2026/4/2,Iowa State Univ; Li-ion multi-condition cycle aging; CSV; Nature Sci Data
-dateset_39,CQU,cycle_aging,,,,,,,,,,,,
-dateset_40,JRC,cycle_aging,,,,,,,,,,,,
-dateset_41,HUST,cycle_aging,,,,,,,,,,,,
-dateset_42,MIT,cycle_aging,,,,,,,,,,,,
-dateset_43,TJU,cycle_aging,,,,,,,,,,,,
+dataset_39,CQU,cycle_aging,,,,,,,,,,,,
+dataset_40,JRC,cycle_aging,,,,,,,,,,,,
+dataset_41,HUST,cycle_aging,,,,,,,,,,,,
+dataset_42,MIT,cycle_aging,,,,,,,,,,,,
+dataset_43,TJU,cycle_aging,,,,,,,,,,,,
