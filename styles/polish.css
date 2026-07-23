@@ -4020,13 +4020,14 @@ pre.api-code,
 }
 #page-benchmarks .bw-result-controls {
   display: flex;
-  flex: 1 1 280px;
+  flex: 0 1 auto;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: stretch;
   min-width: 0;
   max-width: 100%;
+  margin-left: auto;
 }
 #page-benchmarks .bw-result-controls select {
   box-sizing: border-box;
@@ -4034,14 +4035,18 @@ pre.api-code,
   border-radius: 8px;
   max-width: 100%;
   min-width: 0;
-  width: auto;
+  width: max-content;
+  field-sizing: content;
   white-space: nowrap;
   text-overflow: clip;
   overflow: visible;
 }
 #page-benchmarks #bwr-cell-select {
-  flex: 1 1 140px;
-  min-width: min(100%, 140px);
+  flex: 0 1 auto;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  field-sizing: content;
 }
 #page-benchmarks .bw-chart-shell {
   position: relative;
@@ -4166,15 +4171,19 @@ pre.api-code,
     flex-direction: column;
   }
   #page-benchmarks .bw-result-controls {
-    flex: 1 1 auto;
-    width: 100%;
-    justify-content: stretch;
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
   }
   #page-benchmarks .bw-result-controls select,
   #page-benchmarks #bwr-cell-select {
-    flex: 1 1 100%;
-    width: 100%;
+    flex: 0 1 auto;
+    width: max-content;
+    max-width: 100%;
     min-width: 0;
+    field-sizing: content;
   }
   #page-benchmarks .bw-wizard-buttons,
   #page-benchmarks .bw-export-actions {

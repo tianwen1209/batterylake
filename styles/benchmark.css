@@ -427,7 +427,25 @@ details.bw-feature-block.bw-advanced .bw-advanced-body { padding-top: 0; }
 .bw-chart-title { font-size: 14px; font-weight: 800; color: var(--text1); line-height: 1.25; }
 .bw-pill-soft { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 999px; padding: 5px 9px; background: #f8fafc; color: var(--text3); font-size: 12px; font-weight: 700; white-space: nowrap; }
 .bw-result-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; min-width: 0; }
-.bw-result-controls select { border: 1px solid var(--border2); border-radius: 8px; padding: 7px 28px 7px 10px; background: #fff; color: var(--text2); font-size: 12px; font-weight: 650; max-width: 100%; min-width: 0; width: auto; }
+.bw-result-controls select {
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 7px 28px 7px 10px;
+  background: #fff;
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 650;
+  max-width: 100%;
+  min-width: 0;
+  width: max-content;
+  field-sizing: content;
+}
+#bwr-cell-select {
+  flex: 0 1 auto;
+  width: max-content;
+  max-width: 100%;
+  field-sizing: content;
+}
 .bw-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 0 6px; }
 .bw-lg { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); }
 .bw-lg i { width: 15px; height: 3px; border-radius: 2px; display: inline-block; }
