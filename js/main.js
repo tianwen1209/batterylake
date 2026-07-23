@@ -19,30 +19,30 @@ const FALLBACK_DATASETS = [
 
   { id:'dataset_11', name:'KIT NMC/C-SiO 228 Cells', ref_name:'2024_KIT_NMC-SiO_18650_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'228', form:'18650', cycles:0, size_mb:0, notes:'Karlsruhe Institute; 228 NMC/C-SiO cells; 30B+ data points; Sci Data 2024', doi:'https://doi.org/10.1038/s41597-024-03831-x', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgA7SW3-O8n1SIVDxKOIv3OxAVZY3b8ZY7Mqmu2xGl934HQ?e=SYqOzt', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_12', name:'Tsinghua Li-ion EV Field', ref_name:'2022_Tsinghua_LiIon_EV_MultiChem_MultiC_MultiT', status:'pending', category:'ev', chemistry:'Multi', cells:'—', form:'EV-BMS', cycles:0, size_mb:0, notes:'Tsinghua University; real-world EV battery cycle data', doi:'https://data.mendeley.com/datasets/mcsh4hnb8b/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCWAMpPvIFGSoFxZoh4ltkdARgWCDSfpiOUSa2yYdr6kC8?e=dxi7lb', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_13', name:'Comprehensive battery aging dataset for NMC/C-SiO cells', ref_name:'2024_KIT_Luh_NMC_18650_MultiC_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'-', form:'18650', cycles:0, size_mb:0, notes:'3 billion data points; 228 commercial NMC/C+SiO lithium-ion cells; aged for almost 600 days', doi:'https://radar.kit.edu/radar/en/dataset/kww7jv8ajuvchcah#', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCviM4fNJhJR5eUQr46kGU4AXinAKoE6AGOFG1lxbY2f68?e=29gQzN', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_14', name:'KIT NMC/C-SiO Characterization', ref_name:'2021_KIT_NMC-SiO_18650_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'KIT; high-power Li-ion NMC/C-SiO characterization; OSF', doi:'https://osf.io/9ceav/', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCzM5vwbXzVQZlE57pKF-fZASJ4dH12luElFQBRM2-eogU?e=qnjXxJ', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_15', name:'IVST Changan Large-Scale NEV', ref_name:'2023_IVST_Changan_LiIon_EV_MultiChem_MultiC_MultiT', status:'pending', category:'ev', chemistry:'Multi', cells:'—', form:'EV-BMS', cycles:0, size_mb:0, notes:'IVST/Changan; real-world large-scale NEV Li-ion battery dataset', doi:'http://ivstskl.changan.com.cn/?p=2697', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCY47Rn2592R4QabVItC3L8AXjbpHJHI59SUVsWErLxQSA?e=gfZeVM', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_16', name:'TBSI-Lijing Pulse Voltage', ref_name:'2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'TBSI & Lijing; retired batteries; pulse voltage response', doi:'https://zenodo.org/records/13360631', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBYcPYztbIYTapaaIao6BqHAZZLZxeAfZZMwmKkuNbaaTA?e=SFT0ii', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_13', name:'Comprehensive battery aging dataset for NMC/C-SiO cells', ref_name:'2024_KIT_Luh_NMC_18650_MultiC_MultiC_MultiT', status:'pending', category:'field_data', chemistry:'NMC', cells:'-', form:'18650', cycles:0, size_mb:0, notes:'3 billion data points; 228 commercial NMC/C+SiO lithium-ion cells; aged for almost 600 days', doi:'https://radar.kit.edu/radar/en/dataset/kww7jv8ajuvchcah#', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCviM4fNJhJR5eUQr46kGU4AXinAKoE6AGOFG1lxbY2f68?e=29gQzN', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_14', name:'KIT NMC/C-SiO Characterization', ref_name:'2021_KIT_NMC-SiO_18650_MultiC_MultiT', status:'pending', category:'characterization', chemistry:'NMC', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'KIT; high-power Li-ion NMC/C-SiO characterization; OSF', doi:'https://osf.io/9ceav/', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCzM5vwbXzVQZlE57pKF-fZASJ4dH12luElFQBRM2-eogU?e=qnjXxJ', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_15', name:'IVST Changan Large-Scale NEV', ref_name:'2023_IVST_Changan_LiIon_EV_MultiChem_MultiC_MultiT', status:'pending', category:'field_data', chemistry:'Multi', cells:'—', form:'EV-BMS', cycles:0, size_mb:0, notes:'IVST/Changan; real-world large-scale NEV Li-ion battery dataset', doi:'http://ivstskl.changan.com.cn/?p=2697', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCY47Rn2592R4QabVItC3L8AXjbpHJHI59SUVsWErLxQSA?e=gfZeVM', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_16', name:'TBSI-Lijing Pulse Voltage', ref_name:'2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT', status:'pending', category:'soh_estimation', chemistry:'Multi', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'TBSI & Lijing; retired batteries; pulse voltage response', doi:'https://zenodo.org/records/13360631', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBYcPYztbIYTapaaIao6BqHAZZLZxeAfZZMwmKkuNbaaTA?e=SFT0ii', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_17', name:'A123 LFP HEV-WLTP Drive Cycle', ref_name:'2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T', status:'pending', category:'cycle_aging', chemistry:'LFP', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'A123 2.5Ah LFP 18650; HEV WLTP drive cycle; SOH 15-70%', doi:'https://borealisdata.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/23MFNE', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCXoroka133RpfJ32DUNCZAAVafbxgTDzoXOze9LVdWEdk?e=xi8U33', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_18', name:'A123 LFP Calendar+Cycle 50°C', ref_name:'2022_A123_LFP_18650_1.1Ah_CalCyc_50T', status:'pending', category:'cycle_aging', chemistry:'LFP', cells:'20', form:'18650', cycles:0, size_mb:0, notes:'20× A123 LFP 18650 1.1Ah; calendar + cycle aging at 50°C', doi:'https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi:10.57745/OLBXKT	', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBpRY44AYW3Qayk7hCi38G5AZB-ogUecwQ-VdBexMVgOmU?e=wkHvCs', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_19', name:'Oxford Path-Dependent Degradation', ref_name:'2020_Oxford_Howey_LiIon_PathDep_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'Oxford Howey group; 3-part path-dependent degradation dataset', doi:'https://ora.ox.ac.uk/objects/uuid:de62b5d2-6154-426d-bcbb-30253ddb7d1e', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAP3unusCzYTJafZgLbW-NQAUjOh4ieMtAtYmzfrTNzrW0?e=NSScEL', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_20', name:'Mendeley Drive Cycle Multi-Chem', ref_name:'2021_Mendeley_LFP-NCA-NMC_18650_DriveCycle_MultiT', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'LFP+NCA+NMC; DST/FUDS/UDDS/WLTP/US06 drive cycles; 4 temps', doi:'https://data.mendeley.com/datasets/29kw38kzwj/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCG4BbE2uK4Qo83K8yJHrsxAfBMciPWuE5YPshAhvgFH2c?e=y7EawZ', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_20', name:'Mendeley Drive Cycle Multi-Chem', ref_name:'2021_Mendeley_LFP-NCA-NMC_18650_DriveCycle_MultiT', status:'pending', category:'characterization', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'LFP+NCA+NMC; DST/FUDS/UDDS/WLTP/US06 drive cycles; 4 temps', doi:'https://data.mendeley.com/datasets/29kw38kzwj/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCG4BbE2uK4Qo83K8yJHrsxAfBMciPWuE5YPshAhvgFH2c?e=y7EawZ', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_21', name:'CMU VTC6 eVTOL Duty Cycle', ref_name:'2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Carnegie Mellon Bills group; Sony-Murata VTC6; eVTOL duty cycle; Nat Sci Data 2023', doi:'https://figshare.com/articles/dataset/eVTOL_Battery_Dataset/14226830', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDFu5H98Ti8QY8PrtyveawVAUWZLQ3wdhl0DCimDEi5ejU?e=Jokp4v', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_22', name:'EVERLASTING 4TU (25°C+45°C)', ref_name:'2022_EVERLASTING_4TU_NMC-SiGr_18650_3.5Ah_MultiC_25-45T ', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'EU EVERLASTING; Ni-rich Si/Gr 3.5Ah 18650; multi C-rate at 25°C & 45°C', doi:'https://data.4tu.nl/datasets/e42bca59-f1dd-495a-92c9-8b01d6b64040', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgC5NJyK0KTKQ64QWk8NUmInASWVj_BBUcMn_ktr3HUle7o?e=E9OSWh', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_23', name:'EVERLASTING 4TU (25°C+45°C)', ref_name:'2022_EVERLASTING_4TU_NMC_18650_3.5Ah_MultiC_25-45T', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'EU EVERLASTING; Ni-rich Si/Gr 3.5Ah 18650; multi C-rate at 25°C & 45°C', doi:'https://data.4tu.nl/datasets/e19fe272-4f46-450c-9125-6545c4c1a98b', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDMnm7IbveySa0cehfkpl5tATGVmgHqrangERU5J547JLY?e=dVSwJF', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_24', name:'Stanford-Onori Galvanostatic Discharge', ref_name:'2021_Stanford_Onori_NMC-NCA-LFP_18650_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Stanford Onori Lab; NMC+NCA+LFP 18650; multi-rate multi-temp galvanostatic', doi:'https://data.mendeley.com/datasets/kxsbr4x3j2/2', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgC9kAYKGaOkTp-kP56gqRdgAa1iNwCzcF0Epne1cQ_bjkc?e=YYpklI', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_24', name:'Stanford-Onori Galvanostatic Discharge', ref_name:'2021_Stanford_Onori_NMC-NCA-LFP_18650_MultiC_MultiT', status:'pending', category:'characterization', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Stanford Onori Lab; NMC+NCA+LFP 18650; multi-rate multi-temp galvanostatic', doi:'https://data.mendeley.com/datasets/kxsbr4x3j2/2', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgC9kAYKGaOkTp-kP56gqRdgAa1iNwCzcF0Epne1cQ_bjkc?e=YYpklI', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_25', name:'Stanford-Onori EV Real-Driving', ref_name:'2022_Stanford_Onori_NMC_Cyl_RealDriving_MultiT', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'—', form:'Cyl', cycles:0, size_mb:0, notes:'Stanford Onori Lab; NMC cells; real EV driving profile aging', doi:'https://osf.io/qsabn/', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDTdOwzyY70QpcENz78IPHYAdo6GZASgoVgbbzH1WLKpYM?e=TbPxYs', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_26', name:'Stanford-Onori Parallel Cells', ref_name:'2024_Stanford_Onori_LiIon_Parallel_MultiC_25T', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Stanford Onori Lab; parallel-connected Li-ion; cell-to-cell imbalance', doi:'https://data.mendeley.com/datasets/zh58byr53c/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCFLHnq6CLRQIlTdsmmOiVoAWE7LmUEp57XuHie5bpSdLw?e=AQhtTc', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_26', name:'Stanford-Onori Parallel Cells', ref_name:'2024_Stanford_Onori_LiIon_Parallel_MultiC_25T', status:'pending', category:'characterization', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Stanford Onori Lab; parallel-connected Li-ion; cell-to-cell imbalance', doi:'https://data.mendeley.com/datasets/zh58byr53c/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCFLHnq6CLRQIlTdsmmOiVoAWE7LmUEp57XuHie5bpSdLw?e=AQhtTc', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_27', name:'Stanford-Onori Second-Life Grid', ref_name:'2024_Stanford_Onori_LiIon_SecondLife_GridStorage_25T', status:'pending', category:'cycle_aging', chemistry:'Multi', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'Stanford Onori Lab; second-life Li-ion grid storage cycling aging', doi:'https://osf.io/8jnr5/', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgA97EpKF88jS7lxt8eZa2T8AWuN18p0SabzbDtkbftF5g8?e=Nt7BWI', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_28', name:'Stanford-Onori LFP SOC ML', ref_name:'2024_Stanford_Onori_LFP_Cyl_SOC-ML_25T', status:'pending', category:'cycle_aging', chemistry:'LFP', cells:'—', form:'Cyl', cycles:0, size_mb:0, notes:'Stanford Onori Lab; LFP; coulomb counting + ML SOC estimation', doi:'https://github.com/LeXuSECL/ML_SOC_Estimation_ACS_Energy_Letters', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDnvOSEcdVgSZS5sfWSLF_CAeOK4rRPvdgW8obpwV9YVr0?e=4a3J2w', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_28', name:'Stanford-Onori LFP SOC ML', ref_name:'2024_Stanford_Onori_LFP_Cyl_SOC-ML_25T', status:'pending', category:'soc_estimation', chemistry:'LFP', cells:'—', form:'Cyl', cycles:0, size_mb:0, notes:'Stanford Onori Lab; LFP; coulomb counting + ML SOC estimation', doi:'https://github.com/LeXuSECL/ML_SOC_Estimation_ACS_Energy_Letters', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDnvOSEcdVgSZS5sfWSLF_CAeOK4rRPvdgW8obpwV9YVr0?e=4a3J2w', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_29', name:'Stanford-Onori Calendar Aging', ref_name:'2025_Stanford_Onori_LiIon_Calendar_MultiT', status:'pending', category:'calendar_aging', chemistry:'Multi', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'Stanford Onori Lab; Li-ion calendar aging; decade-long; Lam et al. Joule 2025', doi:'https://osf.io/ju325/', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBqu1mPtw4hRbGcJpxnMxohAesvvTCFjojoGpkj0xa3ttI?e=fDVCd7', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_30', name:'Beihang EV Fault Diagnosis', ref_name:'2025_Beihang_LiIon_EV-BMS_MultiChem_MultiT', status:'pending', category:'ev', chemistry:'Multi', cells:'515 EVs', form:'EV-BMS', cycles:0, size_mb:0, notes:'Beihang Univ; 515 real EVs; 18.2M BMS entries; 3 manufacturers; fault labels TR/EL/ISC/EA; Nat Commun 2025', doi:'https://doi.org/10.5281/zenodo.10656500', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBa8Ai0y8C0R5gx4SvlkYYcAYfIEjg5VrrRzDY8ZR_Z_yg?e=5hgc3i', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_30', name:'Beihang EV Fault Diagnosis', ref_name:'2025_Beihang_LiIon_EV-BMS_MultiChem_MultiT', status:'pending', category:'field_fault_diagnosis', chemistry:'Multi', cells:'515 EVs', form:'EV-BMS', cycles:0, size_mb:0, notes:'Beihang Univ; 515 real EVs; 18.2M BMS entries; 3 manufacturers; fault labels TR/EL/ISC/EA; Nat Commun 2025', doi:'https://doi.org/10.5281/zenodo.10656500', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBa8Ai0y8C0R5gx4SvlkYYcAYfIEjg5VrrRzDY8ZR_Z_yg?e=5hgc3i', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
 
   { id:'dataset_31', name:'Mendeley NMC811-LFP Relaxation', ref_name:'2023_Mendeley_NMC811-LFP_18650_Relaxation_MultiT', status:'pending', category:'eis', chemistry:'Multi', cells:'—', form:'18650', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: relaxation/rest voltage; NMC811+LFP; SOH estimation reference', doi:'https://data.mendeley.com/datasets/y8nstxmdrg/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgA-px8bByeZTZ6e6LK94owSAchC3h0mGXL0s9hy6KoAFS4?e=REJLlF', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_32', name:'Figshare LFP Pouch EIS', ref_name:'2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT', status:'pending', category:'eis', chemistry:'LFP', cells:'—', form:'Pouch', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: EIS frequency sweep; 600 mAh LFP pouch; impedance spectra', doi:'https://figshare.com/articles/dataset/Li-ion_Batteries_EIS_measurements/23736582', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgC7krq2n_GqS6g3JYOsFbj3ARyxru8g_dwgn8woHVVEmUM?e=KhufHX', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_33', name:'TUM Thermal Runaway Propagation', ref_name:'2023_TUM_NMC811-LFP_Auto_ThermalRunaway_MultiT', status:'pending', category:'safety', chemistry:'Multi', cells:'—', form:'Auto', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: thermal runaway propagation; NMC-811+LFP automotive modules', doi:'https://mediatum.ub.tum.de/node?id=1717758', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCOGktuuuDqSYXNk9xVkk62AdHPq7VHsekMzDC2kOEqgZU?e=lv9vSC', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_34', name:'Mendeley Mech-Induced Thermal Runaway', ref_name:'2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT', status:'pending', category:'safety', chemistry:'Unknown', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: mechanical abuse / nail penetration; thermal runaway trigger', doi:'https://data.mendeley.com/datasets/sn2kv34r4h/2', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBxqo5F5qKwQbH--4jPp3IpASRJpR9OyMGEu1SUu4mLSLw?e=Lhdp6u', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
-  { id:'dataset_35', name:'Zenodo ARC Calorimetry 21700', ref_name:'2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT', status:'pending', category:'safety', chemistry:'Multi', cells:'—', form:'21700', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: ARC exothermal; 21700; NMC/NCA/LFP; thermal safety', doi:'https://zenodo.org/records/7707929', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBB_0fSJ5MXSbhmHVeJK6LyAYVORNLdvhuyyXT_3CkhohU?e=ONxPU5', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_33', name:'TUM Thermal Runaway Propagation', ref_name:'2023_TUM_NMC811-LFP_Auto_ThermalRunaway_MultiT', status:'pending', category:'thermal_runaway', chemistry:'Multi', cells:'—', form:'Auto', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: thermal runaway propagation; NMC-811+LFP automotive modules', doi:'https://mediatum.ub.tum.de/node?id=1717758', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCOGktuuuDqSYXNk9xVkk62AdHPq7VHsekMzDC2kOEqgZU?e=lv9vSC', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_34', name:'Mendeley Mech-Induced Thermal Runaway', ref_name:'2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT', status:'pending', category:'thermal_runaway', chemistry:'Unknown', cells:'—', form:'Multi', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: mechanical abuse / nail penetration; thermal runaway trigger', doi:'https://data.mendeley.com/datasets/sn2kv34r4h/2', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBxqo5F5qKwQbH--4jPp3IpASRJpR9OyMGEu1SUu4mLSLw?e=Lhdp6u', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
+  { id:'dataset_35', name:'Zenodo ARC Calorimetry 21700', ref_name:'2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT', status:'pending', category:'thermal_runaway', chemistry:'Multi', cells:'—', form:'21700', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: ARC exothermal; 21700; NMC/NCA/LFP; thermal safety', doi:'https://zenodo.org/records/7707929', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBB_0fSJ5MXSbhmHVeJK6LyAYVORNLdvhuyyXT_3CkhohU?e=ONxPU5', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
 
   { id:'dataset_36', name:'Imperial College 21700 Cycle Aging', ref_name:'2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'21', form:'21700', cycles:14500, size_mb:520, notes:'LG M50T/GBM50T 21700; 3 temps; J. Power Sources 2024', doi:'https://doi.org/10.5281/zenodo.10637534', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDFoGTyCAf7SokvWt55BZl9AXaoMW8HTT1L1p22T4Gc5zo?e=ReCV3T', meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
   { id:'dataset_37', name:'Munich Multistage Aging Samsung 21700', ref_name:'2024_TUM_Stroebl_NMC_21700_Multistage_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'279', form:'21700', cycles:67000, size_mb:3800, notes:'279× Samsung INR21700-50E; 71 aging conditions; Scientific Data 2024', doi:'https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315', processed_url:'https://doi.org/10.1038/s41597-024-03859-z', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCKqhLB3FILTZSucxlDhPw2AYsFXXGONKTHfQT09Xa-15Y?e=hVhwOD' ,meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
@@ -57,10 +57,36 @@ const FALLBACK_DATASETS = [
   { id:'dataset_internal', name:'BatteryLake Internal Experiment', ref_name:'TBD_NTU_Internal_LiIon_TBD_TBD_TBD', status:'pending', category:'cycle_aging', chemistry:'Unknown', cells:'—', form:'—', cycles:0, size_mb:0, notes:'Internal experiment data; to be provided by supervisor', doi:'', processed_url:'', student:'TBD', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
 ];
 
+/* Per-dataset category overrides for the Datasets page taxonomy.
+   Applied after CSV parse / fallback so remaps persist even if the registry still has legacy keys. */
+const DATASET_CATEGORY_OVERRIDES = {
+  dataset_13: 'field_data',
+  dataset_14: 'characterization',
+  dataset_15: 'field_data',
+  dataset_16: 'soh_estimation',
+  dataset_20: 'characterization',
+  dataset_24: 'characterization',
+  dataset_26: 'characterization',
+  dataset_28: 'soc_estimation',
+  dataset_29: 'calendar_aging',
+  dataset_30: 'field_fault_diagnosis',
+  dataset_33: 'thermal_runaway',
+  dataset_34: 'thermal_runaway',
+  dataset_35: 'thermal_runaway',
+  dataset_40: 'calendar_aging'
+};
+
+function applyDatasetCategoryOverride(d) {
+  if (!d || !d.id) return d;
+  const override = DATASET_CATEGORY_OVERRIDES[d.id];
+  if (override) d.category = override;
+  return d;
+}
+
 /* ══════════════════════════════════════════════════════════════
    LIVE STATE — this is what the UI renders from
    ══════════════════════════════════════════════════════════════ */
-let DATASETS = [...FALLBACK_DATASETS];
+let DATASETS = FALLBACK_DATASETS.map(d => applyDatasetCategoryOverride({ ...d }));
 let dataSource = 'fallback'; // 'github' or 'fallback'
 
 /* ══════════════════════════════════════════════════════════════
@@ -132,11 +158,24 @@ function extractCellCount(notes) {
 }
 
 function extractCategory(cat, notes) {
-  const c = (cat || '').toLowerCase();
+  const c = (cat || '').toLowerCase().trim();
   const n = (notes || '').toLowerCase();
-  if (c.includes('safety') || n.includes('abuse') || n.includes('thermal runaway') || n.includes('nail penetration')) return 'safety';
-  if (c.includes('eis') || n.includes('eis') || n.includes('impedance') || n.includes('relaxation')) return 'eis';
-  if (c.includes('ev') || n.includes(' ev ') || n.includes('bms') || n.includes('fleet')) return 'ev';
+  const aliases = { ev: 'field_data', safety: 'thermal_runaway', thermal_abuse: 'thermal_runaway' };
+  const known = new Set([
+    'cycle_aging', 'calendar_aging', 'characterization', 'field_data', 'field_fault_diagnosis',
+    'soh_estimation', 'soc_estimation', 'relaxation', 'eis', 'thermal_runaway',
+    'thermal_abuse', 'safety', 'ev'
+  ]);
+  if (known.has(c)) return aliases[c] || c;
+  if (c.includes('safety') || c.includes('thermal') || n.includes('abuse') || n.includes('thermal runaway') || n.includes('nail penetration')) return 'thermal_runaway';
+  if (c.includes('eis') || n.includes('eis') || n.includes('impedance')) return 'eis';
+  if (c.includes('relax') || n.includes('relaxation')) return 'relaxation';
+  if (c.includes('calendar')) return 'calendar_aging';
+  if (c.includes('character')) return 'characterization';
+  if (c.includes('soh')) return 'soh_estimation';
+  if (c.includes('soc')) return 'soc_estimation';
+  if (c.includes('fault')) return 'field_fault_diagnosis';
+  if (c.includes('field') || c.includes('ev') || n.includes(' ev ') || n.includes('bms') || n.includes('fleet')) return 'field_data';
   return 'cycle_aging';
 }
 
@@ -167,7 +206,7 @@ function csvRowToDataset(row) {
   const size_mb = parseFloat((row.size_mb || row.data_size_mb || '0').toString()) || 0;
   const processed_url = lookupProcessedUrl(id, ref, row.processed_url);
 
-  return {
+  return applyDatasetCategoryOverride({
     id, name, ref_name: ref || '—', status: status || 'pending',
     category: cat, chemistry: chem, cells, form, notes,
     cycles, size_mb,
@@ -177,7 +216,7 @@ function csvRowToDataset(row) {
     cs:   (row.cycle_summary_done || 'no').trim().toLowerCase(),
     qc:   (row.qc_done || 'no').trim().toLowerCase(),
     updated: (row.last_updated || '—').trim(),
-  };
+  });
 }
 
 function parseCSVToDatasets(csvText) {
@@ -241,7 +280,7 @@ async function syncFromGitHub(silent = false) {
   } catch (e) {
     console.warn('GitHub sync failed:', e.message);
     if (dataSource !== 'github' && dataSource !== 'local') {
-      DATASETS = [...FALLBACK_DATASETS];
+      DATASETS = FALLBACK_DATASETS.map(d => applyDatasetCategoryOverride({ ...d }));
       dataSource = 'fallback';
     }
     refreshAll();
@@ -312,6 +351,8 @@ function refreshAll() {
   if (bdc) bdc.textContent = DATASETS.length;
 
   if (typeof bwRefresh === 'function') bwRefresh();
+  // Keep Benchmarks → Step 2 list in sync with the shared DATASETS catalog.
+  if (typeof bwFlowRenderDatasets === 'function') bwFlowRenderDatasets();
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -445,12 +486,31 @@ function filterTypeClass(type) {
   return 'filter-token ' + ((FILTER_TYPE_STYLES[type] || FILTER_TYPE_STYLES.status).cls);
 }
 
+/* Datasets page category taxonomy (browse sections + Category filter chips).
+   Benchmarks Step 2 keeps its own Category filter options and raw dataset.category keys. */
 const DATASET_CATEGORIES = [
   { key: 'cycle_aging', label: 'Cycle Aging', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><path d="M21 4v6h-6"/></svg>' },
-  { key: 'safety', label: 'Safety', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-5"/></svg>' },
+  { key: 'calendar_aging', label: 'Calendar Aging', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>' },
+  { key: 'characterization', label: 'Characterization', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>' },
+  { key: 'field_data', label: 'Field Data', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17h10l2-7H5l2 7z"/><path d="M7 17l-1 3M17 17l1 3M8 10l1-4h6l1 4"/><circle cx="9" cy="20" r="1"/><circle cx="15" cy="20" r="1"/></svg>' },
+  { key: 'field_fault_diagnosis', label: 'Field Fault Diagnosis', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>' },
+  { key: 'soh_estimation', label: 'SOH Estimation', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>' },
+  { key: 'soc_estimation', label: 'SOC Estimation', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2M6 10v4M10 10v4"/></svg>' },
+  { key: 'relaxation', label: 'Relaxation', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12c3-6 6 6 9 0s6 6 9 0"/></svg>' },
   { key: 'eis', label: 'EIS', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 17c3-9 5 3 8-6s5 3 8-4"/><path d="M4 20h16M4 4v16"/></svg>' },
-  { key: 'ev', label: 'EV Field', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17h10l2-7H5l2 7z"/><path d="M7 17l-1 3M17 17l1 3M8 10l1-4h6l1 4"/><circle cx="9" cy="20" r="1"/><circle cx="15" cy="20" r="1"/></svg>' }
+  { key: 'thermal_runaway', label: 'Thermal Runaway', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v5M12 16h.01"/></svg>' }
 ];
+
+/* Map legacy dataset.category values → Datasets-page filter/section keys. */
+const DATASET_PAGE_CATEGORY_ALIASES = {
+  ev: 'field_data',
+  safety: 'thermal_runaway',
+  thermal_abuse: 'thermal_runaway'
+};
+function getDatasetPageCategory(raw) {
+  const key = raw || '';
+  return DATASET_PAGE_CATEGORY_ALIASES[key] || key;
+}
 
 function datasetCategoryToggleIcon(expanded) {
   return expanded
@@ -478,24 +538,75 @@ function getChemClass(chem) {
 }
 function getChemLabel(chem) { return getChemClass(chem).replace('chem-',''); }
 function getCatClass(cat) {
-  if (cat === 'cycle_aging') return 'cat-cycle';
+  const key = getDatasetPageCategory(cat);
+  if (key === 'cycle_aging' || key === 'calendar_aging') return 'cat-cycle';
+  if (key === 'thermal_runaway' || key === 'field_fault_diagnosis') return 'cat-safety';
+  if (key === 'eis' || key === 'relaxation' || key === 'characterization') return 'cat-eis';
+  if (key === 'field_data' || key === 'soh_estimation' || key === 'soc_estimation') return 'cat-ev';
+  // Legacy keys used by Benchmarks / raw dataset rows
   if (cat === 'safety') return 'cat-safety';
   if (cat === 'eis') return 'cat-eis';
   if (cat === 'ev') return 'cat-ev';
+  if (cat === 'cycle_aging') return 'cat-cycle';
   return '';
 }
 function getCatLabel(cat) {
-  return { cycle_aging:'Cycle Aging', safety:'Safety', eis:'EIS/Impedance', ev:'EV Field Data' }[cat] || cat;
+  const key = getDatasetPageCategory(cat);
+  return {
+    cycle_aging: 'Cycle Aging',
+    calendar_aging: 'Calendar Aging',
+    characterization: 'Characterization',
+    field_data: 'Field Data',
+    field_fault_diagnosis: 'Field Fault Diagnosis',
+    soh_estimation: 'SOH Estimation',
+    soc_estimation: 'SOC Estimation',
+    relaxation: 'Relaxation',
+    eis: 'EIS',
+    thermal_runaway: 'Thermal Runaway',
+    // Legacy labels kept for Benchmarks filter chips + existing dataset.category values
+    safety: 'Safety',
+    ev: 'EV Field Data'
+  }[key] || {
+    safety: 'Safety',
+    ev: 'EV Field Data'
+  }[cat] || cat;
 }
 function getSectionCatLabel(cat) {
   const found = DATASET_CATEGORIES.find(c => c.key === cat);
   return found ? found.label : getCatLabel(cat);
 }
 function getCategorySlug(cat) {
-  return { cycle_aging: 'cycle-aging', safety: 'safety', eis: 'eis', ev: 'ev-field' }[cat] || cat;
+  return {
+    cycle_aging: 'cycle-aging',
+    calendar_aging: 'calendar-aging',
+    characterization: 'characterization',
+    field_data: 'field-data',
+    field_fault_diagnosis: 'field-fault-diagnosis',
+    soh_estimation: 'soh-estimation',
+    soc_estimation: 'soc-estimation',
+    relaxation: 'relaxation',
+    eis: 'eis',
+    thermal_runaway: 'thermal-runaway',
+    safety: 'safety',
+    ev: 'ev-field'
+  }[cat] || cat;
 }
 function getCategoryFromSlug(slug) {
-  return { 'cycle-aging': 'cycle_aging', safety: 'safety', eis: 'eis', 'ev-field': 'ev' }[slug] || null;
+  return {
+    'cycle-aging': 'cycle_aging',
+    'calendar-aging': 'calendar_aging',
+    characterization: 'characterization',
+    'field-data': 'field_data',
+    'field-fault-diagnosis': 'field_fault_diagnosis',
+    'soh-estimation': 'soh_estimation',
+    'soc-estimation': 'soc_estimation',
+    relaxation: 'relaxation',
+    eis: 'eis',
+    'thermal-runaway': 'thermal_runaway',
+    // Legacy deep links resolve to Datasets-page canonical keys
+    safety: 'thermal_runaway',
+    'ev-field': 'field_data'
+  }[slug] || null;
 }
 function hasAppliedDatasetFilters() {
   return activeChems.size > 0 || activeForms.size > 0 || activeCategories.size > 0 || activeDomains.size > 0 || activeDuties.size > 0;
@@ -518,17 +629,17 @@ function syncPendingFromActive() {
   syncFilterPopupTags();
 }
 function syncFilterPopupTags() {
-  document.querySelectorAll('.filter-tag[data-chem]').forEach(t => t.classList.toggle('active', pendingChems.has(t.dataset.chem)));
-  document.querySelectorAll('.filter-tag[data-form]').forEach(t => t.classList.toggle('active', pendingForms.has(t.dataset.form)));
-  document.querySelectorAll('.filter-tag[data-cat]').forEach(t => t.classList.toggle('active', pendingCategories.has(t.dataset.cat)));
-  document.querySelectorAll('.filter-tag[data-domain]').forEach(t => t.classList.toggle('active', pendingDomains.has(t.dataset.domain)));
-  document.querySelectorAll('.filter-tag[data-duty]').forEach(t => t.classList.toggle('active', pendingDuties.has(t.dataset.duty)));
-  const all = document.querySelector('.filter-tag[data-all-datasets]');
+  document.querySelectorAll('#page-datasets .filter-tag[data-chem]').forEach(t => t.classList.toggle('active', pendingChems.has(t.dataset.chem)));
+  document.querySelectorAll('#page-datasets .filter-tag[data-form]').forEach(t => t.classList.toggle('active', pendingForms.has(t.dataset.form)));
+  document.querySelectorAll('#page-datasets .filter-tag[data-cat]').forEach(t => t.classList.toggle('active', pendingCategories.has(t.dataset.cat)));
+  document.querySelectorAll('#page-datasets .filter-tag[data-domain]').forEach(t => t.classList.toggle('active', pendingDomains.has(t.dataset.domain)));
+  document.querySelectorAll('#page-datasets .filter-tag[data-duty]').forEach(t => t.classList.toggle('active', pendingDuties.has(t.dataset.duty)));
+  const all = document.querySelector('#page-datasets .filter-tag[data-all-datasets]');
   if (all) all.classList.toggle('active', pendingAllDatasets);
 }
 function clearPendingAllDatasets() {
   pendingAllDatasets = false;
-  const all = document.querySelector('.filter-tag[data-all-datasets]');
+  const all = document.querySelector('#page-datasets .filter-tag[data-all-datasets]');
   if (all) all.classList.remove('active');
 }
 function updatePendingSet(set, value, el) {
@@ -626,11 +737,16 @@ function renderDatasets(data) {
     return;
   }
 
-  const viewCats = DATASET_CATEGORIES;
+  // Browse sections ordered by dataset count (desc), independent of Category filter chip order.
+  const viewCats = DATASET_CATEGORIES
+    .map(cat => {
+      const allForCat = data.filter(d => getDatasetPageCategory(d.category) === cat.key);
+      return { cat, allForCat, count: allForCat.length };
+    })
+    .filter(entry => entry.count > 0)
+    .sort((a, b) => b.count - a.count || a.cat.label.localeCompare(b.cat.label));
 
-  grid.innerHTML = viewCats.map(cat => {
-    const allForCat = data.filter(d => d.category === cat.key);
-    if (!allForCat.length) return '';
+  grid.innerHTML = viewCats.map(({ cat, allForCat }) => {
     const expanded = expandedDatasetCategories.has(cat.key);
     return `
       <section class="dataset-section ${expanded ? 'is-expanded' : 'is-collapsed'}">
@@ -673,8 +789,8 @@ function getFiltered() {
       activeForms.forEach(f => { if (d.form && d.form.toLowerCase() === f.toLowerCase()) match = true; });
       if (!match) return false;
     }
-    // Category (empty = no filter)
-    if (activeCategories.size > 0 && !activeCategories.has(d.category)) return false;
+    // Category (empty = no filter). Datasets page uses canonical keys + legacy aliases.
+    if (activeCategories.size > 0 && !activeCategories.has(getDatasetPageCategory(d.category))) return false;
 
     // Domain filter (inferred from category/notes)
     if (activeDomains.size > 0) {
@@ -766,7 +882,7 @@ function toggleDutyFilter(el) {
 
 function toggleDatasetFilters() {
   const popover = document.getElementById('dataset-filter-popover');
-  const btn = document.querySelector('.dataset-filter-toggle');
+  const btn = document.querySelector('#page-datasets .dataset-filter-toggle');
   const willOpen = !popover.classList.contains('open');
   if (willOpen) syncPendingFromActive();
   popover.classList.toggle('open', willOpen);
@@ -775,7 +891,7 @@ function toggleDatasetFilters() {
 
 function closeDatasetFilters() {
   const popover = document.getElementById('dataset-filter-popover');
-  const btn = document.querySelector('.dataset-filter-toggle');
+  const btn = document.querySelector('#page-datasets .dataset-filter-toggle');
   if (popover) popover.classList.remove('open');
   if (btn) btn.setAttribute('aria-expanded', 'false');
 }
@@ -827,7 +943,7 @@ function clearPendingDatasetFilters() {
 document.addEventListener('click', e => {
   const popover = document.getElementById('dataset-filter-popover');
   if (!popover || !popover.classList.contains('open')) return;
-  if (e.target.closest('#dataset-filter-popover') || e.target.closest('.dataset-filter-toggle')) return;
+  if (e.target.closest('#dataset-filter-popover') || e.target.closest('#page-datasets .dataset-filter-toggle')) return;
   closeDatasetFilters();
 });
 document.addEventListener('click', e => {
@@ -854,7 +970,7 @@ function showDatasetCategory(cat) {
   activeChems.clear();
   activeForms.clear();
   activeCategories.clear();
-  activeCategories.add(cat);
+  activeCategories.add(getDatasetPageCategory(cat));
   activeDomains.clear();
   activeDuties.clear();
   syncPendingFromActive();
@@ -7702,11 +7818,17 @@ function bwDatasetMatchesSet(set, getter) {
   if (!set || set.size === 0) return true;
   return getter(set);
 }
+/** Benchmarks Step 2 only offers Cycle Aging datasets from the shared catalog. */
+const BWR_BASE_CATEGORY = 'cycle_aging';
+function bwIsCycleAgingDataset(d) {
+  return !!(d && d.category === BWR_BASE_CATEGORY);
+}
 function bwFlowFilteredDatasets() {
   const q = BWR.filters.q;
   const f = BWR.filters;
-  return bwFlowSortedDatasets(DATASETS.filter(d => {
-    if (isHiddenFromCatalog(d)) return false;
+  // Same live catalog as the Datasets page — no separate hardcoded list.
+  return bwFlowSortedDatasets(getCatalogDatasets().filter(d => {
+    if (!bwIsCycleAgingDataset(d)) return false;
     if (q) {
       const hay = [d.name, d.ref_name, d.notes, d.chemistry, d.form].join(' ').toLowerCase();
       if (!hay.includes(q)) return false;
@@ -7724,7 +7846,7 @@ function bwHasDatasetFilters(state) {
   return !!(state.all || state.chem.size || state.form.size || state.cat.size || state.domain.size || state.duty.size);
 }
 function bwFilterLabel(type, value) {
-  if (type === 'cat') return getSectionCatLabel(value);
+  if (type === 'cat') return getCatLabel(value);
   if (type === 'domain') return String(value).toUpperCase() === 'EV' ? 'EV' : String(value).charAt(0).toUpperCase() + String(value).slice(1);
   if (type === 'duty') return ({ cccv: 'CC/CV', dynamic: 'Dynamic', multi: 'Multi-rate' }[value] || value);
   return value;
@@ -7796,10 +7918,10 @@ function bwDatasetPagerItems(current, pages) {
 function bwFlowRenderDatasets() {
   const box = document.getElementById('bwr-dataset-list');
   if (!box) return;
-  // Drop stale selection if the chosen dataset was temporarily hidden.
+  // Drop stale selection if the chosen dataset was hidden or is outside Cycle Aging.
   if (BWR.datasetId) {
     const selected = DATASETS.find(d => d.id === BWR.datasetId);
-    if (selected && isHiddenFromCatalog(selected)) {
+    if (selected && (isHiddenFromCatalog(selected) || !bwIsCycleAgingDataset(selected))) {
       BWR.datasetId = null;
       BW.selId = null;
     }
@@ -7898,7 +8020,7 @@ window.bwGoDatasetPage = function(page) {
 };
 window.bwSelectDataset = function(id) {
   const d = DATASETS.find(x => x.id === id);
-  if (!d || isHiddenFromCatalog(d)) return;
+  if (!d || isHiddenFromCatalog(d) || !bwIsCycleAgingDataset(d)) return;
   BWR.datasetId = id;
   BW.selId = id;
   bwFlowRenderDatasets();
@@ -7951,7 +8073,7 @@ window.bwPickSplitProtocol = function(el, name) {
 function bwSelectedDataset() {
   if (!BWR.datasetId) return null;
   const d = DATASETS.find(x => x.id === BWR.datasetId);
-  if (!d || isHiddenFromCatalog(d)) return null;
+  if (!d || isHiddenFromCatalog(d) || !bwIsCycleAgingDataset(d)) return null;
   return d;
 }
 function bwFlowDatasetCellCount() {

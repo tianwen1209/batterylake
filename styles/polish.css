@@ -2174,6 +2174,16 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
   border-color: var(--tag-border) !important;
   color: var(--tag-fg) !important;
 }
+/* Datasets Category filter has more options than Benchmarks — keep layout local. */
+#page-datasets #dataset-filter-popover {
+  width: min(860px, calc(100% - 36px));
+}
+/* Category spans a full row; Chemistry/Domain/Form/Profile stay in a 2×2 below. */
+@media (min-width: 961px) {
+  #page-datasets #dataset-filter-grid .filter-group--category {
+    grid-column: 1 / -1;
+  }
+}
 #page-datasets .dataset-section-title h2 {
   font-size: 23px !important;
 }

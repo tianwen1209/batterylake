@@ -502,12 +502,18 @@ for ds in resp.json()["items"]:
           <button class="filter-tag filter-token filter-type-all" data-all-datasets="true" onclick="toggleAllDatasetsFilter(this)">All datasets</button>
         </div>
         <div class="dataset-filter-grid" id="dataset-filter-grid">
-          <div class="filter-group">
+          <div class="filter-group filter-group--category">
             <span class="filter-label">Category</span>
+            <div class="filter-tag filter-token filter-type-category" data-cat="calendar_aging" onclick="toggleCatFilter(this)">Calendar Aging</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="characterization" onclick="toggleCatFilter(this)">Characterization</div>
             <div class="filter-tag filter-token filter-type-category" data-cat="cycle_aging" onclick="toggleCatFilter(this)">Cycle Aging</div>
             <div class="filter-tag filter-token filter-type-category" data-cat="eis" onclick="toggleCatFilter(this)">EIS</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="ev" onclick="toggleCatFilter(this)">EV Field</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="safety" onclick="toggleCatFilter(this)">Safety</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="field_data" onclick="toggleCatFilter(this)">Field Data</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="field_fault_diagnosis" onclick="toggleCatFilter(this)">Field Fault Diagnosis</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="relaxation" onclick="toggleCatFilter(this)">Relaxation</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="soc_estimation" onclick="toggleCatFilter(this)">SOC Estimation</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="soh_estimation" onclick="toggleCatFilter(this)">SOH Estimation</div>
+            <div class="filter-tag filter-token filter-type-category" data-cat="thermal_runaway" onclick="toggleCatFilter(this)">Thermal Runaway</div>
           </div>
           <div class="filter-group">
             <span class="filter-label">Chemistry</span>
@@ -623,9 +629,6 @@ for ds in resp.json()["items"]:
                 <div class="filter-group">
                   <span class="filter-label">Category</span>
                   <div class="filter-tag filter-token filter-type-category" data-bwr-cat="cycle_aging" onclick="bwToggleDatasetFilterTag(this,'cat')">Cycle Aging</div>
-                  <div class="filter-tag filter-token filter-type-category" data-bwr-cat="eis" onclick="bwToggleDatasetFilterTag(this,'cat')">EIS</div>
-                  <div class="filter-tag filter-token filter-type-category" data-bwr-cat="ev" onclick="bwToggleDatasetFilterTag(this,'cat')">EV Field</div>
-                  <div class="filter-tag filter-token filter-type-category" data-bwr-cat="safety" onclick="bwToggleDatasetFilterTag(this,'cat')">Safety</div>
                 </div>
                 <div class="filter-group">
                   <span class="filter-label">Chemistry</span>

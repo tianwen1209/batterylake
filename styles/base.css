@@ -493,13 +493,15 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .dataset-filter-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px 18px;
+  align-items: start;
 }
 .dataset-filter-grid .filter-group {
-  display: flex; align-items: flex-start; gap: 7px; padding: 0; border-left: 0;
+  display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start;
+  gap: 7px; padding: 0; border-left: 0;
 }
 .dataset-filter-grid .filter-group + .filter-group { border-left: 0; padding-left: 0; }
 .dataset-filter-grid .filter-label {
-  width: 100%; margin-bottom: 1px; text-transform: capitalize; letter-spacing: 0 !important;
+  flex: 0 0 100%; width: 100%; margin-bottom: 1px; text-transform: capitalize; letter-spacing: 0 !important;
   font-size: 13px !important; color: var(--text2);
 }
 .dataset-filter-grid .filter-tag { border-radius: 999px; padding: 4px 10px; }
