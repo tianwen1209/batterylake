@@ -38,7 +38,7 @@ BatteryLake is built as **community infrastructure** for three overlapping resea
 
 | | You are… | BatteryLake gives you… |
 |---|---|---|
-| 🔬 | **A battery researcher** studying degradation, chemistry, or cell design | A curated catalog of 41+ aging datasets across LFP / NMC / LCO / NCA chemistries and 7 form factors — searchable by chemistry, C-rate, temperature, and institution, with DOI-level provenance for every source. Publish your own data through the contribution pipeline and make it instantly reusable. |
+| 🔬 | **A battery researcher** studying degradation, chemistry, or cell design | A curated catalog of 40+ aging datasets across LFP / NMC / LCO / NCA chemistries and 7 form factors — searchable by chemistry, C-rate, temperature, and institution, with DOI-level provenance for every source. Publish your own data through the contribution pipeline and make it instantly reusable. |
 | 🤖 | **An ML researcher** building SOH / RUL / degradation models | Standardized benchmark tasks with pinned train/val/test splits, a reference model suite (Ridge → Random Forest → XGBoost → MLP → LSTM → Transformer → PINN), and unified RMSE / MAE / MAPE reporting — so your new architecture gets an honest, like-for-like comparison. |
 | 📊 | **A data scientist / engineer** who needs clean time-series at scale | One schema for everything: `metadata.json` + `timeseries.parquet` + `cycle_summary.csv` per dataset, loadable in two lines of pandas. Machine-readable quality reports, a machine-readable naming standard, and REST APIs for programmatic access. |
 
@@ -50,7 +50,7 @@ If your work touches battery data from more than one source, BatteryLake is desi
 
 ### 🗂️ Dataset Catalog — browse, filter, download
 
-Search 41+ curated datasets by chemistry, form factor, category, domain, and duty profile. Every dataset card carries ETL status, cell/cycle counts, and links to both **source** and **processed** data.
+Search 40+ curated datasets by chemistry, form factor, category, domain, and duty profile. Every dataset card carries ETL status, cell/cycle counts, and links to both **source** and **processed** data.
 
 <img src="docs/preview-datasets.png" alt="BatteryLake dataset catalog with domain-aware filters" width="100%"/>
 
@@ -72,7 +72,7 @@ Explore REST endpoints interactively: query the dataset catalog, stream per-cell
 
 | Metric | Value | Notes |
 |---|---:|---|
-| **Curated datasets** | 41+ | Public archives + internal NTU experiments |
+| **Curated datasets** | 40+ | Public archives + internal NTU experiments |
 | **Individual cells** | 1,499+ | Across all chemistries and form factors |
 | **Charge/discharge cycles** | 331.8K | Standardized, per-cycle aligned |
 | **Data volume** | 9.7 GB | Uniform Parquet/CSV time-series + summaries |

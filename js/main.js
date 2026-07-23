@@ -17,7 +17,6 @@ const FALLBACK_DATASETS = [
   { id:'dataset_08', name:'UL-Purdue BatteryArchive NCA', ref_name:'2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T', status:'done', category:'cycle_aging', chemistry:'NCA', cells:'21', form:'18650', cycles:9000, size_mb:200, notes:'UL-PUR / UL-Purdue; 21 NCA 18650 cylindrical cells; 23°C; 0.5C/0.5C protocol', doi:'https://batteryarchive.org', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCk2QLkD7maSYcV51CbnSS6Adf5rpq85Y9nW75acvkODzI?e=LtTELj', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/20'},
   { id:'dataset_09', name:'XJTU NCM Prismatic', ref_name:'2023_XJTU_NCM_Prismatic_MultiC_MultiC_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'55', form:'Prismatic', cycles:22000, size_mb:340, notes:"Xi'an Jiaotong University; NCM prismatic; Zenodo 2023", doi:'https://zenodo.org/record/7758424', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCZBnB6O9HAQI-TxUwXTAcMAbNRt2oC9C9TDAkT-4Q1rmE?e=jCPdVs', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/20'},
 
-  { id:'dataset_10', name:'Kaggle EV Battery Charging', ref_name:'2023_Kaggle_LiIon_Unknown_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'Unknown', cells:'—', form:'Unknown', cycles:0, size_mb:0, notes:'Kaggle EV battery charging data; possibly synthetic/toy dataset', doi:'https://www.kaggle.com/datasets/ziya07/ev-battery-charging-data', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDLxbFPXptxR5f2JATCUUDkAaUlIByPxn4JXkCYWwjz6l4?e=p3CMOo', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_11', name:'KIT NMC/C-SiO 228 Cells', ref_name:'2024_KIT_NMC-SiO_18650_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'228', form:'18650', cycles:0, size_mb:0, notes:'Karlsruhe Institute; 228 NMC/C-SiO cells; 30B+ data points; Sci Data 2024', doi:'https://doi.org/10.1038/s41597-024-03831-x', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgA7SW3-O8n1SIVDxKOIv3OxAVZY3b8ZY7Mqmu2xGl934HQ?e=SYqOzt', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_12', name:'Tsinghua Li-ion EV Field', ref_name:'2022_Tsinghua_LiIon_EV_MultiChem_MultiC_MultiT', status:'pending', category:'ev', chemistry:'Multi', cells:'—', form:'EV-BMS', cycles:0, size_mb:0, notes:'Tsinghua University; real-world EV battery cycle data', doi:'https://data.mendeley.com/datasets/mcsh4hnb8b/1', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCWAMpPvIFGSoFxZoh4ltkdARgWCDSfpiOUSa2yYdr6kC8?e=dxi7lb', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
   { id:'dataset_13', name:'Comprehensive battery aging dataset for NMC/C-SiO cells', ref_name:'2024_KIT_Luh_NMC_18650_MultiC_MultiC_MultiT', status:'pending', category:'cycle_aging', chemistry:'NMC', cells:'-', form:'18650', cycles:0, size_mb:0, notes:'3 billion data points; 228 commercial NMC/C+SiO lithium-ion cells; aged for almost 600 days', doi:'https://radar.kit.edu/radar/en/dataset/kww7jv8ajuvchcah#', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCviM4fNJhJR5eUQr46kGU4AXinAKoE6AGOFG1lxbY2f68?e=29gQzN', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
@@ -368,7 +367,7 @@ function animateHomeMetrics() {
 
   const duration = 1400;
   const final = {
-    datasets: 41,
+    datasets: 40,
     labs: 34,
     years: 19,
     cyclesK: 331.8,
@@ -386,7 +385,7 @@ function animateHomeMetrics() {
     setHomeMetric('m-cells', Math.round(final.cells * p).toLocaleString('en-US'));
     setHomeMetric('m-volume', `${(final.volumeGB * p).toFixed(1)} <span class="metric-unit">GB</span>`);
     if (progress >= 1) {
-      setHomeMetric('m-datasets', '41+');
+      setHomeMetric('m-datasets', '40+');
       setHomeMetric('m-labs', '34+');
       setHomeMetric('m-years', '19');
       setHomeMetric('m-cycles', '331.8<span class="metric-unit">K</span>');

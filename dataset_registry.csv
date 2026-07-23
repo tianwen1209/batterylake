@@ -8,7 +8,6 @@ dataset_06,SNL Battery Abuse Testing,cycle_aging,https://www.batteryarchive.org/
 dataset_07,HNEI Battery Dataset,cycle_aging,https://www.batteryarchive.org/,https://www.batteryarchive.org/,Cao Han,,pending,no,no,no,no,no,,Hawaii Natural Energy Institute; NMC 18650
 dataset_08,UL-PUR Battery Dataset,cycle_aging,https://www.batteryarchive.org/,https://www.batteryarchive.org/,Cao Han,,pending,no,no,no,no,no,,UL-Purdue; LFP cells
 dataset_09,XJTU Battery Dataset,cycle_aging,https://zenodo.org/record/7758424,https://zenodo.org/record/7758424,Cao Han,,Processing,yes,yes,yes,yes,no,2026/3/13,Xi'an Jiaotong University; NCM cells
-dataset_10,EV_batt_charging_data,cycle_aging,https://www.kaggle.com/datasets/ziya07/ev-battery-charging-data,https://www.kaggle.com/datasets/ziya07/ev-battery-charging-data,,,pending,no,no,no,no,no,,maybe toy dataset
 dataset_11,Lithium-ion battery cycle data,cycle_aging,https://data.mendeley.com/datasets/279783p5df/1,https://data.mendeley.com/datasets/279783p5df/1,,,pending,no,no,no,no,no,,UCL/Beihang University School of Astronautics
 dataset_12,Comprehensive NMC/C-SiO Aging (KIT 228 cells),cycle_aging,https://radar.kit.edu/radar/en/dataset/kww7jv8ajuvchcah#,https://radar.kit.edu/radar/en/dataset/zYYmSEIWMwoELRCK,,,pending,no,no,no,no,no,,KIT; 228 NMC/C-SiO cells; 30B+ data points; calendar+cycle aging; DOI:10.1038/s41597-024-03831-x
 dataset_13,EV field datasets Tsinghua,cycle_aging,https://data.mendeley.com/datasets/mcsh4hnb8b/1,https://data.mendeley.com/datasets/mcsh4hnb8b/1,,,pending,no,no,no,no,no,,Tsinghua university
