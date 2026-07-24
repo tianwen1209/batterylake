@@ -1,22 +1,24 @@
 {
-  "updated_at": "2026-07-23T18:40:55Z",
-  "total_visits": 1104,
-  "dataset_downloads": 296,
-  "skill_uses": 104,
+  "updated_at": "2026-07-24T18:51:41Z",
+  "total_visits": 1152,
+  "dataset_downloads": 315,
+  "skill_uses": 106,
   "model_downloads": {
-    "cnn": 11,
+    "cnn": 14,
     "linear": 4
   },
   "model_runs": {
-    "cnn": 8,
-    "linear": 3
+    "cnn": 9,
+    "linear": 3,
+    "baseline-package": 1,
+    "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-07-23T18:40:55Z",
+    "updatedAt": "2026-07-24T18:51:41Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-07-23"
+      "endDate": "2026-07-24"
     },
     "countries": [
       {
@@ -27,12 +29,22 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 4
+        "visitors": 5
       },
       {
         "country": "China",
         "countryCode": "CN",
+        "visitors": 3
+      },
+      {
+        "country": "Vietnam",
+        "countryCode": "VN",
         "visitors": 2
+      },
+      {
+        "country": "Germany",
+        "countryCode": "DE",
+        "visitors": 1
       },
       {
         "country": "Hong Kong",
@@ -42,11 +54,6 @@
       {
         "country": "T\u00fcrkiye",
         "countryCode": "TR",
-        "visitors": 1
-      },
-      {
-        "country": "Vietnam",
-        "countryCode": "VN",
         "visitors": 1
       }
     ],
@@ -84,12 +91,36 @@
         "lat": 23.117
       },
       {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Quanzhou",
+        "visitors": 1,
+        "lng": 118.586,
+        "lat": 24.914
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Xiamen",
+        "visitors": 1,
+        "lng": 118.082,
+        "lat": 24.48
+      },
+      {
         "country": "United States",
         "countryCode": "US",
         "city": "Los Angeles",
         "visitors": 1,
         "lng": -118.244,
         "lat": 34.052
+      },
+      {
+        "country": "Vietnam",
+        "countryCode": "VN",
+        "city": "Hanoi",
+        "visitors": 1,
+        "lng": 105.841,
+        "lat": 21.024
       },
       {
         "country": "Vietnam",
