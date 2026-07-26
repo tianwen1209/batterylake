@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-25T18:12:41Z",
-  "total_visits": 1159,
+  "updated_at": "2026-07-26T18:16:14Z",
+  "total_visits": 1167,
   "dataset_downloads": 315,
   "skill_uses": 106,
   "model_downloads": {
@@ -14,11 +14,11 @@
     "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-07-25T18:12:41Z",
+    "updatedAt": "2026-07-26T18:16:14Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-07-25"
+      "endDate": "2026-07-26"
     },
     "countries": [
       {
@@ -39,7 +39,7 @@
       {
         "country": "Vietnam",
         "countryCode": "VN",
-        "visitors": 2
+        "visitors": 3
       },
       {
         "country": "Germany",
