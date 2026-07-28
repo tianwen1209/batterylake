@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-07-27T18:51:07Z",
-  "total_visits": 1225,
-  "dataset_downloads": 316,
+  "updated_at": "2026-07-28T18:51:26Z",
+  "total_visits": 1249,
+  "dataset_downloads": 319,
   "skill_uses": 106,
   "model_downloads": {
     "cnn": 14,
@@ -11,14 +11,15 @@
     "cnn": 9,
     "linear": 3,
     "baseline-package": 1,
+    "lstm": 1,
     "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-07-27T18:51:07Z",
+    "updatedAt": "2026-07-28T18:51:26Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-07-27"
+      "endDate": "2026-07-28"
     },
     "countries": [
       {
@@ -27,14 +28,14 @@
         "visitors": 39
       },
       {
-        "country": "United States",
-        "countryCode": "US",
+        "country": "China",
+        "countryCode": "CN",
         "visitors": 5
       },
       {
-        "country": "China",
-        "countryCode": "CN",
-        "visitors": 3
+        "country": "United States",
+        "countryCode": "US",
+        "visitors": 5
       },
       {
         "country": "Vietnam",
@@ -49,6 +50,11 @@
       {
         "country": "Hong Kong",
         "countryCode": "HK",
+        "visitors": 1
+      },
+      {
+        "country": "India",
+        "countryCode": "IN",
         "visitors": 1
       },
       {
@@ -73,6 +79,14 @@
         "visitors": 3,
         "lng": -121.955,
         "lat": 37.354
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Zhuhai",
+        "visitors": 2,
+        "lng": 113.568,
+        "lat": 22.277
       },
       {
         "country": "China",
@@ -105,6 +119,14 @@
         "visitors": 1,
         "lng": 118.082,
         "lat": 24.48
+      },
+      {
+        "country": "India",
+        "countryCode": "IN",
+        "city": "Coimbatore",
+        "visitors": 1,
+        "lng": 76.966,
+        "lat": 11.006
       },
       {
         "country": "United States",
