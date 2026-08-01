@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-07-31T18:48:13Z",
-  "total_visits": 1304,
-  "dataset_downloads": 356,
+  "updated_at": "2026-08-01T18:15:19Z",
+  "total_visits": 1308,
+  "dataset_downloads": 354,
   "skill_uses": 106,
   "model_downloads": {
     "cnn": 14,
@@ -15,11 +15,11 @@
     "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-07-31T18:48:13Z",
+    "updatedAt": "2026-08-01T18:15:19Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-07-31"
+      "endDate": "2026-08-01"
     },
     "countries": [
       {
@@ -55,6 +55,11 @@
       {
         "country": "India",
         "countryCode": "IN",
+        "visitors": 1
+      },
+      {
+        "country": "Kazakhstan",
+        "countryCode": "KZ",
         "visitors": 1
       },
       {
@@ -143,6 +148,14 @@
         "visitors": 1,
         "lng": 76.966,
         "lat": 11.006
+      },
+      {
+        "country": "Kazakhstan",
+        "countryCode": "KZ",
+        "city": "Almaty",
+        "visitors": 1,
+        "lng": 76.912,
+        "lat": 43.252
       },
       {
         "country": "United States",
