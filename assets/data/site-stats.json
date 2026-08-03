@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-02T18:15:24Z",
-  "total_visits": 1308,
+  "updated_at": "2026-08-03T18:59:55Z",
+  "total_visits": 1314,
   "dataset_downloads": 354,
   "skill_uses": 106,
   "model_downloads": {
@@ -15,11 +15,11 @@
     "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-08-02T18:15:24Z",
+    "updatedAt": "2026-08-03T18:59:55Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-08-02"
+      "endDate": "2026-08-03"
     },
     "countries": [
       {
@@ -35,7 +35,7 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 5
+        "visitors": 6
       },
       {
         "country": "Vietnam",
@@ -164,6 +164,14 @@
         "visitors": 1,
         "lng": -118.244,
         "lat": 34.052
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "San Jose",
+        "visitors": 1,
+        "lng": -121.895,
+        "lat": 37.339
       },
       {
         "country": "Vietnam",
