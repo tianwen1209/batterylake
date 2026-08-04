@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-03T18:59:55Z",
-  "total_visits": 1314,
+  "updated_at": "2026-08-04T18:59:51Z",
+  "total_visits": 1323,
   "dataset_downloads": 354,
   "skill_uses": 106,
   "model_downloads": {
@@ -15,11 +15,11 @@
     "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-08-03T18:59:55Z",
+    "updatedAt": "2026-08-04T18:59:51Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-08-03"
+      "endDate": "2026-08-04"
     },
     "countries": [
       {
