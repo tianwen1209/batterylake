@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-20T17:51:13Z",
-  "total_visits": 1356,
+  "updated_at": "2026-08-21T17:50:21Z",
+  "total_visits": 1361,
   "dataset_downloads": 359,
   "skill_uses": 106,
   "model_downloads": {
@@ -15,11 +15,11 @@
     "xgboost": 1
   },
   "locations": {
-    "updatedAt": "2026-08-20T17:51:13Z",
+    "updatedAt": "2026-08-21T17:50:21Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-08-20"
+      "endDate": "2026-08-21"
     },
     "countries": [
       {
@@ -30,7 +30,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 10
+        "visitors": 11
       },
       {
         "country": "United States",
@@ -41,6 +41,11 @@
         "country": "Vietnam",
         "countryCode": "VN",
         "visitors": 3
+      },
+      {
+        "country": "T\u00fcrkiye",
+        "countryCode": "TR",
+        "visitors": 2
       },
       {
         "country": "Germany",
@@ -65,11 +70,6 @@
       {
         "country": "Kazakhstan",
         "countryCode": "KZ",
-        "visitors": 1
-      },
-      {
-        "country": "T\u00fcrkiye",
-        "countryCode": "TR",
         "visitors": 1
       }
     ],
@@ -97,6 +97,14 @@
         "visitors": 3,
         "lng": -121.955,
         "lat": 37.354
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Shanghai",
+        "visitors": 2,
+        "lng": 121.458,
+        "lat": 31.222
       },
       {
         "country": "China",
@@ -149,14 +157,6 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shanghai",
-        "visitors": 1,
-        "lng": 121.458,
-        "lat": 31.222
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
         "city": "Xi'An",
         "visitors": 1,
         "lng": 108.929,
@@ -193,6 +193,14 @@
         "visitors": 1,
         "lng": 76.912,
         "lat": 43.252
+      },
+      {
+        "country": "T\u00fcrkiye",
+        "countryCode": "TR",
+        "city": "Istanbul",
+        "visitors": 1,
+        "lng": 28.95,
+        "lat": 41.014
       },
       {
         "country": "United States",
