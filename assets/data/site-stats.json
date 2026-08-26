@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-25T17:49:39Z",
-  "total_visits": 1397,
+  "updated_at": "2026-08-26T19:22:37Z",
+  "total_visits": 1419,
   "dataset_downloads": 363,
   "skill_uses": 106,
   "model_downloads": {
@@ -10,16 +10,16 @@
   "model_runs": {
     "cnn": 9,
     "linear": 3,
+    "xgboost": 2,
     "baseline-package": 1,
-    "lstm": 1,
-    "xgboost": 1
+    "lstm": 1
   },
   "locations": {
-    "updatedAt": "2026-08-25T17:49:39Z",
+    "updatedAt": "2026-08-26T19:22:37Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-08-25"
+      "endDate": "2026-08-26"
     },
     "countries": [
       {
@@ -65,6 +65,11 @@
       {
         "country": "India",
         "countryCode": "IN",
+        "visitors": 1
+      },
+      {
+        "country": "Italy",
+        "countryCode": "IT",
         "visitors": 1
       },
       {
@@ -193,6 +198,14 @@
         "visitors": 1,
         "lng": 76.966,
         "lat": 11.006
+      },
+      {
+        "country": "Italy",
+        "countryCode": "IT",
+        "city": "Milan",
+        "visitors": 1,
+        "lng": 9.19,
+        "lat": 45.464
       },
       {
         "country": "Kazakhstan",
