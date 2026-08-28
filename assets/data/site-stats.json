@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-26T19:22:37Z",
-  "total_visits": 1419,
-  "dataset_downloads": 363,
+  "updated_at": "2026-08-28T01:32:10Z",
+  "total_visits": 1413,
+  "dataset_downloads": 364,
   "skill_uses": 106,
   "model_downloads": {
     "cnn": 14,
@@ -15,11 +15,11 @@
     "lstm": 1
   },
   "locations": {
-    "updatedAt": "2026-08-26T19:22:37Z",
+    "updatedAt": "2026-08-28T01:32:10Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-08-26"
+      "endDate": "2026-08-28"
     },
     "countries": [
       {
@@ -30,7 +30,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 12
+        "visitors": 13
       },
       {
         "country": "United States",
@@ -41,6 +41,11 @@
         "country": "Vietnam",
         "countryCode": "VN",
         "visitors": 3
+      },
+      {
+        "country": "India",
+        "countryCode": "IN",
+        "visitors": 2
       },
       {
         "country": "T\u00fcrkiye",
@@ -60,11 +65,6 @@
       {
         "country": "Ireland",
         "countryCode": "IE",
-        "visitors": 1
-      },
-      {
-        "country": "India",
-        "countryCode": "IN",
         "visitors": 1
       },
       {
@@ -106,6 +106,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Fuzhou",
+        "visitors": 2,
+        "lng": 119.306,
+        "lat": 26.061
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Shanghai",
         "visitors": 2,
         "lng": 121.458,
@@ -126,14 +134,6 @@
         "visitors": 1,
         "lng": 116.397,
         "lat": 39.907
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Fuzhou",
-        "visitors": 1,
-        "lng": 119.306,
-        "lat": 26.061
       },
       {
         "country": "China",
@@ -190,6 +190,14 @@
         "visitors": 1,
         "lng": -6.249,
         "lat": 53.333
+      },
+      {
+        "country": "India",
+        "countryCode": "IN",
+        "city": "Chennai",
+        "visitors": 1,
+        "lng": 80.278,
+        "lat": 13.088
       },
       {
         "country": "India",
