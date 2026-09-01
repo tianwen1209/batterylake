@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-31T21:56:01Z",
-  "total_visits": 1432,
-  "dataset_downloads": 372,
+  "updated_at": "2026-09-01T19:58:41Z",
+  "total_visits": 1451,
+  "dataset_downloads": 383,
   "skill_uses": 106,
   "model_downloads": {
     "cnn": 14,
@@ -15,11 +15,11 @@
     "lstm": 1
   },
   "locations": {
-    "updatedAt": "2026-08-31T21:56:01Z",
+    "updatedAt": "2026-09-01T19:58:41Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-08-31"
+      "endDate": "2026-09-01"
     },
     "countries": [
       {
@@ -30,7 +30,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 15
+        "visitors": 17
       },
       {
         "country": "United States",
@@ -98,6 +98,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Fuzhou",
+        "visitors": 3,
+        "lng": 119.306,
+        "lat": 26.061
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Qingdao",
         "visitors": 3,
         "lng": 120.38,
@@ -106,18 +114,18 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Fuzhou",
-        "visitors": 2,
-        "lng": 119.306,
-        "lat": 26.061
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
         "city": "Shanghai",
         "visitors": 2,
         "lng": 121.458,
         "lat": 31.222
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Shenzhen",
+        "visitors": 2,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "China",
@@ -142,6 +150,14 @@
         "visitors": 1,
         "lng": 116.397,
         "lat": 39.907
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Chengdu",
+        "visitors": 1,
+        "lng": 104.067,
+        "lat": 30.667
       },
       {
         "country": "China",
@@ -174,14 +190,6 @@
         "visitors": 1,
         "lng": 118.586,
         "lat": 24.914
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Shenzhen",
-        "visitors": 1,
-        "lng": 114.068,
-        "lat": 22.546
       },
       {
         "country": "China",
