@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-05T19:07:24Z",
+  "updated_at": "2026-09-06T19:18:07Z",
   "total_visits": 1515,
   "dataset_downloads": 390,
   "skill_uses": 106,
@@ -15,11 +15,11 @@
     "lstm": 1
   },
   "locations": {
-    "updatedAt": "2026-09-05T19:07:24Z",
+    "updatedAt": "2026-09-06T19:18:07Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-05"
+      "endDate": "2026-09-06"
     },
     "countries": [
       {
