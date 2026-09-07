@@ -7,8 +7,8 @@
 **One naming standard. One ETL pipeline. One quality gate. Battery data, research-ready.**
 
 [![Datasets](https://img.shields.io/badge/Datasets-40-2A5FEA)](#-whats-inside)
-[![Cells](https://img.shields.io/badge/Cells-1%2C469-16a34a)](#-whats-inside)
-[![Cycles](https://img.shields.io/badge/Cycles-331.8K-0d9488)](#-whats-inside)
+[![Cells](https://img.shields.io/badge/Cells-1%2C762-16a34a)](#-whats-inside)
+[![Cycles](https://img.shields.io/badge/Cycles-704.7K-0d9488)](#-whats-inside)
 [![Institutions](https://img.shields.io/badge/Institutions-31-7c3aed)](#-whats-inside)
 [![Span](https://img.shields.io/badge/Years-2007–2026-d97706)](#-whats-inside)
 
@@ -73,8 +73,8 @@ Explore REST endpoints interactively: query the dataset catalog, stream per-cell
 | Metric | Value | Notes |
 |---|---:|---|
 | **Curated datasets** | 40 | Public archives + internal NTU experiments |
-| **Individual cells** | 1,469 | Across all chemistries and form factors |
-| **Charge/discharge cycles** | 331.8K | Standardized, per-cycle aligned |
+| **Individual cells** | 1,762 | Across all chemistries and form factors |
+| **Charge/discharge cycles** | 704.7K | Standardized, per-cycle aligned |
 | **Data volume** | 9.7 GB | Uniform Parquet/CSV time-series + summaries |
 | **Source institutions** | 31 | Laboratories worldwide |
 | **Publication span** | 2007 – 2026 | 19 years of battery aging research |
