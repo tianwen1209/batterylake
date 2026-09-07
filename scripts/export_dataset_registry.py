@@ -29,7 +29,7 @@ COLUMNS = [
     "processed_url", "chemistry", "form_factor", "cells", "cycles", "size_mb",
     "assigned_student", "reviewed_by", "status",
     "metadata_done", "timeseries_done", "cycle_summary_done", "dataset_note_done", "qc_done",
-    "last_updated", "notes",
+    "last_updated", "count_basis", "notes",
 ]
 PRESERVED = ["source", "assigned_student", "reviewed_by", "dataset_note_done"]
 
@@ -89,6 +89,7 @@ def build_rows() -> list[dict]:
             "dataset_note_done": old.get("dataset_note_done", "") or "no",
             "qc_done": d.get("qc", "no"),
             "last_updated": d.get("updated", ""),
+            "count_basis": d.get("evidence", ""),
             "notes": d.get("notes", ""),
         }
         for key in ("cells", "last_updated"):
