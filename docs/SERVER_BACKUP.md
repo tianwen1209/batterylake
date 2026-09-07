@@ -4,9 +4,11 @@
 
 The website repository is cloned at `/home/zhutianwen/batterylake`, with `origin` set to `git@github.com:tianwen1209/batterylake.git` and branch `main`. This is separate from the battery data repository at `/home/zhutianwen/BatteryLake2026`.
 
+One-time setup: add `/home/zhutianwen/.ssh/id_ed25519_batterylake_web.pub` to this repository's [Deploy keys](https://github.com/tianwen1209/batterylake/settings/keys) and enable **Allow write access**. The server's previous deploy key cannot write to this repository. Scheduling is installed, but uploads require this authorization. The dedicated private key stays outside the repository, and both this script and local Git configuration select it explicitly. See [GitHub's deploy-key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys).
+
 The server runs `scripts/github_backup.sh` daily at **09:00 Asia/Singapore (UTC+08:00, also Beijing time)** through the user's crontab. It commits eligible local changes, incorporates upstream commits with a rebase, pushes without force and checks the remote commit. On a conflict it aborts the rebase, preserves the local backup commit and records the error. It also retries previously unpushed commits when there are no new file changes. Existing staged changes or an unfinished Git operation stop the automatic run.
 
-`.gitignore` excludes local environment files, virtual environments and server logs. Logs stay at `/home/zhutianwen/batterylake/logs/github_backup.log`. Per-file and overall limits are 90 MiB and 250 MiB. Authentication uses the server's existing SSH key; no credentials are stored in this repository. The script uses a lock to prevent overlapping runs.
+`.gitignore` excludes local environment files, virtual environments and server logs. Logs stay at `/home/zhutianwen/batterylake/logs/github_backup.log`. Per-file and overall limits are 90 MiB and 250 MiB. Authentication uses the dedicated server SSH key; no credentials are stored in this repository. The script uses a lock to prevent overlapping runs.
 
 ```bash
 # Inspect candidates without committing, rebasing or pushing.
