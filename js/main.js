@@ -196,9 +196,10 @@ function csvRowToDataset(row) {
   const status = (row.status || 'pending').trim().toLowerCase();
   const notes  = (row.notes || '').trim();
   const cat    = extractCategory(row.data_category, notes);
-  const chem   = extractChemistry(ref, notes);
-  const form   = extractFormFactor(ref, notes);
-  const cells  = extractCellCount(notes);
+  // Explicit registry columns win; fall back to inference from ref_name / notes.
+  const chem   = (row.chemistry || '').trim() || extractChemistry(ref, notes);
+  const form   = (row.form_factor || '').trim() || extractFormFactor(ref, notes);
+  const cells  = (row.cells || '').trim() || extractCellCount(notes);
   const doi    = (row.doi || row.source_url || '').trim();
   const student = (row.assigned_student || '—').trim();
   // Optional numeric fields from CSV if present
