@@ -220,7 +220,7 @@
         <div class="metric-cell">
           <div class="metric-val accent" id="m-years">0</div>
           <div class="metric-sub">Years span</div>
-          <div class="metric-sub metric-detail">2007-2026</div>
+          <div class="metric-sub metric-detail" id="m-years-range">2007-2026</div>
         </div>
         <div class="metric-cell">
           <div class="metric-val accent" id="m-cycles">0</div>
@@ -489,7 +489,7 @@ for ds in resp.json()["items"]:
         <div class="dataset-search" id="search-box">
           <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
           <input type="text" id="searchInput" placeholder="Search datasets" oninput="onSearchInput()">
-          <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="Clear search" title="Clear search">?</button>
+          <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="Clear search" title="Clear search">×</button>
         </div>
         <button class="dataset-filter-toggle" onclick="toggleDatasetFilters()" aria-expanded="false" aria-controls="dataset-filter-grid">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h18M7 12h10M10 19h4"/></svg>

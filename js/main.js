@@ -45,7 +45,7 @@ const FALLBACK_DATASETS = [
   { id:'dataset_35', name:'Zenodo ARC Calorimetry 21700', ref_name:'2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT', status:'pending', category:'thermal_runaway', chemistry:'Multi', cells:'—', form:'21700', cycles:0, size_mb:0, notes:'Auxiliary physical dataset: ARC exothermal; 21700; NMC/NCA/LFP; thermal safety', doi:'https://zenodo.org/records/7707929', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBB_0fSJ5MXSbhmHVeJK6LyAYVORNLdvhuyyXT_3CkhohU?e=ONxPU5', meta:'no',ts:'no',cs:'no',qc:'no',updated:'—'},
 
   { id:'dataset_36', name:'Imperial College 21700 Cycle Aging', ref_name:'2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'21', form:'21700', cycles:14500, size_mb:520, notes:'LG M50T/GBM50T 21700; 3 temps; J. Power Sources 2024', doi:'https://doi.org/10.5281/zenodo.10637534', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDFoGTyCAf7SokvWt55BZl9AXaoMW8HTT1L1p22T4Gc5zo?e=ReCV3T', meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
-  { id:'dataset_37', name:'Munich Multistage Aging Samsung 21700', ref_name:'2024_TUM_Stroebl_NMC_21700_Multistage_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'279', form:'21700', cycles:67000, size_mb:3800, notes:'279× Samsung INR21700-50E; 71 aging conditions; Scientific Data 2024', doi:'https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315', processed_url:'https://doi.org/10.1038/s41597-024-03859-z', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCKqhLB3FILTZSucxlDhPw2AYsFXXGONKTHfQT09Xa-15Y?e=hVhwOD' ,meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
+  { id:'dataset_37', name:'Munich Multistage Aging Samsung 21700', ref_name:'2024_TUM_Stroebl_NMC_21700_Multistage_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'279', form:'21700', cycles:67000, size_mb:3800, notes:'279× Samsung INR21700-50E; 71 aging conditions; Scientific Data 2024', doi:'https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCKqhLB3FILTZSucxlDhPw2AYsFXXGONKTHfQT09Xa-15Y?e=hVhwOD', meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
   { id:'dataset_38', name:'ISU-ILCC Battery Aging', ref_name:'2023_ISU_ILCC_Thelen_LFP_Cyl_MultiC_30T', status:'done', category:'cycle_aging', chemistry:'LFP', cells:'88', form:'Cyl', cycles:31000, size_mb:610, notes:'Iowa State Univ; Li-ion multi-condition cycle aging', doi:'https://iastate.figshare.com/articles/dataset/_b_ISU-ILCC_Battery_Aging_Dataset_b_/22582234', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAQsqg5Eb4SSZDw_owj_-m6AcXA90yjg98xig61jAwtCzk?e=Rld0C3',meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
   { id:'dataset_39', name:'CQU Battery Aging', ref_name:'2023_CQU_NCA-LFP_Pouch-Prismatic_MultiC_MultiT', status:'done', category:'cycle_aging', chemistry:'NCA-LFP', cells:'', form:'Pouch', cycles:0, size_mb:0, notes:'Diverse Pouch & Prismatic cells; Multi-temperature & dynamic loading profiles; complex cycle aging', doi:'https://data.mendeley.com/datasets/n3b54nsw8m/9', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCKZCKUHq78SY57RhoFxXrtAaVz7wEc_OY1q007gmfSp_4?e=OIYo61', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/7/22'},
   { id:'dataset_40', name:'JRC Calendar Aging', ref_name:'2022_JRC_NMC-LFP-LTO_MultiForm_Calendar_MultiT', status:'done', category:'calendar_aging', chemistry:'NMC-LFP-LTO', cells:'', form:'Multi', cycles:0, size_mb:0, notes:'Diverse commercial NMC/LFP/LTO cells; Extremely long-term calendar aging (up to 3 years); multi-T & SOC matrix; EU Open Data Portal', doi:'https://data.europa.eu/data/datasets/oai-zenodo-org-5196334?locale=en', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAdLdrzmlrZQZdvipakXgIkAaD9XlPtP-1QrpZzwlfuA5k?e=dkRZLK', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/7/22'},
@@ -402,37 +402,68 @@ function setHomeMetric(id, html) {
   if (el) el.innerHTML = html;
 }
 
+/* Institution key for counting distinct labs: the ref_name source token(s),
+   with any descriptor that slipped past the chemistry stop removed
+   (e.g. "Oxford_Howey_LCO-NCA_..." -> "oxford_howey"). */
+function extractInstitutionFromRef(ref) {
+  const src = extractSourceFromRef(ref);
+  if (!src) return null;
+  const stop = /(LFP|NMC|NCM|LCO|NCA|LTO|SiO|SiGr|LiIon|MultiChem|MultiForm|MultiC|MultiT|Calendar|Auto|Cyl|Pouch|Prismatic|18650|21700|^\d+(\.\d+)?C$|^\d+T$)/i;
+  const out = [];
+  for (const part of src.split('_')) {
+    if (stop.test(part)) break;
+    out.push(part);
+  }
+  return (out.length ? out.join('_') : src.split('_')[0]).toLowerCase();
+}
+
+/* Single source of truth for the Home metric band: everything is derived from
+   DATASETS. Internal datasets hidden from the public catalog still count toward
+   cycle / cell / volume totals, while the dataset count matches the browsable
+   catalog and the sidebar badge. */
+function computeHomeMetrics() {
+  const all = DATASETS;
+  const num = v => Number(v) || 0;
+  const cellsOf = d => parseInt(String(d.cells || '').replace(/[^\d]/g, ''), 10) || 0;
+  const years = all.map(d => extractYearFromRef(d.ref_name)).filter(Boolean);
+  const yearMin = years.length ? Math.min(...years) : 0;
+  const yearMax = years.length ? Math.max(...years) : 0;
+  const labs = new Set(all.map(d => extractInstitutionFromRef(d.ref_name)).filter(Boolean));
+  return {
+    datasets: getCatalogDatasets().length,
+    labs: labs.size,
+    yearMin,
+    yearMax,
+    years: yearMax && yearMin ? yearMax - yearMin : 0,
+    cycles: all.reduce((sum, d) => sum + num(d.cycles), 0),
+    cells: all.reduce((sum, d) => sum + cellsOf(d), 0),
+    volumeGB: all.reduce((sum, d) => sum + num(d.size_mb), 0) / 1024
+  };
+}
+window.computeHomeMetrics = computeHomeMetrics;
+
+function formatCyclesMetric(cycles) {
+  if (cycles >= 1000) return (cycles / 1000).toFixed(1) + '<span class="metric-unit">K</span>';
+  return String(Math.round(cycles));
+}
+
 function animateHomeMetrics() {
   const metricsEl = document.getElementById('metrics-panel');
   if (!metricsEl) return;
 
   const duration = 1400;
-  const final = {
-    datasets: 40,
-    labs: 34,
-    years: 19,
-    cyclesK: 331.8,
-    cells: 1499,
-    volumeGB: 9.7
-  };
+  const final = computeHomeMetrics();
   const ease = t => 1 - Math.pow(1 - t, 3);
   const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setHomeMetric('m-years-range', final.yearMin && final.yearMax ? final.yearMin + '-' + final.yearMax : '');
   const render = progress => {
     const p = ease(progress);
     setHomeMetric('m-datasets', String(Math.round(final.datasets * p)));
     setHomeMetric('m-labs', String(Math.round(final.labs * p)));
     setHomeMetric('m-years', String(Math.round(final.years * p)));
-    setHomeMetric('m-cycles', `${(final.cyclesK * p).toFixed(1)}<span class="metric-unit">K</span>`);
+    setHomeMetric('m-cycles', formatCyclesMetric(final.cycles * p));
     setHomeMetric('m-cells', Math.round(final.cells * p).toLocaleString('en-US'));
     setHomeMetric('m-volume', `${(final.volumeGB * p).toFixed(1)} <span class="metric-unit">GB</span>`);
-    if (progress >= 1) {
-      setHomeMetric('m-datasets', '40+');
-      setHomeMetric('m-labs', '34+');
-      setHomeMetric('m-years', '19');
-      setHomeMetric('m-cycles', '331.8<span class="metric-unit">K</span>');
-      setHomeMetric('m-cells', '1499+');
-      setHomeMetric('m-volume', '9.7 <span class="metric-unit">GB</span>');
-    }
   };
 
   if (homeMetricAnimation) cancelAnimationFrame(homeMetricAnimation);

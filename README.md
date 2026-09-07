@@ -6,10 +6,10 @@
 
 **One naming standard. One ETL pipeline. One quality gate. Battery data, research-ready.**
 
-[![Datasets](https://img.shields.io/badge/Datasets-41%2B-2A5FEA)](#-whats-inside)
-[![Cells](https://img.shields.io/badge/Cells-1%2C499%2B-16a34a)](#-whats-inside)
+[![Datasets](https://img.shields.io/badge/Datasets-40-2A5FEA)](#-whats-inside)
+[![Cells](https://img.shields.io/badge/Cells-1%2C469-16a34a)](#-whats-inside)
 [![Cycles](https://img.shields.io/badge/Cycles-331.8K-0d9488)](#-whats-inside)
-[![Institutions](https://img.shields.io/badge/Institutions-34%2B-7c3aed)](#-whats-inside)
+[![Institutions](https://img.shields.io/badge/Institutions-31-7c3aed)](#-whats-inside)
 [![Span](https://img.shields.io/badge/Years-2007–2026-d97706)](#-whats-inside)
 
 [Explore the Platform](https://tianwen1209.github.io/batterylake/) · [Who It Serves](#-who-batterylake-serves) · [Platform Tour](#-platform-tour) · [How to Use](#-how-to-use) · [Data Schema](#-standardized-data-schema) · [Benchmarks](#-benchmark-tasks) · [Contributing](#-contributing)
@@ -28,7 +28,7 @@ Battery degradation research is held back by a **data fragmentation crisis**. Ev
 
 **BatteryLake removes that barrier.** We curate, standardize, and quality-check battery cycling datasets from laboratories worldwide into a single uniform schema, then expose them through an interactive catalog, a reproducible benchmark suite, and open APIs — so models for **State-of-Health (SOH) estimation** and **Remaining-Useful-Life (RUL) prediction** are finally compared on science, not on preprocessing luck.
 
-> Fair, reproducible comparison across **34+ institutions and 19 years** of battery aging research.
+> Fair, reproducible comparison across **31 institutions and 19 years** of battery aging research.
 
 ---
 
@@ -72,12 +72,14 @@ Explore REST endpoints interactively: query the dataset catalog, stream per-cell
 
 | Metric | Value | Notes |
 |---|---:|---|
-| **Curated datasets** | 40+ | Public archives + internal NTU experiments |
-| **Individual cells** | 1,499+ | Across all chemistries and form factors |
+| **Curated datasets** | 40 | Public archives + internal NTU experiments |
+| **Individual cells** | 1,469 | Across all chemistries and form factors |
 | **Charge/discharge cycles** | 331.8K | Standardized, per-cycle aligned |
 | **Data volume** | 9.7 GB | Uniform Parquet/CSV time-series + summaries |
-| **Source institutions** | 34+ | Laboratories worldwide |
+| **Source institutions** | 31 | Laboratories worldwide |
 | **Publication span** | 2007 – 2026 | 19 years of battery aging research |
+
+These figures are computed from the dataset catalog in `js/main.js` (the Home page derives them at load time), so this table should be refreshed whenever datasets are added.
 
 **Chemistries:** `LFP` · `NMC` · `NMC811` · `LCO` · `NCA` · multi-chemistry
 **Form factors:** `18650` · `21700` · `Pouch` · `Prismatic` · `Cylindrical` · `Automotive` · `EV-BMS`
