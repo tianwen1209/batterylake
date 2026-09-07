@@ -706,6 +706,7 @@ select:focus-visible, [tabindex]:focus-visible {
 .ml-card-btns { display: flex; gap: 8px; margin-top: 15px; }
 .ml-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 12px; border-radius: 9px; font-size: 13px; font-weight: 600; font-family: var(--sans); cursor: pointer; border: 1px solid var(--border); background: var(--bg); color: var(--text2); transition: all .15s; white-space: nowrap; }
 .ml-btn:hover { background: var(--bg3); border-color: var(--border2); }
+a.ml-btn { text-decoration: none; }
 .ml-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 .ml-btn-ghost { color: var(--accent); border-color: var(--border); }
 .ml-btn-ghost:hover { background: var(--accent-light); border-color: var(--accent); }

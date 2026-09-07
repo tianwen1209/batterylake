@@ -8821,7 +8821,7 @@ const MODELS_LIB = [
     files:[{n:'model.py',d:'Random forest definition',s:'2.2 KB'},{n:'train.py',d:'Training script',s:'2.6 KB'},{n:'features.py',d:'Feature extraction',s:'3.1 KB'},{n:'config.yaml',d:'Default hyperparameters',s:'0.9 KB'},{n:'requirements.txt',d:'Python dependencies',s:'0.4 KB'}] },
   { id:'xgboost', name:'XGBoost', sub:'Gradient Boosting', group:'Classical ML', icon:'boost',
     grad:'linear-gradient(135deg,#d97706,#b45309)', desc:'Gradient boosting framework for high-accuracy predictions.',
-    tasks:['SOH','RUL'], status:'Recommended', framework:'XGBoost', taskLabel:'SOH / RUL', difficulty:'Intermediate', pyfile:'xgboost.py',
+    tasks:['SOH','RUL'], status:'Recommended', framework:'XGBoost', taskLabel:'SOH / RUL', difficulty:'Intermediate', pyfile:'xgboost_model.py',
     overview:'Regularized gradient-boosted trees delivering top-tier accuracy on tabular features, with built-in handling of missing values.',
     whenToUse:'When you want the best tabular accuracy and are willing to tune learning rate, depth, and estimators.',
     inputs:['Per-cycle summary features','Optional dQ/dV descriptors'],
@@ -8894,7 +8894,7 @@ const ML_PACKAGE_MODEL = {
     { n:'random_forest.py', d:'Random Forest implementation', s:'.py' },
     { n:'transformer.py', d:'Transformer implementation', s:'.py' },
     { n:'utils.py', d:'Shared model utilities', s:'.py' },
-    { n:'xgboost.py', d:'XGBoost implementation', s:'.py' },
+    { n:'xgboost_model.py', d:'XGBoost implementation', s:'.py' },
     { n:'cnn.py', d:'CNN implementation', s:'.py' },
     { n:'README.md', d:'Package instructions', s:'.md' }
   ]
@@ -8968,6 +8968,254 @@ const ML_CARD_LOGOS = {
   xgboost: { light: 'assets/logos/models/7.png', dark: 'assets/logos/models/dark/7.png' },
   'baseline-package': { light: 'assets/logos/models/8.png', dark: 'assets/logos/models/dark/8.png' }
 };
+/* ── Model download: build a real zip from the same Python templates the
+   Benchmark package uses, so what users download is what the benchmark runs. ── */
+const ML_MODEL_CLASS = {
+  linear: 'LinearRegressionModel',
+  rf: 'RandomForestModel',
+  xgboost: 'XGBoostModel',
+  lstm: 'LSTMModel',
+  cnn: 'CNNModel',
+  transformer: 'TransformerModel',
+  pinn: 'PINNModel'
+};
+const ML_TORCH_TEMPLATES = {
+  lstm: () => bwLstmPy(),
+  cnn: () => bwCnnPy(),
+  transformer: () => bwTransformerPy(),
+  pinn: () => bwPinnPy()
+};
+function mlSklearnHelpersPy() {
+  return `
+
+def _to_arrays(data):
+    """Accept an (X, y) tuple, or any iterable of (batch_x, batch_y) pairs such as a torch DataLoader."""
+    if isinstance(data, tuple) and len(data) == 2:
+        x, y = data
+        x = np.asarray(x, dtype=float)
+        return x.reshape(len(x), -1), np.asarray(y, dtype=float).ravel()
+    xs, ys = [], []
+    for batch_x, batch_y in data:
+        batch_x = np.asarray(batch_x, dtype=float)
+        xs.append(batch_x.reshape(len(batch_x), -1))
+        ys.append(np.asarray(batch_y, dtype=float).ravel())
+    return np.concatenate(xs), np.concatenate(ys)
+`;
+}
+function mlSklearnModelPy(m) {
+  const cls = ML_MODEL_CLASS[m.id];
+  let imports = '';
+  let build = '';
+  if (m.id === 'linear') {
+    imports = 'from sklearn.linear_model import LinearRegression';
+    build = '        self.model = make_pipeline(StandardScaler(), LinearRegression(**params))';
+  } else if (m.id === 'rf') {
+    imports = 'from sklearn.ensemble import RandomForestRegressor';
+    build = '        defaults = {"n_estimators": 200, "min_samples_leaf": 2, "random_state": 42, "n_jobs": -1}\n'
+          + '        defaults.update(params)\n'
+          + '        self.model = RandomForestRegressor(**defaults)';
+  } else {
+    imports = 'try:\n    from xgboost import XGBRegressor\nexcept ImportError:  # xgboost is optional; scikit-learn ships an equivalent booster\n    XGBRegressor = None\nfrom sklearn.ensemble import HistGradientBoostingRegressor';
+    build = '        if XGBRegressor is not None:\n'
+          + '            defaults = {"n_estimators": 300, "learning_rate": 0.05, "max_depth": 6, "subsample": 0.9, "random_state": 42}\n'
+          + '            defaults.update(params)\n'
+          + '            self.model = XGBRegressor(**defaults)\n'
+          + '        else:\n'
+          + '            defaults = {"max_iter": 300, "learning_rate": 0.05, "random_state": 42}\n'
+          + '            defaults.update(params)\n'
+          + '            self.model = HistGradientBoostingRegressor(**defaults)';
+  }
+  return `"""BatteryLake reference model: ${m.name} (${m.framework}).
+
+Implements the BaseModel interface shared with the BatteryLake benchmark package:
+fit(train, val, config) / predict(x) / save(path) / load(path).
+Inputs are per-cycle engineered feature rows (capacity, internal resistance, coulombic
+efficiency, cycle index, ...); the target is SOH or RUL depending on the benchmark task.
+"""
+import numpy as np
+import joblib
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+${imports}
+from dataset_interface import BaseModel
+
+
+class ${cls}(BaseModel):
+    def __init__(self, config=None):
+        self.config = config or {}
+        params = dict(self.config.get("model_params", {}))
+${build}
+
+    def fit(self, train_loader, val_loader=None, config=None):
+        x, y = _to_arrays(train_loader)
+        self.model.fit(x, y)
+        if val_loader is not None:
+            vx, vy = _to_arrays(val_loader)
+            mae = float(np.mean(np.abs(self.model.predict(vx) - vy)))
+            print(f"Val MAE: {mae:.4f}")
+        return self
+
+    def predict(self, x):
+        x = np.asarray(x, dtype=float)
+        return self.model.predict(x.reshape(len(x), -1))
+
+    def save(self, path):
+        joblib.dump(self.model, path)
+
+    def load(self, path):
+        self.model = joblib.load(path)
+${mlSklearnHelpersPy()}`;
+}
+function mlModelRequirementsTxt(m) {
+  if (m.framework === 'PyTorch') return 'numpy>=1.23\ntorch>=2.0\n';
+  const req = ['numpy>=1.23', 'scikit-learn>=1.2', 'joblib>=1.2'];
+  if (m.id === 'xgboost') req.push('xgboost>=1.7  # optional; falls back to scikit-learn HistGradientBoosting');
+  return req.join('\n') + '\n';
+}
+function mlModelQuickstartPy(m) {
+  const cls = ML_MODEL_CLASS[m.id];
+  const mod = String(m.pyfile || '').replace(/\.py$/, '');
+  if (m.framework === 'PyTorch') {
+    return `import numpy as np
+import torch
+from torch.utils.data import DataLoader, TensorDataset
+from ${mod} import ${cls}
+
+# x: [samples, sequence_len, 4 channels (V, I, T, cycle)], y: SOH or RUL target
+x = torch.randn(256, 20, 4)
+y = torch.rand(256, 1)
+train = DataLoader(TensorDataset(x[:200], y[:200]), batch_size=32, shuffle=True)
+val = DataLoader(TensorDataset(x[200:], y[200:]), batch_size=32)
+
+config = {"model_params": {"input_dim": 4}, "train_params": {"learning_rate": 1e-3, "max_epochs": 50, "patience": 10}}
+model = ${cls}(config)
+model.fit(train, val, config)
+pred = model.predict(x[200:].numpy())
+model.save("${m.id}.pt")`;
+  }
+  return `import numpy as np
+from ${mod} import ${cls}
+
+# x: per-cycle feature rows, y: SOH (0-1) or RUL (cycles) target
+x = np.random.rand(300, 6)
+y = np.random.rand(300)
+
+model = ${cls}({"model_params": {}})
+model.fit((x[:240], y[:240]), (x[240:], y[240:]))
+pred = model.predict(x[240:])
+model.save("${m.id}.joblib")`;
+}
+function mlModelReadmeMd(m) {
+  const cls = ML_MODEL_CLASS[m.id];
+  return `# ${m.name} - BatteryLake reference model
+
+${m.overview}
+
+**Framework:** ${m.framework}  ·  **Tasks:** ${m.taskLabel}  ·  **Class:** \`${cls}\`
+
+## When to use
+
+${m.whenToUse}
+
+## Inputs
+
+${m.inputs.map(i => '- ' + i).join('\n')}
+
+## Outputs
+
+${m.outputs.map(o => '- ' + o).join('\n')}
+
+## Quick start
+
+\`\`\`bash
+pip install -r requirements.txt
+\`\`\`
+
+\`\`\`python
+${mlModelQuickstartPy(m)}
+\`\`\`
+
+## Interface
+
+Every BatteryLake model implements \`BaseModel\` from \`dataset_interface.py\`:
+
+- \`fit(train_loader, val_loader, config)\`
+- \`predict(x) -> np.ndarray\`
+- \`save(path)\` / \`load(path)\`
+
+The same file is used unchanged inside the Benchmark training package generated on the
+BatteryLake Benchmarks page, so results are directly comparable.
+
+Cite the BatteryLake paper (see Terms & Citation on the platform) when you publish results.
+`;
+}
+function mlPackageReadmeMd(models) {
+  return `# BatteryLake baseline models package
+
+All reference model implementations from the BatteryLake Model Library in one folder.
+Every model implements the \`BaseModel\` interface in \`dataset_interface.py\`
+(\`fit\` / \`predict\` / \`save\` / \`load\`), so they can be swapped inside the same training loop.
+
+| File | Model | Framework | Class |
+|---|---|---|---|
+${models.map(m => '| `' + m.pyfile + '` | ' + m.name + ' | ' + m.framework + ' | `' + ML_MODEL_CLASS[m.id] + '` |').join('\n')}
+
+## Install
+
+\`\`\`bash
+pip install -r requirements.txt
+\`\`\`
+
+Classical models need only scikit-learn. LSTM, CNN, Transformer and PINN need PyTorch
+(a GPU is recommended but not required).
+
+## Usage
+
+Import the class you need from its file, e.g. \`from lstm import LSTMModel\`. See the
+per-model README on the BatteryLake Model Library page for a runnable quick-start.
+These are the same files the Benchmarks page bundles into its training package.
+`;
+}
+function mlModelSourceFile(m) {
+  const torch = ML_TORCH_TEMPLATES[m.id];
+  return torch ? torch() : mlSklearnModelPy(m);
+}
+/** Files (relative to the zip root) for a single model or the full package. */
+function mlBuildModelFiles(m) {
+  if (m.isPackage) {
+    const models = MODELS_LIB;
+    const files = [
+      { name: 'README.md', desc: 'Package instructions', data: mlPackageReadmeMd(models) },
+      { name: 'requirements.txt', desc: 'Python dependencies', data: 'numpy>=1.23\nscikit-learn>=1.2\njoblib>=1.2\ntorch>=2.0\nxgboost>=1.7\n' },
+      { name: 'dataset_interface.py', desc: 'Shared BaseModel interface', data: bwDatasetInterfacePy() }
+    ];
+    models.forEach(model => files.push({ name: model.pyfile, desc: model.name + ' implementation', data: mlModelSourceFile(model) }));
+    return files;
+  }
+  return [
+    { name: m.pyfile, desc: m.name + ' implementation (' + ML_MODEL_CLASS[m.id] + ')', data: mlModelSourceFile(m) },
+    { name: 'dataset_interface.py', desc: 'Shared BaseModel interface', data: bwDatasetInterfacePy() },
+    { name: 'README.md', desc: 'Usage and quick start', data: mlModelReadmeMd(m) },
+    { name: 'requirements.txt', desc: 'Python dependencies', data: mlModelRequirementsTxt(m) }
+  ];
+}
+function mlFileSizeLabel(data) {
+  const bytes = new TextEncoder().encode(String(data || '')).length;
+  return bytes >= 1024 ? (bytes / 1024).toFixed(1) + ' KB' : bytes + ' B';
+}
+function mlPackageZipName(m) {
+  return m.isPackage ? 'baseline_models' : 'bt_model_' + m.id;
+}
+function mlTriggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
 function mlDownloadModel(id, source) {
   const m = mlFindModel(id);
   if (!m) return;
@@ -8977,7 +9225,14 @@ function mlDownloadModel(id, source) {
       download_source: source === 'model_card' ? 'model_card' : 'model_detail'
     });
   }
-  showToast(m.isPackage ? 'Preparing baseline_models.zip...' : 'Downloading ' + m.pyfile + ' ...', 'info');
+  try {
+    const root = mlPackageZipName(m);
+    const files = mlBuildModelFiles(m).map(f => ({ name: root + '/' + f.name, data: f.data }));
+    mlTriggerDownload(bwZipBlob(files), root + '.zip');
+    showToast('Downloading ' + root + '.zip', 'success');
+  } catch (err) {
+    showToast('Download failed. Please try again in Chrome or Safari.', 'error');
+  }
 }
 function mlRunBenchmark(id) {
   if (!mlFindModel(id)) return;
@@ -9220,11 +9475,11 @@ function mlDetailHTML(m) {
       + '<div class="ml-d-sec"><div class="ml-d-h">Input Requirements</div><ul>' + m.inputs.map(i => '<li>' + i + '</li>').join('') + '</ul></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Output</div><ul>' + m.outputs.map(o => '<li>' + o + '</li>').join('') + '</ul></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Included Files</div><div class="ml-files">'
-        + m.files.map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + f.n + '</span><span class="ml-file-d">' + f.d + '</span><span class="ml-file-s">' + f.s + '</span></div>').join('')
+        + mlBuildModelFiles(m).map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + esc(f.name) + '</span><span class="ml-file-d">' + esc(f.desc) + '</span><span class="ml-file-s">' + mlFileSizeLabel(f.data) + '</span></div>').join('')
       + '</div></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Quick Actions</div><div class="ml-actions">'
         + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\', \'model_detail\')">' + ML_SVG.dl + ' Download Code</button>'
-        + '<button class="ml-btn ml-btn-ghost" onclick="showToast(\'Opening ' + m.name + ' docs…\', \'info\')">' + ML_SVG.ext + ' Docs</button>'
+        + '<a class="ml-btn ml-btn-ghost" href="https://github.com/tianwen1209/batterylake#-benchmark-tasks" target="_blank" rel="noopener noreferrer">' + ML_SVG.ext + ' Docs</a>'
         + '<button class="ml-btn ml-btn-ghost" onclick="mlRunBenchmark(\'' + m.id + '\')">' + ML_SVG.play + ' Run Benchmark</button>'
       + '</div></div>'
     + '</div>';
@@ -9234,12 +9489,12 @@ function mlPackageDetailHTML(m) {
     + '<div class="ml-d-chips">'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.code + ' Format</span><span class="ml-chip-v">Python package</span></div>'
       + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.target + ' Coverage</span><span class="ml-chip-v">All baseline models</span></div>'
-      + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.bars + ' Files</span><span class="ml-chip-v">' + m.files.length + ' items</span></div>'
+      + '<div class="ml-chip"><span class="ml-chip-k">' + ML_SVG.bars + ' Files</span><span class="ml-chip-v">' + mlBuildModelFiles(m).length + ' files</span></div>'
     + '</div>'
     + '<div class="ml-d-body">'
       + '<div class="ml-d-sec"><div class="ml-d-h">Overview</div><p>' + esc(m.overview) + '</p></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Included Files</div><div class="ml-files ml-package-files">'
-        + m.files.map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + esc(f.n) + '</span><span class="ml-file-d">' + esc(f.d) + '</span><span class="ml-file-s">' + esc(f.s) + '</span></div>').join('')
+        + mlBuildModelFiles(m).map(f => '<div class="ml-file"><span class="ml-file-ic">' + ML_SVG.file + '</span><span class="ml-file-n">' + esc(f.name) + '</span><span class="ml-file-d">' + esc(f.desc) + '</span><span class="ml-file-s">' + mlFileSizeLabel(f.data) + '</span></div>').join('')
       + '</div></div>'
       + '<div class="ml-d-sec"><div class="ml-d-h">Quick Actions</div><div class="ml-actions">'
         + '<button class="ml-btn ml-btn-primary" onclick="mlDownloadModel(\'' + m.id + '\', \'model_detail\')">' + ML_SVG.dl + ' Download Package</button>'
