@@ -1,8 +1,11 @@
 # Quality Assessment — Backend Scripts & Integration Guide
 
-Backend for the **Quality Assessment** page (`#quality`). It replaces the current
-placeholder in `js/main.js` (`generateQualityReport()` produces seeded-random
-scores from the file name) with a **real** analysis of battery data.
+Backend for the **Quality Assessment** page (`#quality`). The page never shows
+synthetic scores: it loads a precomputed report for catalog datasets, runs the
+browser port of this engine (`js/quality-engine.js`) on CSV / TSV / TXT / JSON
+uploads, and falls back to `POST /api/quality` on the local `app.py` server for
+Parquet / HDF5. If none of those apply it reports that no assessment is available.
+Keep the rules in `quality_assessment.py` and `js/quality-engine.js` in step.
 
 The output JSON matches the schema the page already renders, so wiring it in is
 a small, backward-compatible change.
@@ -60,9 +63,9 @@ This writes one `quality_reports/<dataset_id>_quality_report.json` per dataset
 
 ---
 
-## 3. Wire it into the page — pick ONE of two paths
+## 3. How the page is wired (both paths are implemented)
 
-### Path A — Precomputed reports (works on GitHub Pages, no server) ✅ recommended
+### Path A — Precomputed reports (works on GitHub Pages, no server) ✅ implemented
 
 1. Run the batch runner and commit the `quality_reports/` folder.
 2. In `js/main.js`, load the real report when a catalog dataset's quality view
@@ -87,7 +90,7 @@ async function showDatasetQuality(datasetId) {
 
 `renderQualityResults()` already accepts this exact JSON shape — nothing else changes.
 
-### Path B — Live upload endpoint (for the local `python app.py` server)
+### Path B — Live upload endpoint (for the local `python app.py` server) ✅ implemented as `/api/quality`
 
 Adds a real "Run Assessment" that analyses the uploaded file server-side.
 

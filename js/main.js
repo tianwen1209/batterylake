@@ -9587,16 +9587,6 @@ let qaActiveDatasetId = null;
 let qaPageInitialized = false;
 let qaHasAssessed = false;
 
-function qaHashSeed(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
-  return h || 1;
-}
-function qaSeededRandom(seed) {
-  let s = seed;
-  return function () { s = (s * 1103515245 + 12345) >>> 0; return (s % 10000) / 10000; };
-}
-
 function updateQualitySelectedFile() {
   const note = document.getElementById('qaSelectedFile');
   const runBtn = document.getElementById('qaRunBtn');
@@ -9651,32 +9641,80 @@ if (qaDropZoneEl) {
   });
 }
 
-function generateQualityReport(file) {
-  const rand = qaSeededRandom(qaHashSeed(file.name + '_' + file.size));
-  const dims = {
-    completeness: Math.min(1, Math.round((0.90 + rand() * 0.09) * 100) / 100),
-    consistency: Math.min(1, Math.round((0.88 + rand() * 0.11) * 100) / 100),
-    accuracy: Math.min(1, Math.round((0.85 + rand() * 0.14) * 100) / 100),
-    validity: Math.min(1, Math.round((0.94 + rand() * 0.06) * 100) / 100)
-  };
-  const overall = Math.round(((dims.completeness + dims.consistency + dims.accuracy + dims.validity) / 4) * 100) / 100;
+/* ── Real assessment paths (no synthetic scores) ──
+   1. precomputed quality_reports/<id>_quality_report.json for catalog datasets
+   2. browser engine (js/quality-engine.js) for CSV / TSV / TXT / JSON uploads
+   3. local backend POST /api/quality (python app.py) for Parquet / HDF5      */
+const QA_BROWSER_EXTENSIONS = new Set(['csv', 'tsv', 'txt', 'json']);
+const QA_MAX_BROWSER_ROWS = 250000;
 
-  const checksDetail = QA_CHECK_DEFS.map(def => ({ ...def, status: rand() < 0.16 ? 'warn' : 'pass' }));
-  const warnCount = checksDetail.filter(c => c.status === 'warn').length;
-  const gate = warnCount === 0 ? 'ready' : 'ready_with_warning';
-  const datasetId = file.name.replace(/\.[^.]+$/, '') || 'uploaded_dataset';
+function qaFileExtension(file) {
+  return String(file && file.name || '').split('.').pop().toLowerCase();
+}
 
-  return {
-    dataset_id: datasetId,
-    file_name: file.name,
-    quality_score: dims,
-    overall,
-    gate,
-    checks_detail: checksDetail,
-    checks: checksDetail.map(c => c.status === 'pass' ? { name: c.key, passed: true } : { name: c.key, status: 'review' }),
-    warn_count: warnCount,
-    generated_at: new Date().toISOString()
-  };
+function qaParseDelimited(file) {
+  return new Promise((resolve, reject) => {
+    if (!window.Papa || typeof Papa.parse !== 'function') { reject(new Error('CSV parser unavailable.')); return; }
+    Papa.parse(file, {
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: 'greedy',
+      preview: QA_MAX_BROWSER_ROWS,
+      transformHeader: h => String(h || '').trim(),
+      complete: result => resolve({ rows: result.data || [], columns: (result.meta && result.meta.fields) || [] }),
+      error: err => reject(err instanceof Error ? err : new Error(String(err && err.message || err)))
+    });
+  });
+}
+
+async function qaParseJson(file) {
+  const text = await file.text();
+  let parsed = JSON.parse(text);
+  if (parsed && !Array.isArray(parsed)) {
+    // Accept {records:[...]} / {data:[...]} / {rows:[...]} or a column-oriented object.
+    const key = ['records', 'data', 'rows', 'timeseries', 'cycles'].find(k => Array.isArray(parsed[k]));
+    if (key) parsed = parsed[key];
+    else if (Object.values(parsed).every(v => Array.isArray(v))) {
+      const cols = Object.keys(parsed);
+      const n = Math.max(...cols.map(c => parsed[c].length));
+      parsed = Array.from({ length: n }, (_, i) => Object.fromEntries(cols.map(c => [c, parsed[c][i]])));
+    }
+  }
+  if (!Array.isArray(parsed)) throw new Error('JSON must be an array of records or a column-oriented object.');
+  const rows = parsed.slice(0, QA_MAX_BROWSER_ROWS).filter(r => r && typeof r === 'object');
+  const columns = Array.from(rows.reduce((set, r) => { Object.keys(r).forEach(k => set.add(k)); return set; }, new Set()));
+  return { rows, columns };
+}
+
+async function assessQualityInBrowser(file, datasetId) {
+  if (!window.BatteryLakeQuality) throw new Error('Quality engine not loaded.');
+  const ext = qaFileExtension(file);
+  const parsed = ext === 'json' ? await qaParseJson(file) : await qaParseDelimited(file);
+  if (!parsed.rows.length) throw new Error('No data rows were found in ' + file.name + '.');
+  const match = DATASETS.find(d => d.id === datasetId || d.ref_name === datasetId);
+  const chemistry = match && match.chemistry && /^(LFP|LCO|NCA|NMC)/i.test(match.chemistry) ? match.chemistry : null;
+  return window.BatteryLakeQuality.assessRows(parsed.rows, { datasetId, fileName: file.name, chemistry, columns: parsed.columns });
+}
+
+async function assessQualityOnBackend(file, datasetId) {
+  const form = new FormData();
+  form.append('file', file, file.name);
+  const endpoints = ['/api/quality', 'http://127.0.0.1:8000/api/quality', 'http://localhost:8000/api/quality'];
+  let lastError = null;
+  for (const endpoint of endpoints) {
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: form });
+      const text = await res.text();
+      let data = {};
+      try { data = text ? JSON.parse(text) : {}; } catch (_) { data = {}; }
+      if (!res.ok || !data.quality_score) throw new Error(data.error || ('Quality backend returned ' + res.status));
+      if (datasetId) data.dataset_id = data.dataset_id || datasetId;
+      return data;
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  throw lastError || new Error('Quality backend unavailable.');
 }
 
 function qaDiagIcon(status) {
@@ -9765,7 +9803,7 @@ function renderQualityResults(report, options = {}) {
     list.innerHTML = report.checks_detail.map(c => `
       <li class="diag-item ${c.status}">
         <div class="diag-icon ${c.status}">${qaDiagIcon(c.status)}</div>
-        <div><div class="diag-name">${esc(c.name)}</div><div class="diag-detail">${esc(c.detail)}</div></div>
+        <div><div class="diag-name">${esc(c.name)}</div><div class="diag-detail">${esc(c.detail)}${c.note ? ' <span class="diag-note">(' + esc(c.note) + ')</span>' : ''}</div></div>
       </li>`).join('');
   }
 
@@ -9804,30 +9842,61 @@ function runQualityAssessment() {
   showToast('Running quality assessment...', 'info', 1600);
 
   (async () => {
-    const stem = String(qaSelectedFile.name || '').replace(/\.[^.]+$/, '');
+    const file = qaSelectedFile;
+    const stem = String(file.name || '').replace(/\.[^.]+$/, '');
+    const match = DATASETS.find(d =>
+      d.id === stem ||
+      d.ref_name === stem ||
+      stem === d.id + '_timeseries' ||
+      stem === d.ref_name + '_timeseries'
+    );
+    const datasetId = match ? match.id : stem;
+
+    // 1. Precomputed report for a catalog dataset.
     let report = await loadQualityReport(stem);
-    if (!report) {
-      const match = DATASETS.find(d =>
-        d.id === stem ||
-        d.ref_name === stem ||
-        stem === d.id + '_timeseries' ||
-        stem === d.ref_name + '_timeseries'
-      );
-      if (match) report = await loadQualityReport(match.id);
+    if (!report && match) report = await loadQualityReport(match.id);
+    let sourceLabel = 'precomputed report';
+
+    // 2. Real analysis in the browser for text formats.
+    if (!report && QA_BROWSER_EXTENSIONS.has(qaFileExtension(file))) {
+      try {
+        report = await assessQualityInBrowser(file, datasetId);
+        sourceLabel = 'analysed in browser';
+      } catch (err) {
+        console.warn('Browser quality assessment failed:', err);
+      }
     }
-    // Path A offline fallback when no precomputed report exists for this file.
-    if (!report) report = generateQualityReport(qaSelectedFile);
+
+    // 3. Local Python backend (Parquet / HDF5, or when browser parsing failed).
+    if (!report) {
+      try {
+        report = await assessQualityOnBackend(file, datasetId);
+        sourceLabel = 'analysed by local backend';
+      } catch (err) {
+        console.warn('Backend quality assessment unavailable:', err);
+      }
+    }
+
+    if (runBtn) { runBtn.disabled = false; runBtn.textContent = originalLabel; }
+    if (!report) {
+      const ext = qaFileExtension(file);
+      const hint = QA_BROWSER_EXTENSIONS.has(ext)
+        ? 'The file could not be parsed as a table.'
+        : ext.toUpperCase() + ' files need the local backend: run "python app.py" and retry, or upload the CSV export.';
+      showToast('No assessment available for ' + file.name + '. ' + hint, 'error', 7000);
+      return;
+    }
 
     qaLastReport = report;
-    qaActiveDatasetId = report.dataset_id || stem;
+    qaActiveDatasetId = report.dataset_id || datasetId;
     qaHasAssessed = true;
     renderQualityResults(report, { isExample: false });
-    if (runBtn) { runBtn.disabled = false; runBtn.textContent = originalLabel; }
-    showToast('Assessment complete - report ready to download.', 'success');
+    showToast('Assessment complete (' + sourceLabel + ') - report ready to download.', 'success');
     document.getElementById('qaResults')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  })().catch(() => {
+  })().catch(err => {
+    console.error(err);
     if (runBtn) { runBtn.disabled = false; runBtn.textContent = originalLabel; }
-    showToast('Quality assessment failed.', 'error');
+    showToast('Quality assessment failed: ' + (err && err.message || 'unknown error'), 'error', 6000);
   });
 }
 
@@ -9840,8 +9909,10 @@ function downloadQualityReport() {
     overall: report.overall,
     gate: report.gate,
     checks: report.checks,
+    checks_detail: report.checks_detail,
     warn_count: report.warn_count,
-    generated_at: report.generated_at
+    generated_at: report.generated_at,
+    source: report.source || 'precomputed'
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
   const link = document.createElement('a');

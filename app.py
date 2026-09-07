@@ -2,6 +2,7 @@ import json
 import mimetypes
 import os
 import re
+import tempfile
 import time
 from collections import Counter
 from email.parser import BytesParser
@@ -12,6 +13,8 @@ from pathlib import Path
 from urllib import error, parse, request
 
 import pandas as pd
+
+from quality import assess_dataset, report_to_frontend_schema
 
 
 ROOT = Path(__file__).resolve().parent
@@ -683,6 +686,30 @@ class BatteryTwinHandler(SimpleHTTPRequestHandler):
                     self.send_json({"error": "No files were received."}, status=400)
                     return
                 self.send_json(infer_inspection(files, "uploaded files"))
+                return
+
+            if self.path == "/api/quality":
+                content_type = self.headers.get("Content-Type", "")
+                message = BytesParser(policy=default).parsebytes(
+                    f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n".encode() + raw_body
+                )
+                for part in message.iter_parts():
+                    filename = part.get_filename()
+                    if not filename:
+                        continue
+                    content = part.get_payload(decode=True) or b""
+                    safe_name = Path(filename).name
+                    suffix = Path(safe_name).suffix or ".csv"
+                    with tempfile.NamedTemporaryFile(suffix=suffix, delete=True) as tmp:
+                        tmp.write(content)
+                        tmp.flush()
+                        report = assess_dataset(tmp.name, dataset_id=Path(safe_name).stem)
+                    payload = report_to_frontend_schema(report)
+                    payload["file_name"] = safe_name
+                    payload["source"] = "backend"
+                    self.send_json(payload)
+                    return
+                self.send_json({"error": "No file was received."}, status=400)
                 return
 
             if self.path == "/api/inspect-path":

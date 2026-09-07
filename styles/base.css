@@ -2246,3 +2246,5 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .sync-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .sync-dot.live { background: var(--green); }
 .sync-dot.fallback { background: var(--amber); }
+
+.diag-note { color: var(--text3); font-size: 12px; white-space: nowrap; }
