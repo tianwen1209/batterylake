@@ -1387,7 +1387,7 @@ bash run_benchmark.sh</pre>
         <div class="px-kicker">Agent skill</div>
         <h2 class="px-skill-name" id="px-skill-title">batterylake-processing</h2>
         <p class="px-skill-desc">Converts heterogeneous BatteryLake battery datasets into provenance-preserving standard data and explicit SOH / RUL benchmark views. Use it for dataset inventory, adapter design, conversion, fidelity checks, and raw-versus-standard benchmark validation.</p>
-        <div class="px-files" id="px-skill-files" aria-label="Files in the skill package"></div>
+        <div class="px-filetree" id="px-skill-files" aria-label="Files in the skill package"></div>
         <div class="px-actions">
           <button class="px-btn px-btn-primary" type="button" id="px-download-btn" onclick="BatteryLakePreprocessing.downloadSkill()">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1425,70 +1425,66 @@ bash run_benchmark.sh</pre>
     <section class="px-section reveal" aria-labelledby="px-gates-title">
       <div class="px-section-head">
         <span class="px-kicker">How it works</span>
-        <h2 id="px-gates-title">Five acceptance gates, one dataset at a time</h2>
-        <p>The skill walks the agent down this tree and records evidence for each gate in <code>status.json</code>. A gate is passed only by evidence, never by a folder listing or a copied archive.</p>
+        <h2 id="px-gates-title">Every dataset passes five acceptance gates</h2>
+        <p>The skill records evidence for each gate in <code>status.json</code>. A gate is passed by evidence, never by a folder listing or a copied archive.</p>
       </div>
-      <div class="px-gatetree">
-        <div class="px-tree-node px-tree-end">
-          <span class="px-tree-ic px-tree-ic-folder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-          </span>
-          <div class="px-tree-text"><strong>Raw_Dataset/&lt;category&gt;/dataset_xx</strong><span>original files &middot; read-only</span></div>
-        </div>
-        <ol class="px-tree-gates">
-          <li class="px-tree-gate" data-gate="I">
-            <span class="px-tree-ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-            </span>
-            <div class="px-tree-text">
-              <div class="px-tree-title"><b>I</b> Inventory <em>inventoried</em></div>
-              <div class="px-tree-tags"><span>files &amp; bytes</span><span>archive members</span><span>SHA-256</span><span>missing inputs</span></div>
-            </div>
-          </li>
-          <li class="px-tree-gate" data-gate="S">
-            <span class="px-tree-ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5a2 2 0 012-2h5v18H6a2 2 0 01-2-2z"/><path d="M20 5a2 2 0 00-2-2h-5v18h5a2 2 0 002-2z"/><path d="M7 8h2M7 12h2M15 8h2M15 12h2"/></svg>
-            </span>
-            <div class="px-tree-text">
-              <div class="px-tree-title"><b>S</b> Semantics <em>adapter design confirmed</em></div>
-              <div class="px-tree-tags"><span>cell identity</span><span>units &amp; clocks</span><span>cycle boundaries</span><span>labels</span><span>field ledger</span></div>
-            </div>
-          </li>
-          <li class="px-tree-gate" data-gate="C">
-            <span class="px-tree-ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h11l-3-3M20 17H9l3 3"/><path d="M4 7v0M20 17v0"/></svg>
-            </span>
-            <div class="px-tree-text">
-              <div class="px-tree-title"><b>C</b> Conversion <em>converted</em></div>
-              <div class="px-tree-tags"><span>rerunnable adapter</span><span>every source field</span><span>typed extras</span><span>output hashes</span></div>
-            </div>
-          </li>
-          <li class="px-tree-gate" data-gate="V">
-            <span class="px-tree-ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M7 10v4a3 3 0 003 3h4M17 14v-4a3 3 0 00-3-3h-4"/></svg>
-            </span>
-            <div class="px-tree-text">
-              <div class="px-tree-title"><b>V</b> Fidelity <em>canonical_validated</em></div>
-              <div class="px-tree-tags"><span>keys &amp; counts</span><span>order &amp; missingness</span><span>raw vs standard values</span><span>capacity check</span></div>
-            </div>
-          </li>
-          <li class="px-tree-gate" data-gate="E">
-            <span class="px-tree-ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 21h14"/><path d="M12 6l6 2-6 2-6-2z"/><path d="M6 8l-3 6a3 3 0 006 0zM18 8l-3 6a3 3 0 006 0z"/></svg>
-            </span>
-            <div class="px-tree-text">
-              <div class="px-tree-title"><b>E</b> Equivalence <em>benchmark_verified</em></div>
-              <div class="px-tree-tags"><span>independent loaders</span><span>same X / y / mask / split</span><span>paired training</span><span>per profile</span></div>
-            </div>
-          </li>
-        </ol>
-        <div class="px-tree-node px-tree-end">
-          <span class="px-tree-ic px-tree-ic-folder is-out" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 14l2 2 4-4"/></svg>
-          </span>
-          <div class="px-tree-text"><strong>Processed_Dataset/&lt;category&gt;/dataset_xx</strong><span>canonical &middot; views &middot; validation &middot; status.json</span></div>
-        </div>
-      </div>
+      <ol class="px-gates">
+        <li class="px-gate" data-gate="I">
+          <div class="px-gate-art" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="14" y="10" width="36" height="46" rx="4"/><path d="M22 22h20M22 31h20M22 40h12"/><path d="M40 44l3 3 6-6"/>
+            </svg>
+          </div>
+          <span class="px-gate-letter">I</span>
+          <strong>Inventory</strong>
+          <span>List every file and archive member, hash each source.</span>
+          <em>inventoried</em>
+        </li>
+        <li class="px-gate" data-gate="S">
+          <div class="px-gate-art" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 14a4 4 0 014-4h14v44H14a4 4 0 01-4-4z"/><path d="M54 14a4 4 0 00-4-4H36v44h14a4 4 0 004-4z"/><path d="M17 22h6M17 30h6M41 22h6M41 30h6"/><circle cx="32" cy="44" r="7"/><path d="M32 40v4l3 2"/>
+            </svg>
+          </div>
+          <span class="px-gate-letter">S</span>
+          <strong>Semantics</strong>
+          <span>Confirm cells, units, clocks, cycle boundaries and labels.</span>
+          <em>adapter design confirmed</em>
+        </li>
+        <li class="px-gate" data-gate="C">
+          <div class="px-gate-art" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="18" width="18" height="28" rx="3"/><rect x="38" y="18" width="18" height="28" rx="3"/><path d="M12 26h10M12 32h10M12 38h6M42 26h10M42 32h10M42 38h10"/><path d="M28 28h8l-3-3M36 36h-8l3 3"/>
+            </svg>
+          </div>
+          <span class="px-gate-letter">C</span>
+          <strong>Conversion</strong>
+          <span>Write every source field to the canonical layer.</span>
+          <em>converted</em>
+        </li>
+        <li class="px-gate" data-gate="V">
+          <div class="px-gate-art" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 44l10-14 8 8 10-16 12 12"/><path d="M10 44l10-14 8 8 10-16 12 12" stroke-dasharray="3 3" transform="translate(0 6)"/><circle cx="50" cy="16" r="8"/><path d="M46.5 16l2.5 2.5 4.5-5"/>
+            </svg>
+          </div>
+          <span class="px-gate-letter">V</span>
+          <strong>Fidelity</strong>
+          <span>Compare raw and standard values record by record.</span>
+          <em>canonical_validated</em>
+        </li>
+        <li class="px-gate" data-gate="E">
+          <div class="px-gate-art" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 10v44M20 54h24"/><path d="M14 20h36"/><path d="M14 20l-7 16a7 7 0 0014 0zM50 20l-7 16a7 7 0 0014 0z"/>
+            </svg>
+          </div>
+          <span class="px-gate-letter">E</span>
+          <strong>Equivalence</strong>
+          <span>Raw and standard loaders train to the same result.</span>
+          <em>benchmark_verified</em>
+        </li>
+      </ol>
     </section>
 
     <!-- 3 · Run -->

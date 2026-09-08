@@ -89,17 +89,36 @@
   function fmtInt(n) { return Number.isFinite(Number(n)) ? Number(n).toLocaleString('en-US') : String(n); }
 
   /* ── 1. Skill package ─────────────────────────────────────── */
+  /* Directory-tree listing of the package: root -> dirs -> files, with descriptions and sizes. */
   function renderFiles() {
     var box = $('px-skill-files');
     if (!box) return;
-    box.innerHTML = SKILL_FILES.map(function (f) {
-      var size = state.fileSizes[f.path];
-      return '<div class="px-file">'
-        + '<span class="px-file-name">' + escapeHtml(f.path) + '</span>'
-        + '<span class="px-file-desc">' + escapeHtml(f.desc) + '</span>'
-        + '<span class="px-file-size">' + (size ? fmtBytes(size) : '') + '</span>'
-        + '</div>';
-    }).join('');
+    var tree = { dirs: {}, files: [] };
+    SKILL_FILES.forEach(function (f) {
+      var parts = f.path.split('/');
+      var node = tree;
+      parts.slice(0, -1).forEach(function (dir) { node.dirs[dir] = node.dirs[dir] || { dirs: {}, files: [] }; node = node.dirs[dir]; });
+      node.files.push({ name: parts[parts.length - 1], file: f });
+    });
+    var rows = ['<div class="px-ft-row is-dir"><span class="px-ft-name">' + SKILL_NAME + '/</span><span class="px-ft-desc">skill package root</span><span class="px-ft-size"></span></div>'];
+    function walk(node, prefix) {
+      var entries = node.files.map(function (f) { return { kind: 'file', name: f.name, file: f.file }; })
+        .concat(Object.keys(node.dirs).map(function (d) { return { kind: 'dir', name: d, node: node.dirs[d] }; }));
+      entries.forEach(function (e, i) {
+        var last = i === entries.length - 1;
+        var branch = prefix + (last ? '└── ' : '├── ');
+        if (e.kind === 'file') {
+          var size = state.fileSizes[e.file.path];
+          rows.push('<div class="px-ft-row"><span class="px-ft-name"><span class="px-ft-branch">' + branch + '</span>' + escapeHtml(e.name) + '</span>'
+            + '<span class="px-ft-desc">' + escapeHtml(e.file.desc) + '</span><span class="px-ft-size">' + (size ? fmtBytes(size) : '') + '</span></div>');
+        } else {
+          rows.push('<div class="px-ft-row is-dir"><span class="px-ft-name"><span class="px-ft-branch">' + branch + '</span>' + escapeHtml(e.name) + '/</span><span class="px-ft-desc"></span><span class="px-ft-size"></span></div>');
+          walk(e.node, prefix + (last ? '    ' : '│   '));
+        }
+      });
+    }
+    walk(tree, '');
+    box.innerHTML = rows.join('');
   }
 
   function fetchSkillFile(path) {
