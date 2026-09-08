@@ -1,0 +1,922 @@
+{
+  "checked_at": "2026-09-08",
+  "units": "size_mb = bytes / 1,000,000; GB = size_mb / 1,000",
+  "datasets": [
+    {
+      "dataset_id": "dataset_01",
+      "previous": {
+        "cells": "34",
+        "cycles": "5609",
+        "size_mb": "205",
+        "ref_name": "2007_NASA_PCoE_LCO_18650_1C_1C_25T"
+      },
+      "current": {
+        "cells": "34",
+        "cycles": "5609",
+        "size_mb": "209.70867",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.nasa.gov",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 34 cell .mat files (B0005-B0056) in the complete NASA archive; 5,609 cycles from the ETL summary. Volume: Complete NASA source ZIP; verified archive receipt."
+    },
+    {
+      "dataset_id": "dataset_02",
+      "previous": {
+        "cells": "6",
+        "cycles": "5686",
+        "size_mb": "236",
+        "ref_name": "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T"
+      },
+      "current": {
+        "cells": "6",
+        "cycles": "5686",
+        "size_mb": "248.444385",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://calce.umd.edu",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): the CS2 study is the six CS2_33-CS2_38 cells (all archives held); 5,686 source cycle indices across their 152 cycling tables. Volume: All six author CS2_33 through CS2_38 ZIP archives; complete CS2 release, not the entire CALCE portal."
+    },
+    {
+      "dataset_id": "dataset_03",
+      "previous": {
+        "cells": "124",
+        "cycles": "96000",
+        "size_mb": "5151",
+        "ref_name": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T"
+      },
+      "current": {
+        "cells": "124",
+        "cycles": "0",
+        "size_mb": "8269.341808",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://doi.org/10.1038/s41560-019-0356-8",
+      "evidence": "Full-source metrics audit 2026-09-08. Complete-study cell count retained from author documentation. Earlier estimated cycle total removed pending a complete source-cycle audit. Volume: All three original 2017-05, 2017-06, 2018-04 MATR batch files; upstream HEAD lengths. Later 2019 extension excluded."
+    },
+    {
+      "dataset_id": "dataset_04",
+      "previous": {
+        "cells": "8",
+        "cycles": "55300",
+        "size_mb": "256",
+        "ref_name": "2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T"
+      },
+      "current": {
+        "cells": "8",
+        "cycles": "55300",
+        "size_mb": "266.236883",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 8 Kokam pouch cells in Oxford Battery Degradation Dataset 1 (complete); cycles = sum of the last RPT aging-cycle count per cell, RPT every 100 cycles (55,300). Volume: Complete Oxford Dataset 1 MAT plus ExampleDC MAT; accompanying documentation excluded."
+    },
+    {
+      "dataset_id": "dataset_05",
+      "previous": {
+        "cells": "48",
+        "cycles": "116749",
+        "size_mb": "5192",
+        "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "48",
+        "cycles": "116749",
+        "size_mb": "5444.154862",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://publications.rwth-aachen.de/record/818642",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 48 Sanyo UR18650E cells per the RWTH metadata PDF; 116,749 aging cycles counted as distinct Zyklus counter values across the ZYK cycling files (complete 5.1 GB archive held). Volume: Complete author Rawdata.zip; accompanying documentation excluded."
+    },
+    {
+      "dataset_id": "dataset_06",
+      "previous": {
+        "cells": "61",
+        "cycles": "0",
+        "size_mb": "115.2",
+        "ref_name": "2020_SNL_BatteryArchive_NCA-NMC-LFP_18650_MultiDOD_MultiC_15-25-35T"
+      },
+      "current": {
+        "cells": "61",
+        "cycles": "0",
+        "size_mb": "0",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "unknown",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://zenodo.org/records/21149533",
+      "evidence": "Full-source metrics audit 2026-09-08. 61 cells in the documented SNL BatteryLife release; original CSV volume and full original cycle count unavailable. The processed-copy ZIP size is excluded. Volume: Full original release volume is unknown; local subset, processed-copy and unverified legacy sizes are excluded."
+    },
+    {
+      "dataset_id": "dataset_07",
+      "previous": {
+        "cells": "14",
+        "cycles": "15164",
+        "size_mb": "41",
+        "ref_name": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T"
+      },
+      "current": {
+        "cells": "14",
+        "cycles": "0",
+        "size_mb": "0",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "unknown",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://batteryarchive.org",
+      "evidence": "Full-source metrics audit 2026-09-08. 14 HNEI study cells. Original CSV volume and full original cycle total are not established by the BatteryLife copy; processed-copy size/cycles excluded. Volume: Full original release volume is unknown; local subset, processed-copy and unverified legacy sizes are excluded."
+    },
+    {
+      "dataset_id": "dataset_08",
+      "previous": {
+        "cells": "10",
+        "cycles": "2245",
+        "size_mb": "10",
+        "ref_name": "2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T"
+      },
+      "current": {
+        "cells": "21",
+        "cycles": "0",
+        "size_mb": "0",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "unknown",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://batteryarchive.org",
+      "evidence": "Full-source metrics audit 2026-09-08. 21 cells in the original UL-PUR Part I study (BatteryArchive study summary); the local BatteryLife copy covers only 10. Original CSV volume and complete cycle total unknown. Volume: Full original release volume is unknown; local subset, processed-copy and unverified legacy sizes are excluded."
+    },
+    {
+      "dataset_id": "dataset_09",
+      "previous": {
+        "cells": "55",
+        "cycles": "27642",
+        "size_mb": "2324",
+        "ref_name": "2023_XJTU_NCM_Prismatic_MultiC_MultiC_25T"
+      },
+      "current": {
+        "cells": "55",
+        "cycles": "27642",
+        "size_mb": "2438.769934",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://zenodo.org/records/10963339",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 55 LISHEN NCM 18650 cells in 6 batches per the XJTU data introduction; 27,642 cycles counted from the 55 complete .mat files. Volume: Complete author Battery Dataset.zip, Zenodo 10963339; official size and MD5."
+    },
+    {
+      "dataset_id": "dataset_11",
+      "previous": {
+        "cells": "228",
+        "cycles": "0",
+        "size_mb": "5519",
+        "ref_name": "2024_KIT_NMC-SiO_18650_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "228",
+        "cycles": "0",
+        "size_mb": "69375.563264",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": "KIT_Luh_228",
+        "volume_group": null
+      },
+      "source_url": "https://doi.org/10.1038/s41597-024-03831-x",
+      "evidence": "Full-source metrics audit 2026-09-08. 228 cells in the original KIT study; raw release volume comes from the full upstream record. Volume: Official RADAR v1 record contentSize; the local mixed v1/v2 subset is not used."
+    },
+    {
+      "dataset_id": "dataset_12",
+      "previous": {
+        "cells": "464 EVs",
+        "cycles": "0",
+        "size_mb": "1341",
+        "ref_name": "2022_Tsinghua_LiIon_EV_MultiChem_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "464 EVs",
+        "cycles": "0",
+        "size_mb": "1408.209405",
+        "cells_basis": "not_applicable",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/mcsh4hnb8b/1",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 464 vehicles across the three complete tar.gz archives (native charging snippets). Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_13",
+      "previous": {
+        "cells": "-",
+        "cycles": "0",
+        "size_mb": "0",
+        "ref_name": "2024_KIT_Luh_NMC_18650_MultiC_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "228",
+        "cycles": "0",
+        "size_mb": "81909.759488",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": "KIT_Luh_228",
+        "volume_group": null
+      },
+      "source_url": "https://radar.kit.edu/radar/en/dataset/kww7jv8ajuvchcah#",
+      "evidence": "Full-source metrics audit 2026-09-08. 228 study cells shared with dataset_11; one cell-count group prevents counting these twice. Volume: Official RADAR v2 log release contentSize; full release, not the selected local logs."
+    },
+    {
+      "dataset_id": "dataset_14",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0",
+        "ref_name": "2021_KIT_NMC-SiO_18650_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "45",
+        "cycles": "0",
+        "size_mb": "2745.069193",
+        "cells_basis": "known",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://osf.io/9ceav/",
+      "evidence": "Full-source metrics audit 2026-09-08. 45 cells in the author high-power Molicel P42A study, Scientific Data DOI 10.1038/s41597-025-05725-y. Characterization tests are not aging-cycle totals. Volume: Complete author Dataset_Molicell_P42A.zip from OSF; expanded copies excluded."
+    },
+    {
+      "dataset_id": "dataset_15",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "76083",
+        "ref_name": "2023_IVST_Changan_LiIon_EV_MultiChem_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "74306.376155",
+        "cells_basis": "not_applicable",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "http://ivstskl.changan.com.cn/?p=2697",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): upstream release is stated as 74.3 GB of vehicle records; only a 0.1 GB sample archive is held locally, so no vehicle count is claimed. Volume: Complete upstream RAW_DATA.z01 + RAW_DATA.zip split archive; public share manifest. Local sample excluded."
+    },
+    {
+      "dataset_id": "dataset_16",
+      "previous": {
+        "cells": "464",
+        "cycles": "0",
+        "size_mb": "13742",
+        "ref_name": "2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT"
+      },
+      "current": {
+        "cells": "464",
+        "cycles": "0",
+        "size_mb": "14409.915853",
+        "cells_basis": "known",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://zenodo.org/records/13360631",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 464 retired cell IDs in the author pulse-feature tables (4,628 pulse samples), complete release; no cycle axis. Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_17",
+      "previous": {
+        "cells": "3",
+        "cycles": "0",
+        "size_mb": "3215",
+        "ref_name": "2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T"
+      },
+      "current": {
+        "cells": "3",
+        "cycles": "0",
+        "size_mb": "3373.184626",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://borealisdata.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/23MFNE",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 3 A123 2.5 Ah cells (95k / 206k / 300k km cases), complete release; drive-cycle aging has no simple cycle count. Volume: All three author drive-history ZIPs plus original summary XLSX; ingested TAB not counted again."
+    },
+    {
+      "dataset_id": "dataset_18",
+      "previous": {
+        "cells": "20",
+        "cycles": "82600",
+        "size_mb": "25078",
+        "ref_name": "2022_A123_LFP_18650_1.1Ah_CalCyc_50T"
+      },
+      "current": {
+        "cells": "20",
+        "cycles": "82600",
+        "size_mb": "26298.87975",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi:10.57745/OLBXKT",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 20 A123 18650 cells (all 20 cell archives held); cycles = sum of the last RPT aging-cycle count per cell (82,600). Volume: Complete set of author source ZIP archives; no extracted or converted files."
+    },
+    {
+      "dataset_id": "dataset_19",
+      "previous": {
+        "cells": "28",
+        "cycles": "20400",
+        "size_mb": "8540",
+        "ref_name": "2020_Oxford_Howey_LiIon_PathDep_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "28",
+        "cycles": "0",
+        "size_mb": "8950.273323",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://ora.ox.ac.uk/objects/uuid:de62b5d2-6154-426d-bcbb-30253ddb7d1e",
+      "evidence": "Full-source metrics audit 2026-09-08. Complete-study cell count retained from author documentation. Earlier estimated cycle total removed pending a complete source-cycle audit. Volume: Complete Parts 1-3 ZIP payloads, including EIS and half-cell files; accompanying guides excluded."
+    },
+    {
+      "dataset_id": "dataset_20",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "102",
+        "ref_name": "2021_Mendeley_LFP-NCA-NMC_18650_DriveCycle_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "102.805962",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/29kw38kzwj/1",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_21",
+      "previous": {
+        "cells": "22",
+        "cycles": "21392",
+        "size_mb": "1464",
+        "ref_name": "2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T"
+      },
+      "current": {
+        "cells": "22",
+        "cycles": "21392",
+        "size_mb": "1539.394976",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://figshare.com/articles/dataset/eVTOL_Battery_Dataset/14226830",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 22 cells (VAH01-VAH30) in the complete figshare release; 21,392 cycles as reported for the dataset. The tester cycleNumber in the files is not accurate (7,139 distinct values). Volume: Complete Figshare version 3 official file list; original release files only."
+    },
+    {
+      "dataset_id": "dataset_22",
+      "previous": {
+        "cells": "17",
+        "cycles": "0",
+        "size_mb": "8714",
+        "ref_name": "2022_EVERLASTING_4TU_NMC-SiGr_18650_3.5Ah_MultiC_25-45T"
+      },
+      "current": {
+        "cells": "17",
+        "cycles": "0",
+        "size_mb": "9134.458452",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": "EVERLASTING_e19fe272",
+        "volume_group": "EVERLASTING_e19fe272"
+      },
+      "source_url": "https://data.4tu.nl/datasets/e19fe272-4f46-450c-9125-6545c4c1a98b",
+      "evidence": "Full-source metrics audit 2026-09-08. Corrected 4TU cycling release e19fe272, same as dataset_23. 17 author per-cell CSVs; calendar record e42bca59 is a different study and is not counted here. Volume: Complete corrected 4TU e19fe272 author file list (17 cell CSVs + README); same source under IDs 22/23, counted once."
+    },
+    {
+      "dataset_id": "dataset_23",
+      "previous": {
+        "cells": "18",
+        "cycles": "0",
+        "size_mb": "9288",
+        "ref_name": "2022_EVERLASTING_4TU_NMC_18650_3.5Ah_MultiC_25-45T"
+      },
+      "current": {
+        "cells": "17",
+        "cycles": "0",
+        "size_mb": "9134.458452",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": "EVERLASTING_e19fe272",
+        "volume_group": "EVERLASTING_e19fe272"
+      },
+      "source_url": "https://data.4tu.nl/datasets/e19fe272-4f46-450c-9125-6545c4c1a98b",
+      "evidence": "Full-source metrics audit 2026-09-08. 17 cell identities in the complete author file list; the previous count of 18 included a README. Shared release with dataset_22. Volume: Complete corrected 4TU e19fe272 author file list (17 cell CSVs + README); same source under IDs 22/23, counted once."
+    },
+    {
+      "dataset_id": "dataset_24",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "604",
+        "ref_name": "2021_Stanford_Onori_NMC-NCA-LFP_18650_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "638.231736",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/kxsbr4x3j2/2",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_25",
+      "previous": {
+        "cells": "10",
+        "cycles": "0",
+        "size_mb": "2284",
+        "ref_name": "2022_Stanford_Onori_NMC_Cyl_RealDriving_MultiT"
+      },
+      "current": {
+        "cells": "10",
+        "cycles": "0",
+        "size_mb": "0",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "unknown",
+        "cells_group": "Onori_first_second_life",
+        "volume_group": null
+      },
+      "source_url": "https://osf.io/qsabn/",
+      "evidence": "Full-source metrics audit 2026-09-08. 10 original LG INR21700-M50T cells; original UDDS full cycle count and full release size remain unknown while source traversal is incomplete. Volume: Full original release volume is unknown; local subset, processed-copy and unverified legacy sizes are excluded."
+    },
+    {
+      "dataset_id": "dataset_26",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "727",
+        "ref_name": "2024_Stanford_Onori_LiIon_Parallel_MultiC_25T"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "762.469662",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/zh58byr53c/1",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_27",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "2058",
+        "ref_name": "2024_Stanford_Onori_LiIon_SecondLife_GridStorage_25T"
+      },
+      "current": {
+        "cells": "6",
+        "cycles": "0",
+        "size_mb": "2153.883052",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": "Onori_first_second_life",
+        "volume_group": null
+      },
+      "source_url": "https://osf.io/8jnr5/",
+      "evidence": "Full-source metrics audit 2026-09-08. Six second-life cells in the author paper DOI 10.1016/j.dib.2024.111046, continued from the ten-cell first-life dataset_25; same physical-cell group. Volume: Complete author second-life ZIP from OSF root listing; not the partial legacy local folder."
+    },
+    {
+      "dataset_id": "dataset_28",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "2304",
+        "ref_name": "2024_Stanford_Onori_LFP_Cyl_SOC-ML_25T"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "2419.728427",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://github.com/LeXuSECL/ML_SOC_Estimation_ACS_Energy_Letters",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Complete author GitHub archive at pinned commit 8855592; not an extracted folder."
+    },
+    {
+      "dataset_id": "dataset_29",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "4659",
+        "ref_name": "2025_Stanford_Onori_LiIon_Calendar_MultiT"
+      },
+      "current": {
+        "cells": "259",
+        "cycles": "0",
+        "size_mb": "850.754705",
+        "cells_basis": "known",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://osf.io/ju325/",
+      "evidence": "Full-source metrics audit 2026-09-08. 259 distinct Cell_id entries in the author Joule_cell_id.csv, including 27 cells excluded from paper analysis (232 analyzed). Count the original release, not the analysis subset. Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_30",
+      "previous": {
+        "cells": "515 EVs",
+        "cycles": "0",
+        "size_mb": "0",
+        "ref_name": "2025_Beihang_LiIon_EV-BMS_MultiChem_MultiT"
+      },
+      "current": {
+        "cells": "515 EVs",
+        "cycles": "0",
+        "size_mb": "38100",
+        "cells_basis": "not_applicable",
+        "cycles_basis": "unknown",
+        "volume_basis": "author_rounded",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://doi.org/10.5281/zenodo.10656500",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Author Zenodo 10656500 full seven-archive listing: 38.1 GB (rounded). GIS/DTI local subset is not used."
+    },
+    {
+      "dataset_id": "dataset_31",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "1229",
+        "ref_name": "2023_Mendeley_NMC811-LFP_18650_Relaxation_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "1292.019622",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/y8nstxmdrg/1",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_32",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0",
+        "ref_name": "2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0.465799",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://figshare.com/articles/dataset/Li-ion_Batteries_EIS_measurements/23736582",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Complete Figshare version 1 official file list; original release files only."
+    },
+    {
+      "dataset_id": "dataset_33",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "799",
+        "ref_name": "2023_TUM_NMC811-LFP_Auto_ThermalRunaway_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "841.320832",
+        "cells_basis": "unknown",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://mediatum.ub.tum.de/node?id=1717758",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Every file in the complete author FTP checksum list verified against upstream SHA-512; sum of matched original file bytes."
+    },
+    {
+      "dataset_id": "dataset_34",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "276",
+        "ref_name": "2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT"
+      },
+      "current": {
+        "cells": "109",
+        "cycles": "0",
+        "size_mb": "292.28331",
+        "cells_basis": "known",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/sn2kv34r4h/2",
+      "evidence": "Full-source metrics audit 2026-09-08. 54 ORNL + 55 SNL pouch cells in the author mechanical-abuse study, as described by BatteryArchive; 109 total, no cycling axis. Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_35",
+      "previous": {
+        "cells": "55 specimens",
+        "cycles": "0",
+        "size_mb": "1",
+        "ref_name": "2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT"
+      },
+      "current": {
+        "cells": "55 specimens",
+        "cycles": "0",
+        "size_mb": "0.22814",
+        "cells_basis": "not_applicable",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://zenodo.org/records/7707929",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 55 ARC test specimens (complete release); cycling does not apply. Volume: Complete official file manifest captured 2026-09-08; author release files only."
+    },
+    {
+      "dataset_id": "dataset_36",
+      "previous": {
+        "cells": "40",
+        "cycles": "131301",
+        "size_mb": "47135",
+        "ref_name": "2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "40",
+        "cycles": "131301",
+        "size_mb": "49420.596739",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://doi.org/10.5281/zenodo.10637534",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 40 cells across the five experiments in experiment_metadata.xlsx (9 + 6 + 9 + 8 + 8); 131,301 aging cycles summed from the per-cell \"Summary per Cycle\" tables (complete 46 GB release held). Volume: Complete five author experiment ZIP archives; metadata workbook excluded."
+    },
+    {
+      "dataset_id": "dataset_37",
+      "previous": {
+        "cells": "279",
+        "cycles": "67000",
+        "size_mb": "9820",
+        "ref_name": "2024_TUM_Stroebl_NMC_21700_Multistage_25T"
+      },
+      "current": {
+        "cells": "279",
+        "cycles": "0",
+        "size_mb": "10292.649424",
+        "cells_basis": "known",
+        "cycles_basis": "unknown",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315",
+      "evidence": "Full-source metrics audit 2026-09-08. Complete-study cell count retained from author documentation. Earlier estimated cycle total removed pending a complete source-cycle audit. Volume: Complete Figshare version 1 official file list; original release files only."
+    },
+    {
+      "dataset_id": "dataset_38",
+      "previous": {
+        "cells": "251",
+        "cycles": "1331994",
+        "size_mb": "10670",
+        "ref_name": "2023_ISU_ILCC_Thelen_NMC_Pouch_MultiC_30T"
+      },
+      "current": {
+        "cells": "251",
+        "cycles": "1331994",
+        "size_mb": "11186.085527",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://iastate.figshare.com/articles/dataset/_b_ISU-ILCC_Battery_Aging_Dataset_b_/22582234",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 251 NMC/graphite 502030 pouch cells under 63 conditions per README_V2.0.pdf (complete 10.4 GB release held; the earlier LFP/cylindrical label was wrong); 1,331,994 partial-DoD cycles counted from the per-cell Cycling_json capacity records. Volume: Complete Figshare version 2 official file list; original release files only."
+    },
+    {
+      "dataset_id": "dataset_39",
+      "previous": {
+        "cells": "47",
+        "cycles": "104817",
+        "size_mb": "256",
+        "ref_name": "2023_CQU_NCA-LFP_Pouch-Prismatic_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "47",
+        "cycles": "104817",
+        "size_mb": "272.160209",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/n3b54nsw8m/9",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 47 cells across three MAT files covering four experiments (30 source cell names, namespaced per file); 104,817 cycle records. Volume: Complete three author MAT files covering experiments 1-4; not four physical files."
+    },
+    {
+      "dataset_id": "dataset_40",
+      "previous": {
+        "cells": "",
+        "cycles": "0",
+        "size_mb": "0.08",
+        "ref_name": "2022_THI_Geisbauer_MultiChem_Calendar_3SOC_50-60T"
+      },
+      "current": {
+        "cells": "108",
+        "cycles": "0",
+        "size_mb": "0.079545",
+        "cells_basis": "known",
+        "cycles_basis": "not_applicable",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://zenodo.org/records/6685365",
+      "evidence": "Full-source metrics audit 2026-09-08. 108 distinct (chemistry, Cell Identity Number) keys across the six original CSV tables; alternate CSV/XLSX/TAB formats counted once. Calendar RPT observations are not aging cycles. Volume: Complete author Zenodo v3 ZIP (18 source files in three representations); counted once."
+    },
+    {
+      "dataset_id": "dataset_41",
+      "previous": {
+        "cells": "77",
+        "cycles": "146122",
+        "size_mb": "1137",
+        "ref_name": "2022_HUST_LFP_18650_MultiC_MultiC_30T"
+      },
+      "current": {
+        "cells": "77",
+        "cycles": "146122",
+        "size_mb": "1188.136932",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "known",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "https://data.mendeley.com/datasets/nsc7hnsg4s/2",
+      "evidence": "Full-source metrics audit 2026-09-08. Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 77 LFP/graphite cells per the Mendeley v2 description (complete release held); 146,122 per-cycle curve files. Volume: Complete author our_data.zip release; metadata documents excluded."
+    },
+    {
+      "dataset_id": "dataset_eee",
+      "previous": {
+        "cells": "16",
+        "cycles": "9095",
+        "size_mb": "240",
+        "ref_name": "2026_NTU_Ampace-Samsung_LFP-NMC_21700_2C_2C_25T"
+      },
+      "current": {
+        "cells": "16",
+        "cycles": "9095",
+        "size_mb": "251.65824",
+        "cells_basis": "known",
+        "cycles_basis": "known",
+        "volume_basis": "legacy_reported",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Internal complete-experiment catalog reports 240 MiB (converted to decimal MB); original precision retained as reported."
+    },
+    {
+      "dataset_id": "dataset_internal_MSE",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0",
+        "ref_name": "2026_NTU_Internal_LFP-NCA_MultiForm_MultiC_MultiT"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0",
+        "cells_basis": "unknown",
+        "cycles_basis": "unknown",
+        "volume_basis": "unknown",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Full original release volume is unknown; local subset, processed-copy and unverified legacy sizes are excluded."
+    },
+    {
+      "dataset_id": "dataset_internal",
+      "previous": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0",
+        "ref_name": "TBD_NTU_Internal_LiIon_TBD_TBD_TBD"
+      },
+      "current": {
+        "cells": "\u2014",
+        "cycles": "0",
+        "size_mb": "0",
+        "cells_basis": "unknown",
+        "cycles_basis": "unknown",
+        "volume_basis": "unknown",
+        "cells_group": null,
+        "volume_group": null
+      },
+      "source_url": "",
+      "evidence": "Full-source metrics audit 2026-09-08.  Volume: Full original release volume is unknown; local subset, processed-copy and unverified legacy sizes are excluded."
+    }
+  ],
+  "aggregate": {
+    "datasets": 40,
+    "source_lab_groups": 32,
+    "year_min": 2007,
+    "year_max": 2026,
+    "years_span": 19,
+    "known_cycles": 2038307,
+    "known_cells": 2394,
+    "known_volume_gb_approx": 430.39329889,
+    "unknown_cycle_entries": 18,
+    "unknown_cell_entries": 9,
+    "unknown_volume_entries": 6
+  }
+}

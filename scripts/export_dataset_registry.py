@@ -30,6 +30,8 @@ COLUMNS = [
     "assigned_student", "reviewed_by", "status",
     "metadata_done", "timeseries_done", "cycle_summary_done", "dataset_note_done", "qc_done",
     "last_updated", "count_basis", "notes",
+    "stats_scope", "cells_basis", "cycles_basis", "volume_basis",
+    "cells_group", "cycles_group", "volume_group",
 ]
 PRESERVED = ["source", "assigned_student", "reviewed_by", "dataset_note_done"]
 
@@ -92,6 +94,8 @@ def build_rows() -> list[dict]:
             "count_basis": d.get("evidence", ""),
             "notes": d.get("notes", ""),
         }
+        for key in ("stats_scope", "cells_basis", "cycles_basis", "volume_basis", "cells_group", "cycles_group", "volume_group"):
+            row[key] = d.get(key, "")
         for key in ("cells", "last_updated"):
             if row[key] in ("—", "-"):
                 row[key] = ""

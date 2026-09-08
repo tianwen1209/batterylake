@@ -275,3 +275,7 @@ BatteryLake stands on the shoulders of the open battery-data community. We grate
 **BatteryLake** — turning scattered battery data into a shared scientific foundation.
 
 </div>
+
+## Home page statistics
+
+Home metrics describe complete original releases rather than downloaded subsets. See the [counting methodology and source audit](docs/HOME_METRICS.md) ([中文](docs/HOME_METRICS.zh-CN.md)) before updating the catalog.
