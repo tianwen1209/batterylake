@@ -2003,9 +2003,9 @@ for dataset in resp.json()["items"]:
       <path d="M21 27h6" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
       <path d="M11 22H6M37 22h5M17 39l-3 4M31 39l3 4" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
     </svg>
-    <span class="ai-chat-fab-label"><strong>AI Assistant</strong><span>Preview</span></span>
+    <span class="ai-chat-fab-label"><strong>AI Assistant</strong><span>Beta</span></span>
   </button>
-  <section class="ai-chat-panel" id="aiChatPanel" aria-label="BatteryTwin AI Assistant">
+  <section class="ai-chat-panel" id="aiChatPanel" aria-label="BatteryLake AI Assistant">
     <div class="ai-chat-header">
       <div class="ai-chat-heading">
         <div class="ai-chat-header-avatar">
@@ -2021,12 +2021,17 @@ for dataset in resp.json()["items"]:
           </svg>
         </div>
         <div>
-          <div class="ai-chat-title">BatteryTwin AI Assistant</div>
-          <div class="ai-chat-subtitle">Frontend placeholder</div>
-          <div class="ai-chat-status"><span class="ai-chat-status-dot"></span>Backend not enabled</div>
+          <div class="ai-chat-title">BatteryLake AI Assistant</div>
+          <div class="ai-chat-subtitle" id="aiChatSubtitle">Built-in knowledge base</div>
+          <div class="ai-chat-status"><span class="ai-chat-status-dot is-online"></span><span id="aiChatStatusText">Ready · answers from site data</span></div>
         </div>
       </div>
-      <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="Close AI assistant">&times;</button>
+      <div class="ai-chat-tools">
+        <button class="ai-chat-clear" id="aiChatClear" type="button" aria-label="Clear conversation" title="Clear conversation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="Close AI assistant">&times;</button>
+      </div>
     </div>
     <div class="ai-chat-messages" id="aiChatMessages">
       <div class="ai-msg ai-msg-bot">
@@ -2043,13 +2048,14 @@ for dataset in resp.json()["items"]:
           </svg>
         </span>
         <span class="ai-msg-bubble">
-          <span class="ai-msg-text">Hello! I'm BatteryTwin AI Assistant. How can I help you today?</span>
+          <span class="ai-msg-text">Hi! I answer questions about BatteryLake: catalog numbers, individual datasets, the processing skill, status.json, benchmarks and citation. Ask in English or 中文.</span>
           <span class="ai-msg-time">Now</span>
         </span>
       </div>
     </div>
     <div class="ai-chat-suggestions" aria-label="Suggested questions">
-      <button class="ai-suggestion" type="button" data-prompt="Summarize the BatteryLake preprocessing workflow and its five acceptance gates.">Preprocessing help</button>
+      <button class="ai-suggestion" type="button" data-prompt="How many datasets, cells and cycles are in BatteryLake?">Catalog numbers</button>
+      <button class="ai-suggestion" type="button" data-prompt="Which datasets are LFP?">LFP datasets</button>
       <button class="ai-suggestion" type="button" data-prompt="How do I install and run the batterylake-processing skill?">Install the skill</button>
       <button class="ai-suggestion" type="button" data-prompt="What does canonical_validated mean in status.json?">Status fields</button>
     </div>
@@ -2063,6 +2069,8 @@ for dataset in resp.json()["items"]:
     </form>
   </section>
 </div>
+<script src="js/ai-config.js"></script>
+<script src="js/assistant-knowledge.js"></script>
 <script src="js/assistant.js"></script>
 <script src="js/showcase.js"></script>
 </body>

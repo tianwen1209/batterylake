@@ -55,7 +55,9 @@ Contains the app scripts, loaded by `index.html`.
 
 - `js/theme-init.js`: runs early and sets the initial light/dark theme on `document.documentElement` to prevent theme flicker.
 - `js/main.js`: main application logic, including dataset loading/parsing, filters, search, page navigation, theme toggling, modals, preprocessing tools, Benchmark workflow/package generation/results, and model library behavior.
-- `js/assistant.js`: floating AI assistant widget behavior, including open/close state, message rendering, local history, suggestions, and placeholder backend calls.
+- `js/ai-config.js`: public provider settings for the AI assistant (`auto` / `gemini` / `openai` / `backend` / `pollinations` / `local`).
+- `js/assistant-knowledge.js`: built-in knowledge base for the assistant — bilingual FAQ, live catalog statistics, dataset look-ups by name / chemistry / form factor / category, and grounding context for the optional remote model.
+- `js/assistant.js`: floating AI assistant widget — open/close state, markdown-lite rendering, local history, provider probing and fallback (remote model → knowledge base), in-page link routing.
 - `js/preprocessing.js`: Preprocessing page (redesigned 2026-09-08). Zips the `batterylake-processing` agent skill from `assets/skills/`, builds the per-dataset agent prompt, and renders a dataset's `status.json` against the five acceptance gates. The previous wizard is archived under `archive/preprocessing-20260908/` and tagged `preprocessing-20260908`.
 - `js/quality-engine.js`: browser port of `quality/quality_assessment.py` used by the Quality Assessment page.
 
@@ -109,6 +111,8 @@ Edit:
 - `styles/base.css`
 - `styles/polish.css`
 - `js/assistant.js`
+- `js/assistant-knowledge.js` (answers and FAQ content)
+- `js/ai-config.js` (which model to use)
 
 ### Global cards, buttons, tables, and tags
 Start with:

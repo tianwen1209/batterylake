@@ -73,15 +73,32 @@ load_dotenv()
 PROJECT_CONTEXT = load_project_context()
 
 
-def build_system_prompt():
-    return (
-        "You are the BatteryTwin project assistant. Answer in English by default. "
-        "Only answer in another language when the user explicitly asks you to. "
-        "If the user asks in Chinese or another language, understand the request and still respond in English. "
-        "Help with battery datasets, schema, ETL scripts, quality checks, and benchmark workflows. "
+def build_system_prompt(extra_context=""):
+    prompt = (
+        "You are the BatteryLake AI Assistant embedded in the BatteryLake website "
+        "(battery aging datasets, SOH/RUL benchmarking). "
+        "Answer in the same language the user writes in (Chinese or English). "
+        "Be concise (about 150 words at most), plain sentences or short '- ' bullet lists. "
+        "Help with battery datasets, schema, the processing skill, quality checks, and benchmark workflows. "
         "Use the project context below when it is relevant.\n\n"
         f"{PROJECT_CONTEXT}"
     )
+    if extra_context:
+        prompt += "\n\n[site context from the page]\n" + str(extra_context)[:6000]
+    return prompt
+
+
+def normalize_history(history):
+    """Keep the last few {role, content} turns sent by the widget."""
+    out = []
+    for item in history or []:
+        if not isinstance(item, dict):
+            continue
+        role = "assistant" if str(item.get("role", "")).lower() in {"assistant", "model", "bot"} else "user"
+        content = str(item.get("content") or item.get("text") or "").strip()
+        if content:
+            out.append({"role": role, "content": content[:4000]})
+    return out[-8:]
 
 
 def post_json(url, payload, headers):
@@ -91,7 +108,7 @@ def post_json(url, payload, headers):
         req = request.Request(
             url,
             data=body,
-            headers={"Content-Type": "application/json", **headers},
+            headers={"Content-Type": "application/json", "User-Agent": "BatteryLake-Assistant/1.0", **headers},
             method="POST",
         )
 
@@ -113,24 +130,26 @@ def post_json(url, payload, headers):
     raise RuntimeError("AI API request failed after retries.")
 
 
-def call_openai_compatible(message):
+class AINotConfigured(RuntimeError):
+    """Raised when no usable model is configured; the widget then answers from its knowledge base."""
+
+
+def call_openai_compatible(message, context="", history=None):
     api_key = os.getenv("AI_API_KEY")
     api_url = os.getenv("AI_API_URL")
     model = os.getenv("AI_MODEL", "deepseek-chat")
 
     if not api_key or not api_url:
-        return (
-            "The AI backend is connected, but AI_API_KEY and AI_API_URL are not configured yet.\n\n"
-            "You can use this message to confirm that the chat window is working. To connect a real model, "
-            "create a .env file in the project root, add AI_API_KEY, AI_API_URL, and AI_MODEL, then restart python app.py."
+        raise AINotConfigured(
+            "AI_API_KEY and AI_API_URL are not configured. Create a .env file in the project root "
+            "(see .env.example), then restart python app.py."
         )
 
     payload = {
         "model": model,
-        "messages": [
-            {"role": "system", "content": build_system_prompt()},
-            {"role": "user", "content": message},
-        ],
+        "messages": [{"role": "system", "content": build_system_prompt(context)}]
+        + normalize_history(history)
+        + [{"role": "user", "content": message}],
         "temperature": 0.3,
     }
     data = post_json(api_url, payload, {"Authorization": f"Bearer {api_key}"})
@@ -141,7 +160,7 @@ def call_openai_compatible(message):
         raise RuntimeError(f"Unexpected AI API response: {data}") from exc
 
 
-def call_gemini(message):
+def call_gemini(message, context="", history=None):
     api_key = os.getenv("GEMINI_API_KEY") or os.getenv("AI_API_KEY")
     model = os.getenv("GEMINI_MODEL") or os.getenv("AI_MODEL", "gemini-2.5-flash")
     api_url = os.getenv("GEMINI_API_URL")
@@ -151,21 +170,21 @@ def call_gemini(message):
         api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{encoded_model}:generateContent"
 
     if not api_key:
-        return (
-            "The Gemini backend is connected, but GEMINI_API_KEY is not configured yet.\n\n"
-            "Create a .env file in the project root, add GEMINI_API_KEY, then restart python app.py."
+        raise AINotConfigured(
+            "GEMINI_API_KEY is not configured. Create a .env file in the project root "
+            "(see .env.example), then restart python app.py."
         )
 
+    contents = [
+        {"role": "model" if turn["role"] == "assistant" else "user", "parts": [{"text": turn["content"]}]}
+        for turn in normalize_history(history)
+    ]
+    contents.append({"role": "user", "parts": [{"text": message}]})
     payload = {
         "systemInstruction": {
-            "parts": [{"text": build_system_prompt()}],
+            "parts": [{"text": build_system_prompt(context)}],
         },
-        "contents": [
-            {
-                "role": "user",
-                "parts": [{"text": message}],
-            }
-        ],
+        "contents": contents,
         "generationConfig": {
             "temperature": 0.3,
         },
@@ -179,13 +198,53 @@ def call_gemini(message):
         raise RuntimeError(f"Unexpected Gemini API response: {data}") from exc
 
 
-def call_ai(message):
+def ai_configured():
+    provider = os.getenv("AI_PROVIDER", "").strip().lower()
+    if provider == "pollinations":
+        return True
+    if provider == "gemini" or os.getenv("GEMINI_API_KEY"):
+        return bool(os.getenv("GEMINI_API_KEY") or os.getenv("AI_API_KEY"))
+    return bool(os.getenv("AI_API_KEY") and os.getenv("AI_API_URL"))
+
+
+def call_pollinations(message, context="", history=None):
+    """Free anonymous model at text.pollinations.ai; it rejects the system role, so
+    the instructions are folded into the first user turn."""
+    api_url = os.getenv("POLLINATIONS_API_URL", "https://text.pollinations.ai/openai")
+    turns = normalize_history(history)
+    messages = []
+    if turns:
+        messages.append({"role": "user", "content": build_system_prompt(context) + "\n\n(Conversation continues below.)"})
+        messages.append({"role": "assistant", "content": "Understood."})
+        messages.extend(turns)
+        messages.append({"role": "user", "content": message})
+    else:
+        messages.append({"role": "user", "content": build_system_prompt(context) + "\n\n=== User message ===\n" + message})
+    data = post_json(api_url, {"model": os.getenv("POLLINATIONS_MODEL", "openai"), "messages": messages, "temperature": 0.3}, {})
+    try:
+        return data["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise RuntimeError(f"Unexpected Pollinations response: {data}") from exc
+
+
+def call_ai(message, context="", history=None):
     provider = os.getenv("AI_PROVIDER", "").strip().lower()
     if not provider and os.getenv("GEMINI_API_KEY"):
         provider = "gemini"
+    if not provider and os.getenv("AI_API_KEY") and os.getenv("AI_API_URL"):
+        provider = "openai"
     if provider == "gemini":
-        return call_gemini(message)
-    return call_openai_compatible(message)
+        return call_gemini(message, context, history)
+    if provider in {"openai", "openai_compatible", "deepseek"}:
+        return call_openai_compatible(message, context, history)
+    if provider == "pollinations":
+        return call_pollinations(message, context, history)
+    # Nothing configured: try the free model once, otherwise report "not configured"
+    # so the widget answers from its built-in knowledge base.
+    try:
+        return call_pollinations(message, context, history)
+    except Exception as exc:
+        raise AINotConfigured(f"No AI key configured and the free model is unavailable ({exc}).") from exc
 
 
 def confidence_field(name, value, evidence, confidence):
@@ -657,7 +716,19 @@ class BatteryTwinHandler(SimpleHTTPRequestHandler):
                 if not message:
                     self.send_json({"reply": "Please enter a question."}, status=400)
                     return
-                self.send_json({"reply": call_ai(message)})
+                if message == "ping":
+                    # Availability probe from the widget: only say "ok" when a model can answer.
+                    if ai_configured():
+                        self.send_json({"reply": "ok", "provider": os.getenv("AI_PROVIDER", "") or "auto"})
+                    else:
+                        self.send_json({"error": "AI backend is not configured."}, status=503)
+                    return
+                try:
+                    reply = call_ai(message, payload.get("context", ""), payload.get("history"))
+                except AINotConfigured as exc:
+                    self.send_json({"error": str(exc)}, status=503)
+                    return
+                self.send_json({"reply": reply})
                 return
 
             if self.path == "/api/metadata-extract":
