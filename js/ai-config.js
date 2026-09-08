@@ -20,7 +20,7 @@
 window.BATTERYLAKE_AI_CONFIG = {
   provider: 'auto',
   apiKey: '',
-  model: '',
+  model: 'gemini-flash-lite-latest',
   endpoint: '',
   timeoutMs: 20000
 };
