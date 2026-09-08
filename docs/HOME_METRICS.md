@@ -4,7 +4,7 @@
 
 The Home page describes **complete original source releases**, including releases for which the server holds only a subset. It does not describe the number of downloaded files, local disk usage, converted table rows, or benchmark acceptance.
 
-The 2026-09-08 audit gives 40 visible catalog entries, 32 source/lab groups, a 19-year span (2007–2026), 2,038,307 known source cycles, 2,394 known cells, and approximately 430.4 GB of original release files. These are **known totals**, not a claim that every source has published every statistic. The page lists how many entries still have unknown totals. See the [per-dataset audit](home-metrics-audit.json) for the values, previous values, evidence and source links.
+The 2026-09-08 audit gives 40 visible catalog entries, 32 source/lab groups, a 19-year span (2007–2026), 2,038,307 known source cycles, 2,394 known cells, and approximately 430.4 GB of original release files. These are **known totals**, not a claim that every source has published every statistic. Unknown-total counts are retained in the audit and aggregate data; the Home page does not display the methodology note or link. See the [per-dataset audit](home-metrics-audit.json) for the values, previous values, evidence and source links.
 
 ## Definitions
 

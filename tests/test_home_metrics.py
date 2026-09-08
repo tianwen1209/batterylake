@@ -82,10 +82,11 @@ class HomeMetricsTest(unittest.TestCase):
         self.assertEqual(result['cycles'], 40)
         self.assertEqual(result['volumeGB'], 3.5)
 
-    def test_mobile_metric_note_and_no_overflow(self):
+    def test_mobile_metrics_without_note_and_no_overflow(self):
         self.page.set_viewport_size(dict(width=390, height=844))
         self.page.evaluate('animateHomeMetrics()')
-        self.assertIn('not local downloads', self.page.locator('#m-scope-note').inner_text())
+        self.assertEqual(self.page.locator('#m-scope-note').count(), 0)
+        self.assertEqual(self.page.get_by_text('Counting methodology and sources', exact=True).count(), 0)
         self.assertTrue(self.page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
         self.assertEqual(self.page.locator('#m-cells').inner_text(), '2,394')
 

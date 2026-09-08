@@ -512,8 +512,6 @@ function animateHomeMetrics() {
 
   const duration = 1400;
   const final = computeHomeMetrics();
-  const note = document.getElementById('m-scope-note');
-  if (note) note.textContent = `Full original releases · known totals, not local downloads. Missing totals: ${final.unknown.cycles} cycle counts, ${final.unknown.cells} cell counts, ${final.unknown.volume} release sizes.`;
   const ease = t => 1 - Math.pow(1 - t, 3);
   const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   setHomeMetric('m-years-range', final.yearMin && final.yearMax ? final.yearMin + '-' + final.yearMax : '');
