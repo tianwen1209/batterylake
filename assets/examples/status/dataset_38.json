@@ -1,0 +1,22 @@
+{
+  "dataset_id": "dataset_38",
+  "schema_version": "2.0.0",
+  "status": "converted_native_rpt_features",
+  "conversion": "source_tables_converted",
+  "canonical_validation": "storage_checked_only",
+  "benchmark_validation": "RPT inputs_targets_exact; training_not_run",
+  "upstream_completeness": "unverified",
+  "stages": {
+    "I": "done",
+    "S": "pending",
+    "C": "local_source_decode_complete",
+    "V": "native_profile_inputs_verified; full_semantics_separate",
+    "E": "profile_inputs_verified; training_not_run"
+  },
+  "adapter": "0.5.0",
+  "parser_errors": 0,
+  "source_table_rows": 256455,
+  "standard_signal_rows": 0,
+  "native_feature_validation": "passed",
+  "feature_sample_count": 5505
+}

@@ -1,0 +1,20 @@
+{
+  "dataset_id": "dataset_05",
+  "schema_version": "2.0.0",
+  "status": "partial_source_with_standard_signals",
+  "conversion": "partial",
+  "canonical_validation": "storage_checked_only",
+  "benchmark_validation": "not_run",
+  "upstream_completeness": "unverified",
+  "stages": {
+    "I": "done",
+    "S": "pending",
+    "C": "available_sources_decoded_with_source_error",
+    "V": "storage_only",
+    "E": "pending"
+  },
+  "adapter": "0.5.0",
+  "parser_errors": 1,
+  "source_table_rows": 89043675,
+  "standard_signal_rows": 89016214
+}

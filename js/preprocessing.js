@@ -249,15 +249,18 @@
 
   /* ── 4. status.json viewer ────────────────────────────────── */
   var DONE_RE = /done|complete|verified|passed|validated|inventoried|decoded|converted|checked/i;
-  var PENDING_RE = /pending|not_run|not run|blocked|missing|unverified|^-?$/i;
+  var PARTIAL_RE = /pending|not_run|not run|only|partial|converting|error|sample|unverified|unavailable|separate|needs|review|subset/i;
   function classify(value) {
     var v = String(value == null ? '' : value).trim();
-    if (!v) return 'pending';
-    if (PENDING_RE.test(v) && !DONE_RE.test(v)) return 'pending';
-    if (/only|partial|pending|sample|source_checks/i.test(v)) return 'partial';
+    if (!v || v === 'None' || v === 'null') return 'pending';
+    if (/not_applicable|n\/a/i.test(v)) return 'na';
+    if (/^(pending|not_run|not run|no_measurements|unverified|none)$/i.test(v) || /^blocked/i.test(v)) return 'pending';
+    if (PARTIAL_RE.test(v)) return 'partial';
     if (DONE_RE.test(v)) return 'done';
     return 'partial';
   }
+  var EXTRA_COUNT_KEYS = ['feature_sample_count', 'batterylife_cells', 'batterylife_cycles'];
+  function labelize(key) { return String(key).replace(/_/g, ' ').replace(/^\w/, function (c) { return c.toUpperCase(); }); }
   function renderStatus() {
     var st = state.status || {};
     var badge = $('px-status-badge');
@@ -275,7 +278,7 @@
       track.innerHTML = GATES.map(function (g) {
         var raw = stages[g.key];
         var cls = raw === undefined ? 'pending' : classify(raw);
-        var label = raw === undefined ? 'not recorded' : String(raw);
+        var label = raw === undefined ? 'not recorded' : (cls === 'na' ? 'not applicable' : String(raw));
         return '<div class="px-stage is-' + cls + '" title="' + escapeHtml(label) + '">'
           + '<span class="px-stage-letter">' + g.key + '</span>'
           + '<span class="px-stage-name">' + g.name + '</span>'
@@ -301,22 +304,66 @@
         var ip = st.incremental_processing;
         items.push(['Sources processed / failed / pending', fmtInt(ip.processed_sources || 0) + ' / ' + fmtInt(ip.failed_sources || 0) + ' / ' + fmtInt(ip.pending_sources || 0)]);
       }
+      EXTRA_COUNT_KEYS.forEach(function (k) { if (st[k] !== undefined && st[k] !== null) items.push([labelize(k), fmtInt(st[k])]); });
+      if (st.adapter) items.push(['Adapter', String(st.adapter)]);
       if (st.schema_version) items.push(['Schema', String(st.schema_version)]);
       counts.innerHTML = items.map(function (it) {
         return '<div class="px-count"><span>' + escapeHtml(it[0]) + '</span><strong>' + escapeHtml(it[1]) + '</strong></div>';
       }).join('');
     }
   }
+  function applyStatus(data, label) {
+    if (!data || typeof data !== 'object') throw new Error('not an object');
+    if (!data.stages && !data.status && !data.conversion) throw new Error('no status fields');
+    state.status = data;
+    state.isExample = false;
+    renderStatus();
+    toast('Loaded status for ' + (data.dataset_id || label), 'success');
+    var panel = $('px-status-panel');
+    if (panel && panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function loadExample(id) {
+    fetch('assets/examples/status/' + id + '.json', { cache: 'no-store' }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }).then(function (data) { applyStatus(data, id); }).catch(function () {
+      toast('Could not load the example for ' + id + '.', 'error');
+    });
+  }
+  /* Walk a dropped directory (depth-limited) and return the first status.json File. */
+  function findStatusInEntry(entry, depth) {
+    if (!entry) return Promise.resolve(null);
+    if (entry.isFile) {
+      if (entry.name.toLowerCase() !== 'status.json') return Promise.resolve(null);
+      return new Promise(function (resolve) { entry.file(resolve, function () { resolve(null); }); });
+    }
+    if (!entry.isDirectory || depth > 3) return Promise.resolve(null);
+    return new Promise(function (resolve) {
+      var reader = entry.createReader();
+      var all = [];
+      (function readMore() {
+        reader.readEntries(function (batch) {
+          if (!batch.length) { resolve(all); return; }
+          all = all.concat(Array.prototype.slice.call(batch));
+          readMore();
+        }, function () { resolve(all); });
+      })();
+    }).then(function (entries) {
+      // Prefer a status.json directly inside this folder before descending.
+      var direct = entries.filter(function (e) { return e.isFile && e.name.toLowerCase() === 'status.json'; });
+      var queue = direct.length ? direct : entries.filter(function (e) { return e.isDirectory && !/^(canonical|validation|views|source_tables|extras|assets)$/i.test(e.name); });
+      var chain = Promise.resolve(null);
+      queue.forEach(function (e) {
+        chain = chain.then(function (found) { return found || findStatusInEntry(e, depth + 1); });
+      });
+      return chain;
+    });
+  }
   function loadStatusFile(file) {
     if (!file) return;
     file.text().then(function (text) {
       var data = JSON.parse(text);
-      if (!data || typeof data !== 'object') throw new Error('not an object');
-      if (!data.stages && !data.status && !data.conversion) throw new Error('no status fields');
-      state.status = data;
-      state.isExample = false;
-      renderStatus();
-      toast('Loaded status for ' + (data.dataset_id || file.name), 'success');
+      applyStatus(data, file.name);
     }).catch(function () {
       toast('This file is not a BatteryLake status.json.', 'error');
     });
@@ -340,9 +387,22 @@
       });
     });
     zone.addEventListener('drop', function (e) {
-      var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-      if (!file) { toast('No file was dropped.', 'error'); return; }
-      loadStatusFile(file);
+      var items = Array.prototype.slice.call((e.dataTransfer && e.dataTransfer.items) || []);
+      var entries = items.map(function (it) { return it.webkitGetAsEntry ? it.webkitGetAsEntry() : null; }).filter(Boolean);
+      var files = Array.prototype.slice.call((e.dataTransfer && e.dataTransfer.files) || []);
+      var direct = files.find(function (f) { return f.name.toLowerCase() === 'status.json'; }) || (files.length === 1 && /\.json$/i.test(files[0].name) ? files[0] : null);
+      if (direct) { loadStatusFile(direct); return; }
+      if (entries.some(function (en) { return en.isDirectory; })) {
+        var chain = Promise.resolve(null);
+        entries.forEach(function (en) { chain = chain.then(function (found) { return found || findStatusInEntry(en, 0); }); });
+        chain.then(function (found) {
+          if (found) loadStatusFile(found);
+          else toast('No status.json found in the dropped folder.', 'error');
+        });
+        return;
+      }
+      if (!files.length) { toast('No file was dropped.', 'error'); return; }
+      loadStatusFile(files[0]);
     });
   }
 
@@ -365,6 +425,7 @@
     renderPrompt: renderPrompt,
     refreshDatasets: renderDatasetOptions,
     copy: copy,
-    handleStatusFile: handleStatusFile
+    handleStatusFile: handleStatusFile,
+    loadExample: loadExample
   };
 })();

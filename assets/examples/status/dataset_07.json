@@ -1,0 +1,28 @@
+{
+  "dataset_id": "dataset_07",
+  "schema_version": "2.0.0",
+  "status": "needs_semantic_review",
+  "benchmark_validation": "not_run",
+  "canonical_validation": "processed_copy_fidelity_passed;original_csv_unavailable",
+  "processing_task": "logs/new_dataset_processing/status.json",
+  "stages": {
+    "I": "verified_available_downloads_inventoried",
+    "S": "pending",
+    "C": "decoded_available_sources",
+    "V": "not_run",
+    "E": "not_run"
+  },
+  "conversion": "processed_copy_decoded",
+  "source_kind": "third_party_processed_copy",
+  "original_raw_csv": "not_acquired",
+  "batterylife_copy_validation": "passed",
+  "batterylife_cells": 14,
+  "batterylife_cycles": 15164,
+  "standard_signal_rows": 7359143,
+  "incremental_processing": {
+    "processed_sources": 0,
+    "failed_sources": 0,
+    "pending_sources": 0
+  },
+  "source_table_rows": 7359143
+}

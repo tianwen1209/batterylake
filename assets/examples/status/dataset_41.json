@@ -1,0 +1,22 @@
+{
+  "dataset_id": "dataset_41",
+  "schema_version": "2.0.0",
+  "status": "converted_native_features",
+  "conversion": "completed_local_native_objects_and_features",
+  "canonical_validation": "storage_checked_only",
+  "benchmark_validation": "inputs_targets_exact; training_not_run",
+  "upstream_completeness": "unverified",
+  "stages": {
+    "I": "done",
+    "S": "pending",
+    "C": "local_source_decode_complete",
+    "V": "native_profile_inputs_verified; full_semantics_separate",
+    "E": "profile_inputs_verified; training_not_run"
+  },
+  "adapter": "0.1.0",
+  "parser_errors": 0,
+  "source_table_rows": 91736659,
+  "standard_signal_rows": 91736659,
+  "native_feature_validation": "passed",
+  "feature_sample_count": 146122
+}

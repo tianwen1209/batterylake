@@ -1,0 +1,20 @@
+{
+  "dataset_id": "dataset_35",
+  "schema_version": "2.0.0",
+  "status": "canonical_validated",
+  "conversion": "completed_local_available",
+  "canonical_validation": "passed",
+  "benchmark_validation": "not_applicable",
+  "upstream_completeness": "local_inventory_complete; remote_listing_unverified",
+  "stages": {
+    "I": "done",
+    "S": "done",
+    "C": "local_source_decode_complete",
+    "V": "done",
+    "E": "not_applicable"
+  },
+  "adapter": "0.1.0",
+  "parser_errors": 0,
+  "source_table_rows": 9368,
+  "standard_signal_rows": 9368
+}

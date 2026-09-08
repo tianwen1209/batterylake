@@ -87,33 +87,47 @@
   font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--text2); white-space: pre; overflow-x: auto;
 }
 
-/* ── gates ─────────────────────────────────────────────────── */
-#page-preprocessing .px-gates {
-  list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px;
-  counter-reset: gate;
-}
-#page-preprocessing .px-gate {
-  position: relative; display: flex; gap: 12px; padding: 16px 16px 14px; border: 1px solid var(--border); border-radius: 14px;
+/* ── gates: tree diagram ───────────────────────────────────── */
+#page-preprocessing .px-gatetree {
+  position: relative; padding: 22px 26px 22px 28px; border: 1px solid var(--border); border-radius: 16px;
   background: var(--surface, var(--bg)); box-shadow: var(--card-shadow, none);
 }
-#page-preprocessing .px-gate::after {
-  content: ''; position: absolute; top: 50%; right: -13px; width: 12px; height: 2px; background: var(--border2, var(--border));
+#page-preprocessing .px-tree-node { display: flex; align-items: center; gap: 14px; }
+#page-preprocessing .px-tree-ic {
+  flex: 0 0 40px; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; background: var(--accent);
+  box-shadow: 0 4px 12px rgba(42,95,234,.22); position: relative; z-index: 1;
 }
-#page-preprocessing .px-gate:last-child::after { display: none; }
-#page-preprocessing .px-gate-letter {
-  flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
-  font-family: var(--mono); font-weight: 700; font-size: 15px; color: #fff; background: var(--accent);
+#page-preprocessing .px-tree-ic svg { width: 21px; height: 21px; }
+#page-preprocessing .px-tree-ic-folder { background: var(--bg3); color: var(--text2); box-shadow: none; border: 1px solid var(--border); }
+#page-preprocessing .px-tree-ic-folder.is-out { background: var(--green-bg); color: var(--green); border-color: transparent; }
+#page-preprocessing .px-tree-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#page-preprocessing .px-tree-text strong { font-family: var(--mono); font-size: 13.5px; color: var(--text1); }
+#page-preprocessing .px-tree-text > span { font-size: 12.5px; color: var(--text3); }
+#page-preprocessing .px-tree-gates {
+  list-style: none; margin: 6px 0 6px 19px; padding: 6px 0 6px 0; border-left: 2px solid var(--border2, var(--border));
+  display: flex; flex-direction: column; gap: 10px;
 }
-#page-preprocessing .px-gate[data-gate="S"] .px-gate-letter { background: var(--teal); }
-#page-preprocessing .px-gate[data-gate="C"] .px-gate-letter { background: var(--purple); }
-#page-preprocessing .px-gate[data-gate="V"] .px-gate-letter { background: var(--amber); }
-#page-preprocessing .px-gate[data-gate="E"] .px-gate-letter { background: var(--green); }
-#page-preprocessing .px-gate-body { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-#page-preprocessing .px-gate-body strong { font-size: 14px; color: var(--text1); }
-#page-preprocessing .px-gate-body span { font-size: 12.5px; line-height: 1.5; color: var(--text3); }
-#page-preprocessing .px-gate-body em {
-  font-style: normal; font-family: var(--mono); font-size: 11.5px; color: var(--text2); margin-top: 2px;
-  padding: 2px 7px; border-radius: 6px; background: var(--bg3); align-self: flex-start;
+#page-preprocessing .px-tree-gate { position: relative; display: flex; align-items: center; gap: 14px; padding: 8px 12px 8px 26px; border-radius: 12px; transition: background .15s; }
+#page-preprocessing .px-tree-gate:hover { background: var(--bg2, var(--bg)); }
+#page-preprocessing .px-tree-gate::before {
+  content: ''; position: absolute; left: 0; top: 50%; width: 24px; height: 2px; background: var(--border2, var(--border));
+}
+#page-preprocessing .px-tree-gate::after {
+  content: ''; position: absolute; left: 22px; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--border2, var(--border));
+}
+#page-preprocessing .px-tree-gate[data-gate="I"] .px-tree-ic { background: var(--accent); }
+#page-preprocessing .px-tree-gate[data-gate="S"] .px-tree-ic { background: var(--teal); box-shadow: 0 4px 12px rgba(14,155,142,.22); }
+#page-preprocessing .px-tree-gate[data-gate="C"] .px-tree-ic { background: var(--purple); box-shadow: 0 4px 12px rgba(122,69,230,.22); }
+#page-preprocessing .px-tree-gate[data-gate="V"] .px-tree-ic { background: var(--amber); box-shadow: 0 4px 12px rgba(217,129,10,.22); }
+#page-preprocessing .px-tree-gate[data-gate="E"] .px-tree-ic { background: var(--green); box-shadow: 0 4px 12px rgba(21,160,90,.22); }
+#page-preprocessing .px-tree-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 14.5px; font-weight: 700; color: var(--text1); }
+#page-preprocessing .px-tree-title b { font-family: var(--mono); font-size: 12px; color: var(--text3); font-weight: 700; }
+#page-preprocessing .px-tree-title em {
+  font-style: normal; font-family: var(--mono); font-size: 11.5px; font-weight: 500; color: var(--text2); padding: 2px 8px; border-radius: 6px; background: var(--bg3);
+}
+#page-preprocessing .px-tree-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+#page-preprocessing .px-tree-tags span {
+  font-size: 12px; color: var(--text3); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg);
 }
 
 /* ── run ───────────────────────────────────────────────────── */
@@ -150,6 +164,14 @@
   transition: border-color .15s, background .15s;
 }
 #page-preprocessing .px-drop:hover, #page-preprocessing .px-drop.dragging { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+#page-preprocessing .px-verify-left { display: flex; flex-direction: column; gap: 10px; }
+#page-preprocessing .px-drop { flex: 1; }
+#page-preprocessing .px-examples { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text3); }
+#page-preprocessing .px-examples button {
+  font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg);
+  color: var(--text2); cursor: pointer;
+}
+#page-preprocessing .px-examples button:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
 #page-preprocessing .px-drop-title { font-size: 14px; font-weight: 600; color: var(--text1); }
 #page-preprocessing .px-drop-sub { font-size: 12px; color: var(--text4); font-family: var(--mono); }
 #page-preprocessing .px-status {
@@ -179,6 +201,8 @@
 #page-preprocessing .px-stage.is-partial { border-color: var(--amber); background: var(--amber-bg, #fff4e3); }
 #page-preprocessing .px-stage.is-partial .px-stage-letter { color: var(--amber); }
 #page-preprocessing .px-stage.is-pending { opacity: .75; }
+#page-preprocessing .px-stage.is-na { opacity: .6; border-style: dashed; }
+#page-preprocessing .px-dim.is-na dd { color: var(--text4); }
 #page-preprocessing .px-status-dims { margin: 0 0 12px; display: grid; gap: 6px; }
 #page-preprocessing .px-dim { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 6px 0; border-top: 1px solid var(--divider, var(--border)); }
 #page-preprocessing .px-dim dt { font-size: 12.5px; font-weight: 600; color: var(--text3); }
@@ -194,8 +218,6 @@
 
 /* ── responsive ────────────────────────────────────────────── */
 @media (max-width: 1180px) {
-  #page-preprocessing .px-gates { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  #page-preprocessing .px-gate::after { display: none; }
 }
 @media (max-width: 960px) {
   #page-preprocessing .px-skill { grid-template-columns: minmax(0, 1fr); }
@@ -205,7 +227,9 @@
   #page-preprocessing .px-file-desc { display: none; }
 }
 @media (max-width: 640px) {
-  #page-preprocessing .px-gates, #page-preprocessing .px-stage-track { grid-template-columns: minmax(0, 1fr); }
+  #page-preprocessing .px-stage-track { grid-template-columns: minmax(0, 1fr); }
+  #page-preprocessing .px-gatetree { padding: 16px 14px; }
+  #page-preprocessing .px-tree-gate { align-items: flex-start; padding-left: 20px; }
   #page-preprocessing .px-dim { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   #page-preprocessing .px-skill-main, #page-preprocessing .px-install { padding: 20px 18px; }
 }
