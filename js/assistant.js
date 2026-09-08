@@ -218,14 +218,16 @@
     return fetch(url, Object.assign({}, options, { signal: controller.signal })).finally(() => clearTimeout(timer));
   }
   function systemPrompt(question) {
-    const ctx = KB ? KB.context(question) : '';
+    const prevUser = state.history.filter(m => m.role === 'user').slice(-1)[0];
+    const ctx = KB ? KB.context(question, prevUser ? prevUser.text : '') : '';
     const zh = KB && typeof KB.isChinese === 'function' ? KB.isChinese(question) : /[\u3400-\u9fff]/.test(question);
     return [
       'You are the BatteryLake AI Assistant embedded in the BatteryLake website (battery aging datasets, SOH/RUL benchmarking).',
       zh ? 'The user wrote in Chinese: answer in Chinese (简体中文).' : 'The user wrote in English: answer in English only.',
       'Quote numbers exactly as given in the context (e.g. 55,300 cycles), never rescale them.',
       'Be concise: at most about 150 words, plain sentences or short "- " bullet lists; no headings, no tables.',
-      'Use only the site context below for facts about BatteryLake; if the context does not cover something, say so and point to the relevant page. General battery knowledge is fine.',
+      'For facts about BatteryLake itself (datasets, numbers, pages, workflow) rely on the site context below; if it does not cover a BatteryLake detail, say so and point to the relevant page.',
+      'For general battery science or machine-learning questions (chemistries, aging mechanisms, SOH/RUL methods, protocols), answer from your own knowledge like a helpful battery researcher.',
       'When you mention a page, link it in markdown using its hash, e.g. [Datasets](#datasets), [Preprocessing](#preprocessing). Link datasets as [Name](dataset:dataset_id).',
       '',
       '=== Site context ===',

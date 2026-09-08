@@ -450,7 +450,7 @@
   }
 
   /* Grounding context for the optional remote model. */
-  function context(query) {
+  function context(query, previousQuery) {
     var m = metrics();
     var lines = [
       'BatteryLake (' + SITE + ') — open data foundation for battery prognostics; curated lithium-ion aging datasets standardized to the BatteryLake v2.0.0 schema for SOH/RUL benchmarking. Built at Nanyang Technological University (PI Prof. Yonggang Wen; Dr Hao Wang; Tianwen Zhu; Yezi Cai).',
@@ -462,6 +462,13 @@
     var found = findDatasets(query);
     var filtered = filterDatasets(query);
     var picks = (found && found.items) || (filtered && filtered.items) || [];
+    if (!picks.length && previousQuery) {
+      // Follow-up questions ("how many cells does it have?") inherit the datasets of the previous turn.
+      var prevFound = findDatasets(previousQuery);
+      var prevFiltered = filterDatasets(previousQuery);
+      picks = (prevFound && prevFound.items) || (prevFiltered && prevFiltered.items) || [];
+      if (picks.length) lines.push('The previous user question referred to these datasets:');
+    }
     picks.slice(0, 5).forEach(function (d) {
       lines.push('Dataset ' + d.id + ' "' + d.name + '": ref_name=' + d.ref_name + '; chemistry=' + d.chemistry + '; form=' + d.form + '; cells=' + (String(d.cells || '').trim() || 'n/a') + '; cycles=' + (Number(d.cycles) ? fmtInt(d.cycles) : 'n/a') + '; source_volume=' + fmtGB(d.size_mb) + '; category=' + (CATEGORY_LABELS[d.category] || d.category) + '; status=' + (STATUS_LABELS[d.status] || d.status) + (d.notes ? '; notes=' + d.notes : ''));
     });
