@@ -12,7 +12,7 @@ const FALLBACK_DATASETS = [
   { id:'dataset_03', name:'Stanford-MIT-TRI Fast Charging', ref_name:'2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T', status:'done', category:'cycle_aging', chemistry:'LFP', cells:'124', form:'18650', cycles:96000, size_mb:5151, notes:'124 LFP/graphite cells; multi-protocol fast charging; Severson et al. Nature Energy 2019', doi:'https://doi.org/10.1038/s41560-019-0356-8', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgD_pp7pwJmGSo8YoIWsyUhsAdAXebc_hy7v3wYg_xPVqro?e=gfzBXe', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 124 cells per Severson et al. 2019; the 96,000-cycle figure is the earlier catalog estimate. Volume is the 2017-05-12 and 2017-06-30 batches (5.0 GB); the local copy holds only the first batch.', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/19'},
   { id:'dataset_04', name:'Oxford Battery Degradation', ref_name:'2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T', status:'wip', category:'cycle_aging', chemistry:'Multi', cells:'8', form:'Multi', cycles:55300, size_mb:256, notes:'Oxford Dataset 1: 8 Kokam 0.74 Ah pouch cells cycled at 40C with RPT every 100 cycles (up to 8,200 cycles per cell); NCA 18650 subset pending', doi:'https://howey.eng.ox.ac.uk/data-and-code/', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBs5CWjO_9qS5DrwYGebQHBAaZIyqPvyWjtC9m31o_tC3k?e=yRITtW', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 8 Kokam pouch cells in Oxford Battery Degradation Dataset 1 (complete); cycles = sum of the last RPT aging-cycle count per cell, RPT every 100 cycles (55,300).', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/25'},
   { id:'dataset_05', name:'RWTH Aachen Lithium-Ion', ref_name:'2021_RWTH_Aachen_NMC_18650_MultiC_MultiT', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'48', form:'18650', cycles:116749, size_mb:5192, notes:'RWTH Aachen; NMC/Graphite; CSV format; 48 samples', doi:'https://publications.rwth-aachen.de/record/818642', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgA6E_29GYFTSqvUREUnC4oEAShTAGsl4lNqEkm1LcM7h2Y?e=awyBsa', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 48 Sanyo UR18650E cells per the RWTH metadata PDF; 116,749 aging cycles counted as distinct Zyklus counter values across the ZYK cycling files (complete 5.1 GB archive held).', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/21'},
-  { id:'dataset_06', name:'SNL BatteryArchive Abuse Testing', ref_name:'2020_SNL_BatteryArchive_MultiChem_MultiForm_MultiC_MultiT', status:'done', category:'safety', chemistry:'Multi', cells:'—', form:'Multi', cycles:2400, size_mb:310, notes:'Sandia National Lab; abuse testing; multiple chemistries', doi:'https://batteryarchive.org', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAGYrsSB9t_Rp9rzgxG5dvAAfHSkdY1susn8k5xpWH4wF8?e=ui53vs', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/20'},
+  { id:'dataset_06', name:'SNL BatteryArchive Cycle Aging', ref_name:'2020_SNL_BatteryArchive_NCA-NMC-LFP_18650_MultiDOD_MultiC_15-25-35T', category:'cycle_aging', chemistry:'NCA-NMC-LFP', form:'18650', cells:'61', cycles:0, size_mb:115.2, status:'wip', doi:'https://zenodo.org/records/21149533', processed_url:'', notes:'Preger et al. JES 2020 cycle aging. BatteryLife v12 processed copy; original BatteryArchive CSV not acquired. Mechanical abuse is dataset_34.', meta:'yes', ts:'yes', cs:'yes', qc:'no', updated:'2026/9/8' },
   { id:'dataset_07', name:'HNEI BatteryArchive NMC', ref_name:'2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'14', form:'18650', cycles:15164, size_mb:41, notes:'Hawaii Natural Energy Institute; NMC 18650 cells', doi:'https://batteryarchive.org', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAe8XQyoi2BSLmMrf42Xz4lASO3fAf88CfQ-zHAE8AkgJU?e=iw69hJ', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): HNEI BatteryArchive study: 14 cells, 15,164 source cycles (BatteryLife v12 copy of the full study).', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/20'},
   { id:'dataset_08', name:'UL-Purdue BatteryArchive NCA', ref_name:'2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T', status:'done', category:'cycle_aging', chemistry:'NCA', cells:'10', form:'18650', cycles:2245, size_mb:10, notes:'UL-PUR / UL-Purdue; 21 NCA 18650 cylindrical cells; 23°C; 0.5C/0.5C protocol', doi:'https://batteryarchive.org', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCk2QLkD7maSYcV51CbnSS6Adf5rpq85Y9nW75acvkODzI?e=LtTELj', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): UL-PUR BatteryArchive study: 10 cells, 2,245 source cycles (BatteryLife v12 copy of the full study).', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/20'},
   { id:'dataset_09', name:'XJTU NCM Prismatic', ref_name:'2023_XJTU_NCM_Prismatic_MultiC_MultiC_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'55', form:'Prismatic', cycles:27642, size_mb:2324, notes:"Xi'an Jiaotong University; NCM prismatic; Zenodo 2023", doi:'https://zenodo.org/record/7758424', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCZBnB6O9HAQI-TxUwXTAcMAbNRt2oC9C9TDAkT-4Q1rmE?e=jCPdVs', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 55 LISHEN NCM 18650 cells in 6 batches per the XJTU data introduction; 27,642 cycles counted from the 55 complete .mat files.', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/3/20'},
@@ -48,7 +48,7 @@ const FALLBACK_DATASETS = [
   { id:'dataset_37', name:'Munich Multistage Aging Samsung 21700', ref_name:'2024_TUM_Stroebl_NMC_21700_Multistage_25T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'279', form:'21700', cycles:67000, size_mb:9820, notes:'279× Samsung INR21700-50E; 71 aging conditions; Scientific Data 2024', doi:'https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCKqhLB3FILTZSucxlDhPw2AYsFXXGONKTHfQT09Xa-15Y?e=hVhwOD', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 279 cells in experiments_meta.csv (complete figshare release held); the 67,000-cycle figure is the earlier catalog estimate.', meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
   { id:'dataset_38', name:'ISU-ILCC Battery Aging', ref_name:'2023_ISU_ILCC_Thelen_NMC_Pouch_MultiC_30T', status:'done', category:'cycle_aging', chemistry:'NMC', cells:'251', form:'Pouch', cycles:1331994, size_mb:10670, notes:'Iowa State Univ; 251 NMC/graphite 250 mAh pouch cells; 63 cycling conditions at 30C; C/5 and C/2 RPTs', doi:'https://iastate.figshare.com/articles/dataset/_b_ISU-ILCC_Battery_Aging_Dataset_b_/22582234', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAQsqg5Eb4SSZDw_owj_-m6AcXA90yjg98xig61jAwtCzk?e=Rld0C3', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 251 NMC/graphite 502030 pouch cells under 63 conditions per README_V2.0.pdf (complete 10.4 GB release held; the earlier LFP/cylindrical label was wrong); 1,331,994 partial-DoD cycles counted from the per-cell Cycling_json capacity records.', meta:'yes',ts:'yes',cs:'yes',qc:'no',updated:'2026/4/5'},
   { id:'dataset_39', name:'CQU Battery Aging', ref_name:'2023_CQU_NCA-LFP_Pouch-Prismatic_MultiC_MultiT', status:'done', category:'cycle_aging', chemistry:'NCA-LFP', cells:'47', form:'Pouch', cycles:104817, size_mb:256, notes:'Diverse Pouch & Prismatic cells; Multi-temperature & dynamic loading profiles; complex cycle aging', doi:'https://data.mendeley.com/datasets/n3b54nsw8m/9', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgCKZCKUHq78SY57RhoFxXrtAaVz7wEc_OY1q007gmfSp_4?e=OIYo61', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 47 cells in the four complete MAT files (30 source cell names, namespaced per file); 104,817 cycle records.', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/7/22'},
-  { id:'dataset_40', name:'JRC Calendar Aging', ref_name:'2022_JRC_NMC-LFP-LTO_MultiForm_Calendar_MultiT', status:'done', category:'calendar_aging', chemistry:'NMC-LFP-LTO', cells:'', form:'Multi', cycles:0, size_mb:0, notes:'Diverse commercial NMC/LFP/LTO cells; Extremely long-term calendar aging (up to 3 years); multi-T & SOC matrix; EU Open Data Portal', doi:'https://data.europa.eu/data/datasets/oai-zenodo-org-5196334?locale=en', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAdLdrzmlrZQZdvipakXgIkAaD9XlPtP-1QrpZzwlfuA5k?e=dkRZLK', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/7/22'},
+  { id:'dataset_40', name:'THI Experimental Calendar Ageing', ref_name:'2022_THI_Geisbauer_MultiChem_Calendar_3SOC_50-60T', category:'calendar_aging', chemistry:'NCA/NMC/LFP/LCO/LMO/LTO-LCO', form:'Multi', cells:'', cycles:0, size_mb:0.08, status:'wip', doi:'https://zenodo.org/records/6685365', processed_url:'', notes:'THI calendar capacity summaries; downloaded v3 tables contain SOC 20/50/100%, 50/60 C and 0-152 days. CSV/XLSX/TAB are alternative representations; no raw waveforms; not JRC.', meta:'yes', ts:'no', cs:'no', qc:'no', updated:'2026/9/8' },
   { id:'dataset_41', name:'HUST Cycle Aging', ref_name:'2022_HUST_LFP_18650_MultiC_MultiC_30T', status:'done', category:'cycle_aging', chemistry:'LFP', cells:'77', form:'18650', cycles:146122, size_mb:1137, notes:'72 LFP/Graphite cells; Multi-stage fast charging profiles; early-life cycle aging', doi:'https://data.mendeley.com/datasets/nsc7hnsg4s/2', processed_url:'https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBGu5W7qVaoQrqxK__aZVxJASOx3Dvpm_Asln6aoOF5-n8?e=tTppur', evidence:'Full-dataset figures from the author documentation in the raw archives (checked 2026-09-08): 77 LFP/graphite cells per the Mendeley v2 description (complete release held); 146,122 per-cycle curve files.', meta:'yes',ts:'yes',cs:'yes',qc:'yes',updated:'2026/7/22'},
 
   // Hidden datasets
@@ -60,6 +60,7 @@ const FALLBACK_DATASETS = [
 /* Per-dataset category overrides for the Datasets page taxonomy.
    Applied after CSV parse / fallback so remaps persist even if the registry still has legacy keys. */
 const DATASET_CATEGORY_OVERRIDES = {
+  dataset_06: 'cycle_aging',
   dataset_13: 'field_data',
   dataset_14: 'characterization',
   dataset_15: 'field_data',
@@ -76,8 +77,51 @@ const DATASET_CATEGORY_OVERRIDES = {
   dataset_40: 'calendar_aging'
 };
 
+// Author-source corrections apply to both CSV and fallback catalog entries.
+const DATASET_SOURCE_CORRECTIONS = {
+  "dataset_06": {
+    "name": "SNL BatteryArchive Cycle Aging",
+    "ref_name": "2020_SNL_BatteryArchive_NCA-NMC-LFP_18650_MultiDOD_MultiC_15-25-35T",
+    "category": "cycle_aging",
+    "chemistry": "NCA-NMC-LFP",
+    "form": "18650",
+    "cells": "61",
+    "cycles": 0,
+    "size_mb": 115.2,
+    "status": "wip",
+    "doi": "https://zenodo.org/records/21149533",
+    "processed_url": "",
+    "notes": "Preger et al. JES 2020 cycle aging. BatteryLife v12 processed copy; original BatteryArchive CSV not acquired. Mechanical abuse is dataset_34.",
+    "meta": "yes",
+    "ts": "yes",
+    "cs": "yes",
+    "qc": "no",
+    "updated": "2026/9/8"
+  },
+  "dataset_40": {
+    "name": "THI Experimental Calendar Ageing",
+    "ref_name": "2022_THI_Geisbauer_MultiChem_Calendar_3SOC_50-60T",
+    "category": "calendar_aging",
+    "chemistry": "NCA/NMC/LFP/LCO/LMO/LTO-LCO",
+    "form": "Multi",
+    "cells": "",
+    "cycles": 0,
+    "size_mb": 0.08,
+    "status": "wip",
+    "doi": "https://zenodo.org/records/6685365",
+    "processed_url": "",
+    "notes": "THI calendar capacity summaries; downloaded v3 tables contain SOC 20/50/100%, 50/60 C and 0-152 days. CSV/XLSX/TAB are alternative representations; no raw waveforms; not JRC.",
+    "meta": "yes",
+    "ts": "no",
+    "cs": "no",
+    "qc": "no",
+    "updated": "2026/9/8"
+  }
+};
+
 function applyDatasetCategoryOverride(d) {
   if (!d || !d.id) return d;
+  if (DATASET_SOURCE_CORRECTIONS[d.id]) Object.assign(d, DATASET_SOURCE_CORRECTIONS[d.id]);
   const override = DATASET_CATEGORY_OVERRIDES[d.id];
   if (override) d.category = override;
   return d;
