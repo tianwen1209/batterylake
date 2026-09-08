@@ -340,7 +340,7 @@
   function ensureProvider() {
     if (state.ready) return Promise.resolve(state.provider);
     if (state.probing) return state.probing;
-    setStatus('busy', 'Connecting…', 'Checking model availability');
+    setStatus('busy', PROVIDER_LABELS.local.subtitle, 'Ready · checking for a free model…');
     state.probing = (async () => {
       for (const provider of candidateProviders()) {
         if (provider === 'local') break;

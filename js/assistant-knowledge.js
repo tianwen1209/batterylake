@@ -58,6 +58,14 @@
     if (gb >= 1) return gb.toFixed(1).replace(/\.0$/, '') + ' GB';
     return Math.round(Number(mb) || 0) + ' MB';
   }
+  function brief(text, max) {
+    text = String(text || '').replace(/\s+/g, ' ').trim();
+    max = max || 220;
+    if (text.length <= max) return text;
+    var cut = text.slice(0, max);
+    var stop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; '));
+    return (stop > 80 ? cut.slice(0, stop + 1) : cut) + ' …';
+  }
   function safe(fn, fallback) { try { var v = fn(); return v === undefined ? fallback : v; } catch (_) { return fallback; } }
 
   function catalog() {
@@ -99,14 +107,14 @@
       lines.push('- 电芯数：' + cells + ' · 循环数：' + cycles + ' · 原始数据量：' + fmtGB(d.size_mb, true));
       lines.push('- 类别：' + cat + ' · 状态：' + status);
       if (d.notes) lines.push('- 备注：' + d.notes);
-      if (d.evidence) lines.push('- 统计依据：' + d.evidence);
+      if (d.evidence) lines.push('- 统计依据：' + brief(d.evidence));
     } else {
       lines.push('- Reference name: `' + d.ref_name + '`');
       lines.push('- Chemistry / form factor: ' + (d.chemistry || '—') + ' · ' + (d.form || '—'));
       lines.push('- Cells: ' + cells + ' · Cycles: ' + cycles + ' · Source volume: ' + fmtGB(d.size_mb));
       lines.push('- Category: ' + cat + ' · Status: ' + status);
       if (d.notes) lines.push('- Notes: ' + d.notes);
-      if (d.evidence) lines.push('- Count basis: ' + d.evidence);
+      if (d.evidence) lines.push('- Count basis: ' + brief(d.evidence));
     }
     return lines.join('\n') + '\n\n' + links.join(' · ');
   }
