@@ -1239,6 +1239,24 @@ bash run_benchmark.sh</pre>
       </div>
     </section>
 
+    <section class="qa-try reveal" id="qaTryPanel">
+      <div class="qa-try-head">
+        <div>
+          <div class="qa-try-title">Try it with real data</div>
+          <div class="qa-try-sub">Short excerpts cut from the BatteryLake canonical time series. Click <strong>Assess</strong> to run the engine in your browser, or download the CSV and drop it into the box above.</div>
+        </div>
+        <div class="qa-try-picker">
+          <label for="qaReportSelect">Precomputed catalog report</label>
+          <select id="qaReportSelect" onchange="qaSelectCatalogReport(this.value)">
+            <option value="">Choose a dataset…</option>
+          </select>
+        </div>
+      </div>
+      <div class="qa-try-grid" id="qaSampleGrid">
+        <div class="qa-try-empty">Loading samples…</div>
+      </div>
+    </section>
+
     <section class="qa-results qa-is-example" id="qaResults">
       <div class="qa-results-bar reveal" id="qaResultsBar">
         <div class="qa-results-info">
@@ -1246,6 +1264,8 @@ bash run_benchmark.sh</pre>
           <span class="qa-results-file" id="qaResultsFile">dataset_03_quality_assesment.json</span>
           <span class="qa-results-sep">&middot;</span>
           <span class="qa-results-time" id="qaResultsTime">Assessed 14:32</span>
+          <span class="qa-results-sep">&middot;</span>
+          <span class="qa-results-source" id="qaResultsSource">example values</span>
           <span class="qa-chip" id="qaGateChip">Ready</span>
           <span class="qa-chip warn" id="qaGateWarnChip">1 warning</span>
         </div>

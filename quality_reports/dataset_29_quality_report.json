@@ -1,40 +1,40 @@
 {
-  "dataset_id": "dataset_05",
-  "file_name": "canonical/time_series (16/1642 shards)",
-  "chemistry": "NMC",
-  "n_rows": 625445,
+  "dataset_id": "dataset_29",
+  "file_name": "canonical/time_series (22/507 shards)",
+  "chemistry": "unknown",
+  "n_rows": 610611,
   "metrics": {
-    "n_rows": 625445,
-    "n_cells": 11,
+    "n_rows": 610611,
+    "n_cells": 22,
     "channels_present": [
       "voltage",
-      "current",
-      "timestamp"
+      "current"
     ],
     "channels_missing": [
       "temperature",
-      "capacity"
+      "capacity",
+      "timestamp"
     ],
     "missing_pct": 0.0,
     "sequence_flags": 1,
     "schema_errors": 0
   },
   "quality_score": {
-    "completeness": 0.8,
-    "consistency": 1.0,
+    "completeness": 0.7,
+    "consistency": 0.5,
     "accuracy": 1.0,
     "validity": 1.0
   },
-  "overall": 0.95,
-  "gate": "ready",
+  "overall": 0.8,
+  "gate": "ready_with_warning",
   "checks_detail": [
     {
       "key": "voltage_range",
       "name": "Voltage Range Validation",
       "detail": "All cell voltages within nominal operating range for the stated chemistry.",
       "status": "pass",
-      "score": 1.0,
-      "note": "100.0% within 2.5-4.35V"
+      "score": 0.9995,
+      "note": "100.0% within 2.0-4.5V"
     },
     {
       "key": "energy_balance",
@@ -65,16 +65,16 @@
       "name": "Timestamp Integrity",
       "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
       "status": "pass",
-      "score": 1.0,
-      "note": "1 negative interval(s), 0 large gap(s)"
+      "score": null,
+      "note": "channel not available \u2014 skipped"
     },
     {
       "key": "current_direction",
       "name": "Current Direction Consistency",
       "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
-      "status": "pass",
-      "score": 1.0,
-      "note": "charge 48% / discharge 52% of non-zero samples"
+      "status": "warn",
+      "score": 0.5,
+      "note": "only one current sign present"
     }
   ],
   "checks": [
@@ -100,20 +100,20 @@
     },
     {
       "name": "current_direction",
-      "passed": true
+      "status": "review"
     }
   ],
-  "warn_count": 0,
-  "generated_at": "2026-09-08T15:54:01Z",
+  "warn_count": 1,
+  "generated_at": "2026-09-08T15:54:00Z",
   "source": "canonical_v2_sample",
   "sample": {
-    "shards_total": 1642,
-    "shards_used": 16,
-    "rows_loaded": 625445,
+    "shards_total": 507,
+    "shards_used": 22,
+    "rows_loaded": 610611,
     "rows_per_shard_cap": 50000,
     "note": "evenly spaced canonical time-series shards, leading rows per shard"
   },
-  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
-  "category": "cycle_aging",
-  "processing_status": "needs_semantic_review"
+  "ref_name": "2025_Stanford_Chueh_MultiChem_Calendar_MultiT",
+  "category": "calendar_aging",
+  "processing_status": "calendar_native_tables_converted"
 }

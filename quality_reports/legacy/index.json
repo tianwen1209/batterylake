@@ -1,0 +1,74 @@
+[
+  {
+    "dataset_id": "2007_NASA_PCoE_LCO_18650_1C_1C_25T",
+    "catalog_id": "dataset_01",
+    "overall": 1.0,
+    "gate": "ready",
+    "warn_count": 0,
+    "file": "2007_NASA_PCoE_LCO_18650_1C_1C_25T_quality_report.json"
+  },
+  {
+    "dataset_id": "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T",
+    "catalog_id": "dataset_02",
+    "overall": 1.0,
+    "gate": "ready",
+    "warn_count": 0,
+    "file": "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T_quality_report.json"
+  },
+  {
+    "dataset_id": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T",
+    "catalog_id": "dataset_03",
+    "overall": 1.0,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "file": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T_quality_report.json"
+  },
+  {
+    "dataset_id": "2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T",
+    "catalog_id": "dataset_04",
+    "overall": 0.99,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "file": "2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T_quality_report.json"
+  },
+  {
+    "dataset_id": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+    "catalog_id": "dataset_05",
+    "overall": 1.0,
+    "gate": "ready",
+    "warn_count": 0,
+    "file": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT_quality_report.json"
+  },
+  {
+    "dataset_id": "2020_SNL_BatteryArchive_MultiChem_MultiForm_MultiC_MultiT",
+    "catalog_id": "dataset_06",
+    "overall": 1.0,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "file": "2020_SNL_BatteryArchive_MultiChem_MultiForm_MultiC_MultiT_quality_report.json"
+  },
+  {
+    "dataset_id": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T",
+    "catalog_id": "dataset_07",
+    "overall": 1.0,
+    "gate": "ready",
+    "warn_count": 0,
+    "file": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T_quality_report.json"
+  },
+  {
+    "dataset_id": "2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T",
+    "catalog_id": "dataset_08",
+    "overall": 1.0,
+    "gate": "ready",
+    "warn_count": 0,
+    "file": "2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T_quality_report.json"
+  },
+  {
+    "dataset_id": "2023_XJTU_NCM_Prismatic_1C_1C_25T",
+    "catalog_id": "dataset_09",
+    "overall": 1.0,
+    "gate": "ready",
+    "warn_count": 0,
+    "file": "2023_XJTU_NCM_Prismatic_1C_1C_25T_quality_report.json"
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "file": "dataset_21_timeseries_sample.csv",
+    "dataset_id": "dataset_21",
+    "ref_name": "2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T",
+    "name": "CMU VTC6 eVTOL Duty Cycle",
+    "chemistry": "NMC",
+    "rows": 3858,
+    "cells": 2,
+    "columns": [
+      "cell_id",
+      "source_cycle_id",
+      "elapsed_test_s",
+      "voltage_V",
+      "current_A",
+      "temperature_C",
+      "charge_capacity_Ah",
+      "discharge_capacity_Ah"
+    ],
+    "note": "Full channel set (V, I, T, capacities, elapsed time, cycle ids) from the CMU eVTOL duty-cycle test. Expect a clean pass.",
+    "size_kb": 373.6
+  },
+  {
+    "file": "dataset_17_timeseries_sample.csv",
+    "dataset_id": "dataset_17",
+    "ref_name": "2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T",
+    "name": "A123 LFP HEV-WLTP Drive Cycle",
+    "chemistry": "LFP",
+    "rows": 3889,
+    "cells": 2,
+    "columns": [
+      "cell_id",
+      "source_cycle_id",
+      "elapsed_test_s",
+      "voltage_V",
+      "current_A",
+      "temperature_C",
+      "charge_capacity_Ah",
+      "discharge_capacity_Ah"
+    ],
+    "note": "A123 LFP cells under a HEV drive cycle with temperature and cycle ids. Good example of an LFP voltage window.",
+    "size_kb": 172.1
+  },
+  {
+    "file": "dataset_05_timeseries_sample.csv",
+    "dataset_id": "dataset_05",
+    "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+    "name": "RWTH Aachen Lithium-Ion",
+    "chemistry": "NMC",
+    "rows": 4000,
+    "cells": 2,
+    "columns": [
+      "cell_id",
+      "source_cycle_id",
+      "timestamp",
+      "elapsed_test_s",
+      "voltage_V",
+      "current_A",
+      "temperature_C",
+      "charge_capacity_Ah",
+      "discharge_capacity_Ah"
+    ],
+    "note": "RWTH NMC cycling with ISO timestamps but no temperature or capacity columns. Shows how missing channels lower completeness.",
+    "size_kb": 279.4
+  },
+  {
+    "file": "dataset_35_timeseries_sample.csv",
+    "dataset_id": "dataset_35",
+    "ref_name": "2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT",
+    "name": "Zenodo ARC Calorimetry 21700",
+    "chemistry": "Multi",
+    "rows": 1023,
+    "cells": 6,
+    "columns": [
+      "cell_id",
+      "source_cycle_id",
+      "elapsed_test_s",
+      "voltage_V",
+      "current_A",
+      "temperature_C",
+      "charge_capacity_Ah",
+      "discharge_capacity_Ah"
+    ],
+    "note": "ARC calorimetry (thermal runaway) specimens: only time and temperature are populated. Shows an out-of-scope file scoring low.",
+    "size_kb": 33.4
+  }
+]

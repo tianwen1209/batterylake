@@ -1,39 +1,38 @@
 {
-  "dataset_id": "dataset_05",
-  "file_name": "canonical/time_series (16/1642 shards)",
+  "dataset_id": "dataset_21",
+  "file_name": "canonical/time_series (17/22 shards)",
   "chemistry": "NMC",
-  "n_rows": 625445,
+  "n_rows": 615611,
   "metrics": {
-    "n_rows": 625445,
-    "n_cells": 11,
+    "n_rows": 615611,
+    "n_cells": 17,
     "channels_present": [
       "voltage",
       "current",
+      "temperature",
+      "capacity",
       "timestamp"
     ],
-    "channels_missing": [
-      "temperature",
-      "capacity"
-    ],
+    "channels_missing": [],
     "missing_pct": 0.0,
-    "sequence_flags": 1,
+    "sequence_flags": 0,
     "schema_errors": 0
   },
   "quality_score": {
-    "completeness": 0.8,
+    "completeness": 1.0,
     "consistency": 1.0,
-    "accuracy": 1.0,
+    "accuracy": 0.95,
     "validity": 1.0
   },
-  "overall": 0.95,
-  "gate": "ready",
+  "overall": 0.99,
+  "gate": "ready_with_warning",
   "checks_detail": [
     {
       "key": "voltage_range",
       "name": "Voltage Range Validation",
       "detail": "All cell voltages within nominal operating range for the stated chemistry.",
       "status": "pass",
-      "score": 1.0,
+      "score": 0.9999,
       "note": "100.0% within 2.5-4.35V"
     },
     {
@@ -41,24 +40,24 @@
       "name": "Energy Balance Check",
       "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
       "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "score": 0.9938,
+      "note": "99.4% of 806 cycles CE in 95-105%"
     },
     {
       "key": "capacity_mono",
       "name": "Capacity Monotonicity",
       "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
       "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "score": 1.0,
+      "note": "0 non-monotonic step(s) over 790 cycles"
     },
     {
       "key": "temperature_consistency",
       "name": "Temperature Consistency",
       "detail": "Cell surface temperature stays within 5C of the stated test condition.",
-      "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "status": "warn",
+      "score": 0.8141,
+      "note": "81.4% within +/-5C of 24.9C"
     },
     {
       "key": "timestamp_integrity",
@@ -66,7 +65,7 @@
       "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
       "status": "pass",
       "score": 1.0,
-      "note": "1 negative interval(s), 0 large gap(s)"
+      "note": "0 negative interval(s), 0 large gap(s)"
     },
     {
       "key": "current_direction",
@@ -74,7 +73,7 @@
       "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
       "status": "pass",
       "score": 1.0,
-      "note": "charge 48% / discharge 52% of non-zero samples"
+      "note": "charge 19% / discharge 81% of non-zero samples"
     }
   ],
   "checks": [
@@ -92,7 +91,7 @@
     },
     {
       "name": "temperature_consistency",
-      "passed": true
+      "status": "review"
     },
     {
       "name": "timestamp_integrity",
@@ -103,17 +102,17 @@
       "passed": true
     }
   ],
-  "warn_count": 0,
-  "generated_at": "2026-09-08T15:54:01Z",
+  "warn_count": 1,
+  "generated_at": "2026-09-08T15:54:31Z",
   "source": "canonical_v2_sample",
   "sample": {
-    "shards_total": 1642,
-    "shards_used": 16,
-    "rows_loaded": 625445,
+    "shards_total": 22,
+    "shards_used": 17,
+    "rows_loaded": 615611,
     "rows_per_shard_cap": 50000,
     "note": "evenly spaced canonical time-series shards, leading rows per shard"
   },
-  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+  "ref_name": "2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T",
   "category": "cycle_aging",
   "processing_status": "needs_semantic_review"
 }

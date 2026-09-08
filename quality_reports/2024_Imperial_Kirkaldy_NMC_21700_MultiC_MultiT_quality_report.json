@@ -1,32 +1,32 @@
 {
-  "dataset_id": "dataset_05",
-  "file_name": "canonical/time_series (16/1642 shards)",
+  "dataset_id": "dataset_36",
+  "file_name": "canonical/time_series (16/5054 shards)",
   "chemistry": "NMC",
-  "n_rows": 625445,
+  "n_rows": 624572,
   "metrics": {
-    "n_rows": 625445,
-    "n_cells": 11,
+    "n_rows": 624572,
+    "n_cells": 16,
     "channels_present": [
       "voltage",
       "current",
+      "temperature",
       "timestamp"
     ],
     "channels_missing": [
-      "temperature",
       "capacity"
     ],
-    "missing_pct": 0.0,
-    "sequence_flags": 1,
+    "missing_pct": 5.6,
+    "sequence_flags": 0,
     "schema_errors": 0
   },
   "quality_score": {
-    "completeness": 0.8,
+    "completeness": 0.87,
     "consistency": 1.0,
-    "accuracy": 1.0,
-    "validity": 1.0
+    "accuracy": 0.8,
+    "validity": 0.96
   },
-  "overall": 0.95,
-  "gate": "ready",
+  "overall": 0.91,
+  "gate": "ready_with_warning",
   "checks_detail": [
     {
       "key": "voltage_range",
@@ -56,9 +56,9 @@
       "key": "temperature_consistency",
       "name": "Temperature Consistency",
       "detail": "Cell surface temperature stays within 5C of the stated test condition.",
-      "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "status": "warn",
+      "score": 0.5982,
+      "note": "59.8% within +/-5C of 27.2C"
     },
     {
       "key": "timestamp_integrity",
@@ -66,7 +66,7 @@
       "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
       "status": "pass",
       "score": 1.0,
-      "note": "1 negative interval(s), 0 large gap(s)"
+      "note": "0 negative interval(s), 0 large gap(s)"
     },
     {
       "key": "current_direction",
@@ -74,7 +74,7 @@
       "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
       "status": "pass",
       "score": 1.0,
-      "note": "charge 48% / discharge 52% of non-zero samples"
+      "note": "charge 37% / discharge 63% of non-zero samples"
     }
   ],
   "checks": [
@@ -92,7 +92,7 @@
     },
     {
       "name": "temperature_consistency",
-      "passed": true
+      "status": "review"
     },
     {
       "name": "timestamp_integrity",
@@ -103,17 +103,17 @@
       "passed": true
     }
   ],
-  "warn_count": 0,
-  "generated_at": "2026-09-08T15:54:01Z",
+  "warn_count": 1,
+  "generated_at": "2026-09-08T15:54:04Z",
   "source": "canonical_v2_sample",
   "sample": {
-    "shards_total": 1642,
+    "shards_total": 5054,
     "shards_used": 16,
-    "rows_loaded": 625445,
+    "rows_loaded": 624572,
     "rows_per_shard_cap": 50000,
     "note": "evenly spaced canonical time-series shards, leading rows per shard"
   },
-  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+  "ref_name": "2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT",
   "category": "cycle_aging",
   "processing_status": "needs_semantic_review"
 }

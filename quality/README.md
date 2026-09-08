@@ -33,6 +33,14 @@ Dependencies are already in `requirements.txt` (pandas, numpy, pyarrow).
 | `accuracy`     | physical-plausibility checks (voltage / CE / capacity / temperature) |
 | `validity`     | required columns present, numeric, finite |
 
+Checks run **per cell** when a cell column (`cell_id`, `entity_id`, …) exists, so
+concatenated cells do not produce false timestamp or capacity violations. Columns
+that exist but are entirely empty count as absent. Each check has its own pass
+floor (`CHECK_PASS_MIN`): voltage / timestamps / current 99.5 %, capacity
+monotonicity 98 %, coulombic efficiency 95 %, temperature 90 %. A report whose
+overall score is below 0.7 (or accuracy < 0.5, validity < 0.6) gets
+`gate = "needs_review"`.
+
 **Six physical checks** → shown in the diagnostics list (each `pass` / `warn`):
 `voltage_range` · `energy_balance` · `capacity_mono` · `temperature_consistency` ·
 `timestamp_integrity` · `current_direction`
@@ -47,6 +55,32 @@ are resolved tolerantly (`voltage_V` / `voltage` / `V` all map to voltage, etc.)
 ---
 
 ## 2. Run it (offline / batch)
+
+### 2a. BatteryLake v2 canonical datasets (what the site ships)
+
+`run_quality_v2.py` walks a `Processed_Dataset/<category>/dataset_XX/` tree,
+samples the `canonical/time_series/*.parquet` shards of every dataset that has
+them (evenly spaced shards, leading rows per shard, truncated final cycle
+dropped), runs the engine per cell, and writes one report per dataset under
+both its catalog id and its `ref_name`, plus `index.json`:
+
+```bash
+# from the website repo, with pandas + pyarrow available
+python quality/run_quality_v2.py \
+    --root /path/to/BatteryLake2026/Processed_Dataset \
+    --out quality_reports --registry dataset_registry.csv \
+    --samples assets/examples/quality        # also refresh the "try it" CSV excerpts
+```
+
+Every report records what it saw (`sample.shards_used / shards_total`,
+`sample.rows_loaded`) and plain counts behind the four cards (`metrics`).
+Datasets without canonical time series (older ingested-object layouts) get no
+report and the page says so. `quality_reports/legacy/` keeps the pre-2026-09-08
+reports whose inputs no longer exist; they are not served.
+
+### 2b. Loose files
+
+
 
 ```bash
 pip install -r requirements.txt

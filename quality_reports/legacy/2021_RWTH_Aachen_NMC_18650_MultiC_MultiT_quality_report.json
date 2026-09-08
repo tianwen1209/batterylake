@@ -1,80 +1,50 @@
 {
-  "dataset_id": "dataset_05",
-  "file_name": "canonical/time_series (16/1642 shards)",
-  "chemistry": "NMC",
-  "n_rows": 625445,
-  "metrics": {
-    "n_rows": 625445,
-    "n_cells": 11,
-    "channels_present": [
-      "voltage",
-      "current",
-      "timestamp"
-    ],
-    "channels_missing": [
-      "temperature",
-      "capacity"
-    ],
-    "missing_pct": 0.0,
-    "sequence_flags": 1,
-    "schema_errors": 0
-  },
+  "dataset_id": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+  "file_name": "timeseries.csv",
   "quality_score": {
-    "completeness": 0.8,
+    "completeness": 1.0,
     "consistency": 1.0,
     "accuracy": 1.0,
     "validity": 1.0
   },
-  "overall": 0.95,
+  "overall": 1.0,
   "gate": "ready",
   "checks_detail": [
     {
       "key": "voltage_range",
       "name": "Voltage Range Validation",
       "detail": "All cell voltages within nominal operating range for the stated chemistry.",
-      "status": "pass",
-      "score": 1.0,
-      "note": "100.0% within 2.5-4.35V"
+      "status": "pass"
     },
     {
       "key": "energy_balance",
       "name": "Energy Balance Check",
       "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
-      "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "status": "pass"
     },
     {
       "key": "capacity_mono",
       "name": "Capacity Monotonicity",
       "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
-      "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "status": "pass"
     },
     {
       "key": "temperature_consistency",
       "name": "Temperature Consistency",
       "detail": "Cell surface temperature stays within 5C of the stated test condition.",
-      "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "status": "pass"
     },
     {
       "key": "timestamp_integrity",
       "name": "Timestamp Integrity",
       "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
-      "status": "pass",
-      "score": 1.0,
-      "note": "1 negative interval(s), 0 large gap(s)"
+      "status": "pass"
     },
     {
       "key": "current_direction",
       "name": "Current Direction Consistency",
       "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
-      "status": "pass",
-      "score": 1.0,
-      "note": "charge 48% / discharge 52% of non-zero samples"
+      "status": "pass"
     }
   ],
   "checks": [
@@ -104,16 +74,5 @@
     }
   ],
   "warn_count": 0,
-  "generated_at": "2026-09-08T15:54:01Z",
-  "source": "canonical_v2_sample",
-  "sample": {
-    "shards_total": 1642,
-    "shards_used": 16,
-    "rows_loaded": 625445,
-    "rows_per_shard_cap": 50000,
-    "note": "evenly spaced canonical time-series shards, leading rows per shard"
-  },
-  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
-  "category": "cycle_aging",
-  "processing_status": "needs_semantic_review"
+  "generated_at": "2026-07-13T04:24:53Z"
 }

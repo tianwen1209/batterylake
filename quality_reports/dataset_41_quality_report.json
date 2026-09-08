@@ -1,11 +1,11 @@
 {
-  "dataset_id": "dataset_05",
-  "file_name": "canonical/time_series (16/1642 shards)",
-  "chemistry": "NMC",
-  "n_rows": 625445,
+  "dataset_id": "dataset_41",
+  "file_name": "canonical/time_series (160/146122 shards)",
+  "chemistry": "LFP",
+  "n_rows": 100083,
   "metrics": {
-    "n_rows": 625445,
-    "n_cells": 11,
+    "n_rows": 100083,
+    "n_cells": 160,
     "channels_present": [
       "voltage",
       "current",
@@ -16,7 +16,7 @@
       "capacity"
     ],
     "missing_pct": 0.0,
-    "sequence_flags": 1,
+    "sequence_flags": 0,
     "schema_errors": 0
   },
   "quality_score": {
@@ -33,8 +33,8 @@
       "name": "Voltage Range Validation",
       "detail": "All cell voltages within nominal operating range for the stated chemistry.",
       "status": "pass",
-      "score": 1.0,
-      "note": "100.0% within 2.5-4.35V"
+      "score": 0.9984,
+      "note": "99.8% within 2.0-3.8V"
     },
     {
       "key": "energy_balance",
@@ -66,7 +66,7 @@
       "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
       "status": "pass",
       "score": 1.0,
-      "note": "1 negative interval(s), 0 large gap(s)"
+      "note": "0 negative interval(s), 0 large gap(s)"
     },
     {
       "key": "current_direction",
@@ -74,7 +74,7 @@
       "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
       "status": "pass",
       "score": 1.0,
-      "note": "charge 48% / discharge 52% of non-zero samples"
+      "note": "charge 54% / discharge 46% of non-zero samples"
     }
   ],
   "checks": [
@@ -104,16 +104,16 @@
     }
   ],
   "warn_count": 0,
-  "generated_at": "2026-09-08T15:54:01Z",
+  "generated_at": "2026-09-08T15:54:05Z",
   "source": "canonical_v2_sample",
   "sample": {
-    "shards_total": 1642,
-    "shards_used": 16,
-    "rows_loaded": 625445,
+    "shards_total": 146122,
+    "shards_used": 160,
+    "rows_loaded": 100083,
     "rows_per_shard_cap": 50000,
     "note": "evenly spaced canonical time-series shards, leading rows per shard"
   },
-  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+  "ref_name": "2022_HUST_LFP_18650_MultiC_MultiC_30T",
   "category": "cycle_aging",
-  "processing_status": "needs_semantic_review"
+  "processing_status": "converted_native_features"
 }

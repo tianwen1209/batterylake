@@ -1,74 +1,182 @@
 [
   {
-    "dataset_id": "2007_NASA_PCoE_LCO_18650_1C_1C_25T",
-    "catalog_id": "dataset_01",
-    "overall": 1.0,
+    "dataset_id": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+    "catalog_id": "dataset_05",
+    "category": "cycle_aging",
+    "overall": 0.95,
     "gate": "ready",
     "warn_count": 0,
-    "file": "2007_NASA_PCoE_LCO_18650_1C_1C_25T_quality_report.json"
+    "n_rows": 625445,
+    "file": "dataset_05_quality_report.json"
   },
   {
-    "dataset_id": "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T",
-    "catalog_id": "dataset_02",
-    "overall": 1.0,
+    "dataset_id": "2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT",
+    "catalog_id": "dataset_16",
+    "category": "soh_estimation",
+    "overall": 0.97,
     "gate": "ready",
     "warn_count": 0,
-    "file": "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T_quality_report.json"
+    "n_rows": 624209,
+    "file": "dataset_16_quality_report.json"
   },
   {
-    "dataset_id": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T",
-    "catalog_id": "dataset_03",
-    "overall": 1.0,
+    "dataset_id": "2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T",
+    "catalog_id": "dataset_17",
+    "category": "cycle_aging",
+    "overall": 0.97,
+    "gate": "ready",
+    "warn_count": 0,
+    "n_rows": 604215,
+    "file": "dataset_17_quality_report.json"
+  },
+  {
+    "dataset_id": "2022_A123_LFP_18650_1.1Ah_CalCyc_50T",
+    "catalog_id": "dataset_18",
+    "category": "cycle_aging",
+    "overall": 0.93,
     "gate": "ready_with_warning",
     "warn_count": 1,
-    "file": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T_quality_report.json"
+    "n_rows": 612526,
+    "file": "dataset_18_quality_report.json"
   },
   {
-    "dataset_id": "2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T",
-    "catalog_id": "dataset_04",
+    "dataset_id": "2021_Mendeley_LFP-NCA-NMC_18650_DriveCycle_MultiT",
+    "catalog_id": "dataset_20",
+    "category": "characterization",
+    "overall": 0.75,
+    "gate": "ready_with_warning",
+    "warn_count": 2,
+    "n_rows": 602848,
+    "file": "dataset_20_quality_report.json"
+  },
+  {
+    "dataset_id": "2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T",
+    "catalog_id": "dataset_21",
+    "category": "cycle_aging",
     "overall": 0.99,
     "gate": "ready_with_warning",
     "warn_count": 1,
-    "file": "2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T_quality_report.json"
+    "n_rows": 615611,
+    "file": "dataset_21_quality_report.json"
   },
   {
-    "dataset_id": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
-    "catalog_id": "dataset_05",
-    "overall": 1.0,
-    "gate": "ready",
-    "warn_count": 0,
-    "file": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT_quality_report.json"
-  },
-  {
-    "dataset_id": "2020_SNL_BatteryArchive_MultiChem_MultiForm_MultiC_MultiT",
-    "catalog_id": "dataset_06",
-    "overall": 1.0,
+    "dataset_id": "2022_EVERLASTING_4TU_NMC_18650_3.5Ah_MultiC_25-45T",
+    "catalog_id": "dataset_23",
+    "category": "cycle_aging",
+    "overall": 0.92,
     "gate": "ready_with_warning",
     "warn_count": 1,
-    "file": "2020_SNL_BatteryArchive_MultiChem_MultiForm_MultiC_MultiT_quality_report.json"
+    "n_rows": 600000,
+    "file": "dataset_23_quality_report.json"
   },
   {
-    "dataset_id": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T",
-    "catalog_id": "dataset_07",
-    "overall": 1.0,
+    "dataset_id": "2021_Stanford_Onori_NMC-NCA-LFP_18650_MultiC_MultiT",
+    "catalog_id": "dataset_24",
+    "category": "characterization",
+    "overall": 0.95,
     "gate": "ready",
     "warn_count": 0,
-    "file": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T_quality_report.json"
+    "n_rows": 618253,
+    "file": "dataset_24_quality_report.json"
   },
   {
-    "dataset_id": "2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T",
-    "catalog_id": "dataset_08",
-    "overall": 1.0,
-    "gate": "ready",
-    "warn_count": 0,
-    "file": "2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T_quality_report.json"
+    "dataset_id": "2024_Stanford_Onori_LiIon_Parallel_MultiC_25T",
+    "catalog_id": "dataset_26",
+    "category": "characterization",
+    "overall": 0.85,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "n_rows": 622269,
+    "file": "dataset_26_quality_report.json"
   },
   {
-    "dataset_id": "2023_XJTU_NCM_Prismatic_1C_1C_25T",
-    "catalog_id": "dataset_09",
-    "overall": 1.0,
+    "dataset_id": "2024_Stanford_Onori_LiIon_SecondLife_GridStorage_25T",
+    "catalog_id": "dataset_27",
+    "category": "cycle_aging",
+    "overall": 0.79,
+    "gate": "ready_with_warning",
+    "warn_count": 2,
+    "n_rows": 624080,
+    "file": "dataset_27_quality_report.json"
+  },
+  {
+    "dataset_id": "2024_Stanford_Onori_LFP_Cyl_SOC-ML_25T",
+    "catalog_id": "dataset_28",
+    "category": "soc_estimation",
+    "overall": 0.88,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "n_rows": 621546,
+    "file": "dataset_28_quality_report.json"
+  },
+  {
+    "dataset_id": "2025_Stanford_Chueh_MultiChem_Calendar_MultiT",
+    "catalog_id": "dataset_29",
+    "category": "calendar_aging",
+    "overall": 0.8,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "n_rows": 610611,
+    "file": "dataset_29_quality_report.json"
+  },
+  {
+    "dataset_id": "2023_TUM_NMC811-LFP_Auto_ThermalRunaway_MultiT",
+    "catalog_id": "dataset_33",
+    "category": "thermal_runaway",
+    "overall": 0.54,
+    "gate": "needs_review",
+    "warn_count": 2,
+    "n_rows": 609290,
+    "file": "dataset_33_quality_report.json"
+  },
+  {
+    "dataset_id": "2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT",
+    "catalog_id": "dataset_34",
+    "category": "thermal_runaway",
+    "overall": 0.67,
+    "gate": "needs_review",
+    "warn_count": 2,
+    "n_rows": 637943,
+    "file": "dataset_34_quality_report.json"
+  },
+  {
+    "dataset_id": "2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT",
+    "catalog_id": "dataset_35",
+    "category": "thermal_runaway",
+    "overall": 0.75,
+    "gate": "needs_review",
+    "warn_count": 0,
+    "n_rows": 9368,
+    "file": "dataset_35_quality_report.json"
+  },
+  {
+    "dataset_id": "2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT",
+    "catalog_id": "dataset_36",
+    "category": "cycle_aging",
+    "overall": 0.91,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "n_rows": 624572,
+    "file": "dataset_36_quality_report.json"
+  },
+  {
+    "dataset_id": "2024_TUM_Stroebl_NMC_21700_Multistage_25T",
+    "catalog_id": "dataset_37",
+    "category": "cycle_aging",
+    "overall": 0.88,
+    "gate": "ready_with_warning",
+    "warn_count": 1,
+    "n_rows": 646812,
+    "file": "dataset_37_quality_report.json"
+  },
+  {
+    "dataset_id": "2022_HUST_LFP_18650_MultiC_MultiC_30T",
+    "catalog_id": "dataset_41",
+    "category": "cycle_aging",
+    "overall": 0.95,
     "gate": "ready",
     "warn_count": 0,
-    "file": "2023_XJTU_NCM_Prismatic_1C_1C_25T_quality_report.json"
+    "n_rows": 100083,
+    "file": "dataset_41_quality_report.json"
   }
 ]

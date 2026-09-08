@@ -20,8 +20,12 @@
     capacity: ['capacity_ah', 'capacity', 'cap', 'q', 'qd', 'discharge_capacity_ah', 'discharge_capacity', 'q_discharge'],
     charge_capacity: ['charge_capacity_ah', 'charge_capacity', 'q_charge', 'qc'],
     coulombic_efficiency: ['coulombic_efficiency', 'ce', 'efficiency', 'coulombic_eff'],
-    timestamp: ['timestamp', 'time', 'time_s', 'test_time', 'test_time_s', 't_s', 'elapsed_time'],
-    cycle: ['cycle_number', 'cycle', 'cycle_index', 'cyc', 'cycle_no', 'n']
+    // BatteryLake v2 canonical time series carry elapsed_test_s (seconds) and,
+    // for some sources, an ISO `timestamp` string; either works here.
+    timestamp: ['timestamp', 'elapsed_test_s', 'time_s', 'test_time_s', 'time', 'test_time', 't_s', 'elapsed_time', 'datetime', 'date_time'],
+    cycle: ['cycle_number', 'cycle', 'cycle_index', 'source_cycle_id', 'cycle_id', 'cyc', 'cycle_no', 'cycle_count', 'n'],
+    // Grouping column: monotonicity / timestamp checks run per cell, not across concatenated cells.
+    cell: ['cell_id', 'physical_cell_id', 'entity_id', 'cell', 'battery_id', 'cell_name', 'source_id']
   };
 
   var VOLTAGE_WINDOWS = {
@@ -44,6 +48,16 @@
 
   var EXPECTED_CHANNELS = ['voltage', 'current', 'temperature', 'capacity', 'timestamp'];
   var WARN_THRESHOLD = 0.995;
+  /* Per-check pass floors: physical channels are noisy by nature (cells heat up
+     under load, coulombic efficiency scatters around 1). Keep in step with Python. */
+  var CHECK_PASS_MIN = {
+    voltage_range: 0.995,
+    energy_balance: 0.95,
+    capacity_mono: 0.98,
+    temperature_consistency: 0.90,
+    timestamp_integrity: 0.995,
+    current_direction: 0.995
+  };
 
   /* ── helpers ─────────────────────────────────────────────────── */
   function isMissing(v) {
@@ -90,20 +104,46 @@
   function round4(x) { return Math.round(x * 10000) / 10000; }
   function pct(x) { return (x * 100).toFixed(1) + '%'; }
 
-  function resolveColumns(columns) {
+  /* The first alias that exists *and holds at least one non-null value* wins, so an
+     all-empty `timestamp` column does not shadow a populated `elapsed_test_s`. */
+  function resolveColumns(columns, rows) {
     var lookup = {};
     columns.forEach(function (c) {
       var key = String(c).toLowerCase().trim();
       if (!(key in lookup)) lookup[key] = c;
     });
+    function hasValue(col) {
+      if (!rows || !rows.length) return true;
+      var n = Math.min(rows.length, 5000);
+      for (var i = 0; i < n; i++) if (!isMissing(rows[i][col])) return true;
+      for (var j = n; j < rows.length; j += 97) if (!isMissing(rows[j][col])) return true;
+      return false;
+    }
     var resolved = {};
     Object.keys(COLUMN_ALIASES).forEach(function (canonical) {
       var aliases = COLUMN_ALIASES[canonical];
       for (var i = 0; i < aliases.length; i++) {
-        if (aliases[i] in lookup) { resolved[canonical] = lookup[aliases[i]]; break; }
+        if (!(aliases[i] in lookup)) continue;
+        var col = lookup[aliases[i]];
+        if (hasValue(col)) { resolved[canonical] = col; break; }
       }
+      // A column that exists but is entirely empty counts as absent.
     });
     return resolved;
+  }
+
+  /* Split rows per cell (or one group when no cell column / single cell). */
+  function groups(rows, cols) {
+    if (!cols.cell) return [rows];
+    var map = new Map();
+    for (var i = 0; i < rows.length; i++) {
+      var k = rows[i][cols.cell];
+      if (isMissing(k)) continue;
+      k = String(k);
+      if (!map.has(k)) map.set(k, []);
+      map.get(k).push(rows[i]);
+    }
+    return map.size > 1 ? Array.from(map.values()) : [rows];
   }
 
   function inferChemistry(datasetId) {
@@ -131,20 +171,35 @@
       if (ce.length && median(ce) > 2) ce = ce.map(function (x) { return x / 100; });
     } else if (cols.capacity && cols.charge_capacity) {
       ce = [];
-      for (var i = 0; i < rows.length; i++) {
-        var qd = toNumber(rows[i][cols.capacity]);
-        var qc = toNumber(rows[i][cols.charge_capacity]);
-        var r = qd / qc;
-        if (Number.isFinite(r)) ce.push(r);
+      if (cols.cycle) {
+        // Time series: capacities accumulate within a cycle, so compare the
+        // per-cycle (per-cell) maxima rather than row-by-row values.
+        var agg = new Map();
+        for (var i = 0; i < rows.length; i++) {
+          var qd0 = toNumber(rows[i][cols.capacity]);
+          var qc0 = toNumber(rows[i][cols.charge_capacity]);
+          if (!Number.isFinite(qd0) || !Number.isFinite(qc0)) continue;
+          var key = (cols.cell ? String(rows[i][cols.cell]) : '') + '|' + String(rows[i][cols.cycle]);
+          var cur = agg.get(key);
+          if (!cur) agg.set(key, [qd0, qc0]);
+          else { if (qd0 > cur[0]) cur[0] = qd0; if (qc0 > cur[1]) cur[1] = qc0; }
+        }
+        agg.forEach(function (v) { if (v[0] > 0 && v[1] > 0) ce.push(v[0] / v[1]); });
+      } else {
+        for (var j = 0; j < rows.length; j++) {
+          var qd = toNumber(rows[j][cols.capacity]);
+          var qc = toNumber(rows[j][cols.charge_capacity]);
+          var r = qd / qc;
+          if (Number.isFinite(r)) ce.push(r);
+        }
       }
     }
     if (!ce || !ce.length) return null;
     var within = fraction(ce, function (x) { return x >= 0.95 && x <= 1.05; });
-    return [within, pct(within) + ' of cycles CE in 95-105%'];
+    return [within, pct(within) + ' of ' + ce.length + ' cycles CE in 95-105%'];
   }
 
-  function checkCapacityMono(rows, cols) {
-    if (!cols.capacity) return null;
+  function capacityMonoOne(rows, cols) {
     var series;
     if (cols.cycle) {
       var byCycle = new Map();
@@ -158,12 +213,20 @@
     } else {
       series = numeric(rows, cols.capacity);
     }
-    if (series.length < 3) return null;
+    if (series.length < 3) return [0, 0];
     var tol = series[0] ? 0.02 * Math.abs(series[0]) : 0;
     var rises = 0;
     for (var j = 1; j < series.length; j++) if (series[j] - series[j - 1] > tol) rises++;
-    var ok = 1 - rises / Math.max(1, series.length - 1);
-    return [ok, rises + ' non-monotonic step(s) over ' + series.length + ' cycles'];
+    return [rises, series.length - 1];
+  }
+
+  function checkCapacityMono(rows, cols) {
+    if (!cols.capacity) return null;
+    var rises = 0, steps = 0;
+    groups(rows, cols).forEach(function (g) { var r = capacityMonoOne(g, cols); rises += r[0]; steps += r[1]; });
+    if (steps < 2) return null;
+    var ok = 1 - rises / Math.max(1, steps);
+    return [ok, rises + ' non-monotonic step(s) over ' + (steps + 1) + ' cycles'];
   }
 
   function checkTemperatureConsistency(rows, cols) {
@@ -175,26 +238,38 @@
     return [within, pct(within) + ' within +/-5C of ' + nominal.toFixed(1) + 'C'];
   }
 
-  function checkTimestampIntegrity(rows, cols) {
-    if (!cols.timestamp) return null;
-    var ts = numeric(rows, cols.timestamp);
+  function timestampSeconds(rows, col) {
+    var ts = numeric(rows, col);
     if (ts.length < 3) {
       // Maybe a datetime string column: parse to seconds.
       ts = [];
       for (var i = 0; i < rows.length; i++) {
-        var v = rows[i][cols.timestamp];
+        var v = rows[i][col];
         if (isMissing(v)) continue;
         var ms = Date.parse(String(v));
         if (Number.isFinite(ms)) ts.push(ms / 1000);
       }
     }
-    if (ts.length < 3) return null;
+    return ts;
+  }
+
+  function timestampOne(rows, cols) {
+    var ts = timestampSeconds(rows, cols.timestamp);
+    if (ts.length < 3) return [0, 0, 0];
     var dt = [];
     for (var j = 1; j < ts.length; j++) dt.push(ts[j] - ts[j - 1]);
     var negatives = dt.filter(function (d) { return d < 0; }).length;
     var absMedian = median(dt.map(Math.abs));
     var bigGaps = absMedian < 3600 ? dt.filter(function (d) { return d > 24 * 3600; }).length : 0;
-    var ok = 1 - (negatives + bigGaps) / Math.max(1, dt.length);
+    return [negatives, bigGaps, dt.length];
+  }
+
+  function checkTimestampIntegrity(rows, cols) {
+    if (!cols.timestamp) return null;
+    var negatives = 0, bigGaps = 0, intervals = 0;
+    groups(rows, cols).forEach(function (g) { var r = timestampOne(g, cols); negatives += r[0]; bigGaps += r[1]; intervals += r[2]; });
+    if (intervals < 2) return null;
+    var ok = 1 - (negatives + bigGaps) / Math.max(1, intervals);
     return [ok, negatives + ' negative interval(s), ' + bigGaps + ' large gap(s)'];
   }
 
@@ -205,8 +280,14 @@
     var pos = fraction(cur, function (x) { return x > 0; });
     var neg = fraction(cur, function (x) { return x < 0; });
     if (!(pos > 0 && neg > 0)) return [0.5, 'only one current sign present'];
-    var balance = Math.min(pos, neg) / 0.5;
-    return [Math.min(1, 0.9 + 0.1 * balance), 'charge/discharge signs both present'];
+    // Both directions present. Flag only a pathological split (< 2% of non-zero
+    // samples in one direction), which usually means a sign-convention change.
+    var nz = cur.filter(function (x) { return x !== 0; });
+    var p = fraction(nz, function (x) { return x > 0; });
+    var n = fraction(nz, function (x) { return x < 0; });
+    var minority = nz.length ? Math.min(p, n) : 0;
+    if (minority < 0.02) return [0.9, 'one direction is only ' + (minority * 100).toFixed(1) + '% of non-zero samples'];
+    return [1, 'charge ' + Math.round(p * 100) + '% / discharge ' + Math.round(n * 100) + '% of non-zero samples'];
   }
 
   var CHECK_FUNCS = {
@@ -246,6 +327,41 @@
     return clamp01(0.5 * presence + 0.5 * finite);
   }
 
+  /* Plain counts behind the four cards (shown in the card footers). */
+  function metrics(rows, cols, ratios, notes) {
+    var present = EXPECTED_CHANNELS.filter(function (ch) { return cols[ch]; });
+    var missing = 0;
+    if (present.length && rows.length) {
+      for (var i = 0; i < rows.length; i++) for (var k = 0; k < present.length; k++) if (isMissing(rows[i][cols[present[k]]])) missing++;
+    }
+    var cells = 1;
+    if (cols.cell) {
+      var set = new Set();
+      for (var j = 0; j < rows.length; j++) { var v = rows[j][cols.cell]; if (!isMissing(v)) set.add(String(v)); }
+      cells = Math.max(1, set.size);
+    }
+    var seq = 0;
+    ['timestamp_integrity', 'capacity_mono'].forEach(function (key) {
+      var m = String(notes[key] || '').match(/(\d+) (?:negative|large|non-monotonic)/g) || [];
+      m.forEach(function (x) { seq += parseInt(x, 10) || 0; });
+    });
+    if (ratios.current_direction !== null && ratios.current_direction !== undefined && ratios.current_direction < 0.9) seq += 1;
+    var schema = ['voltage', 'current'].filter(function (r) { return !cols[r]; }).length;
+    ['voltage', 'current', 'temperature', 'capacity'].forEach(function (ch) {
+      if (!cols[ch]) return;
+      for (var r = 0; r < rows.length; r++) { var val = rows[r][cols[ch]]; if (!isMissing(val) && !Number.isFinite(toNumber(val))) schema++; }
+    });
+    return {
+      n_rows: rows.length,
+      n_cells: cells,
+      channels_present: present,
+      channels_missing: EXPECTED_CHANNELS.filter(function (ch) { return !cols[ch]; }),
+      missing_pct: Math.round((present.length && rows.length ? missing / (rows.length * present.length) * 100 : 0) * 100) / 100,
+      sequence_flags: seq,
+      schema_errors: schema
+    };
+  }
+
   function meanOfAvailable(ratios, keys) {
     var vals = keys.filter(function (k) { return ratios[k] !== null && ratios[k] !== undefined; }).map(function (k) { return ratios[k]; });
     return vals.length ? clamp01(mean(vals)) : 0.9;
@@ -259,7 +375,7 @@
     options = options || {};
     rows = Array.isArray(rows) ? rows : [];
     var columns = options.columns || (rows.length ? Object.keys(rows[0]) : []);
-    var cols = resolveColumns(columns);
+    var cols = resolveColumns(columns, rows);
     var datasetId = options.datasetId || 'uploaded_dataset';
     var chem = String(options.chemistry || inferChemistry(datasetId)).toUpperCase();
     if (!(chem in VOLTAGE_WINDOWS)) chem = '_default';
@@ -277,7 +393,7 @@
     var checksDetail = CHECK_DEFS.map(function (def) {
       var key = def[0];
       var ratio = ratios[key];
-      var status = (ratio === null || ratio >= WARN_THRESHOLD) ? 'pass' : 'warn';
+      var status = (ratio === null || ratio >= (CHECK_PASS_MIN[key] || WARN_THRESHOLD)) ? 'pass' : 'warn';
       return { key: key, name: def[1], detail: def[2], status: status, score: ratio === null ? null : round4(ratio), note: notes[key] };
     });
     var warnCount = checksDetail.filter(function (c) { return c.status === 'warn'; }).length;
@@ -289,6 +405,9 @@
       validity: round2(scoreValidity(rows, cols))
     };
     var overall = round2((dims.completeness + dims.consistency + dims.accuracy + dims.validity) / 4);
+    var gate = warnCount === 0 ? 'ready' : 'ready_with_warning';
+    // Very low scores mean the file is not a usable cycling dataset as-is.
+    if (overall < 0.7 || dims.accuracy < 0.5 || dims.validity < 0.6) gate = 'needs_review';
 
     return {
       dataset_id: datasetId,
@@ -296,9 +415,10 @@
       chemistry: chem === '_default' ? 'unknown' : chem,
       n_rows: rows.length,
       resolved_columns: cols,
+      metrics: metrics(rows, cols, ratios, notes),
       quality_score: dims,
       overall: overall,
-      gate: warnCount === 0 ? 'ready' : 'ready_with_warning',
+      gate: gate,
       checks_detail: checksDetail,
       checks: checksDetail.map(function (c) {
         return c.status === 'pass' ? { name: c.key, passed: true } : { name: c.key, status: 'review' };

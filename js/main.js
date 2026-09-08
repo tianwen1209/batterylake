@@ -1307,7 +1307,9 @@ function showPage(name, navEl, options = {}) {
       typeof window.BatteryLakePreprocessing.refreshDatasets === 'function') {
     window.BatteryLakePreprocessing.refreshDatasets();
   }
-  if (name === 'quality' && !options.skipQualityLoad && typeof ensureQualityPageReady === 'function') {
+  // The quality module lives further down this file; before it has executed
+  // (initial hash routing) its own init block takes care of the page.
+  if (name === 'quality' && !options.skipQualityLoad && window.__qaModuleReady && typeof ensureQualityPageReady === 'function') {
     void ensureQualityPageReady(options.qualityDatasetId || null);
   }
   if (!options.preserveHash && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
@@ -6499,6 +6501,8 @@ let qaLastReport = QA_DEFAULT_REPORT;
 let qaActiveDatasetId = null;
 let qaPageInitialized = false;
 let qaHasAssessed = false;
+const QA_LANDING_EXAMPLE_ID = 'dataset_21';   // real precomputed report shown before the user uploads anything
+window.__qaModuleReady = true;
 
 function updateQualitySelectedFile() {
   const note = document.getElementById('qaSelectedFile');
@@ -6605,9 +6609,97 @@ async function assessQualityInBrowser(file, datasetId) {
   const parsed = ext === 'json' ? await qaParseJson(file) : await qaParseDelimited(file);
   if (!parsed.rows.length) throw new Error('No data rows were found in ' + file.name + '.');
   const match = DATASETS.find(d => d.id === datasetId || d.ref_name === datasetId);
-  const chemistry = match && match.chemistry && /^(LFP|LCO|NCA|NMC)/i.test(match.chemistry) ? match.chemistry : null;
+  const chemMatch = match && match.chemistry ? String(match.chemistry).toUpperCase().match(/^(NMC811|LFP|LCO|NCA|NMC)/) : null;
+  const chemistry = chemMatch ? chemMatch[1] : null;
   return window.BatteryLakeQuality.assessRows(parsed.rows, { datasetId, fileName: file.name, chemistry, columns: parsed.columns });
 }
+
+/* ── "Try it with real data": sample excerpts + precomputed report picker ── */
+const QA_SAMPLES_URL = 'assets/examples/quality/samples.json';
+let qaSamplesLoaded = false;
+
+async function qaLoadSamples() {
+  if (qaSamplesLoaded) return;
+  qaSamplesLoaded = true;
+  const grid = document.getElementById('qaSampleGrid');
+  if (!grid) return;
+  try {
+    const res = await fetch(QA_SAMPLES_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const samples = await res.json();
+    if (!Array.isArray(samples) || !samples.length) throw new Error('empty');
+    grid.innerHTML = samples.map((smp, i) => {
+      const cols = (smp.columns || []).filter(c => !/^(cell_id|source_cycle_id)$/.test(c));
+      return `
+      <div class="qa-sample" data-file="${esc(smp.file)}" data-dataset="${esc(smp.dataset_id)}">
+        <div class="qa-sample-name">${esc(smp.name || smp.dataset_id)}</div>
+        <div class="qa-sample-meta">${esc(smp.dataset_id)} · ${esc(smp.chemistry || '—')} · ${Number(smp.rows).toLocaleString('en-US')} rows · ${smp.cells} cell${smp.cells === 1 ? '' : 's'} · ${smp.size_kb} KB</div>
+        <div class="qa-sample-note">${esc(smp.note || ('Channels: ' + cols.join(', ')))}</div>
+        <div class="qa-sample-actions">
+          <button class="prep-btn" type="button" onclick="qaRunSample(${i})">Assess</button>
+          <a class="prep-btn secondary" href="assets/examples/quality/${esc(smp.file)}" download>Download CSV</a>
+        </div>
+      </div>`;
+    }).join('');
+    grid.dataset.samples = JSON.stringify(samples);
+  } catch (err) {
+    grid.innerHTML = '<div class="qa-try-empty">Sample excerpts are not available (' + esc(err.message || 'load failed') + ').</div>';
+  }
+}
+
+async function qaRunSample(index) {
+  const grid = document.getElementById('qaSampleGrid');
+  let samples = [];
+  try { samples = JSON.parse(grid.dataset.samples || '[]'); } catch (_) { samples = []; }
+  const smp = samples[index];
+  if (!smp) return;
+  const card = grid.querySelectorAll('.qa-sample')[index];
+  if (card) card.classList.add('is-running');
+  try {
+    const res = await fetch('assets/examples/quality/' + smp.file, { cache: 'force-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const blob = await res.blob();
+    qaSelectedFile = new File([blob], smp.file, { type: 'text/csv' });
+    updateQualitySelectedFile();
+    runQualityAssessment();
+  } catch (err) {
+    showToast('Could not load sample: ' + (err.message || err), 'error');
+  } finally {
+    if (card) card.classList.remove('is-running');
+  }
+}
+
+async function qaLoadReportIndex() {
+  const select = document.getElementById('qaReportSelect');
+  if (!select || select.dataset.loaded) return;
+  select.dataset.loaded = '1';
+  try {
+    const res = await fetch('quality_reports/index.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const index = await res.json();
+    const rows = (Array.isArray(index) ? index : []).map(entry => {
+      const id = entry.catalog_id || entry.dataset_id;
+      const d = DATASETS.find(x => x.id === id || x.ref_name === entry.dataset_id);
+      return { id, label: (d ? d.name : entry.dataset_id), overall: entry.overall, warn: entry.warn_count };
+    }).filter(r => r.id).sort((a, b) => a.id.localeCompare(b.id));
+    rows.forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r.id;
+      opt.textContent = `${r.id} · ${r.label} · ${Number(r.overall).toFixed(2)}${r.warn ? ' · ' + r.warn + ' warn' : ''}`;
+      select.appendChild(opt);
+    });
+    if (!rows.length) select.innerHTML = '<option value="">No precomputed reports yet</option>';
+  } catch (err) {
+    select.innerHTML = '<option value="">Reports unavailable</option>';
+  }
+}
+
+function qaSelectCatalogReport(id) {
+  if (!id) return;
+  void showDatasetQuality(id);
+}
+window.qaRunSample = qaRunSample;
+window.qaSelectCatalogReport = qaSelectCatalogReport;
 
 async function assessQualityOnBackend(file, datasetId) {
   const form = new FormData();
@@ -6637,7 +6729,29 @@ function qaDiagIcon(status) {
 }
 
 function qaGateLabel(report) {
-  return report.gate === 'ready' ? 'Ready' : 'Ready with warning';
+  if (report.gate === 'ready') return 'Ready';
+  if (report.gate === 'needs_review') return 'Needs review';
+  return 'Ready with warning';
+}
+
+/** Human description of where a report came from (precomputed sample / browser / backend). */
+function qaSourceLabel(report, isExample) {
+  if (isExample && !report.source) return 'example values';
+  if (isExample) return 'example · ' + qaSourceLabel(report, false).replace(/<[^>]+>/g, '');
+  const m = report.metrics || {};
+  const rows = Number(m.n_rows || report.n_rows || 0);
+  const cells = Number(m.n_cells || 0);
+  const bits = [];
+  if (rows) bits.push(rows.toLocaleString('en-US') + ' rows');
+  if (cells > 1) bits.push(cells + ' cells');
+  if (report.source === 'browser') return '<strong>Analysed in your browser</strong>' + (bits.length ? ' · ' + bits.join(' · ') : '');
+  if (report.source === 'canonical_v2_sample') {
+    const smp = report.sample || {};
+    const shards = smp.shards_used && smp.shards_total ? smp.shards_used + '/' + smp.shards_total + ' shards' : '';
+    return '<strong>Precomputed from canonical v2 time series</strong>' + (bits.length ? ' · ' + bits.join(' · ') : '') + (shards ? ' · ' + shards : '');
+  }
+  if (report.source === 'python') return '<strong>Analysed by local backend</strong>' + (bits.length ? ' · ' + bits.join(' · ') : '');
+  return '<strong>Precomputed report</strong>' + (bits.length ? ' · ' + bits.join(' · ') : '');
 }
 
 function setQualityExampleMode(isExample) {
@@ -6680,13 +6794,16 @@ function renderQualityResults(report, options = {}) {
     const bar = card.querySelector('.qa-progress');
     if (bar) bar.style.setProperty('--score', Math.round(score * 100) + '%');
     const footVal = card.querySelectorAll('.qa-card-foot span')[1];
+    const m = report.metrics || null;
     if (footVal) {
-      if (dim === 'completeness') footVal.textContent = ((1 - score) * 100).toFixed(1) + '%';
-      if (dim === 'consistency') footVal.textContent = Math.max(0, Math.round((1 - score) * 55)) + ' flags';
+      if (dim === 'completeness') footVal.textContent = m ? (m.missing_pct.toFixed(1) + '%' + (m.channels_missing && m.channels_missing.length ? ' · ' + m.channels_missing.length + ' channel' + (m.channels_missing.length > 1 ? 's' : '') + ' absent' : '')) : ((1 - score) * 100).toFixed(1) + '%';
+      if (dim === 'consistency') footVal.textContent = (m ? m.sequence_flags : Math.max(0, Math.round((1 - score) * 55))) + ' flags';
       if (dim === 'accuracy') footVal.textContent = `${QA_CHECK_DEFS.length - report.warn_count} / ${QA_CHECK_DEFS.length} pass`;
-      if (dim === 'validity') footVal.textContent = String(Math.round((1 - score) * 20));
+      if (dim === 'validity') footVal.textContent = String(m ? m.schema_errors : Math.round((1 - score) * 20));
     }
   });
+  const sourceEl = document.getElementById('qaResultsSource');
+  if (sourceEl) sourceEl.innerHTML = qaSourceLabel(report, isExample);
 
   const ring = document.getElementById('qaOverallRing');
   if (ring) ring.style.setProperty('--pct', Math.round(report.overall * 100));
@@ -6698,7 +6815,7 @@ function renderQualityResults(report, options = {}) {
   [['qaOverallGateChip', 'qaOverallWarnChip'], ['qaGateChip', 'qaGateWarnChip']].forEach(([gateId, warnId]) => {
     const gateEl = document.getElementById(gateId);
     const warnEl = document.getElementById(warnId);
-    if (gateEl) gateEl.textContent = gateLabel;
+    if (gateEl) { gateEl.textContent = gateLabel; gateEl.classList.toggle('review', report.gate === 'needs_review'); }
     if (warnEl) { warnEl.style.display = report.warn_count ? '' : 'none'; warnEl.textContent = warnLabel; }
   });
 
@@ -6735,7 +6852,8 @@ function renderQualityResults(report, options = {}) {
     <span class="qa-line" data-dim="validity"><span class="k">"validity"</span>: <span class="n">${dims.validity.toFixed(2)}</span></span>
   },
   <span class="k">"overall"</span>: <span class="n">${report.overall.toFixed(2)}</span>,
-  <span class="k">"gate"</span>: "${report.gate}",
+  <span class="k">"gate"</span>: "${report.gate}",${report.metrics ? `
+  <span class="k">"metrics"</span>: { <span class="k">"n_rows"</span>: <span class="n">${Number(report.metrics.n_rows || 0)}</span>, <span class="k">"n_cells"</span>: <span class="n">${Number(report.metrics.n_cells || 1)}</span>, <span class="k">"missing_pct"</span>: <span class="n">${Number(report.metrics.missing_pct || 0)}</span>, <span class="k">"sequence_flags"</span>: <span class="n">${Number(report.metrics.sequence_flags || 0)}</span>, <span class="k">"schema_errors"</span>: <span class="n">${Number(report.metrics.schema_errors || 0)}</span> },` : ''}
   <span class="k">"checks"</span>: [
 ${checksJson}
   ],
@@ -6757,18 +6875,24 @@ function runQualityAssessment() {
   (async () => {
     const file = qaSelectedFile;
     const stem = String(file.name || '').replace(/\.[^.]+$/, '');
-    const match = DATASETS.find(d =>
-      d.id === stem ||
-      d.ref_name === stem ||
-      stem === d.id + '_timeseries' ||
-      stem === d.ref_name + '_timeseries'
-    );
+    const exact = DATASETS.find(d => d.id === stem || d.ref_name === stem ||
+      stem === d.id + '_quality_report' || stem === d.ref_name + '_quality_report');
+    const idPrefix = (stem.match(/^(dataset_\d{2,3})/) || [])[1];
+    const match = exact || DATASETS.find(d => d.id === idPrefix) ||
+      DATASETS.find(d => d.ref_name && stem.startsWith(d.ref_name));
     const datasetId = match ? match.id : stem;
 
-    // 1. Precomputed report for a catalog dataset.
-    let report = await loadQualityReport(stem);
-    if (!report && match) report = await loadQualityReport(match.id);
+    // 1. Precomputed report, only when the upload *is* the dataset / its report
+    //    (a sample excerpt must be analysed for real).
+    let report = null;
     let sourceLabel = 'precomputed report';
+    if (exact) report = await loadQualityReport(exact.id);
+    if (!report && qaFileExtension(file) === 'json') {
+      try {
+        const parsed = JSON.parse(await file.text());
+        if (parsed && parsed.quality_score && parsed.checks_detail) { report = parsed; sourceLabel = 'report file'; }
+      } catch (_) { /* not a report: fall through to analysis */ }
+    }
 
     // 2. Real analysis in the browser for text formats.
     if (!report && QA_BROWSER_EXTENSIONS.has(qaFileExtension(file))) {
@@ -6824,6 +6948,8 @@ function downloadQualityReport() {
     checks: report.checks,
     checks_detail: report.checks_detail,
     warn_count: report.warn_count,
+    metrics: report.metrics || undefined,
+    sample: report.sample || undefined,
     generated_at: report.generated_at,
     source: report.source || 'precomputed'
   };
@@ -6863,23 +6989,30 @@ async function showDatasetQuality(datasetId) {
 
   document.getElementById('qaCatalogSelect')?.closest('.qa-catalog-picker')?.remove();
 
+  void qaLoadSamples();
+  await qaLoadReportIndex();
+  const select = document.getElementById('qaReportSelect');
   const report = await loadQualityReport(datasetId);
   if (report) {
     qaLastReport = report;
     qaActiveDatasetId = datasetId;
     qaHasAssessed = true;
     qaPageInitialized = true;
+    if (select) select.value = report.dataset_id && select.querySelector(`option[value="${report.dataset_id}"]`) ? report.dataset_id : (select.querySelector(`option[value="${datasetId}"]`) ? datasetId : '');
     renderQualityResults(report, { isExample: false });
     document.getElementById('qaResults')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return report;
   }
-  showToast('No precomputed quality report for this dataset yet.', 'info');
+  if (select) select.value = '';
+  showToast('No precomputed quality report for this dataset yet. Datasets without canonical v2 time series are not assessed.', 'info', 5000);
   return null;
 }
 
 async function ensureQualityPageReady(datasetId) {
   // Remove any leftover catalog picker from earlier builds.
   document.getElementById('qaCatalogSelect')?.closest('.qa-catalog-picker')?.remove();
+  void qaLoadSamples();
+  void qaLoadReportIndex();
 
   // Deep-link / modal: load a real catalog report and clear the example label.
   if (datasetId) {
@@ -6897,8 +7030,11 @@ async function ensureQualityPageReady(datasetId) {
   if (qaPageInitialized && qaHasAssessed) return;
   qaPageInitialized = true;
   qaHasAssessed = false;
-  qaLastReport = QA_DEFAULT_REPORT;
-  renderQualityResults(QA_DEFAULT_REPORT, { isExample: true });
+  // Landing state: a real precomputed report, labelled as the example.
+  const example = await loadQualityReport(QA_LANDING_EXAMPLE_ID);
+  if (qaHasAssessed) return;   // the user assessed something while we were fetching
+  qaLastReport = example || QA_DEFAULT_REPORT;
+  renderQualityResults(qaLastReport, { isExample: true });
 }
 
 window.handleQualityFileInput = handleQualityFileInput;

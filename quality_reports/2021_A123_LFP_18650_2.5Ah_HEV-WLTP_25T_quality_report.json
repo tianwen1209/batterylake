@@ -1,31 +1,31 @@
 {
-  "dataset_id": "dataset_05",
-  "file_name": "canonical/time_series (16/1642 shards)",
-  "chemistry": "NMC",
-  "n_rows": 625445,
+  "dataset_id": "dataset_17",
+  "file_name": "canonical/time_series (20/1281 shards)",
+  "chemistry": "LFP",
+  "n_rows": 604215,
   "metrics": {
-    "n_rows": 625445,
-    "n_cells": 11,
+    "n_rows": 604215,
+    "n_cells": 3,
     "channels_present": [
       "voltage",
       "current",
+      "temperature",
       "timestamp"
     ],
     "channels_missing": [
-      "temperature",
       "capacity"
     ],
     "missing_pct": 0.0,
-    "sequence_flags": 1,
+    "sequence_flags": 14,
     "schema_errors": 0
   },
   "quality_score": {
-    "completeness": 0.8,
+    "completeness": 0.9,
     "consistency": 1.0,
-    "accuracy": 1.0,
+    "accuracy": 0.99,
     "validity": 1.0
   },
-  "overall": 0.95,
+  "overall": 0.97,
   "gate": "ready",
   "checks_detail": [
     {
@@ -34,7 +34,7 @@
       "detail": "All cell voltages within nominal operating range for the stated chemistry.",
       "status": "pass",
       "score": 1.0,
-      "note": "100.0% within 2.5-4.35V"
+      "note": "100.0% within 2.0-3.8V"
     },
     {
       "key": "energy_balance",
@@ -57,8 +57,8 @@
       "name": "Temperature Consistency",
       "detail": "Cell surface temperature stays within 5C of the stated test condition.",
       "status": "pass",
-      "score": null,
-      "note": "channel not available \u2014 skipped"
+      "score": 0.9834,
+      "note": "98.3% within +/-5C of 24.4C"
     },
     {
       "key": "timestamp_integrity",
@@ -66,7 +66,7 @@
       "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
       "status": "pass",
       "score": 1.0,
-      "note": "1 negative interval(s), 0 large gap(s)"
+      "note": "10 negative interval(s), 4 large gap(s)"
     },
     {
       "key": "current_direction",
@@ -74,7 +74,7 @@
       "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
       "status": "pass",
       "score": 1.0,
-      "note": "charge 48% / discharge 52% of non-zero samples"
+      "note": "charge 45% / discharge 55% of non-zero samples"
     }
   ],
   "checks": [
@@ -104,16 +104,16 @@
     }
   ],
   "warn_count": 0,
-  "generated_at": "2026-09-08T15:54:01Z",
+  "generated_at": "2026-09-08T15:54:30Z",
   "source": "canonical_v2_sample",
   "sample": {
-    "shards_total": 1642,
-    "shards_used": 16,
-    "rows_loaded": 625445,
+    "shards_total": 1281,
+    "shards_used": 20,
+    "rows_loaded": 604215,
     "rows_per_shard_cap": 50000,
     "note": "evenly spaced canonical time-series shards, leading rows per shard"
   },
-  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+  "ref_name": "2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T",
   "category": "cycle_aging",
   "processing_status": "needs_semantic_review"
 }
