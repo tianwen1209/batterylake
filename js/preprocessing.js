@@ -18,7 +18,6 @@
     { path: 'standard/README.md', view: 'standard', desc: 'BatteryLake processing standard v2.0.0 (English)' },
     { path: 'standard/README.zh-CN.md', view: 'standard-zh', desc: 'BatteryLake processing standard v2.0.0 (Chinese)' }
   ];
-  var VIEWER_URL = 'skill/?doc=';
 
   var AGENT_INSTALL = {
     claude: {
@@ -95,11 +94,11 @@
     if (!box) return;
     box.innerHTML = SKILL_FILES.map(function (f) {
       var size = state.fileSizes[f.path];
-      return '<a class="px-file" href="' + VIEWER_URL + f.view + '" title="Read ' + escapeHtml(f.path) + '">'
+      return '<div class="px-file">'
         + '<span class="px-file-name">' + escapeHtml(f.path) + '</span>'
         + '<span class="px-file-desc">' + escapeHtml(f.desc) + '</span>'
         + '<span class="px-file-size">' + (size ? fmtBytes(size) : '') + '</span>'
-        + '</a>';
+        + '</div>';
     }).join('');
   }
 
@@ -111,12 +110,11 @@
   }
 
   function loadFileSizes() {
-    SKILL_FILES.forEach(function (f) {
-      fetchSkillFile(f.path).then(function (text) {
+    Promise.all(SKILL_FILES.map(function (f) {
+      return fetchSkillFile(f.path).then(function (text) {
         state.fileSizes[f.path] = new TextEncoder().encode(text).length;
-        renderFiles();
       }).catch(function () { /* sizes are cosmetic */ });
-    });
+    })).then(renderFiles);
   }
 
   function installMd() {

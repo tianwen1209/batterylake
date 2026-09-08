@@ -39,9 +39,8 @@
 #page-preprocessing .px-file {
   display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) auto; gap: 14px; align-items: center;
   padding: 9px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg2, var(--bg));
-  text-decoration: none; color: inherit; transition: border-color .15s, background .15s;
+  color: inherit;
 }
-#page-preprocessing .px-file:hover { border-color: var(--accent); background: var(--accent-light); }
 #page-preprocessing .px-file-name { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--text1); }
 #page-preprocessing .px-file-desc { font-size: 12.5px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #page-preprocessing .px-file-size { font-family: var(--mono); font-size: 11.5px; color: var(--text4); min-width: 52px; text-align: right; }
