@@ -211,12 +211,11 @@
     var folder = folderFor(d);
     var ref = d && d.ref_name && d.ref_name !== '—' ? d.ref_name : '';
     var lines = [
-      'Use the batterylake-processing skill in this repository.',
-      'Dataset: Raw_Dataset/' + folder + '/' + id + (ref ? ' (' + ref + ')' : '') + '.',
-      'Output: Processed_Dataset/' + folder + '/' + id + '/.',
-      'Read Processed_Dataset_Standard/README.md and the dataset TODO.md first, then continue from the first unfinished gate in status.json.',
-      'Do not modify anything under Raw_Dataset. Preserve every source field in the canonical layer; do not resample, clean or guess labels there.',
-      'When you stop, report actual row counts, coverage, failures, unresolved semantics and the next step.'
+      'Use the batterylake-processing skill.',
+      'Dataset: Raw_Dataset/' + folder + '/' + id + (ref ? ' (' + ref + ')' : ''),
+      'Output:  Processed_Dataset/' + folder + '/' + id + '/',
+      'Read Processed_Dataset_Standard/README.md and the dataset TODO.md, then continue from the first unfinished gate in status.json.',
+      'Never modify Raw_Dataset. When you stop, report row counts, coverage, failures and the next step.'
     ];
     return lines.join('\n');
   }
@@ -234,8 +233,83 @@
     renderPrompt();
   }
   function renderPrompt() {
+    var d = selectedDataset();
     var pre = $('px-prompt');
-    if (pre) pre.textContent = buildPrompt(selectedDataset());
+    if (pre) pre.textContent = buildPrompt(d);
+    var folder = folderFor(d);
+    var id = d ? d.id : 'dataset_xx';
+    var pin = $('px-path-in'); if (pin) pin.textContent = 'Raw_Dataset/' + folder + '/' + id + '/';
+    var pout = $('px-path-out'); if (pout) pout.textContent = 'Processed_Dataset/' + folder + '/' + id + '/';
+  }
+
+  /* ── 2b. Output explorer ──────────────────────────────────── */
+  var OUTPUT_NODES = [
+    { key: 'root', depth: 0, dir: true, name: 'dataset_xx/', title: 'Processed_Dataset/<category>/dataset_xx/', desc: 'One output folder per dataset, next to the raw one. Everything the agent writes lands here; nothing is written back into Raw_Dataset.', chips: ['README.md', 'TODO.md', 'status.json', 'manifest.json'], gate: 'I' },
+    { key: 'status', depth: 1, name: 'status.json', title: 'status.json', desc: 'The scoreboard. Records the I / S / C / V / E stage results and the four status axes: conversion, canonical_validation, benchmark_validation, upstream_completeness.', chips: ['stages', 'conversion', 'canonical_validation', 'benchmark_validation'], gate: 'I → E' },
+    { key: 'inventory', depth: 1, name: 'source_inventory.csv', title: 'source_inventory.csv', desc: 'Every original file with its size and SHA-256, taken before conversion and re-checked afterwards.', chips: ['path', 'bytes', 'sha256'], gate: 'I' },
+    { key: 'manifest', depth: 1, name: 'manifest.json', title: 'manifest.json', desc: 'Catalogue of the outputs that actually exist: tables, shards, native objects, row counts, hashes and the command that produced them.', chips: ['tables', 'row_count', 'sha256', 'command'], gate: 'C' },
+    { key: 'mapping', depth: 1, name: 'field_mapping.json', title: 'field_mapping.json', desc: 'How each source column became a standard column: unit conversion, sign convention and the evidence for it. Unmapped fields are listed, not dropped.', chips: ['source_field', 'standard_column', 'unit', 'evidence'], gate: 'S' },
+    { key: 'canonical', depth: 1, dir: true, name: 'canonical/', title: 'canonical/', desc: 'The fidelity layer. Every source measurement and extra field, in original order and precision. No resampling, cleaning or label guessing happens here.', chips: ['source_tables/', 'time_series/', 'entities', 'cycles', 'labels', 'extras/', 'assets/'], gate: 'C · V' },
+    { key: 'entities', depth: 2, name: 'entities.parquet', title: 'canonical/entities.parquet', desc: 'Who was measured: cell, module or branch identities, aliases and the evidence linking records of the same physical cell.', chips: ['entity_id', 'cell_id', 'physical_cell_id', 'entity_kind'], gate: 'S' },
+    { key: 'source_tables', depth: 2, dir: true, name: 'source_tables/', title: 'canonical/source_tables/<source_id>/', desc: 'One Parquet table per source object with all original columns and a schema.json that records headers, sheet or object path and the mapping to standard columns.', chips: ['data.parquet', 'schema.json'], gate: 'C' },
+    { key: 'time_series', depth: 2, dir: true, name: 'time_series/', title: 'canonical/time_series/', desc: 'The common signal table projected from the source tables, sharded by source: voltage, current, temperature, capacities, energies and step types with a locator back to the source record.', chips: ['voltage_V', 'current_A', 'temperature_C', 'charge_capacity_Ah', 'source_locator'], gate: 'C' },
+    { key: 'cycles', depth: 2, name: 'cycles.parquet', title: 'canonical/cycles.parquet', desc: 'Cycles that could be identified reliably, including incomplete ones, with completeness and the aging axis when the source supports it.', chips: ['cycle_id', 'source_cycle_id', 'completeness', 'aging_cycle_count'], gate: 'S' },
+    { key: 'labels', depth: 2, name: 'labels.parquet', title: 'canonical/labels.parquet + label_links.parquet', desc: 'Author labels and derived labels kept apart, each with origin, method, reference capacity and availability time; links say which sample a label belongs to and how it was matched.', chips: ['label_links.parquet', 'capacity', 'soh', 'rul', 'eol', 'origin', 'censoring_type'], gate: 'S · V' },
+    { key: 'extras', depth: 2, dir: true, name: 'extras/ + assets/', title: 'canonical/extras/ + assets/', desc: 'Typed arrays, nested objects and raw representations that do not fit a table, plus protocols, PDFs, code and videos kept for provenance.', chips: ['dtype', 'shape', 'storage_path', 'protocol.pdf'], gate: 'C' },
+    { key: 'views', depth: 1, dir: true, name: 'views/<profile_id>/', title: 'views/<profile_id>/', desc: 'One task view per benchmark profile: which samples, inputs and targets are used, with fixed splits. Each profile names its SOH reference and EOL definition explicitly.', chips: ['profile.json', 'sample_index.parquet', 'splits.csv'], gate: 'E' },
+    { key: 'validation', depth: 1, dir: true, name: 'validation/', title: 'validation/', desc: 'Conversion checks, not a machine-learning validation set: coverage, record-by-record fidelity reports and per-profile benchmark equivalence reports.', chips: ['coverage.json', 'fidelity.json', 'benchmark_<profile>.json'], gate: 'V · E' }
+  ];
+  var outputSelected = 'canonical';
+  function renderOutputTree() {
+    var box = $('px-out-tree');
+    if (!box) return;
+    function isLast(i) {
+      var d = OUTPUT_NODES[i].depth;
+      for (var k = i + 1; k < OUTPUT_NODES.length; k++) {
+        if (OUTPUT_NODES[k].depth < d) return true;
+        if (OUTPUT_NODES[k].depth === d) return false;
+      }
+      return true;
+    }
+    function parentIndex(i) {
+      for (var k = i - 1; k >= 0; k--) if (OUTPUT_NODES[k].depth < OUTPUT_NODES[i].depth) return k;
+      return -1;
+    }
+    box.innerHTML = OUTPUT_NODES.map(function (n, i) {
+      var branch = '';
+      if (n.depth >= 1) {
+        var p = parentIndex(i);
+        var prefix = n.depth === 2 ? (isLast(p) ? '    ' : '│   ') : '';
+        branch = prefix + (isLast(i) ? '└── ' : '├── ');
+      }
+      var icon = n.dir
+        ? '<svg class="px-out-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>'
+        : '<svg class="px-out-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>';
+      return '<div class="px-out-row' + (n.dir ? ' is-dir' : '') + (n.key === outputSelected ? ' active' : '') + '" role="option" tabindex="0" data-key="' + n.key + '" aria-selected="' + (n.key === outputSelected) + '">'
+        + '<span class="px-out-branch">' + branch + '</span>' + icon + '<span class="px-out-name">' + escapeHtml(n.name) + '</span></div>';
+    }).join('');
+    Array.prototype.forEach.call(box.querySelectorAll('.px-out-row'), function (row) {
+      row.addEventListener('click', function () { selectOutput(row.dataset.key); });
+      row.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOutput(row.dataset.key); } });
+    });
+    renderOutputDetail();
+  }
+  function selectOutput(key) {
+    outputSelected = key;
+    Array.prototype.forEach.call(document.querySelectorAll('#px-out-tree .px-out-row'), function (row) {
+      var on = row.dataset.key === key;
+      row.classList.toggle('active', on);
+      row.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    renderOutputDetail();
+  }
+  function renderOutputDetail() {
+    var box = $('px-out-detail');
+    var n = OUTPUT_NODES.find(function (m) { return m.key === outputSelected; });
+    if (!box || !n) return;
+    box.innerHTML = '<h4>' + escapeHtml(n.title) + '</h4><p>' + escapeHtml(n.desc) + '</p>'
+      + '<div class="px-out-chips">' + n.chips.map(function (c) { return '<span>' + escapeHtml(c) + '</span>'; }).join('') + '</div>'
+      + '<span class="px-out-gate">Produced at gate <b>' + escapeHtml(n.gate) + '</b></span>';
   }
 
   /* ── 3. Copy helper ───────────────────────────────────────── */
@@ -432,6 +506,7 @@
     loadFileSizes();
     setAgent(state.agent);
     renderDatasetOptions();
+    renderOutputTree();
     renderStatus();
     initDropZone();
   }

@@ -1491,61 +1491,97 @@ bash run_benchmark.sh</pre>
     <section class="px-section px-run reveal" aria-labelledby="px-run-title">
       <div class="px-section-head">
         <span class="px-kicker">Run it</span>
-        <h2 id="px-run-title">Point the agent at a dataset</h2>
-        <p>Pick a catalog dataset to fill in the prompt, or edit the paths for your own <code>dataset_xx</code>. The agent reads the standard and the dataset TODO first, then resumes from the first unfinished gate.</p>
+        <h2 id="px-run-title">Three steps from raw files to a processed dataset</h2>
       </div>
-      <div class="px-run-grid">
-        <div class="px-run-left">
-          <label class="px-label" for="px-dataset-select">Dataset</label>
-          <select class="px-select" id="px-dataset-select" onchange="BatteryLakePreprocessing.renderPrompt()"></select>
+      <ol class="px-steps">
+        <li class="px-step">
+          <div class="px-step-head"><span class="px-step-num">1</span><strong>Choose a dataset</strong></div>
+          <select class="px-select" id="px-dataset-select" onchange="BatteryLakePreprocessing.renderPrompt()" aria-label="Dataset"></select>
+          <div class="px-paths">
+            <div class="px-path"><span class="px-path-k">in</span><code id="px-path-in">Raw_Dataset/…</code></div>
+            <div class="px-path-arrow" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+            <div class="px-path is-out"><span class="px-path-k">out</span><code id="px-path-out">Processed_Dataset/…</code></div>
+          </div>
+        </li>
+        <li class="px-step">
+          <div class="px-step-head"><span class="px-step-num">2</span><strong>Paste the prompt to your agent</strong></div>
           <div class="px-code-wrap">
-            <button class="px-copy" type="button" onclick="BatteryLakePreprocessing.copy('px-prompt', this)">Copy prompt</button>
+            <button class="px-copy" type="button" onclick="BatteryLakePreprocessing.copy('px-prompt', this)">Copy</button>
             <pre class="px-code px-prompt" id="px-prompt"></pre>
           </div>
-        </div>
-        <div class="px-run-right">
-          <div class="px-mini-title">Expected repository layout</div>
-          <pre class="px-tree">BatteryLake/
-├── Raw_Dataset/&lt;category&gt;/dataset_xx/     original files, read-only
-├── Processed_Dataset/&lt;category&gt;/dataset_xx/   skill output
-├── Processed_Dataset_Standard/           standard + skill
-└── scripts/processing/                   adapters, loader</pre>
-          <div class="px-mini-title">While it runs</div>
-          <ul class="px-list">
-            <li>Progress is written to <code>status.json</code> and <code>TODO.md</code> in the dataset output folder.</li>
-            <li>Expensive steps are resumed, not repeated, when input, code and schema fingerprints match.</li>
-            <li>Source files are never modified; undecodable measurements are reported, not faked.</li>
+          <p class="px-step-note">The agent reads the standard and the dataset TODO, then continues from the first unfinished gate.</p>
+        </li>
+        <li class="px-step">
+          <div class="px-step-head"><span class="px-step-num">3</span><strong>Watch it work</strong></div>
+          <ul class="px-facts">
+            <li>
+              <span class="px-fact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
+              <span><strong>Progress lives in <code>status.json</code></strong>one line per gate, plus <code>TODO.md</code></span>
+            </li>
+            <li>
+              <span class="px-fact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg></span>
+              <span><strong>Interrupted runs resume</strong>finished steps are skipped when fingerprints match</span>
+            </li>
+            <li>
+              <span class="px-fact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span>
+              <span><strong>Raw files stay untouched</strong>undecodable data is reported, never invented</span>
+            </li>
           </ul>
-        </div>
-      </div>
+          <a class="px-step-link" href="#preprocessing" onclick="document.getElementById('px-verify-title').scrollIntoView({behavior:'smooth'});return false;">Check the result below
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </a>
+        </li>
+      </ol>
     </section>
 
-    <!-- 4 · Output + rules -->
+    <!-- 4 · Output explorer + rules -->
     <section class="px-section px-two reveal" aria-label="Outputs and rules">
-      <div class="px-card">
-        <div class="px-mini-title">What the skill produces</div>
-        <pre class="px-tree">Processed_Dataset/&lt;category&gt;/dataset_xx/
-├── README.md · TODO.md · status.json
-├── source_inventory.csv · manifest.json · field_mapping.json
-├── canonical/
-│   ├── entities.parquet · experiments.parquet
-│   ├── source_tables/      every source field, original order
-│   ├── time_series/        voltage_V, current_A, temperature_C, …
-│   ├── cycles.parquet · labels.parquet · label_links.parquet
-│   └── extras/ · assets/   arrays, objects, protocols, documents
-├── views/&lt;profile_id&gt;/    profile.json, sample_index, splits
-└── validation/             coverage, fidelity, benchmark reports</pre>
-        <p class="px-card-note">Status is reported on four separate axes: <code>conversion</code>, <code>canonical_validation</code>, <code>benchmark_validation</code> and <code>upstream_completeness</code>. There is no single "done" flag.</p>
+      <div class="px-card px-explorer">
+        <div class="px-card-head">
+          <div class="px-mini-title">What the skill produces</div>
+          <span class="px-card-hint">click an item</span>
+        </div>
+        <div class="px-explorer-body">
+          <div class="px-out-tree" id="px-out-tree" role="listbox" aria-label="Output files"></div>
+          <div class="px-out-detail" id="px-out-detail"></div>
+        </div>
       </div>
       <div class="px-card">
-        <div class="px-mini-title">Rules the skill never skips</div>
-        <ul class="px-rules">
-          <li><strong>Identify containers by content.</strong> Magic bytes, complete payloads and EOF are checked; a <code>.pkl</code> may hold several streams.</li>
-          <li><strong>No cleaning in the fidelity layer.</strong> No resampling, interpolation, clipping, float32 down-casting or removal of diagnostics; those belong to a named task view.</li>
-          <li><strong>Capacities are different quantities.</strong> Health capacity, partial-DoD throughput, RPT capacity, rated capacity and author SOH are kept apart; unclear labels are withheld, never guessed.</li>
-          <li><strong>EOL is an observed event.</strong> The last row is not EOL; sparse RPTs may only bound an interval, and censoring is recorded.</li>
-          <li><strong>No leakage across splits.</strong> The same physical cell, duplicate copies and overlapping windows stay on one side; scalers fit on training data only.</li>
-          <li><strong>Stages are distinct.</strong> <code>inventoried</code>, <code>converted</code>, <code>canonical_validated</code> and <code>benchmark_verified</code> advance only with their own evidence.</li>
+        <div class="px-card-head">
+          <div class="px-mini-title">Rules the skill never skips</div>
+          <span class="px-card-hint">click to expand</span>
+        </div>
+        <ul class="px-rules" id="px-rules">
+          <li class="px-rule" onclick="this.classList.toggle('open')">
+            <span class="px-rule-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></span>
+            <span class="px-rule-title">Identify files by content</span>
+            <span class="px-rule-body">Magic bytes, complete payloads and EOF are checked. A <code>.pkl</code> may hold several streams; extensions are only a hint.</span>
+          </li>
+          <li class="px-rule" onclick="this.classList.toggle('open')">
+            <span class="px-rule-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+            <span class="px-rule-title">No cleaning in the fidelity layer</span>
+            <span class="px-rule-body">No resampling, interpolation, clipping, float32 down-casting or dropped diagnostics. Those belong to a named task view.</span>
+          </li>
+          <li class="px-rule" onclick="this.classList.toggle('open')">
+            <span class="px-rule-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10h2a1 1 0 011 1v2a1 1 0 01-1 1h-2M7 10v4M11 10v4"/></svg></span>
+            <span class="px-rule-title">Capacities are not interchangeable</span>
+            <span class="px-rule-body">Health capacity, partial-DoD throughput, RPT capacity, rated capacity and author SOH stay separate. Unclear labels are withheld, not guessed.</span>
+          </li>
+          <li class="px-rule" onclick="this.classList.toggle('open')">
+            <span class="px-rule-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19L20 5M4 5v14h14"/><circle cx="16" cy="9" r="2"/></svg></span>
+            <span class="px-rule-title">EOL is an observed event</span>
+            <span class="px-rule-body">The last row is not EOL. Sparse RPTs may only bound an interval, and right-censoring is recorded instead of a fake RUL.</span>
+          </li>
+          <li class="px-rule" onclick="this.classList.toggle('open')">
+            <span class="px-rule-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v18M3 12h18"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>
+            <span class="px-rule-title">No leakage across splits</span>
+            <span class="px-rule-body">The same physical cell, duplicate copies and overlapping windows stay on one side; scalers are fit on training data only.</span>
+          </li>
+          <li class="px-rule" onclick="this.classList.toggle('open')">
+            <span class="px-rule-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16M4 12h10M4 18h6"/><path d="M17 15l2 2 4-4"/></svg></span>
+            <span class="px-rule-title">Gates advance only with evidence</span>
+            <span class="px-rule-body"><code>inventoried</code>, <code>converted</code>, <code>canonical_validated</code> and <code>benchmark_verified</code> are separate; none is inferred from the one before.</span>
+          </li>
         </ul>
       </div>
     </section>
