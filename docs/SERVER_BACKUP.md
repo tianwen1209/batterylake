@@ -2,6 +2,8 @@
 
 [中文](SERVER_BACKUP.zh-CN.md)
 
+After every completed website modification, run the relevant checks and immediately commit and push the changes to GitHub, verifying the remote commit. The owner has explicitly authorized this workflow; do not wait for the scheduled run. The daily 09:00 backup remains an additional safeguard. See [repository instructions](../AGENTS.md).
+
 The website repository is cloned at `/home/zhutianwen/batterylake`, with `origin` set to `git@github.com:tianwen1209/batterylake.git` and branch `main`. This is separate from the battery data repository at `/home/zhutianwen/BatteryLake2026`.
 
 One-time setup: add `/home/zhutianwen/.ssh/id_ed25519_batterylake_web.pub` to this repository's [Deploy keys](https://github.com/tianwen1209/batterylake/settings/keys) and enable **Allow write access**. The server's previous deploy key cannot write to this repository. Scheduling is installed, but uploads require this authorization. The dedicated private key stays outside the repository, and both this script and local Git configuration select it explicitly. See [GitHub's deploy-key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys).

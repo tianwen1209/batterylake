@@ -2,6 +2,8 @@
 
 [English](SERVER_BACKUP.md)
 
+每次网页修改完成并通过相应检查后，立即提交并推送 GitHub，并核对远程提交号。用户已明确授权此流程，无需再次确认，也不等待定时任务。每天 09:00 自动备份继续作为补充保障。详见[仓库协作规则](../AGENTS.md)。
+
 网页仓库克隆在 `/home/zhutianwen/batterylake`，远程地址为 `git@github.com:tianwen1209/batterylake.git`，分支为 `main`。它与 `/home/zhutianwen/BatteryLake2026` 中的数据仓库独立。
 
 首次启用需要将 `/home/zhutianwen/.ssh/id_ed25519_batterylake_web.pub` 添加到该仓库的 [Deploy keys](https://github.com/tianwen1209/batterylake/settings/keys)，并勾选 **Allow write access**。服务器原有部署密钥无权写入此仓库。定时配置已经安装，但上传需要先完成这一步。专用私钥保存在仓库之外，备份脚本和本地 Git 配置均显式使用该密钥。详见 [GitHub 部署密钥说明](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)。
