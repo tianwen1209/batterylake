@@ -18,8 +18,12 @@
  *   'local'        Built-in knowledge base only, no network calls.
  */
 window.BATTERYLAKE_AI_CONFIG = {
-  provider: 'auto',
-  apiKey: '',
+  provider: 'gemini',
+  // Free-tier Gemini key owned by the BatteryLake team. Google does not allow
+  // website restrictions on Gemini keys, so it is public by design; the
+  // project has no billing account, so abuse can only exhaust the daily quota
+  // (the widget then falls back to the built-in knowledge base).
+  apiKey: 'AQ.Ab8RN6L9uS2gJwr8e3lZ0xFL5mC7XHuWCRMD2VHfSBRGuj1xVw',
   model: 'gemini-flash-lite-latest',
   endpoint: '',
   timeoutMs: 20000
