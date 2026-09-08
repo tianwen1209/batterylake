@@ -48,7 +48,8 @@
     provider: null,          // resolved provider id
     ready: false,
     probing: null,           // promise while probing a remote provider
-    dead: new Set(),         // providers that failed this session
+    dead: new Set(),         // providers that failed permanently this session
+    cooldownUntil: {},       // provider -> timestamp until which it is skipped
     history: []              // [{role:'user'|'assistant', text}]
   };
 
@@ -218,9 +219,11 @@
   }
   function systemPrompt(question) {
     const ctx = KB ? KB.context(question) : '';
+    const zh = KB && typeof KB.isChinese === 'function' ? KB.isChinese(question) : /[\u3400-\u9fff]/.test(question);
     return [
       'You are the BatteryLake AI Assistant embedded in the BatteryLake website (battery aging datasets, SOH/RUL benchmarking).',
-      'Answer the user\'s latest message in the same language the user wrote it in (Chinese or English).',
+      zh ? 'The user wrote in Chinese: answer in Chinese (简体中文).' : 'The user wrote in English: answer in English only.',
+      'Quote numbers exactly as given in the context (e.g. 55,300 cycles), never rescale them.',
       'Be concise: at most about 150 words, plain sentences or short "- " bullet lists; no headings, no tables.',
       'Use only the site context below for facts about BatteryLake; if the context does not cover something, say so and point to the relevant page. General battery knowledge is fine.',
       'When you mention a page, link it in markdown using its hash, e.g. [Datasets](#datasets), [Preprocessing](#preprocessing). Link datasets as [Name](dataset:dataset_id).',
@@ -233,8 +236,13 @@
     return state.history.slice(-8).map(m => ({ role: m.role, content: m.text }));
   }
 
-  async function askGemini(question) {
-    const model = CONFIG.model || 'gemini-2.5-flash-lite';
+  const GEMINI_FALLBACK_MODELS = ['gemini-flash-lite-latest', 'gemini-flash-latest', 'gemini-3.5-flash-lite'];
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  function isTransient(status, message) {
+    return status === 429 || status === 503 || status === 500 || status === 502 || status === 504 || /high demand|overloaded|temporar|quota|rate/i.test(message || '');
+  }
+
+  async function askGeminiModel(question, model) {
     const url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(CONFIG.apiKey);
     const contents = historyMessages().map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] }));
     contents.push({ role: 'user', parts: [{ text: question }] });
@@ -242,13 +250,38 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt(question) }] }, contents, generationConfig: { temperature: 0.3, maxOutputTokens: 600 } })
-    });
+    }, 15000);
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error((data.error && data.error.message) || ('Gemini HTTP ' + res.status));
+    if (!res.ok) {
+      const err = new Error((data.error && data.error.message) || ('Gemini HTTP ' + res.status));
+      err.status = res.status;
+      err.transient = isTransient(res.status, err.message);
+      throw err;
+    }
     const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
     const text = parts.map(p => p.text || '').join('').trim();
     if (!text) throw new Error('Gemini returned no text');
     return text;
+  }
+
+  /* Try the configured model, then the fallback models; retry transient
+     "high demand" / rate-limit answers once before giving up. */
+  async function askGemini(question) {
+    const models = [CONFIG.model].concat(GEMINI_FALLBACK_MODELS).filter((m, i, a) => m && a.indexOf(m) === i);
+    let lastErr = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      for (const model of models) {
+        try {
+          return await askGeminiModel(question, model);
+        } catch (err) {
+          lastErr = err;
+          if (err.name === 'AbortError') { err.transient = true; continue; }
+          if (!err.transient) throw err;       // bad key, blocked model, etc.: no point retrying
+        }
+      }
+      await sleep(1200);
+    }
+    throw lastErr || new Error('Gemini unavailable');
   }
 
   async function askOpenAI(question, url, opts = {}) {
@@ -357,14 +390,26 @@
     return state.probing;
   }
   function applyProviderStatus() {
-    const l = PROVIDER_LABELS[state.provider] || PROVIDER_LABELS.local;
+    const active = remoteAvailable(state.provider) ? state.provider : 'local';
+    const l = PROVIDER_LABELS[active] || PROVIDER_LABELS.local;
+    if (active === 'local' && state.provider !== 'local' && state.cooldownUntil[state.provider] > Date.now()) {
+      setStatus('busy', l.subtitle, 'Model busy · retrying shortly');
+      return;
+    }
     setStatus('online', l.subtitle, l.status);
   }
-  function demoteProvider(reason) {
-    state.dead.add(state.provider);
-    console.warn('AI assistant: ' + state.provider + ' unavailable (' + reason + '); using built-in knowledge base.');
-    state.provider = 'local';
+  /* A failed remote call parks the provider for a cooldown instead of the whole
+     session, so a temporary "high demand" answer does not disable the model. */
+  const COOLDOWN_MS = 90000;
+  function demoteProvider(reason, transient) {
+    console.warn('AI assistant: ' + state.provider + ' unavailable (' + reason + '); using built-in knowledge base' + (transient ? ' for a while.' : '.'));
+    if (transient) state.cooldownUntil[state.provider] = Date.now() + COOLDOWN_MS;
+    else state.dead.add(state.provider);
     applyProviderStatus();
+  }
+  function remoteAvailable(provider) {
+    if (!provider || provider === 'local' || state.dead.has(provider)) return false;
+    return !(state.cooldownUntil[provider] > Date.now());
   }
 
   /* ── answering ─────────────────────────────────────────────────── */
@@ -377,12 +422,14 @@
     // Do not wait more than a moment for the initial probe; the knowledge base can answer immediately.
     await Promise.race([ensureProvider(), new Promise(resolve => setTimeout(resolve, 1500))]);
     const provider = state.ready ? state.provider : 'local';
-    if (provider === 'local' || state.dead.has(provider)) return localAnswer(question);
+    if (!remoteAvailable(provider)) return localAnswer(question);
     try {
       const text = await askRemote(provider, question);
+      if (state.cooldownUntil[provider]) { delete state.cooldownUntil[provider]; applyProviderStatus(); }
       return { text, source: provider };
     } catch (err) {
-      demoteProvider(err && err.message ? err.message : 'error');
+      const msg = err && err.message ? err.message : 'error';
+      demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg));
       return localAnswer(question);
     }
   }

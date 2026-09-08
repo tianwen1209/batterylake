@@ -463,7 +463,7 @@
     var filtered = filterDatasets(query);
     var picks = (found && found.items) || (filtered && filtered.items) || [];
     picks.slice(0, 5).forEach(function (d) {
-      lines.push('Dataset ' + d.id + ' "' + d.name + '" ref_name=' + d.ref_name + ' chemistry=' + d.chemistry + ' form=' + d.form + ' cells=' + d.cells + ' cycles=' + (d.cycles || 'n/a') + ' source_volume=' + fmtGB(d.size_mb) + ' category=' + d.category + ' status=' + d.status + (d.notes ? ' notes=' + d.notes : ''));
+      lines.push('Dataset ' + d.id + ' "' + d.name + '": ref_name=' + d.ref_name + '; chemistry=' + d.chemistry + '; form=' + d.form + '; cells=' + (String(d.cells || '').trim() || 'n/a') + '; cycles=' + (Number(d.cycles) ? fmtInt(d.cycles) : 'n/a') + '; source_volume=' + fmtGB(d.size_mb) + '; category=' + (CATEGORY_LABELS[d.category] || d.category) + '; status=' + (STATUS_LABELS[d.status] || d.status) + (d.notes ? '; notes=' + d.notes : ''));
     });
     if (filtered && filtered.items.length > 5) lines.push('(' + filtered.items.length + ' datasets match the filter in total.)');
     return lines.join('\n');
