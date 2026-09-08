@@ -1295,11 +1295,6 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   transform: translateY(20px); opacity: 0; pointer-events: none; transition: .25s ease;
 }
 .prep-toast.show { transform: translateY(0); opacity: 1; }
-#page-preprocessing > .page-header,
-#page-preprocessing > .pipeline-flow,
-#page-preprocessing > .preproc-grid,
-#page-preprocessing > h3,
-#page-preprocessing > .model-table { display: none; }
 .prep-shell { max-width: none; margin-top: 0; }
 .prep-kicker { display: none; }
 .prep-title { font-family: var(--sans); font-size: 23px; margin-top: 0; font-weight: 750; letter-spacing: -.01em; }

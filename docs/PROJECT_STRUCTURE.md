@@ -45,6 +45,7 @@ Contains the app stylesheets, loaded by `index.html`.
 
 - `styles/base.css`: original global styles and many page-level styles, including layout, sidebar, topbar, dataset cards, modals, quality/preprocessing/API/contribute pages, toast states, and AI assistant styling. The name is acceptable for now, but this file is broader than pure "base" styles.
 - `styles/benchmark.css`: Benchmark workspace styles, mostly scoped to `#page-benchmarks` and `.bw-*` classes. Keep this separate because the Benchmark page is a dense workflow with its own wizard, dataset picker, model picker, split controls, package UI, and results views.
+- `styles/preprocessing.css`: styles for the redesigned Preprocessing page (`px-*` classes).
 - `styles/polish.css`: current override/refinement layer, including design tokens, dark mode token overrides, visual polish, card/button/table refinements, page-specific visual updates, and final layout fixes. This file intentionally loads after the other CSS files so it can refine existing styles.
 
 `polish.css` may eventually be renamed or split into smaller files such as `theme.css`, `components.css`, and `pages.css`, but avoid doing that until the UI has stabilized.
@@ -55,6 +56,8 @@ Contains the app scripts, loaded by `index.html`.
 - `js/theme-init.js`: runs early and sets the initial light/dark theme on `document.documentElement` to prevent theme flicker.
 - `js/main.js`: main application logic, including dataset loading/parsing, filters, search, page navigation, theme toggling, modals, preprocessing tools, Benchmark workflow/package generation/results, and model library behavior.
 - `js/assistant.js`: floating AI assistant widget behavior, including open/close state, message rendering, local history, suggestions, and placeholder backend calls.
+- `js/preprocessing.js`: Preprocessing page (redesigned 2026-09-08). Zips the `batterylake-processing` agent skill from `assets/skills/`, builds the per-dataset agent prompt, and renders a dataset's `status.json` against the five acceptance gates. The previous wizard is archived under `archive/preprocessing-20260908/` and tagged `preprocessing-20260908`.
+- `js/quality-engine.js`: browser port of `quality/quality_assessment.py` used by the Quality Assessment page.
 
 `main.js` is intentionally still the central logic file for now. It can be split later by domain after the UI and workflows are stable.
 
@@ -69,6 +72,9 @@ Contains partner and institution logos shown on the home page.
 
 ### `assets/logos/models/`
 Contains model library logos named `1.png` through `8.png`, plus matching `dark/` variants. Some paths are referenced dynamically from `js/main.js`, so rename these carefully.
+
+### `assets/skills/batterylake-processing/`
+The agent skill served by the Preprocessing page: `SKILL.md`, `references/schema.md`, `references/equivalence.md`, and the processing standard under `standard/`. Mirror of `Processed_Dataset_Standard/skills/batterylake-processing` in the BatteryLake data repository; update both together.
 
 ### `assets/vendor/`
 Contains third-party browser dependencies served locally. Currently this is `papaparse.min.js`.

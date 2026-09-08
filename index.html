@@ -24,6 +24,8 @@
 <link rel="stylesheet" href="styles/polish.css">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css">
+<!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
+<link rel="stylesheet" href="styles/preprocessing.css">
 </head>
 <body>
 <div class="app">
@@ -1373,305 +1375,198 @@ bash run_benchmark.sh</pre>
        PAGE: PREPROCESSING
        ═══════════════════════════════════════ -->
   <div class="page" id="page-preprocessing">
-    <div class="prep-shell">
-      <div class="page-header quality-page-hero visual-page-hero prep-page-hero">
-        <div class="page-title">Preprocessing</div>
-        <div class="page-desc">Convert raw battery data or source evidence into BatteryLake-ready preprocessing outputs.</div>
-        <img class="preprocessing-hero-art visual-page-hero-art" src="assets/images/preprocessing-hero-transparent.png" alt="" aria-hidden="true">
-      </div>
-
-      <div class="prep-steps" aria-label="Preprocessing workflow">
-        <div class="prep-step active" data-stage-nav="1" onclick="showPrepStage(1)"><span class="prep-step-num">1</span><span class="prep-step-label">Upload Dataset</span></div>
-        <div class="prep-step" data-stage-nav="2" onclick="showPrepStage(2)"><span class="prep-step-num">2</span><span class="prep-step-label">Review &amp; Edit Metadata</span></div>
-        <div class="prep-step" data-stage-nav="3" onclick="showPrepStage(3)"><span class="prep-step-num">3</span><span class="prep-step-label">Download Preprocessing Skill</span></div>
-        <div class="prep-step" data-stage-nav="4" onclick="showPrepStage(4)"><span class="prep-step-num">4</span><span class="prep-step-label">Upload Report &amp; Verification</span></div>
-      </div>
-
-      <section class="prep-card prep-stage active" data-prep-stage="1">
-        <div class="prep-card-body">
-          <div class="prep-step1-tasks">
-            <section class="prep-task-section" id="rawTaskPanel" aria-labelledby="rawTaskTitle">
-              <div class="prep-task-section-head">
-                <div class="prep-card-title" id="rawTaskTitle">Task 1: Upload raw measurement data</div>
-                <div class="prep-card-desc"><span>Input: Raw measurement files</span><span>Output: *_timeseries.csv + *_cycle_summary.csv</span></div>
-              </div>
-              <div class="prep-task-section-body source-grid">
-                <div>
-              <label class="drop-zone" id="prepDropZone" for="prepFileInput">
-                <input id="prepFileInput" type="file" multiple hidden onchange="handlePrepFileInput(event)">
-                <input id="prepFolderInput" type="file" multiple webkitdirectory directory hidden onchange="handlePrepFileInput(event)">
-                <span class="drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
-                <span><span class="drop-title">Choose or drop almost any raw file or folder</span></span>
-              </label>
-              <div class="prep-selected-files" id="prepSelectedFiles">No files queued.</div>
-              <div style="margin-top:10px;"><button class="prep-btn secondary" type="button" onclick="document.getElementById('prepFolderInput').click()">Choose folder</button></div>
-              <div class="source-or">or provide a path accessible to your AI agent</div>
-              <div class="path-row">
-                <input class="prep-input" id="prepPath" value="" placeholder="Paste a real local file or folder path, e.g. C:\Users\41604\Downloads\data.json" aria-label="Dataset path">
-                <button class="prep-btn" type="button" onclick="runPrepFileInspection()">Run AI inspection</button>
-                <button class="prep-btn secondary" type="button" onclick="runPrepInspection()">Inspect path</button>
-              </div>
-                </div>
-                <aside class="inspect-scope">
-                  <div class="scope-title">The AI checks first</div>
-                  <ul class="scope-list">
-                    <li>Folder structure and filenames</li><li>Sheets, MAT keys and nested fields</li><li>Headers, units and sample rows</li><li>Context, schema and validator files</li><li>Existing output directory contents</li>
-                  </ul>
-                  <p class="privacy-note">Full files are not loaded into the browser. The generated skill instructs the local agent to inspect and process them in place.</p>
-                </aside>
-              </div>
-            </section>
-            <section class="prep-task-section" id="metadataTaskPanel" aria-labelledby="metadataTaskTitle">
-              <div class="prep-task-section-head">
-                <div class="prep-card-title" id="metadataTaskTitle">Task 2: Metadata extraction</div>
-                <div class="prep-card-desc"><span>Input: Source URLs, GitHub repos, DOI pages and papers</span><span>Output: dataset_metadata.csv + source evidence</span></div>
-              </div>
-              <div class="prep-task-section-body ai-agent-strip">
-              <div class="ai-agent-copy">
-                <div class="ai-agent-sub">Start with the dataset source URL. The agent checks what the source page can support, reports missing BatteryLake fields, then uses an optional paper URL to fill the gaps before you manually confirm the final metadata.</div>
-                <div class="metadata-flow-grid">
-                  <div>
-                    <div class="metadata-step-label">Step A - dataset source URL</div>
-                    <div class="path-row">
-                      <input class="prep-input" id="metadataSourceUrl" value="" placeholder="Paste dataset source page, GitHub, DOI, OSF, Zenodo or Mendeley URL">
-                      <button class="prep-btn" type="button" onclick="runMetadataSourceCheck()">Check source URL</button>
-                    </div>
-                    <div class="metadata-help">Use the official dataset page first. Missing fields stay marked as "Source page not stated".</div>
-                  </div>
-                  <div id="metadataPaperStep">
-                    <div class="metadata-step-label">Step B - paper URL for missing fields</div>
-                    <div class="path-row">
-                      <input class="prep-input" id="metadataPaperUrl" value="" placeholder="Paste paper URL / DOI when the source page is incomplete">
-                      <button class="prep-btn secondary" type="button" onclick="runMetadataPaperCheck()">Use paper to fill gaps</button>
-                    </div>
-                    <div class="metadata-help">Only fields that are still missing or lower-confidence will be replaced by paper-supported values.</div>
-                  </div>
-                </div>
-                <div class="metadata-missing-summary" id="metadataMissingSummary">No source URL has been checked yet.</div>
-                <div class="metadata-result-panel" id="metadataResultPanel">
-                  <div class="metadata-result-head">
-                    <div>
-                      <div class="metadata-result-title">dataset_metadata.csv draft</div>
-                      <div class="metadata-help" id="metadataResultSubtitle">Review every field and confirm before downloading.</div>
-                    </div>
-                    <button class="prep-btn secondary" id="metadataDownloadBtn" type="button" onclick="downloadMetadataCsv()" disabled>Download confirmed CSV</button>
-                  </div>
-                  <div style="overflow:auto;">
-                    <table class="metadata-table">
-                      <thead><tr><th>Confirm</th><th>Field</th><th>Value</th><th>Evidence</th><th>Source</th><th>Confidence</th></tr></thead>
-                      <tbody id="metadataResultBody"></tbody>
-                    </table>
-                  </div>
-                </div>
-                <label class="metadata-confirm-box" id="metadataConfirmBox">
-                  <input type="checkbox" id="metadataConfirmAll" onchange="toggleMetadataFinalConfirmation()">
-                  <span>I reviewed the values, evidence and missing fields. Generate dataset_metadata.csv from the confirmed rows only.</span>
-                </label>
-              </div>
-              </div>
-            </section>
-          </div>
-          <div class="inspect-progress" id="inspectProgress"><span></span></div>
-        </div>
-      </section>
-
-      <section class="prep-card analysis-panel prep-stage" id="analysisPanel" data-prep-stage="2">
-        <div class="prep-card-head">
-          <div><div class="prep-card-title">AI inspection results - review and confirm</div><div class="prep-card-desc">Confirm only what is correct. Anything unconfirmed is written as Unknown and excluded from the generated ref_name.</div></div>
-        </div>
-        <div class="analysis-summary">
-          <div class="summary-main"><span class="summary-icon">✓</span><span><span class="summary-title">Inspection complete</span><span class="summary-sub">24 files · 6 sampled · read-only</span></span></div>
-          <div class="summary-stat"><strong>0 / 9</strong><span>fields inferred</span></div><div class="summary-stat"><strong>9</strong><span>need confirmation</span></div><div class="summary-stat"><strong>-</strong><span>overall confidence</span></div>
-        </div>
-        <div class="file-role-panel" id="fileRolePanel">
-          <div class="file-role-card queued"><strong>No files queued yet</strong><span>Upload raw data for Task 1 or provide a source URL for Task 2.</span></div>
-        </div>
-        <div class="ai-inspect-head">
-          <div>
-            <div class="ai-inspect-title">Review each AI-detected field</div>
-            <div class="ai-inspect-sub">The AI agent can suggest values, but the skill package only trusts fields you explicitly confirm.</div>
-          </div>
-          <div class="ai-inspect-summary" id="aiInspectSummary">0 / 9 fields confirmed</div>
-        </div>
-        <div class="ai-field-table" id="aiFieldTable">
-          <!-- rows injected by renderAIFieldTable() -->
-        </div>
-        <div class="ai-refname-card">
-          <div class="ai-refname-label">Generated ref_name from confirmed fields only</div>
-          <div class="ai-refname-value" id="aiRefNamePreview">UNKNOWN_UNKNOWN_UNKNOWN_UNKNOWN</div>
-          <div class="ai-refname-hint" id="aiRefNameHint">Confirm fields above to replace Unknown slots. Unconfirmed fields stay Unknown in the downloaded skill.</div>
-        </div>
-        <div class="evidence-scroll" hidden>
-          <table class="evidence-table">
-            <colgroup><col style="width:15%"><col style="width:20%"><col style="width:41%"><col style="width:14%"><col style="width:10%"></colgroup>
-            <thead><tr><th>Field</th><th>AI pre-fill</th><th>Evidence</th><th>Confidence</th><th></th></tr></thead>
-            <tbody>
-              <tr><td class="evidence-field">Dataset type</td><td class="evidence-value">Calendar aging</td><td class="evidence-source">Folders named <code>storage_25C</code>; records contain periodic RPT blocks separated by multi-day rests.</td><td><span class="confidence" style="--score:96%">96%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Data format</td><td class="evidence-value">XLSX + CSV</td><td class="evidence-source">18 <code>.xlsx</code> workbooks and 6 exported <code>.csv</code> files detected.</td><td><span class="confidence" style="--score:100%">100%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Year</td><td class="evidence-value">2023</td><td class="evidence-source">Workbook creation metadata and source README both state 2023.</td><td><span class="confidence" style="--score:94%">94%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Source / lab</td><td class="evidence-value">Zenodo / Example Lab</td><td class="evidence-source">DOI and author affiliation found in <code>README.md</code>.</td><td><span class="confidence" style="--score:91%">91%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Chemistry</td><td class="evidence-value">NMC811 / graphite</td><td class="evidence-source">Cell specification sheet names NMC811 cathode and graphite anode.</td><td><span class="confidence" style="--score:93%">93%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Form factor</td><td class="evidence-value">21700</td><td class="evidence-source"><code>INR21700</code> appears in filenames and cell specification.</td><td><span class="confidence" style="--score:98%">98%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">C-rate</td><td class="evidence-value pending">Needs confirmation</td><td class="evidence-source">RPT current is measurable, but nominal capacity is inconsistent across two source documents.</td><td><span class="confidence medium pending" style="--score:42%">42%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Confirm</button></td></tr>
-              <tr><td class="evidence-field">Temperature</td><td class="evidence-value">25 °C, 45 °C</td><td class="evidence-source">Folder names, chamber setpoint column and median sample temperatures agree.</td><td><span class="confidence" style="--score:97%">97%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Cell count</td><td class="evidence-value">24</td><td class="evidence-source">24 unique IDs after normalizing workbook names and <code>cell_id</code> values.</td><td><span class="confidence" style="--score:99%">99%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">Cell ID rule</td><td class="evidence-value">Source filename</td><td class="evidence-source">Stable pattern <code>NMC_25C_C01</code>; no conflicting in-file identifier.</td><td><span class="confidence" style="--score:89%">89%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Edit</button></td></tr>
-              <tr><td class="evidence-field">License</td><td class="evidence-value pending">Needs confirmation</td><td class="evidence-source">DOI resolves, but no explicit license text was found in the downloaded package.</td><td><span class="confidence medium pending" style="--score:18%">18%</span></td><td><button class="field-edit" onclick="editPrepField(this)">Confirm</button></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="prep-card prep-stage" data-prep-stage="3">
-        <div class="prep-card-head">
-          <div><div class="prep-card-title">Download the dataset-specific BatteryLake skill.</div><div class="prep-card-desc">The package is generated from the inspected evidence and your confirmed corrections, not from an unverified form.</div></div>
-        </div>
-        <div class="prep-card-body">
-          <div class="skill-package-grid">
-            <div class="skill-package-field"><div class="skill-package-label">Skill package</div><div class="skill-package-value" id="skillPackageName">bt_skill_pending_inspection</div></div>
-            <div class="skill-package-field"><div class="skill-package-label">Dataset ref_name</div><div class="skill-package-value" id="skillRefName">Pending confirmed context</div></div>
-            <div class="skill-package-field"><div class="skill-package-label">Included files</div><div class="skill-package-value">SKILL.md + schema + context + validator</div></div>
-          </div>
-          <div class="science-note">The skill instructs the local agent to re-check source evidence, preserve extended physical channels, archive existing outputs and record all fallbacks before writing processed data.</div>
-          <div style="margin-top:16px;"><button class="prep-btn" type="button" onclick="generatePrepSkill()">Download BatteryLake Skill</button></div>
-          <div class="prep-run-label">Run locally after download</div>
-          <pre class="prep-run-prompt">Ask your AI agent:
-Use the BatteryLake preprocessing skill in this folder.
-Process my raw battery dataset at /path/to/raw_dataset.
-Write outputs/processed_dataset/ and outputs/preprocessing_report.json.
-Do not guess I / V / T / time / cycle fields without source evidence.</pre>
-        </div>
-      </section>
-
-      <section class="prep-card prep-stage" data-prep-stage="4">
-        <div class="prep-card-head"><div><div class="prep-card-title">Verification and Benchmark handoff</div><div class="prep-card-desc">Upload outputs/preprocessing_report.json after the local AI run. The browser only reads this small report; raw battery files stay local.</div></div></div>
-        <div class="prep-card-body">
-          <div class="prep-verify-actions">
-            <button class="prep-btn" type="button" onclick="document.getElementById('prepReportUpload').click()">Upload preprocessing_report.json</button>
-            <input id="prepReportUpload" type="file" accept=".json,application/json" hidden onchange="ppHandleReportUpload(event)" />
-          </div>
-          <div class="prep-report-summary" id="prepReportSummary">No preprocessing report loaded.</div>
-          <div class="skill-package-grid prep-verify-grid">
-            <div class="skill-package-field">
-              <div class="skill-package-label">Status</div>
-              <input class="prep-input" id="prepVerifyStatus" value="Upload report first" readonly />
-            </div>
-            <div class="skill-package-field">
-              <div class="skill-package-label">Benchmark ready</div>
-              <input class="prep-input" id="prepVerifyReady" value="-" readonly />
-            </div>
-            <div class="skill-package-field">
-              <div class="skill-package-label">Dataset folder</div>
-              <input class="prep-input" value="outputs/processed_dataset/" readonly />
-            </div>
-          </div>
-          <div class="prep-report-summary" id="prepVerificationSummary">Upload preprocessing_report.json to verify schema status, file counts, exported cells, warnings, and Benchmark readiness.</div>
-          <pre class="prep-run-prompt">If benchmark_ready is true, copy:
-outputs/processed_dataset/  -&gt;  bt_benchmark_.../data/&lt;dataset_name&gt;/</pre>
-          <div class="audit-strip"><div class="audit-item"><strong>—</strong><span>missing values</span></div><div class="audit-item"><strong>—</strong><span>anomalies to flag</span></div><div class="audit-item"><strong>—</strong><span>unit conversions</span></div><div class="audit-item"><strong>—</strong><span>unmapped fields retained in audit</span></div></div>
-        </div>
-        <div class="prep-actions"><span class="prep-action-buttons"><button class="prep-btn secondary" type="button" onclick="downloadPrepManifest()">Export inspection manifest</button></span></div>
-      </section>
-      <div class="prep-wizard-footer" aria-label="Preprocessing step navigation">
-        <button class="prep-btn secondary" id="prepPrevious" type="button" onclick="showPrepStage(prepStage - 1)" disabled>Previous</button>
-        <button class="prep-btn" id="prepNext" type="button" onclick="showPrepStage(prepStage + 1)">Next</button>
-      </div>
-    </div>
-    <div class="prep-toast" id="prepToast" role="status"></div>
-    <div class="page-header">
-      <div class="page-title">Data Preprocessing Pipeline</div>
-      <div class="page-desc">Beyond ETL, the BatteryTwin platform offers a comprehensive data preprocessing pipeline that transforms raw battery measurements into research-ready, harmonized datasets.</div>
+    <div class="page-header quality-page-hero visual-page-hero prep-page-hero">
+      <div class="page-title">Preprocessing</div>
+      <div class="page-desc">Turn a raw battery dataset into the BatteryLake v2.0.0 standard with one agent skill: provenance-preserving canonical data, explicit SOH / RUL task views, and auditable validation reports.</div>
+      <img class="preprocessing-hero-art visual-page-hero-art" src="assets/images/preprocessing-hero-transparent.png" alt="" aria-hidden="true">
     </div>
 
-    <div class="pipeline-flow">
-      <div class="pf-step active">Raw Cycles</div><div class="pf-arrow">→</div>
-      <div class="pf-step active">Cleaning</div><div class="pf-arrow">→</div>
-      <div class="pf-step active">Resampling</div><div class="pf-arrow">→</div>
-      <div class="pf-step active">Harmonization</div><div class="pf-arrow">→</div>
-      <div class="pf-step active">Cycle Analytics</div><div class="pf-arrow">→</div>
-      <div class="pf-step">Quality Check</div><div class="pf-arrow">→</div>
-      <div class="pf-step">Export</div>
-    </div>
-
-    <div class="preproc-grid">
-      <div class="preproc-card">
-        <div class="preproc-card-head">
-          <div class="preproc-card-icon" style="background:var(--accent-light);color:var(--accent);">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
-          </div>
-          <div class="preproc-card-title">Cleaning & Standardization</div>
+    <!-- 1 · Skill card -->
+    <section class="px-skill reveal" aria-labelledby="px-skill-title">
+      <div class="px-skill-main">
+        <div class="px-kicker">Agent skill</div>
+        <h2 class="px-skill-name" id="px-skill-title">batterylake-processing</h2>
+        <div class="px-chips">
+          <span class="px-chip">Standard v2.0.0</span>
+          <span class="px-chip">Updated 2026-09-07</span>
+          <span class="px-chip">Claude Code &middot; Codex</span>
+          <span class="px-chip px-chip-muted">Instructions written in Chinese</span>
         </div>
-        <div class="preproc-card-desc">Remove noise, outliers, and corrupted records. Standardize column names, units (V, A, Ah, °C), and sign conventions across heterogeneous source formats.</div>
-        <div class="preproc-tags">
-          <span class="preproc-tag">Outlier detection</span>
-          <span class="preproc-tag">Unit conversion</span>
-          <span class="preproc-tag">Column mapping</span>
-          <span class="preproc-tag">NaN handling</span>
-        </div>
-      </div>
-
-      <div class="preproc-card">
-        <div class="preproc-card-head">
-          <div class="preproc-card-icon" style="background:var(--teal-bg);color:var(--teal);">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9"/></svg>
-          </div>
-          <div class="preproc-card-title">Resampling & Interpolation</div>
-        </div>
-        <div class="preproc-card-desc">Uniformly resample time-series to configurable target intervals. Apply linear or spline interpolation to align measurements from different instruments and sampling rates.</div>
-        <div class="preproc-tags">
-          <span class="preproc-tag">Temporal alignment</span>
-          <span class="preproc-tag">Target-point resampling</span>
-          <span class="preproc-tag">Interpolation</span>
-          <span class="preproc-tag">Anti-aliasing</span>
+        <p class="px-skill-desc">Converts heterogeneous BatteryLake battery datasets into provenance-preserving standard data and explicit SOH / RUL benchmark views. Use it for dataset inventory, adapter design, conversion, fidelity checks, and raw-versus-standard benchmark validation.</p>
+        <div class="px-files" id="px-skill-files" aria-label="Files in the skill package"></div>
+        <div class="px-actions">
+          <button class="px-btn px-btn-primary" type="button" id="px-download-btn" onclick="BatteryLakePreprocessing.downloadSkill()">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download skill (.zip)
+          </button>
+          <a class="px-btn" href="assets/skills/batterylake-processing/SKILL.md" target="_blank" rel="noopener">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View SKILL.md
+          </a>
+          <a class="px-btn" href="assets/skills/batterylake-processing/standard/README.md" target="_blank" rel="noopener">Processing standard</a>
         </div>
       </div>
-
-      <div class="preproc-card">
-        <div class="preproc-card-head">
-          <div class="preproc-card-icon" style="background:var(--green-bg);color:var(--green);">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <aside class="px-install">
+        <div class="px-install-head">
+          <span class="px-install-title">Install</span>
+          <div class="px-tabs" role="tablist" aria-label="Agent">
+            <button class="px-tab active" type="button" role="tab" data-agent="claude" onclick="BatteryLakePreprocessing.setAgent('claude')">Claude Code</button>
+            <button class="px-tab" type="button" role="tab" data-agent="codex" onclick="BatteryLakePreprocessing.setAgent('codex')">Codex</button>
           </div>
-          <div class="preproc-card-title">Metadata Harmonization</div>
         </div>
-        <div class="preproc-card-desc">Unify metadata schemas across datasets: cell chemistry, capacity, form factor, test protocol, lab of origin, DOI, and environmental conditions into a common taxonomy.</div>
-        <div class="preproc-tags">
-          <span class="preproc-tag">Schema alignment</span>
-          <span class="preproc-tag">Taxonomy mapping</span>
-          <span class="preproc-tag">Protocol tagging</span>
-          <span class="preproc-tag">Provenance tracking</span>
+        <ol class="px-install-steps">
+          <li>Open a terminal in your <strong>BatteryLake data repository</strong>, the folder that contains <code>Raw_Dataset/</code> and <code>Processed_Dataset_Standard/</code>.</li>
+          <li>Unzip the package into the agent's skill folder:</li>
+        </ol>
+        <div class="px-code-wrap">
+          <button class="px-copy" type="button" onclick="BatteryLakePreprocessing.copy('px-install-code', this)">Copy</button>
+          <pre class="px-code" id="px-install-code">unzip batterylake-processing.zip -d .claude/skills/
+# -> .claude/skills/batterylake-processing/SKILL.md</pre>
+        </div>
+        <p class="px-install-note" id="px-install-note">Claude Code discovers <code>.claude/skills/&lt;name&gt;/SKILL.md</code> automatically; invoke it with <code>/batterylake-processing</code> or by asking for it by name.</p>
+      </aside>
+    </section>
+
+    <!-- 2 · Gates -->
+    <section class="px-section reveal" aria-labelledby="px-gates-title">
+      <div class="px-section-head">
+        <span class="px-kicker">How it works</span>
+        <h2 id="px-gates-title">Every dataset passes five acceptance gates</h2>
+        <p>The skill routes the agent through the stages below and records evidence for each one in <code>status.json</code>. A stage advances only when its evidence exists; directory listings and copied archives never count as completed processing.</p>
+      </div>
+      <ol class="px-gates">
+        <li class="px-gate" data-gate="I">
+          <span class="px-gate-letter">I</span>
+          <div class="px-gate-body">
+            <strong>Inventory</strong>
+            <span>Counts, bytes, formats, nested archive members, missing inputs, preliminary experiment types, SHA-256 of every source file.</span>
+            <em>inventoried</em>
+          </div>
+        </li>
+        <li class="px-gate" data-gate="S">
+          <span class="px-gate-letter">S</span>
+          <div class="px-gate-body">
+            <strong>Semantics</strong>
+            <span>Author evidence for cell identities, units, clocks, cycle boundaries, labels, duplicate copies and a field-coverage ledger.</span>
+            <em>adapter design confirmed</em>
+          </div>
+        </li>
+        <li class="px-gate" data-gate="C">
+          <span class="px-gate-letter">C</span>
+          <div class="px-gate-body">
+            <strong>Conversion</strong>
+            <span>A rerunnable adapter writes every source measurement and extra field to the canonical layer, with typed extras, hashes and reproducible commands.</span>
+            <em>converted</em>
+          </div>
+        </li>
+        <li class="px-gate" data-gate="V">
+          <span class="px-gate-letter">V</span>
+          <div class="px-gate-body">
+            <strong>Fidelity</strong>
+            <span>Keys, counts, order, missingness and record-by-record raw-versus-standard numeric checks, plus capacity comparison.</span>
+            <em>canonical_validated</em>
+          </div>
+        </li>
+        <li class="px-gate" data-gate="E">
+          <span class="px-gate-letter">E</span>
+          <div class="px-gate-body">
+            <strong>Equivalence</strong>
+            <span>Independent raw and standard loaders produce identical X / y / masks / splits, predictions and paired training for a named profile.</span>
+            <em>benchmark_verified</em>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 3 · Run -->
+    <section class="px-section px-run reveal" aria-labelledby="px-run-title">
+      <div class="px-section-head">
+        <span class="px-kicker">Run it</span>
+        <h2 id="px-run-title">Point the agent at a dataset</h2>
+        <p>Pick a catalog dataset to fill in the prompt, or edit the paths for your own <code>dataset_xx</code>. The agent reads the standard and the dataset TODO first, then resumes from the first unfinished gate.</p>
+      </div>
+      <div class="px-run-grid">
+        <div class="px-run-left">
+          <label class="px-label" for="px-dataset-select">Dataset</label>
+          <select class="px-select" id="px-dataset-select" onchange="BatteryLakePreprocessing.renderPrompt()"></select>
+          <div class="px-code-wrap">
+            <button class="px-copy" type="button" onclick="BatteryLakePreprocessing.copy('px-prompt', this)">Copy prompt</button>
+            <pre class="px-code px-prompt" id="px-prompt"></pre>
+          </div>
+        </div>
+        <div class="px-run-right">
+          <div class="px-mini-title">Expected repository layout</div>
+          <pre class="px-tree">BatteryLake/
+├── Raw_Dataset/&lt;category&gt;/dataset_xx/     original files, read-only
+├── Processed_Dataset/&lt;category&gt;/dataset_xx/   skill output
+├── Processed_Dataset_Standard/           standard + skill
+└── scripts/processing/                   adapters, loader</pre>
+          <div class="px-mini-title">While it runs</div>
+          <ul class="px-list">
+            <li>Progress is written to <code>status.json</code> and <code>TODO.md</code> in the dataset output folder.</li>
+            <li>Expensive steps are resumed, not repeated, when input, code and schema fingerprints match.</li>
+            <li>Source files are never modified; undecodable measurements are reported, not faked.</li>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <div class="preproc-card">
-        <div class="preproc-card-head">
-          <div class="preproc-card-icon" style="background:var(--purple-bg);color:var(--purple);">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><polyline points="21 4 21 10 15 10"/></svg>
+    <!-- 4 · Output + rules -->
+    <section class="px-section px-two reveal" aria-label="Outputs and rules">
+      <div class="px-card">
+        <div class="px-mini-title">What the skill produces</div>
+        <pre class="px-tree">Processed_Dataset/&lt;category&gt;/dataset_xx/
+├── README.md · TODO.md · status.json
+├── source_inventory.csv · manifest.json · field_mapping.json
+├── canonical/
+│   ├── entities.parquet · experiments.parquet
+│   ├── source_tables/      every source field, original order
+│   ├── time_series/        voltage_V, current_A, temperature_C, …
+│   ├── cycles.parquet · labels.parquet · label_links.parquet
+│   └── extras/ · assets/   arrays, objects, protocols, documents
+├── views/&lt;profile_id&gt;/    profile.json, sample_index, splits
+└── validation/             coverage, fidelity, benchmark reports</pre>
+        <p class="px-card-note">Status is reported on four separate axes: <code>conversion</code>, <code>canonical_validation</code>, <code>benchmark_validation</code> and <code>upstream_completeness</code>. There is no single "done" flag.</p>
+      </div>
+      <div class="px-card">
+        <div class="px-mini-title">Rules the skill never skips</div>
+        <ul class="px-rules">
+          <li><strong>Identify containers by content.</strong> Magic bytes, complete payloads and EOF are checked; a <code>.pkl</code> may hold several streams.</li>
+          <li><strong>No cleaning in the fidelity layer.</strong> No resampling, interpolation, clipping, float32 down-casting or removal of diagnostics; those belong to a named task view.</li>
+          <li><strong>Capacities are different quantities.</strong> Health capacity, partial-DoD throughput, RPT capacity, rated capacity and author SOH are kept apart; unclear labels are withheld, never guessed.</li>
+          <li><strong>EOL is an observed event.</strong> The last row is not EOL; sparse RPTs may only bound an interval, and censoring is recorded.</li>
+          <li><strong>No leakage across splits.</strong> The same physical cell, duplicate copies and overlapping windows stay on one side; scalers fit on training data only.</li>
+          <li><strong>Stages are distinct.</strong> <code>inventoried</code>, <code>converted</code>, <code>canonical_validated</code> and <code>benchmark_verified</code> advance only with their own evidence.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5 · Verify -->
+    <section class="px-section px-verify reveal" aria-labelledby="px-verify-title">
+      <div class="px-section-head">
+        <span class="px-kicker">Verify</span>
+        <h2 id="px-verify-title">Check a processed dataset</h2>
+        <p>Drop the <code>status.json</code> the skill wrote for a dataset to see which gates it has passed and what still blocks benchmark use.</p>
+      </div>
+      <div class="px-verify-grid">
+        <label class="px-drop" id="px-status-drop" for="px-status-input">
+          <input id="px-status-input" type="file" accept=".json,application/json" hidden onchange="BatteryLakePreprocessing.handleStatusFile(event)">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg>
+          <span class="px-drop-title">Drop status.json here, or click to choose</span>
+          <span class="px-drop-sub">Found at Processed_Dataset/&lt;category&gt;/dataset_xx/status.json</span>
+        </label>
+        <div class="px-status" id="px-status-panel">
+          <div class="px-status-head">
+            <span class="px-example-badge" id="px-status-badge">Example</span>
+            <span class="px-status-id" id="px-status-id">dataset_21</span>
+            <span class="px-status-overall" id="px-status-overall">needs_semantic_review</span>
           </div>
-          <div class="preproc-card-title">Cycle Analytics & Feature Extraction</div>
-        </div>
-        <div class="preproc-card-desc">Compute per-cycle summary statistics: discharge capacity, charge capacity, coulombic efficiency, internal resistance, dQ/dV peak positions, and health indicators.</div>
-        <div class="preproc-tags">
-          <span class="preproc-tag">Capacity extraction</span>
-          <span class="preproc-tag">CE calculation</span>
-          <span class="preproc-tag">IR estimation</span>
-          <span class="preproc-tag">dQ/dV analysis</span>
+          <div class="px-stage-track" id="px-stage-track" aria-label="Gate progress"></div>
+          <dl class="px-status-dims" id="px-status-dims"></dl>
+          <div class="px-status-counts" id="px-status-counts"></div>
         </div>
       </div>
-    </div>
-
-    <h3 style="font-family:var(--display);font-size:18px;margin:24px 0 12px;">Preprocessing Capabilities Reference</h3>
-    <table class="model-table">
-      <thead><tr><th>Capability</th><th>Description</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Noise filtering</strong></td><td>Savitzky–Golay, median, and rolling-window filters for voltage/current smoothing</td><td><span class="status-badge status-done">Active</span></td></tr>
-        <tr><td><strong>Outlier detection</strong></td><td>IQR-based and domain-aware anomaly flagging (e.g. voltage spikes, current transients)</td><td><span class="status-badge status-done">Active</span></td></tr>
-        <tr><td><strong>Cycle segmentation</strong></td><td>Automatic charge/discharge/rest detection from current polarity and voltage patterns</td><td><span class="status-badge status-done">Active</span></td></tr>
-        <tr><td><strong>Capacity integration</strong></td><td>Trapezoidal and Simpson's rule integration for Ah capacity per half-cycle</td><td><span class="status-badge status-done">Active</span></td></tr>
-        <tr><td><strong>Multi-format ingestion</strong></td><td>Support for CSV, Parquet, HDF5, MATLAB .mat, Excel, MACCOR, Arbin, Neware</td><td><span class="status-badge status-done">Active</span></td></tr>
-        <tr><td><strong>dQ/dV computation</strong></td><td>Incremental capacity analysis with configurable voltage binning and smoothing</td><td><span class="status-badge status-wip">In dev</span></td></tr>
-        <tr><td><strong>EIS preprocessing</strong></td><td>Impedance spectra parsing, Nyquist/Bode extraction, ECM fitting</td><td><span class="status-badge status-pending">Planned</span></td></tr>
-      </tbody>
-    </table>
+    </section>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -2039,6 +1934,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
+<script src="js/preprocessing.js"></script>
 <script src="js/naming-sequencer.js"></script>
 <div class="ai-chat-widget" aria-live="polite">
   <button class="ai-chat-fab" id="aiChatToggle" type="button" aria-label="Open AI assistant">
@@ -2098,9 +1994,9 @@ for dataset in resp.json()["items"]:
       </div>
     </div>
     <div class="ai-chat-suggestions" aria-label="Suggested questions">
-      <button class="ai-suggestion" type="button" data-prompt="Summarize the current Preprocessing workflow.">Preprocessing help</button>
-      <button class="ai-suggestion" type="button" data-prompt="Explain file roles for Task 1.">File roles</button>
-      <button class="ai-suggestion" type="button" data-prompt="Explain metadata confirmation for Task 2.">Metadata CSV</button>
+      <button class="ai-suggestion" type="button" data-prompt="Summarize the BatteryLake preprocessing workflow and its five acceptance gates.">Preprocessing help</button>
+      <button class="ai-suggestion" type="button" data-prompt="How do I install and run the batterylake-processing skill?">Install the skill</button>
+      <button class="ai-suggestion" type="button" data-prompt="What does canonical_validated mean in status.json?">Status fields</button>
     </div>
     <form class="ai-chat-form" id="aiChatForm">
       <textarea id="aiChatInput" rows="1" placeholder="Ask a question..." autocomplete="off"></textarea>
