@@ -12,12 +12,13 @@
   var SKILL_ROOT = 'assets/skills/batterylake-processing/';
   var SKILL_NAME = 'batterylake-processing';
   var SKILL_FILES = [
-    { path: 'SKILL.md', desc: 'Execution routing for the agent (read first)' },
-    { path: 'references/schema.md', desc: 'Schema 2.0.0: file layout, canonical tables, labels, manifest' },
-    { path: 'references/equivalence.md', desc: 'Raw-versus-standard benchmark equivalence contract' },
-    { path: 'standard/README.md', desc: 'BatteryLake processing standard v2.0.0 (English)' },
-    { path: 'standard/README.zh-CN.md', desc: 'BatteryLake processing standard v2.0.0 (Chinese)' }
+    { path: 'SKILL.md', view: 'skill', desc: 'Execution routing for the agent (read first)' },
+    { path: 'references/schema.md', view: 'schema', desc: 'Schema 2.0.0: file layout, canonical tables, labels, manifest' },
+    { path: 'references/equivalence.md', view: 'equivalence', desc: 'Raw-versus-standard benchmark equivalence contract' },
+    { path: 'standard/README.md', view: 'standard', desc: 'BatteryLake processing standard v2.0.0 (English)' },
+    { path: 'standard/README.zh-CN.md', view: 'standard-zh', desc: 'BatteryLake processing standard v2.0.0 (Chinese)' }
   ];
+  var VIEWER_URL = 'skill/?doc=';
 
   var AGENT_INSTALL = {
     claude: {
@@ -94,7 +95,7 @@
     if (!box) return;
     box.innerHTML = SKILL_FILES.map(function (f) {
       var size = state.fileSizes[f.path];
-      return '<a class="px-file" href="' + SKILL_ROOT + f.path + '" target="_blank" rel="noopener">'
+      return '<a class="px-file" href="' + VIEWER_URL + f.view + '" title="Read ' + escapeHtml(f.path) + '">'
         + '<span class="px-file-name">' + escapeHtml(f.path) + '</span>'
         + '<span class="px-file-desc">' + escapeHtml(f.desc) + '</span>'
         + '<span class="px-file-size">' + (size ? fmtBytes(size) : '') + '</span>'
