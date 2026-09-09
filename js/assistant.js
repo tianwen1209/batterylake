@@ -324,9 +324,45 @@
     return String(text).trim();
   }
 
+  /* Cloudflare Worker proxy (keeps the Gemini key server-side). Contract:
+     POST {message: string} -> {text: string}. It takes no system prompt or
+     history, so both are folded into the single message. */
+  async function askWorker(question, url) {
+    // The minimal Worker rejects very long messages, so keep the folded prompt
+    // under ~4500 characters: drop old history first, then trim the context.
+    const LIMIT = 4500;
+    let hist = historyMessages();
+    let system = systemPrompt(question);
+    const build = () => {
+      const convo = hist.map(m => (m.role === 'user' ? 'User: ' : 'Assistant: ') + m.content.slice(0, 600)).join('\n');
+      return system + '\n\n=== Conversation ===\n' + (convo ? convo + '\n' : '') + 'User: ' + question.slice(0, 1500) + '\nAssistant:';
+    };
+    let message = build();
+    while (message.length > LIMIT && hist.length) { hist = hist.slice(1); message = build(); }
+    if (message.length > LIMIT) { system = system.slice(0, Math.max(800, system.length - (message.length - LIMIT))); message = build(); }
+    // `message` is the whole prompt for the minimal Worker; a Worker built from
+    // deploy/cloudflare-worker/worker.js prefers question + system + history.
+    const res = await fetchWithTimeout(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, question, system: systemPrompt(question), history: hist })
+    }, 25000);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const err = new Error((data.error || ('Proxy HTTP ' + res.status)) + (data.detail ? ': ' + data.detail : ''));
+      err.status = res.status;
+      err.transient = isTransient(res.status, err.message);
+      throw err;
+    }
+    const text = data.text || data.reply || data.response || '';
+    if (!String(text).trim()) throw new Error('Empty proxy response');
+    return String(text).trim();
+  }
+
   function askRemote(provider, question) {
     switch (provider) {
       case 'gemini': return askGemini(question);
+      case 'worker': return askWorker(question, CONFIG.endpoint);
       case 'openai': return askOpenAI(question, CONFIG.endpoint);
       case 'backend': return askBackend(question, CONFIG.endpoint || LOCAL_BACKEND_URL);
       case 'pollinations': return askOpenAI(question, POLLINATIONS_URL, { anonymous: true, foldSystem: true, model: 'openai', timeoutMs: 15000 });
@@ -336,6 +372,7 @@
 
   const PROVIDER_LABELS = {
     gemini: { subtitle: 'Gemini · free tier', status: 'Model connected' },
+    worker: { subtitle: 'Gemini · via proxy', status: 'Model connected' },
     openai: { subtitle: 'Custom model endpoint', status: 'Model connected' },
     backend: { subtitle: 'Local app.py backend', status: 'Backend connected' },
     pollinations: { subtitle: 'Free model · Pollinations', status: 'Model connected' },
@@ -347,7 +384,7 @@
     if (p !== 'auto') return [p];
     const list = [];
     if (CONFIG.apiKey && (!CONFIG.endpoint || /gemini/i.test(CONFIG.model))) list.push('gemini');
-    if (CONFIG.endpoint) list.push(/\/api\/chat$/.test(CONFIG.endpoint) ? 'backend' : 'openai');
+    if (CONFIG.endpoint) list.push(/\/api\/chat$/.test(CONFIG.endpoint) ? 'backend' : /workers\.dev|\/chat$/.test(CONFIG.endpoint) ? 'worker' : 'openai');
     if (IS_LOCALHOST) list.push('backend');
     list.push('pollinations');
     return list;
@@ -371,7 +408,7 @@
       }, 12000);
       return res.ok;
     }
-    // Gemini / OpenAI: a configured key or endpoint is trusted until a real call fails.
+    // Gemini / OpenAI / worker proxy: a configured key or endpoint is trusted until a real call fails.
     return provider === 'gemini' ? !!CONFIG.apiKey : !!CONFIG.endpoint;
   }
 

@@ -67,6 +67,7 @@ To add a free language model on top of that, edit `js/ai-config.js`:
 |---|---|---|
 | `gemini` | `apiKey` (and optionally `model`, default `gemini-flash-lite-latest`) | Free tier at https://aistudio.google.com/apikey. The key is served to visitors, so restrict it in Google Cloud Console → Credentials → *Website restrictions* to `https://tianwen1209.github.io/*`. |
 | `openai` | `endpoint` (any OpenAI-compatible `/chat/completions` URL) + `apiKey` if needed | Groq, OpenRouter, a Cloudflare Worker proxy, vLLM / Ollama on your own HTTPS host. Do not put a secret key here unless the endpoint is your own proxy. |
+| `worker` | `endpoint` = your Cloudflare Worker `/chat` URL | Recommended for the hosted site: the Gemini key stays in the Worker's secrets, the Worker only accepts this site's origin. Reference code and steps in `deploy/cloudflare-worker/`. |
 | `backend` | `endpoint` = `http://127.0.0.1:8000/api/chat` (default when the page runs on localhost) | Uses `app.py` and the `.env` keys described below. |
 | `pollinations` | nothing | Free anonymous model at text.pollinations.ai; tried automatically in `auto` mode, currently often over quota. |
 | `local` | nothing | Knowledge base only, no network calls. |

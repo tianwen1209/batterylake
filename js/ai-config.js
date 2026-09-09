@@ -14,17 +14,17 @@
  *   'openai'       Any OpenAI-compatible /chat/completions endpoint (Groq,
  *                  OpenRouter, a Cloudflare Worker proxy, vLLM, Ollama, ...).
  *   'backend'      The bundled app.py backend (POST /api/chat, {message}).
+ *   'worker'       A Cloudflare Worker proxy: POST {message} -> {text}; system
+ *                  prompt and history are folded into the message.
  *   'pollinations' Free anonymous model at text.pollinations.ai (no key).
  *   'local'        Built-in knowledge base only, no network calls.
  */
 window.BATTERYLAKE_AI_CONFIG = {
-  provider: 'gemini',
-  // Free-tier Gemini key owned by the BatteryLake team. Google does not allow
-  // website restrictions on Gemini keys, so it is public by design; the
-  // project has no billing account, so abuse can only exhaust the daily quota
-  // (the widget then falls back to the built-in knowledge base).
-  apiKey: 'AQ.Ab8RN6L9uS2gJwr8e3lZ0xFL5mC7XHuWCRMD2VHfSBRGuj1xVw',
-  model: 'gemini-flash-lite-latest',
-  endpoint: '',
-  timeoutMs: 20000
+  // Gemini behind the team's Cloudflare Worker: the key lives in the Worker's
+  // secrets and the Worker only accepts requests from this site's origin.
+  provider: 'worker',
+  apiKey: '',
+  model: '',
+  endpoint: 'https://tianwen-gemini-proxy.tianwen-4e0.workers.dev/chat',
+  timeoutMs: 25000
 };
