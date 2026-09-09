@@ -649,7 +649,10 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: var(--bg2);
+  background: #f7f9fb;
+}
+[data-theme="dark"] .sc-reach-map {
+  background: #18202b;
 }
 .sc-reach-map-empty {
   position: absolute;
@@ -705,7 +708,7 @@
   );
 }
 
-/* Leaflet chrome — keep only zoom + attribution, themed to BatteryLake */
+/* Leaflet chrome — keep only zoom, themed to BatteryLake */
 .sc-reach-map-panel .leaflet-control-zoom {
   border: 1px solid var(--border) !important;
   border-radius: 8px !important;
@@ -726,17 +729,6 @@
 .sc-reach-map-panel .leaflet-control-zoom a:hover {
   color: var(--text1) !important;
   background: var(--bg3) !important;
-}
-.sc-reach-map-panel .leaflet-control-attribution {
-  background: color-mix(in srgb, var(--surface, var(--bg)) 88%, transparent) !important;
-  color: var(--text4) !important;
-  font-size: 10px;
-  max-width: 55%;
-  margin: 0 !important;
-  padding: 2px 6px !important;
-}
-.sc-reach-map-panel .leaflet-control-attribution a {
-  color: var(--text3) !important;
 }
 .sc-reach-map-leaflet-tooltip {
   background: var(--surface, var(--bg)) !important;

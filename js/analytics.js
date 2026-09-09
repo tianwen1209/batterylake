@@ -8,6 +8,7 @@
   var MEASUREMENT_ID = 'G-5C061K2R5M';
   var STATS_URL = 'assets/data/site-stats.json';
   var CENTROIDS_URL = 'assets/vendor/leaflet/country-centroids.json';
+  var WORLD_COUNTRIES_URL = 'assets/data/world-countries.geojson';
   var LEAFLET_JS_URL = 'assets/vendor/leaflet/leaflet.js';
   var lastPagePath = null;
   var numberFmt = typeof Intl !== 'undefined' && Intl.NumberFormat
@@ -54,19 +55,20 @@
 
   var visitorMap = {
     map: null,
-    tileLayer: null,
+    countryLayer: null,
     markerLayer: null,
     places: [],
     centroids: null,
+    countries: null,
     leafletLoading: null,
     resizeBound: false,
     themeObserver: null,
     savedView: null
   };
 
-  // Asia-Pacific framing: Singapore near center, zoomed out enough that SEA
-  // does not dominate the panel. Users can still zoom/drag freely.
-  var MAP_DEFAULT_CENTER = [5, 105];
+  // Europe-to-Asia framing keeps Africa and Southeast Asia in view while
+  // preserving the existing zoom level. Users can still zoom/drag freely.
+  var MAP_DEFAULT_CENTER = [15, 75];
   var MAP_DEFAULT_ZOOM = 1.5;
   var MAP_MIN_ZOOM = 1;
   var MAP_MAX_ZOOM = 10;
@@ -76,13 +78,6 @@
   var MARKER_RADIUS_MAX = 18;
   /** Floor for the sqrt reference so sparse/small datasets stay subtle. */
   var MARKER_RADIUS_VISITORS_FLOOR = 64;
-
-  var TILE_URLS = {
-    light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-  };
-  var TILE_ATTR =
-    '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>';
 
   /** Dev-only sample locations. Enabled with ?demoLocations=1 — never used as production data. */
   var DEV_SAMPLE_LOCATIONS = {
@@ -459,7 +454,7 @@
     if (visitorMap.map) {
       try { visitorMap.map.remove(); } catch (_) { /* no-op */ }
       visitorMap.map = null;
-      visitorMap.tileLayer = null;
+      visitorMap.countryLayer = null;
       visitorMap.markerLayer = null;
     }
     visitorMap.savedView = null;
@@ -550,25 +545,27 @@
     return { points: points, maxVisitors: maxVisitors };
   }
 
-  function tileUrlForTheme() {
-    return isDarkTheme() ? TILE_URLS.dark : TILE_URLS.light;
+  function countryStyle() {
+    var dark = isDarkTheme();
+    return {
+      color: dark ? '#3a4656' : '#d5dde3',
+      weight: 0.75,
+      opacity: 1,
+      fillColor: dark ? '#283241' : '#e8edf1',
+      fillOpacity: 1,
+      interactive: false
+    };
   }
 
-  function ensureTileLayer() {
-    if (!visitorMap.map || typeof window.L === 'undefined') return;
-    var nextUrl = tileUrlForTheme();
-    if (visitorMap.tileLayer) {
-      visitorMap.map.removeLayer(visitorMap.tileLayer);
-      visitorMap.tileLayer = null;
+  function ensureCountryLayer() {
+    if (!visitorMap.map || !visitorMap.countries || typeof window.L === 'undefined') return;
+    if (visitorMap.countryLayer) {
+      visitorMap.countryLayer.setStyle(countryStyle());
+      return;
     }
-    visitorMap.tileLayer = window.L.tileLayer(nextUrl, {
-      attribution: TILE_ATTR,
-      subdomains: 'abcd',
-      maxZoom: MAP_MAX_ZOOM,
-      minZoom: MAP_MIN_ZOOM,
-      detectRetina: true
-    });
-    visitorMap.tileLayer.addTo(visitorMap.map);
+    visitorMap.countryLayer = window.L.geoJSON(visitorMap.countries, {
+      style: countryStyle
+    }).addTo(visitorMap.map);
   }
 
   function ensureLeafletMap(mapEl) {
@@ -581,7 +578,7 @@
       minZoom: MAP_MIN_ZOOM,
       maxZoom: MAP_MAX_ZOOM,
       zoomControl: false,
-      attributionControl: true,
+      attributionControl: false,
       scrollWheelZoom: true,
       dragging: true,
       touchZoom: true,
@@ -591,7 +588,7 @@
       worldCopyJump: true
     });
     L.control.zoom({ position: 'topleft' }).addTo(visitorMap.map);
-    ensureTileLayer();
+    ensureCountryLayer();
     visitorMap.markerLayer = L.layerGroup().addTo(visitorMap.map);
     visitorMap.map.on('moveend zoomend', function () {
       visitorMap.savedView = captureMapView();
@@ -649,7 +646,7 @@
       }
 
       ensureLeafletMap(mapEl);
-      ensureTileLayer();
+      ensureCountryLayer();
 
       var hasMarkers = false;
       if (places && places.length) {
@@ -691,17 +688,24 @@
   }
 
   function ensureMapAssets() {
-    if (visitorMap.centroids && typeof window.L !== 'undefined') {
+    if (visitorMap.centroids && visitorMap.countries && typeof window.L !== 'undefined') {
       return Promise.resolve();
     }
     return loadLeaflet().then(function () {
-      return fetch(CENTROIDS_URL, { cache: 'force-cache' }).then(function (res) {
-        if (!res.ok) throw new Error('centroids ' + res.status);
-        return res.json();
-      });
-    }).then(function (centroids) {
+      return Promise.all([
+        fetch(CENTROIDS_URL, { cache: 'force-cache' }).then(function (res) {
+          if (!res.ok) throw new Error('centroids ' + res.status);
+          return res.json();
+        }),
+        fetch(WORLD_COUNTRIES_URL, { cache: 'force-cache' }).then(function (res) {
+          if (!res.ok) throw new Error('world countries ' + res.status);
+          return res.json();
+        })
+      ]);
+    }).then(function (assets) {
       if (typeof window.L === 'undefined') throw new Error('leaflet missing');
-      visitorMap.centroids = centroids || {};
+      visitorMap.centroids = assets[0] || {};
+      visitorMap.countries = assets[1] || null;
     });
   }
 
@@ -715,7 +719,7 @@
     if (!visitorMap.themeObserver && typeof MutationObserver !== 'undefined') {
       visitorMap.themeObserver = new MutationObserver(function () {
         if (!visitorMap.map) return;
-        ensureTileLayer();
+        ensureCountryLayer();
         if (visitorMap.places && visitorMap.places.length) {
           renderVisitorMarkers(visitorMap.places);
         }
