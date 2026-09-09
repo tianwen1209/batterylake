@@ -110,7 +110,9 @@
 #page-preprocessing .px-gate-art {
   width: 100%; height: 84px; border-radius: 11px; background: var(--gate-bg); color: var(--gate); display: grid; place-items: center; margin-bottom: 6px;
 }
-#page-preprocessing .px-gate-art img { width: 112px; height: 112px; object-fit: contain; }
+#page-preprocessing .px-gate-art img {
+  width: 112px; height: 112px; object-fit: contain; display: block; transform: translateY(-12px);
+}
 #page-preprocessing .px-gate strong { font-size: 14.5px; color: var(--text1); }
 #page-preprocessing .px-gate > span { font-size: 12.5px; line-height: 1.5; color: var(--text3); }
 #page-preprocessing .px-gate em {
