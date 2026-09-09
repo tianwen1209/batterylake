@@ -329,8 +329,8 @@
      history, so both are folded into the single message. */
   async function askWorker(question, url) {
     // The minimal Worker rejects very long messages, so keep the folded prompt
-    // under ~4500 characters: drop old history first, then trim the context.
-    const LIMIT = 4500;
+    // under ~3900 characters: drop old history first, then trim the context.
+    const LIMIT = 3900;   // the minimal Worker rejects messages above ~4000 characters
     let hist = historyMessages();
     let system = systemPrompt(question);
     const build = () => {
