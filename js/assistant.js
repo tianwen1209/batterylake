@@ -300,7 +300,9 @@
   const GEMINI_FALLBACK_MODELS = ['gemini-flash-lite-latest', 'gemini-flash-latest', 'gemini-3.5-flash-lite'];
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   function isTransient(status, message) {
-    return status === 429 || status === 503 || status === 500 || status === 502 || status === 504 || /high demand|overloaded|temporar|quota|rate/i.test(message || '');
+    // "User location is not supported" comes from a Cloudflare edge egressing via a
+    // region Gemini blocks; the next request usually lands elsewhere, so retry.
+    return status === 429 || status === 503 || status === 500 || status === 502 || status === 504 || /high demand|overloaded|temporar|quota|rate|location is not supported/i.test(message || '');
   }
 
   async function askGeminiModel(question, model) {
@@ -398,21 +400,23 @@
     if (message.length > LIMIT) { system = system.slice(0, Math.max(800, system.length - (message.length - LIMIT))); message = build(); }
     // `message` is the whole prompt for the minimal Worker; a Worker built from
     // deploy/cloudflare-worker/worker.js prefers question + system + history.
-    const res = await fetchWithTimeout(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, question, system: systemPrompt(question), history: hist })
-    }, 25000);
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) {
+    const payload = JSON.stringify({ message, question, system: systemPrompt(question), history: hist });
+    // A Cloudflare edge occasionally egresses through a region Gemini blocks
+    // ("User location is not supported"); a new request usually succeeds.
+    for (let attempt = 0; ; attempt++) {
+      const res = await fetchWithTimeout(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }, 25000);
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        const text = data.text || data.reply || data.response || '';
+        if (!String(text).trim()) throw new Error('Empty proxy response');
+        return String(text).trim();
+      }
       const err = new Error((data.error || ('Proxy HTTP ' + res.status)) + (data.detail ? ': ' + data.detail : ''));
       err.status = res.status;
       err.transient = isTransient(res.status, err.message);
+      if (/location is not supported/i.test(err.message) && attempt < 2) continue;
       throw err;
     }
-    const text = data.text || data.reply || data.response || '';
-    if (!String(text).trim()) throw new Error('Empty proxy response');
-    return String(text).trim();
   }
 
   function askRemote(provider, question) {
@@ -499,9 +503,11 @@
   /* A failed remote call parks the provider for a cooldown instead of the whole
      session, so a temporary "high demand" answer does not disable the model. */
   const COOLDOWN_MS = 90000;
+  const SHORT_COOLDOWN_MS = 15000;   // location / capacity blips clear quickly
   function demoteProvider(reason, transient) {
     console.warn('AI assistant: ' + state.provider + ' unavailable (' + reason + '); using built-in knowledge base' + (transient ? ' for a while.' : '.'));
-    if (transient) state.cooldownUntil[state.provider] = Date.now() + COOLDOWN_MS;
+    const brief = /location is not supported|high demand|overloaded/i.test(reason || '');
+    if (transient) state.cooldownUntil[state.provider] = Date.now() + (brief ? SHORT_COOLDOWN_MS : COOLDOWN_MS);
     else state.dead.add(state.provider);
     applyProviderStatus();
   }

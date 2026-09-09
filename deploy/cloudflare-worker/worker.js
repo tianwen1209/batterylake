@@ -32,6 +32,10 @@ const FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-3.5-flash-lite'];
 const MAX_QUESTION_CHARS = 4000;
 const MAX_SYSTEM_CHARS = 12000;
 const MAX_HISTORY_TURNS = 8;
+// Cloudflare's outbound fetch sometimes egresses through a region Gemini
+// blocks ("User location is not supported"); a fresh attempt usually takes a
+// different path, so retry those a few times before giving up.
+const LOCATION_RETRIES = 3;
 
 function allowedOrigins(env) {
   const raw = (env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
@@ -127,14 +131,19 @@ export default {
     const models = [env.GEMINI_MODEL || DEFAULT_MODEL, ...FALLBACK_MODELS].filter((m, i, a) => a.indexOf(m) === i);
     let lastErr = null;
     for (const model of models) {
-      try {
-        const text = await callGemini(env, model, body);
-        return json({ text, model }, 200, cors);
-      } catch (err) {
-        lastErr = err;
-        // Only fall through to the next model on capacity / rate problems.
-        if (![429, 500, 503, 504].includes(err.status)) break;
+      let attempt = 0;
+      while (true) {
+        try {
+          const text = await callGemini(env, model, body);
+          return json({ text, model }, 200, cors);
+        } catch (err) {
+          lastErr = err;
+          if (/location is not supported/i.test(err.message || '') && attempt < LOCATION_RETRIES) { attempt++; continue; }
+          break;
+        }
       }
+      // Only fall through to the next model on capacity / rate problems.
+      if (![429, 500, 503, 504].includes(lastErr.status)) break;
     }
     const status = lastErr && [400, 401, 403, 404, 429].includes(lastErr.status) ? lastErr.status : 502;
     return json({ error: 'Gemini API request failed', detail: lastErr ? lastErr.message : 'unknown' }, status, cors);
