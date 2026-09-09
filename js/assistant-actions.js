@@ -33,7 +33,12 @@
     { name: 'download_skill', description: 'Download the batterylake-processing agent skill package (zip).', args: {} },
     { name: 'select_preprocessing_dataset', description: 'On the Preprocessing page, select the dataset for which the agent prompt is generated.', args: { dataset_id: 'catalog id' } },
     { name: 'open_model', description: 'Open a model from the Model library.', args: { model: 'model id or part of its name' } },
-    { name: 'set_theme', description: 'Switch the site theme.', args: { theme: 'light | dark' } }
+    { name: 'set_theme', description: 'Switch the site theme.', args: { theme: 'light | dark' } },
+    { name: 'start_contribution', description: 'Open the Contribute page (describe -> check -> package -> submit a new dataset).', args: {} },
+    { name: 'prefill_contribution', description: 'Fill the contribution form from what the user said. Give only the fields mentioned.', args: { name: 'dataset name', institution: 'lab / university token, e.g. NTU_EEE', year: 'publication year', chemistry: 'LFP | NMC | NMC811 | NCA | LCO | LMO | LTO | LiIon | MultiChem', form: '18650 | 21700 | Pouch | Prismatic | Cyl | Auto | EV-BMS', cells: 'number of cells', capacity_ah: 'nominal capacity in Ah', charge_c: 'charge rate, e.g. 1C or Multi', discharge_c: 'discharge rate', temperature: 'test temperature in C or Multi', category: 'cycle_aging | calendar_aging | characterization | field_data | field_fault_diagnosis | soh_estimation | soc_estimation | eis | thermal_runaway | ev', data_url: 'download link', doi: 'paper or data DOI/URL', license: 'CC BY 4.0 | CC BY-NC 4.0 | CC BY-SA 4.0 | CC0 1.0 | MIT | ODC-By 1.0', contact: 'email', protocol: 'protocol notes', notes: 'notes' } },
+    { name: 'check_contribution', description: 'Report the contribution readiness checklist (what is filled, what is missing).', args: {} },
+    { name: 'download_contribution_package', description: 'Download the submission package zip built from the contribution form.', args: {} },
+    { name: 'submit_contribution', description: 'Prepare the submission: gives the prefilled GitHub issue link for the contribution.', args: {} }
   ];
 
   /* ── helpers ─────────────────────────────────────────────────────── */
@@ -207,6 +212,56 @@
       call('mlOpenDetails', m.id);
       return { ok: true, summary: 'Opened the model **' + (m.name || m.id) + '** in the [Model library](#models)', navigated: true };
     },
+    start_contribution: function () {
+      gotoPage('contribute');
+      var C = window.BatteryLakeContribute;
+      if (C) { C.init(); C.refresh(); C.focusStep(1); }
+      return { ok: true, summary: 'Opened the [Contribute](#contribute) page: describe the dataset, check a sample, download the package, submit', navigated: true };
+    },
+    prefill_contribution: function (args) {
+      var C = window.BatteryLakeContribute;
+      if (!C) return { ok: false, summary: 'The Contribute page is not available' };
+      gotoPage('contribute');
+      C.init();
+      var r = C.prefill(args || {});
+      if (!r.applied.length) return { ok: false, summary: 'No recognised contribution fields in ' + JSON.stringify(args || {}), navigated: true };
+      var missing = r.readiness.required.filter(function (x) { return !x.ok; }).map(function (x) { return x.label; });
+      C.focusStep(1);
+      return { ok: true, summary: 'Filled ' + r.applied.join(', ') + ' on the [Contribute](#contribute) form — reference name `' + r.refName + '`' + (missing.length ? '. Still needed: ' + missing.join(', ') : '. All required fields are filled'), navigated: true };
+    },
+    check_contribution: function () {
+      var C = window.BatteryLakeContribute;
+      if (!C) return { ok: false, summary: 'The Contribute page is not available' };
+      gotoPage('contribute');
+      C.init();
+      var sm = C.check();
+      C.focusStep(2);
+      var lines = sm.items.map(function (i) { return (i.state === 'ok' ? '✓ ' : i.state === 'warn' ? '! ' : '○ ') + i.label + ' — ' + i.text; });
+      return { ok: true, summary: 'Readiness **' + sm.ok + ' / ' + sm.total + '** for `' + sm.refName + '`' + (sm.precheck ? ' · sample quality ' + sm.precheck.overall.toFixed(2) : ' · no data sample checked yet (drop one on the page)') + '\n' + lines.join('\n'), navigated: true };
+    },
+    download_contribution_package: function () {
+      var C = window.BatteryLakeContribute;
+      if (!C) return { ok: false, summary: 'The Contribute page is not available' };
+      gotoPage('contribute');
+      C.init();
+      var sm = C.summary();
+      if (!sm.packageable) return { ok: false, summary: 'Complete the reference name first: institution, year, chemistry, form factor, charge/discharge rate and temperature (use the form or tell me the details)', navigated: true };
+      C.focusStep(3);
+      var ok = C.downloadPackage();
+      return { ok: !!ok, summary: ok ? 'Downloading `' + sm.refName + '_submission.zip` (metadata.json, protocol.md, README, checklist' + (sm.precheck ? ', quality precheck' : '') + ')' : 'Package download failed', navigated: true };
+    },
+    submit_contribution: function () {
+      var C = window.BatteryLakeContribute;
+      if (!C) return { ok: false, summary: 'The Contribute page is not available' };
+      gotoPage('contribute');
+      C.init();
+      var sm = C.summary();
+      C.focusStep(4);
+      var url = C.submitLink();
+      var opened = null;
+      try { opened = window.open(url, '_blank', 'noopener'); } catch (_) { opened = null; }
+      return { ok: true, summary: (opened ? 'Opened the prefilled GitHub issue for `' + sm.refName + '`' : '[Open the prefilled GitHub issue](' + url + ') for `' + sm.refName + '`') + ' — readiness ' + sm.ok + ' / ' + sm.total + (sm.readyToSubmit ? '' : ' (you can still submit; the team will ask for the missing items)'), navigated: true };
+    },
     set_theme: function (args) {
       var theme = /dark|night|深|夜/i.test(String(args.theme || '')) ? 'dark' : 'light';
       call('setTheme', theme);
@@ -267,6 +322,7 @@
       'Rules: use only the tools and argument values listed; use catalog ids for datasets; chain several actions when the request needs it (at most 5).',
       'If the request is a question rather than an action, return an empty actions list and answer briefly in reply using the catalog above.',
       'If the request is ambiguous, return an empty actions list and ask one clarifying question in reply.',
+      'For prefill_contribution pass only the fields the user actually stated; never invent a name, DOI, license, link or number.',
       'Write reply in the same language as the user (' + (isZh(question) ? 'Chinese' : 'English') + '), plain text, describing what you are doing.'
     ].join('\n');
   }
@@ -280,6 +336,40 @@
       if (!obj || typeof obj !== 'object') return null;
       return { actions: Array.isArray(obj.actions) ? obj.actions : [], reply: typeof obj.reply === 'string' ? obj.reply : '' };
     } catch (_) { return null; }
+  }
+
+  /* Pull contribution fields out of free text ("24 NMC 21700 cells from NTU, 2025, 1C/1C at 25C"). */
+  function extractContribution(text) {
+    var t = String(text || '');
+    var q = t.toLowerCase();
+    var out = {};
+    var m;
+    if ((m = q.match(/(\d{1,4})\s*(?:cells?|电芯|颗|节)/))) out.cells = m[1];
+    if ((m = q.match(/\b(20\d{2})\b/))) out.year = m[1];
+    if ((m = q.match(/\b(nmc811|nmc|lfp|nca|lco|lmo|lto)\b/))) out.chemistry = m[1].toUpperCase();
+    else if (/磷酸铁锂/.test(q)) out.chemistry = 'LFP'; else if (/三元/.test(q)) out.chemistry = 'NMC';
+    if ((m = q.match(/\b(18650|21700)\b/))) out.form = m[1];
+    else if (/pouch|软包/.test(q)) out.form = 'Pouch'; else if (/prismatic|方形/.test(q)) out.form = 'Prismatic'; else if (/cylindrical|圆柱/.test(q)) out.form = 'Cyl';
+    if ((m = q.match(/(\d+(?:\.\d+)?)\s*ah\b/))) out.capacity_ah = m[1];
+    if ((m = q.match(/(\d+(?:\.\d+)?)\s*c\s*\/\s*(\d+(?:\.\d+)?)\s*c\b/))) { out.charge_c = m[1] + 'C'; out.discharge_c = m[2] + 'C'; }
+    else if ((m = q.match(/(\d+(?:\.\d+)?)\s*c\s*(?:charge|charging|充电?)[^\d]{0,12}(\d+(?:\.\d+)?)\s*c\s*(?:discharge|discharging|放电?)/))) { out.charge_c = m[1] + 'C'; out.discharge_c = m[2] + 'C'; }
+    else {
+      var ch = q.match(/(\d+(?:\.\d+)?)\s*c\s*(?:charge|charging|充)/), dc = q.match(/(\d+(?:\.\d+)?)\s*c\s*(?:discharge|discharging|放)/);
+      if (ch) out.charge_c = ch[1] + 'C';
+      if (dc) out.discharge_c = dc[1] + 'C';
+      if (!ch && !dc && (m = q.match(/(\d+(?:\.\d+)?)\s*c\b/))) { out.charge_c = m[1] + 'C'; out.discharge_c = m[1] + 'C'; }
+    }
+    if (/multi[- ]?rate|multiple rates|多倍率|多种倍率/.test(q)) { out.charge_c = out.charge_c || 'Multi'; out.discharge_c = 'Multi'; }
+    if ((m = q.match(/(?:at|@|在)\s*(-?\d{1,2})\s*(?:°\s*c|c|度|℃)\b/)) || (m = q.match(/(-?\d{1,2})\s*(?:°\s*c|℃|度)/))) out.temperature = m[1];
+    if ((m = t.match(/\bfrom\s+([A-Z][A-Za-z0-9&.-]*(?:\s+[A-Z][A-Za-z0-9&.-]*){0,3})/))) out.institution = m[1].replace(/\s+/g, '_');
+    else if ((m = t.match(/(?:来自|由)\s*([\u4e00-\u9fff]{2,12}?)(?:大学|实验室|的|，|,|。)/))) out.institution = m[1];
+    else if ((m = t.match(/(?:来自|由)\s*([A-Za-z][A-Za-z0-9&.\- ]{1,30}?)\s*(?:大学|实验室|的|，|,|。|\n|$)/))) out.institution = m[1].trim().replace(/\s+/g, '_');
+    if ((m = t.match(/https?:\/\/\S+/))) out.data_url = m[0];
+    if ((m = t.match(/\b(10\.\d{4,}\/\S+)/))) out.doi = 'https://doi.org/' + m[1];
+    if ((m = t.match(/[\w.+-]+@[\w-]+\.[\w.-]+/))) out.contact = m[0];
+    if ((m = t.match(/\b(CC[ -]BY(?:[ -]NC)?(?:[ -]SA)?(?: 4\.0)?|CC0|MIT)\b/i))) out.license = m[1].toUpperCase().replace(/-/g, ' ').replace(/^CC BY( NC| SA)?$/, 'CC BY$1 4.0').replace('CC0', 'CC0 1.0');
+    if ((m = t.match(/(?:called|named|titled|名为|叫)\s*[“"']?([^”"'\n,，]{3,60})[”"']?/i))) out.name = m[1].trim();
+    return out;
   }
 
   /* ── rule-based fallback planner (works without any model) ───────── */
@@ -313,7 +403,21 @@
     if (!page) Object.keys(zhPages).forEach(function (k) { if (q.indexOf(k) >= 0 && (wants.open || /页/.test(q))) page = page || zhPages[k]; });
     if (/model library|模型库/.test(q)) page = 'models';
 
+    var wantsContribute = /\b(contribut\w*|submit(?:ting)?\s+(?:a |my |our )?(?:new )?dataset|share (?:my|our) (?:data|dataset)|upload (?:my|our) dataset|donate)\b|贡献|提交(?:我的|我们的|一个|新)?数据集|分享(?:我的|我们的)?数据|上传(?:我的|我们的)?数据集/.test(q);
+    var wantsPackage = /\b(package|zip|bundle)\b|打包|压缩包/.test(q);
+    var wantsSubmit = /\b(submit|send|issue)\b|提交|发送/.test(q);
+    var wantsCheck = /\b(check|readiness|ready|missing|status)\b|检查|还差|缺什么|准备好/.test(q);
+    var extracted = extractContribution(command);
+
     if (wants.dark || wants.light) actions.push({ tool: 'set_theme', args: { theme: wants.dark ? 'dark' : 'light' } });
+    else if (wantsContribute || (Object.keys(extracted).length >= 3 && /dataset|数据集|cells|电芯/.test(q))) {
+      if (Object.keys(extracted).length) actions.push({ tool: 'prefill_contribution', args: extracted });
+      if (wantsPackage) actions.push({ tool: 'download_contribution_package', args: {} });
+      else if (wantsSubmit && !Object.keys(extracted).length) actions.push({ tool: 'submit_contribution', args: {} });
+      else if (wantsCheck) actions.push({ tool: 'check_contribution', args: {} });
+      else if (!Object.keys(extracted).length) actions.push({ tool: 'start_contribution', args: {} });
+    }
+    else if (wantsPackage && /contribution|submission|贡献|提交/.test(q)) actions.push({ tool: 'download_contribution_package', args: {} });
     else if (wants.clear && (wants.filter || /filter|筛选|搜索/.test(q))) actions.push({ tool: 'clear_filters', args: {} });
     else if (wants.skill && wants.download) actions.push({ tool: 'download_skill', args: {} });
     else if (wants.skill) actions.push({ tool: 'open_page', args: { page: 'preprocessing' } });
@@ -342,6 +446,8 @@
 
     var reply;
     if (actions.length) reply = zh ? '好的，正在执行：' : 'On it:';
+    if (actions.some(function (a) { return a.tool === 'prefill_contribution'; }) && !zh) reply = 'Starting a contribution with what you told me:';
+    if (actions.some(function (a) { return a.tool === 'prefill_contribution'; }) && zh) reply = '按你提供的信息开始填写贡献表单：';
     else if (kb) reply = kb.answer(command).text + '\n\n' + (zh ? '（Agent 模式可以执行页面操作，例如：“打开 dataset_21 的质量报告”、“筛选 LFP 软包数据集”、“下载处理 skill”。）' : '(Agent mode can also act on the page, e.g. "open dataset_21 quality report", "filter LFP pouch datasets", "download the processing skill".)');
     else reply = zh ? '我没有理解这个指令。' : 'I could not understand that request.';
     return { actions: actions, reply: reply };

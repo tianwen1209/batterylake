@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="styles/showcase.css">
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css">
+<link rel="stylesheet" href="styles/contribute.css">
 </head>
 <body>
 <div class="app">
@@ -1802,157 +1803,111 @@ for dataset in resp.json()["items"]:
        ═══════════════════════════════════════ -->
   <div class="page" id="page-contribute">
     <div class="page-header contribute-upload-hero visual-page-hero">
-      <div class="page-title">Contribute Dataset</div>
-      <div class="page-desc">Help advance battery research by contributing your experimental data to the BatteryLake platform. All contributions undergo our standardized ETL and quality assessment pipeline.</div>
+      <div class="page-title">Contribute a dataset</div>
+      <div class="page-desc">Describe your dataset, check it against the BatteryLake standard, download a submission package and send it to the team. Nothing is uploaded from this page; every contribution is then processed with the batterylake-processing skill and published with full attribution.</div>
       <div class="contribute-actions visual-page-actions">
-        <input type="file" class="dataset-upload-input" id="dataset-upload" multiple onchange="handleDatasetUpload(event)">
-        <button class="dataset-contribute-btn" onclick="document.getElementById('dataset-upload').click()">
+        <button class="dataset-contribute-btn" type="button" onclick="BatteryLakeContribute.focusStep(1)">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-          Contribute Dataset
+          Start a contribution
         </button>
       </div>
       <img class="contribute-hero-art visual-page-hero-art" src="assets/images/contribute-hero-transparent.png" alt="" aria-hidden="true">
     </div>
 
-    <section class="contrib-cockpit">
-      <div>
-        <div class="contrib-cockpit-kicker">Submission cockpit</div>
-        <div class="contrib-cockpit-title">Package a dataset for review with the same discipline as a benchmark run.</div>
-        <div class="contrib-cockpit-copy">The contribution page now shows what must be prepared, how the validation lane works, and which files are required before a pull request or upload can be accepted.</div>
+    <ol class="cb-rail" id="cb-rail">
+      <li data-step="1" class="is-active"><span class="cb-rail-num">1</span><span>Describe</span><em id="cb-rail-1">0 / 9 required fields</em></li>
+      <li data-step="2"><span class="cb-rail-num">2</span><span>Check</span><em id="cb-rail-2">0 / 6 ready</em></li>
+      <li data-step="3"><span class="cb-rail-num">3</span><span>Package</span><em id="cb-rail-3">needs step 1</em></li>
+      <li data-step="4"><span class="cb-rail-num">4</span><span>Submit</span><em id="cb-rail-4">after the checks</em></li>
+    </ol>
+
+    <section class="cb-step reveal" id="cb-step-1">
+      <div class="cb-step-head">
+        <span class="cb-step-num">1</span>
+        <div><h2>Describe the dataset</h2><p>These fields become <code>metadata.json</code> and the catalog reference name. Your draft is kept in this browser.</p></div>
+        <div class="cb-head-actions"><button class="cb-mini-btn" id="cb-clear-btn" type="button">Clear draft</button></div>
       </div>
-      <div class="contrib-cockpit-stats">
-        <div class="contrib-stat"><span>Required files</span><strong>4</strong></div>
-        <div class="contrib-stat"><span>Review gates</span><strong>5</strong></div>
-        <div class="contrib-stat"><span>Attribution</span><strong>DOI</strong></div>
+      <div class="cb-describe">
+        <form class="cb-form" id="cb-form" autocomplete="off" onsubmit="return false"></form>
+        <aside class="cb-preview">
+          <div class="cb-refname-card">
+            <div class="cb-card-label">Reference name</div>
+            <div class="cb-refname" id="cb-refname"></div>
+            <div class="cb-refname-note" id="cb-refname-note"></div>
+          </div>
+          <div class="cb-json-card">
+            <div class="cb-card-label"><span>metadata.json</span><button class="cb-mini-btn" id="cb-copy-json" type="button">Copy</button></div>
+            <pre class="cb-json" id="cb-json"></pre>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <div class="contrib-workflow">
-      <section class="contrib-readiness">
-        <div class="contrib-panel-title">Readiness checklist</div>
-        <div class="contrib-panel-sub">A submission should not move forward until these minimum conditions are visible.</div>
-        <div class="contrib-check-row">
-          <span class="contrib-check-icon"></span>
-          <span><strong>Time-series channels</strong><small>Voltage, current, timestamp, and cell identifier are present.</small></span>
-          <span class="contrib-check-tag">Required</span>
-        </div>
-        <div class="contrib-check-row">
-          <span class="contrib-check-icon"></span>
-          <span><strong>Experiment metadata</strong><small>Chemistry, nominal capacity, protocol, lab, and temperature are documented.</small></span>
-          <span class="contrib-check-tag">Required</span>
-        </div>
-        <div class="contrib-check-row warn">
-          <span class="contrib-check-icon">!</span>
-          <span><strong>Publication source</strong><small>DOI, license, or repository URL is attached for attribution.</small></span>
-          <span class="contrib-check-tag">Preferred</span>
-        </div>
-        <div class="contrib-check-row">
-          <span class="contrib-check-icon"></span>
-          <span><strong>Protocol notes</strong><small>Rest periods, C-rates, formation cycles, and test cutoffs are explained.</small></span>
-          <span class="contrib-check-tag">Required</span>
-        </div>
-      </section>
-
-      <section class="contrib-intake">
-        <div class="contrib-panel-title">Dataset intake package</div>
-        <div class="contrib-panel-sub">The user sees the exact bundle expected before opening GitHub or uploading files.</div>
-        <div class="contrib-intake-grid">
-          <div class="contrib-file-tile"><span>01</span><strong>raw_cycles/</strong><small>Native cycler exports or normalized CSV/Parquet time-series.</small></div>
-          <div class="contrib-file-tile"><span>02</span><strong>metadata.json</strong><small>Cell metadata, protocol, institution, DOI, and license fields.</small></div>
-          <div class="contrib-file-tile"><span>03</span><strong>protocol.md</strong><small>Charge/discharge details, rest periods, test equipment, and notes.</small></div>
-          <div class="contrib-file-tile"><span>04</span><strong>manifest.yaml</strong><small>File map, checksums, expected channels, and reviewer comments.</small></div>
-        </div>
-        <div class="contrib-action-bar">
-          <code>submission/NASA_PCoE_2010/manifest.yaml</code>
-          <a href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep" target="_blank">Open repository</a>
-        </div>
-      </section>
-
-      <section class="contrib-validation-lane">
-        <div class="contrib-panel-title">Validation lane</div>
-        <div class="contrib-panel-sub">Each contribution passes through the same checks used by the platform.</div>
-        <div class="contrib-validation-flow">
-          <div class="contrib-validation-step"><span class="contrib-validation-num">1</span><span><strong>Schema parse</strong><small>Column mapping, unit detection, and required metadata validation.</small></span></div>
-          <div class="contrib-validation-step"><span class="contrib-validation-num">2</span><span><strong>Quality report</strong><small>Physical plausibility, missingness, and consistency scores are generated.</small></span></div>
-          <div class="contrib-validation-step"><span class="contrib-validation-num">3</span><span><strong>Catalog publish</strong><small>Dataset is added with provenance, citation, and benchmark readiness.</small></span></div>
-        </div>
-      </section>
-    </div>
-
-    <div class="contribute-hero">
-      <div class="ch-title">Share Your Battery Data with the Community</div>
-      <div class="ch-desc">Every contributed dataset is processed through our standardized pipeline, quality-assessed, and made available to researchers worldwide - with full attribution and DOI citation to your original work.</div>
-    </div>
-
-    <h3 style="font-family:var(--display);font-size:18px;margin-bottom:14px;">Contribution Workflow</h3>
-    <div class="contrib-steps">
-      <div class="contrib-step">
-        <div class="contrib-step-num">1</div>
-        <div class="contrib-step-title">Prepare Data</div>
-        <div class="contrib-step-desc">Organize your raw data files, metadata, and protocol documentation according to our schema.</div>
+    <section class="cb-step reveal" id="cb-step-2">
+      <div class="cb-step-head">
+        <span class="cb-step-num">2</span>
+        <div><h2>Check readiness</h2><p>The same checks the platform runs, in your browser. A small excerpt (one or two cells, a few thousand rows) is enough to detect the channels.</p></div>
       </div>
-      <div class="contrib-step">
-        <div class="contrib-step-num">2</div>
-        <div class="contrib-step-title">Submit via PR</div>
-        <div class="contrib-step-desc">Open a GitHub Pull Request to the BatteryLake repository with your dataset and metadata.</div>
+      <div class="cb-check-grid">
+        <label class="cb-drop" id="cb-sample-drop">
+          <input id="cb-sample-input" type="file" accept=".csv,.tsv,.txt,.json">
+          <span class="cb-drop-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
+          <span><strong>Data sample <em>required</em></strong><small>CSV or JSON with voltage, current, timestamp and a cell id. Runs the quality engine locally.</small></span>
+        </label>
+        <label class="cb-drop" id="cb-status-drop">
+          <input id="cb-status-input" type="file" accept=".json">
+          <span class="cb-drop-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/></svg></span>
+          <span><strong>status.json <em>optional</em></strong><small>If you already ran the batterylake-processing skill, drop its status.json to show the five gates.</small></span>
+        </label>
       </div>
-      <div class="contrib-step">
-        <div class="contrib-step-num">3</div>
-        <div class="contrib-step-title">Validation</div>
-        <div class="contrib-step-desc">Our team runs the ETL pipeline and quality assessment to verify data integrity.</div>
-      </div>
-      <div class="contrib-step">
-        <div class="contrib-step-num">4</div>
-        <div class="contrib-step-title">Publication</div>
-        <div class="contrib-step-desc">Your dataset is added to the catalog with full provenance, DOI, and your attribution.</div>
-      </div>
-    </div>
-
-    <div class="contrib-requirements">
-      <div class="contrib-req-title">What to Submit</div>
-      <div class="contrib-req-grid">
-        <div class="contrib-req-item">
-          <div class="contrib-req-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <div><div class="contrib-req-name">Raw Data Files</div><div class="contrib-req-desc">Time-series measurements in CSV, Parquet, HDF5, MATLAB, or native cycler format (Arbin, MACCOR, Neware).</div></div>
-        </div>
-        <div class="contrib-req-item">
-          <div class="contrib-req-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <div><div class="contrib-req-name">Metadata</div><div class="contrib-req-desc">Cell chemistry, nominal capacity, form factor, temperature, C-rate protocol, number of cells, and cell identifiers.</div></div>
-        </div>
-        <div class="contrib-req-item">
-          <div class="contrib-req-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-          <div><div class="contrib-req-name">Protocol Description</div><div class="contrib-req-desc">Test protocol document detailing charge/discharge procedures, rest periods, characterization tests, and equipment used.</div></div>
-        </div>
-        <div class="contrib-req-item">
-          <div class="contrib-req-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
-          <div><div class="contrib-req-name">License / DOI / Source</div><div class="contrib-req-desc">Publication DOI, data license (CC-BY preferred), original source URL, and any attribution requirements.</div></div>
+      <div class="cb-result" id="cb-sample-result" hidden></div>
+      <div class="cb-result" id="cb-status-result" hidden></div>
+      <div class="cb-readiness-wrap">
+        <ul class="cb-readiness" id="cb-readiness"></ul>
+        <div class="cb-score-card">
+          <div class="cb-score-label">Readiness</div>
+          <div class="cb-score-value" id="cb-score">0 / 6</div>
+          <div class="cb-score-bar" id="cb-score-bar"></div>
+          <div class="cb-score-note" id="cb-score-note"></div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="diag-section" style="margin-top:20px;">
-      <div class="diag-title">Validation Template & Schema Checklist</div>
-      <p style="font-size:13px;color:var(--text3);margin-bottom:14px;">Use our validation template to ensure your submission meets all requirements before opening a PR.</p>
-      <table class="model-table">
-        <thead><tr><th>Check Item</th><th>Requirement</th><th>Required?</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Time-series columns</strong></td><td>timestamp, voltage_V, current_A, capacity_Ah (minimum)</td><td><span style="color:var(--green);font-weight:600;">Required</span></td></tr>
-          <tr><td><strong>Cell identifier</strong></td><td>Unique cell_id for each battery unit</td><td><span style="color:var(--green);font-weight:600;">Required</span></td></tr>
-          <tr><td><strong>Chemistry & form factor</strong></td><td>Stated in metadata.json or README</td><td><span style="color:var(--green);font-weight:600;">Required</span></td></tr>
-          <tr><td><strong>Nominal capacity</strong></td><td>Manufacturer-rated capacity in Ah</td><td><span style="color:var(--green);font-weight:600;">Required</span></td></tr>
-          <tr><td><strong>Temperature channel</strong></td><td>Cell/ambient temperature per measurement</td><td><span style="color:var(--amber);font-weight:600;">Preferred</span></td></tr>
-          <tr><td><strong>Publication DOI</strong></td><td>Link to associated paper or data repository</td><td><span style="color:var(--amber);font-weight:600;">Preferred</span></td></tr>
-          <tr><td><strong>EIS data</strong></td><td>Impedance spectroscopy if available</td><td><span style="color:var(--text4);">Optional</span></td></tr>
-        </tbody>
-      </table>
-    </div>
+    <section class="cb-step reveal" id="cb-step-3">
+      <div class="cb-step-head">
+        <span class="cb-step-num">3</span>
+        <div><h2>Package</h2><p>A zip built in your browser from the form, the protocol notes and the check results. Add the raw files (or the download link) and you are done.</p></div>
+      </div>
+      <div class="cb-package">
+        <div class="cb-tree" id="cb-tree"></div>
+        <div class="cb-package-actions">
+          <button class="prep-btn" id="cb-download-btn" type="button" disabled>Download package (.zip)</button>
+          <button class="prep-btn secondary" id="cb-copy-btn" type="button">Copy submission summary</button>
+          <p>The package contains no measurement data; raw files stay with you and are shared via the download link in metadata.json.</p>
+        </div>
+      </div>
+    </section>
 
-    <div style="text-align:center;margin-top:28px;">
-      <a href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep" target="_blank" class="oh-btn oh-btn-primary" style="text-decoration:none;display:inline-flex;padding:12px 28px;font-size:14px;border-radius:8px;">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        Open GitHub Repository to Contribute
-      </a>
-    </div>
+    <section class="cb-step reveal" id="cb-step-4">
+      <div class="cb-step-head">
+        <span class="cb-step-num">4</span>
+        <div><h2>Submit</h2><p>Send the package to the team. A GitHub issue is prefilled with your summary; attach the zip or paste its link.</p></div>
+      </div>
+      <div class="cb-submit">
+        <div class="cb-channel">
+          <h3>Open a GitHub issue</h3>
+          <p>Creates a "dataset-contribution" issue in BatteryLake-Benchmark-DataPrep with the summary, readiness checklist and links already filled in. Requires a GitHub account.</p>
+          <a class="prep-btn" id="cb-github" href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep/issues/new" target="_blank" rel="noopener">Open prefilled issue</a>
+        </div>
+        <div class="cb-channel">
+          <h3>Send it another way</h3>
+          <p>Copy the submission summary and send it with the package through your usual channel to the BatteryLake team (see <a href="#about" onclick="showPage('about'); return false;">About</a>).</p>
+          <button class="prep-btn secondary" type="button" onclick="BatteryLakeContribute.summaryText && navigator.clipboard.writeText(BatteryLakeContribute.summaryText()).then(function(){showToast('Submission summary copied.','success')})">Copy summary</button>
+        </div>
+      </div>
+      <div class="cb-gates-info" id="cb-gates-info"></div>
+      <p class="cb-review-note">After submission the team runs the <a href="#preprocessing" onclick="showPage('preprocessing'); return false;">batterylake-processing skill</a> on your files. You get a <code>status.json</code> and a <a href="#quality" onclick="showPage('quality'); return false;">quality report</a>, and the dataset appears in the <a href="#datasets" onclick="showPage('datasets'); return false;">catalog</a> under your reference name with your DOI and license.</p>
+    </section>
   </div>
 
 </div><!-- .main -->
@@ -1992,6 +1947,7 @@ for dataset in resp.json()["items"]:
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
 <script src="js/preprocessing.js"></script>
+<script src="js/contribute.js"></script>
 <script src="js/naming-sequencer.js"></script>
 <div class="ai-chat-widget" aria-live="polite">
   <button class="ai-chat-fab" id="aiChatToggle" type="button" aria-label="Open AI assistant">

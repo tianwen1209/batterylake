@@ -1303,6 +1303,10 @@ function showPage(name, navEl, options = {}) {
   if (page) page.classList.add('active');
   if (navEl) navEl.classList.add('active');
   document.getElementById('sidebar').classList.remove('open');
+  if (name === 'contribute' && window.BatteryLakeContribute && typeof window.BatteryLakeContribute.init === 'function') {
+    window.BatteryLakeContribute.init();
+    window.BatteryLakeContribute.refresh();
+  }
   if (name === 'preprocessing' && window.BatteryLakePreprocessing &&
       typeof window.BatteryLakePreprocessing.refreshDatasets === 'function') {
     window.BatteryLakePreprocessing.refreshDatasets();

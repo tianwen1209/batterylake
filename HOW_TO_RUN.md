@@ -81,7 +81,10 @@ The model (or, without a model, a rule-based planner) turns the request into a
 plan made only of the whitelisted tools in `js/assistant-actions.js` (open a
 page / dataset / quality report, filter or clear the catalog, download the
 skill or a report, run a sample assessment, select the preprocessing dataset,
-open a model, set the theme). Each step is validated against the live catalog
+open a model, set the theme, and drive the Contribute page: prefill the
+contribution form from a sentence such as "I want to contribute 24 NMC 21700
+cells from NTU, 2025, 1C/1C at 25 °C", report readiness, download the package,
+open the prefilled GitHub issue). Each step is validated against the live catalog
 and reported in the transcript with a ✓ / ! marker.
 
 `provider: 'auto'` (default) tries Gemini → custom endpoint → local backend (localhost only)

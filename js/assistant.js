@@ -335,7 +335,7 @@
   function isTransient(status, message) {
     // "User location is not supported" comes from a Cloudflare edge egressing via a
     // region Gemini blocks; the next request usually lands elsewhere, so retry.
-    return status === 429 || status === 503 || status === 500 || status === 502 || status === 504 || /high demand|overloaded|temporar|quota|rate|location is not supported/i.test(message || '');
+    return status === 429 || status === 503 || status === 500 || status === 502 || status === 504 || /high demand|overloaded|temporar|quota|rate|location is not supported|failed to fetch|networkerror|load failed|aborted/i.test(message || '');
   }
 
   async function askGeminiModel(question, model) {
