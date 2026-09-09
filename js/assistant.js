@@ -120,7 +120,22 @@
       : { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   }
 
-  /* Per-message source tags are not shown (the header names the active provider). */
+  /* Sender name shown above every assistant bubble: which source produced the answer. */
+  function senderName(source) {
+    switch (source) {
+      case 'gemini': case 'worker': return 'Gemini';
+      case 'openai': return 'Model';
+      case 'backend': return 'Local backend';
+      case 'pollinations': return 'Free model';
+      case 'kb': case 'dataset': case 'fallback': case 'local': return 'Site knowledge';
+      default: return '';
+    }
+  }
+  function senderClass(source) {
+    return /^(gemini|worker|openai|backend|pollinations)$/.test(source || '') ? 'is-model' : 'is-site';
+  }
+
+  /* Per-message source tags are not shown (the sender name above the bubble covers it). */
   function sourceLabel(source) {
     if (!SHOW_SOURCE_TAGS) return '';
     switch (source) {
@@ -139,6 +154,16 @@
     item.className = `ai-msg ai-msg-${type}`;
     const bubble = document.createElement('span');
     bubble.className = 'ai-msg-bubble';
+    let sender = null;
+    if (type === 'bot') {
+      sender = document.createElement('span');
+      sender.className = 'ai-msg-sender';
+      const name = senderName(options.source);
+      sender.textContent = name;
+      sender.hidden = !name;
+      sender.classList.add(senderClass(options.source));
+      bubble.appendChild(sender);
+    }
     const content = document.createElement('span');
     content.className = 'ai-msg-text';
     if (type === 'bot') { content.classList.add('is-rich'); content.innerHTML = renderMarkdownLite(text); }
@@ -168,7 +193,7 @@
     }
     messages.appendChild(item);
     messages.scrollTop = messages.scrollHeight;
-    return { text: content, meta, bubble };
+    return { text: content, meta, bubble, sender };
   }
 
   function setPanelOpen(isOpen) {
@@ -493,6 +518,13 @@
     try {
       const result = await answer(cleanMessage);
       loading.text.innerHTML = renderMarkdownLite(result.text);
+      if (loading.sender) {
+        const name = senderName(result.source);
+        loading.sender.textContent = name;
+        loading.sender.hidden = !name;
+        loading.sender.classList.remove('is-model', 'is-site');
+        loading.sender.classList.add(senderClass(result.source));
+      }
       const src = sourceLabel(result.source);
       if (src) {
         const tag = document.createElement('span');

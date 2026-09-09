@@ -2461,3 +2461,29 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 }
 .qa-chip.review { background: rgba(239,68,68,.12); color: #dc2626; border-color: rgba(239,68,68,.25); }
 [data-theme="dark"] .qa-chip.review { color: #f87171; }
+
+/* AI assistant: sender name above each assistant bubble (Gemini vs site knowledge) */
+.ai-msg-sender {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 2px;
+}
+.ai-msg-sender::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .8;
+}
+.ai-msg-sender.is-model { color: #2563eb; }
+.ai-msg-sender.is-site { color: #0d9488; }
+.ai-msg-sender[hidden] { display: none; }
+[data-theme="dark"] .ai-msg-sender.is-model { color: #7db3ff; }
+[data-theme="dark"] .ai-msg-sender.is-site { color: #2dd4bf; }
