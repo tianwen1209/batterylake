@@ -21,6 +21,15 @@
   if (!panel || !toggle || !form || !input || !messages) return;
   const sendButton = form.querySelector('button[type="submit"]');
   const suggestions = document.querySelectorAll('.ai-suggestion');
+  const suggestionMenu = panel.querySelector('.ai-chat-suggestions');
+  const modeButtons = panel.querySelectorAll('[data-ai-mode]');
+  const modeToolbar = document.getElementById('aiModeToolbar');
+  const modeOptions = document.getElementById('aiModeOptions');
+  const modeCollapse = document.getElementById('aiModeCollapse');
+  const modeSummary = document.getElementById('aiModeSummary');
+  const agentMessages = document.getElementById('aiAgentMessages');
+  let activeMode = 'chat';
+  let sending = false;
   const STORAGE_KEY = 'batteryLakeAiChatHistoryV2';
   const KB = window.BatteryLakeKnowledge || null;
   const CONFIG = Object.assign({ provider: 'auto', apiKey: '', model: '', endpoint: '', timeoutMs: 20000 }, window.BATTERYLAKE_AI_CONFIG || {});
@@ -191,15 +200,36 @@
     } else {
       item.appendChild(bubble);
     }
-    messages.appendChild(item);
-    messages.scrollTop = messages.scrollHeight;
+    const container = options.container || messages;
+    container.appendChild(item);
+    container.scrollTop = container.scrollHeight;
     return { text: content, meta, bubble, sender };
   }
 
   function setPanelOpen(isOpen) {
     panel.classList.toggle('open', isOpen);
     document.body.classList.toggle('ai-panel-open', isOpen);
-    if (isOpen) { input.focus(); void ensureProvider(); }
+    if (isOpen && activeMode === 'chat') { input.focus(); void ensureProvider(); }
+  }
+  function setMode(mode) {
+    activeMode = mode === 'agent' ? 'agent' : 'chat';
+    const isAgent = activeMode === 'agent';
+    modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.aiMode === activeMode)));
+    modeSummary.textContent = isAgent ? 'Agent mode · Soon' : 'Chat mode';
+    messages.hidden = isAgent;
+    form.hidden = isAgent;
+    suggestionMenu.hidden = isAgent;
+    clearBtn.hidden = isAgent;
+    panel.querySelector('.ai-chat-status').hidden = isAgent;
+    subtitleEl.hidden = isAgent;
+    agentMessages.hidden = !isAgent;
+    if (isAgent && !agentMessages.childElementCount) {
+      addMessage('Agent mode is still in development. 功能还在开发中，敬请期待。', 'bot', { container: agentMessages });
+    }
+    if (!isAgent) {
+      messages.scrollTop = messages.scrollHeight;
+      resizeInput();
+    }
   }
   function setTyping(el) {
     el.innerHTML = '<span class="ai-typing" aria-label="Thinking"><span></span><span></span><span></span></span>';
@@ -503,8 +533,10 @@
   }
 
   async function sendMessage(message) {
+    if (activeMode !== 'chat' || sending) return;
     const cleanMessage = message.trim();
     if (!cleanMessage) return;
+    sending = true;
     const userTime = new Date().toISOString();
     addMessage(cleanMessage, 'user', { time: userTime });
     saveMessage(cleanMessage, 'user', userTime);
@@ -539,13 +571,25 @@
       loading.text.textContent = fallback;
       saveMessage(fallback, 'bot', loadingTime, 'fallback');
     } finally {
+      sending = false;
       input.disabled = false;
       sendButton.disabled = false;
-      input.focus();
+      if (activeMode === 'chat' && panel.classList.contains('open')) input.focus();
     }
   }
 
   /* ── events ────────────────────────────────────────────────────── */
+  modeButtons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.aiMode)));
+  modeCollapse.addEventListener('click', () => {
+    const collapsed = modeCollapse.getAttribute('aria-expanded') === 'true';
+    modeOptions.hidden = collapsed;
+    modeSummary.hidden = !collapsed;
+    modeToolbar.classList.toggle('is-collapsed', collapsed);
+    modeCollapse.setAttribute('aria-expanded', String(!collapsed));
+    const label = collapsed ? 'Expand mode selector' : 'Collapse mode selector';
+    modeCollapse.setAttribute('aria-label', label);
+    modeCollapse.title = label;
+  });
   toggle.addEventListener('click', () => setPanelOpen(!panel.classList.contains('open')));
   if (close) close.addEventListener('click', () => setPanelOpen(false));
   if (clearBtn) clearBtn.addEventListener('click', clearConversation);
@@ -591,12 +635,13 @@
   window.batteryTwinAI = {
     open() { setPanelOpen(true); },
     addBotNote(text) {
+      setMode('chat');
       setPanelOpen(true);
       const time = new Date().toISOString();
       addMessage(text, 'bot', { time, source: 'kb' });
       saveMessage(text, 'bot', time, 'kb');
     },
-    send(message) { setPanelOpen(true); return sendMessage(message); },
+    send(message) { setMode('chat'); setPanelOpen(true); return sendMessage(message); },
     ask(message) { return answer(String(message || '')); },
     provider() { return state.provider; }
   };

@@ -2035,6 +2035,17 @@ for dataset in resp.json()["items"]:
         <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="Close AI assistant">&times;</button>
       </div>
     </div>
+    <div class="ai-mode-toolbar" id="aiModeToolbar">
+      <div class="ai-mode-switch" id="aiModeOptions" role="group" aria-label="Assistant mode">
+        <button class="ai-mode-button" type="button" data-ai-mode="chat" aria-pressed="true">Chat</button>
+        <button class="ai-mode-button" type="button" data-ai-mode="agent" aria-pressed="false">Agent <span class="ai-mode-badge">Soon</span></button>
+      </div>
+      <button class="ai-mode-collapse" id="aiModeCollapse" type="button" aria-expanded="true" aria-controls="aiModeOptions" aria-label="Collapse mode selector" title="Collapse mode selector">
+        <span id="aiModeSummary" hidden>Chat mode</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="ai-chat-messages" id="aiAgentMessages" aria-label="Agent mode" hidden></div>
     <div class="ai-chat-messages" id="aiChatMessages">
       <div class="ai-msg ai-msg-bot">
         <span class="ai-msg-avatar" aria-hidden="true">
