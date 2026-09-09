@@ -220,8 +220,16 @@
     var list = Array.isArray(actions) ? actions.slice(0, 6) : [];
     for (var i = 0; i < list.length; i++) {
       var a = list[i] || {};
-      var tool = String(a.tool || a.name || '').trim();
-      var args = (a.args && typeof a.args === 'object') ? a.args : (a.arguments && typeof a.arguments === 'object' ? a.arguments : {});
+      var tool = String(a.tool || a.name || a.action || '').trim();
+      var args = (a.args && typeof a.args === 'object') ? a.args
+        : (a.arguments && typeof a.arguments === 'object') ? a.arguments
+        : (a.params && typeof a.params === 'object') ? a.params
+        : (a.input && typeof a.input === 'object') ? a.input : null;
+      if (!args) {
+        // The model sometimes puts the arguments next to "tool" instead of under "args".
+        args = {};
+        Object.keys(a).forEach(function (k) { if (['tool', 'name', 'action', 'args', 'arguments', 'params', 'input'].indexOf(k) < 0) args[k] = a[k]; });
+      }
       if (!IMPL[tool]) { results.push({ tool: tool, args: args, ok: false, summary: 'Unknown action "' + tool + '"' }); continue; }
       try {
         var r = await IMPL[tool](args);
