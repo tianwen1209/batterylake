@@ -41,6 +41,7 @@
     </svg>
   `;
 
+  const SHOW_SOURCE_TAGS = false;
   const welcomeText = 'Hi! I answer questions about BatteryLake: catalog numbers, individual datasets, the processing skill, status.json, benchmarks and citation. Ask in English or 中文.';
 
   /* ── state ─────────────────────────────────────────────────────── */
@@ -119,7 +120,9 @@
       : { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   }
 
+  /* Per-message source tags are not shown (the header names the active provider). */
   function sourceLabel(source) {
+    if (!SHOW_SOURCE_TAGS) return '';
     switch (source) {
       case 'gemini': return 'Gemini';
       case 'openai': return 'Model';
@@ -336,7 +339,7 @@
     openai: { subtitle: 'Custom model endpoint', status: 'Model connected' },
     backend: { subtitle: 'Local app.py backend', status: 'Backend connected' },
     pollinations: { subtitle: 'Free model · Pollinations', status: 'Model connected' },
-    local: { subtitle: 'Built-in knowledge base', status: 'Ready · answers from site data' }
+    local: { subtitle: 'BatteryLake assistant', status: 'Online' }
   };
 
   function candidateProviders() {
@@ -375,7 +378,7 @@
   function ensureProvider() {
     if (state.ready) return Promise.resolve(state.provider);
     if (state.probing) return state.probing;
-    setStatus('busy', PROVIDER_LABELS.local.subtitle, 'Ready · checking for a free model…');
+    setStatus('busy', PROVIDER_LABELS.local.subtitle, 'Connecting…');
     state.probing = (async () => {
       for (const provider of candidateProviders()) {
         if (provider === 'local') break;
