@@ -27,8 +27,9 @@ window.BATTERYLAKE_AI_CONFIG = {
   model: '',
   endpoint: 'https://tianwen-gemini-proxy.tianwen-4e0.workers.dev/chat',
   timeoutMs: 25000,
-  // Direct raw-data upload for the Contribute page (Worker + R2, or app.py
-  // /upload/* for self-hosting). The page falls back to "paste a link" when
-  // the endpoint answers that uploads are not enabled.
-  uploadEndpoint: 'https://tianwen-gemini-proxy.tianwen-4e0.workers.dev/upload'
+  // Optional direct raw-data upload for the Contribute page. Leave empty (the
+  // page then asks for a download link). To enable, point it at a receiver
+  // implementing the upload protocol: the Worker with an R2 bucket bound as
+  // CONTRIB_BUCKET, or app.py (/upload/*) on your own HTTPS host.
+  uploadEndpoint: ''
 };

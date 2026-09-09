@@ -37,7 +37,7 @@
     { name: 'start_contribution', description: 'Open the Contribute page (describe -> upload raw data -> submit a new dataset).', args: {} },
     { name: 'prefill_contribution', description: 'Fill the contribution form from what the user said. Give only the fields mentioned.', args: { name: 'dataset name', institution: 'lab / university token, e.g. NTU_EEE', year: 'publication year', chemistry: 'LFP | NMC | NMC811 | NCA | LCO | LMO | LTO | LiIon | MultiChem', form: '18650 | 21700 | Pouch | Prismatic | Cyl | Auto | EV-BMS', cells: 'number of cells', capacity_ah: 'nominal capacity in Ah', charge_c: 'charge rate, e.g. 1C or Multi', discharge_c: 'discharge rate', temperature: 'test temperature in C or Multi', category: 'cycle_aging | calendar_aging | characterization | field_data | field_fault_diagnosis | soh_estimation | soc_estimation | eis | thermal_runaway | ev', data_url: 'download link', doi: 'paper or data DOI/URL', license: 'CC BY 4.0 | CC BY-NC 4.0 | CC BY-SA 4.0 | CC0 1.0 | MIT | ODC-By 1.0', contact: 'email', protocol: 'test protocol notes', layout: 'file layout and cell identifier notes', notes: 'known issues' } },
     { name: 'check_contribution', description: 'Report the contribution readiness checklist (what is filled, what is missing, files uploaded).', args: {} },
-    { name: 'open_contribution_upload', description: 'Open the raw-data upload step of the Contribute page so the user can drop the files (files cannot be selected by the agent).', args: {} },
+    { name: 'open_contribution_upload', description: 'Open step 2 (raw data) of the Contribute page: the user pastes a download link there (or drops files when direct upload is configured). Use prefill_contribution {data_url} when the user gives the link in chat.', args: {} },
     { name: 'download_contribution_package', description: 'Download a zip copy of the contribution (metadata.json, protocol.md, checklist).', args: {} },
     { name: 'submit_contribution', description: 'Submit the contribution: stores submission.json next to the uploaded files and gives the prefilled GitHub issue link.', args: {} }
   ];
@@ -248,6 +248,8 @@
       var sm = C.summary();
       C.focusStep(2);
       if (!sm.packageable) return { ok: false, summary: 'Complete the reference name in step 1 first (institution, year, chemistry, form, rates, temperature); uploads are stored under that name', navigated: true };
+      var cfg = window.BATTERYLAKE_AI_CONFIG || {};
+      if (!cfg.uploadEndpoint) return { ok: true, summary: 'Step 2 opened for `' + sm.refName + '` — paste the download link to the raw files there (Zenodo, Figshare or a share link). You can also tell me the link and I will fill it in', navigated: true };
       return { ok: true, summary: 'Upload step opened for `' + sm.refName + '` — drop the raw files or a folder into the box (I cannot pick files from your disk for you)' + (sm.uploadEnabled === false ? '. Direct upload is not enabled on this site yet: paste a download link instead' : ''), navigated: true };
     },
     download_contribution_package: function () {
@@ -271,7 +273,7 @@
       if (!res.ok) return { ok: false, summary: 'Cannot submit yet: ' + (res.reason || 'incomplete'), navigated: true };
       var sm = C.summary();
       var missing = sm.items.filter(function (i) { return i.state !== 'ok'; }).map(function (i) { return i.label; });
-      return { ok: true, summary: (res.stored ? 'Submitted `' + res.refName + '` — metadata, notes and the file list are stored with your uploads. ' : 'Summary prepared for `' + res.refName + '` (direct upload not enabled, so the files must be linked). ') + '[Open the prefilled GitHub issue](' + res.issueUrl + ') to notify the team' + (missing.length ? '. Still missing: ' + missing.join(', ') : ''), navigated: true };
+      return { ok: true, summary: (res.stored ? 'Submitted `' + res.refName + '` — metadata, notes and the file list are stored with your uploads. ' : 'Submission prepared for `' + res.refName + '`. ') + '[Open the prefilled GitHub issue](' + res.issueUrl + ') and press "Submit new issue" to send it to the team' + (missing.length ? '. Still missing: ' + missing.join(', ') : ''), navigated: true };
     },
     set_theme: function (args) {
       var theme = /dark|night|深|夜/i.test(String(args.theme || '')) ? 'dark' : 'light';
@@ -430,6 +432,7 @@
       else if (!Object.keys(extracted).length) actions.push({ tool: 'start_contribution', args: {} });
     }
     else if (wantsPackage && /contribution|submission|贡献|提交/.test(q)) actions.push({ tool: 'download_contribution_package', args: {} });
+    else if (/raw data|raw files|原始数据|原始文件/.test(q) && /where|put|upload|link|send|give|哪里|放|上传|链接|给/.test(q)) actions.push({ tool: 'open_contribution_upload', args: {} });
     else if (wants.clear && (wants.filter || /filter|筛选|搜索/.test(q))) actions.push({ tool: 'clear_filters', args: {} });
     else if (wants.skill && wants.download) actions.push({ tool: 'download_skill', args: {} });
     else if (wants.skill) actions.push({ tool: 'open_page', args: { page: 'preprocessing' } });

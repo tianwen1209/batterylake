@@ -95,16 +95,15 @@ with its source.
 ## Dataset contributions (Contribute page)
 
 Three steps in the browser: describe (catalog metadata + the notes the
-processing skill needs), upload the raw files directly, submit. Uploads go to
-the endpoint set as `uploadEndpoint` in `js/ai-config.js`:
+processing skill needs), point to the raw files, submit. By default the raw
+files are shared by link (Zenodo, Figshare, an institutional share link) and
+the submission is a prefilled GitHub issue; nothing is stored by the site.
 
-- the Cloudflare Worker with an R2 bucket bound as `CONTRIB_BUCKET`
-  (see `deploy/cloudflare-worker/README.md`), or
-- `app.py` (`/upload/*`, files stored under `contributions/`; `CONTRIB_DIR`
-  and `MAX_UPLOAD_GB` override the defaults, `CONTRIB_UPLOADS=0` disables).
-
-When the endpoint reports uploads as not enabled, the page falls back to a
-download link and the prefilled GitHub issue.
+Direct in-browser upload exists but is off: set `uploadEndpoint` in
+`js/ai-config.js` to a receiver implementing the upload protocol — the
+Cloudflare Worker with an R2 bucket bound as `CONTRIB_BUCKET` (see
+`deploy/cloudflare-worker/README.md`) or `app.py` (`/upload/*`, files under
+`contributions/`; `CONTRIB_DIR`, `MAX_UPLOAD_GB`, `CONTRIB_UPLOADS=0`).
 
 ## Backend keys (`app.py` only)
 

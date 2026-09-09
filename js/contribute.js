@@ -191,8 +191,8 @@
         state: val('doi') && val('license') ? 'ok' : (val('doi') || val('license') ? 'warn' : 'todo'),
         text: val('doi') && val('license') ? val('license') + ' · ' + val('doi') : (val('doi') ? 'Choose a license.' : (val('license') ? 'Add the paper or data DOI / URL.' : 'Add a DOI (or source URL) and choose a license.')) },
       { key: 'data', label: 'Raw data', tag: 'Required',
-        state: done.length ? 'ok' : (isUrl(link) ? 'ok' : (state.uploading ? 'warn' : 'todo')),
-        text: done.length ? done.length + ' file' + (done.length === 1 ? '' : 's') + ' uploaded (' + fmtBytes(bytes) + ')' + (isUrl(link) ? ' · link ' + link : '') : (isUrl(link) ? 'Linked: ' + link : (state.uploading ? 'Upload in progress…' : 'Upload the raw files in step 2, or paste a public download link.')) }
+        state: done.length ? 'ok' : (isUrl(link) ? 'ok' : (state.uploading ? 'warn' : (link ? 'warn' : 'todo'))),
+        text: done.length ? done.length + ' file' + (done.length === 1 ? '' : 's') + ' uploaded (' + fmtBytes(bytes) + ')' + (isUrl(link) ? ' · link ' + link : '') : (isUrl(link) ? 'Linked: ' + link : (state.uploading ? 'Upload in progress…' : (link ? 'The link should start with https://' : (endpoint() ? 'Upload the raw files in step 2, or paste a public download link.' : 'Paste the download link to the raw files in step 2 (Zenodo, Figshare, a share link).')))) }
     ];
     var ok = items.filter(function (i) { return i.state === 'ok'; }).length;
     return { items: items, ok: ok, total: items.length, refName: rn, required: requiredFilled(), readyToSubmit: ok === items.length, packageable: rn.complete, uploads: done, bytes: bytes };
@@ -311,6 +311,7 @@
     });
   }
   function probeUpload() {
+    if (!endpoint()) { state.uploadEnabled = false; return Promise.resolve(false); }
     if (state.uploadEnabled !== null) return Promise.resolve(state.uploadEnabled);
     return api('/status', { method: 'GET' }).then(function (d) {
       state.uploadEnabled = !!d.enabled;
@@ -382,6 +383,7 @@
     });
     var sample = list.filter(precheckable)[0];
     if (sample && !state.precheck) precheckFile(sample).catch(function () {});
+    if (!endpoint()) { toast('Direct upload is not configured on this site; paste a download link instead.', 'error', 6000); return; }
     renderUploads();
     runQueue();
   }
@@ -427,7 +429,14 @@
   function renderUploadState() {
     var note = $('cb-upload-note');
     var zone = $('cb-upload-drop');
-    if (!note) return;
+    var block = $('cb-upload-block');
+    var direct = !!endpoint();
+    if (block) block.hidden = !direct;
+    var title = $('cb-step2-title'), sub = $('cb-step2-sub'), linkLabel = $('cb-data-link-label');
+    if (title) title.textContent = direct ? 'Upload the raw data' : 'Provide the raw data';
+    if (sub) sub.textContent = direct ? 'Drop the original cycler exports (or the whole dataset folder); files are uploaded in chunks and resume if a chunk fails. Or paste a download link.' : 'Host the original cycler exports where the team can download them and paste the link. Keep the original file names; do not resample or clean.';
+    if (linkLabel) linkLabel.innerHTML = direct ? 'Already hosted somewhere? Paste the download link instead' : 'Download link to the raw data <b>*</b>';
+    if (!note || !direct) return;
     if (state.uploadEnabled === false) {
       note.className = 'cb-upload-note is-off';
       note.innerHTML = '<strong>Direct upload is not enabled on this site yet.</strong> Paste a public download link below (Zenodo, Figshare, an institutional share link) and submit; the team will fetch the files.';
@@ -556,9 +565,22 @@
     var enc = function (v) { return encodeURIComponent(v).replace(/[()'*!]/g, function (c) { return '%' + c.charCodeAt(0).toString(16).toUpperCase(); }); };
     return ISSUE_URL + '?title=' + enc(title) + '&labels=' + enc('dataset-contribution') + '&body=' + enc(body);
   }
-  function submit() {
+  function submit(options) {
+    options = options || {};
     var r = readiness();
     if (!r.packageable) { toast('Complete the reference name first.', 'error', 5000); focusStep(1); return Promise.resolve({ ok: false, reason: 'incomplete reference name' }); }
+    if (!endpoint()) {
+      // No upload store: the GitHub issue *is* the submission. Open it right away
+      // (synchronously, so the click is still a user gesture) and remember it.
+      var issue = submitLink();
+      var opened = null;
+      if (options.fromClick) { try { opened = window.open(issue, '_blank', 'noopener'); } catch (_) { opened = null; } }
+      state.submitted = { at: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'), key: null, stored: false, ref_name: r.refName.name, via: 'github' };
+      save();
+      refresh();
+      if (options.fromClick) toast(opened ? 'GitHub issue opened — press "Submit new issue" there to finish.' : 'Pop-up blocked: use the "Open GitHub issue" button.', opened ? 'success' : 'error', 6000);
+      return Promise.resolve({ ok: true, stored: false, key: null, refName: r.refName.name, issueUrl: issue, readiness: r.ok + ' / ' + r.total, opened: !!opened });
+    }
     var btn = $('cb-submit-btn');
     if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
     var key = 'contributions/' + r.refName.name + '/submission.json';
@@ -582,7 +604,7 @@
     box.hidden = false;
     box.innerHTML = state.submitted.stored
       ? '<strong>Submitted</strong> · <code>' + escapeHtml(state.submitted.ref_name) + '</code> on ' + escapeHtml(state.submitted.at) + '. The team has your metadata, notes and file list; you will be contacted at ' + (escapeHtml(val('contact')) || 'the address in the GitHub issue') + '.'
-      : '<strong>Summary prepared</strong> on ' + escapeHtml(state.submitted.at) + '. Direct upload was not enabled, so please open the GitHub issue (button above) so the team can fetch the files from your link.';
+      : '<strong>Submission prepared</strong> · <code>' + escapeHtml(state.submitted.ref_name) + '</code> on ' + escapeHtml(state.submitted.at) + '. Finish by pressing <em>Submit new issue</em> on the GitHub page that opened (or use the "Open GitHub issue" button); the team then downloads the files from your link.';
   }
 
   /* ── render everything ───────────────────────────────────────── */
@@ -616,7 +638,7 @@
     var gh = $('cb-github');
     if (gh) gh.href = submitLink();
     var filled = r.required.filter(function (x) { return x.ok; }).length;
-    var rail = { 1: filled + ' / ' + r.required.length + ' required fields', 2: r.uploads.length ? r.uploads.length + ' file' + (r.uploads.length === 1 ? '' : 's') + ' · ' + fmtBytes(r.bytes) : (isUrl(val('data_url')) ? 'link given' : (state.uploading ? 'uploading…' : 'no files yet')), 3: state.submitted ? 'submitted' : (r.readyToSubmit ? 'ready' : r.ok + ' / ' + r.total + ' ready') };
+    var rail = { 1: filled + ' / ' + r.required.length + ' required fields', 2: r.uploads.length ? r.uploads.length + ' file' + (r.uploads.length === 1 ? '' : 's') + ' · ' + fmtBytes(r.bytes) : (isUrl(val('data_url')) ? 'link given' : (state.uploading ? 'uploading…' : (endpoint() ? 'no files yet' : 'no link yet'))), 3: state.submitted ? 'submitted' : (r.readyToSubmit ? 'ready' : r.ok + ' / ' + r.total + ' ready') };
     Object.keys(rail).forEach(function (k) { var e = $('cb-rail-' + k); if (e) e.textContent = rail[k]; });
     document.querySelectorAll('#cb-rail li').forEach(function (li) {
       var n = Number(li.dataset.step);
@@ -687,7 +709,14 @@
     var si = $('cb-status-input'); if (si) si.addEventListener('change', function (e) { var f = e.target.files && e.target.files[0]; if (f) loadStatusFile(f).catch(function (err) { toast('Could not read status.json: ' + (err.message || err), 'error'); }); e.target.value = ''; });
     var link = $('cb-data-link'); if (link) link.addEventListener('input', function () { state.fields.data_url = link.value; save(); refresh(); });
     var retry = $('cb-upload-retry'); if (retry) retry.addEventListener('click', retryFailed);
-    var sb = $('cb-submit-btn'); if (sb) sb.addEventListener('click', function () { submit(); });
+    var sb = $('cb-submit-btn'); if (sb) sb.addEventListener('click', function () { submit({ fromClick: true }); });
+    var sd = $('cb-sample-drop');
+    if (sd) {
+      ['dragenter', 'dragover'].forEach(function (t) { sd.addEventListener(t, function (e) { e.preventDefault(); sd.classList.add('is-drag'); }); });
+      ['dragleave', 'drop'].forEach(function (t) { sd.addEventListener(t, function (e) { e.preventDefault(); if (t === 'dragleave' && sd.contains(e.relatedTarget)) return; sd.classList.remove('is-drag'); }); });
+      sd.addEventListener('drop', function (e) { var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; if (f) precheckFile(f).then(function (rep) { toast('Sample checked: overall ' + rep.overall.toFixed(2), 'success'); }).catch(function (err) { toast('Sample check failed: ' + (err.message || err), 'error'); }); });
+    }
+    var sfi = $('cb-sample-input'); if (sfi) sfi.addEventListener('change', function (e) { var f = e.target.files && e.target.files[0]; if (f) precheckFile(f).then(function (rep) { toast('Sample checked: overall ' + rep.overall.toFixed(2), 'success'); }).catch(function (err) { toast('Sample check failed: ' + (err.message || err), 'error'); }); e.target.value = ''; });
     var dl = $('cb-download-btn'); if (dl) dl.addEventListener('click', downloadPackage);
     var cp = $('cb-copy-btn'); if (cp) cp.addEventListener('click', function () { navigator.clipboard && navigator.clipboard.writeText(summaryText()).then(function () { toast('Submission summary copied.', 'success'); }); });
     var cj = $('cb-copy-json'); if (cj) cj.addEventListener('click', function () { navigator.clipboard && navigator.clipboard.writeText(metadataJson()).then(function () { toast('metadata.json copied.', 'success'); }); });

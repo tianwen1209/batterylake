@@ -53,10 +53,11 @@ the intended behaviour. Free-tier Gemini allows roughly 15 requests per minute;
 bursts beyond that come back as `429` and the site falls back to its built-in
 answers until the next request.
 
-## Dataset contributions (raw-data upload)
+## Dataset contributions (raw-data upload) — optional, currently off
 
-The Contribute page uploads raw files straight from the browser into an R2
-bucket through this Worker (chunked, 16 MiB parts, resumable per part).
+The site does not use this: contributors share raw data by link. If you ever
+want in-browser upload, the Contribute page can send raw files straight into an
+R2 bucket through this Worker (chunked, 16 MiB parts, resumable per part):
 
 1. Cloudflare dashboard → **R2** → Create bucket, e.g. `batterylake-contributions`.
 2. Worker → **Settings → Bindings → Add → R2 bucket** → variable name

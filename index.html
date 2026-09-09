@@ -1804,7 +1804,7 @@ for dataset in resp.json()["items"]:
   <div class="page" id="page-contribute">
     <div class="page-header contribute-upload-hero visual-page-hero">
       <div class="page-title">Contribute a dataset</div>
-      <div class="page-desc">Three steps: describe the dataset, upload the raw files straight from your browser, submit. The team then runs the batterylake-processing skill on your files and publishes the dataset with your attribution.</div>
+      <div class="page-desc">Three steps: describe the dataset, point us to the raw files, submit. The team then runs the batterylake-processing skill on your files and publishes the dataset with your attribution.</div>
       <div class="contribute-actions visual-page-actions">
         <button class="dataset-contribute-btn" type="button" onclick="BatteryLakeContribute.focusStep(1)">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
@@ -1816,7 +1816,7 @@ for dataset in resp.json()["items"]:
 
     <ol class="cb-rail cb-rail--3" id="cb-rail">
       <li data-step="1" class="is-active"><span class="cb-rail-num">1</span><span>Describe</span><em id="cb-rail-1">0 / 12 required fields</em></li>
-      <li data-step="2"><span class="cb-rail-num">2</span><span>Upload raw data</span><em id="cb-rail-2">no files yet</em></li>
+      <li data-step="2"><span class="cb-rail-num">2</span><span>Raw data</span><em id="cb-rail-2">no link yet</em></li>
       <li data-step="3"><span class="cb-rail-num">3</span><span>Submit</span><em id="cb-rail-3">0 / 5 ready</em></li>
     </ol>
 
@@ -1850,37 +1850,50 @@ for dataset in resp.json()["items"]:
     <section class="cb-step reveal" id="cb-step-2">
       <div class="cb-step-head">
         <span class="cb-step-num">2</span>
-        <div><h2>Upload the raw data</h2><p>Drop the original cycler exports (or the whole dataset folder). Files are uploaded in chunks and resume if a chunk fails; the first small CSV is also quick-checked.</p></div>
+        <div><h2 id="cb-step2-title">Provide the raw data</h2><p id="cb-step2-sub">Host the original cycler exports where the team can download them and paste the link. Keep the original file names; do not resample or clean.</p></div>
       </div>
-      <div class="cb-upload-note" id="cb-upload-note">Checking the upload service…</div>
-      <div class="cb-upload-drop" id="cb-upload-drop">
-        <span class="cb-drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
-        <div class="cb-upload-text">
-          <strong>Drop files or a folder here</strong>
-          <small>Any format your cycler exports: CSV, Excel, MATLAB, Parquet, HDF5, zip… Keep the original names.</small>
+      <div class="cb-link-block" id="cb-link-block">
+        <label class="cb-field" for="cb-data-link">
+          <span class="cb-field-label" id="cb-data-link-label">Download link to the raw data <b>*</b></span>
+          <input id="cb-data-link" type="url" placeholder="https://zenodo.org/records/… · Figshare · OneDrive / SharePoint share link · institutional repository">
+          <span class="cb-field-hint">Zenodo and Figshare are free for research data and give you a DOI; a OneDrive, Google Drive or institutional share link works too. Include every file of the release (all cells, all batches).</span>
+        </label>
+      </div>
+      <div id="cb-upload-block" hidden>
+        <div class="cb-upload-note" id="cb-upload-note">Checking the upload service…</div>
+        <div class="cb-upload-drop" id="cb-upload-drop">
+          <span class="cb-drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
+          <div class="cb-upload-text">
+            <strong>Drop files or a folder here</strong>
+            <small>Any format your cycler exports: CSV, Excel, MATLAB, Parquet, HDF5, zip… Keep the original names.</small>
+          </div>
+          <div class="cb-upload-buttons">
+            <label class="prep-btn">Choose files<input id="cb-upload-files" type="file" multiple hidden></label>
+            <label class="prep-btn secondary">Choose folder<input id="cb-upload-folder" type="file" webkitdirectory multiple hidden></label>
+          </div>
         </div>
-        <div class="cb-upload-buttons">
-          <label class="prep-btn">Choose files<input id="cb-upload-files" type="file" multiple hidden></label>
-          <label class="prep-btn secondary">Choose folder<input id="cb-upload-folder" type="file" webkitdirectory multiple hidden></label>
+        <ul class="cb-upload-list" id="cb-upload-list" hidden></ul>
+        <div class="cb-upload-foot">
+          <span id="cb-upload-summary"></span>
+          <button class="cb-mini-btn" id="cb-upload-retry" type="button" hidden>Retry failed uploads</button>
         </div>
       </div>
-      <ul class="cb-upload-list" id="cb-upload-list" hidden></ul>
-      <div class="cb-upload-foot">
-        <span id="cb-upload-summary"></span>
-        <button class="cb-mini-btn" id="cb-upload-retry" type="button" hidden>Retry failed uploads</button>
-      </div>
-      <div class="cb-result" id="cb-sample-result" hidden></div>
-      <div class="cb-alt-row">
-        <label class="cb-field cb-alt-link" for="cb-data-link"><span class="cb-field-label">Already hosted somewhere? Paste the download link instead</span><input id="cb-data-link" type="url" placeholder="https://zenodo.org/records/… or an institutional share link"></label>
+      <div class="cb-alt-row cb-alt-row--check">
+        <label class="cb-drop cb-drop--inline" id="cb-sample-drop">
+          <input id="cb-sample-input" type="file" accept=".csv,.tsv,.txt,.json">
+          <span class="cb-drop-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+          <span><strong>Quick-check a sample <em>optional</em></strong><small>Drop one CSV or JSON excerpt (a cell, a few thousand rows). The quality engine runs locally and notes the detected channels for the reviewers.</small></span>
+        </label>
         <label class="cb-alt-status" for="cb-status-input"><span class="cb-field-label">Already ran the processing skill?</span><span class="prep-btn secondary">Add status.json<input id="cb-status-input" type="file" accept=".json" hidden></span></label>
       </div>
+      <div class="cb-result" id="cb-sample-result" hidden></div>
       <div class="cb-result" id="cb-status-result" hidden></div>
     </section>
 
     <section class="cb-step reveal" id="cb-step-3">
       <div class="cb-step-head">
         <span class="cb-step-num">3</span>
-        <div><h2>Submit</h2><p>Stores your metadata, notes and file list next to the uploaded files, and opens a prefilled GitHub issue so the team is notified.</p></div>
+        <div><h2>Submit</h2><p>Opens a GitHub issue prefilled with your metadata, notes, checklist and data link; attach nothing else. The team takes it from there.</p></div>
       </div>
       <div class="cb-readiness-wrap">
         <ul class="cb-readiness" id="cb-readiness"></ul>

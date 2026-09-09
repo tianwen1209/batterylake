@@ -294,3 +294,8 @@
   .cb-up { grid-template-columns: 26px minmax(0, 1fr) auto; }
   .cb-up-bar, .cb-up-state { grid-column: 2 / -1; }
 }
+.cb-link-block { margin-bottom: 14px; }
+.cb-link-block .cb-field input { font-size: 14px; padding: 10px 12px; }
+.cb-alt-row--check { align-items: stretch; }
+.cb-drop--inline { padding: 12px 14px; }
+.cb-drop--inline .cb-drop-icon { width: 36px; height: 36px; }
