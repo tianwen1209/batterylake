@@ -6628,19 +6628,11 @@ async function qaLoadSamples() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const samples = await res.json();
     if (!Array.isArray(samples) || !samples.length) throw new Error('empty');
-    grid.innerHTML = samples.map((smp, i) => {
-      const cols = (smp.columns || []).filter(c => !/^(cell_id|source_cycle_id)$/.test(c));
-      return `
-      <div class="qa-sample" data-file="${esc(smp.file)}" data-dataset="${esc(smp.dataset_id)}">
-        <div class="qa-sample-name">${esc(smp.name || smp.dataset_id)}</div>
-        <div class="qa-sample-meta">${esc(smp.dataset_id)} · ${esc(smp.chemistry || '—')} · ${Number(smp.rows).toLocaleString('en-US')} rows · ${smp.cells} cell${smp.cells === 1 ? '' : 's'} · ${smp.size_kb} KB</div>
-        <div class="qa-sample-note">${esc(smp.note || ('Channels: ' + cols.join(', ')))}</div>
-        <div class="qa-sample-actions">
-          <button class="prep-btn" type="button" onclick="qaRunSample(${i})">Assess</button>
-          <a class="prep-btn secondary" href="assets/examples/quality/${esc(smp.file)}" download>Download CSV</a>
-        </div>
-      </div>`;
-    }).join('');
+    grid.innerHTML = samples.map((smp, i) => `
+      <span class="qa-try-link" title="${esc(smp.note || '')}">
+        <a href="assets/examples/quality/${esc(smp.file)}" download>${esc(smp.dataset_id)} · ${esc(smp.chemistry || '—')} · ${Number(smp.rows).toLocaleString('en-US')} rows</a>
+        <button type="button" onclick="qaRunSample(${i})" title="Assess this sample in your browser">Assess</button>
+      </span>`).join('');
     grid.dataset.samples = JSON.stringify(samples);
   } catch (err) {
     grid.innerHTML = '<div class="qa-try-empty">Sample excerpts are not available (' + esc(err.message || 'load failed') + ').</div>';
@@ -6653,7 +6645,7 @@ async function qaRunSample(index) {
   try { samples = JSON.parse(grid.dataset.samples || '[]'); } catch (_) { samples = []; }
   const smp = samples[index];
   if (!smp) return;
-  const card = grid.querySelectorAll('.qa-sample')[index];
+  const card = grid.querySelectorAll('.qa-try-link')[index];
   if (card) card.classList.add('is-running');
   try {
     const res = await fetch('assets/examples/quality/' + smp.file, { cache: 'force-cache' });
