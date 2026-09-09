@@ -18,6 +18,21 @@
  *   2. Settings → Variables and Secrets → add secret GEMINI_API_KEY.
  *      Optional plain variables: GEMINI_MODEL (default gemini-flash-lite-latest),
  *      ALLOWED_ORIGINS (comma separated; default below).
+ *   3. Dataset contributions (optional): create an R2 bucket (e.g.
+ *      batterylake-contributions) and bind it to this Worker as
+ *      CONTRIB_BUCKET (Settings → Bindings → R2 bucket). The Contribute page
+ *      then uploads raw files straight into the bucket, chunked and
+ *      resumable, under contributions/<ref_name>/raw_data/. Optional
+ *      MAX_UPLOAD_GB (default 50) caps the size of one file.
+ *
+ * Upload contract (all under /upload, same origin check as /chat):
+ *   GET  /upload/status                      -> {enabled, part_size, max_gb}
+ *   POST /upload/init     {ref_name, file_name, size, content_type}
+ *                                            -> {key, upload_id, part_size}
+ *   PUT  /upload/part?key&upload_id&part=N   (bytes, all parts equal size) -> {etag}
+ *   POST /upload/complete {key, upload_id, parts:[{part, etag}]} -> {key, size}
+ *   POST /upload/abort    {key, upload_id}
+ *   PUT  /upload/object?key                  (small JSON <= 10 MB) -> {key}
  */
 
 const DEFAULT_ALLOWED_ORIGINS = [
@@ -42,10 +57,13 @@ function allowedOrigins(env) {
   return raw.length ? raw : DEFAULT_ALLOWED_ORIGINS;
 }
 
+const UPLOAD_PART_SIZE = 16 * 1024 * 1024;   // R2 multipart: >= 5 MiB, all parts equal except the last
+const UPLOAD_OBJECT_MAX = 10 * 1024 * 1024;
+
 function corsHeaders(origin) {
   return {
     'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin',
@@ -98,6 +116,68 @@ async function callGemini(env, model, body) {
   return text;
 }
 
+function safeSegment(s, max) {
+  return String(s || '').replace(/[^A-Za-z0-9_.\-]+/g, '_').replace(/^\.+/, '').slice(0, max || 120);
+}
+function safeRelPath(s) {
+  return String(s || '').split(/[\\/]+/).filter(p => p && p !== '.' && p !== '..').map(p => safeSegment(p, 160)).join('/');
+}
+function contributionKey(refName, fileName) {
+  const ref = safeSegment(refName, 120);
+  const rel = safeRelPath(fileName);
+  if (!/^[A-Za-z0-9][A-Za-z0-9_.\-]{2,}$/.test(ref) || !rel) return null;
+  return 'contributions/' + ref + '/raw_data/' + rel;
+}
+
+async function handleUpload(request, env, url, cors) {
+  const sub = url.pathname.replace(/^\/upload\/?/, '');
+  const maxGb = Number(env.MAX_UPLOAD_GB || 50);
+  if (sub === 'status' && request.method === 'GET') {
+    return json({ enabled: !!env.CONTRIB_BUCKET, part_size: UPLOAD_PART_SIZE, max_gb: maxGb }, 200, cors);
+  }
+  if (!env.CONTRIB_BUCKET) return json({ error: 'uploads_not_enabled' }, 503, cors);
+  const bucket = env.CONTRIB_BUCKET;
+  const q = url.searchParams;
+  if (sub === 'init' && request.method === 'POST') {
+    let body; try { body = await request.json(); } catch (_) { return json({ error: 'Invalid JSON' }, 400, cors); }
+    const key = contributionKey(body.ref_name, body.file_name);
+    const size = Number(body.size || 0);
+    if (!key) return json({ error: 'Invalid ref_name or file_name' }, 400, cors);
+    if (!(size >= 0) || size > maxGb * 1024 * 1024 * 1024) return json({ error: 'File exceeds ' + maxGb + ' GB' }, 413, cors);
+    const mp = await bucket.createMultipartUpload(key, { httpMetadata: { contentType: String(body.content_type || 'application/octet-stream').slice(0, 120) }, customMetadata: { original_name: String(body.file_name || '').slice(0, 200), declared_size: String(size) } });
+    return json({ key, upload_id: mp.uploadId, part_size: UPLOAD_PART_SIZE }, 200, cors);
+  }
+  if (sub === 'part' && request.method === 'PUT') {
+    const key = q.get('key'), uploadId = q.get('upload_id'), part = Number(q.get('part'));
+    if (!key || !key.startsWith('contributions/') || !uploadId || !(part >= 1)) return json({ error: 'Missing key, upload_id or part' }, 400, cors);
+    const mp = bucket.resumeMultipartUpload(key, uploadId);
+    const p = await mp.uploadPart(part, request.body);
+    return json({ etag: p.etag, part }, 200, cors);
+  }
+  if (sub === 'complete' && request.method === 'POST') {
+    let body; try { body = await request.json(); } catch (_) { return json({ error: 'Invalid JSON' }, 400, cors); }
+    if (!body.key || !String(body.key).startsWith('contributions/') || !body.upload_id || !Array.isArray(body.parts)) return json({ error: 'Missing key, upload_id or parts' }, 400, cors);
+    const mp = bucket.resumeMultipartUpload(body.key, body.upload_id);
+    const parts = body.parts.map(p => ({ partNumber: Number(p.part || p.partNumber), etag: String(p.etag || '') })).sort((a, b) => a.partNumber - b.partNumber);
+    const obj = await mp.complete(parts);
+    return json({ key: body.key, size: obj.size }, 200, cors);
+  }
+  if (sub === 'abort' && request.method === 'POST') {
+    let body; try { body = await request.json(); } catch (_) { return json({ error: 'Invalid JSON' }, 400, cors); }
+    if (body.key && body.upload_id) { try { await bucket.resumeMultipartUpload(body.key, body.upload_id).abort(); } catch (_) { /* already gone */ } }
+    return json({ ok: true }, 200, cors);
+  }
+  if (sub === 'object' && request.method === 'PUT') {
+    const key = q.get('key') || '';
+    if (!/^contributions\/[A-Za-z0-9][A-Za-z0-9_.\-]{2,}\/[A-Za-z0-9_.\-\/]+\.json$/.test(key)) return json({ error: 'Invalid key' }, 400, cors);
+    const len = Number(request.headers.get('Content-Length') || 0);
+    if (len > UPLOAD_OBJECT_MAX) return json({ error: 'Object too large' }, 413, cors);
+    await bucket.put(key, request.body, { httpMetadata: { contentType: 'application/json' } });
+    return json({ key }, 200, cors);
+  }
+  return json({ error: 'Not found' }, 404, cors);
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
@@ -110,6 +190,10 @@ export default {
     }
     if (!originOk) return json({ error: 'Forbidden origin' }, 403);
     const url = new URL(request.url);
+    if (url.pathname === '/upload' || url.pathname.startsWith('/upload/')) {
+      try { return await handleUpload(request, env, url, cors); }
+      catch (err) { return json({ error: 'Upload failed', detail: err && err.message ? err.message : String(err) }, 500, cors); }
+    }
     if (request.method !== 'POST' || url.pathname !== '/chat') {
       return json({ error: 'Not found' }, 404, cors);
     }

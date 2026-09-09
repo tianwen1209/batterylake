@@ -1804,7 +1804,7 @@ for dataset in resp.json()["items"]:
   <div class="page" id="page-contribute">
     <div class="page-header contribute-upload-hero visual-page-hero">
       <div class="page-title">Contribute a dataset</div>
-      <div class="page-desc">Describe your dataset, check it against the BatteryLake standard, download a submission package and send it to the team. Nothing is uploaded from this page; every contribution is then processed with the batterylake-processing skill and published with full attribution.</div>
+      <div class="page-desc">Three steps: describe the dataset, upload the raw files straight from your browser, submit. The team then runs the batterylake-processing skill on your files and publishes the dataset with your attribution.</div>
       <div class="contribute-actions visual-page-actions">
         <button class="dataset-contribute-btn" type="button" onclick="BatteryLakeContribute.focusStep(1)">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
@@ -1814,21 +1814,25 @@ for dataset in resp.json()["items"]:
       <img class="contribute-hero-art visual-page-hero-art" src="assets/images/contribute-hero-transparent.png" alt="" aria-hidden="true">
     </div>
 
-    <ol class="cb-rail" id="cb-rail">
-      <li data-step="1" class="is-active"><span class="cb-rail-num">1</span><span>Describe</span><em id="cb-rail-1">0 / 9 required fields</em></li>
-      <li data-step="2"><span class="cb-rail-num">2</span><span>Check</span><em id="cb-rail-2">0 / 6 ready</em></li>
-      <li data-step="3"><span class="cb-rail-num">3</span><span>Package</span><em id="cb-rail-3">needs step 1</em></li>
-      <li data-step="4"><span class="cb-rail-num">4</span><span>Submit</span><em id="cb-rail-4">after the checks</em></li>
+    <ol class="cb-rail cb-rail--3" id="cb-rail">
+      <li data-step="1" class="is-active"><span class="cb-rail-num">1</span><span>Describe</span><em id="cb-rail-1">0 / 12 required fields</em></li>
+      <li data-step="2"><span class="cb-rail-num">2</span><span>Upload raw data</span><em id="cb-rail-2">no files yet</em></li>
+      <li data-step="3"><span class="cb-rail-num">3</span><span>Submit</span><em id="cb-rail-3">0 / 5 ready</em></li>
     </ol>
 
     <section class="cb-step reveal" id="cb-step-1">
       <div class="cb-step-head">
         <span class="cb-step-num">1</span>
-        <div><h2>Describe the dataset</h2><p>These fields become <code>metadata.json</code> and the catalog reference name. Your draft is kept in this browser.</p></div>
+        <div><h2>Describe the dataset</h2><p>Only what the catalog needs and what the processing skill needs to convert your files. Your draft stays in this browser.</p></div>
         <div class="cb-head-actions"><button class="cb-mini-btn" id="cb-clear-btn" type="button">Clear draft</button></div>
       </div>
       <div class="cb-describe">
-        <form class="cb-form" id="cb-form" autocomplete="off" onsubmit="return false"></form>
+        <div class="cb-form-wrap">
+          <div class="cb-group-title">Dataset metadata</div>
+          <form class="cb-form" id="cb-form-meta" autocomplete="off" onsubmit="return false"></form>
+          <div class="cb-group-title">For the processing skill</div>
+          <form class="cb-form" id="cb-form-skill" autocomplete="off" onsubmit="return false"></form>
+        </div>
         <aside class="cb-preview">
           <div class="cb-refname-card">
             <div class="cb-card-label">Reference name</div>
@@ -1846,67 +1850,53 @@ for dataset in resp.json()["items"]:
     <section class="cb-step reveal" id="cb-step-2">
       <div class="cb-step-head">
         <span class="cb-step-num">2</span>
-        <div><h2>Check readiness</h2><p>The same checks the platform runs, in your browser. A small excerpt (one or two cells, a few thousand rows) is enough to detect the channels.</p></div>
+        <div><h2>Upload the raw data</h2><p>Drop the original cycler exports (or the whole dataset folder). Files are uploaded in chunks and resume if a chunk fails; the first small CSV is also quick-checked.</p></div>
       </div>
-      <div class="cb-check-grid">
-        <label class="cb-drop" id="cb-sample-drop">
-          <input id="cb-sample-input" type="file" accept=".csv,.tsv,.txt,.json">
-          <span class="cb-drop-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
-          <span><strong>Data sample <em>required</em></strong><small>CSV or JSON with voltage, current, timestamp and a cell id. Runs the quality engine locally.</small></span>
-        </label>
-        <label class="cb-drop" id="cb-status-drop">
-          <input id="cb-status-input" type="file" accept=".json">
-          <span class="cb-drop-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 21s7-3.8 7-9.5V5.5L12 3 5 5.5v6C5 17.2 12 21 12 21z"/></svg></span>
-          <span><strong>status.json <em>optional</em></strong><small>If you already ran the batterylake-processing skill, drop its status.json to show the five gates.</small></span>
-        </label>
-      </div>
-      <div class="cb-result" id="cb-sample-result" hidden></div>
-      <div class="cb-result" id="cb-status-result" hidden></div>
-      <div class="cb-readiness-wrap">
-        <ul class="cb-readiness" id="cb-readiness"></ul>
-        <div class="cb-score-card">
-          <div class="cb-score-label">Readiness</div>
-          <div class="cb-score-value" id="cb-score">0 / 6</div>
-          <div class="cb-score-bar" id="cb-score-bar"></div>
-          <div class="cb-score-note" id="cb-score-note"></div>
+      <div class="cb-upload-note" id="cb-upload-note">Checking the upload service…</div>
+      <div class="cb-upload-drop" id="cb-upload-drop">
+        <span class="cb-drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
+        <div class="cb-upload-text">
+          <strong>Drop files or a folder here</strong>
+          <small>Any format your cycler exports: CSV, Excel, MATLAB, Parquet, HDF5, zip… Keep the original names.</small>
+        </div>
+        <div class="cb-upload-buttons">
+          <label class="prep-btn">Choose files<input id="cb-upload-files" type="file" multiple hidden></label>
+          <label class="prep-btn secondary">Choose folder<input id="cb-upload-folder" type="file" webkitdirectory multiple hidden></label>
         </div>
       </div>
+      <ul class="cb-upload-list" id="cb-upload-list" hidden></ul>
+      <div class="cb-upload-foot">
+        <span id="cb-upload-summary"></span>
+        <button class="cb-mini-btn" id="cb-upload-retry" type="button" hidden>Retry failed uploads</button>
+      </div>
+      <div class="cb-result" id="cb-sample-result" hidden></div>
+      <div class="cb-alt-row">
+        <label class="cb-field cb-alt-link" for="cb-data-link"><span class="cb-field-label">Already hosted somewhere? Paste the download link instead</span><input id="cb-data-link" type="url" placeholder="https://zenodo.org/records/… or an institutional share link"></label>
+        <label class="cb-alt-status" for="cb-status-input"><span class="cb-field-label">Already ran the processing skill?</span><span class="prep-btn secondary">Add status.json<input id="cb-status-input" type="file" accept=".json" hidden></span></label>
+      </div>
+      <div class="cb-result" id="cb-status-result" hidden></div>
     </section>
 
     <section class="cb-step reveal" id="cb-step-3">
       <div class="cb-step-head">
         <span class="cb-step-num">3</span>
-        <div><h2>Package</h2><p>A zip built in your browser from the form, the protocol notes and the check results. Add the raw files (or the download link) and you are done.</p></div>
+        <div><h2>Submit</h2><p>Stores your metadata, notes and file list next to the uploaded files, and opens a prefilled GitHub issue so the team is notified.</p></div>
       </div>
-      <div class="cb-package">
-        <div class="cb-tree" id="cb-tree"></div>
-        <div class="cb-package-actions">
-          <button class="prep-btn" id="cb-download-btn" type="button" disabled>Download package (.zip)</button>
-          <button class="prep-btn secondary" id="cb-copy-btn" type="button">Copy submission summary</button>
-          <p>The package contains no measurement data; raw files stay with you and are shared via the download link in metadata.json.</p>
+      <div class="cb-readiness-wrap">
+        <ul class="cb-readiness" id="cb-readiness"></ul>
+        <div class="cb-score-card">
+          <div class="cb-score-label">Readiness</div>
+          <div class="cb-score-value" id="cb-score">0 / 5</div>
+          <div class="cb-score-bar" id="cb-score-bar"></div>
+          <div class="cb-score-note" id="cb-score-note"></div>
+          <button class="prep-btn cb-submit-btn" id="cb-submit-btn" type="button">Submit contribution</button>
+          <a class="prep-btn secondary cb-submit-btn" id="cb-github" href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep/issues/new" target="_blank" rel="noopener">Open GitHub issue</a>
+          <div class="cb-submit-more"><button class="cb-mini-btn" id="cb-download-btn" type="button">Download a copy (.zip)</button><button class="cb-mini-btn" id="cb-copy-btn" type="button">Copy summary</button></div>
         </div>
       </div>
-    </section>
-
-    <section class="cb-step reveal" id="cb-step-4">
-      <div class="cb-step-head">
-        <span class="cb-step-num">4</span>
-        <div><h2>Submit</h2><p>Send the package to the team. A GitHub issue is prefilled with your summary; attach the zip or paste its link.</p></div>
-      </div>
-      <div class="cb-submit">
-        <div class="cb-channel">
-          <h3>Open a GitHub issue</h3>
-          <p>Creates a "dataset-contribution" issue in BatteryLake-Benchmark-DataPrep with the summary, readiness checklist and links already filled in. Requires a GitHub account.</p>
-          <a class="prep-btn" id="cb-github" href="https://github.com/tianwen1209/BatteryLake-Benchmark-DataPrep/issues/new" target="_blank" rel="noopener">Open prefilled issue</a>
-        </div>
-        <div class="cb-channel">
-          <h3>Send it another way</h3>
-          <p>Copy the submission summary and send it with the package through your usual channel to the BatteryLake team (see <a href="#about" onclick="showPage('about'); return false;">About</a>).</p>
-          <button class="prep-btn secondary" type="button" onclick="BatteryLakeContribute.summaryText && navigator.clipboard.writeText(BatteryLakeContribute.summaryText()).then(function(){showToast('Submission summary copied.','success')})">Copy summary</button>
-        </div>
-      </div>
+      <div class="cb-submitted" id="cb-submitted" hidden></div>
       <div class="cb-gates-info" id="cb-gates-info"></div>
-      <p class="cb-review-note">After submission the team runs the <a href="#preprocessing" onclick="showPage('preprocessing'); return false;">batterylake-processing skill</a> on your files. You get a <code>status.json</code> and a <a href="#quality" onclick="showPage('quality'); return false;">quality report</a>, and the dataset appears in the <a href="#datasets" onclick="showPage('datasets'); return false;">catalog</a> under your reference name with your DOI and license.</p>
+      <p class="cb-review-note">After submission the team runs the <a href="#preprocessing" onclick="showPage('preprocessing'); return false;">batterylake-processing skill</a> on your files through the five gates above. You get a <code>status.json</code> and a <a href="#quality" onclick="showPage('quality'); return false;">quality report</a>, and the dataset appears in the <a href="#datasets" onclick="showPage('datasets'); return false;">catalog</a> under your reference name with your DOI and license.</p>
     </section>
   </div>
 

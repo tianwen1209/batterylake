@@ -34,11 +34,12 @@
     { name: 'select_preprocessing_dataset', description: 'On the Preprocessing page, select the dataset for which the agent prompt is generated.', args: { dataset_id: 'catalog id' } },
     { name: 'open_model', description: 'Open a model from the Model library.', args: { model: 'model id or part of its name' } },
     { name: 'set_theme', description: 'Switch the site theme.', args: { theme: 'light | dark' } },
-    { name: 'start_contribution', description: 'Open the Contribute page (describe -> check -> package -> submit a new dataset).', args: {} },
-    { name: 'prefill_contribution', description: 'Fill the contribution form from what the user said. Give only the fields mentioned.', args: { name: 'dataset name', institution: 'lab / university token, e.g. NTU_EEE', year: 'publication year', chemistry: 'LFP | NMC | NMC811 | NCA | LCO | LMO | LTO | LiIon | MultiChem', form: '18650 | 21700 | Pouch | Prismatic | Cyl | Auto | EV-BMS', cells: 'number of cells', capacity_ah: 'nominal capacity in Ah', charge_c: 'charge rate, e.g. 1C or Multi', discharge_c: 'discharge rate', temperature: 'test temperature in C or Multi', category: 'cycle_aging | calendar_aging | characterization | field_data | field_fault_diagnosis | soh_estimation | soc_estimation | eis | thermal_runaway | ev', data_url: 'download link', doi: 'paper or data DOI/URL', license: 'CC BY 4.0 | CC BY-NC 4.0 | CC BY-SA 4.0 | CC0 1.0 | MIT | ODC-By 1.0', contact: 'email', protocol: 'protocol notes', notes: 'notes' } },
-    { name: 'check_contribution', description: 'Report the contribution readiness checklist (what is filled, what is missing).', args: {} },
-    { name: 'download_contribution_package', description: 'Download the submission package zip built from the contribution form.', args: {} },
-    { name: 'submit_contribution', description: 'Prepare the submission: gives the prefilled GitHub issue link for the contribution.', args: {} }
+    { name: 'start_contribution', description: 'Open the Contribute page (describe -> upload raw data -> submit a new dataset).', args: {} },
+    { name: 'prefill_contribution', description: 'Fill the contribution form from what the user said. Give only the fields mentioned.', args: { name: 'dataset name', institution: 'lab / university token, e.g. NTU_EEE', year: 'publication year', chemistry: 'LFP | NMC | NMC811 | NCA | LCO | LMO | LTO | LiIon | MultiChem', form: '18650 | 21700 | Pouch | Prismatic | Cyl | Auto | EV-BMS', cells: 'number of cells', capacity_ah: 'nominal capacity in Ah', charge_c: 'charge rate, e.g. 1C or Multi', discharge_c: 'discharge rate', temperature: 'test temperature in C or Multi', category: 'cycle_aging | calendar_aging | characterization | field_data | field_fault_diagnosis | soh_estimation | soc_estimation | eis | thermal_runaway | ev', data_url: 'download link', doi: 'paper or data DOI/URL', license: 'CC BY 4.0 | CC BY-NC 4.0 | CC BY-SA 4.0 | CC0 1.0 | MIT | ODC-By 1.0', contact: 'email', protocol: 'test protocol notes', layout: 'file layout and cell identifier notes', notes: 'known issues' } },
+    { name: 'check_contribution', description: 'Report the contribution readiness checklist (what is filled, what is missing, files uploaded).', args: {} },
+    { name: 'open_contribution_upload', description: 'Open the raw-data upload step of the Contribute page so the user can drop the files (files cannot be selected by the agent).', args: {} },
+    { name: 'download_contribution_package', description: 'Download a zip copy of the contribution (metadata.json, protocol.md, checklist).', args: {} },
+    { name: 'submit_contribution', description: 'Submit the contribution: stores submission.json next to the uploaded files and gives the prefilled GitHub issue link.', args: {} }
   ];
 
   /* ── helpers ─────────────────────────────────────────────────────── */
@@ -216,7 +217,7 @@
       gotoPage('contribute');
       var C = window.BatteryLakeContribute;
       if (C) { C.init(); C.refresh(); C.focusStep(1); }
-      return { ok: true, summary: 'Opened the [Contribute](#contribute) page: describe the dataset, check a sample, download the package, submit', navigated: true };
+      return { ok: true, summary: 'Opened the [Contribute](#contribute) page: describe the dataset, upload the raw files, submit', navigated: true };
     },
     prefill_contribution: function (args) {
       var C = window.BatteryLakeContribute;
@@ -235,9 +236,19 @@
       gotoPage('contribute');
       C.init();
       var sm = C.check();
-      C.focusStep(2);
+      C.focusStep(3);
       var lines = sm.items.map(function (i) { return (i.state === 'ok' ? '✓ ' : i.state === 'warn' ? '! ' : '○ ') + i.label + ' — ' + i.text; });
-      return { ok: true, summary: 'Readiness **' + sm.ok + ' / ' + sm.total + '** for `' + sm.refName + '`' + (sm.precheck ? ' · sample quality ' + sm.precheck.overall.toFixed(2) : ' · no data sample checked yet (drop one on the page)') + '\n' + lines.join('\n'), navigated: true };
+      return { ok: true, summary: 'Readiness **' + sm.ok + ' / ' + sm.total + '** for `' + sm.refName + '`' + (sm.uploads ? ' · ' + sm.uploads + ' file(s) uploaded' : '') + (sm.precheck ? ' · quick check ' + sm.precheck.overall.toFixed(2) : '') + '\n' + lines.join('\n'), navigated: true };
+    },
+    open_contribution_upload: function () {
+      var C = window.BatteryLakeContribute;
+      if (!C) return { ok: false, summary: 'The Contribute page is not available' };
+      gotoPage('contribute');
+      C.init();
+      var sm = C.summary();
+      C.focusStep(2);
+      if (!sm.packageable) return { ok: false, summary: 'Complete the reference name in step 1 first (institution, year, chemistry, form, rates, temperature); uploads are stored under that name', navigated: true };
+      return { ok: true, summary: 'Upload step opened for `' + sm.refName + '` — drop the raw files or a folder into the box (I cannot pick files from your disk for you)' + (sm.uploadEnabled === false ? '. Direct upload is not enabled on this site yet: paste a download link instead' : ''), navigated: true };
     },
     download_contribution_package: function () {
       var C = window.BatteryLakeContribute;
@@ -250,17 +261,17 @@
       var ok = C.downloadPackage();
       return { ok: !!ok, summary: ok ? 'Downloading `' + sm.refName + '_submission.zip` (metadata.json, protocol.md, README, checklist' + (sm.precheck ? ', quality precheck' : '') + ')' : 'Package download failed', navigated: true };
     },
-    submit_contribution: function () {
+    submit_contribution: async function () {
       var C = window.BatteryLakeContribute;
       if (!C) return { ok: false, summary: 'The Contribute page is not available' };
       gotoPage('contribute');
       C.init();
+      C.focusStep(3);
+      var res = await C.submit();
+      if (!res.ok) return { ok: false, summary: 'Cannot submit yet: ' + (res.reason || 'incomplete'), navigated: true };
       var sm = C.summary();
-      C.focusStep(4);
-      var url = C.submitLink();
-      var opened = null;
-      try { opened = window.open(url, '_blank', 'noopener'); } catch (_) { opened = null; }
-      return { ok: true, summary: (opened ? 'Opened the prefilled GitHub issue for `' + sm.refName + '`' : '[Open the prefilled GitHub issue](' + url + ') for `' + sm.refName + '`') + ' — readiness ' + sm.ok + ' / ' + sm.total + (sm.readyToSubmit ? '' : ' (you can still submit; the team will ask for the missing items)'), navigated: true };
+      var missing = sm.items.filter(function (i) { return i.state !== 'ok'; }).map(function (i) { return i.label; });
+      return { ok: true, summary: (res.stored ? 'Submitted `' + res.refName + '` — metadata, notes and the file list are stored with your uploads. ' : 'Summary prepared for `' + res.refName + '` (direct upload not enabled, so the files must be linked). ') + '[Open the prefilled GitHub issue](' + res.issueUrl + ') to notify the team' + (missing.length ? '. Still missing: ' + missing.join(', ') : ''), navigated: true };
     },
     set_theme: function (args) {
       var theme = /dark|night|深|夜/i.test(String(args.theme || '')) ? 'dark' : 'light';
@@ -412,7 +423,8 @@
     if (wants.dark || wants.light) actions.push({ tool: 'set_theme', args: { theme: wants.dark ? 'dark' : 'light' } });
     else if (wantsContribute || (Object.keys(extracted).length >= 3 && /dataset|数据集|cells|电芯/.test(q))) {
       if (Object.keys(extracted).length) actions.push({ tool: 'prefill_contribution', args: extracted });
-      if (wantsPackage) actions.push({ tool: 'download_contribution_package', args: {} });
+      if (/\b(upload|files?|folder)\b|上传|文件/.test(q) && !Object.keys(extracted).length && !wantsCheck) actions.push({ tool: 'open_contribution_upload', args: {} });
+      else if (wantsPackage) actions.push({ tool: 'download_contribution_package', args: {} });
       else if (wantsSubmit && !Object.keys(extracted).length) actions.push({ tool: 'submit_contribution', args: {} });
       else if (wantsCheck) actions.push({ tool: 'check_contribution', args: {} });
       else if (!Object.keys(extracted).length) actions.push({ tool: 'start_contribution', args: {} });

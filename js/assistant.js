@@ -213,18 +213,18 @@
     document.body.classList.toggle('ai-panel-open', isOpen);
     if (isOpen) { input.focus(); void ensureProvider(); }
   }
-  const AGENT_WELCOME = 'Agent mode: tell me what to do on the site and I will do it — open a dataset or its quality report, filter the catalog, download the processing skill, switch pages or theme. Try one of the suggestions below.';
+  const AGENT_WELCOME = 'Agent mode: tell me what to do on the site and I will do it — open a dataset or its quality report, filter the catalog, download the processing skill, switch pages or theme, or start a dataset contribution.\n\nExample: "I want to contribute a dataset: 24 NMC 21700 cells from NTU, 2025, 1C/1C at 25 °C, 4.0 Ah, CC BY" fills the contribution form; then "what is still missing?" and "submit my contribution" finish it. Try the suggestions below.';
   const CHAT_SUGGESTIONS = [
     ['Catalog numbers', 'How many datasets, cells and cycles are in BatteryLake?'],
     ['LFP datasets', 'Which datasets are LFP?'],
     ['Install the skill', 'How do I install and run the batterylake-processing skill?'],
-    ['Status fields', 'What does canonical_validated mean in status.json?']
+    ['How to contribute', 'How do I contribute my own dataset to BatteryLake?']
   ];
   const AGENT_SUGGESTIONS = [
     ['Open dataset_21 report', 'Open the quality report of dataset_21'],
     ['Filter LFP pouch', 'Filter the catalog to LFP pouch datasets'],
     ['Download the skill', 'Download the processing skill'],
-    ['Go to Benchmarks', 'Go to the Benchmarks page']
+    ['Contribute a dataset', 'I want to contribute a dataset: 24 NMC 21700 cells from NTU, 2025, 1C/1C at 25 °C, 4.0 Ah, license CC BY — fill the form and tell me what is still missing']
   ];
   function renderSuggestions(list) {
     if (!suggestionMenu) return;

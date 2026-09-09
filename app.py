@@ -683,20 +683,135 @@ def enhance_inspection_with_ai(result):
     return result
 
 
+# ──────────────────────────────────────────────────────────────────────────
+# Dataset contributions: chunked upload protocol shared with the Cloudflare
+# Worker (deploy/cloudflare-worker/worker.js). Files land under
+# contributions/<ref_name>/raw_data/ next to this script (override with
+# CONTRIB_DIR). Set CONTRIB_UPLOADS=0 to disable.
+# ──────────────────────────────────────────────────────────────────────────
+import re as _re
+import shutil as _shutil
+import uuid as _uuid
+
+CONTRIB_DIR = Path(os.getenv("CONTRIB_DIR", str(ROOT / "contributions")))
+CONTRIB_ENABLED = os.getenv("CONTRIB_UPLOADS", "1") not in {"0", "false", "no"}
+CONTRIB_PART_SIZE = 16 * 1024 * 1024
+CONTRIB_MAX_GB = float(os.getenv("MAX_UPLOAD_GB", "50"))
+_SAFE_SEG = _re.compile(r"[^A-Za-z0-9_.\-]+")
+
+
+def _safe_segment(value, limit=120):
+    return _SAFE_SEG.sub("_", str(value or "")).lstrip(".")[:limit]
+
+
+def _contribution_key(ref_name, file_name):
+    ref = _safe_segment(ref_name)
+    parts = [p for p in _re.split(r"[\\/]+", str(file_name or "")) if p and p not in {".", ".."}]
+    rel = "/".join(_safe_segment(p, 160) for p in parts)
+    if not _re.match(r"^[A-Za-z0-9][A-Za-z0-9_.\-]{2,}$", ref) or not rel:
+        return None
+    return f"contributions/{ref}/raw_data/{rel}"
+
+
+def _key_path(key):
+    if not key.startswith("contributions/") or ".." in key:
+        return None
+    return CONTRIB_DIR / key[len("contributions/"):]
+
+
+def handle_contribution_upload(handler, sub, raw_body):
+    """Return (status, payload) for a /upload/<sub> request."""
+    query = parse.parse_qs(parse.urlsplit(handler.path).query)
+    q = {k: v[0] for k, v in query.items()}
+    if sub == "status":
+        return 200, {"enabled": CONTRIB_ENABLED, "part_size": CONTRIB_PART_SIZE, "max_gb": CONTRIB_MAX_GB}
+    if not CONTRIB_ENABLED:
+        return 503, {"error": "uploads_not_enabled"}
+    if sub == "init":
+        body = json.loads(raw_body.decode("utf-8") or "{}")
+        key = _contribution_key(body.get("ref_name"), body.get("file_name"))
+        size = float(body.get("size") or 0)
+        if not key:
+            return 400, {"error": "Invalid ref_name or file_name"}
+        if size > CONTRIB_MAX_GB * 1024 ** 3:
+            return 413, {"error": f"File exceeds {CONTRIB_MAX_GB:g} GB"}
+        upload_id = _uuid.uuid4().hex
+        (CONTRIB_DIR / "_parts" / upload_id).mkdir(parents=True, exist_ok=True)
+        (CONTRIB_DIR / "_parts" / upload_id / "key.txt").write_text(key, encoding="utf-8")
+        return 200, {"key": key, "upload_id": upload_id, "part_size": CONTRIB_PART_SIZE}
+    if sub == "part":
+        key, upload_id, part = q.get("key", ""), q.get("upload_id", ""), int(q.get("part", "0") or 0)
+        part_dir = CONTRIB_DIR / "_parts" / _safe_segment(upload_id)
+        if not key.startswith("contributions/") or not part_dir.exists() or part < 1:
+            return 400, {"error": "Missing key, upload_id or part"}
+        (part_dir / f"{part:06d}.part").write_bytes(raw_body)
+        return 200, {"etag": f"part-{part}-{len(raw_body)}", "part": part}
+    if sub == "complete":
+        body = json.loads(raw_body.decode("utf-8") or "{}")
+        upload_id = _safe_segment(body.get("upload_id"))
+        part_dir = CONTRIB_DIR / "_parts" / upload_id
+        target = _key_path(str(body.get("key") or ""))
+        if not target or not part_dir.exists():
+            return 400, {"error": "Unknown upload"}
+        target.parent.mkdir(parents=True, exist_ok=True)
+        size = 0
+        with target.open("wb") as out:
+            for part_file in sorted(part_dir.glob("*.part")):
+                with part_file.open("rb") as src:
+                    _shutil.copyfileobj(src, out, 1024 * 1024)
+                size += part_file.stat().st_size
+        _shutil.rmtree(part_dir, ignore_errors=True)
+        return 200, {"key": body.get("key"), "size": size}
+    if sub == "abort":
+        body = json.loads(raw_body.decode("utf-8") or "{}")
+        _shutil.rmtree(CONTRIB_DIR / "_parts" / _safe_segment(body.get("upload_id")), ignore_errors=True)
+        return 200, {"ok": True}
+    if sub == "object":
+        key = q.get("key", "")
+        target = _key_path(key) if key.endswith(".json") else None
+        if not target or len(raw_body) > 10 * 1024 * 1024:
+            return 400, {"error": "Invalid key or object too large"}
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(raw_body)
+        return 200, {"key": key}
+    return 404, {"error": "Not found"}
+
+
 class BatteryTwinHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
 
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         super().end_headers()
 
     def do_GET(self):
+        if self.path.startswith("/upload/"):
+            sub = parse.urlsplit(self.path).path[len("/upload/"):]
+            status, payload = handle_contribution_upload(self, sub, b"")
+            self.send_json(payload, status=status)
+            return
         if self.path == "/":
             self.path = "/index.html"
         return super().do_GET()
+
+    def do_PUT(self):
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+            if length > CONTRIB_PART_SIZE + 1024 * 1024:
+                self.send_json({"error": "Part too large"}, status=413)
+                return
+            raw_body = self.rfile.read(length)
+            path = parse.urlsplit(self.path).path
+            if path.startswith("/upload/"):
+                status, payload = handle_contribution_upload(self, path[len("/upload/"):], raw_body)
+                self.send_json(payload, status=status)
+                return
+            self.send_json({"error": "Not found"}, status=404)
+        except Exception as exc:  # noqa: BLE001
+            self.send_json({"error": str(exc)}, status=500)
 
     def do_OPTIONS(self):
         self.send_response(204)
@@ -709,6 +824,12 @@ class BatteryTwinHandler(SimpleHTTPRequestHandler):
                 self.send_json({"error": "Upload exceeds the 100 MB inspection limit."}, status=413)
                 return
             raw_body = self.rfile.read(length)
+
+            if parse.urlsplit(self.path).path.startswith("/upload/"):
+                sub = parse.urlsplit(self.path).path[len("/upload/"):]
+                status, payload = handle_contribution_upload(self, sub, raw_body)
+                self.send_json(payload, status=status)
+                return
 
             if self.path == "/api/chat":
                 payload = json.loads(raw_body.decode("utf-8") or "{}")

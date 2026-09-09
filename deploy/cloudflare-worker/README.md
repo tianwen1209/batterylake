@@ -52,3 +52,24 @@ Without the `Origin` header the Worker answers `403 Forbidden origin`, which is
 the intended behaviour. Free-tier Gemini allows roughly 15 requests per minute;
 bursts beyond that come back as `429` and the site falls back to its built-in
 answers until the next request.
+
+## Dataset contributions (raw-data upload)
+
+The Contribute page uploads raw files straight from the browser into an R2
+bucket through this Worker (chunked, 16 MiB parts, resumable per part).
+
+1. Cloudflare dashboard → **R2** → Create bucket, e.g. `batterylake-contributions`.
+2. Worker → **Settings → Bindings → Add → R2 bucket** → variable name
+   `CONTRIB_BUCKET`, pick the bucket → Deploy (redeploy `worker.js` if it is
+   older than this section).
+3. Optional variable `MAX_UPLOAD_GB` (default 50) caps one file.
+
+Objects land under `contributions/<ref_name>/raw_data/<file>` plus
+`contributions/<ref_name>/submission.json` (metadata, notes, checklist, file
+list). Until the binding exists `/upload/status` answers `enabled: false` and
+the page asks for a download link instead. Free R2 tier: 10 GB storage;
+beyond that about USD 0.015 per GB-month, no egress fees.
+
+The same protocol is implemented by `app.py` (`/upload/*`, files under
+`contributions/`), so a self-hosted receiver works too: set
+`uploadEndpoint` in `js/ai-config.js` to `https://<your host>/upload`.

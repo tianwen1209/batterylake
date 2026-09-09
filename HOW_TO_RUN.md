@@ -92,6 +92,20 @@ and reported in the transcript with a ✓ / ! marker.
 The header of the chat panel shows which source is active, and every answer is tagged
 with its source.
 
+## Dataset contributions (Contribute page)
+
+Three steps in the browser: describe (catalog metadata + the notes the
+processing skill needs), upload the raw files directly, submit. Uploads go to
+the endpoint set as `uploadEndpoint` in `js/ai-config.js`:
+
+- the Cloudflare Worker with an R2 bucket bound as `CONTRIB_BUCKET`
+  (see `deploy/cloudflare-worker/README.md`), or
+- `app.py` (`/upload/*`, files stored under `contributions/`; `CONTRIB_DIR`
+  and `MAX_UPLOAD_GB` override the defaults, `CONTRIB_UPLOADS=0` disables).
+
+When the endpoint reports uploads as not enabled, the page falls back to a
+download link and the prefilled GitHub issue.
+
 ## Backend keys (`app.py` only)
 
 Copy `.env.example` to `.env`.

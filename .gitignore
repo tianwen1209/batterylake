@@ -28,3 +28,6 @@ __pycache__/
 
 # Server automation logs
 /logs/
+
+# Dataset contributions received by app.py
+/contributions/
