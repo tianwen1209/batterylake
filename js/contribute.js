@@ -722,8 +722,6 @@
     var cj = $('cb-copy-json'); if (cj) cj.addEventListener('click', function () { navigator.clipboard && navigator.clipboard.writeText(metadataJson()).then(function () { toast('metadata.json copied.', 'success'); }); });
     var cl = $('cb-clear-btn'); if (cl) cl.addEventListener('click', clearDraft);
     document.querySelectorAll('#cb-rail li').forEach(function (li) { li.addEventListener('click', function () { focusStep(Number(li.dataset.step)); }); });
-    var gatesEl = $('cb-gates-info');
-    if (gatesEl) gatesEl.innerHTML = GATES.map(function (g) { return '<div class="cb-gate-info"><b>' + g[0] + '</b><strong>' + g[1] + '</strong><span>' + g[2] + '</span></div>'; }).join('');
     window.addEventListener('beforeunload', function (e) { if (state.uploading) { e.preventDefault(); e.returnValue = ''; } });
     refresh();
     probeUpload();

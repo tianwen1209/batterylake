@@ -299,3 +299,7 @@
 .cb-alt-row--check { align-items: stretch; }
 .cb-drop--inline { padding: 12px 14px; }
 .cb-drop--inline .cb-drop-icon { width: 36px; height: 36px; }
+/* submit card buttons: stack cleanly */
+.cb-score-card .cb-submit-btn { display: flex; width: 100%; box-sizing: border-box; margin: 10px 0 0; }
+.cb-score-card .cb-submit-btn + .cb-submit-btn { margin-top: 8px; }
+.cb-gates-info { display: none; }
