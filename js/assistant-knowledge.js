@@ -476,5 +476,5 @@
     return lines.join('\n');
   }
 
-  window.BatteryLakeKnowledge = { answer: answer, context: context, isChinese: isZh, metrics: metrics };
+  window.BatteryLakeKnowledge = { answer: answer, context: context, isChinese: isZh, metrics: metrics, find: findDatasets, filter: filterDatasets, catalog: catalog, categoryLabel: function (key, zh) { return (zh ? CATEGORY_LABELS_ZH : CATEGORY_LABELS)[key] || key; } };
 })();

@@ -137,11 +137,13 @@
       case 'backend': return 'Local backend';
       case 'pollinations': return 'Free model';
       case 'kb': case 'dataset': case 'fallback': case 'local': return 'Site knowledge';
+      case 'agent-model': return 'Agent · Gemini';
+      case 'agent-rules': return 'Agent · rules';
       default: return '';
     }
   }
   function senderClass(source) {
-    return /^(gemini|worker|openai|backend|pollinations)$/.test(source || '') ? 'is-model' : 'is-site';
+    return /^(gemini|worker|openai|backend|pollinations|agent-model)$/.test(source || '') ? 'is-model' : 'is-site';
   }
 
   /* Per-message source tags are not shown (the sender name above the bubble covers it). */
@@ -209,27 +211,45 @@
   function setPanelOpen(isOpen) {
     panel.classList.toggle('open', isOpen);
     document.body.classList.toggle('ai-panel-open', isOpen);
-    if (isOpen && activeMode === 'chat') { input.focus(); void ensureProvider(); }
+    if (isOpen) { input.focus(); void ensureProvider(); }
+  }
+  const AGENT_WELCOME = 'Agent mode: tell me what to do on the site and I will do it — open a dataset or its quality report, filter the catalog, download the processing skill, switch pages or theme. Try one of the suggestions below.';
+  const CHAT_SUGGESTIONS = [
+    ['Catalog numbers', 'How many datasets, cells and cycles are in BatteryLake?'],
+    ['LFP datasets', 'Which datasets are LFP?'],
+    ['Install the skill', 'How do I install and run the batterylake-processing skill?'],
+    ['Status fields', 'What does canonical_validated mean in status.json?']
+  ];
+  const AGENT_SUGGESTIONS = [
+    ['Open dataset_21 report', 'Open the quality report of dataset_21'],
+    ['Filter LFP pouch', 'Filter the catalog to LFP pouch datasets'],
+    ['Download the skill', 'Download the processing skill'],
+    ['Go to Benchmarks', 'Go to the Benchmarks page']
+  ];
+  function renderSuggestions(list) {
+    if (!suggestionMenu) return;
+    suggestionMenu.innerHTML = list.map(([label, prompt]) => `<button class="ai-suggestion" type="button" data-prompt="${prompt.replace(/"/g, '&quot;')}">${label}</button>`).join('');
+    suggestionMenu.querySelectorAll('.ai-suggestion').forEach(button => {
+      button.addEventListener('click', () => { setPanelOpen(true); sendMessage(button.dataset.prompt || button.textContent); });
+    });
   }
   function setMode(mode) {
     activeMode = mode === 'agent' ? 'agent' : 'chat';
     const isAgent = activeMode === 'agent';
     modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.aiMode === activeMode)));
-    modeSummary.textContent = isAgent ? 'Agent mode · Soon' : 'Chat mode';
+    modeSummary.textContent = isAgent ? 'Agent mode' : 'Chat mode';
     messages.hidden = isAgent;
-    form.hidden = isAgent;
-    suggestionMenu.hidden = isAgent;
-    clearBtn.hidden = isAgent;
-    panel.querySelector('.ai-chat-status').hidden = isAgent;
-    subtitleEl.hidden = isAgent;
     agentMessages.hidden = !isAgent;
+    input.placeholder = isAgent ? 'Tell me what to do, e.g. "open dataset_21 quality report"' : 'Ask a question...';
+    renderSuggestions(isAgent ? AGENT_SUGGESTIONS : CHAT_SUGGESTIONS);
     if (isAgent && !agentMessages.childElementCount) {
-      addMessage('Agent mode is still in development. 功能还在开发中，敬请期待。', 'bot', { container: agentMessages });
+      addMessage(AGENT_WELCOME, 'bot', { container: agentMessages, source: 'agent-rules' });
     }
-    if (!isAgent) {
-      messages.scrollTop = messages.scrollHeight;
-      resizeInput();
-    }
+    applyProviderStatus();
+    if (!isAgent) messages.scrollTop = messages.scrollHeight;
+    else agentMessages.scrollTop = agentMessages.scrollHeight;
+    resizeInput();
+    if (panel.classList.contains('open')) { input.focus(); void ensureProvider(); }
   }
   function setTyping(el) {
     el.innerHTML = '<span class="ai-typing" aria-label="Thinking"><span></span><span></span><span></span></span>';
@@ -263,6 +283,13 @@
     state.history = state.history.slice(-12);
   }
   function clearConversation() {
+    if (activeMode === 'agent') {
+      agent.history = [];
+      agentMessages.innerHTML = '';
+      addMessage(AGENT_WELCOME, 'bot', { container: agentMessages, source: 'agent-rules' });
+      input.focus();
+      return;
+    }
     try { localStorage.removeItem(STORAGE_KEY); } catch (_) { /* ignore */ }
     state.history = [];
     showWelcome();
@@ -275,7 +302,12 @@
     const timer = setTimeout(() => controller.abort(), ms || CONFIG.timeoutMs);
     return fetch(url, Object.assign({}, options, { signal: controller.signal })).finally(() => clearTimeout(timer));
   }
+  // Agent mode swaps the prompt and the conversation history while a request runs.
+  let promptOverride = null;
+  let historyOverride = null;
+  let timeoutOverride = 0;       // ms; agent planning allows a slower answer
   function systemPrompt(question) {
+    if (promptOverride) return promptOverride(question);
     const prevUser = state.history.filter(m => m.role === 'user').slice(-1)[0];
     const ctx = KB ? KB.context(question, prevUser ? prevUser.text : '') : '';
     const zh = KB && typeof KB.isChinese === 'function' ? KB.isChinese(question) : /[\u3400-\u9fff]/.test(question);
@@ -294,7 +326,8 @@
     ].join('\n');
   }
   function historyMessages() {
-    return state.history.slice(-8).map(m => ({ role: m.role, content: m.text }));
+    const src = historyOverride ? historyOverride() : state.history;
+    return src.slice(-8).map(m => ({ role: m.role, content: m.text }));
   }
 
   const GEMINI_FALLBACK_MODELS = ['gemini-flash-lite-latest', 'gemini-flash-latest', 'gemini-3.5-flash-lite'];
@@ -313,7 +346,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt(question) }] }, contents, generationConfig: { temperature: 0.3, maxOutputTokens: 600 } })
-    }, 15000);
+    }, timeoutOverride || 15000);
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       const err = new Error((data.error && data.error.message) || ('Gemini HTTP ' + res.status));
@@ -404,7 +437,7 @@
     // A Cloudflare edge occasionally egresses through a region Gemini blocks
     // ("User location is not supported"); a new request usually succeeds.
     for (let attempt = 0; ; attempt++) {
-      const res = await fetchWithTimeout(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }, 25000);
+      const res = await fetchWithTimeout(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }, timeoutOverride || 25000);
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         const text = data.text || data.reply || data.response || '';
@@ -493,7 +526,8 @@
   }
   function applyProviderStatus() {
     const active = remoteAvailable(state.provider) ? state.provider : 'local';
-    const l = PROVIDER_LABELS[active] || PROVIDER_LABELS.local;
+    let l = PROVIDER_LABELS[active] || PROVIDER_LABELS.local;
+    if (activeMode === 'agent') l = { subtitle: 'Agent · ' + (active === 'local' ? 'rule-based planner' : 'Gemini plans the actions'), status: l.status };
     if (active === 'local' && state.provider !== 'local' && state.cooldownUntil[state.provider] > Date.now()) {
       setStatus('busy', l.subtitle, 'Model busy · retrying shortly');
       return;
@@ -538,10 +572,91 @@
     }
   }
 
+  /* ── Agent mode ────────────────────────────────────────────────── */
+  const ACTIONS = window.BatteryLakeActions || null;
+  const agent = { history: [] };   // [{role, text}] for the planner
+
+  async function planAgent(command) {
+    if (!ACTIONS) return { actions: [], reply: 'Agent tools failed to load. Please refresh the page.', source: 'agent-rules' };
+    await Promise.race([ensureProvider(), new Promise(resolve => setTimeout(resolve, 1500))]);
+    const provider = state.ready ? state.provider : 'local';
+    if (remoteAvailable(provider)) {
+      promptOverride = ACTIONS.plannerPrompt;
+      historyOverride = () => agent.history;
+      timeoutOverride = 45000;
+      try {
+        const text = await askRemote(provider, command);
+        const plan = ACTIONS.parsePlan(text);
+        if (plan) return Object.assign(plan, { source: 'agent-model' });
+        console.warn('AI agent: model reply was not a plan, using rules:', String(text).slice(0, 200));
+      } catch (err) {
+        const msg = err && err.message ? err.message : 'error';
+        demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg));
+      } finally {
+        promptOverride = null;
+        historyOverride = null;
+        timeoutOverride = 0;
+      }
+    }
+    return Object.assign(ACTIONS.planLocally(command), { source: 'agent-rules' });
+  }
+
+  function renderAgentResult(el, plan, results) {
+    const zh = KB && KB.isChinese ? KB.isChinese(plan.reply || '') : false;
+    let html = plan.reply ? renderMarkdownLite(plan.reply) : '';
+    if (results.length) {
+      html += '<ul class="ai-actions">' + results.map(r =>
+        `<li class="ai-action ${r.ok ? 'ok' : 'fail'}"><span class="ai-action-icon" aria-hidden="true">${r.ok ? '✓' : '!'}</span><span>${renderInline(r.summary || r.tool)}</span></li>`
+      ).join('') + '</ul>';
+    } else if (!plan.reply) {
+      html = renderMarkdownLite(zh ? '没有可执行的操作。' : 'Nothing to do.');
+    }
+    el.innerHTML = html;
+  }
+
+  async function runAgentCommand(command) {
+    const userTime = new Date().toISOString();
+    addMessage(command, 'user', { time: userTime, container: agentMessages });
+    agent.history.push({ role: 'user', text: command });
+    const loading = addMessage('', 'bot', { container: agentMessages });
+    setTyping(loading.text);
+    let plan;
+    try {
+      plan = await planAgent(command);
+    } catch (err) {
+      plan = { actions: [], reply: 'Planning failed: ' + (err && err.message ? err.message : 'unknown error'), source: 'agent-rules' };
+    }
+    let results = [];
+    try { results = await ACTIONS.execute(plan.actions); } catch (err) { results = [{ ok: false, summary: (err && err.message) || 'failed' }]; }
+    renderAgentResult(loading.text, plan, results);
+    if (loading.sender) {
+      const name = senderName(plan.source);
+      loading.sender.textContent = name;
+      loading.sender.hidden = !name;
+      loading.sender.classList.remove('is-model', 'is-site');
+      loading.sender.classList.add(senderClass(plan.source));
+    }
+    const transcript = (plan.reply || '') + (results.length ? '\n' + results.map(r => (r.ok ? 'done: ' : 'failed: ') + r.tool + ' ' + JSON.stringify(r.args || {})).join('\n') : '');
+    agent.history.push({ role: 'assistant', text: transcript.slice(0, 1200) });
+    if (agent.history.length > 10) agent.history = agent.history.slice(-10);
+    agentMessages.scrollTop = agentMessages.scrollHeight;
+    if (results.some(r => r.ok && r.navigated) && window.innerWidth <= 760) setPanelOpen(false);
+  }
+
   async function sendMessage(message) {
-    if (activeMode !== 'chat' || sending) return;
+    if (sending) return;
     const cleanMessage = message.trim();
     if (!cleanMessage) return;
+    if (activeMode === 'agent') {
+      sending = true;
+      input.value = '';
+      resizeInput();
+      input.disabled = true;
+      sendButton.disabled = true;
+      try { await runAgentCommand(cleanMessage); }
+      finally { sending = false; input.disabled = false; sendButton.disabled = false; if (panel.classList.contains('open')) input.focus(); }
+      return;
+    }
     sending = true;
     const userTime = new Date().toISOString();
     addMessage(cleanMessage, 'user', { time: userTime });
@@ -580,7 +695,7 @@
       sending = false;
       input.disabled = false;
       sendButton.disabled = false;
-      if (activeMode === 'chat' && panel.classList.contains('open')) input.focus();
+      if (panel.classList.contains('open')) input.focus();
     }
   }
 
@@ -648,11 +763,14 @@
       saveMessage(text, 'bot', time, 'kb');
     },
     send(message) { setMode('chat'); setPanelOpen(true); return sendMessage(message); },
+    act(command) { setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
+    mode() { return activeMode; },
     ask(message) { return answer(String(message || '')); },
     provider() { return state.provider; }
   };
   window.BatteryLakeAssistant = window.batteryTwinAI;
 
   setStatus('online', PROVIDER_LABELS.local.subtitle, PROVIDER_LABELS.local.status);
+  renderSuggestions(CHAT_SUGGESTIONS);
   restoreHistory();
 })();

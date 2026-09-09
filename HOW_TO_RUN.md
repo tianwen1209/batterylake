@@ -72,6 +72,18 @@ To add a free language model on top of that, edit `js/ai-config.js`:
 | `pollinations` | nothing | Free anonymous model at text.pollinations.ai; tried automatically in `auto` mode, currently often over quota. |
 | `local` | nothing | Knowledge base only, no network calls. |
 
+### Agent mode
+
+The panel has two modes. **Chat** answers questions. **Agent** executes page
+actions from a request such as "open dataset_21's quality report", "filter LFP
+pouch datasets", "download the processing skill" or "switch to dark theme".
+The model (or, without a model, a rule-based planner) turns the request into a
+plan made only of the whitelisted tools in `js/assistant-actions.js` (open a
+page / dataset / quality report, filter or clear the catalog, download the
+skill or a report, run a sample assessment, select the preprocessing dataset,
+open a model, set the theme). Each step is validated against the live catalog
+and reported in the transcript with a ✓ / ! marker.
+
 `provider: 'auto'` (default) tries Gemini → custom endpoint → local backend (localhost only)
 → Pollinations, and falls back to the knowledge base whenever a remote model is unavailable.
 The header of the chat panel shows which source is active, and every answer is tagged
