@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-12T19:27:45Z",
-  "total_visits": 1794,
+  "updated_at": "2026-09-13T19:32:52Z",
+  "total_visits": 1798,
   "dataset_downloads": 431,
   "skill_uses": 110,
   "model_downloads": {
@@ -10,16 +10,16 @@
   "model_runs": {
     "cnn": 9,
     "linear": 3,
+    "lstm": 2,
     "xgboost": 2,
-    "baseline-package": 1,
-    "lstm": 1
+    "baseline-package": 1
   },
   "locations": {
-    "updatedAt": "2026-09-12T19:27:45Z",
+    "updatedAt": "2026-09-13T19:32:52Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-12"
+      "endDate": "2026-09-13"
     },
     "countries": [
       {
@@ -35,7 +35,7 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 9
+        "visitors": 10
       },
       {
         "country": "Hong Kong",
@@ -152,6 +152,14 @@
         "visitors": 2,
         "lng": 113.568,
         "lat": 22.277
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Ashburn",
+        "visitors": 2,
+        "lng": -77.487,
+        "lat": 39.044
       },
       {
         "country": "United States",
@@ -280,14 +288,6 @@
         "visitors": 1,
         "lng": 28.95,
         "lat": 41.014
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Ashburn",
-        "visitors": 1,
-        "lng": -77.487,
-        "lat": 39.044
       },
       {
         "country": "United States",
