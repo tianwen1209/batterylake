@@ -27,7 +27,7 @@
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
-<link rel="stylesheet" href="styles/benchmark-results.css?v=trajectories-1">
+<link rel="stylesheet" href="styles/benchmark-results.css?v=withheld-1">
 </head>
 <body>
 <div class="app">
@@ -584,104 +584,43 @@ for ds in resp.json()["items"]:
 
     <section class="published-benchmarks" id="published-benchmarks" aria-labelledby="pbr-title">
       <div class="pbr-heading">
-        <div>
-          <div class="pbr-eyebrow">Recorded experiments</div>
-          <h2 id="pbr-title">Benchmark results</h2>
-          <p>Seven models. Two prediction tasks. Independently checked source and canonical inputs.</p>
-        </div>
-        <a class="pbr-link-button" href="assets/data/benchmark-results/model_rankings.csv" download>Download rankings CSV <span aria-hidden="true">↗</span></a>
+        <div class="pbr-eyebrow">Research preview</div>
+        <h2 id="pbr-title">Benchmark results</h2>
+        <p>Quantitative results and experimental prediction curves will be released with the paper.</p>
       </div>
-      <p id="pbr-loading" role="status">Loading the verified result snapshot…</p>
-      <button id="pbr-retry" class="pbr-link-button" type="button" hidden>Retry loading results</button>
-      <noscript><p>Enable JavaScript to explore results, or download the rankings CSV above.</p></noscript>
-      <div id="pbr-content" hidden>
-        <div class="pbr-stats" id="pbr-stats"></div>
-        <p class="pbr-snapshot" id="pbr-snapshot"></p>
-        <div class="pbr-explorer">
-          <div class="pbr-explorer-heading"><h3>Explore model performance</h3><span>Lower error is better</span></div>
-          <div class="pbr-filters">
-            <label>Task<select id="pbr-task"><option value="soh_estimation">SOH estimation</option><option value="rul_prediction">RUL prediction</option></select></label>
-            <label class="pbr-dataset-filter">Dataset<select id="pbr-dataset"></select></label>
-            <label>Profile<select id="pbr-profile"></select></label>
-            <label>Capacity / label definition<select id="pbr-variant"></select></label>
-            <label>Split protocol<select id="pbr-protocol"></select></label>
-          </div>
-          <div class="pbr-scope" id="pbr-scope"></div>
-          <p class="pbr-protocol-note" id="pbr-protocol-note"></p>
-          <section class="pbt-panel" id="pbt-panel" aria-labelledby="pbt-title">
-            <div class="pbt-heading">
-              <div><h3 id="pbt-title">Prediction trajectories</h3><p>Replay saved test predictions alongside the reference target.</p></div>
-              <div class="pbt-tasks" role="group" aria-label="Prediction chart task">
-                <button type="button" data-pbt-task="soh_estimation" aria-pressed="true">SOH</button>
-                <button type="button" data-pbt-task="rul_prediction" aria-pressed="false">RUL</button>
-              </div>
-            </div>
-            <div class="pbt-controls">
-              <label>Model<select id="pbt-model" disabled></select></label>
-              <label>Illustrated test cell<select id="pbt-cell" disabled></select></label>
-              <label class="pbt-overlay"><input type="checkbox" id="pbt-raw" disabled>Overlay raw-A prediction</label>
-            </div>
-            <p id="pbt-state" class="pbt-state" role="status">Select an experiment to load its prediction curves.</p>
-            <button type="button" id="pbt-retry" class="pbr-link-button" hidden>Retry loading curves</button>
-            <div id="pbt-body" hidden>
-              <div class="pbt-legend" aria-label="Chart legend">
-                <span><i class="pbt-truth-key"></i>Reference target</span>
-                <span><i class="pbt-pred-key"></i>Processed prediction</span>
-                <span id="pbt-raw-key" hidden><i class="pbt-raw-key"></i>Raw-A prediction</span>
-              </div>
-              <div class="pbt-figure" id="pbt-figure"></div>
-              <div class="pbt-readout" id="pbt-readout"></div>
-              <div class="pbt-playback">
-                <button type="button" id="pbt-play" class="pbr-link-button">Play</button>
-                <button type="button" id="pbt-reset" class="pbt-reset" aria-label="Restart trajectory from the first recorded point">↺ Reset</button>
-                <label class="pbt-scrubber">Replay position<input type="range" id="pbt-position" min="0" max="1" value="1" aria-label="Replay position"></label>
-                <span id="pbt-counter"></span>
-                <button type="button" id="pbt-download" class="pbr-link-button">Save image (SVG)</button>
-              </div>
-              <p id="pbt-note" class="pbt-note"></p>
-            </div>
-          </section>
-          <div class="pbr-result-region" id="pbr-result-region" aria-live="polite" aria-atomic="true">
-            <p id="pbr-empty" class="pbr-empty" hidden></p>
-            <div id="pbr-table-area">
-              <div class="pbr-table-scroll" tabindex="0" role="region" aria-label="Seven model ranking table">
-                <table class="pbr-table">
-                  <caption id="pbr-caption"></caption>
-                  <thead><tr><th scope="col">Rank</th><th scope="col">Model</th><th scope="col">RMSE ± seed SD</th><th scope="col">MAE</th><th scope="col">Test cells</th><th scope="col">Test samples</th></tr></thead>
-                  <tbody id="pbr-rows"></tbody>
-                </table>
-              </div>
-              <p class="pbr-table-note">Each cell contributes equally to MAE and RMSE. Values average five training seeds (0–4); SD is the sample standard deviation across seeds. Rankings apply only to the selected condition.</p>
-            </div>
-          </div>
-          <details class="pbr-pair-panel" id="pbr-pair-panel">
-            <summary>Source ↔ canonical comparison <span id="pbr-pair-badge"></span></summary>
-            <p id="pbr-pair-note"></p>
-            <div class="pbr-table-scroll" id="pbr-pair-table-area" tabindex="0" role="region" aria-label="Raw and processed result comparison">
-              <table class="pbr-table pbr-pair-table">
-                <caption>Mean cell-equal RMSE across the same five seeds. Maximum Δ compares individual predictions.</caption>
-                <thead><tr><th scope="col">Model</th><th scope="col">Raw-A</th><th scope="col">Raw-B repeat</th><th scope="col">Processed</th><th scope="col">Max prediction Δ</th></tr></thead>
-                <tbody id="pbr-pair-rows"></tbody>
-              </table>
-            </div>
-          </details>
-        </div>
-        <div class="pbr-bottom-grid">
-          <div class="pbr-audit">
-            <h3>Paired validation</h3>
-            <p id="pbr-audit-summary"></p>
-            <p id="pbr-tost-note"></p>
-          </div>
-          <div class="pbr-downloads">
-            <h3>Take the results with you</h3>
-            <a href="assets/data/benchmark-results/current_harness_metrics.csv" download>All 8,540 per-run metrics <span>CSV ↗</span></a>
-            <a href="assets/data/benchmark-results/current_harness_equivalence.json" download>Paired checks and statistical limits <span>JSON ↗</span></a>
-            <a href="assets/data/benchmark-results/current_harness_rankings.json" download>Protocol and label comparisons <span>JSON ↗</span></a>
-            <a href="https://github.com/tianwen1209/batterylake/blob/main/docs/BENCHMARK_RESULTS.md" target="_blank" rel="noopener">Scope, definitions and provenance <span>Read ↗</span></a>
-          </div>
-        </div>
-        <p class="pbr-footer">Frozen cell subsets of cycle-aging datasets. Missing endpoint combinations remain excluded. LLM experiments, human review and cross-machine reproduction are separate evaluations.</p>
+      <div class="pbr-preview-heading">
+        <p id="pbr-preview-note">Illustrative animation only · No experimental data</p>
+        <button type="button" id="pbr-preview-play" aria-pressed="false">Play illustration</button>
       </div>
+      <div class="pbr-previews" id="pbr-previews">
+        <figure class="pbr-preview-card">
+          <figcaption><h3>SOH estimation</h3><p>Comparing a reference health trajectory with a model prediction.</p></figcaption>
+          <svg viewBox="0 0 420 225" role="img" aria-labelledby="pbr-soh-title pbr-soh-desc">
+            <title id="pbr-soh-title">Conceptual SOH prediction comparison</title>
+            <desc id="pbr-soh-desc">Hand-drawn illustration, not experimental results. No measured values or calibrated axes are shown.</desc>
+            <path class="pbr-preview-axis" d="M38 24V185H395"/>
+            <path class="pbr-preview-grid" d="M38 65H395M38 105H395M38 145H395"/>
+            <path class="pbr-preview-line pbr-preview-reference" pathLength="1" d="M40 44C92 45 118 57 162 71S226 96 267 115S334 150 390 168"/>
+            <path class="pbr-preview-line pbr-preview-prediction" pathLength="1" d="M40 53C81 41 128 67 162 65S231 111 267 108S333 161 390 161"/>
+            <text x="40" y="211">Earlier</text><text x="390" y="211" text-anchor="end">Later</text>
+          </svg>
+          <div class="pbr-preview-legend"><span><i class="pbr-reference-key"></i>Illustrative reference</span><span><i class="pbr-prediction-key"></i>Illustrative prediction</span></div>
+        </figure>
+        <figure class="pbr-preview-card">
+          <figcaption><h3>RUL prediction</h3><p>Comparing reference remaining life with a model prediction.</p></figcaption>
+          <svg viewBox="0 0 420 225" role="img" aria-labelledby="pbr-rul-title pbr-rul-desc">
+            <title id="pbr-rul-title">Conceptual RUL prediction comparison</title>
+            <desc id="pbr-rul-desc">Hand-drawn illustration, not experimental results. No measured values, endpoints or calibrated axes are shown.</desc>
+            <path class="pbr-preview-axis" d="M38 24V185H395"/>
+            <path class="pbr-preview-grid" d="M38 65H395M38 105H395M38 145H395"/>
+            <path class="pbr-preview-line pbr-preview-reference" pathLength="1" d="M40 39L390 171"/>
+            <path class="pbr-preview-line pbr-preview-prediction" pathLength="1" d="M40 52C89 36 112 80 165 79S244 133 282 121S348 166 390 164"/>
+            <text x="40" y="211">Earlier</text><text x="390" y="211" text-anchor="end">Later</text>
+          </svg>
+          <div class="pbr-preview-legend"><span><i class="pbr-reference-key"></i>Illustrative reference</span><span><i class="pbr-prediction-key"></i>Illustrative prediction</span></div>
+        </figure>
+      </div>
+      <p class="pbr-footer">These illustrations explain the comparison format. They do not represent model performance, dataset measurements or a ranking.</p>
     </section>
 
     <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2><p>Configure a training package and inspect your local outputs below.</p></div>
@@ -2052,8 +1991,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/benchmark-results.js?v=trajectories-1"></script>
-<script src="js/benchmark-trajectories.js?v=1"></script>
+<script src="js/benchmark-results.js?v=withheld-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
 <script src="js/naming-sequencer.js"></script>

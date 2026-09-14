@@ -31,3 +31,7 @@ __pycache__/
 
 # Dataset contributions received by app.py
 /contributions/
+
+# Paper results are withheld. Do not republish through daily Git backup.
+/assets/data/benchmark-results/
+/benchmark-results-private/
