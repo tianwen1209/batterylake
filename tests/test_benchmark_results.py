@@ -45,7 +45,8 @@ class WithheldResultsTest(unittest.TestCase):
         section=self.page.locator('#published-benchmarks')
         self.assertIn('will be released with the paper',section.inner_text())
         self.assertIn('No experimental data',section.inner_text())
-        self.assertEqual(section.locator('table, a[download], select').count(),0)
+        self.assertEqual(section.locator('table, a[download]').count(),0)
+        self.assertEqual(section.locator('select').count(),2)
         self.assertFalse(any('/assets/data/benchmark-results/' in u for u in self.requests))
         self.assertEqual(section.locator('svg').count(),2)
         self.assertFalse((ROOT/'assets/data/benchmark-results').exists())
@@ -65,13 +66,58 @@ class WithheldResultsTest(unittest.TestCase):
         self.assertEqual(button.inner_text(),'Play illustration')
         button.click()
         self.assertEqual(button.get_attribute('aria-pressed'),'true')
-        self.assertEqual(self.page.evaluate('document.getAnimations().filter(a => a.effect.target.classList.contains("pbr-preview-line") && a.playState === "running").length'),4)
+        self.assertEqual(self.page.evaluate('document.getAnimations().filter(a => a.effect.target.classList.contains("pbr-preview-line") && a.playState === "running").length'),2)
         button.click()
         self.assertEqual(button.inner_text(),'Resume illustration')
-        self.assertEqual(self.page.evaluate('document.getAnimations().filter(a => a.effect.target.classList.contains("pbr-preview-line") && a.playState === "paused").length'),4)
+        self.assertEqual(self.page.evaluate('document.getAnimations().filter(a => a.effect.target.classList.contains("pbr-preview-line") && a.playState === "paused").length'),2)
+        self.page.locator('#pbr-task').select_option('rul_prediction')
+        self.assertEqual(button.inner_text(),'Play illustration')
+        self.assertEqual(self.page.evaluate('document.getAnimations().filter(a => a.effect.target.classList.contains("pbr-preview-line")).length'),0)
+        self.assertTrue(self.page.locator('[data-pbr-task="rul_prediction"]').is_visible())
         self.page.locator('#bw-flow [data-bwr-task="SOH Estimation"]').click()
         self.page.locator('#bw-wizard-next').click()
         self.assertTrue(self.page.locator('#bw-flow [data-bwr-panel="2"]').is_visible())
+
+    def test_all_dataset_task_choices_and_censored_results(self):
+        datasets=self.page.locator('#pbr-dataset option').evaluate_all('(options)=>options.map(o=>o.value)')
+        expected=[f'dataset_{i:02d}' for i in [1,3,4,5,6,7,8,9,11,17,18,19,21,23,27,36,37,38,41]]
+        self.assertEqual(datasets,expected)
+        for dataset in datasets:
+            self.page.locator('#pbr-dataset').select_option(dataset)
+            for task in ['soh_estimation','rul_prediction']:
+                self.page.locator('#pbr-task').select_option(task)
+                unavailable=task=='rul_prediction' and dataset in ['dataset_27','dataset_37']
+                self.assertEqual(self.page.locator('#pbr-status').get_attribute('data-state'),'unavailable' if unavailable else 'completed')
+                self.assertEqual(self.page.locator('#pbr-unavailable').is_visible(),unavailable)
+                self.assertEqual(self.page.locator('#pbr-models').is_visible(),not unavailable)
+                self.assertEqual(self.page.locator('#pbr-preview-play').is_disabled(),unavailable)
+                self.assertEqual(self.page.locator(f'[data-pbr-task="{task}"]').is_visible(),not unavailable)
+                self.assertEqual(self.page.locator('#pbr-task').input_value(),task)
+                if unavailable:
+                    self.assertIn('right-censored',self.page.locator('#pbr-task-note').inner_text())
+                else:
+                    self.assertIn('Results withheld',self.page.locator('#pbr-status').inner_text())
+        self.assertFalse(any('/assets/data/benchmark-results/' in u for u in self.requests))
+
+    def test_scope_distinctions_without_fake_dataset_curves(self):
+        soh_path=self.page.locator('[data-pbr-task="soh_estimation"] .pbr-preview-prediction').get_attribute('d')
+        for dataset in ['dataset_06','dataset_07','dataset_08']:
+            self.page.locator('#pbr-dataset').select_option(dataset)
+            self.assertIn('BatteryLife processed copy',self.page.locator('#pbr-source').inner_text())
+            self.assertIn('unavailable BatteryArchive original CSV',self.page.locator('#pbr-scope-note').inner_text())
+        self.page.locator('#pbr-dataset').select_option('dataset_11')
+        self.assertIn('Temperature endpoint features only',self.page.locator('#pbr-scope-note').inner_text())
+        self.page.locator('#pbr-dataset').select_option('dataset_19')
+        self.assertIn('Group 5',self.page.locator('#pbr-scope-note').inner_text())
+        self.assertEqual(self.page.locator('[data-pbr-task="soh_estimation"] .pbr-preview-prediction').get_attribute('d'),soh_path)
+        self.assertIn('not a dataset-specific result curve',self.page.locator('#pbr-illustration-note').inner_text())
+        self.page.locator('#pbr-task').select_option('rul_prediction')
+        self.page.locator('#pbr-dataset').select_option('dataset_23')
+        self.assertIn('remaining elapsed days',self.page.locator('#pbr-task-note').inner_text())
+        self.assertIn('completed discharge operations',self.page.locator('#pbr-task-note').inner_text())
+        for dataset in ['dataset_03','dataset_41']:
+            self.page.locator('#pbr-dataset').select_option(dataset)
+            self.assertIn('author',self.page.locator('#pbr-task-note').inner_text().lower())
 
     def test_responsive_light_and_dark_preview(self):
         for width in [1440,390]:
@@ -79,7 +125,7 @@ class WithheldResultsTest(unittest.TestCase):
             for theme in ['light','dark']:
                 self.page.evaluate('(theme)=>document.documentElement.dataset.theme=theme',theme)
                 self.assertTrue(self.page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
-                self.page.locator('#published-benchmarks').screenshot(path=f'/tmp/batterylake-withheld-{width}-{theme}.png')
+                self.page.locator('#published-benchmarks').screenshot(path=f'/tmp/batterylake-scope-{width}-{theme}.png')
 
 
 if __name__ == '__main__':

@@ -27,7 +27,7 @@
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
-<link rel="stylesheet" href="styles/benchmark-results.css?v=withheld-1">
+<link rel="stylesheet" href="styles/benchmark-results.css?v=scope-preview-1">
 </head>
 <body>
 <div class="app">
@@ -586,41 +586,70 @@ for ds in resp.json()["items"]:
       <div class="pbr-heading">
         <div class="pbr-eyebrow">Research preview</div>
         <h2 id="pbr-title">Benchmark results</h2>
-        <p>Quantitative results and experimental prediction curves will be released with the paper.</p>
+        <p>Explore completed experiments by dataset and task. Quantitative results and experimental prediction curves will be released with the paper.</p>
       </div>
-      <div class="pbr-preview-heading">
-        <p id="pbr-preview-note">Illustrative animation only · No experimental data</p>
-        <button type="button" id="pbr-preview-play" aria-pressed="false">Play illustration</button>
+      <div class="pbr-filters" aria-label="Browse benchmark experiments">
+        <label for="pbr-dataset">Dataset<select id="pbr-dataset"></select></label>
+        <label for="pbr-task">Task<select id="pbr-task"><option value="soh_estimation">SOH estimation</option><option value="rul_prediction">RUL prediction</option></select></label>
       </div>
-      <div class="pbr-previews" id="pbr-previews">
-        <figure class="pbr-preview-card">
-          <figcaption><h3>SOH estimation</h3><p>Comparing a reference health trajectory with a model prediction.</p></figcaption>
-          <svg viewBox="0 0 420 225" role="img" aria-labelledby="pbr-soh-title pbr-soh-desc">
-            <title id="pbr-soh-title">Conceptual SOH prediction comparison</title>
-            <desc id="pbr-soh-desc">Hand-drawn illustration, not experimental results. No measured values or calibrated axes are shown.</desc>
-            <path class="pbr-preview-axis" d="M38 24V185H395"/>
-            <path class="pbr-preview-grid" d="M38 65H395M38 105H395M38 145H395"/>
-            <path class="pbr-preview-line pbr-preview-reference" pathLength="1" d="M40 44C92 45 118 57 162 71S226 96 267 115S334 150 390 168"/>
-            <path class="pbr-preview-line pbr-preview-prediction" pathLength="1" d="M40 53C81 41 128 67 162 65S231 111 267 108S333 161 390 161"/>
-            <text x="40" y="211">Earlier</text><text x="390" y="211" text-anchor="end">Later</text>
-          </svg>
-          <div class="pbr-preview-legend"><span><i class="pbr-reference-key"></i>Illustrative reference</span><span><i class="pbr-prediction-key"></i>Illustrative prediction</span></div>
-        </figure>
-        <figure class="pbr-preview-card">
-          <figcaption><h3>RUL prediction</h3><p>Comparing reference remaining life with a model prediction.</p></figcaption>
-          <svg viewBox="0 0 420 225" role="img" aria-labelledby="pbr-rul-title pbr-rul-desc">
-            <title id="pbr-rul-title">Conceptual RUL prediction comparison</title>
-            <desc id="pbr-rul-desc">Hand-drawn illustration, not experimental results. No measured values, endpoints or calibrated axes are shown.</desc>
-            <path class="pbr-preview-axis" d="M38 24V185H395"/>
-            <path class="pbr-preview-grid" d="M38 65H395M38 105H395M38 145H395"/>
-            <path class="pbr-preview-line pbr-preview-reference" pathLength="1" d="M40 39L390 171"/>
-            <path class="pbr-preview-line pbr-preview-prediction" pathLength="1" d="M40 52C89 36 112 80 165 79S244 133 282 121S348 166 390 164"/>
-            <text x="40" y="211">Earlier</text><text x="390" y="211" text-anchor="end">Later</text>
-          </svg>
-          <div class="pbr-preview-legend"><span><i class="pbr-reference-key"></i>Illustrative reference</span><span><i class="pbr-prediction-key"></i>Illustrative prediction</span></div>
-        </figure>
+      <div class="pbr-explorer">
+        <section class="pbr-scope" aria-labelledby="pbr-selection-title" aria-live="polite" aria-atomic="true">
+          <p class="pbr-status" id="pbr-status"></p>
+          <h3 id="pbr-selection-title"></h3>
+          <p class="pbr-task-name" id="pbr-task-name"></p>
+          <dl>
+            <dt>Source</dt><dd id="pbr-source"></dd>
+            <dt>Experiment scope</dt><dd id="pbr-scope-note"></dd>
+            <dt>Task definition</dt><dd id="pbr-task-note"></dd>
+          </dl>
+          <div id="pbr-models">
+            <h4>Models evaluated <span>· Unranked</span></h4>
+            <ul class="pbr-model-list"><li>Linear Regression</li><li>Random Forest</li><li>XGBoost</li><li>LSTM</li><li>Transformer</li><li>CNN</li><li>PINN</li></ul>
+          </div>
+        </section>
+        <div class="pbr-visual">
+          <div class="pbr-preview-heading" id="pbr-preview-controls">
+            <p id="pbr-preview-note">Illustrative animation only · No experimental data</p>
+            <button type="button" id="pbr-preview-play" aria-pressed="false">Play illustration</button>
+          </div>
+          <div class="pbr-previews" id="pbr-previews">
+            <figure class="pbr-preview-card" data-pbr-task="soh_estimation">
+              <figcaption><h3>SOH estimation</h3><p>Comparing a reference health trajectory with a model prediction.</p></figcaption>
+              <svg viewBox="0 0 420 225" role="img" aria-labelledby="pbr-soh-title pbr-soh-desc">
+                <title id="pbr-soh-title">Conceptual SOH prediction comparison</title>
+                <desc id="pbr-soh-desc">Hand-drawn illustration, not experimental results. No measured values or calibrated axes are shown.</desc>
+                <path class="pbr-preview-axis" d="M38 24V185H395"/>
+                <path class="pbr-preview-grid" d="M38 65H395M38 105H395M38 145H395"/>
+                <path class="pbr-preview-line pbr-preview-reference" pathLength="1" d="M40 44C92 45 118 57 162 71S226 96 267 115S334 150 390 168"/>
+                <path class="pbr-preview-line pbr-preview-prediction" pathLength="1" d="M40 53C81 41 128 67 162 65S231 111 267 108S333 161 390 161"/>
+                <text x="40" y="211">Earlier</text><text x="390" y="211" text-anchor="end">Later</text>
+              </svg>
+              <div class="pbr-preview-legend"><span><i class="pbr-reference-key"></i>Illustrative reference</span><span><i class="pbr-prediction-key"></i>Illustrative prediction</span></div>
+            </figure>
+            <figure class="pbr-preview-card" data-pbr-task="rul_prediction" hidden>
+              <figcaption><h3>RUL prediction</h3><p>Comparing reference remaining life with a model prediction.</p></figcaption>
+              <svg viewBox="0 0 420 225" role="img" aria-labelledby="pbr-rul-title pbr-rul-desc">
+                <title id="pbr-rul-title">Conceptual RUL prediction comparison</title>
+                <desc id="pbr-rul-desc">Hand-drawn illustration, not experimental results. No measured values, endpoints or calibrated axes are shown.</desc>
+                <path class="pbr-preview-axis" d="M38 24V185H395"/>
+                <path class="pbr-preview-grid" d="M38 65H395M38 105H395M38 145H395"/>
+                <path class="pbr-preview-line pbr-preview-reference" pathLength="1" d="M40 39L390 171"/>
+                <path class="pbr-preview-line pbr-preview-prediction" pathLength="1" d="M40 52C89 36 112 80 165 79S244 133 282 121S348 166 390 164"/>
+                <text x="40" y="211">Earlier</text><text x="390" y="211" text-anchor="end">Later</text>
+              </svg>
+              <div class="pbr-preview-legend"><span><i class="pbr-reference-key"></i>Illustrative reference</span><span><i class="pbr-prediction-key"></i>Illustrative prediction</span></div>
+            </figure>
+          </div>
+          <div class="pbr-unavailable" id="pbr-unavailable" hidden>
+            <span class="pbr-eyebrow">Task availability</span>
+            <h3>Point-value RUL is not available</h3>
+            <p id="pbr-unavailable-note"></p>
+            <p>SOH experiments remain available. Choose SOH estimation to view their scope.</p>
+          </div>
+          <p class="pbr-footer" id="pbr-illustration-note">The illustration explains the selected task, not a dataset-specific result curve. It does not represent model performance, measurements or a ranking.</p>
+        </div>
       </div>
-      <p class="pbr-footer">These illustrations explain the comparison format. They do not represent model performance, dataset measurements or a ranking.</p>
+      <p class="pbr-footer">Availability refers to the selected experimental subsets. Scores, rankings and real prediction curves are withheld pending publication.</p>
     </section>
 
     <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2><p>Configure a training package and inspect your local outputs below.</p></div>
@@ -1991,7 +2020,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/benchmark-results.js?v=withheld-1"></script>
+<script src="js/benchmark-results.js?v=scope-preview-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
 <script src="js/naming-sequencer.js"></script>
