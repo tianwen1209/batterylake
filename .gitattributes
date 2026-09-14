@@ -1,0 +1,3 @@
+# Preserve byte-exact report downloads and their upstream SHA-256 fingerprints.
+# Python's CSV writer uses CRLF; these are valid record endings, not whitespace errors.
+assets/data/benchmark-results/*.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol

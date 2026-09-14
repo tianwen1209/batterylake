@@ -1,0 +1,24 @@
+{
+  "updated_at": "2026-09-11T02:56:25+00:00",
+  "verified_fits": 8540,
+  "planned_fits": 8540,
+  "ranking_conditions": 168,
+  "ranking_rows": 1176,
+  "incomplete_ranking_conditions": [],
+  "protocol_comparisons": 287,
+  "paired_statuses": {
+    "passed_direct_comparison": 266
+  },
+  "tost_statuses": {
+    "insufficient_test_cells": 140,
+    "degenerate_difference_variance": 126
+  },
+  "final_tost_equivalence_claims": 0,
+  "ranking_definition": "Mean over five seeds of cell-equal RMSE; rank separately per case, task, label variant, protocol and target unit. Exact ties receive average ranks. No global mixed-unit leaderboard.",
+  "input_hashes": {
+    "current_harness_metrics.csv": "a07951ceaf49a18765eded8f415bd680277ecb4f032b47928766ed9948bb77b8",
+    "current_harness_rankings.json": "d53d35dd9d7d0adde74a99c7b286cb989b2a6a5d4e3989204e75a7e32af5333f",
+    "current_harness_equivalence.json": "bd818a639e1babfa06012165538869c9cf24ff8ea51f6346625e5909c6e35fd2"
+  },
+  "ranking_sha256": "bd874203b44a7abaadbf59ae03af21f646cabca035587f9d4541b4b3ffe78bc2"
+}

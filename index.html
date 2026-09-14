@@ -27,6 +27,7 @@
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
+<link rel="stylesheet" href="styles/benchmark-results.css">
 </head>
 <body>
 <div class="app">
@@ -581,6 +582,76 @@ for ds in resp.json()["items"]:
       <img class="benchmarks-hero-art visual-page-hero-art" src="assets/images/benchmarks-hero-reference.png?v=1" alt="" aria-hidden="true">
     </div>
 
+    <section class="published-benchmarks" id="published-benchmarks" aria-labelledby="pbr-title">
+      <div class="pbr-heading">
+        <div>
+          <div class="pbr-eyebrow">Recorded experiments</div>
+          <h2 id="pbr-title">Benchmark results</h2>
+          <p>Seven models. Two prediction tasks. Independently checked source and canonical inputs.</p>
+        </div>
+        <a class="pbr-link-button" href="assets/data/benchmark-results/model_rankings.csv" download>Download rankings CSV <span aria-hidden="true">↗</span></a>
+      </div>
+      <p id="pbr-loading" role="status">Loading the verified result snapshot…</p>
+      <button id="pbr-retry" class="pbr-link-button" type="button" hidden>Retry loading results</button>
+      <noscript><p>Enable JavaScript to explore results, or download the rankings CSV above.</p></noscript>
+      <div id="pbr-content" hidden>
+        <div class="pbr-stats" id="pbr-stats"></div>
+        <p class="pbr-snapshot" id="pbr-snapshot"></p>
+        <div class="pbr-explorer">
+          <div class="pbr-explorer-heading"><h3>Explore model performance</h3><span>Lower error is better</span></div>
+          <div class="pbr-filters">
+            <label>Task<select id="pbr-task"><option value="soh_estimation">SOH estimation</option><option value="rul_prediction">RUL prediction</option></select></label>
+            <label class="pbr-dataset-filter">Dataset<select id="pbr-dataset"></select></label>
+            <label>Profile<select id="pbr-profile"></select></label>
+            <label>Capacity / label definition<select id="pbr-variant"></select></label>
+            <label>Split protocol<select id="pbr-protocol"></select></label>
+          </div>
+          <div class="pbr-scope" id="pbr-scope"></div>
+          <p class="pbr-protocol-note" id="pbr-protocol-note"></p>
+          <div class="pbr-result-region" id="pbr-result-region" aria-live="polite" aria-atomic="true">
+            <p id="pbr-empty" class="pbr-empty" hidden></p>
+            <div id="pbr-table-area">
+              <div class="pbr-table-scroll" tabindex="0" role="region" aria-label="Seven model ranking table">
+                <table class="pbr-table">
+                  <caption id="pbr-caption"></caption>
+                  <thead><tr><th scope="col">Rank</th><th scope="col">Model</th><th scope="col">RMSE ± seed SD</th><th scope="col">MAE</th><th scope="col">Test cells</th><th scope="col">Test samples</th></tr></thead>
+                  <tbody id="pbr-rows"></tbody>
+                </table>
+              </div>
+              <p class="pbr-table-note">Each cell contributes equally to MAE and RMSE. Values average five training seeds (0–4); SD is the sample standard deviation across seeds. Rankings apply only to the selected condition.</p>
+            </div>
+          </div>
+          <details class="pbr-pair-panel" id="pbr-pair-panel">
+            <summary>Source ↔ canonical comparison <span id="pbr-pair-badge"></span></summary>
+            <p id="pbr-pair-note"></p>
+            <div class="pbr-table-scroll" id="pbr-pair-table-area" tabindex="0" role="region" aria-label="Raw and processed result comparison">
+              <table class="pbr-table pbr-pair-table">
+                <caption>Mean cell-equal RMSE across the same five seeds. Maximum Δ compares individual predictions.</caption>
+                <thead><tr><th scope="col">Model</th><th scope="col">Raw-A</th><th scope="col">Raw-B repeat</th><th scope="col">Processed</th><th scope="col">Max prediction Δ</th></tr></thead>
+                <tbody id="pbr-pair-rows"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div class="pbr-bottom-grid">
+          <div class="pbr-audit">
+            <h3>Paired validation</h3>
+            <p id="pbr-audit-summary"></p>
+            <p id="pbr-tost-note"></p>
+          </div>
+          <div class="pbr-downloads">
+            <h3>Take the results with you</h3>
+            <a href="assets/data/benchmark-results/current_harness_metrics.csv" download>All 8,540 per-run metrics <span>CSV ↗</span></a>
+            <a href="assets/data/benchmark-results/current_harness_equivalence.json" download>Paired checks and statistical limits <span>JSON ↗</span></a>
+            <a href="assets/data/benchmark-results/current_harness_rankings.json" download>Protocol and label comparisons <span>JSON ↗</span></a>
+            <a href="https://github.com/tianwen1209/batterylake/blob/main/docs/BENCHMARK_RESULTS.md" target="_blank" rel="noopener">Scope, definitions and provenance <span>Read ↗</span></a>
+          </div>
+        </div>
+        <p class="pbr-footer">Frozen cell subsets of cycle-aging datasets. Missing endpoint combinations remain excluded. LLM experiments, human review and cross-machine reproduction are separate evaluations.</p>
+      </div>
+    </section>
+
+    <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2><p>Configure a training package and inspect your local outputs below.</p></div>
     <div class="bw-flow" id="bw-flow">
       <div class="bw-progress bw-flow-progress" aria-label="Benchmark workflow steps">
         <button class="bw-pstep active" type="button" data-bwr-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">1</span><span class="bw-pcopy"><span class="bw-plabel">Select Task</span></span></button>
@@ -1948,6 +2019,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
+<script src="js/benchmark-results.js"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
 <script src="js/naming-sequencer.js"></script>
