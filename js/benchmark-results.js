@@ -105,6 +105,9 @@
       tr.append(...[data.models[p.model], number(p.raw_a), number(p.raw_b), number(p.processed), number(p.paired_max_abs)].map(x => make('td', x)));
       el('pair-rows').append(tr);
     }
+    const detail = {condition: condition || null, profile, task, models: data.models};
+    window.BatteryLakePublishedCondition = detail;
+    document.dispatchEvent(new CustomEvent('batterylake:benchmark-condition', {detail}));
   }
   async function load() {
     if (loading || data) return;

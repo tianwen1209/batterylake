@@ -146,6 +146,86 @@ class PublishedResultsTest(unittest.TestCase):
             self.assertEqual(response.status, 200)
             self.assertGreater(len(response.body()), 1000)
 
+    def test_real_trajectory_replay_pause_scrub_and_export(self):
+        self.open_results()
+        self.page.wait_for_selector('#pbt-body', state='visible')
+        self.assertEqual(self.page.locator('#pbt-model').input_value(), 'cnn')
+        self.assertIn('SOH reference target', self.page.locator('#pbt-svg-title').text_content())
+        self.assertEqual(self.page.locator('#pbt-play').inner_text(), 'Play')  # reduced-motion preference
+        self.page.locator('#pbt-reset').click()
+        self.assertEqual(self.page.locator('#pbt-position').input_value(), '0')
+        self.page.locator('#pbt-play').click()
+        self.page.wait_for_function('Number(document.getElementById("pbt-position").value) > 0')
+        self.page.locator('#pbt-play').click()
+        position = self.page.locator('#pbt-position').input_value()
+        self.page.wait_for_timeout(150)
+        self.assertEqual(self.page.locator('#pbt-position').input_value(), position)
+        self.page.locator('#pbt-position').fill('1')
+        self.assertTrue(self.page.locator('#pbt-counter').inner_text().startswith('2 /'))
+        with self.page.expect_download() as event:
+            self.page.locator('#pbt-download').click()
+        download = event.value
+        self.assertTrue(download.suggested_filename.endswith('-cnn-seed0.svg'))
+        text = Path(download.path()).read_text()
+        self.assertIn('Reference', text)
+        self.assertIn('seed 0', text)
+        self.assertIn('Life axis:', text)
+
+    def test_curve_model_overlay_task_and_censoring(self):
+        self.open_results()
+        self.page.wait_for_selector('#pbt-body', state='visible')
+        original = self.page.locator('#pbt-pred-path').get_attribute('d')
+        self.page.select_option('#pbt-model', 'rf')
+        self.assertNotEqual(self.page.locator('#pbt-pred-path').get_attribute('d'), original)
+        self.page.locator('#pbt-raw').check()
+        self.assertEqual(self.page.locator('#pbt-raw-path').get_attribute('d'), self.page.locator('#pbt-pred-path').get_attribute('d'))
+        self.page.locator('[data-pbt-task="rul_prediction"]').click()
+        self.page.wait_for_function('document.getElementById("pbt-svg-title")?.textContent.startsWith("RUL")')
+        self.assertEqual(self.page.locator('#pbr-task').input_value(), 'rul_prediction')
+        self.page.select_option('#pbr-dataset', 'dataset_27')
+        self.page.wait_for_function('document.getElementById("pbt-state").textContent.includes("Censored")')
+        self.assertTrue(self.page.locator('#pbt-body').is_hidden())
+
+    def test_curve_download_failure_retry_and_selection_race(self):
+        self.page.route('**/trajectories/*.json', lambda route: route.abort())
+        self.open_results()
+        self.page.wait_for_selector('#pbt-retry', state='visible')
+        self.assertEqual(self.page.locator('#pbr-rows tr').count(), 7)
+        self.page.unroute('**/trajectories/*.json')
+        self.page.locator('#pbt-retry').click()
+        self.page.wait_for_selector('#pbt-body', state='visible')
+        self.page.evaluate('''() => {
+          const e=document.getElementById('pbr-task');
+          for(const t of ['rul_prediction','soh_estimation','rul_prediction']) {
+            e.value=t; e.dispatchEvent(new Event('change'));
+          }
+        }''')
+        self.page.wait_for_function('document.getElementById("pbt-svg-title")?.textContent.startsWith("RUL") && !document.getElementById("pbt-body").hidden')
+        self.assertEqual(self.page.locator('[data-pbt-task="rul_prediction"]').get_attribute('aria-pressed'), 'true')
+
+    def test_all_curve_payloads_match_snapshot_and_responsive_plot(self):
+        index = json.loads((DATA / 'trajectories/index.json').read_text())
+        self.assertEqual(len(index['conditions']), len(self.snapshot['conditions']))
+        for entry in index['conditions']:
+            content = (DATA / 'trajectories' / entry['file']).read_bytes()
+            self.assertEqual(hashlib.sha256(content).hexdigest(), entry['sha256'])
+            curve = json.loads(content)
+            self.assertEqual(curve['seed'], 0)
+            for cell in curve['cells']:
+                self.assertLessEqual(cell['plotted_points'], 512)
+                self.assertEqual(cell['plotted_points'], len(cell['truth']))
+                self.assertEqual(set(cell['predictions']), set(self.snapshot['models']))
+                self.assertEqual(cell['axis'], sorted(cell['axis']))
+        self.open_results()
+        self.page.wait_for_selector('#pbt-body', state='visible')
+        for width in [1440, 390]:
+            self.page.set_viewport_size({'width': width, 'height': 1000})
+            for theme in ['light', 'dark']:
+                self.page.evaluate('(theme) => document.documentElement.dataset.theme=theme', theme)
+                self.page.wait_for_timeout(150)
+                self.assertTrue(self.page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                self.page.locator('#pbt-panel').screenshot(path=f'/tmp/batterylake-trajectory-{width}-{theme}.png')
+
 
 if __name__ == '__main__':
     unittest.main()

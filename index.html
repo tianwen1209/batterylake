@@ -27,7 +27,7 @@
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
-<link rel="stylesheet" href="styles/benchmark-results.css">
+<link rel="stylesheet" href="styles/benchmark-results.css?v=trajectories-1">
 </head>
 <body>
 <div class="app">
@@ -608,6 +608,39 @@ for ds in resp.json()["items"]:
           </div>
           <div class="pbr-scope" id="pbr-scope"></div>
           <p class="pbr-protocol-note" id="pbr-protocol-note"></p>
+          <section class="pbt-panel" id="pbt-panel" aria-labelledby="pbt-title">
+            <div class="pbt-heading">
+              <div><h3 id="pbt-title">Prediction trajectories</h3><p>Replay saved test predictions alongside the reference target.</p></div>
+              <div class="pbt-tasks" role="group" aria-label="Prediction chart task">
+                <button type="button" data-pbt-task="soh_estimation" aria-pressed="true">SOH</button>
+                <button type="button" data-pbt-task="rul_prediction" aria-pressed="false">RUL</button>
+              </div>
+            </div>
+            <div class="pbt-controls">
+              <label>Model<select id="pbt-model" disabled></select></label>
+              <label>Illustrated test cell<select id="pbt-cell" disabled></select></label>
+              <label class="pbt-overlay"><input type="checkbox" id="pbt-raw" disabled>Overlay raw-A prediction</label>
+            </div>
+            <p id="pbt-state" class="pbt-state" role="status">Select an experiment to load its prediction curves.</p>
+            <button type="button" id="pbt-retry" class="pbr-link-button" hidden>Retry loading curves</button>
+            <div id="pbt-body" hidden>
+              <div class="pbt-legend" aria-label="Chart legend">
+                <span><i class="pbt-truth-key"></i>Reference target</span>
+                <span><i class="pbt-pred-key"></i>Processed prediction</span>
+                <span id="pbt-raw-key" hidden><i class="pbt-raw-key"></i>Raw-A prediction</span>
+              </div>
+              <div class="pbt-figure" id="pbt-figure"></div>
+              <div class="pbt-readout" id="pbt-readout"></div>
+              <div class="pbt-playback">
+                <button type="button" id="pbt-play" class="pbr-link-button">Play</button>
+                <button type="button" id="pbt-reset" class="pbt-reset" aria-label="Restart trajectory from the first recorded point">↺ Reset</button>
+                <label class="pbt-scrubber">Replay position<input type="range" id="pbt-position" min="0" max="1" value="1" aria-label="Replay position"></label>
+                <span id="pbt-counter"></span>
+                <button type="button" id="pbt-download" class="pbr-link-button">Save image (SVG)</button>
+              </div>
+              <p id="pbt-note" class="pbt-note"></p>
+            </div>
+          </section>
           <div class="pbr-result-region" id="pbr-result-region" aria-live="polite" aria-atomic="true">
             <p id="pbr-empty" class="pbr-empty" hidden></p>
             <div id="pbr-table-area">
@@ -2019,7 +2052,8 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/benchmark-results.js"></script>
+<script src="js/benchmark-results.js?v=trajectories-1"></script>
+<script src="js/benchmark-trajectories.js?v=1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
 <script src="js/naming-sequencer.js"></script>

@@ -40,6 +40,21 @@ LLM conversion experiments, human Gold/review, and cross-machine reproduction ar
 
 ## Public files and refresh
 
+### Animated prediction figures
+
+The prediction figure follows the selected condition. Use SOH/RUL, model and test-cell controls, then **Play**, **Pause**, **Reset**, or drag the replay position. The reference curve is the task label saved with the experiment (including explicitly identified author-RUL profiles), not a newly inferred endpoint. Playback reveals stored test observations; it does not run a model live. When paired raw-A results exist, an optional dashed overlay shows the source-lane predictions. Coincident lines are expected for exact numerical agreement.
+
+Figures use **seed 0**, not the five-seed mean. For every condition, at most three eligible test cells are selected by the lowest SHA-256 of the compact JSON tuple `[20260910, case_id, cell_id]`, independent of outcomes. At most 512 evenly spaced recorded test anchors per cell are exported, including the first and last. Values are unchanged; no smoothing or interpolated values are generated. Connecting lines are visual guides between the selected anchors. Full-test, five-seed metrics above remain unchanged. The legend, axes, cell identity, label variant and seed are included in **Save image (SVG)**. Reduced-motion preferences disable automatic playback; manual playback remains available.
+
+`trajectories/index.json` links all 168 conditions to small, lazily fetched JSON files. Each file records sample keys, source prediction SHA-256 hashes and job IDs. Full prediction archives stay on the server. To refresh these bounded illustrations after exporting the metric snapshot:
+
+```bash
+/home/zhutianwen/BatteryLake2026/Benchmark/runs/harness-cpu-env/bin/python \
+  scripts/export_benchmark_trajectories.py
+```
+
+The exporter verifies each result identity and prediction hash, accepts only valid test rows, and checks cell, axis, label and sample-order alignment across models and source lanes.
+
 All public files are hosted with the static website, so visitors do not need access to the server or data repository:
 
 | File in `assets/data/benchmark-results/` | Content |
