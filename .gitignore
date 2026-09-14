@@ -32,6 +32,6 @@ __pycache__/
 # Dataset contributions received by app.py
 /contributions/
 
-# Paper results are withheld. Do not republish through daily Git backup.
+# Numerical result files are withheld. Real curve PNGs are published separately.
 /assets/data/benchmark-results/
 /benchmark-results-private/

@@ -1,6 +1,5 @@
-/* Public availability metadata only, reviewed against the frozen harness manifest
- * and completed result receipts. Do not import scores, rankings or predictions.
- * The task illustrations are independent of every dataset's experimental data. */
+/* Verified experimental curves are rendered on the server as PNGs.
+ * The browser loads display metadata and pixels, never numerical results. */
 (() => {
   'use strict';
   const author = 'Author-published data → canonical';
@@ -78,21 +77,27 @@
   if (!root || !button) return;
   const datasetSelect = document.getElementById('pbr-dataset');
   const taskSelect = document.getElementById('pbr-task');
-  const figures = [...root.querySelectorAll('[data-pbr-task]')];
+  const modelSelect = document.getElementById('pbr-model');
+  const chart = document.getElementById('pbr-real-chart');
+  const curveImage = document.getElementById('pbr-curve-image');
+  const message = document.getElementById('pbr-chart-message');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  let animations = [], started = false, inView = false;
+  let animation = null, started = false, inView = false, generation = 0, catalog = null;
   datasets.forEach(dataset => datasetSelect.add(new Option(`${dataset.id.replace('dataset_', '')} · ${dataset.name}`, dataset.id)));
   function text(id, value) {document.getElementById(id).textContent = value;}
-  function render() {
-    animations.forEach(a => {a.onfinish = null; a.cancel();});
-    animations = []; started = false;
+  async function render() {
+    const current = ++generation;
+    if (animation) {animation.onfinish = null; animation.cancel();}
+    animation = null; started = false;
+    chart.hidden = true; button.disabled = true;
+    button.textContent = 'Play prediction'; button.setAttribute('aria-pressed', 'false');
     const dataset = datasets.find(d => d.id === datasetSelect.value);
     const isSoh = taskSelect.value === 'soh_estimation';
     const definition = isSoh ? dataset.soh : dataset.rul;
     const available = Boolean(definition);
     text('pbr-selection-title', dataset.name);
     text('pbr-task-name', isSoh ? 'SOH estimation' : 'RUL prediction');
-    text('pbr-status', available ? 'Experiments completed · Results withheld' : 'Point-value RUL unavailable');
+    text('pbr-status', available ? 'Experiments completed' : 'Point-value RUL unavailable');
     document.getElementById('pbr-status').dataset.state = available ? 'completed' : 'unavailable';
     text('pbr-source', dataset.source);
     text('pbr-scope-note', dataset.scope);
@@ -101,42 +106,68 @@
     document.getElementById('pbr-models').hidden = !available;
     document.getElementById('pbr-unavailable').hidden = available;
     document.getElementById('pbr-preview-controls').hidden = !available;
-    document.getElementById('pbr-illustration-note').hidden = !available;
-    figures.forEach(figure => {figure.hidden = !available || figure.dataset.pbrTask !== taskSelect.value;});
-    button.disabled = !available;
-    button.textContent = 'Play illustration'; button.setAttribute('aria-pressed', 'false');
-    if (available && inView && !reducedMotion.matches && !document.hidden) toggle();
+    document.getElementById('pbr-curve-note').hidden = !available;
+    modelSelect.disabled = !available;
+    message.hidden = !available;
+    if (!available) return;
+    message.textContent = 'Loading prediction curves…';
+    const entry = catalog?.entries.find(e => e.dataset_id === dataset.id && e.task === taskSelect.value && e.model === modelSelect.value);
+    if (!entry) {message.textContent = 'This prediction chart is currently unavailable.'; return;}
+    const modelName = catalog.models[entry.model];
+    text('pbr-curve-context', entry.protocol);
+    text('pbr-chart-title', `${isSoh ? 'SOH estimation' : 'RUL prediction'} · ${modelName}`);
+    text('pbr-chart-subtitle', `Test cell ${entry.cell} · ${entry.profile}`);
+    text('pbr-y-label', isSoh ? 'State of health' : 'Remaining useful life');
+    text('pbr-x-label', entry.axis_label);
+    document.getElementById('pbr-raw-legend').hidden = !entry.raw_comparison;
+    text('pbr-raw-label', dataset.source === copySource ? 'Source-copy prediction' : 'Raw-input prediction');
+    text('pbr-curve-note', entry.raw_comparison
+      ? 'Curves use recorded test targets and saved model predictions. Overlapping predictions may appear as one line.'
+      : 'This temporal experiment compares recorded test targets with processed-input predictions. A paired raw-input run is not available for this protocol.');
+    try {
+      const next = new Image();
+      next.src = `assets/images/benchmark-curves/${entry.image}?v=real-curves-1`;
+      await next.decode();
+      if (current !== generation) return;
+      curveImage.src = next.src;
+      curveImage.alt = `${dataset.name}, ${isSoh ? 'SOH' : 'RUL'}, ${modelName}: recorded reference targets and ${entry.raw_comparison ? 'raw-input and ' : ''}processed-input test predictions for cell ${entry.cell}.`;
+      chart.hidden = false; message.hidden = true; button.disabled = false;
+      if (inView && !reducedMotion.matches && !document.hidden) toggle();
+    } catch (_) {
+      if (current === generation) message.textContent = 'The prediction chart could not be loaded. Change the selection to retry.';
+    }
   }
   function pause() {
-    const running = animations.some(a => a.playState === 'running');
-    animations.forEach(a => {if (a.playState === 'running') a.pause();});
-    if (running) {button.textContent = 'Resume illustration'; button.setAttribute('aria-pressed', 'false');}
+    if (animation?.playState === 'running') {
+      animation.pause(); button.textContent = 'Resume prediction'; button.setAttribute('aria-pressed', 'false');
+    }
   }
   function toggle() {
     if (button.disabled) return;
-    if (animations.some(a => a.playState === 'running')) {pause(); return;}
+    if (animation?.playState === 'running') {pause(); return;}
     started = true;
-    if (animations.some(a => a.playState === 'paused')) animations.forEach(a => a.play());
+    if (animation?.playState === 'paused') animation.play();
     else {
-      animations.forEach(a => a.cancel());
-      const paths = figures.filter(figure => !figure.hidden).flatMap(figure => [...figure.querySelectorAll('.pbr-preview-line')]);
-      animations = paths.map(path => path.animate([
-        {strokeDasharray: '1', strokeDashoffset: '1'},
-        {strokeDasharray: '1', strokeDashoffset: '0'}
-      ], {duration: 7000, fill: 'forwards', easing: 'linear'}));
-      animations[0].onfinish = () => {button.textContent = 'Replay illustration'; button.setAttribute('aria-pressed', 'false');};
+      if (animation) animation.cancel();
+      animation = curveImage.animate([{clipPath: 'inset(0 100% 0 0)'}, {clipPath: 'inset(0 0% 0 0)'}],
+        {duration: 7000, fill: 'forwards', easing: 'linear'});
+      animation.onfinish = () => {button.textContent = 'Replay prediction'; button.setAttribute('aria-pressed', 'false');};
     }
-    button.textContent = 'Pause illustration'; button.setAttribute('aria-pressed', 'true');
+    button.textContent = 'Pause prediction'; button.setAttribute('aria-pressed', 'true');
   }
   datasetSelect.addEventListener('change', render);
   taskSelect.addEventListener('change', render);
-  render();
+  modelSelect.addEventListener('change', render);
+  fetch('assets/images/benchmark-curves/index.json?v=real-curves-1')
+    .then(response => {if (!response.ok) throw new Error('Unavailable curve index'); return response.json();})
+    .then(data => {catalog = data; return render();})
+    .catch(() => {message.textContent = 'Prediction charts are currently unavailable. Please reload to retry.';});
   button.addEventListener('click', toggle);
   new IntersectionObserver(entries => {
     inView = entries[0].isIntersecting;
     if (!inView) pause();
     else if (!started && !reducedMotion.matches && !document.hidden) toggle();
-  }, {threshold: .25}).observe(document.getElementById('pbr-previews'));
+  }, {threshold: .25}).observe(chart);
   reducedMotion.addEventListener('change', () => {if (reducedMotion.matches) pause();});
   document.addEventListener('visibilitychange', () => {if (document.hidden) pause();});
   new MutationObserver(() => {

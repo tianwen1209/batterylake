@@ -1,19 +1,43 @@
-# Benchmark 发布状态
+# Benchmark 真实曲线展示
 
 [English](BENCHMARK_RESULTS.md) · [Benchmark 页面](https://tianwen1209.github.io/batterylake/#benchmarks)
 
-具体实验结果暂留作论文使用，不包含在当前网页发布版本中。
+公开页面使用**真实测试标签与已保存的模型预测**绘图，可切换数据集、任务和模型。按论文发布要求，不展示数字刻度、数值悬浮提示、指标和排名。原概念示意动画已移除。
 
-数据集和任务选择器覆盖十九个冻结实验数据集：01、03、04、05、06、07、08、09、11、17、18、19、21、23、27、36、37、38、41。切换后展示定性的任务可用状态、来源、实验范围、任务定义及不带排名的已评估模型列表。可用状态针对选定子集，不代表完整原始发布版或所有标签定义均已完成。
+覆盖十九个数据集：01、03、04、05、06、07、08、09、11、17、18、19、21、23、27、36、37、38、41。各数据集均有 SOH 曲线；Onori 二次寿命（27）与事故筛查后的 HM（37）在当前定义下右删失，不提供点值 RUL。每个可用任务都提供 Linear Regression、Random Forest、XGBoost、LSTM、Transformer、CNN、PINN 图像。PINN 使用已完成的 PINN4SOH 替换实验。原有的本地训练包配置流程继续保留。
 
-公开说明于 2026-09-14 对照服务器上的冻结清单 `Benchmark/harness_v1/manifest.json` 和已完成记录 `Benchmark/reports/pinn4soh_v1/current_harness_metrics.csv` 核查。`js/benchmark-results.js` 仅包含人工核对的定性文字，不将这两个源文件导出到网页。后续更新可用状态需要重新核对实验记录，不能根据数据集目录的展示状态推断实验完成。
+## 每张图代表什么
 
-页面保留以下区别：BatteryLife 处理版副本与作者原始数据、KIT 温度端点输入限制、Oxford 仅 Group 5 的范围、EVERLASTING 天数与操作数的独立实验，以及作者 RUL 与观测终点 RUL。Onori 二次寿命（27）和事故筛查后的 HM 子集（37）选择 RUL 时显示右删失原因，不展示已评估模型或预测示意图；仍可选择 SOH。完成拟合不等于证明精度或统计等价性。
+- 使用冻结的 baseline 标签、固定种子 `0` 和每个数据集／任务的一颗测试电芯。按 `[20260910, case_id, cell_id]` 的 SHA-256 排序，选择首颗合格身份。选择不依赖预测误差，各模型及 raw／processed 共用所选电芯。
+- 使用跨电芯测试。**XJTU 的 RUL 是例外**：已完成的 baseline 只有时间划分和随机划分。网页明确展示时间划分的参考标签与 processed 预测，不补造 raw 配对曲线，也不标为跨电芯结果。
+- SOH 展示主 profile；MATR 续测和 EVERLASTING 操作数实验作为独立结果继续保留在服务器。EVERLASTING 图使用主 profile 的时间轴。MATR／HUST RUL 使用作者终点；ILCC RUL 使用时间匹配后的扩展 profile。
+- 保留 06／07／08 的 BatteryLife 处理版来源、KIT 温度端点输入、Oxford 仅 Group 5、HM 事故筛查 v7 的范围限定。不声称覆盖完整原始发布版，也不声称验证了尚未获取的 BatteryArchive 原始 CSV。
 
-可用任务保留 SOH 与 RUL 的概念对比示意图。图形独立绘制，不使用真实实验数据，没有经过数值标定的坐标轴，不代表实际模型效果。切换任务会切换示意图；切换数据集会更新范围说明，不改变示意轨迹，图旁明确说明这一区别。动画可暂停，并遵循系统减少动态效果的设置。用户自行配置训练包的原有流程继续保留。
+绿色为参考标签，橙色虚线为 raw 输入预测（BatteryLife 对应来源处理版预测），蓝色为 processed 输入预测。预测一致时曲线可能重合。每张图使用所选电芯全部有效测试观测，不平滑、不插值生成新样本、不裁掉预测误差、不平均不同种子，也不按效果挑选。相邻有效观测用直线连接；被排除或无效的观测会断开曲线。动画只是沿寿命轴逐渐展示真实图像，不是在浏览器中实时推理。
 
-当前发布版本不提供指标表、排名、配对统计、真实预测曲线、数值快照，以及实验 CSV／JSON 或图片下载。前端也不在后台请求私有实验结果。原数值资产目录已加入 Git 忽略规则，避免每日备份重新上传意外生成的结果文件。
+标签与预测共用同一套线性坐标尺度，范围包含全部显示值，包括离群值和负预测。每张图独立计算范围，不能把像素距离直接当作跨模型或跨数据集的数值指标。一颗电芯的图是可视化样例，不代表总体排名。
 
-完整实验产物及经哈希核验的数值展示版本保存在服务器非发布目录。今后恢复数值展示须得到所有者新的发布指令。
+## 生成和追溯
 
-本次撤下的是当前网页文件，不改写先前 Git 提交，也不能收回已经下载或缓存的副本。
+`scripts/render_benchmark_curves.py` 将当前指标文件哈希与 `FINAL_SUMMARY.json` 对照，核验已完成任务的身份、种子、代码指纹和预测文件哈希，再严格检查不同模型及 raw／processed 的样本、标签、寿命轴和掩码对齐。来源不符时直接失败，不替换数据。
+
+公开目录 `assets/images/benchmark-curves/` 只包含 PNG 像素和采用字段白名单的展示索引 `index.json`（数据集、任务、模型、电芯身份、profile、划分方式、轴名称、图片文件名）。不包含标签／预测数值数组、坐标范围、指标或 PNG 内的数值元数据；前端不请求底层结果文件。曲线形状按要求公开，图像不能保证无法被近似读图。
+
+完整来源证据、样本键、坐标范围与源文件／图像哈希保存在服务器：
+
+```text
+/home/zhutianwen/BatteryLake2026/Benchmark/runs/website_curve_exports/20260914-real-curves/audit.json
+```
+
+使用现有 CPU 环境重新生成，无需训练：
+
+```bash
+cd /home/zhutianwen/batterylake
+/home/zhutianwen/BatteryLake2026/Benchmark/runs/harness-cpu-env/bin/python \
+  scripts/render_benchmark_curves.py \
+  --audit /home/zhutianwen/BatteryLake2026/Benchmark/runs/website_curve_exports/20260914-real-curves/audit.json
+```
+
+可用状态和范围于 2026-09-14 对照冻结 harness 清单和完成记录核查。不要根据网站数据集目录的展示状态推断实验完成。后续修改需重新核对来源凭证，并保留不同任务和划分方式的区别。
+
+旧数值资产仍未发布，并保留 Git 忽略规则。完整实验产物及原数值网页备份继续保存在服务器。本次修改不改写先前公开的 Git 提交或缓存副本。
