@@ -4229,7 +4229,7 @@ pre.api-code,
 #page-benchmarks .bw-flow-progress .bw-psub {
   display: none !important;
 }
-#page-benchmarks .bwr-dataset-search-panel {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) {
   position: relative;
   margin: 16px 0 14px;
   padding: 0;
@@ -4237,36 +4237,36 @@ pre.api-code,
   background: transparent !important;
   box-shadow: none;
 }
-#page-benchmarks .bwr-dataset-search-panel .dataset-filter-popover {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-filter-popover {
   right: 0;
   top: calc(100% + 8px);
 }
-#page-benchmarks .bwr-dataset-search-panel .dataset-search-row {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-search-row {
   align-items: stretch;
 }
-#page-benchmarks .bwr-dataset-search-panel .dataset-search {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-search {
   flex: 1 1 auto;
 }
-#page-benchmarks .bwr-dataset-search-panel .dataset-search input:hover,
-#page-benchmarks .bwr-dataset-search-panel .dataset-search input:focus {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-search input:hover,
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-search input:focus {
   background: var(--dataset-lift-bg) !important;
   border-color: var(--dataset-lift-border) !important;
   box-shadow: var(--dataset-lift-shadow) !important;
 }
-#page-benchmarks .bwr-dataset-search-panel .filter-token {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .filter-token {
   background: var(--tag-bg) !important;
   border-color: var(--tag-border) !important;
   color: var(--tag-fg) !important;
 }
-#page-benchmarks .bwr-dataset-search-panel .dataset-filter-popover .filter-token:not(.active) {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-filter-popover .filter-token:not(.active) {
   background: var(--bg2) !important;
   border-color: var(--border) !important;
   color: var(--text3) !important;
   box-shadow: none !important;
 }
-#page-benchmarks .bwr-dataset-search-panel .filter-token.active,
-#page-benchmarks .bwr-dataset-search-panel .filter-token.is-active,
-#page-benchmarks .bwr-dataset-search-panel .dataset-filter-popover .filter-token.active {
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .filter-token.active,
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .filter-token.is-active,
+:is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-filter-popover .filter-token.active {
   background: var(--tag-bg) !important;
   border-color: var(--tag-border) !important;
   color: var(--tag-fg) !important;
@@ -4613,7 +4613,7 @@ pre.api-code,
     width: 100%;
     justify-content: center;
   }
-  #page-benchmarks .bwr-dataset-search-panel .dataset-search-row,
+  :is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) .dataset-search-row,
   #page-benchmarks .bw-wizard-buttons {
     flex-direction: column;
   }

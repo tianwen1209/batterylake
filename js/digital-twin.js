@@ -4,7 +4,57 @@
   const root = document.getElementById('page-digital-twin');
   if (!root) return;
   const el = id => document.getElementById('studio-' + id);
-  const state = { selected: null, confirmed: null, page: 1, query: '', chemistry: '', form: '', charge: 1, temperature: 25, socMin: 10, socMax: 90, cycleMin: 1, cycleMax: 500, scenario: 'constant' };
+  const state = { selected: null, confirmed: null, page: 1, query: '', charge: 1, temperature: 25, socMin: 10, socMax: 90, cycleMin: 1, cycleMax: 500, scenario: 'constant' };
+  const emptyFilters = () => ({ all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() });
+  let filters = emptyFilters();
+  let pendingFilters = emptyFilters();
+  const filterTypes = { chem: 'chemistry', form: 'form', cat: 'category', domain: 'domain', duty: 'profile' };
+  // Reuse Benchmark's filter markup and tokens, with independent Studio state.
+  const filterTemplate = document.getElementById('bwr-dataset-filter-popover').cloneNode(true);
+  filterTemplate.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+  filterTemplate.querySelectorAll('[onclick]').forEach(node => node.removeAttribute('onclick'));
+  filterTemplate.querySelectorAll('.filter-token').forEach(token => {
+    const entry = Object.entries(token.dataset).find(([key]) => key.startsWith('bwr'));
+    const type = entry[0].slice(3).toLowerCase();
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = token.className; button.textContent = token.textContent;
+    button.dataset.filterType = type; button.dataset.filterValue = entry[1];
+    button.addEventListener('click', () => {
+      if (type === 'all') {
+        const all = !pendingFilters.all; pendingFilters = emptyFilters(); pendingFilters.all = all;
+      } else {
+        pendingFilters.all = false;
+        const set = pendingFilters[type];
+        if (set.has(entry[1])) set.delete(entry[1]); else set.add(entry[1]);
+      }
+      syncFilters();
+    });
+    token.replaceWith(button);
+  });
+  el('filters').replaceChildren(...filterTemplate.childNodes);
+  function syncFilters() {
+    el('filters').querySelectorAll('.filter-token').forEach(button => {
+      const { filterType: type, filterValue: value } = button.dataset;
+      const active = type === 'all' ? pendingFilters.all : pendingFilters[type].has(value);
+      button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
+    });
+  }
+  function renderFilterChips() {
+    const box = el('applied-filter-chips'); box.replaceChildren();
+    const chips = filters.all ? [{ type: 'all', value: 'all', label: 'All datasets' }] : [];
+    Object.keys(filterTypes).forEach(type => filters[type].forEach(value => chips.push({ type, value, label: bwFilterLabel(type, value) })));
+    chips.forEach(({ type, value, label }) => {
+      const chip = document.createElement('span'); chip.className = 'applied-chip ' + filterTypeClass(filterTypes[type] || 'all');
+      chip.append(document.createTextNode(label));
+      const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = '×'; remove.setAttribute('aria-label', 'Remove ' + label + ' filter');
+      remove.addEventListener('click', () => {
+        if (type === 'all') filters.all = false; else filters[type].delete(value);
+        pendingFilters = bwCloneFilterState(filters); state.page = 1; syncFilters(); renderDatasets();
+      });
+      chip.append(remove); box.append(chip);
+    });
+    box.classList.toggle('has-chips', chips.length > 0);
+  }
   const controls = [
     { label: 'Charge Rate (C)', keys: ['charge'], min: 0.1, max: 5, step: 0.1, unit: 'C' },
     { label: 'Temperature (°C)', keys: ['temperature'], min: -20, max: 60, step: 1, unit: '°C' },
@@ -39,7 +89,16 @@
     el('run').disabled = !dataset;
   }
   function renderDatasets() {
-    const list = catalog().filter(d => (!state.query || [d.name, d.ref_name, d.chemistry, d.form].join(' ').toLowerCase().includes(state.query)) && (!state.chemistry || d.chemistry === state.chemistry) && (!state.form || d.form === state.form));
+    const list = catalog().filter(d => {
+      if (state.query && ![d.name, d.ref_name, d.notes, d.chemistry, d.form].join(' ').toLowerCase().includes(state.query)) return false;
+      if (filters.all) return true;
+      return (!filters.chem.size || filters.chem.has(d.chemistry))
+        && (!filters.form.size || filters.form.has(d.form))
+        && (!filters.cat.size || filters.cat.has(d.category))
+        && (!filters.domain.size || inferDatasetDomains(d).some(value => filters.domain.has(value)))
+        && (!filters.duty.size || inferDatasetProfiles(d).some(value => filters.duty.has(value)));
+    });
+    renderFilterChips();
     const pages = Math.max(1, Math.ceil(list.length / 4));
     state.page = Math.min(state.page, pages);
     const start = (state.page - 1) * 4;
@@ -96,13 +155,6 @@
     const list = catalog();
     if (!list.some(d => d.id === state.selected)) state.selected = null;
     if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; clearResults(); }
-    ['chemistry', 'form'].forEach(key => {
-      const select = el(key);
-      select.replaceChildren(new Option(key === 'chemistry' ? 'All chemistries' : 'All form factors', ''));
-      [...new Set(list.map(d => d[key]).filter(Boolean))].sort().forEach(value => select.add(new Option(value, value)));
-      if (!Array.from(select.options).some(option => option.value === state[key])) state[key] = '';
-      select.value = state[key];
-    });
     renderDatasets(); renderTwin();
   }
   controls.forEach((control, index) => {
@@ -174,12 +226,20 @@
       <div class="studio-result-value"><div><span>Predicted SoH</span><small>@ ${state.cycleMax} cycles</small></div><strong>${end.toFixed(1)}<span>%</span></strong></div>`;
   }
   el('search').addEventListener('input', event => { state.query = event.target.value.trim().toLowerCase(); state.page = 1; renderDatasets(); });
-  function closeFilters() { el('filters').hidden = true; el('filter-toggle').setAttribute('aria-expanded', 'false'); }
-  el('filter-toggle').addEventListener('click', () => { el('filters').hidden = !el('filters').hidden; el('filter-toggle').setAttribute('aria-expanded', String(!el('filters').hidden)); });
+  function closeFilters() { el('filters').classList.remove('open'); el('filter-toggle').setAttribute('aria-expanded', 'false'); }
+  el('filter-toggle').addEventListener('click', () => {
+    if (el('filters').classList.contains('open')) return;
+    pendingFilters = bwCloneFilterState(filters); syncFilters();
+    el('filters').classList.add('open'); el('filter-toggle').setAttribute('aria-expanded', 'true');
+  });
   document.addEventListener('click', event => { if (!root.querySelector('.studio-search-tools').contains(event.target)) closeFilters(); });
   el('filters').addEventListener('keydown', event => { if (event.key === 'Escape') { closeFilters(); el('filter-toggle').focus(); } });
-  ['chemistry', 'form'].forEach(key => el(key).addEventListener('change', event => { state[key] = event.target.value; state.page = 1; renderDatasets(); }));
-  el('reset-filters').addEventListener('click', () => { state.chemistry = ''; state.form = ''; state.page = 1; refresh(); });
+  el('filters').querySelector('.dataset-filter-action:not(.apply)').addEventListener('click', () => {
+    pendingFilters = emptyFilters(); syncFilters();
+  });
+  el('filters').querySelector('.dataset-filter-action.apply').addEventListener('click', () => {
+    filters = bwCloneFilterState(pendingFilters); state.page = 1; closeFilters(); renderDatasets(); el('filter-toggle').focus();
+  });
   el('confirm').addEventListener('click', () => { if (!state.selected) return; state.confirmed = state.selected; clearResults(); renderTwin(); renderDatasets(); });
   el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); });
   el('prediction-form').addEventListener('submit', runPrediction);

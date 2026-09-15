@@ -1,5 +1,4 @@
 /* Scoped studio layout; shared catalog, input and button tokens remain authoritative. */
-.sidebar-nav a.studio-nav { padding-left: 44px; font-size: 13px; line-height: 1.45; }
 #page-digital-twin { max-width: 1600px; margin-inline: auto; }
 #page-digital-twin .studio-hero { display: grid; grid-template-columns: minmax(0, 3fr) 1fr; align-items: start; min-height: 212px; padding-top: 28px; margin-bottom: 32px; }
 #page-digital-twin .studio-hero .page-title { font-size: 34px !important; line-height: 1.25; letter-spacing: -.025em; }
@@ -11,10 +10,9 @@
 #page-digital-twin .dataset-search { min-width: 0; }
 #page-digital-twin .dataset-search input, #page-digital-twin .dataset-filter-toggle { height: 38px; font-size: 13px; box-shadow: none; }
 #page-digital-twin .dataset-search input { padding-left: 38px; padding-right: 12px; }
-.studio-filters { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; width: min(100%, 330px); padding: 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); box-shadow: var(--card-shadow-hover); }
-.studio-filters[hidden] { display: none; }
-.studio-filters label { display: block; margin-bottom: 12px; color: var(--text2); font-size: 13px; }
-.studio-filters select { display: block; width: 100%; margin-top: 5px; }
+#page-digital-twin #studio-filters { width: 100%; max-height: min(560px, 65vh); overflow-y: auto; }
+#page-digital-twin .studio-search-tools .dataset-filter-toggle { height: 46px; font-size: 14px; }
+#page-digital-twin .studio-search-tools .dataset-search input { height: 46px; }
 #studio-dataset-list { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-rows: 98px; gap: 8px; min-height: 416px; align-content: start; }
 #studio-dataset-list .dataset-card { padding: 10px 12px; border-radius: 8px; box-shadow: none; overflow: hidden; }
 #studio-dataset-list .dataset-card::before { display: none; }
@@ -31,7 +29,7 @@
 .studio-dataset-footer { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 16px; }
 .studio-pager-info { font-size: 12px; color: var(--text3); margin-bottom: 8px; }
 .studio-pager { display: flex; gap: 4px; flex-wrap: wrap; }
-#page-digital-twin .btn { min-height: 36px; border-radius: 7px; font-size: 13px; box-shadow: none; }
+#page-digital-twin .studio-action { height: 36px; padding-inline: 16px; }
 #studio-confirm { min-width: 94px; }
 #page-digital-twin button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 #page-digital-twin :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

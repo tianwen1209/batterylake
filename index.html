@@ -21,14 +21,14 @@
 
 <link rel="stylesheet" href="styles/benchmark.css">
 <!-- DESIGN POLISH LAYER: visual tokens and component refinements. -->
-<link rel="stylesheet" href="styles/polish.css">
+<link rel="stylesheet" href="styles/polish.css?v=studio-controls-1">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css">
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-controls-1">
 </head>
 <body>
 <div class="app">
@@ -49,7 +49,10 @@
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
       Datasets <span class="nav-badge" id="ds-count-badge"></span>
     </a></li>
-    <li><a href="#digital-twin" onclick="showPage('digital-twin', this)" id="nav-digital-twin" class="studio-nav">Battery Digital Twin Studio</a></li>
+    <li><a href="#digital-twin" onclick="showPage('digital-twin', this)" id="nav-digital-twin" class="studio-nav">
+      <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="16" height="12" rx="2"/><path d="M21 10v4M6 12h3l2-3 3 6 2-3"/></svg></span>
+      Studio
+    </a></li>
     <li><a onclick="showPage('benchmarks', this)">
       <span class="nav-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 17l4-8 4 4 5-9"/></svg></span>
       Benchmarks
@@ -929,16 +932,13 @@ bash run_benchmark.sh</pre>
             </div>
             <button type="button" class="dataset-filter-toggle" id="studio-filter-toggle" aria-expanded="false" aria-controls="studio-filters"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M7 12h10M10 19h4"/></svg>Filters</button>
           </div>
-          <div id="studio-filters" class="studio-filters" hidden>
-            <label>Chemistry<select id="studio-chemistry" class="studio-input"></select></label>
-            <label>Form factor<select id="studio-form" class="studio-input"></select></label>
-            <button type="button" class="btn btn-outline" id="studio-reset-filters">Reset</button>
-          </div>
+          <div id="studio-applied-filter-chips" class="applied-filter-chips"></div>
+          <div id="studio-filters" class="dataset-filter-popover"></div>
         </div>
         <div id="studio-dataset-list" class="dataset-card-grid" role="group" aria-label="Choose one dataset"></div>
         <div class="studio-dataset-footer">
           <div><div id="studio-pager-info" class="studio-pager-info" aria-live="polite"></div><nav id="studio-pager" class="studio-pager" aria-label="Dataset pages"></nav></div>
-          <button type="button" class="btn btn-primary" id="studio-confirm" disabled>Confirm</button>
+          <button type="button" class="bw-pg active studio-action" id="studio-confirm" disabled>Confirm</button>
         </div>
       </section>
       <section class="studio-card" aria-labelledby="studio-twin-title">
@@ -950,7 +950,7 @@ bash run_benchmark.sh</pre>
         <form id="studio-prediction-form" class="studio-setup">
           <div id="studio-controls"></div>
           <label class="studio-scenario" for="studio-scenario">Scenario<select class="studio-input" id="studio-scenario"><option value="constant">Cycle Aging (Constant Current)</option><option value="fast">Fast Charging</option><option value="dynamic">Dynamic Cycling</option></select></label>
-          <button class="btn btn-primary studio-run" id="studio-run" type="submit" disabled>Run Prediction</button>
+          <button class="bw-pg active studio-action studio-run" id="studio-run" type="submit" disabled>Run Prediction</button>
         </form>
       </section>
       <section class="studio-card" aria-labelledby="studio-results-title">
@@ -2060,7 +2060,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/digital-twin.js"></script>
+<script src="js/digital-twin.js?v=studio-controls-1"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
