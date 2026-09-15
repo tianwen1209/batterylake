@@ -395,6 +395,7 @@ function refreshAll() {
   if (typeof bwRefresh === 'function') bwRefresh();
   // Keep Benchmarks → Step 2 list in sync with the shared DATASETS catalog.
   if (typeof bwFlowRenderDatasets === 'function') bwFlowRenderDatasets();
+  if (window.BatteryLakeDigitalTwin) window.BatteryLakeDigitalTwin.refresh();
 }
 
 /* ══════════════════════════════════════════════════════════════
