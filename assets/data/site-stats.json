@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-14T20:58:40Z",
-  "total_visits": 1849,
-  "dataset_downloads": 431,
+  "updated_at": "2026-09-15T20:17:44Z",
+  "total_visits": 1959,
+  "dataset_downloads": 433,
   "skill_uses": 110,
   "model_downloads": {
     "cnn": 15,
@@ -10,27 +10,27 @@
   "model_runs": {
     "cnn": 9,
     "linear": 3,
+    "xgboost": 3,
     "lstm": 2,
-    "xgboost": 2,
     "baseline-package": 1
   },
   "locations": {
-    "updatedAt": "2026-09-14T20:58:40Z",
+    "updatedAt": "2026-09-15T20:17:44Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-14"
+      "endDate": "2026-09-15"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 42
+        "visitors": 43
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 22
+        "visitors": 23
       },
       {
         "country": "United States",
@@ -86,6 +86,11 @@
         "country": "Kazakhstan",
         "countryCode": "KZ",
         "visitors": 1
+      },
+      {
+        "country": "Thailand",
+        "countryCode": "TH",
+        "visitors": 1
       }
     ],
     "cities": [
@@ -93,7 +98,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 40,
+        "visitors": 41,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -212,6 +217,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Nanjing",
+        "visitors": 1,
+        "lng": 118.778,
+        "lat": 32.062
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Quanzhou",
         "visitors": 1,
         "lng": 118.586,
@@ -280,6 +293,14 @@
         "visitors": 1,
         "lng": 76.912,
         "lat": 43.252
+      },
+      {
+        "country": "Thailand",
+        "countryCode": "TH",
+        "city": "Bangkok",
+        "visitors": 1,
+        "lng": 100.501,
+        "lat": 13.754
       },
       {
         "country": "T\u00fcrkiye",
