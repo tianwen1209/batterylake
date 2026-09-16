@@ -35,3 +35,4 @@ __pycache__/
 # Numerical result files are withheld. Real curve PNGs are published separately.
 /assets/data/benchmark-results/
 /benchmark-results-private/
+package-lock.json

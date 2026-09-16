@@ -49,7 +49,10 @@
 .studio-range input { pointer-events: none; }
 .studio-slider input::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 14px; height: 14px; border: 3px solid var(--accent); border-radius: 50%; background: var(--surface); pointer-events: auto; cursor: grab; }
 .studio-slider input::-moz-range-thumb { width: 9px; height: 9px; border: 3px solid var(--accent); border-radius: 50%; background: var(--surface); pointer-events: auto; cursor: grab; }
+#page-digital-twin .studio-slider input:focus { outline: none !important; box-shadow: none !important; }
 .studio-slider input:focus-visible { z-index: 1; }
+.studio-slider input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--accent-soft); }
+.studio-slider input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--accent-soft); }
 .studio-scenario { display: grid; grid-template-columns: 126px minmax(0, 1fr); align-items: center; gap: 14px; }
 .studio-scenario select { width: 100%; font-size: 13px; }
 #page-digital-twin .studio-run { width: 100%; min-height: 40px; }
