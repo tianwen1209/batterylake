@@ -64,8 +64,16 @@
   // Use the same cycle-aging catalog and ordering as Benchmark's data selection.
   const catalog = () => bwFlowSortedDatasets(getCatalogDatasets().filter(bwIsCycleAgingDataset));
   const format = (key, value) => key === 'charge' ? value.toFixed(1) : String(value);
-  function clearResults() {
-    el('results').innerHTML = '<div class="studio-empty">Run a prediction to view results</div>';
+  function clearResults(reset = false) {
+    if (!reset && el('results').classList.contains('has-results')) {
+      el('results').classList.add('is-stale');
+      el('result-status').textContent = 'Setup changed · run again to update';
+      el('run').textContent = 'Update Prediction';
+      return;
+    }
+    el('results').classList.remove('has-results', 'is-stale');
+    el('results').innerHTML = '<div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><strong>Your prediction starts here</strong><span>Confirm a dataset, adjust the setup, then run a prediction.</span></div>';
+    el('run').textContent = 'Run Prediction';
   }
   function renderTwin() {
     const dataset = catalog().find(d => d.id === state.confirmed);
@@ -154,7 +162,7 @@
   function refresh() {
     const list = catalog();
     if (!list.some(d => d.id === state.selected)) state.selected = null;
-    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; clearResults(); }
+    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; clearResults(true); }
     renderDatasets(); renderTwin();
   }
   controls.forEach((control, index) => {
@@ -201,21 +209,27 @@
   function runPrediction(event) {
     event.preventDefault(); syncControls();
     if (!state.confirmed) return;
+    const firstRun = !el('results').classList.contains('has-results');
+    const params = { ...state };
     // Deterministic mock, sensitive to setup controls. No training or API request.
-    const stress = Math.pow(state.charge, 0.35) * (1 + Math.abs(state.temperature - 25) * 0.012) * ((state.socMax - state.socMin) / 80) * ({ constant: 1, fast: 1.2, dynamic: 1.1 }[state.scenario]);
+    const stress = Math.pow(params.charge, 0.35) * (1 + Math.abs(params.temperature - 25) * 0.012) * ((params.socMax - params.socMin) / 80) * ({ constant: 1, fast: 1.2, dynamic: 1.1 }[params.scenario]);
     const soh = cycle => Math.max(40, 100 - 16.8 * Math.pow(cycle / 500, 0.72) * stress);
-    const currentCycle = state.cycleMin - 1;
+    const currentCycle = params.cycleMin - 1;
     const current = soh(currentCycle);
     const after50 = soh(currentCycle + 50);
     const daysTo90 = Math.max(0, Math.ceil(500 * Math.pow(10 / (16.8 * stress), 1 / 0.72) - currentCycle));
-    const peak = state.temperature + 4.4 * Math.pow(state.charge, 1.2);
-    const capacity = 3 * current / 100 * (state.socMax - state.socMin) / 80 / (1 + Math.max(0, state.charge - 1) * 0.04);
+    const peak = params.temperature + 4.4 * Math.pow(params.charge, 1.2);
+    const capacity = 3 * current / 100 * (params.socMax - params.socMin) / 80 / (1 + Math.max(0, params.charge - 1) * 0.04);
     const energy = capacity * 3.7;
-    const duration = Math.round(130 / state.charge);
+    const duration = Math.round(130 / params.charge);
     const delta = (value, unit) => `${value > 0.05 ? '+' : value < -0.05 ? '−' : '±'}${Math.abs(value).toFixed(1)} ${unit}`;
     const metric = (label, value, unit, change = '', note = '') => `<div class="studio-metric"${note ? ` title="${note}"` : ''}><span>${label}</span><div><strong>${value}</strong><small>${unit}</small>${change ? `<span class="studio-metric-delta">${change}</span>` : ''}</div></div>`;
     const info = text => `<span class="studio-info" tabindex="0" role="note" aria-label="${text}">i<span class="studio-info-tip">${text}</span></span>`;
-    el('results').innerHTML = `<div class="studio-preview-note">Illustrative preview · not fitted to dataset</div>
+    el('results').classList.add('has-results');
+    el('results').classList.remove('is-stale');
+    el('run').textContent = 'Run Again';
+    const datasetName = catalog().find(d => d.id === params.confirmed)?.name || '';
+    el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)}</strong><span>${params.charge.toFixed(1)} C · ${params.temperature} °C · SOC ${params.socMin}–${params.socMax}% · Cycles ${params.cycleMin}–${params.cycleMax}</span></div><span id="studio-result-status" role="status">Illustrative preview · not fitted to dataset</span></div>
       <section class="studio-prediction-block" aria-labelledby="studio-performance-title">
         <div class="studio-chart-heading"><h3 id="studio-performance-title">Performance Prediction ${info('Mock performance for a nominal 3 Ah, 3.7 V cell. Deltas compare with 1 C, 25 °C and a 10–90% SOC window.')}</h3>
           <select class="studio-input" id="studio-performance-view" aria-label="Performance chart metric"><option value="temperature">Temperature (°C)</option><option value="capacity">Discharge Capacity (Ah)</option><option value="energy">Discharge Energy (Wh)</option></select></div>
@@ -232,7 +246,7 @@
           ${metric('After 50 cycles', after50.toFixed(1), '%', delta(after50 - current, 'pt'))}
           ${metric('Time to 90%', daysTo90 === 0 ? 'Reached' : daysTo90, daysTo90 === 0 ? '' : 'days', '', 'Assumes one cycle per day')}
         </div><div id="studio-soh-chart"></div></div>
-        <div class="studio-forecast-summary">At ${state.cycleMax} cycles <strong>${soh(state.cycleMax).toFixed(1)}% SoH</strong><span>1 cycle/day assumed</span></div>
+        <div class="studio-forecast-summary">At ${params.cycleMax} cycles <strong>${soh(params.cycleMax).toFixed(1)}% SoH</strong><span>1 cycle/day assumed</span></div>
       </section>`;
     // Both figures share scales, typography, grid, area fill, markers and line treatments.
     function chart({ title, values, min, max, ticks, labels, unit, split, limit, endpoint }) {
@@ -252,9 +266,9 @@
     function renderPerformance() {
       const mode = el('performance-view').value;
       const config = mode === 'temperature'
-        ? { total: peak, min: Math.floor(Math.min(state.temperature, 25) / 5) * 5, max: Math.ceil(Math.max(45, peak + 5) / 5) * 5, unit: '°', limit: 40, title: 'Temperature (°C)' }
+        ? { total: peak, min: Math.floor(Math.min(params.temperature, 25) / 5) * 5, max: Math.ceil(Math.max(45, peak + 5) / 5) * 5, unit: '°', limit: 40, title: 'Temperature (°C)' }
         : { total: mode === 'capacity' ? capacity : energy, min: 0, max: Math.ceil((mode === 'capacity' ? capacity : energy) * 1.15), unit: '', title: mode === 'capacity' ? 'Discharge Capacity (Ah)' : 'Discharge Energy (Wh)' };
-      const values = Array.from({ length: 41 }, (_, i) => mode === 'temperature' ? state.temperature + (peak - state.temperature) * (1 - Math.exp(-i / 9)) / (1 - Math.exp(-40 / 9)) : config.total * i / 40);
+      const values = Array.from({ length: 41 }, (_, i) => mode === 'temperature' ? params.temperature + (peak - params.temperature) * (1 - Math.exp(-i / 9)) / (1 - Math.exp(-40 / 9)) : config.total * i / 40);
       el('performance-chart').innerHTML = chart({ ...config, values, ticks: Array.from({ length: 4 }, (_, i) => +(config.min + (config.max - config.min) * i / 3).toFixed(1)), labels: [{ index: 0, label: 'Now' }, { index: 20, label: Math.round(duration / 2) }, { index: 40, label: `${duration} min` }], endpoint: `${config.total.toFixed(mode === 'temperature' ? 1 : 2)} ${mode === 'temperature' ? '°C' : mode === 'capacity' ? 'Ah' : 'Wh'}` });
     }
     const history = Math.min(20, currentCycle);
@@ -264,6 +278,10 @@
     el('soh-chart').innerHTML = chart({ title: 'State of health: illustrative history and 50-cycle forecast', values, min: lower, max: 100.5, ticks: [lower, +(lower + (100 - lower) / 2).toFixed(1), 100], unit: '%', split, labels: history ? [{ index: 0, label: `−${history}` }, { index: split, label: 'Now' }, { index: split + 50, label: '+50 cycles' }] : [{ index: 0, label: 'Now' }, { index: 25, label: '+25' }, { index: 50, label: '+50 cycles' }], endpoint: `${after50.toFixed(1)}%` });
     el('performance-view').addEventListener('change', renderPerformance);
     renderPerformance();
+    if (firstRun && el('results-title').getBoundingClientRect().top > window.innerHeight * 0.5) {
+      el('results-title').focus({ preventScroll: true });
+      el('results-title').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+    }
   }
   el('search').addEventListener('input', event => { state.query = event.target.value.trim().toLowerCase(); state.page = 1; renderDatasets(); });
   function closeFilters() { el('filters').classList.remove('open'); el('filter-toggle').setAttribute('aria-expanded', 'false'); }
@@ -280,7 +298,7 @@
   el('filters').querySelector('.dataset-filter-action.apply').addEventListener('click', () => {
     filters = bwCloneFilterState(pendingFilters); state.page = 1; closeFilters(); renderDatasets(); el('filter-toggle').focus();
   });
-  el('confirm').addEventListener('click', () => { if (!state.selected) return; state.confirmed = state.selected; clearResults(); renderTwin(); renderDatasets(); });
+  el('confirm').addEventListener('click', () => { if (!state.selected) return; state.confirmed = state.selected; clearResults(true); renderTwin(); renderDatasets(); });
   el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); });
   el('prediction-form').addEventListener('submit', runPrediction);
   window.BatteryLakeDigitalTwin = { refresh };
