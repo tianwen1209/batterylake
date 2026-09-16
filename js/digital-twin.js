@@ -64,6 +64,67 @@
   // Use the same cycle-aging catalog and ordering as Benchmark's data selection.
   const catalog = () => bwFlowSortedDatasets(getCatalogDatasets().filter(bwIsCycleAgingDataset));
   const format = (key, value) => key === 'charge' ? value.toFixed(1) : String(value);
+  const twinAssets = {
+    '18650': 'assets/images/studio-batteries/18650.png',
+    '21700': 'assets/images/studio-batteries/21700.png',
+    pouch: 'assets/images/studio-batteries/pouch.png',
+    prismatic: 'assets/images/studio-batteries/prismatic.png',
+    cyl: 'assets/images/studio-batteries/cyl.png'
+  };
+  function twinAssetFor(form) {
+    const value = String(form || '').trim().toLowerCase();
+    if (twinAssets[value]) return twinAssets[value];
+    if (value.includes('pouch')) return twinAssets.pouch;
+    if (value.includes('prismatic')) return twinAssets.prismatic;
+    if (value.includes('21700')) return twinAssets['21700'];
+    if (value.includes('18650')) return twinAssets['18650'];
+    if (value.includes('cyl')) return twinAssets.cyl;
+    if (value === 'multi') return twinAssets.prismatic;
+    return null;
+  }
+  function twinFormKey(form) {
+    const value = String(form || '').trim().toLowerCase();
+    if (value.includes('21700')) return '21700';
+    if (value.includes('18650')) return '18650';
+    if (value.includes('pouch')) return 'pouch';
+    if (value.includes('prismatic') || value === 'multi') return 'prismatic';
+    if (value.includes('cyl')) return 'cyl';
+    return value;
+  }
+  const twinMeasureCrop = {
+    '21700': { left: 0.38, right: 0.62, top: 0.27, bottom: 0.73 },
+    '18650': { left: 0.36, right: 0.64, top: 0.25, bottom: 0.76 }
+  };
+  function positionTwinMeasures(image, measures, formKey) {
+    if (!image || !measures || !image.getBoundingClientRect) return;
+    const imageBox = image.getBoundingClientRect();
+    const visualBox = measures.parentElement.getBoundingClientRect();
+    const gap = 20;
+    const crop = twinMeasureCrop[formKey] || { left: 0, right: 1, top: 0, bottom: 1 };
+    const left = imageBox.left - visualBox.left + imageBox.width * crop.left;
+    const right = imageBox.left - visualBox.left + imageBox.width * crop.right;
+    const top = imageBox.top - visualBox.top + imageBox.height * crop.top;
+    const bottom = imageBox.top - visualBox.top + imageBox.height * crop.bottom;
+    const width = right - left;
+    const height = bottom - top;
+    const heightScale = measures.querySelector('.studio-measure-height');
+    const widthScale = measures.querySelector('.studio-measure-width');
+    if (heightScale) {
+      heightScale.style.left = `${left - gap}px`;
+      heightScale.style.top = `${top}px`;
+      heightScale.style.transform = 'translateX(-100%)';
+      const line = heightScale.querySelector('i');
+      if (line) line.style.height = `${height}px`;
+    }
+    if (widthScale) {
+      widthScale.style.left = `${left}px`;
+      widthScale.style.top = `${top + height + gap}px`;
+      widthScale.style.bottom = 'auto';
+      widthScale.style.transform = 'none';
+      const line = widthScale.querySelector('i');
+      if (line) line.style.width = `${width}px`;
+    }
+  }
   function clearResults(reset = false) {
     if (!reset && el('results').classList.contains('has-results')) {
       el('results').classList.add('is-stale');
@@ -87,10 +148,36 @@
       const meta = document.createElement('span');
       meta.textContent = [dataset.chemistry, dataset.form].filter(Boolean).join(' · ');
       caption.append(name, meta);
-      const placeholder = document.createElement('span');
-      placeholder.className = 'studio-visual-placeholder';
-      placeholder.textContent = 'Digital twin visualization';
-      el('twin').append(caption, placeholder);
+      const asset = twinAssetFor(dataset.form);
+      if (asset) {
+        const visual = document.createElement('div');
+        visual.className = `studio-twin-visual twin-form-${twinFormKey(dataset.form)}`;
+        const image = document.createElement('img');
+        image.className = 'studio-twin-image';
+        image.src = asset;
+        image.alt = `${dataset.form} battery illustration`;
+        image.loading = 'eager';
+        visual.append(image);
+        if (['18650', '21700'].includes(twinFormKey(dataset.form))) {
+          const measure = document.createElement('div');
+          measure.className = 'studio-twin-measures';
+          measure.innerHTML = twinFormKey(dataset.form) === '18650'
+            ? '<span class="studio-measure-height"><i></i>Height 65 mm</span><span class="studio-measure-width"><i></i>Ø 18 mm</span>'
+            : '<span class="studio-measure-height"><i></i>Height 70 mm</span><span class="studio-measure-width"><i></i>Ø 21 mm</span>';
+          visual.append(measure);
+          const formKey = twinFormKey(dataset.form);
+          const syncMeasures = () => requestAnimationFrame(() => positionTwinMeasures(image, measure, formKey));
+          image.addEventListener('load', syncMeasures, { once: true });
+          if (window.ResizeObserver) new ResizeObserver(syncMeasures).observe(image);
+          syncMeasures();
+        }
+        el('twin').append(caption, visual);
+      } else {
+        const placeholder = document.createElement('span');
+        placeholder.className = 'studio-visual-placeholder';
+        placeholder.textContent = 'Digital twin visualization';
+        el('twin').append(caption, placeholder);
+      }
     } else {
       el('twin').textContent = 'Select and confirm a dataset to load its digital twin';
     }
