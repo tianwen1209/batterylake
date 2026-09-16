@@ -204,26 +204,66 @@
     // Deterministic mock, sensitive to setup controls. No training or API request.
     const stress = Math.pow(state.charge, 0.35) * (1 + Math.abs(state.temperature - 25) * 0.012) * ((state.socMax - state.socMin) / 80) * ({ constant: 1, fast: 1.2, dynamic: 1.1 }[state.scenario]);
     const soh = cycle => Math.max(40, 100 - 16.8 * Math.pow(cycle / 500, 0.72) * stress);
-    const end = soh(state.cycleMax);
-    const yMin = Math.max(0, Math.floor((end - 4) / 10) * 10);
-    const x = cycle => 48 + (cycle - state.cycleMin) / (state.cycleMax - state.cycleMin) * 426;
-    const y = value => 178 - (value - yMin) / (100 - yMin) * 156;
-    let grid = '';
-    for (let health = yMin; health <= 100; health += 10) {
-      grid += `<line x1="48" x2="474" y1="${y(health)}" y2="${y(health)}"/><text x="38" y="${y(health) + 4}" text-anchor="end">${health}</text>`;
+    const currentCycle = state.cycleMin - 1;
+    const current = soh(currentCycle);
+    const after50 = soh(currentCycle + 50);
+    const daysTo90 = Math.max(0, Math.ceil(500 * Math.pow(10 / (16.8 * stress), 1 / 0.72) - currentCycle));
+    const peak = state.temperature + 4.4 * Math.pow(state.charge, 1.2);
+    const capacity = 3 * current / 100 * (state.socMax - state.socMin) / 80 / (1 + Math.max(0, state.charge - 1) * 0.04);
+    const energy = capacity * 3.7;
+    const duration = Math.round(130 / state.charge);
+    const delta = (value, unit) => `${value > 0.05 ? '+' : value < -0.05 ? '−' : '±'}${Math.abs(value).toFixed(1)} ${unit}`;
+    const metric = (label, value, unit, change = '', note = '') => `<div class="studio-metric"${note ? ` title="${note}"` : ''}><span>${label}</span><div><strong>${value}</strong><small>${unit}</small>${change ? `<span class="studio-metric-delta">${change}</span>` : ''}</div></div>`;
+    const info = text => `<span class="studio-info" tabindex="0" role="note" aria-label="${text}">i<span class="studio-info-tip">${text}</span></span>`;
+    el('results').innerHTML = `<div class="studio-preview-note">Illustrative preview · not fitted to dataset</div>
+      <section class="studio-prediction-block" aria-labelledby="studio-performance-title">
+        <div class="studio-chart-heading"><h3 id="studio-performance-title">Performance Prediction ${info('Mock performance for a nominal 3 Ah, 3.7 V cell. Deltas compare with 1 C, 25 °C and a 10–90% SOC window.')}</h3>
+          <select class="studio-input" id="studio-performance-view" aria-label="Performance chart metric"><option value="temperature">Temperature (°C)</option><option value="capacity">Discharge Capacity (Ah)</option><option value="energy">Discharge Energy (Wh)</option></select></div>
+        <div class="studio-output-grid"><div class="studio-metrics">
+          ${metric('Peak Temp', peak.toFixed(1), '°C', delta(peak - 29.4, '°C'))}
+          ${metric('Discharge Capacity', capacity.toFixed(2), 'Ah', delta(capacity - 3, 'Ah'))}
+          ${metric('Discharge Energy', energy.toFixed(2), 'Wh', delta(energy - 11.1, 'Wh'))}
+        </div><div id="studio-performance-chart"></div></div>
+      </section>
+      <section class="studio-prediction-block" aria-labelledby="studio-soh-title">
+        <div class="studio-chart-heading"><h3 id="studio-soh-title">SoH Prediction ${info('Illustrative history and forecast. Now is the start of the selected cycle range. Time to 90% assumes one cycle per day. Dashed line: forecast.')}</h3></div>
+        <div class="studio-output-grid"><div class="studio-metrics">
+          ${metric('Current', current.toFixed(1), '%')}
+          ${metric('After 50 cycles', after50.toFixed(1), '%', delta(after50 - current, 'pt'))}
+          ${metric('Time to 90%', daysTo90 === 0 ? 'Reached' : daysTo90, daysTo90 === 0 ? '' : 'days', '', 'Assumes one cycle per day')}
+        </div><div id="studio-soh-chart"></div></div>
+        <div class="studio-forecast-summary">At ${state.cycleMax} cycles <strong>${soh(state.cycleMax).toFixed(1)}% SoH</strong><span>1 cycle/day assumed</span></div>
+      </section>`;
+    // Both figures share scales, typography, grid, area fill, markers and line treatments.
+    function chart({ title, values, min, max, ticks, labels, unit, split, limit, endpoint }) {
+      const x = i => 42 + i / (values.length - 1) * 228;
+      const y = v => 164 - (v - min) / (max - min) * 132;
+      const points = (start, end) => values.slice(start, end).map((v, j) => `${x(start + j).toFixed(2)},${y(v).toFixed(2)}`).join(' ');
+      const all = points(0, values.length);
+      return `<svg class="studio-chart" viewBox="0 0 288 199" role="img" aria-label="${title}">
+        <g class="studio-chart-grid">${ticks.map(v => `<line x1="42" x2="270" y1="${y(v)}" y2="${y(v)}"/><text x="34" y="${y(v) + 4}" text-anchor="end">${v}${unit}</text>`).join('')}
+        ${labels.map(({ index, label }) => `<text x="${x(index)}" y="186" text-anchor="${index === 0 ? 'start' : index === values.length - 1 ? 'end' : 'middle'}">${label}</text>`).join('')}</g>
+        <polygon class="studio-chart-area" points="42,164 ${all} 270,164"/>
+        ${limit === undefined ? '' : `<line class="studio-chart-limit" x1="42" x2="270" y1="${y(limit)}" y2="${y(limit)}"/><text class="studio-limit-label" x="48" y="${y(limit) - 8}">${limit} °C limit</text>`}
+        ${split === undefined ? `<polyline class="studio-curve" points="${all}"/>` : `<line class="studio-now-line" x1="${x(split)}" x2="${x(split)}" y1="32" y2="164"/><polyline class="studio-curve" points="${points(0, split + 1)}"/><polyline class="studio-curve studio-forecast" points="${points(split, values.length)}"/>`}
+        <circle class="studio-chart-point" cx="270" cy="${y(values[values.length - 1])}" r="4"/>
+        <text class="studio-endpoint" x="268" y="${Math.max(16, y(values[values.length - 1]) - 10)}" text-anchor="end">${endpoint}</text></svg>`;
     }
-    const tickCount = Math.min(4, state.cycleMax - state.cycleMin);
-    for (let i = 0; i <= tickCount; i++) {
-      const cycle = Math.round(state.cycleMin + (state.cycleMax - state.cycleMin) * i / tickCount);
-      grid += `<text x="${x(cycle)}" y="197" text-anchor="middle">${cycle}</text>`;
+    function renderPerformance() {
+      const mode = el('performance-view').value;
+      const config = mode === 'temperature'
+        ? { total: peak, min: Math.floor(Math.min(state.temperature, 25) / 5) * 5, max: Math.ceil(Math.max(45, peak + 5) / 5) * 5, unit: '°', limit: 40, title: 'Temperature (°C)' }
+        : { total: mode === 'capacity' ? capacity : energy, min: 0, max: Math.ceil((mode === 'capacity' ? capacity : energy) * 1.15), unit: '', title: mode === 'capacity' ? 'Discharge Capacity (Ah)' : 'Discharge Energy (Wh)' };
+      const values = Array.from({ length: 41 }, (_, i) => mode === 'temperature' ? state.temperature + (peak - state.temperature) * (1 - Math.exp(-i / 9)) / (1 - Math.exp(-40 / 9)) : config.total * i / 40);
+      el('performance-chart').innerHTML = chart({ ...config, values, ticks: Array.from({ length: 4 }, (_, i) => +(config.min + (config.max - config.min) * i / 3).toFixed(1)), labels: [{ index: 0, label: 'Now' }, { index: 20, label: Math.round(duration / 2) }, { index: 40, label: `${duration} min` }], endpoint: `${config.total.toFixed(mode === 'temperature' ? 1 : 2)} ${mode === 'temperature' ? '°C' : mode === 'capacity' ? 'Ah' : 'Wh'}` });
     }
-    const points = Array.from({ length: 61 }, (_, i) => {
-      const cycle = state.cycleMin + (state.cycleMax - state.cycleMin) * i / 60;
-      return `${x(cycle).toFixed(2)},${y(soh(cycle)).toFixed(2)}`;
-    }).join(' ');
-    el('results').innerHTML = `<div class="studio-chart-heading"><h3>State of Health (SoH)</h3><span>Illustrative preview</span></div>
-      <svg class="studio-chart" viewBox="0 0 490 225" role="img" aria-labelledby="studio-chart-title studio-chart-desc"><title id="studio-chart-title">Illustrative state of health prediction</title><desc id="studio-chart-desc">Mock SoH curve from cycle ${state.cycleMin} to ${state.cycleMax}, ending at ${end.toFixed(1)} percent. Not fitted to the selected dataset.</desc><g class="studio-chart-grid">${grid}</g><text class="studio-axis-label" transform="translate(13 103) rotate(-90)" text-anchor="middle">SoH (%)</text><text class="studio-axis-label" x="261" y="220" text-anchor="middle">Cycle</text><polyline class="studio-curve" points="${points}"/></svg>
-      <div class="studio-result-value"><div><span>Predicted SoH</span><small>@ ${state.cycleMax} cycles</small></div><strong>${end.toFixed(1)}<span>%</span></strong></div>`;
+    const history = Math.min(20, currentCycle);
+    const split = history ? 20 : 0;
+    const values = Array.from({ length: split + 51 }, (_, i) => soh(split && i <= split ? currentCycle - history + history * i / split : currentCycle + i - split));
+    const lower = Math.floor(Math.min(...values) - 1);
+    el('soh-chart').innerHTML = chart({ title: 'State of health: illustrative history and 50-cycle forecast', values, min: lower, max: 100.5, ticks: [lower, +(lower + (100 - lower) / 2).toFixed(1), 100], unit: '%', split, labels: history ? [{ index: 0, label: `−${history}` }, { index: split, label: 'Now' }, { index: split + 50, label: '+50 cycles' }] : [{ index: 0, label: 'Now' }, { index: 25, label: '+25' }, { index: 50, label: '+50 cycles' }], endpoint: `${after50.toFixed(1)}%` });
+    el('performance-view').addEventListener('change', renderPerformance);
+    renderPerformance();
   }
   el('search').addEventListener('input', event => { state.query = event.target.value.trim().toLowerCase(); state.page = 1; renderDatasets(); });
   function closeFilters() { el('filters').classList.remove('open'); el('filter-toggle').setAttribute('aria-expanded', 'false'); }

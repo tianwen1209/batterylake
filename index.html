@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-controls-1">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-results-2">
 </head>
 <body>
 <div class="app">
@@ -922,6 +922,7 @@ bash run_benchmark.sh</pre>
       <div class="studio-hero-visual" aria-hidden="true"></div>
     </header>
     <div class="studio-grid">
+      <div class="studio-row" role="group" aria-label="Dataset and digital twin">
       <section class="studio-card studio-datasets" aria-labelledby="studio-datasets-title">
         <h2 id="studio-datasets-title">Select Dataset</h2>
         <div class="studio-search-tools">
@@ -945,6 +946,8 @@ bash run_benchmark.sh</pre>
         <h2 id="studio-twin-title">Battery Digital Twin</h2>
         <div id="studio-twin" class="studio-stage" role="status">Select and confirm a dataset to load its digital twin</div>
       </section>
+      </div>
+      <div class="studio-row" role="group" aria-label="Prediction setup and results">
       <section class="studio-card" aria-labelledby="studio-setup-title">
         <h2 id="studio-setup-title">Prediction Setup</h2>
         <form id="studio-prediction-form" class="studio-setup">
@@ -957,6 +960,7 @@ bash run_benchmark.sh</pre>
         <h2 id="studio-results-title">Prediction Results</h2>
         <div id="studio-results" class="studio-results" aria-live="polite"><div class="studio-empty">Run a prediction to view results</div></div>
       </section>
+      </div>
     </div>
   </div>
 
@@ -2060,7 +2064,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/digital-twin.js?v=studio-controls-1"></script>
+<script src="js/digital-twin.js?v=studio-results-2"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
