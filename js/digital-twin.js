@@ -1,4 +1,4 @@
-/* First-pass UI only. Predictions are illustrative, never fitted to catalog data. */
+/* Illustrative local Studio workflow; no model training or API request is performed. */
 (function () {
   'use strict';
   const root = document.getElementById('page-digital-twin');
@@ -8,6 +8,7 @@
   const emptyFilters = () => ({ all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() });
   let filters = emptyFilters();
   let pendingFilters = emptyFilters();
+  let calibrationFrame = 0;
   const filterTypes = { chem: 'chemistry', form: 'form', cat: 'category', domain: 'domain', duty: 'profile' };
   // Reuse Benchmark's filter markup and tokens, with independent Studio state.
   const filterTemplate = document.getElementById('bwr-dataset-filter-popover').cloneNode(true);
@@ -91,50 +92,38 @@
     if (value.includes('cyl')) return 'cyl';
     return value;
   }
-  const twinMeasureCrop = {
-    '21700': { left: 0.38, right: 0.62, top: 0.27, bottom: 0.73 },
-    '18650': { left: 0.36, right: 0.64, top: 0.25, bottom: 0.76 }
-  };
-  function positionTwinMeasures(image, measures, formKey) {
-    if (!image || !measures || !image.getBoundingClientRect) return;
-    const imageBox = image.getBoundingClientRect();
-    const visualBox = measures.parentElement.getBoundingClientRect();
-    const gap = 20;
-    const crop = twinMeasureCrop[formKey] || { left: 0, right: 1, top: 0, bottom: 1 };
-    const left = imageBox.left - visualBox.left + imageBox.width * crop.left;
-    const right = imageBox.left - visualBox.left + imageBox.width * crop.right;
-    const top = imageBox.top - visualBox.top + imageBox.height * crop.top;
-    const bottom = imageBox.top - visualBox.top + imageBox.height * crop.bottom;
-    const width = right - left;
-    const height = bottom - top;
-    const heightScale = measures.querySelector('.studio-measure-height');
-    const widthScale = measures.querySelector('.studio-measure-width');
-    if (heightScale) {
-      heightScale.style.left = `${left - gap}px`;
-      heightScale.style.top = `${top}px`;
-      heightScale.style.transform = 'translateX(-100%)';
-      const line = heightScale.querySelector('i');
-      if (line) line.style.height = `${height}px`;
-    }
-    if (widthScale) {
-      widthScale.style.left = `${left}px`;
-      widthScale.style.top = `${top + height + gap}px`;
-      widthScale.style.bottom = 'auto';
-      widthScale.style.transform = 'none';
-      const line = widthScale.querySelector('i');
-      if (line) line.style.width = `${width}px`;
-    }
-  }
   function clearResults(reset = false) {
     if (!reset && el('results').classList.contains('has-results')) {
       el('results').classList.add('is-stale');
-      el('result-status').textContent = 'Setup changed · run again to update';
-      el('run').textContent = 'Update Prediction';
+      el('result-status').textContent = 'Setup changed · generate again to update';
+      el('run').textContent = 'Update';
       return;
     }
     el('results').classList.remove('has-results', 'is-stale');
-    el('results').innerHTML = '<div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><strong>Your prediction starts here</strong><span>Confirm a dataset, adjust the setup, then run a prediction.</span></div>';
-    el('run').textContent = 'Run Prediction';
+    el('results').innerHTML = '<div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Build a digital twin, adjust the setup, then generate data.</span></div>';
+    el('run').textContent = 'Generate';
+  }
+  function setCalibrationProgress(value) {
+    const progress = Math.max(0, Math.min(100, Math.round(value)));
+    el('calibration-ring').style.setProperty('--progress', progress);
+    el('calibration-value').textContent = progress + '%';
+  }
+  function calibrateTwin(dataset) {
+    cancelAnimationFrame(calibrationFrame);
+    el('run').disabled = true;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const started = performance.now();
+    const duration = reduced ? 0 : 1300;
+    const tick = now => {
+      const ratio = duration ? Math.min(1, (now - started) / duration) : 1;
+      const eased = 1 - Math.pow(1 - ratio, 3);
+      setCalibrationProgress(eased * 100);
+      if (ratio < 1) calibrationFrame = requestAnimationFrame(tick);
+      else {
+        el('run').disabled = false;
+      }
+    };
+    calibrationFrame = requestAnimationFrame(tick);
   }
   function renderTwin() {
     const dataset = catalog().find(d => d.id === state.confirmed);
@@ -158,19 +147,6 @@
         image.alt = `${dataset.form} battery illustration`;
         image.loading = 'eager';
         visual.append(image);
-        if (['18650', '21700'].includes(twinFormKey(dataset.form))) {
-          const measure = document.createElement('div');
-          measure.className = 'studio-twin-measures';
-          measure.innerHTML = twinFormKey(dataset.form) === '18650'
-            ? '<span class="studio-measure-height"><i></i>Height 65 mm</span><span class="studio-measure-width"><i></i>Ø 18 mm</span>'
-            : '<span class="studio-measure-height"><i></i>Height 70 mm</span><span class="studio-measure-width"><i></i>Ø 21 mm</span>';
-          visual.append(measure);
-          const formKey = twinFormKey(dataset.form);
-          const syncMeasures = () => requestAnimationFrame(() => positionTwinMeasures(image, measure, formKey));
-          image.addEventListener('load', syncMeasures, { once: true });
-          if (window.ResizeObserver) new ResizeObserver(syncMeasures).observe(image);
-          syncMeasures();
-        }
         el('twin').append(caption, visual);
       } else {
         const placeholder = document.createElement('span');
@@ -179,7 +155,8 @@
         el('twin').append(caption, placeholder);
       }
     } else {
-      el('twin').textContent = 'Select and confirm a dataset to load its digital twin';
+      el('twin').textContent = 'Select and confirm a dataset to build its digital twin';
+      setCalibrationProgress(0);
     }
     el('run').disabled = !dataset;
   }
@@ -244,7 +221,7 @@
     });
     pageButton('›', state.page + 1, 'Next dataset page', state.page === pages);
     el('confirm').disabled = !state.selected || state.selected === state.confirmed;
-    el('confirm').textContent = state.selected && state.selected === state.confirmed ? 'Confirmed' : 'Confirm';
+    el('confirm').textContent = state.selected && state.selected === state.confirmed ? 'Dataset in use' : 'Use Dataset';
   }
   function refresh() {
     const list = catalog();
@@ -293,7 +270,7 @@
       row.style.setProperty('--range-end', percent(control.keys[control.keys.length - 1]) + '%');
     });
   }
-  function runPrediction(event) {
+  function runGeneration(event) {
     event.preventDefault(); syncControls();
     if (!state.confirmed) return;
     const firstRun = !el('results').classList.contains('has-results');
@@ -303,37 +280,36 @@
     const soh = cycle => Math.max(40, 100 - 16.8 * Math.pow(cycle / 500, 0.72) * stress);
     const currentCycle = params.cycleMin - 1;
     const current = soh(currentCycle);
-    const after50 = soh(currentCycle + 50);
-    const daysTo90 = Math.max(0, Math.ceil(500 * Math.pow(10 / (16.8 * stress), 1 / 0.72) - currentCycle));
     const peak = params.temperature + 4.4 * Math.pow(params.charge, 1.2);
     const capacity = 3 * current / 100 * (params.socMax - params.socMin) / 80 / (1 + Math.max(0, params.charge - 1) * 0.04);
-    const energy = capacity * 3.7;
     const duration = Math.round(130 / params.charge);
-    const delta = (value, unit) => `${value > 0.05 ? '+' : value < -0.05 ? '−' : '±'}${Math.abs(value).toFixed(1)} ${unit}`;
+    const cycleCount = Math.max(1, params.cycleMax - params.cycleMin + 1);
+    const sampleCount = cycleCount * Math.max(60, Math.round(duration * 6));
+    const consistency = Math.max(94, 99.4 - Math.abs(params.temperature - 25) * .025 - Math.max(0, params.charge - 1) * .3);
+    const finalCapacity = 3 * soh(params.cycleMax) / 100;
     const metric = (label, value, unit, change = '', note = '') => `<div class="studio-metric"${note ? ` title="${note}"` : ''}><span>${label}</span><div><strong>${value}</strong><small>${unit}</small>${change ? `<span class="studio-metric-delta">${change}</span>` : ''}</div></div>`;
     const info = text => `<span class="studio-info" tabindex="0" role="note" aria-label="${text}">i<span class="studio-info-tip">${text}</span></span>`;
     el('results').classList.add('has-results');
     el('results').classList.remove('is-stale');
-    el('run').textContent = 'Run Again';
+    el('run').textContent = 'Generate Again';
     const datasetName = catalog().find(d => d.id === params.confirmed)?.name || '';
-    el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)}</strong><span>${params.charge.toFixed(1)} C · ${params.temperature} °C · SOC ${params.socMin}–${params.socMax}% · Cycles ${params.cycleMin}–${params.cycleMax}</span></div><span id="studio-result-status" role="status">Illustrative preview · not fitted to dataset</span></div>
+    el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)} · Synthetic dataset</strong><span>${params.charge.toFixed(1)} C · ${params.temperature} °C · SOC ${params.socMin}–${params.socMax}% · Cycles ${params.cycleMin}–${params.cycleMax}</span></div><span id="studio-result-status" role="status">Illustrative output · generated by calibrated twin</span></div>
       <section class="studio-prediction-block" aria-labelledby="studio-performance-title">
-        <div class="studio-chart-heading"><h3 id="studio-performance-title">Performance Prediction ${info('Mock performance for a nominal 3 Ah, 3.7 V cell. Deltas compare with 1 C, 25 °C and a 10–90% SOC window.')}</h3>
-          <select class="studio-input" id="studio-performance-view" aria-label="Performance chart metric"><option value="temperature">Temperature (°C)</option><option value="capacity">Discharge Capacity (Ah)</option><option value="energy">Discharge Energy (Wh)</option></select></div>
+        <div class="studio-chart-heading"><h3 id="studio-performance-title">Synthetic Signal Profile ${info('Illustrative signals generated from the selected operating envelope. No real model training or API request is performed.')}</h3>
+          <select class="studio-input" id="studio-performance-view" aria-label="Synthetic signal chart metric"><option value="temperature">Temperature (°C)</option><option value="voltage">Voltage (V)</option><option value="current">Current (A)</option></select></div>
         <div class="studio-output-grid"><div class="studio-metrics">
-          ${metric('Peak Temp', peak.toFixed(1), '°C', delta(peak - 29.4, '°C'))}
-          ${metric('Discharge Capacity', capacity.toFixed(2), 'Ah', delta(capacity - 3, 'Ah'))}
-          ${metric('Discharge Energy', energy.toFixed(2), 'Wh', delta(energy - 11.1, 'Wh'))}
+          ${metric('Generated Cycles', cycleCount.toLocaleString(), '')}
+          ${metric('Profile Samples', sampleCount.toLocaleString(), '')}
+          ${metric('Physics Consistency', consistency.toFixed(1), '%')}
         </div><div id="studio-performance-chart"></div></div>
       </section>
       <section class="studio-prediction-block" aria-labelledby="studio-soh-title">
-        <div class="studio-chart-heading"><h3 id="studio-soh-title">SoH Prediction ${info('Illustrative history and forecast. Now is the start of the selected cycle range. Time to 90% assumes one cycle per day. Dashed line: forecast.')}</h3></div>
+        <div class="studio-chart-heading"><h3 id="studio-soh-title">Synthetic Capacity Trajectory ${info('Capacity retention is generated across the requested cycle range using the calibrated digital twin.')}</h3></div>
         <div class="studio-output-grid"><div class="studio-metrics">
-          ${metric('Current', current.toFixed(1), '%')}
-          ${metric('After 50 cycles', after50.toFixed(1), '%', delta(after50 - current, 'pt'))}
-          ${metric('Time to 90%', daysTo90 === 0 ? 'Reached' : daysTo90, daysTo90 === 0 ? '' : 'days', '', 'Assumes one cycle per day')}
+          ${metric('Initial Capacity', (3 * current / 100).toFixed(2), 'Ah')}
+          ${metric('Final Capacity', finalCapacity.toFixed(2), 'Ah')}
+          ${metric('Capacity Retention', soh(params.cycleMax).toFixed(1), '%')}
         </div><div id="studio-soh-chart"></div></div>
-        <div class="studio-forecast-summary">At ${params.cycleMax} cycles <strong>${soh(params.cycleMax).toFixed(1)}% SoH</strong><span>1 cycle/day assumed</span></div>
       </section>`;
     // Both figures share scales, typography, grid, area fill, markers and line treatments.
     function chart({ title, values, min, max, ticks, labels, unit, split, limit, endpoint }) {
@@ -353,16 +329,23 @@
     function renderPerformance() {
       const mode = el('performance-view').value;
       const config = mode === 'temperature'
-        ? { total: peak, min: Math.floor(Math.min(params.temperature, 25) / 5) * 5, max: Math.ceil(Math.max(45, peak + 5) / 5) * 5, unit: '°', limit: 40, title: 'Temperature (°C)' }
-        : { total: mode === 'capacity' ? capacity : energy, min: 0, max: Math.ceil((mode === 'capacity' ? capacity : energy) * 1.15), unit: '', title: mode === 'capacity' ? 'Discharge Capacity (Ah)' : 'Discharge Energy (Wh)' };
-      const values = Array.from({ length: 41 }, (_, i) => mode === 'temperature' ? params.temperature + (peak - params.temperature) * (1 - Math.exp(-i / 9)) / (1 - Math.exp(-40 / 9)) : config.total * i / 40);
-      el('performance-chart').innerHTML = chart({ ...config, values, ticks: Array.from({ length: 4 }, (_, i) => +(config.min + (config.max - config.min) * i / 3).toFixed(1)), labels: [{ index: 0, label: 'Now' }, { index: 20, label: Math.round(duration / 2) }, { index: 40, label: `${duration} min` }], endpoint: `${config.total.toFixed(mode === 'temperature' ? 1 : 2)} ${mode === 'temperature' ? '°C' : mode === 'capacity' ? 'Ah' : 'Wh'}` });
+        ? { total: peak, min: Math.floor(Math.min(params.temperature, 25) / 5) * 5, max: Math.ceil(Math.max(45, peak + 5) / 5) * 5, unit: '°', limit: 40, title: 'Synthetic temperature (°C)' }
+        : mode === 'voltage'
+          ? { total: 3.2, min: 2.8, max: 4.3, unit: '', title: 'Synthetic voltage (V)' }
+          : { total: params.charge * 3, min: 0, max: Math.max(4, params.charge * 3.5), unit: '', title: 'Synthetic current (A)' };
+      const values = Array.from({ length: 41 }, (_, i) => {
+        if (mode === 'temperature') return params.temperature + (peak - params.temperature) * (1 - Math.exp(-i / 9)) / (1 - Math.exp(-40 / 9));
+        if (mode === 'voltage') return 4.2 - .82 * (i / 40) - .18 * Math.pow(i / 40, 5);
+        return config.total * (.76 + .18 * Math.sin(i / 3.2) + .06 * Math.sin(i / 1.3));
+      });
+      const lastValue = values[values.length - 1];
+      const endpoint = mode === 'temperature' ? `${peak.toFixed(1)} °C` : mode === 'voltage' ? `${lastValue.toFixed(2)} V` : `${lastValue.toFixed(2)} A`;
+      el('performance-chart').innerHTML = chart({ ...config, values, ticks: Array.from({ length: 4 }, (_, i) => +(config.min + (config.max - config.min) * i / 3).toFixed(1)), labels: [{ index: 0, label: '0' }, { index: 20, label: Math.round(duration / 2) }, { index: 40, label: `${duration} min` }], endpoint });
     }
-    const history = Math.min(20, currentCycle);
-    const split = history ? 20 : 0;
-    const values = Array.from({ length: split + 51 }, (_, i) => soh(split && i <= split ? currentCycle - history + history * i / split : currentCycle + i - split));
-    const lower = Math.floor(Math.min(...values) - 1);
-    el('soh-chart').innerHTML = chart({ title: 'State of health: illustrative history and 50-cycle forecast', values, min: lower, max: 100.5, ticks: [lower, +(lower + (100 - lower) / 2).toFixed(1), 100], unit: '%', split, labels: history ? [{ index: 0, label: `−${history}` }, { index: split, label: 'Now' }, { index: split + 50, label: '+50 cycles' }] : [{ index: 0, label: 'Now' }, { index: 25, label: '+25' }, { index: 50, label: '+50 cycles' }], endpoint: `${after50.toFixed(1)}%` });
+    const values = Array.from({ length: 51 }, (_, i) => 3 * soh(params.cycleMin + (params.cycleMax - params.cycleMin) * i / 50) / 100);
+    const lower = Math.max(0, Math.floor((Math.min(...values) - .1) * 10) / 10);
+    const upper = Math.ceil((Math.max(...values) + .05) * 10) / 10;
+    el('soh-chart').innerHTML = chart({ title: 'Synthetic capacity trajectory over requested cycles', values, min: lower, max: upper, ticks: [lower, +((lower + upper) / 2).toFixed(2), upper], unit: '', labels: [{ index: 0, label: `Cycle ${params.cycleMin}` }, { index: 25, label: Math.round((params.cycleMin + params.cycleMax) / 2) }, { index: 50, label: `Cycle ${params.cycleMax}` }], endpoint: `${finalCapacity.toFixed(2)} Ah` });
     el('performance-view').addEventListener('change', renderPerformance);
     renderPerformance();
     if (firstRun && el('results-title').getBoundingClientRect().top > window.innerHeight * 0.5) {
@@ -385,9 +368,27 @@
   el('filters').querySelector('.dataset-filter-action.apply').addEventListener('click', () => {
     filters = bwCloneFilterState(pendingFilters); state.page = 1; closeFilters(); renderDatasets(); el('filter-toggle').focus();
   });
-  el('confirm').addEventListener('click', () => { if (!state.selected) return; state.confirmed = state.selected; clearResults(true); renderTwin(); renderDatasets(); });
+  el('reset').addEventListener('click', () => {
+    cancelAnimationFrame(calibrationFrame);
+    state.selected = null; state.confirmed = null; state.page = 1; state.query = '';
+    filters = emptyFilters(); pendingFilters = emptyFilters();
+    el('search').value = '';
+    root.querySelector('.studio-feature-grid')?.classList.add('is-reset');
+    root.querySelector('.studio-live-loss')?.classList.add('is-reset');
+    closeFilters(); syncFilters(); clearResults(true); renderDatasets(); renderTwin();
+    el('search').focus({ preventScroll: true });
+  });
+  el('confirm').addEventListener('click', () => {
+    if (!state.selected) return;
+    state.confirmed = state.selected;
+    root.querySelector('.studio-feature-grid')?.classList.remove('is-reset');
+    root.querySelector('.studio-live-loss')?.classList.remove('is-reset');
+    clearResults(true); renderTwin(); renderDatasets();
+    const dataset = catalog().find(d => d.id === state.confirmed);
+    if (dataset) calibrateTwin(dataset);
+  });
   el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); });
-  el('prediction-form').addEventListener('submit', runPrediction);
+  el('prediction-form').addEventListener('submit', runGeneration);
   window.BatteryLakeDigitalTwin = { refresh };
   syncControls(); refresh();
 })();

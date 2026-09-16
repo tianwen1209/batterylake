@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-measure-subject-14">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-12">
 </head>
 <body>
 <div class="app">
@@ -919,46 +919,95 @@ bash run_benchmark.sh</pre>
       <div class="page-desc">Train dataset-specific digital twins for simulation, prediction, and synthetic data generation.</div>
       <img class="studio-hero-art visual-page-hero-art" src="assets/images/studio-hero-transparent.png" alt="" aria-hidden="true">
     </header>
-    <div class="studio-grid">
-      <div class="studio-row" role="group" aria-label="Dataset and digital twin">
-      <section class="studio-card studio-datasets" aria-labelledby="studio-datasets-title">
-        <h2 id="studio-datasets-title">Select Dataset</h2>
-        <div class="studio-search-tools">
-          <div class="dataset-search-row">
-            <div class="dataset-search">
-              <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-              <input type="search" id="studio-search" placeholder="Search datasets" aria-label="Search studio datasets">
-            </div>
-            <button type="button" class="dataset-filter-toggle" id="studio-filter-toggle" aria-expanded="false" aria-controls="studio-filters"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M7 12h10M10 19h4"/></svg>Filters</button>
+    <div class="studio-workspace">
+      <section class="studio-explainer" aria-labelledby="studio-overview-title">
+        <div class="studio-section-heading"><h2 id="studio-overview-title">How the Studio Works</h2></div>
+        <div class="studio-process-flow" role="img" aria-label="Dataset selection and feature identification feed battery digital twin calibration. The calibrated digital twin and generation setup feed the generation engine, which produces generation results.">
+          <div class="studio-process-node studio-process-step-1"><span>01</span><strong>Select Dataset</strong></div>
+          <i class="studio-process-arrow studio-process-arrow-1" aria-hidden="true">→</i>
+          <div class="studio-process-node studio-process-step-2"><span>02</span><strong>Feature Identification</strong></div>
+          <i class="studio-process-arrow studio-process-arrow-2" aria-hidden="true">→</i>
+          <div class="studio-process-node studio-process-calibration"><span>03</span><strong>Calibrate Battery Digital Twin</strong></div>
+          <div class="studio-process-node studio-process-setup"><span>04</span><strong>Synthetic Data Generation Setup</strong></div>
+          <i class="studio-process-arrow studio-process-arrow-4" aria-hidden="true">→</i>
+          <div class="studio-process-node studio-process-engine"><span class="studio-process-piml-logo" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="4"/><ellipse cx="16" cy="16" rx="13" ry="6"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(120 16 16)"/></svg></span><strong>Generation Engine</strong></div>
+          <i class="studio-process-arrow studio-process-arrow-5" aria-hidden="true">→</i>
+          <div class="studio-process-node studio-process-result"><span>05</span><strong>Synthetic Data Generation Results</strong></div>
+        </div>
+        <div class="studio-piml-explanation">
+          <div class="studio-formula" aria-label="Physics-informed machine learning loss formula"><span>ℒ<sub>PIML</sub></span> = λ<sub>d</sub> ‖ŷ − y‖² + λ<sub>p</sub> ‖∂ŷ/∂t − f<sub>physics</sub>(ŷ,u)‖²</div>
+          <div class="studio-piml-diagram" role="img" aria-label="Identified features and physics constraints converge in physics-informed calibration">
+            <div class="studio-piml-inputs"><span><i>ƒ</i> Identified Features</span><span><i>∂</i> Physics Constraints</span></div>
+            <svg viewBox="0 0 68 92" aria-hidden="true"><path d="M2 19h29c13 0 13 27 26 27h9M2 73h29c13 0 13-27 26-27h9"/><path d="m59 40 7 6-7 6"/></svg>
+            <div class="studio-piml-core"><span class="studio-core-orbit"></span><strong>PIML</strong><small>Calibration</small></div>
           </div>
-          <div id="studio-applied-filter-chips" class="applied-filter-chips"></div>
-          <div id="studio-filters" class="dataset-filter-popover"></div>
-        </div>
-        <div id="studio-dataset-list" class="dataset-card-grid" role="group" aria-label="Choose one dataset"></div>
-        <div class="studio-dataset-footer">
-          <div><div id="studio-pager-info" class="studio-pager-info" aria-live="polite"></div><nav id="studio-pager" class="studio-pager" aria-label="Dataset pages"></nav></div>
-          <button type="button" class="bw-pg active studio-action" id="studio-confirm" disabled>Confirm</button>
         </div>
       </section>
-      <section class="studio-card" aria-labelledby="studio-twin-title">
-        <h2 id="studio-twin-title">Battery Digital Twin</h2>
-        <div id="studio-twin" class="studio-stage" role="status">Select and confirm a dataset to load its digital twin</div>
+
+      <section class="studio-operations" aria-labelledby="studio-workspace-title">
+        <div class="studio-section-heading"><h2 id="studio-workspace-title">Studio Workspace</h2></div>
+        <div class="studio-operation-grid">
+          <article class="studio-step studio-datasets" aria-labelledby="studio-datasets-title">
+            <div class="studio-step-head"><span class="studio-step-number">01</span><h3 id="studio-datasets-title">Select Dataset</h3></div>
+            <div class="studio-search-tools">
+              <div class="dataset-search-row">
+                <div class="dataset-search">
+                  <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                  <input type="search" id="studio-search" placeholder="Search datasets" aria-label="Search studio datasets">
+                </div>
+                <button type="button" class="dataset-filter-toggle" id="studio-filter-toggle" aria-expanded="false" aria-controls="studio-filters"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M7 12h10M10 19h4"/></svg>Filters</button>
+              </div>
+              <div id="studio-applied-filter-chips" class="applied-filter-chips"></div>
+              <div id="studio-filters" class="dataset-filter-popover"></div>
+            </div>
+            <div id="studio-dataset-list" class="dataset-card-grid" role="group" aria-label="Choose one dataset"></div>
+            <div class="studio-dataset-footer">
+              <div><div id="studio-pager-info" class="studio-pager-info" aria-live="polite"></div><nav id="studio-pager" class="studio-pager" aria-label="Dataset pages"></nav></div>
+              <div class="studio-dataset-actions"><button type="button" class="bw-pg studio-action" id="studio-reset">Reset</button><button type="button" class="bw-pg active studio-action" id="studio-confirm" disabled>Use Dataset</button></div>
+            </div>
+          </article>
+
+          <article class="studio-step" aria-labelledby="studio-features-title">
+            <div class="studio-step-head"><span class="studio-step-number">02</span><h3 id="studio-features-title">Feature Identification</h3></div>
+            <div class="studio-feature-grid">
+              <figure class="studio-signal-card"><figcaption><strong>Voltage (V)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative voltage line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-blue" d="M28 77 C47 74 55 56 76 58 S106 71 124 46 S157 25 176 32 S204 51 226 21"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+              <figure class="studio-signal-card"><figcaption><strong>Current (A)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative current line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-cyan" d="M28 68 L52 68 L52 28 L84 28 L84 78 L112 78 L112 42 L146 42 L146 72 L178 72 L178 24 L206 24 L206 60 L226 60"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+              <figure class="studio-signal-card"><figcaption><strong>Temperature (°C)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative temperature line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-amber" d="M28 78 C48 75 59 67 75 60 S103 36 120 44 S148 71 164 55 S194 28 226 35"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+              <figure class="studio-signal-card"><figcaption><strong>Capacity (Ah)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative capacity line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-violet" d="M28 22 C58 24 75 27 96 31 S132 39 151 48 S191 65 226 78"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+              <figure class="studio-signal-card"><figcaption><strong>Internal Resistance (mΩ)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative internal resistance line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-rose" d="M28 78 C56 76 78 71 97 67 S128 57 147 54 S184 38 226 21"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+              <figure class="studio-signal-card"><figcaption><strong>SOC Range (%)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative state of charge range chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-band" d="M28 26 C66 28 91 32 124 30 S185 23 226 28 L226 69 C184 66 157 72 124 68 S65 70 28 65Z"/><path class="studio-signal-line line-green" d="M28 26 C66 28 91 32 124 30 S185 23 226 28M28 65 C65 70 91 66 124 68 S184 66 226 69"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+            </div>
+          </article>
+
+          <article class="studio-step studio-calibration-twin-step studio-operation-wide" aria-labelledby="studio-piml-title">
+            <div class="studio-step-head"><span class="studio-step-number">03</span><h3 id="studio-piml-title">Calibrate Battery Digital Twin</h3></div>
+            <div class="studio-calibration-workbench">
+              <figure class="studio-loss-chart studio-live-loss"><figcaption><strong>Training Loss</strong></figcaption><svg viewBox="0 0 390 178" role="img" aria-label="Training loss by iterations"><g class="studio-loss-grid"><path d="M42 18v125h326M42 49h326M42 80h326M42 111h326"/><text x="34" y="23" text-anchor="end">10⁰</text><text x="34" y="54" text-anchor="end">10⁻¹</text><text x="34" y="85" text-anchor="end">10⁻²</text><text x="34" y="116" text-anchor="end">10⁻³</text><text x="42" y="161">0</text><text x="199" y="161">500</text><text x="368" y="161" text-anchor="end">1k</text></g><path class="studio-loss-area" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134 L368 143H42Z"/><path class="studio-loss-line" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134"/><text class="studio-axis-title" x="205" y="176" text-anchor="middle">Iterations</text></svg></figure>
+              <div class="studio-twin-build-panel">
+                <div class="studio-progress-wrap">
+                  <div class="studio-progress-ring" id="studio-calibration-ring" style="--progress:0"><div><strong id="studio-calibration-value">0%</strong><span>Twin build</span></div></div>
+                  <span class="studio-progress-caption">Calibration Progress</span>
+                </div>
+                <div id="studio-twin" class="studio-stage" role="status">Select and confirm a dataset to build its digital twin</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="studio-step studio-operation-wide" aria-labelledby="studio-setup-title">
+            <div class="studio-step-head"><span class="studio-step-number">04</span><h3 id="studio-setup-title">Synthetic Data Generation Setup</h3></div>
+            <form id="studio-prediction-form" class="studio-setup">
+              <div id="studio-controls"></div>
+              <label class="studio-scenario" for="studio-scenario">Scenario<select class="studio-input" id="studio-scenario"><option value="constant">Cycle Aging (Constant Current)</option><option value="fast">Fast Charging</option><option value="dynamic">Dynamic Cycling</option></select></label>
+              <button class="bw-pg active studio-action studio-run" id="studio-run" type="submit" disabled>Generate</button>
+            </form>
+          </article>
+
+          <article class="studio-step studio-results-step studio-operation-wide" aria-labelledby="studio-results-title">
+            <div class="studio-step-head"><span class="studio-step-number">05</span><h3 id="studio-results-title" tabindex="-1">Synthetic Data Generation Results</h3></div>
+            <div id="studio-results" class="studio-results" aria-live="polite"><div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Build a digital twin, adjust the setup, then generate data.</span></div></div>
+          </article>
+        </div>
       </section>
-      </div>
-      <div class="studio-row studio-prediction-workspace" role="group" aria-label="Prediction setup and results">
-      <section class="studio-card" aria-labelledby="studio-setup-title">
-        <h2 id="studio-setup-title">Prediction Setup</h2>
-        <form id="studio-prediction-form" class="studio-setup">
-          <div id="studio-controls"></div>
-          <label class="studio-scenario" for="studio-scenario">Scenario<select class="studio-input" id="studio-scenario"><option value="constant">Cycle Aging (Constant Current)</option><option value="fast">Fast Charging</option><option value="dynamic">Dynamic Cycling</option></select></label>
-          <button class="bw-pg active studio-action studio-run" id="studio-run" type="submit" disabled>Run Prediction</button>
-        </form>
-      </section>
-      <section class="studio-card" aria-labelledby="studio-results-title">
-        <h2 id="studio-results-title" tabindex="-1">Prediction Results</h2>
-        <div id="studio-results" class="studio-results" aria-live="polite"><div class="studio-empty">Run a prediction to view results</div></div>
-      </section>
-      </div>
     </div>
   </div>
 
@@ -2062,7 +2111,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/digital-twin.js?v=studio-measure-subject-14"></script>
+<script src="js/digital-twin.js?v=studio-workspace-12"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
