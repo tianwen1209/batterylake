@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-15T20:17:44Z",
-  "total_visits": 1959,
+  "updated_at": "2026-09-16T20:14:56Z",
+  "total_visits": 2130,
   "dataset_downloads": 433,
   "skill_uses": 110,
   "model_downloads": {
@@ -15,22 +15,22 @@
     "baseline-package": 1
   },
   "locations": {
-    "updatedAt": "2026-09-15T20:17:44Z",
+    "updatedAt": "2026-09-16T20:14:56Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-15"
+      "endDate": "2026-09-16"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 43
+        "visitors": 45
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 23
+        "visitors": 27
       },
       {
         "country": "United States",
@@ -98,7 +98,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 41,
+        "visitors": 43,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -106,7 +106,7 @@
         "country": "China",
         "countryCode": "CN",
         "city": "Shanghai",
-        "visitors": 4,
+        "visitors": 6,
         "lng": 121.458,
         "lat": 31.222
       },
@@ -137,18 +137,18 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Chengdu",
-        "visitors": 2,
-        "lng": 104.067,
-        "lat": 30.667
+        "city": "Shenzhen",
+        "visitors": 3,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shenzhen",
+        "city": "Chengdu",
         "visitors": 2,
-        "lng": 114.068,
-        "lat": 22.546
+        "lng": 104.067,
+        "lat": 30.667
       },
       {
         "country": "China",
@@ -221,6 +221,14 @@
         "visitors": 1,
         "lng": 118.778,
         "lat": 32.062
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Qinhuangdao",
+        "visitors": 1,
+        "lng": 119.589,
+        "lat": 39.941
       },
       {
         "country": "China",
