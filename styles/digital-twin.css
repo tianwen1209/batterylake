@@ -155,6 +155,7 @@
 
 /* Generated output */
 .studio-results { min-height: 235px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: stretch; gap: 16px; }
+.studio-results-actions { display: flex; justify-content: flex-end; margin-top: 22px; }
 .studio-empty { min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 30px; color: var(--text3); font-size: 13px; text-align: center; }
 #studio-dataset-list > .studio-empty { grid-column: 1/-1; min-height: 190px; }
 .studio-results-empty { grid-column: 1/-1; flex-direction: column; gap: 10px; border: 1px dashed var(--border2); border-radius: 11px; background: var(--surface); }
