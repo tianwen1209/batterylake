@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-16T20:14:56Z",
-  "total_visits": 2130,
-  "dataset_downloads": 433,
+  "updated_at": "2026-09-17T20:23:19Z",
+  "total_visits": 2356,
+  "dataset_downloads": 454,
   "skill_uses": 110,
   "model_downloads": {
     "cnn": 15,
@@ -15,11 +15,11 @@
     "baseline-package": 1
   },
   "locations": {
-    "updatedAt": "2026-09-16T20:14:56Z",
+    "updatedAt": "2026-09-17T20:23:19Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-16"
+      "endDate": "2026-09-17"
     },
     "countries": [
       {
@@ -36,6 +36,11 @@
         "country": "United States",
         "countryCode": "US",
         "visitors": 10
+      },
+      {
+        "country": "Taiwan",
+        "countryCode": "TW",
+        "visitors": 4
       },
       {
         "country": "Hong Kong",
@@ -60,11 +65,6 @@
       {
         "country": "T\u00fcrkiye",
         "countryCode": "TR",
-        "visitors": 2
-      },
-      {
-        "country": "Taiwan",
-        "countryCode": "TW",
         "visitors": 2
       },
       {
