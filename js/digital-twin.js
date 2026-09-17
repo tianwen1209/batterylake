@@ -108,6 +108,10 @@
     el('calibration-ring').style.setProperty('--progress', progress);
     el('calibration-value').textContent = progress + '%';
   }
+  function setDatasetDependentStepsVisible(visible) {
+    el('features-step').hidden = !visible;
+    el('calibration-step').hidden = !visible;
+  }
   function calibrateTwin(dataset) {
     cancelAnimationFrame(calibrationFrame);
     el('run').disabled = true;
@@ -227,7 +231,7 @@
     const list = catalog();
     if (!list.some(d => d.id === state.selected)) state.selected = null;
     if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; clearResults(true); }
-    renderDatasets(); renderTwin();
+    setDatasetDependentStepsVisible(!!state.confirmed); renderDatasets(); renderTwin();
   }
   controls.forEach((control, index) => {
     const row = document.createElement('div');
@@ -375,7 +379,7 @@
     el('search').value = '';
     root.querySelector('.studio-feature-grid')?.classList.add('is-reset');
     root.querySelector('.studio-live-loss')?.classList.add('is-reset');
-    closeFilters(); syncFilters(); clearResults(true); renderDatasets(); renderTwin();
+    setDatasetDependentStepsVisible(false); closeFilters(); syncFilters(); clearResults(true); renderDatasets(); renderTwin();
     el('search').focus({ preventScroll: true });
   });
   el('confirm').addEventListener('click', () => {
@@ -383,7 +387,7 @@
     state.confirmed = state.selected;
     root.querySelector('.studio-feature-grid')?.classList.remove('is-reset');
     root.querySelector('.studio-live-loss')?.classList.remove('is-reset');
-    clearResults(true); renderTwin(); renderDatasets();
+    setDatasetDependentStepsVisible(true); clearResults(true); renderTwin(); renderDatasets();
     const dataset = catalog().find(d => d.id === state.confirmed);
     if (dataset) calibrateTwin(dataset);
   });

@@ -64,7 +64,7 @@
 #studio-dataset-list .dc-stats { gap: 12px; margin-top: 5px; line-height: 1; }
 #studio-dataset-list .dc-stat { font-size: 12px; }
 #studio-dataset-list .dc-stat svg { width: 11px; height: 11px; }
-#studio-dataset-list .dc-tags { margin-top: 5px; gap: 4px; flex-wrap: nowrap; }
+#studio-dataset-list .dc-tags { margin-top: 5px; gap: 4px; flex-wrap: wrap; }
 #studio-dataset-list .dc-tag { padding: 1px 5px; font-size: 10px; white-space: nowrap; }
 .studio-dataset-footer { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 15px; }
 .studio-dataset-actions { display: flex; align-items: center; gap: 8px; }
@@ -113,11 +113,15 @@
 .studio-loss-chart figcaption { display: flex; justify-content: space-between; align-items: center; }
 .studio-loss-chart figcaption strong { color: var(--text2); font-size: 13px; }
 .studio-loss-chart figcaption span { color: var(--text4); font-size: 10px; }
+.studio-loss-legend { display: inline-flex; align-items: center; gap: 5px; }
+.studio-loss-key { display: inline-block; width: 14px; height: 2px; margin-left: 5px; border-radius: 2px; background: var(--accent); }
+.studio-loss-key.validation { background: #7c3aed; }
 .studio-loss-chart svg { width: 100%; height: auto; margin-top: 5px; }
 .studio-loss-grid { fill: none; stroke: var(--border); stroke-width: 1; }
 .studio-loss-grid text,.studio-axis-title { fill: var(--text4); stroke: none; font: 9px var(--sans); }
 .studio-loss-area { fill: color-mix(in srgb,var(--accent) 10%,transparent); }
 .studio-loss-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+.studio-loss-validation { stroke: #7c3aed; stroke-dasharray: 5 4; }
 .studio-live-loss.is-reset .studio-loss-area,.studio-live-loss.is-reset .studio-loss-line { opacity: 0; }
 
 /* Digital twin output */

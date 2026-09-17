@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-12">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-13">
 </head>
 <body>
 <div class="app">
@@ -967,7 +967,7 @@ bash run_benchmark.sh</pre>
             </div>
           </article>
 
-          <article class="studio-step" aria-labelledby="studio-features-title">
+          <article id="studio-features-step" class="studio-step" aria-labelledby="studio-features-title" hidden>
             <div class="studio-step-head"><span class="studio-step-number">02</span><h3 id="studio-features-title">Feature Identification</h3></div>
             <div class="studio-feature-grid">
               <figure class="studio-signal-card"><figcaption><strong>Voltage (V)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative voltage line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-blue" d="M28 77 C47 74 55 56 76 58 S106 71 124 46 S157 25 176 32 S204 51 226 21"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
@@ -979,10 +979,10 @@ bash run_benchmark.sh</pre>
             </div>
           </article>
 
-          <article class="studio-step studio-calibration-twin-step studio-operation-wide" aria-labelledby="studio-piml-title">
+          <article id="studio-calibration-step" class="studio-step studio-calibration-twin-step studio-operation-wide" aria-labelledby="studio-piml-title" hidden>
             <div class="studio-step-head"><span class="studio-step-number">03</span><h3 id="studio-piml-title">Calibrate Battery Digital Twin</h3></div>
             <div class="studio-calibration-workbench">
-              <figure class="studio-loss-chart studio-live-loss"><figcaption><strong>Training Loss</strong></figcaption><svg viewBox="0 0 390 178" role="img" aria-label="Training loss by iterations"><g class="studio-loss-grid"><path d="M42 18v125h326M42 49h326M42 80h326M42 111h326"/><text x="34" y="23" text-anchor="end">10⁰</text><text x="34" y="54" text-anchor="end">10⁻¹</text><text x="34" y="85" text-anchor="end">10⁻²</text><text x="34" y="116" text-anchor="end">10⁻³</text><text x="42" y="161">0</text><text x="199" y="161">500</text><text x="368" y="161" text-anchor="end">1k</text></g><path class="studio-loss-area" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134 L368 143H42Z"/><path class="studio-loss-line" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134"/><text class="studio-axis-title" x="205" y="176" text-anchor="middle">Iterations</text></svg></figure>
+              <figure class="studio-loss-chart studio-live-loss"><figcaption><strong>Training Loss</strong><span class="studio-loss-legend" aria-label="Loss-series legend"><i class="studio-loss-key train"></i>Train <i class="studio-loss-key validation"></i>Val</span></figcaption><svg viewBox="0 0 390 178" role="img" aria-label="Training and validation loss by iterations"><g class="studio-loss-grid"><path d="M42 18v125h326M42 49h326M42 80h326M42 111h326"/><text x="34" y="23" text-anchor="end">10⁰</text><text x="34" y="54" text-anchor="end">10⁻¹</text><text x="34" y="85" text-anchor="end">10⁻²</text><text x="34" y="116" text-anchor="end">10⁻³</text><text x="42" y="161">0</text><text x="199" y="161">500</text><text x="368" y="161" text-anchor="end">1k</text></g><path class="studio-loss-area" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134 L368 143H42Z"/><path class="studio-loss-line studio-loss-train" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134"/><path class="studio-loss-line studio-loss-validation" d="M42 31 C69 39 89 49 112 64 S148 75 173 91 S211 97 244 110 S296 115 368 122"/><text class="studio-axis-title" x="205" y="176" text-anchor="middle">Iterations</text></svg></figure>
               <div class="studio-twin-build-panel">
                 <div class="studio-progress-wrap">
                   <div class="studio-progress-ring" id="studio-calibration-ring" style="--progress:0"><div><strong id="studio-calibration-value">0%</strong><span>Twin build</span></div></div>
@@ -2111,7 +2111,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/digital-twin.js?v=studio-workspace-12"></script>
+<script src="js/digital-twin.js?v=studio-workspace-13"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
