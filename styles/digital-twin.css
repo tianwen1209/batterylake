@@ -22,7 +22,7 @@
 .studio-process-calibration::before { content: ''; position: absolute; z-index: 2; left: calc(50% - 4px); top: calc(100% + 15px); width: 7px; height: 7px; border-right: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); transform: rotate(45deg); }
 .studio-process-arrow { color: var(--accent); font-style: normal; font-size: 22px; font-weight: 650; text-align: center; }
 .studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 1/2; }.studio-process-step-2 { grid-area: 1/3; }.studio-process-arrow-2 { grid-area: 1/4; }
-.studio-process-setup { grid-area: 2/5; }.studio-process-arrow-4 { grid-area: 2/4; }.studio-process-engine { grid-area: 2/3; }.studio-process-arrow-5 { grid-area: 2/2; }.studio-process-result { grid-area: 2/1; }
+.studio-process-engine { grid-area: 2/5; }.studio-process-arrow-4 { grid-area: 2/4; }.studio-process-setup { grid-area: 2/3; }.studio-process-arrow-5 { grid-area: 2/2; }.studio-process-result { grid-area: 2/1; }
 .studio-process-engine { position: relative; overflow: hidden; border-color: rgba(147,197,253,.68); color: var(--text1); background: linear-gradient(135deg,rgba(96,165,250,.18),rgba(147,197,253,.36) 38%,rgba(125,211,252,.30) 72%,rgba(96,165,250,.20)),var(--surface); box-shadow: 0 10px 25px rgba(96,165,250,.14),inset 0 1px 0 rgba(255,255,255,.38); }
 .studio-process-engine .studio-process-number { color: var(--accent); background: rgba(255,255,255,.58); font-size: 9px; }.studio-process-engine strong,.studio-process-engine small { position: relative; color: var(--text1); }.studio-process-engine small { color: var(--text3); }.studio-process-engine .studio-process-icon { color: var(--accent); background: rgba(255,255,255,.5); }
 .studio-process-piml-logo svg { width: 20px; height: 20px; stroke-width: 1.3; }.studio-process-piml-logo svg circle { fill: currentColor; stroke: none; }
@@ -47,7 +47,7 @@
 /* Five supplied Studio illustrations carry the visual story; the connector treatment is uniform in every direction. */
 .studio-process-flow { grid-template-columns: minmax(155px,1fr) 34px minmax(165px,1.08fr) 34px minmax(190px,1.24fr); grid-template-rows: auto 34px auto; row-gap: 7px; }
 .studio-process-node { min-height: 172px; padding: 13px; }.studio-process-node-head strong { font-size: 13px; }.studio-process-logo { height: 108px; margin: 3px 0 0 40px; overflow: hidden; }.studio-process-logo img { display: block; width: 116%; height: 116%; margin: -8% 0 0 -8%; object-fit: contain; mix-blend-mode: multiply; }
-.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 1/2; }.studio-process-step-2 { grid-area: 1/3; }.studio-process-arrow-2 { grid-area: 1/4; }.studio-process-calibration { grid-area: 1/5; }.studio-process-arrow-3 { grid-area: 2/5; }.studio-process-setup { grid-area: 3/5; }.studio-process-arrow-4 { grid-area: 3/4; }.studio-process-result { grid-area: 3/3; }
+.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 1/2; }.studio-process-step-2 { grid-area: 1/3; }.studio-process-arrow-2 { grid-area: 1/4; }.studio-process-calibration { grid-area: 1/5; }.studio-process-arrow-3 { grid-area: 2/5; }.studio-process-engine { grid-area: 3/5; }.studio-process-arrow-4 { grid-area: 3/4; }.studio-process-setup { grid-area: 3/3; }.studio-process-result { grid-area: 3/1; }
 .studio-process-calibration::before,.studio-process-calibration::after { display: none; }
 .studio-process-arrow { position: relative; display: block; align-self: center; width: 34px; height: 34px; color: transparent; font-size: 0; }
 .studio-process-arrow::before,.studio-process-arrow::after { content: ''; position: absolute; box-sizing: border-box; }
@@ -58,7 +58,7 @@
 /* Keep the familiar horizontal arrows; only the 03 → 04 transition is vertical. */
 .studio-process-flow { grid-template-rows: auto 28px auto; row-gap: 8px; }
 .studio-process-node { min-height: clamp(178px,17vw,218px); }.studio-process-logo { height: clamp(132px,11vw,166px); margin: 7px 2px 0; }.studio-process-logo img { width: 100%; height: 100%; margin: 0; object-fit: contain; transform: scale(1.34); transform-origin: center; }
-.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 1/2; }.studio-process-step-2 { grid-area: 1/3; }.studio-process-arrow-2 { grid-area: 1/4; }.studio-process-calibration { grid-area: 1/5; }.studio-process-arrow-3 { grid-area: 2/5; }.studio-process-setup { grid-area: 3/5; }.studio-process-arrow-4 { grid-area: 3/4; }.studio-process-engine { grid-area: 3/3; }.studio-process-arrow-5 { grid-area: 3/2; }.studio-process-result { grid-area: 3/1; }
+.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 1/2; }.studio-process-step-2 { grid-area: 1/3; }.studio-process-arrow-2 { grid-area: 1/4; }.studio-process-calibration { grid-area: 1/5; }.studio-process-arrow-3 { grid-area: 2/5; }.studio-process-engine { grid-area: 3/5; }.studio-process-arrow-4 { grid-area: 3/4; }.studio-process-setup { grid-area: 3/3; }.studio-process-arrow-5 { grid-area: 3/2; }.studio-process-result { grid-area: 3/1; }
 .studio-process-arrow { display: grid; place-items: center; width: auto; height: auto; color: var(--accent); font: 650 22px/1 var(--sans); text-align: center; }.studio-process-arrow::before,.studio-process-arrow::after { display: none; }.studio-process-arrow-3 { font-size: 22px; }
 .studio-engine-logo { position: relative; z-index: 1; border-radius: 0; background: transparent; }
 
@@ -262,8 +262,8 @@
   .studio-process-node { width: 100%; min-height: 138px; }
   .studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 2/1; }
   .studio-process-step-2 { grid-area: 3/1; }.studio-process-arrow-2 { grid-area: 4/1; }
-  .studio-process-calibration { grid-area: 5/1; }.studio-process-setup { grid-area: 6/1; }
-  .studio-process-arrow-4 { grid-area: 7/1; }.studio-process-engine { grid-area: 8/1; }.studio-process-arrow-5 { grid-area: 9/1; }.studio-process-result { grid-area: 10/1; }
+  .studio-process-calibration { grid-area: 5/1; }.studio-process-engine { grid-area: 6/1; }
+  .studio-process-arrow-4 { grid-area: 7/1; }.studio-process-setup { grid-area: 8/1; }.studio-process-arrow-5 { grid-area: 9/1; }.studio-process-result { grid-area: 10/1; }
   .studio-process-arrow-1,.studio-process-arrow-2 { transform: rotate(90deg); }.studio-process-arrow-4,.studio-process-arrow-5 { transform: rotate(-90deg); }
   .studio-piml-explanation,.studio-calibration-workbench { grid-template-columns: minmax(0,1fr); }
   #studio-controls { grid-template-columns: minmax(0,1fr); }
@@ -297,6 +297,6 @@
 
 @media (max-width:1000px) {
   .studio-process-flow { grid-template-columns: minmax(0,1fr); grid-template-rows: repeat(11,auto); row-gap: 7px; }
-  .studio-process-node { min-height: min(68vw,260px); }.studio-process-logo { height: min(47vw,185px); }.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 2/1; }.studio-process-step-2 { grid-area: 3/1; }.studio-process-arrow-2 { grid-area: 4/1; }.studio-process-calibration { grid-area: 5/1; }.studio-process-arrow-3 { grid-area: 6/1; }.studio-process-setup { grid-area: 7/1; }.studio-process-arrow-4 { grid-area: 8/1; }.studio-process-engine { grid-area: 9/1; }.studio-process-arrow-5 { grid-area: 10/1; }.studio-process-result { grid-area: 11/1; }
+  .studio-process-node { min-height: min(68vw,260px); }.studio-process-logo { height: min(47vw,185px); }.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 2/1; }.studio-process-step-2 { grid-area: 3/1; }.studio-process-arrow-2 { grid-area: 4/1; }.studio-process-calibration { grid-area: 5/1; }.studio-process-arrow-3 { grid-area: 6/1; }.studio-process-engine { grid-area: 7/1; }.studio-process-arrow-4 { grid-area: 8/1; }.studio-process-setup { grid-area: 9/1; }.studio-process-arrow-5 { grid-area: 10/1; }.studio-process-result { grid-area: 11/1; }
   .studio-process-arrow,.studio-process-arrow-1,.studio-process-arrow-2,.studio-process-arrow-3,.studio-process-arrow-4,.studio-process-arrow-5 { transform: none; }
 }
