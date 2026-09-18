@@ -66,11 +66,11 @@
   const catalog = () => bwFlowSortedDatasets(getCatalogDatasets().filter(bwIsCycleAgingDataset));
   const format = (key, value) => key === 'charge' ? value.toFixed(1) : String(value);
   const twinAssets = {
-    '18650': 'assets/images/studio-batteries/18650.png',
-    '21700': 'assets/images/studio-batteries/21700.png',
-    pouch: 'assets/images/studio-batteries/pouch.png',
-    prismatic: 'assets/images/studio-batteries/prismatic.png',
-    cyl: 'assets/images/studio-batteries/cyl.png'
+    '18650': 'assets/images/studio-batteries/18650.png?v=2',
+    '21700': 'assets/images/studio-batteries/21700.png?v=2',
+    pouch: 'assets/images/studio-batteries/pouch.png?v=2',
+    prismatic: 'assets/images/studio-batteries/prismatic.png?v=2',
+    cyl: 'assets/images/studio-batteries/cyl.png?v=2'
   };
   function twinAssetFor(form) {
     const value = String(form || '').trim().toLowerCase();
@@ -148,7 +148,15 @@
         image.src = asset;
         image.alt = `${dataset.form} battery illustration`;
         image.loading = 'eager';
-        visual.append(image);
+        const effects = document.createElement('div');
+        effects.className = 'studio-twin-effects';
+        effects.setAttribute('aria-hidden', 'true');
+        effects.innerHTML = '<span class="studio-twin-beam"></span><span class="studio-twin-platform"></span><span class="studio-twin-scan"></span><span class="studio-twin-particles"></span>';
+        const tags = document.createElement('div');
+        tags.className = 'studio-twin-tags';
+        tags.setAttribute('aria-hidden', 'true');
+        tags.innerHTML = '<span class="studio-twin-tag tag-soc"><i></i><b>SOC</b><em>82%</em></span><span class="studio-twin-tag tag-soh"><i></i><b>SOH</b><em>96%</em></span><span class="studio-twin-tag tag-voltage"><i></i><b>Voltage</b><em>3.68 V</em></span><span class="studio-twin-tag tag-temperature"><i></i><b>Temperature</b><em>28 °C</em></span>';
+        visual.append(effects, image, tags);
         el('twin').append(caption, visual);
       } else {
         const placeholder = document.createElement('span');

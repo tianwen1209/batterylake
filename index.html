@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="styles/preprocessing.css">
 <link rel="stylesheet" href="styles/contribute.css">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-15">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-30">
 </head>
 <body>
 <div class="app">
@@ -922,24 +922,28 @@ bash run_benchmark.sh</pre>
     <div class="studio-workspace">
       <section class="studio-explainer" aria-labelledby="studio-overview-title">
         <div class="studio-section-heading"><h2 id="studio-overview-title">How the Studio Works</h2></div>
-        <div class="studio-process-flow" role="img" aria-label="Dataset selection and feature identification feed battery digital twin calibration. The calibrated digital twin and generation setup feed the generation engine, which produces generation results.">
-          <div class="studio-process-node studio-process-step-1"><span>01</span><strong>Select Dataset</strong></div>
+        <div class="studio-process-flow" role="img" aria-label="Select a dataset, identify its features, calibrate a digital twin, configure data generation, run the generation engine, then review generated results.">
+          <div class="studio-process-node studio-process-step-1"><div class="studio-process-node-head"><span class="studio-process-number">01</span><strong>Select Dataset</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/select-dataset.png" alt="" aria-hidden="true"></div></div>
           <i class="studio-process-arrow studio-process-arrow-1" aria-hidden="true">→</i>
-          <div class="studio-process-node studio-process-step-2"><span>02</span><strong>Feature Identification</strong></div>
+          <div class="studio-process-node studio-process-step-2"><div class="studio-process-node-head"><span class="studio-process-number">02</span><strong>Feature Identification</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/feature-identification.png" alt="" aria-hidden="true"></div></div>
           <i class="studio-process-arrow studio-process-arrow-2" aria-hidden="true">→</i>
-          <div class="studio-process-node studio-process-calibration"><span>03</span><strong>Calibrate Battery Digital Twin</strong></div>
-          <div class="studio-process-node studio-process-setup"><span>04</span><strong>Synthetic Data Generation Setup</strong></div>
-          <i class="studio-process-arrow studio-process-arrow-4" aria-hidden="true">→</i>
-          <div class="studio-process-node studio-process-engine"><span class="studio-process-piml-logo" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="4"/><ellipse cx="16" cy="16" rx="13" ry="6"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(120 16 16)"/></svg></span><strong>Generation Engine</strong></div>
-          <i class="studio-process-arrow studio-process-arrow-5" aria-hidden="true">→</i>
-          <div class="studio-process-node studio-process-result"><span>05</span><strong>Synthetic Data Generation Results</strong></div>
+          <div class="studio-process-node studio-process-calibration"><div class="studio-process-node-head"><span class="studio-process-number">03</span><strong>Calibrate Digital Twin</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/calibrate-digital-twin.png" alt="" aria-hidden="true"></div></div>
+          <i class="studio-process-arrow studio-process-arrow-3" aria-hidden="true">↓</i>
+          <div class="studio-process-node studio-process-setup"><div class="studio-process-node-head"><span class="studio-process-number">04</span><strong>Data Generation Setup</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/data-generation-setup.png" alt="" aria-hidden="true"></div></div>
+          <i class="studio-process-arrow studio-process-arrow-4" aria-hidden="true">←</i>
+          <div class="studio-process-node studio-process-engine"><div class="studio-process-node-head"><span class="studio-process-number">PIML</span><strong>Generation Engine</strong></div><div class="studio-process-logo studio-engine-logo"><img src="assets/images/studio-flow/generation-engine.png" alt="" aria-hidden="true"></div></div>
+          <i class="studio-process-arrow studio-process-arrow-5" aria-hidden="true">←</i>
+          <div class="studio-process-node studio-process-result"><div class="studio-process-node-head"><span class="studio-process-number">05</span><strong>Data Generation Results</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/data-generation-results.png" alt="" aria-hidden="true"></div></div>
         </div>
         <div class="studio-piml-explanation">
-          <div class="studio-formula" aria-label="Physics-informed machine learning loss formula"><span>ℒ<sub>PIML</sub></span> = λ<sub>d</sub> ‖ŷ − y‖² + λ<sub>p</sub> ‖∂ŷ/∂t − f<sub>physics</sub>(ŷ,u)‖²</div>
+          <div class="studio-piml-formula-card">
+            <div class="studio-piml-card-title"><span aria-hidden="true">ℒ</span><div><strong>Physics-informed objective</strong></div></div>
+            <div class="studio-formula" aria-label="Physics-informed machine learning loss formula"><span>ℒ(θ)</span> = ℒ<sub>data</sub> + λ ℒ<sub>physics</sub></div>
+          </div>
           <div class="studio-piml-diagram" role="img" aria-label="Identified features and physics constraints converge in physics-informed calibration">
-            <div class="studio-piml-inputs"><span><i>ƒ</i> Identified Features</span><span><i>∂</i> Physics Constraints</span></div>
+            <div class="studio-piml-inputs"><span><i><svg viewBox="0 0 24 24"><path d="M3 17c3-8 5 3 8-6s5 4 10-7"/><path d="M3 20h18"/></svg></i><b>Identified Features</b></span><span><i><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="M8 12h8M12 8v8"/></svg></i><b>Physics Constraints</b></span></div>
             <svg viewBox="0 0 68 92" aria-hidden="true"><path d="M2 19h29c13 0 13 27 26 27h9M2 73h29c13 0 13-27 26-27h9"/><path d="m59 40 7 6-7 6"/></svg>
-            <div class="studio-piml-core"><span class="studio-core-orbit"></span><strong>PIML</strong><small>Calibration</small></div>
+            <div class="studio-piml-core"><span class="studio-core-orbit"></span><svg aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4"/><ellipse cx="16" cy="16" rx="13" ry="6"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(120 16 16)"/></svg><strong>PIML</strong><small>Calibration</small></div>
           </div>
         </div>
       </section>
@@ -967,7 +971,7 @@ bash run_benchmark.sh</pre>
             </div>
           </article>
 
-          <article class="studio-step" aria-labelledby="studio-features-title">
+          <article class="studio-step studio-features-step" aria-labelledby="studio-features-title">
             <div class="studio-step-head"><span class="studio-step-number">02</span><h3 id="studio-features-title">Feature Identification</h3></div>
             <div class="studio-feature-grid is-reset">
               <figure class="studio-signal-card"><figcaption><strong>Voltage (V)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative voltage line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-blue" d="M28 77 C47 74 55 56 76 58 S106 71 124 46 S157 25 176 32 S204 51 226 21"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
@@ -2112,7 +2116,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/digital-twin.js?v=studio-workspace-15"></script>
+<script src="js/digital-twin.js?v=studio-workspace-18"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
