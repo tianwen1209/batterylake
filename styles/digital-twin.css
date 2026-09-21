@@ -27,11 +27,14 @@
 .studio-process-engine .studio-process-number { color: var(--accent); background: rgba(255,255,255,.58); font-size: 9px; }.studio-process-engine strong,.studio-process-engine small { position: relative; color: var(--text1); }.studio-process-engine small { color: var(--text3); }.studio-process-engine .studio-process-icon { color: var(--accent); background: rgba(255,255,255,.5); }
 .studio-process-piml-logo svg { width: 20px; height: 20px; stroke-width: 1.3; }.studio-process-piml-logo svg circle { fill: currentColor; stroke: none; }
 .studio-process-result { border-color: color-mix(in srgb,#16a36b 38%,var(--border)); }
-.studio-piml-explanation { display: grid; grid-template-columns: minmax(300px,.92fr) minmax(420px,1.15fr); align-items: stretch; gap: 16px; margin-top: 16px; padding: 18px; border: 1px solid color-mix(in srgb,#6146d7 32%,var(--border)); border-radius: 14px; background: linear-gradient(110deg,color-mix(in srgb,var(--accent) 5%,var(--surface)),color-mix(in srgb,#6146d7 5%,var(--surface))); }
-.studio-piml-formula-card { display: flex; flex-direction: column; justify-content: center; gap: 13px; min-width: 0; padding: 16px; border: 1px solid color-mix(in srgb,var(--accent) 21%,var(--border)); border-radius: 12px; background: var(--surface); }
-.studio-piml-card-title { display: flex; align-items: center; gap: 9px; }.studio-piml-card-title > span { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 9px; color: #fff; background: linear-gradient(145deg,#2a5fea,#6146d7); font: 800 16px var(--mono); }.studio-piml-card-title div { display: grid; gap: 2px; }.studio-piml-card-title strong { color: var(--text1); font-size: 12px; }.studio-piml-card-title small { color: var(--text3); font-size: 10px; }
-.studio-piml-explanation .studio-formula { min-height: 64px; padding: 10px; border-color: color-mix(in srgb,var(--accent) 15%,var(--border)); background: var(--surface-alt); font-size: clamp(12px,1.15vw,16px); }
-.studio-piml-explanation .studio-piml-diagram { min-height: 148px; padding: 4px 4px 0; }.studio-piml-explanation .studio-piml-core { min-height: 122px; }
+.studio-piml-explanation { display: grid; gap: 16px; margin-top: 16px; padding: 20px; border: 1px solid color-mix(in srgb,var(--accent) 25%,var(--border)); border-radius: 16px; background: linear-gradient(115deg,color-mix(in srgb,#eff8ff 74%,var(--surface)),color-mix(in srgb,#f8fbff 86%,var(--surface))); }
+.studio-piml-heading { display: flex; align-items: center; gap: 11px; color: #10295c; }.studio-piml-heading > span { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 50%; color: #fff; background: linear-gradient(145deg,#2a83ff,#1558d2); font-size: 21px; line-height: 1; }.studio-piml-heading strong { font-size: clamp(18px,1.7vw,24px); letter-spacing: -.025em; }
+.studio-piml-panel-grid { display: grid; grid-template-columns: minmax(260px,.94fr) minmax(340px,1.06fr); align-items: stretch; gap: 18px; }
+.studio-piml-formula-card,.studio-piml-input-card { min-width: 0; padding: 18px; border: 1px solid color-mix(in srgb,var(--accent) 22%,var(--border)); border-radius: 15px; background: color-mix(in srgb,var(--surface) 90%,#fff); box-shadow: 0 7px 20px rgba(30,91,182,.05); }
+.studio-piml-formula-card { position: relative; display: flex; flex-direction: column; justify-content:space-between; gap: 22px; overflow: hidden; }.studio-piml-formula-card::after { content: ''; position: absolute; z-index: 0; right: -12%; bottom: -32%; width: 126%; height: 65%; opacity: .32; background: repeating-radial-gradient(ellipse at 52% 100%,transparent 0 9px,rgba(96,165,250,.62) 10px 11px,transparent 12px 16px); transform: rotate(-5deg); }.studio-piml-formula-card > * { position: relative; z-index: 1; }
+.studio-piml-card-title { display: flex; align-items: center; gap: 11px; }.studio-piml-card-title > span { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border: 1px solid #cfe5ff; border-radius: 14px; color: #216df0; background: linear-gradient(145deg,#f7fbff,#e6f3ff); }.studio-piml-card-title svg { width: 27px; height: 27px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }.studio-piml-card-title strong { color: #10295c; font-size: 15px; font-weight: 780; }.studio-piml-atom { color: #7550e8 !important; }.studio-piml-database { color: #1676ed !important; }
+.studio-piml-explanation .studio-formula { min-height: 94px; padding: 14px 10px; border: 0; color: #10295c; background: transparent; font-size: clamp(18px,2vw,27px); overflow: visible; }.studio-piml-explanation .studio-formula > span { color: #10295c; }
+.studio-piml-input-card { display: grid; gap: 14px; }.studio-piml-inputs { display: grid; gap: 8px; }.studio-piml-inputs > span { display: flex; align-items: center; gap: 11px; min-height: 45px; padding: 8px 12px; border: 1px solid #dbeafa; border-radius: 13px; color: #31527e; background: linear-gradient(90deg,#f7fbff,#f2f8ff); }.studio-piml-inputs i { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; font-style: normal; }.studio-piml-inputs i svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.85; stroke-linecap: round; stroke-linejoin: round; }.studio-piml-inputs b { min-width: 0; font-size: 13px; font-weight: 690; line-height: 1.3; }.piml-electrical { color: #237cf4; }.piml-thermal { color: #ff8a16; }.piml-operating { color: #14b985; }.piml-physics { color: #7c4dff; }
 
 /* Compact visual previews keep each step illustrative without turning the map into a dashboard. */
 .studio-process-node { display: block; min-height: 148px; padding: 13px; }
@@ -41,7 +44,7 @@
 .studio-feature-preview svg,.studio-results-preview svg { display: block; width: 100%; height: 48px; overflow: visible; }.studio-feature-preview > span,.studio-results-preview > span { display: flex; align-items: center; gap: 5px; margin-top: 4px; color: var(--text3); font-size: 9px; }.feature-grid { fill: none; stroke: var(--border); stroke-width: 1; }.feature-voltage,.feature-temperature,.result-voltage,.result-capacity { fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }.feature-voltage,.result-voltage { stroke: #2a5fea; }.feature-temperature { stroke: #16a36b; }.result-capacity { stroke: #7c3aed; }.dot-voltage { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #2a5fea; }
 .studio-twin-preview { display: grid; place-items: center; min-height: 84px; overflow: hidden; border-radius: 10px; background: radial-gradient(circle at 50% 42%,rgba(65,196,255,.18),transparent 45%),linear-gradient(135deg,#112d69,#1e56b2); }.studio-twin-preview img { z-index: 1; width: 54px; height: 73px; object-fit: contain; filter: brightness(1.28) saturate(.45) drop-shadow(0 0 7px rgba(105,220,255,.9)); }.studio-twin-preview > span:last-child { position: absolute; z-index: 2; right: 8px; bottom: 6px; color: rgba(227,248,255,.88); font-size: 8px; }.studio-twin-orbit { position: absolute; width: 132px; height: 31px; border: 1px solid rgba(96,211,255,.65); border-radius: 50%; }.studio-twin-orbit.orbit-one { transform: rotate(-8deg); }.studio-twin-orbit.orbit-two { transform: rotate(9deg) scale(.74); opacity: .58; }
 .studio-scenario-preview { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; }.studio-scenario-preview > span { display: flex; align-items: center; gap: 5px; min-width: 0; min-height: 35px; padding: 6px; border: 1px solid color-mix(in srgb,var(--accent) 16%,var(--border)); border-radius: 8px; color: var(--text2); background: var(--surface); font-size: 9px; font-weight: 650; line-height: 1.2; }.studio-scenario-preview i { display: grid; place-items: center; flex: 0 0 18px; width: 18px; height: 18px; border-radius: 6px; color: #d97706; background: rgba(217,119,6,.1); font-style: normal; font-size: 13px; }.studio-scenario-preview > span:last-child i { color: #0891b2; background: rgba(8,145,178,.1); }
-.studio-engine-logo img { position: relative; z-index: 1; mix-blend-mode: normal; }
+.studio-engine-logo img { position: relative; z-index: 1; width: 100%; height: 100%; margin: 0; mix-blend-mode: normal; }
 .studio-process-result { box-shadow: 0 6px 18px rgba(22,163,107,.08); }
 
 /* Five supplied Studio illustrations carry the visual story; the connector treatment is uniform in every direction. */
@@ -120,17 +123,6 @@
 /* PIML explanation and the combined calibration/twin workbench. */
 .studio-formula { min-height: 54px; display: flex; align-items: center; justify-content: center; padding: 10px 14px; border: 1px solid var(--border); border-radius: 9px; color: var(--text2); background: var(--surface-alt); font: 500 clamp(13px,1.4vw,18px) var(--mono); text-align: center; overflow-x: auto; }
 .studio-formula > span { color: var(--accent); font-weight: 700; }
-.studio-piml-diagram { display: grid; grid-template-columns: minmax(150px,1fr) 68px minmax(145px,.9fr); align-items: center; gap: 10px; min-height: 168px; padding: 16px 8px 0; }
-.studio-piml-inputs { display: grid; gap: 12px; }
-.studio-piml-inputs > span { display: flex; align-items: center; gap: 9px; min-height: 51px; padding: 11px; border: 1px solid var(--border); border-radius: 9px; color: var(--text2); }
-.studio-piml-inputs i { display: grid; place-items: center; flex: 0 0 27px; width: 27px; height: 27px; border-radius: 7px; color: var(--accent); background: var(--accent-light); }
-.studio-piml-inputs i svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }.studio-piml-inputs b { min-width: 0; font-size: 12px; font-weight: 650; line-height: 1.3; }
-.studio-piml-diagram > svg { width: 100%; fill: none; stroke: var(--border2); stroke-width: 1.5; }
-.studio-piml-core { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 112px; overflow: hidden; border: 1px solid rgba(147,197,253,.68); border-radius: 16px; color: var(--accent); background: linear-gradient(135deg,rgba(96,165,250,.18),rgba(147,197,253,.36) 38%,rgba(125,211,252,.30) 72%,rgba(96,165,250,.20)),var(--surface); box-shadow: 0 10px 25px rgba(96,165,250,.14),inset 0 1px 0 rgba(255,255,255,.38); }
-.studio-piml-core > :not(.studio-core-orbit) { position: relative; z-index: 1; }
-.studio-piml-core > svg { width: 29px; height: 29px; margin-bottom: 5px; fill: none; stroke: currentColor; stroke-width: 1.25; }.studio-piml-core > svg circle { fill: currentColor; stroke: none; }
-.studio-piml-core strong { color: var(--text1); font: 800 19px var(--mono); letter-spacing: .08em; }.studio-piml-core small { margin-top: 3px; color: var(--text3); font-size: 9px; }.studio-piml-core em { margin-top: 5px; padding: 2px 6px; border-radius: 99px; color: var(--accent); background: rgba(255,255,255,.48); font: 600 8px var(--sans); font-style: normal; letter-spacing: .04em; text-transform: uppercase; }
-.studio-core-orbit { position: absolute; z-index: 0; inset: 8px; border: 1px dashed rgba(42,95,234,.28); border-radius: 50%; }
 .studio-calibration-workbench { display: grid; grid-template-columns: minmax(330px,.9fr) minmax(0,1.5fr); gap: 16px; align-items: stretch; }
 .studio-live-loss { display: flex; flex-direction: column; justify-content: center; padding: 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
 .studio-twin-build-panel { min-width: 0; display: grid; grid-template-columns: 160px minmax(0,1fr); align-items: center; gap: 18px; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
@@ -265,7 +257,7 @@
   .studio-process-calibration { grid-area: 5/1; }.studio-process-engine { grid-area: 6/1; }
   .studio-process-arrow-4 { grid-area: 7/1; }.studio-process-setup { grid-area: 8/1; }.studio-process-arrow-5 { grid-area: 9/1; }.studio-process-result { grid-area: 10/1; }
   .studio-process-arrow-1,.studio-process-arrow-2 { transform: rotate(90deg); }.studio-process-arrow-4,.studio-process-arrow-5 { transform: rotate(-90deg); }
-  .studio-piml-explanation,.studio-calibration-workbench { grid-template-columns: minmax(0,1fr); }
+  .studio-piml-panel-grid,.studio-calibration-workbench { grid-template-columns: minmax(0,1fr); }
   #studio-controls { grid-template-columns: minmax(0,1fr); }
 }
 @media (max-width:780px) {
@@ -274,7 +266,7 @@
   .studio-operation-wide { grid-column: 1; }
   .studio-feature-grid,#studio-dataset-list,.studio-results { grid-template-columns: minmax(0,1fr); }
   .studio-twin-build-panel { grid-template-columns: minmax(0,1fr); }
-  .studio-piml-diagram { grid-template-columns: minmax(130px,1fr) 45px minmax(120px,.8fr); }
+  .studio-piml-panel-grid { gap: 14px; }
   .studio-results-empty { grid-column: 1; }
 }
 @media (max-width:600px) {
@@ -283,9 +275,7 @@
   .studio-step { padding: 17px; }
   .studio-step-head { align-items: flex-start; flex-wrap: wrap; }
   .studio-feature-grid { grid-template-columns: minmax(0,1fr); }
-  .studio-piml-diagram { grid-template-columns: minmax(0,1fr); }
-  .studio-piml-diagram > svg { height: 45px; transform: rotate(90deg); }
-  .studio-piml-core { width: 140px; min-height: 140px; margin-inline: auto; }
+  .studio-piml-explanation { padding: 16px; }.studio-piml-panel-grid { grid-template-columns: minmax(0,1fr); }
   .studio-setup { grid-template-columns: minmax(0,1fr); }
   .studio-control { grid-template-columns: minmax(0,1fr) 125px; gap: 8px 12px; }
   .studio-control-label { grid-column: 1/-1; }
