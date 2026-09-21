@@ -5,6 +5,7 @@
   if (!root) return;
   const el = id => document.getElementById('studio-' + id);
   const state = { selected: null, confirmed: null, page: 1, query: '', charge: 1, temperature: 25, socMin: 10, socMax: 90, cycleMin: 1, cycleMax: 500, scenario: 'constant', generatedData: null };
+  const datasetPageSize = 6;
   const emptyFilters = () => ({ all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() });
   let filters = emptyFilters();
   let pendingFilters = emptyFilters();
@@ -181,11 +182,11 @@
         && (!filters.duty.size || inferDatasetProfiles(d).some(value => filters.duty.has(value)));
     });
     renderFilterChips();
-    const pages = Math.max(1, Math.ceil(list.length / 4));
+    const pages = Math.max(1, Math.ceil(list.length / datasetPageSize));
     state.page = Math.min(state.page, pages);
-    const start = (state.page - 1) * 4;
+    const start = (state.page - 1) * datasetPageSize;
     el('dataset-list').replaceChildren();
-    list.slice(start, start + 4).forEach(d => {
+    list.slice(start, start + datasetPageSize).forEach(d => {
       // Keep the shared renderer's metadata and tags; replace only modal behavior.
       const template = document.createElement('template');
       template.innerHTML = datasetCardHTML(d).trim();
@@ -210,7 +211,7 @@
       el('dataset-list').append(card);
     });
     if (!list.length) el('dataset-list').innerHTML = '<div class="studio-empty">No datasets match your search or filters</div>';
-    el('pager-info').textContent = list.length ? `${start + 1}–${Math.min(start + 4, list.length)} of ${list.length} datasets` : '0 datasets';
+    el('pager-info').textContent = list.length ? `${start + 1}–${Math.min(start + datasetPageSize, list.length)} of ${list.length} datasets` : '0 datasets';
     el('pager').replaceChildren();
     const pageButton = (text, page, label, disabled) => {
       const button = document.createElement('button');
