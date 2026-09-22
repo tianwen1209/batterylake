@@ -2372,7 +2372,7 @@ function bwUpdateProgress() {
     st.classList.remove('done', 'active');
     const num = st.querySelector('.bw-pnum');
     if (done[i]) { st.classList.add('done'); if (num) num.innerHTML = check; }
-    else { if (num) num.textContent = String(i + 1); if (i === activeIdx) st.classList.add('active'); }
+    else { if (num) num.textContent = String(i + 1).padStart(2, '0'); if (i === activeIdx) st.classList.add('active'); }
   });
   document.querySelectorAll('.bw-progress .bw-pline').forEach((ln, i) => ln.classList.toggle('done', !!done[i]));
   const runBtn = document.querySelector('.bw-run');
@@ -5219,7 +5219,7 @@ window.bwUpdateProgress = function() {
     const num = stepEl.querySelector('.bw-pnum');
     stepEl.classList.toggle('active', step === BWR.current);
     stepEl.classList.toggle('done', BWR.completed.has(step));
-    if (num) num.innerHTML = BWR.completed.has(step) ? check : String(step);
+    if (num) num.innerHTML = BWR.completed.has(step) ? check : String(step).padStart(2, '0');
   });
   document.querySelectorAll('#page-benchmarks .bw-flow-step').forEach(panel => {
     panel.classList.toggle('is-active', Number(panel.dataset.bwrPanel) === BWR.current);

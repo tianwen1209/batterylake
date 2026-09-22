@@ -13,29 +13,52 @@
 #page-preprocessing .px-section-head { max-width: 860px; margin-bottom: 22px; }
 #page-preprocessing .px-section-head h2,
 #page-preprocessing .px-skill-name {
-  font-family: var(--sans) !important; font-size: 24px; font-weight: 850 !important; letter-spacing: 0 !important; color: var(--text1);
+  display: flex; align-items: center; gap: 10px; font-family: var(--sans) !important; font-size: 24px; font-weight: 850 !important; letter-spacing: 0 !important; color: var(--text1);
 }
 #page-preprocessing .px-section-head h2 { margin: 0; }
+#page-preprocessing .px-section-number {
+  flex: 0 0 34px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid color-mix(in srgb,var(--accent) 32%,var(--border));
+  border-radius: 10px; color: var(--accent); background: var(--accent-light); font-size: 11px; font-weight: 800;
+}
 #page-preprocessing code { font-family: var(--mono); font-size: .92em; background: var(--bg3); padding: 1px 5px; border-radius: 5px; color: var(--text2); }
 
 /* ── skill card ────────────────────────────────────────────── */
 #page-preprocessing .px-skill {
-  display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr); gap: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 1.1fr); grid-template-areas: 'title title' 'download install'; gap: 18px 14px; padding: 26px 28px 28px;
   border: 1px solid var(--border); border-radius: var(--radius-lg, 16px); background: var(--surface, var(--bg));
   box-shadow: var(--card-shadow, none); overflow: hidden;
 }
-#page-preprocessing .px-skill-main { padding: 28px 30px 26px; min-width: 0; }
-#page-preprocessing .px-skill-name {
-  margin: 0 0 18px;
+#page-preprocessing .px-skill-title-row { grid-area: title; padding: 0; }
+#page-preprocessing .px-skill-main {
+  grid-area: download; padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-alt, var(--bg2, var(--bg))); min-width: 0;
 }
+#page-preprocessing .px-skill-name {
+  margin: 0;
+}
+#page-preprocessing .px-flow-heading { display: flex; align-items: flex-start; gap: 10px; min-width: 0; }
+#page-preprocessing .px-flow-number {
+  display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid var(--border2, var(--border)); border-radius: 10px;
+  background: var(--accent); border-color: var(--accent); color: #fff; font-size: 11px; font-weight: 800;
+}
+#page-preprocessing .px-flow-heading h3 { margin: 0; color: var(--text1); font-size: 15px; font-weight: 750; line-height: 1.35; }
+#page-preprocessing .px-flow-heading p { margin: 3px 0 0; color: var(--text3); font-size: 12.5px; line-height: 1.45; }
 #page-preprocessing .px-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 #page-preprocessing .px-chip {
   font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
   background: var(--accent-light); color: var(--accent); border: 1px solid transparent;
 }
 #page-preprocessing .px-chip-muted { background: var(--bg3); color: var(--text3); }
+#page-preprocessing .px-actions { margin: 16px 0 18px; }
+#page-preprocessing .px-package-contents { border-top: 1px solid var(--border); }
+#page-preprocessing .px-package-contents summary {
+  padding: 14px 0 0; color: var(--text3); cursor: pointer; font-size: 12.5px; font-weight: 650; list-style: none;
+}
+#page-preprocessing .px-package-contents summary::-webkit-details-marker { display: none; }
+#page-preprocessing .px-package-contents summary::before { content: '›'; display: inline-block; margin-right: 7px; color: var(--accent); font-size: 16px; line-height: 10px; transition: transform .15s; }
+#page-preprocessing .px-package-contents[open] summary { padding-bottom: 10px; color: var(--text1); }
+#page-preprocessing .px-package-contents[open] summary::before { transform: rotate(90deg); }
 #page-preprocessing .px-filetree {
-  margin-bottom: 20px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2, var(--bg));
+  margin: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2, var(--bg));
   font-family: var(--mono); font-size: 12.5px; color: var(--text1); overflow-x: auto;
 }
 #page-preprocessing .px-ft-row { display: grid; grid-template-columns: minmax(200px, 250px) minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 4px 4px; }
@@ -58,11 +81,11 @@
 #page-preprocessing .px-btn:disabled { opacity: .6; cursor: default; }
 
 #page-preprocessing .px-install {
-  padding: 26px 26px 24px; border-left: 1px solid var(--border); background: var(--surface-alt, var(--bg2, var(--bg)));
+  grid-area: install; padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-alt, var(--bg2, var(--bg)));
   display: flex; flex-direction: column; gap: 12px; min-width: 0;
 }
-#page-preprocessing .px-install-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-#page-preprocessing .px-install-title { font-size: 15px; font-weight: 700; color: var(--text1); }
+#page-preprocessing .px-install-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+#page-preprocessing .px-install-head .px-flow-heading { flex: 1; }
 #page-preprocessing .px-tabs { display: inline-flex; padding: 3px; border-radius: 9px; background: var(--bg3); }
 #page-preprocessing .px-tab {
   border: 0; background: transparent; padding: 6px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
@@ -76,14 +99,14 @@
 /* ── code blocks ───────────────────────────────────────────── */
 #page-preprocessing .px-code-wrap { position: relative; }
 #page-preprocessing .px-code {
-  margin: 0; padding: 14px 16px; border-radius: 10px; background: var(--code-bg, #0f172a); color: var(--code-text, #e2e8f0);
+  margin: 0; padding: 14px 16px; border: 1px solid var(--border) !important; border-radius: 10px; background: var(--bg) !important; color: var(--text1) !important;
   font-family: var(--mono); font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; overflow-x: auto;
 }
 #page-preprocessing .px-copy {
   position: absolute; top: 8px; right: 8px; padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 600;
-  border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #e2e8f0; cursor: pointer; font-family: var(--sans);
+  border: 1px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; font-family: var(--sans);
 }
-#page-preprocessing .px-copy:hover { background: rgba(255,255,255,.16); }
+#page-preprocessing .px-copy:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
 #page-preprocessing .px-tree {
   margin: 0 0 14px; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg2, var(--bg));
   font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--text2); white-space: pre; overflow-x: auto;
@@ -93,6 +116,10 @@
 #page-preprocessing .px-gates {
   list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px;
 }
+#page-preprocessing .px-run-explainer { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--border); }
+#page-preprocessing .px-run-explainer-head { margin-bottom: 16px; }
+#page-preprocessing .px-run-explainer-head h3 { margin: 0; color: var(--text1); font-size: 17px; font-weight: 750; letter-spacing: -.01em; }
+#page-preprocessing .px-output-explainer { margin-top: 28px; }
 #page-preprocessing .px-gate {
   --gate: var(--accent); --gate-bg: var(--accent-light);
   position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px 16px 16px;
@@ -128,8 +155,8 @@
 #page-preprocessing .px-step-head { display: flex; align-items: center; gap: 10px; }
 #page-preprocessing .px-step-head strong { font-size: 15px; color: var(--text1); }
 #page-preprocessing .px-step-num {
-  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-weight: 700; font-size: 13px;
-  background: var(--accent); color: #fff; flex: 0 0 28px;
+  width: 34px; height: 34px; border: 1px solid var(--border2, var(--border)); border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: 11px;
+  background: var(--accent); border-color: var(--accent); color: #fff; flex: 0 0 34px;
 }
 #page-preprocessing .px-select {
   width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg, var(--bg));
@@ -156,7 +183,7 @@
 #page-preprocessing .px-step-link:hover { text-decoration: underline; }
 
 /* ── output explorer + rules ──────────────────────────────── */
-#page-preprocessing .px-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+#page-preprocessing .px-two-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 #page-preprocessing .px-card {
   padding: 20px 22px 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-alt, var(--bg2, var(--bg))); box-shadow: none; min-width: 0;
 }
@@ -260,9 +287,8 @@
 @media (max-width: 1180px) {
 }
 @media (max-width: 960px) {
-  #page-preprocessing .px-skill { grid-template-columns: minmax(0, 1fr); }
-  #page-preprocessing .px-install { border-left: 0; border-top: 1px solid var(--border); }
-  #page-preprocessing .px-steps, #page-preprocessing .px-two, #page-preprocessing .px-verify-grid { grid-template-columns: minmax(0, 1fr); }
+  #page-preprocessing .px-skill { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'title' 'download' 'install'; }
+  #page-preprocessing .px-steps, #page-preprocessing .px-two-grid, #page-preprocessing .px-verify-grid { grid-template-columns: minmax(0, 1fr); }
   #page-preprocessing .px-explorer-body { grid-template-columns: minmax(0, 1fr); }
   #page-preprocessing .px-rules { grid-template-columns: minmax(0, 1fr); }
   #page-preprocessing .px-ft-row { grid-template-columns: minmax(0, 1fr) auto; }
@@ -273,5 +299,8 @@
 @media (max-width: 640px) {
   #page-preprocessing .px-stage-track, #page-preprocessing .px-gates { grid-template-columns: minmax(0, 1fr); }
   #page-preprocessing .px-dim { grid-template-columns: minmax(0, 1fr); gap: 2px; }
-  #page-preprocessing .px-section, #page-preprocessing .px-skill-main, #page-preprocessing .px-install { padding: 20px 18px; }
+  #page-preprocessing .px-section, #page-preprocessing .px-skill { padding: 20px 18px; }
+  #page-preprocessing .px-skill-main, #page-preprocessing .px-install { padding: 18px; }
+  #page-preprocessing .px-skill-title-row { padding-bottom: 0; }
+  #page-preprocessing .px-install-head { flex-direction: column; }
 }

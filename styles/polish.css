@@ -4226,6 +4226,36 @@ pre.api-code,
 #page-benchmarks .bw-flow-progress .bw-psub {
   display: none !important;
 }
+
+/* Keep Benchmark workflow numbering aligned with the Processing and Contribute flows. */
+#page-benchmarks .bw-flow-progress .bw-pnum,
+#page-benchmarks .bw-substep-num {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  box-shadow: none;
+}
+#page-benchmarks .bw-flow-progress .bw-pstep.done .bw-pnum {
+  background: var(--green);
+  border-color: var(--green);
+}
+#page-benchmarks .bw-step-title,
+#page-benchmarks .bw-local-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 :is(#page-benchmarks .bwr-dataset-search-panel, #page-digital-twin .studio-search-tools) {
   position: relative;
   margin: 16px 0 14px;

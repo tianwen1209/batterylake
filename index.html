@@ -19,14 +19,14 @@
 <link rel="stylesheet" href="styles/base.css">
 <script src="assets/vendor/papaparse.min.js"></script>
 
-<link rel="stylesheet" href="styles/benchmark.css">
+<link rel="stylesheet" href="styles/benchmark.css?v=numbered-cards-1">
 <!-- DESIGN POLISH LAYER: visual tokens and component refinements. -->
 <link rel="stylesheet" href="styles/polish.css?v=studio-controls-3">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css">
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
-<link rel="stylesheet" href="styles/preprocessing.css?v=section-shell-2">
-<link rel="stylesheet" href="styles/contribute.css">
+<link rel="stylesheet" href="styles/preprocessing.css?v=numbered-cards-8">
+<link rel="stylesheet" href="styles/contribute.css?v=workflow-1">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
 <link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-36">
 </head>
@@ -647,12 +647,12 @@ for ds in resp.json()["items"]:
     <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2><p>Configure a training package and inspect your local outputs below.</p></div>
     <div class="bw-flow" id="bw-flow">
       <div class="bw-progress bw-flow-progress" aria-label="Benchmark workflow steps">
-        <button class="bw-pstep active" type="button" data-bwr-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">1</span><span class="bw-pcopy"><span class="bw-plabel">Select Task</span></span></button>
-        <button class="bw-pstep" type="button" data-bwr-step="2" onclick="bwWizardGo(2)"><span class="bw-pnum">2</span><span class="bw-pcopy"><span class="bw-plabel">Select Data</span></span></button>
-        <button class="bw-pstep" type="button" data-bwr-step="3" onclick="bwWizardGo(3)"><span class="bw-pnum">3</span><span class="bw-pcopy"><span class="bw-plabel">Split Data</span></span></button>
-        <button class="bw-pstep" type="button" data-bwr-step="4" onclick="bwWizardGo(4)"><span class="bw-pnum">4</span><span class="bw-pcopy"><span class="bw-plabel">Select Models</span></span></button>
-        <button class="bw-pstep" type="button" data-bwr-step="5" onclick="bwWizardGo(5)"><span class="bw-pnum">5</span><span class="bw-pcopy"><span class="bw-plabel">Local Run</span></span></button>
-        <button class="bw-pstep" type="button" data-bwr-step="6" onclick="bwWizardGo(6)"><span class="bw-pnum">6</span><span class="bw-pcopy"><span class="bw-plabel">View Results</span></span></button>
+        <button class="bw-pstep active" type="button" data-bwr-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">01</span><span class="bw-pcopy"><span class="bw-plabel">Select Task</span></span></button>
+        <button class="bw-pstep" type="button" data-bwr-step="2" onclick="bwWizardGo(2)"><span class="bw-pnum">02</span><span class="bw-pcopy"><span class="bw-plabel">Select Data</span></span></button>
+        <button class="bw-pstep" type="button" data-bwr-step="3" onclick="bwWizardGo(3)"><span class="bw-pnum">03</span><span class="bw-pcopy"><span class="bw-plabel">Split Data</span></span></button>
+        <button class="bw-pstep" type="button" data-bwr-step="4" onclick="bwWizardGo(4)"><span class="bw-pnum">04</span><span class="bw-pcopy"><span class="bw-plabel">Select Models</span></span></button>
+        <button class="bw-pstep" type="button" data-bwr-step="5" onclick="bwWizardGo(5)"><span class="bw-pnum">05</span><span class="bw-pcopy"><span class="bw-plabel">Local Run</span></span></button>
+        <button class="bw-pstep" type="button" data-bwr-step="6" onclick="bwWizardGo(6)"><span class="bw-pnum">06</span><span class="bw-pcopy"><span class="bw-plabel">View Results</span></span></button>
       </div>
 
       <section class="bw-flow-step is-active" data-bwr-panel="1">
@@ -674,7 +674,7 @@ for ds in resp.json()["items"]:
 
       <section class="bw-flow-step" data-bwr-panel="2">
         <div class="bw-flow-card">
-          <div class="bw-step-title">Step 1: Select Dataset</div>
+          <div class="bw-step-title"><span class="bw-substep-num">01</span><span>Select Dataset</span></div>
           <div class="dataset-search-panel bwr-dataset-search-panel">
             <div class="dataset-search-row">
               <div class="dataset-search" id="bwr-search-box">
@@ -739,7 +739,7 @@ for ds in resp.json()["items"]:
         </div>
 
         <div class="bw-flow-card">
-          <div class="bw-step-title">Step 2: Select Input Signals</div>
+          <div class="bw-step-title"><span class="bw-substep-num">02</span><span>Select Input Signals</span></div>
           <div class="bw-feats bw-flow-signals" id="bwr-signals">
             <button type="button" class="bw-feat" data-name="Voltage (V)" onclick="bwToggleFeat(this)">Voltage (V)</button>
             <button type="button" class="bw-feat" data-name="Current (A)" onclick="bwToggleFeat(this)">Current (A)</button>
@@ -832,13 +832,13 @@ for ds in resp.json()["items"]:
           <div class="bw-step-title">Execute Local Training Package</div>
           <div class="bw-local-grid">
             <div class="bw-local-card">
-              <div class="bw-local-title">Step 1: Download Training Package</div>
+              <div class="bw-local-title"><span class="bw-substep-num">01</span><span>Download Training Package</span></div>
               <p>Get the configured dataset, model architecture, and runtime environment.</p>
               <button class="bw-download" id="bwr-download-btn" type="button" onclick="bwFlowDownloadPackage()">Download Package (.zip)</button>
               <span id="bw-package-filename" class="bw-hidden-sync">bt_benchmark_soh_lstm.zip</span>
             </div>
             <div class="bw-local-card">
-              <div class="bw-local-title">Step 2: Run in Your Terminal</div>
+              <div class="bw-local-title"><span class="bw-substep-num">02</span><span>Run in Your Terminal</span></div>
               <p>Unzip the package, open your terminal, and execute the following command to start local training.</p>
               <div class="bw-code-wrap">
                 <button class="bw-copycmd" id="bwr-copy-btn" type="button" onclick="bwCopyTerminalCommand()">Copy</button>
@@ -855,7 +855,7 @@ bash run_benchmark.sh</pre>
               </div>
             </div>
             <div class="bw-local-card bw-upload-card" id="bwr-upload-card">
-              <div class="bw-local-title">Step 3: Upload Output Folder</div>
+              <div class="bw-local-title"><span class="bw-substep-num">03</span><span>Upload Output Folder</span></div>
               <p>When training finishes, upload the generated output folder containing your results.</p>
               <input id="bw-outputs-folder" type="file" webkitdirectory directory multiple hidden onchange="bwFlowHandleUpload(event)">
               <input id="bw-outputs-files" type="file" multiple accept=".json,.csv,.txt,.md" hidden onchange="bwFlowHandleUpload(event)">
@@ -1579,9 +1579,17 @@ bash run_benchmark.sh</pre>
 
     <!-- 1 · Skill card -->
     <section class="px-skill reveal" aria-labelledby="px-skill-title">
+      <div class="px-skill-title-row">
+        <h2 class="px-skill-name" id="px-skill-title"><span class="px-section-number">01</span><span>Set Up the Processing Skill</span></h2>
+      </div>
       <div class="px-skill-main">
-        <h2 class="px-skill-name" id="px-skill-title">Install the Dataset Processing Skill</h2>
-        <div class="px-filetree" id="px-skill-files" aria-label="Files in the skill package"></div>
+        <div class="px-flow-heading">
+          <span class="px-flow-number">01</span>
+          <div>
+            <h3>Download the skill package</h3>
+            <p>Save <code>batterylake-processing.zip</code> to your BatteryLake data repository.</p>
+          </div>
+        </div>
         <div class="px-actions">
           <button class="px-btn px-btn-primary" type="button" id="px-download-btn" onclick="BatteryLakePreprocessing.downloadSkill()">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1593,10 +1601,19 @@ bash run_benchmark.sh</pre>
           </a>
           <a class="px-btn" href="skill/?doc=standard">Processing standard</a>
         </div>
+        <details class="px-package-contents">
+          <summary>See package contents</summary>
+          <div class="px-filetree" id="px-skill-files" aria-label="Files in the skill package"></div>
+        </details>
       </div>
       <aside class="px-install">
         <div class="px-install-head">
-          <span class="px-install-title">Install</span>
+          <div class="px-flow-heading">
+            <span class="px-flow-number">02</span>
+            <div>
+              <h3>Install it in your terminal</h3>
+            </div>
+          </div>
           <div class="px-tabs" role="tablist" aria-label="Agent">
             <button class="px-tab active" type="button" role="tab" data-agent="claude" onclick="BatteryLakePreprocessing.setAgent('claude')">Claude Code</button>
             <button class="px-tab" type="button" role="tab" data-agent="codex" onclick="BatteryLakePreprocessing.setAgent('codex')">Codex</button>
@@ -1615,63 +1632,14 @@ bash run_benchmark.sh</pre>
       </aside>
     </section>
 
-    <!-- 2 · Gates -->
-    <section class="px-section reveal" aria-labelledby="px-gates-title">
-      <div class="px-section-head">
-        <h2 id="px-gates-title">Validate Every Dataset Through Five Evidence Gates</h2>
-      </div>
-      <ol class="px-gates">
-        <li class="px-gate" data-gate="I">
-          <div class="px-gate-art" aria-hidden="true">
-            <img src="assets/logos/preprocessing/inventory.png" alt="">
-          </div>
-          <strong>Inventory</strong>
-          <span>List every file and archive member, hash each source.</span>
-          <em>inventoried</em>
-        </li>
-        <li class="px-gate" data-gate="S">
-          <div class="px-gate-art" aria-hidden="true">
-            <img src="assets/logos/preprocessing/semantics.png" alt="">
-          </div>
-          <strong>Semantics</strong>
-          <span>Confirm cells, units, clocks, cycle boundaries and labels.</span>
-          <em>adapter design confirmed</em>
-        </li>
-        <li class="px-gate" data-gate="C">
-          <div class="px-gate-art" aria-hidden="true">
-            <img src="assets/logos/preprocessing/conversion.png" alt="">
-          </div>
-          <strong>Conversion</strong>
-          <span>Write every source field to the canonical layer.</span>
-          <em>converted</em>
-        </li>
-        <li class="px-gate" data-gate="V">
-          <div class="px-gate-art" aria-hidden="true">
-            <img src="assets/logos/preprocessing/fidelity.png" alt="">
-          </div>
-          <strong>Fidelity</strong>
-          <span>Compare raw and standard values record by record.</span>
-          <em>canonical_validated</em>
-        </li>
-        <li class="px-gate" data-gate="E">
-          <div class="px-gate-art" aria-hidden="true">
-            <img src="assets/logos/preprocessing/equivalence.png" alt="">
-          </div>
-          <strong>Equivalence</strong>
-          <span>Raw and standard loaders train to the same result.</span>
-          <em>benchmark_verified</em>
-        </li>
-      </ol>
-    </section>
-
-    <!-- 3 · Run -->
+    <!-- 2 · Run -->
     <section class="px-section px-run reveal" aria-labelledby="px-run-title">
       <div class="px-section-head">
-        <h2 id="px-run-title">Convert Raw Data into a Standard Dataset</h2>
+        <h2 id="px-run-title"><span class="px-section-number">02</span><span>Choose a Dataset and Send the Prompt to Your Agent</span></h2>
       </div>
       <ol class="px-steps">
         <li class="px-step">
-          <div class="px-step-head"><span class="px-step-num">1</span><strong>Choose a dataset</strong></div>
+          <div class="px-step-head"><span class="px-step-num">01</span><strong>Choose a dataset</strong></div>
           <select class="px-select" id="px-dataset-select" onchange="BatteryLakePreprocessing.renderPrompt()" aria-label="Dataset"></select>
           <div class="px-paths">
             <div class="px-path"><span class="px-path-k">in</span><code id="px-path-in">Raw_Dataset/…</code></div>
@@ -1680,7 +1648,7 @@ bash run_benchmark.sh</pre>
           </div>
         </li>
         <li class="px-step">
-          <div class="px-step-head"><span class="px-step-num">2</span><strong>Paste the prompt to your agent</strong></div>
+          <div class="px-step-head"><span class="px-step-num">02</span><strong>Paste the prompt to your agent</strong></div>
           <div class="px-code-wrap">
             <button class="px-copy" type="button" onclick="BatteryLakePreprocessing.copy('px-prompt', this)">Copy</button>
             <pre class="px-code px-prompt" id="px-prompt"></pre>
@@ -1688,7 +1656,7 @@ bash run_benchmark.sh</pre>
           <p class="px-step-note">The agent reads the standard and the dataset TODO, then continues from the first unfinished gate.</p>
         </li>
         <li class="px-step">
-          <div class="px-step-head"><span class="px-step-num">3</span><strong>Watch it work</strong></div>
+          <div class="px-step-head"><span class="px-step-num">03</span><strong>Watch it work</strong></div>
           <ul class="px-facts">
             <li>
               <span class="px-fact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
@@ -1708,11 +1676,26 @@ bash run_benchmark.sh</pre>
           </a>
         </li>
       </ol>
-    </section>
 
-    <!-- 4 · Output explorer + rules -->
-    <section class="px-section px-two reveal" aria-label="Outputs and rules">
-      <div class="px-card px-explorer">
+      <div class="px-run-explainer" aria-labelledby="px-gates-title">
+        <div class="px-run-explainer-head">
+          <h3 id="px-gates-title">While processing, your agent runs these five checks</h3>
+        </div>
+        <ol class="px-gates">
+        <li class="px-gate" data-gate="I"><div class="px-gate-art" aria-hidden="true"><img src="assets/logos/preprocessing/inventory.png" alt=""></div><strong>Inventory</strong><span>List every file and archive member, hash each source.</span><em>inventoried</em></li>
+        <li class="px-gate" data-gate="S"><div class="px-gate-art" aria-hidden="true"><img src="assets/logos/preprocessing/semantics.png" alt=""></div><strong>Semantics</strong><span>Confirm cells, units, clocks, cycle boundaries and labels.</span><em>adapter design confirmed</em></li>
+        <li class="px-gate" data-gate="C"><div class="px-gate-art" aria-hidden="true"><img src="assets/logos/preprocessing/conversion.png" alt=""></div><strong>Conversion</strong><span>Write every source field to the canonical layer.</span><em>converted</em></li>
+        <li class="px-gate" data-gate="V"><div class="px-gate-art" aria-hidden="true"><img src="assets/logos/preprocessing/fidelity.png" alt=""></div><strong>Fidelity</strong><span>Compare raw and standard values record by record.</span><em>canonical_validated</em></li>
+        <li class="px-gate" data-gate="E"><div class="px-gate-art" aria-hidden="true"><img src="assets/logos/preprocessing/equivalence.png" alt=""></div><strong>Equivalence</strong><span>Raw and standard loaders train to the same result.</span><em>benchmark_verified</em></li>
+        </ol>
+      </div>
+
+      <div class="px-run-explainer px-output-explainer" aria-labelledby="px-output-title">
+        <div class="px-run-explainer-head">
+          <h3 id="px-output-title">Your agent produces these files and follows these rules</h3>
+        </div>
+        <div class="px-two-grid">
+        <div class="px-card px-explorer">
         <div class="px-card-head">
           <div class="px-mini-title">What the skill produces</div>
           <span class="px-card-hint">click an item</span>
@@ -1722,7 +1705,7 @@ bash run_benchmark.sh</pre>
           <div class="px-out-detail" id="px-out-detail"></div>
         </div>
       </div>
-      <div class="px-card">
+        <div class="px-card">
         <div class="px-card-head">
           <div class="px-mini-title">Rules the skill never skips</div>
           <span class="px-card-hint">click to expand</span>
@@ -1759,13 +1742,15 @@ bash run_benchmark.sh</pre>
             <span class="px-rule-body"><code>inventoried</code>, <code>converted</code>, <code>canonical_validated</code> and <code>benchmark_verified</code> are separate; none is inferred from the one before.</span>
           </li>
         </ul>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- 5 · Verify -->
     <section class="px-section px-verify reveal" aria-labelledby="px-verify-title">
       <div class="px-section-head">
-        <h2 id="px-verify-title">Check Whether a Dataset Is Ready for Benchmarking</h2>
+        <h2 id="px-verify-title"><span class="px-section-number">03</span><span>Upload status.json to Check Benchmark Readiness</span></h2>
       </div>
       <div class="px-verify-grid">
         <div class="px-verify-left">
@@ -1986,14 +1971,14 @@ for dataset in resp.json()["items"]:
     </div>
 
     <ol class="cb-rail cb-rail--3" id="cb-rail">
-      <li data-step="1" class="is-active"><span class="cb-rail-num">1</span><span>Describe</span><em id="cb-rail-1">0 / 12 required fields</em></li>
-      <li data-step="2"><span class="cb-rail-num">2</span><span>Raw data</span><em id="cb-rail-2">no link yet</em></li>
-      <li data-step="3"><span class="cb-rail-num">3</span><span>Submit</span><em id="cb-rail-3">0 / 5 ready</em></li>
+      <li data-step="1" class="is-active"><span class="cb-rail-num">01</span><span>Describe</span><em id="cb-rail-1">0 / 12 required fields</em></li>
+      <li data-step="2"><span class="cb-rail-num">02</span><span>Raw data</span><em id="cb-rail-2">no link yet</em></li>
+      <li data-step="3"><span class="cb-rail-num">03</span><span>Submit</span><em id="cb-rail-3">0 / 5 ready</em></li>
     </ol>
 
     <section class="cb-step reveal" id="cb-step-1">
       <div class="cb-step-head">
-        <span class="cb-step-num">1</span>
+        <span class="cb-step-num">01</span>
         <div><h2>Describe the dataset</h2><p>Only what the catalog needs and what the processing skill needs to convert your files. Your draft stays in this browser.</p></div>
         <div class="cb-head-actions"><button class="cb-mini-btn" id="cb-clear-btn" type="button">Clear draft</button></div>
       </div>
@@ -2020,7 +2005,7 @@ for dataset in resp.json()["items"]:
 
     <section class="cb-step reveal" id="cb-step-2">
       <div class="cb-step-head">
-        <span class="cb-step-num">2</span>
+        <span class="cb-step-num">02</span>
         <div><h2 id="cb-step2-title">Provide the raw data</h2><p id="cb-step2-sub">Host the original cycler exports where the team can download them and paste the link. Keep the original file names; do not resample or clean.</p></div>
       </div>
       <div class="cb-link-block" id="cb-link-block">
@@ -2063,7 +2048,7 @@ for dataset in resp.json()["items"]:
 
     <section class="cb-step reveal" id="cb-step-3">
       <div class="cb-step-head">
-        <span class="cb-step-num">3</span>
+        <span class="cb-step-num">03</span>
         <div><h2>Submit</h2><p>Opens a GitHub issue prefilled with your metadata, notes, checklist and data link; attach nothing else. The team takes it from there.</p></div>
       </div>
       <div class="cb-readiness-wrap">
