@@ -1791,7 +1791,7 @@ body { font-size: var(--type-body); letter-spacing: 0; }
   padding: clamp(28px, 3.4vw, 42px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   border: 1px solid rgba(191,219,254,.78);
   border-radius: 8px;
   background: transparent;
@@ -1855,9 +1855,6 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
 }
 #page-home .home-metrics .metric-detail {
   margin-top: 4px;
-}
-#page-home .home-metrics #m-datasets-sub {
-  min-height: calc(2 * 1.22em);
 }
 .home-credit-strip {
   margin-top: clamp(30px, 4.2vw, 52px);
