@@ -1580,9 +1580,7 @@ bash run_benchmark.sh</pre>
     <!-- 1 · Skill card -->
     <section class="px-skill reveal" aria-labelledby="px-skill-title">
       <div class="px-skill-main">
-        <div class="px-kicker">Agent skill</div>
-        <h2 class="px-skill-name" id="px-skill-title">batterylake-processing</h2>
-        <p class="px-skill-desc">Converts heterogeneous BatteryLake battery datasets into provenance-preserving standard data and explicit SOH / RUL benchmark views. Use it for dataset inventory, adapter design, conversion, fidelity checks, and raw-versus-standard benchmark validation.</p>
+        <h2 class="px-skill-name" id="px-skill-title">Install the Dataset Processing Skill</h2>
         <div class="px-filetree" id="px-skill-files" aria-label="Files in the skill package"></div>
         <div class="px-actions">
           <button class="px-btn px-btn-primary" type="button" id="px-download-btn" onclick="BatteryLakePreprocessing.downloadSkill()">
@@ -1620,9 +1618,7 @@ bash run_benchmark.sh</pre>
     <!-- 2 · Gates -->
     <section class="px-section reveal" aria-labelledby="px-gates-title">
       <div class="px-section-head">
-        <span class="px-kicker">How it works</span>
-        <h2 id="px-gates-title">Every dataset passes five acceptance gates</h2>
-        <p>The skill records evidence for each gate in <code>status.json</code>. A gate is passed by evidence, never by a folder listing or a copied archive.</p>
+        <h2 id="px-gates-title">Validate Every Dataset Through Five Evidence Gates</h2>
       </div>
       <ol class="px-gates">
         <li class="px-gate" data-gate="I">
@@ -1671,8 +1667,7 @@ bash run_benchmark.sh</pre>
     <!-- 3 · Run -->
     <section class="px-section px-run reveal" aria-labelledby="px-run-title">
       <div class="px-section-head">
-        <span class="px-kicker">Run it</span>
-        <h2 id="px-run-title">Three steps from raw files to a processed dataset</h2>
+        <h2 id="px-run-title">Convert Raw Data into a Standard Dataset</h2>
       </div>
       <ol class="px-steps">
         <li class="px-step">
@@ -1770,9 +1765,7 @@ bash run_benchmark.sh</pre>
     <!-- 5 · Verify -->
     <section class="px-section px-verify reveal" aria-labelledby="px-verify-title">
       <div class="px-section-head">
-        <span class="px-kicker">Verify</span>
-        <h2 id="px-verify-title">Check a processed dataset</h2>
-        <p>Drop a dataset's <code>status.json</code>, or the whole <code>dataset_xx</code> output folder, to see which gates it has passed and what still blocks benchmark use.</p>
+        <h2 id="px-verify-title">Check Whether a Dataset Is Ready for Benchmarking</h2>
       </div>
       <div class="px-verify-grid">
         <div class="px-verify-left">
