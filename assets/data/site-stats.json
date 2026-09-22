@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-21T21:08:15Z",
-  "total_visits": 2587,
-  "dataset_downloads": 463,
+  "updated_at": "2026-09-22T20:15:10Z",
+  "total_visits": 2754,
+  "dataset_downloads": 466,
   "skill_uses": 111,
   "model_downloads": {
     "cnn": 15,
@@ -16,22 +16,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-09-21T21:08:15Z",
+    "updatedAt": "2026-09-22T20:15:10Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-21"
+      "endDate": "2026-09-22"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 47
+        "visitors": 50
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 34
+        "visitors": 36
       },
       {
         "country": "United States",
@@ -104,7 +104,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 45,
+        "visitors": 48,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -112,7 +112,7 @@
         "country": "China",
         "countryCode": "CN",
         "city": "Shanghai",
-        "visitors": 7,
+        "visitors": 8,
         "lng": 121.458,
         "lat": 31.222
       },
@@ -143,6 +143,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Nanjing",
+        "visitors": 3,
+        "lng": 118.778,
+        "lat": 32.062
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Qingdao",
         "visitors": 3,
         "lng": 120.38,
@@ -163,14 +171,6 @@
         "visitors": 2,
         "lng": 104.067,
         "lat": 30.667
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Nanjing",
-        "visitors": 2,
-        "lng": 118.778,
-        "lat": 32.062
       },
       {
         "country": "China",
