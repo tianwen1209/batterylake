@@ -6,11 +6,14 @@
 #page-preprocessing .prep-page-hero .page-title { max-width: min(640px, 55%); }
 #page-preprocessing .prep-page-hero .page-desc { max-width: min(690px, 57%); }
 
-#page-preprocessing .px-section { margin-top: 26px; }
-#page-preprocessing .px-section-head { max-width: 860px; margin-bottom: 16px; }
+#page-preprocessing .px-section {
+  margin-top: 26px; padding: 26px 28px 28px; border: 1px solid var(--border); border-radius: var(--radius-lg, 16px);
+  background: var(--surface, var(--bg)); box-shadow: var(--card-shadow, none);
+}
+#page-preprocessing .px-section-head { max-width: 860px; margin-bottom: 22px; }
 #page-preprocessing .px-section-head h2,
 #page-preprocessing .px-skill-name {
-  font-family: var(--sans); font-size: clamp(21px, 2vw, 28px); font-weight: 750; letter-spacing: -.025em; color: var(--text1);
+  font-family: var(--sans) !important; font-size: 24px; font-weight: 850 !important; letter-spacing: 0 !important; color: var(--text1);
 }
 #page-preprocessing .px-section-head h2 { margin: 0; }
 #page-preprocessing code { font-family: var(--mono); font-size: .92em; background: var(--bg3); padding: 1px 5px; border-radius: 5px; color: var(--text2); }
@@ -93,7 +96,7 @@
 #page-preprocessing .px-gate {
   --gate: var(--accent); --gate-bg: var(--accent-light);
   position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px 16px 16px;
-  border: 1px solid var(--border); border-radius: 14px; background: var(--surface, var(--bg)); box-shadow: var(--card-shadow, none); min-width: 0;
+  border: 1px solid var(--border); border-radius: 14px; background: var(--surface-alt, var(--bg2, var(--bg))); box-shadow: none; min-width: 0;
 }
 #page-preprocessing .px-gate[data-gate="S"] { --gate: var(--teal); --gate-bg: var(--teal-bg); }
 #page-preprocessing .px-gate[data-gate="C"] { --gate: var(--purple); --gate-bg: var(--purple-bg); }
@@ -120,7 +123,7 @@
 #page-preprocessing .px-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr); gap: 14px; align-items: stretch; }
 #page-preprocessing .px-step {
   display: flex; flex-direction: column; gap: 12px; padding: 18px 20px 20px; border: 1px solid var(--border); border-radius: 14px;
-  background: var(--surface, var(--bg)); box-shadow: var(--card-shadow, none); min-width: 0;
+  background: var(--surface-alt, var(--bg2, var(--bg))); box-shadow: none; min-width: 0;
 }
 #page-preprocessing .px-step-head { display: flex; align-items: center; gap: 10px; }
 #page-preprocessing .px-step-head strong { font-size: 15px; color: var(--text1); }
@@ -153,9 +156,9 @@
 #page-preprocessing .px-step-link:hover { text-decoration: underline; }
 
 /* ── output explorer + rules ──────────────────────────────── */
-#page-preprocessing .px-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+#page-preprocessing .px-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 #page-preprocessing .px-card {
-  padding: 20px 22px 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface, var(--bg)); box-shadow: var(--card-shadow, none); min-width: 0;
+  padding: 20px 22px 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-alt, var(--bg2, var(--bg))); box-shadow: none; min-width: 0;
 }
 #page-preprocessing .px-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 #page-preprocessing .px-card-head .px-mini-title { margin-bottom: 0; }
@@ -212,7 +215,7 @@
 #page-preprocessing .px-drop-title { font-size: 14px; font-weight: 600; color: var(--text1); }
 #page-preprocessing .px-drop-sub { font-size: 12px; color: var(--text4); font-family: var(--mono); }
 #page-preprocessing .px-status {
-  padding: 20px 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface, var(--bg)); box-shadow: var(--card-shadow, none); min-width: 0;
+  padding: 20px 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-alt, var(--bg2, var(--bg))); box-shadow: none; min-width: 0;
 }
 #page-preprocessing .px-status-head { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
 #page-preprocessing .px-example-badge {
@@ -270,5 +273,5 @@
 @media (max-width: 640px) {
   #page-preprocessing .px-stage-track, #page-preprocessing .px-gates { grid-template-columns: minmax(0, 1fr); }
   #page-preprocessing .px-dim { grid-template-columns: minmax(0, 1fr); gap: 2px; }
-  #page-preprocessing .px-skill-main, #page-preprocessing .px-install { padding: 20px 18px; }
+  #page-preprocessing .px-section, #page-preprocessing .px-skill-main, #page-preprocessing .px-install { padding: 20px 18px; }
 }
