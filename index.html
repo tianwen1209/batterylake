@@ -581,17 +581,16 @@ for ds in resp.json()["items"]:
        PAGE: BENCHMARKS
        ═══════════════════════════════════════ -->
   <div class="page" id="page-benchmarks">
-    <div class="page-header benchmarks-hero visual-page-hero">
-      <div class="page-title">Benchmarks</div>
-      <div class="page-desc">Configure SOH &amp; RUL benchmarking experiments, build reproducible training packages, and compare model performance across curated BatteryLake datasets.</div>
-      <img class="benchmarks-hero-art visual-page-hero-art" src="assets/images/benchmarks-hero-reference.png?v=1" alt="" aria-hidden="true">
-    </div>
+    <div class="benchmarks-content-surface">
+      <div class="page-header benchmarks-hero visual-page-hero">
+        <div class="page-title">Benchmarks</div>
+        <div class="page-desc">Configure SOH &amp; RUL benchmarking experiments, build reproducible training packages, and compare model performance across curated BatteryLake datasets.</div>
+        <img class="benchmarks-hero-art visual-page-hero-art" src="assets/images/benchmarks-hero-reference.png?v=1" alt="" aria-hidden="true">
+      </div>
 
     <section class="published-benchmarks" id="published-benchmarks" aria-labelledby="pbr-title">
       <div class="pbr-heading">
-        <div class="pbr-eyebrow">Research preview</div>
         <h2 id="pbr-title">Benchmark results</h2>
-        <p>Explore real test predictions by dataset, task and model.</p>
       </div>
       <div class="pbr-filters" aria-label="Browse benchmark experiments">
         <label for="pbr-dataset">Dataset<select id="pbr-dataset"></select></label>
@@ -644,7 +643,7 @@ for ds in resp.json()["items"]:
       <p class="pbr-footer">Each chart shows a fixed test cell from the selected experiment. Numerical metrics and rankings are reserved for publication.</p>
     </section>
 
-    <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2><p>Configure a training package and inspect your local outputs below.</p></div>
+    <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2></div>
     <div class="bw-flow" id="bw-flow">
       <div class="bw-progress bw-flow-progress" aria-label="Benchmark workflow steps">
         <button class="bw-pstep active" type="button" data-bwr-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">01</span><span class="bw-pcopy"><span class="bw-plabel">Select Task</span></span></button>
@@ -908,6 +907,7 @@ bash run_benchmark.sh</pre>
           <button class="bw-wizard-btn primary" type="button" id="bw-wizard-next" onclick="bwWizardNext()" disabled>Next</button>
         </div>
       </div>
+    </div>
     </div>
 
   </div>

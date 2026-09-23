@@ -1,4 +1,12 @@
 /* Real result images; no numerical ticks, scores or value tooltips. */
+#page-benchmarks .benchmarks-content-surface {
+  padding: 0 28px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+}
+#page-benchmarks .benchmarks-content-surface .visual-page-hero { margin-bottom: 18px; }
 .published-benchmarks { margin: 0 0 36px; color: var(--text1); }
 #published-benchmarks [hidden] { display: none !important; }
 .pbr-heading { margin-bottom: 22px; }
@@ -48,6 +56,7 @@
 .pbr-workbench-heading { border-top: 1px solid var(--border2); padding-top: 30px; margin-bottom: 20px; }
 @media (max-width: 850px) { .pbr-explorer { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 600px) {
+  #page-benchmarks .benchmarks-content-surface { padding: 0 16px 16px; }
   .pbr-filters { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .pbr-preview-heading { align-items: flex-start; flex-direction: column; }
   .pbr-preview-card { padding: 18px; }
