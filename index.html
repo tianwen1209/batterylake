@@ -581,12 +581,11 @@ for ds in resp.json()["items"]:
        PAGE: BENCHMARKS
        ═══════════════════════════════════════ -->
   <div class="page" id="page-benchmarks">
-    <div class="benchmarks-content-surface">
-      <div class="page-header benchmarks-hero visual-page-hero">
-        <div class="page-title">Benchmarks</div>
-        <div class="page-desc">Configure SOH &amp; RUL benchmarking experiments, build reproducible training packages, and compare model performance across curated BatteryLake datasets.</div>
-        <img class="benchmarks-hero-art visual-page-hero-art" src="assets/images/benchmarks-hero-reference.png?v=1" alt="" aria-hidden="true">
-      </div>
+    <div class="page-header benchmarks-hero visual-page-hero">
+      <div class="page-title">Benchmarks</div>
+      <div class="page-desc">Configure SOH &amp; RUL benchmarking experiments, build reproducible training packages, and compare model performance across curated BatteryLake datasets.</div>
+      <img class="benchmarks-hero-art visual-page-hero-art" src="assets/images/benchmarks-hero-reference.png?v=1" alt="" aria-hidden="true">
+    </div>
 
     <section class="published-benchmarks" id="published-benchmarks" aria-labelledby="pbr-title">
       <div class="pbr-heading">
@@ -599,13 +598,15 @@ for ds in resp.json()["items"]:
       </div>
       <div class="pbr-explorer">
         <section class="pbr-scope" aria-labelledby="pbr-selection-title" aria-live="polite" aria-atomic="true">
-          <p class="pbr-status" id="pbr-status"></p>
-          <h3 id="pbr-selection-title"></h3>
-          <p class="pbr-task-name" id="pbr-task-name"></p>
-          <dl>
-            <dt>Source</dt><dd id="pbr-source"></dd>
-            <dt>Experiment scope</dt><dd id="pbr-scope-note"></dd>
-            <dt>Task definition</dt><dd id="pbr-task-note"></dd>
+          <div class="pbr-scope-intro">
+            <p class="pbr-status" id="pbr-status"></p>
+            <h3 id="pbr-selection-title"></h3>
+            <p class="pbr-task-name" id="pbr-task-name"></p>
+          </div>
+          <dl class="pbr-fact-list">
+            <div><dt>Source</dt><dd id="pbr-source"></dd></div>
+            <div><dt>Experiment scope</dt><dd id="pbr-scope-note"></dd></div>
+            <div><dt>Task definition</dt><dd id="pbr-task-note"></dd></div>
           </dl>
           <div id="pbr-models">
             <h4>Models evaluated <span>· Unranked</span></h4>
@@ -643,8 +644,9 @@ for ds in resp.json()["items"]:
       <p class="pbr-footer">Each chart shows a fixed test cell from the selected experiment. Numerical metrics and rankings are reserved for publication.</p>
     </section>
 
-    <div class="pbr-workbench-heading"><h2>Run your own benchmark</h2></div>
-    <div class="bw-flow" id="bw-flow">
+    <section class="benchmark-workbench" aria-labelledby="benchmark-workbench-title">
+      <div class="pbr-workbench-heading"><h2 id="benchmark-workbench-title">Run your own benchmark</h2></div>
+      <div class="bw-flow" id="bw-flow">
       <div class="bw-progress bw-flow-progress" aria-label="Benchmark workflow steps">
         <button class="bw-pstep active" type="button" data-bwr-step="1" onclick="bwWizardGo(1)"><span class="bw-pnum">01</span><span class="bw-pcopy"><span class="bw-plabel">Select Task</span></span></button>
         <button class="bw-pstep" type="button" data-bwr-step="2" onclick="bwWizardGo(2)"><span class="bw-pnum">02</span><span class="bw-pcopy"><span class="bw-plabel">Select Data</span></span></button>
@@ -908,7 +910,7 @@ bash run_benchmark.sh</pre>
         </div>
       </div>
     </div>
-    </div>
+    </section>
 
   </div>
 
