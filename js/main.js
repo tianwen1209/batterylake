@@ -1327,6 +1327,11 @@ window.showPage = showPage;
 
 function applyInitialPageFromHash() {
   const name = (location.hash || '').replace(/^#/, '');
+  // Keep pre-rename Studio links working while making #studio canonical.
+  if (name === 'digital-twin') {
+    showPage('studio', document.getElementById('nav-studio'));
+    return;
+  }
   if (name.startsWith('datasets-')) {
     const cat = getCategoryFromSlug(name.replace(/^datasets-/, ''));
     if (cat) {

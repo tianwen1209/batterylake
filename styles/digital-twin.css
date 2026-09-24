@@ -1,11 +1,11 @@
 /* Battery Digital Twin Studio — overview first, working surface second. */
-#page-digital-twin { max-width: 1600px; margin-inline: auto; }
-#page-digital-twin :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-#page-digital-twin button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+#page-studio { max-width: 1600px; margin-inline: auto; }
+#page-studio :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#page-studio button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .studio-workspace { display: grid; gap: 44px; }
 .studio-explainer,.studio-operations { position: relative; padding: 28px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); box-shadow: 0 10px 35px rgba(22,30,48,.035); overflow: hidden; }
 .studio-section-heading { margin-bottom: 24px; }
-#page-digital-twin .studio-section-heading h2 { margin: 0; color: var(--text1); font-family: var(--sans); font-size: clamp(21px,2vw,28px); font-weight: 750; letter-spacing: -.025em; }
+#page-studio .studio-section-heading h2 { margin: 0; color: var(--text1); font-family: var(--sans); font-size: clamp(21px,2vw,28px); font-weight: 750; letter-spacing: -.025em; }
 
 /* Explanatory system map. The lower row reads back toward the left, so 03 feeds 04 directly. */
 .studio-process-flow { display: grid; grid-template-columns: minmax(145px,1fr) 34px minmax(150px,1.08fr) 34px minmax(178px,1.24fr); grid-template-rows: auto auto; align-items: center; gap: 22px 8px; padding: 22px; border: 1px solid var(--border); border-radius: 14px; background: linear-gradient(rgba(93,126,174,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(93,126,174,.045) 1px,transparent 1px),var(--surface-alt); background-size: 24px 24px,24px 24px,auto; }
@@ -74,7 +74,7 @@
 .studio-step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
 .studio-step-number { flex: 0 0 34px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid color-mix(in srgb,var(--accent) 32%,var(--border)); border-radius: 10px; color: var(--accent); background: var(--accent-light); font-size: 11px; font-weight: 800; }
 .studio-calibration-twin-step .studio-step-number { flex-basis: 34px; width: 34px; }
-#page-digital-twin .studio-step h3 { margin: 0; color: var(--text1); font-family: var(--sans); font-size: 18px; font-weight: 700; letter-spacing: -.015em; }
+#page-studio .studio-step h3 { margin: 0; color: var(--text1); font-family: var(--sans); font-size: 18px; font-weight: 700; letter-spacing: -.015em; }
 .studio-status-running { color: var(--accent); border-color: color-mix(in srgb,var(--accent) 25%,var(--border)); background: var(--accent-light); }
 .studio-flow-arrow { display: grid; place-items: center; height: 34px; }
 .studio-flow-arrow span { position: relative; width: 1px; height: 22px; background: var(--border2); }
@@ -82,10 +82,10 @@
 
 /* Dataset selection */
 .studio-search-tools { position: relative; margin-bottom: 12px; }
-#page-digital-twin .dataset-search { min-width: 0; }
-#page-digital-twin .dataset-search input,#page-digital-twin .dataset-filter-toggle { height: 42px; font-size: 13px; box-shadow: none; }
-#page-digital-twin .dataset-search input { padding-left: 38px; padding-right: 12px; }
-#page-digital-twin #studio-filters { width: 100%; max-height: min(560px,65vh); overflow-y: auto; }
+#page-studio .dataset-search { min-width: 0; }
+#page-studio .dataset-search input,#page-studio .dataset-filter-toggle { height: 42px; font-size: 13px; box-shadow: none; }
+#page-studio .dataset-search input { padding-left: 38px; padding-right: 12px; }
+#page-studio #studio-filters { width: 100%; max-height: min(560px,65vh); overflow-y: auto; }
 #studio-dataset-list { display: grid; flex: 1; grid-template-columns: repeat(2,minmax(0,1fr)); grid-auto-rows: minmax(98px,1fr); gap: 8px; min-height: 310px; align-content: stretch; }
 #studio-dataset-list .dataset-card { min-height: 98px; height: auto; padding: 10px 12px; border-radius: 9px; box-shadow: none; overflow: hidden; }
 #studio-dataset-list .dataset-card::before { display: none; }
@@ -103,7 +103,7 @@
 .studio-dataset-actions { display: flex; align-items: center; gap: 8px; }
 .studio-pager-info { margin-bottom: 8px; color: var(--text3); font-size: 12px; }
 .studio-pager { display: flex; flex-wrap: wrap; gap: 4px; }
-#page-digital-twin .studio-action { height: 36px; padding-inline: 16px; }
+#page-studio .studio-action { height: 36px; padding-inline: 16px; }
 #studio-confirm { min-width: 110px; }
 
 /* Feature cards */
@@ -198,13 +198,13 @@
 .studio-values input::-webkit-inner-spin-button,.studio-values input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .studio-slider { position: relative; height: 24px; }
 .studio-slider-track { position: absolute; top: 11px; left: 0; right: 0; height: 3px; border-radius: 3px; background: linear-gradient(to right,var(--border) var(--range-start),var(--accent) var(--range-start),var(--accent) var(--range-end),var(--border) var(--range-end)); }
-#page-digital-twin .studio-slider input { position: absolute; inset: 0; width: 100%; height: 24px; margin: 0; border: 0; background: transparent !important; box-shadow: none; appearance: none; -webkit-appearance: none; cursor: pointer; }
+#page-studio .studio-slider input { position: absolute; inset: 0; width: 100%; height: 24px; margin: 0; border: 0; background: transparent !important; box-shadow: none; appearance: none; -webkit-appearance: none; cursor: pointer; }
 .studio-range input { pointer-events: none; }
 .studio-slider input::-webkit-slider-thumb { width: 14px; height: 14px; border: 3px solid var(--accent); border-radius: 50%; background: var(--surface); appearance: none; -webkit-appearance: none; pointer-events: auto; cursor: grab; }
 .studio-slider input::-moz-range-thumb { width: 9px; height: 9px; border: 3px solid var(--accent); border-radius: 50%; background: var(--surface); pointer-events: auto; cursor: grab; }
 .studio-scenario { display: grid; grid-template-columns: 124px minmax(220px,360px); align-items: center; gap: 14px; }
 .studio-scenario select { width: 100%; font-size: 12px; }
-#page-digital-twin .studio-run { width: auto; min-width: 190px; min-height: 40px; }
+#page-studio .studio-run { width: auto; min-width: 190px; min-height: 40px; }
 
 /* Generated output */
 .studio-results { min-height: 235px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: stretch; gap: 16px; }
@@ -223,7 +223,7 @@
 .is-stale #studio-result-status { color: var(--amber); }
 .studio-prediction-block { min-width: 0; display: flex; flex-direction: column; padding: 19px; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); }
 .studio-chart-heading { min-height: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-#page-digital-twin .studio-chart-heading h3 { display: flex; align-items: center; gap: 7px; margin: 0; color: var(--text1); font-size: 14px; font-weight: 650; }
+#page-studio .studio-chart-heading h3 { display: flex; align-items: center; gap: 7px; margin: 0; color: var(--text1); font-size: 14px; font-weight: 650; }
 .studio-chart-heading select { max-width: 180px; height: 30px; font-size: 11px; }
 .studio-output-grid { display: flex; flex: 1; flex-direction: column; gap: 20px; margin-top: 18px; }
 .studio-metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
@@ -282,7 +282,7 @@
   .studio-control { grid-template-columns: minmax(0,1fr) 125px; gap: 8px 12px; }
   .studio-control-label { grid-column: 1/-1; }
   .studio-scenario { grid-template-columns: minmax(0,1fr); gap: 8px; }
-  #page-digital-twin .studio-run { width: 100%; }
+  #page-studio .studio-run { width: 100%; }
   .studio-metrics { gap: 6px; }.studio-metric { padding-inline: 7px; }.studio-metric strong { font-size: 18px; }
   .studio-stage { padding: 22px; }.studio-twin-image { width: 75%; }.studio-twin-tag { gap: 4px; padding: 5px 7px; }.studio-twin-tag.tag-soc,.studio-twin-tag.tag-voltage { left: 1%; }.studio-twin-tag.tag-soh,.studio-twin-tag.tag-temperature { right: 1%; }
 }
@@ -291,4 +291,39 @@
   .studio-process-flow { grid-template-columns: minmax(0,1fr); grid-template-rows: repeat(11,auto); row-gap: 7px; }
   .studio-process-node { min-height: min(68vw,260px); }.studio-process-logo { height: min(47vw,185px); }.studio-process-step-1 { grid-area: 1/1; }.studio-process-arrow-1 { grid-area: 2/1; }.studio-process-step-2 { grid-area: 3/1; }.studio-process-arrow-2 { grid-area: 4/1; }.studio-process-calibration { grid-area: 5/1; }.studio-process-arrow-3 { grid-area: 6/1; }.studio-process-engine { grid-area: 7/1; }.studio-process-arrow-4 { grid-area: 8/1; }.studio-process-setup { grid-area: 9/1; }.studio-process-arrow-5 { grid-area: 10/1; }.studio-process-result { grid-area: 11/1; }
   .studio-process-arrow,.studio-process-arrow-1,.studio-process-arrow-2,.studio-process-arrow-3,.studio-process-arrow-4,.studio-process-arrow-5 { transform: none; }
+}
+
+/* The assistant drawer reduces the usable Studio width by 400px.  A 14-inch
+   desktop can therefore have a workspace as narrow as a tablet even though
+   its viewport has not crossed the normal responsive breakpoints. */
+@media (min-width:761px) and (max-width:1700px) {
+  body.ai-panel-open #page-studio .studio-explainer,
+  body.ai-panel-open #page-studio .studio-operations { padding: 20px; }
+  body.ai-panel-open #page-studio .studio-process-flow {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: repeat(11,auto);
+    row-gap: 7px;
+  }
+  body.ai-panel-open #page-studio .studio-process-node { min-height: 150px; }
+  body.ai-panel-open #page-studio .studio-process-logo { height: 112px; }
+  body.ai-panel-open #page-studio .studio-process-step-1 { grid-area: 1/1; }
+  body.ai-panel-open #page-studio .studio-process-arrow-1 { grid-area: 2/1; transform: rotate(90deg); }
+  body.ai-panel-open #page-studio .studio-process-step-2 { grid-area: 3/1; }
+  body.ai-panel-open #page-studio .studio-process-arrow-2 { grid-area: 4/1; transform: rotate(90deg); }
+  body.ai-panel-open #page-studio .studio-process-calibration { grid-area: 5/1; }
+  body.ai-panel-open #page-studio .studio-process-arrow-3 { grid-area: 6/1; }
+  body.ai-panel-open #page-studio .studio-process-engine { grid-area: 7/1; }
+  body.ai-panel-open #page-studio .studio-process-arrow-4 { grid-area: 8/1; transform: rotate(-90deg); }
+  body.ai-panel-open #page-studio .studio-process-setup { grid-area: 9/1; }
+  body.ai-panel-open #page-studio .studio-process-arrow-5 { grid-area: 10/1; transform: rotate(-90deg); }
+  body.ai-panel-open #page-studio .studio-process-result { grid-area: 11/1; }
+  body.ai-panel-open #page-studio .studio-piml-panel-grid,
+  body.ai-panel-open #page-studio .studio-calibration-workbench,
+  body.ai-panel-open #page-studio .studio-operation-grid,
+  body.ai-panel-open #page-studio .studio-twin-build-panel,
+  body.ai-panel-open #page-studio #studio-controls,
+  body.ai-panel-open #page-studio .studio-setup { grid-template-columns: minmax(0,1fr); }
+  body.ai-panel-open #page-studio .studio-operation-wide { grid-column: 1; }
+  body.ai-panel-open #page-studio .studio-piml-formula-card::before,
+  body.ai-panel-open #page-studio .studio-piml-input-card::after { display: none; }
 }

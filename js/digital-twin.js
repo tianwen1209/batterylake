@@ -1,7 +1,7 @@
 /* Illustrative local Studio workflow; no model training or API request is performed. */
 (function () {
   'use strict';
-  const root = document.getElementById('page-digital-twin');
+  const root = document.getElementById('page-studio');
   if (!root) return;
   const el = id => document.getElementById('studio-' + id);
   const state = { selected: null, confirmed: null, page: 1, query: '', charge: 1, temperature: 25, socMin: 10, socMax: 90, cycleMin: 1, cycleMax: 500, scenario: 'constant', generatedData: null };
