@@ -327,3 +327,62 @@
   body.ai-panel-open #page-studio .studio-piml-formula-card::before,
   body.ai-panel-open #page-studio .studio-piml-input-card::after { display: none; }
 }
+
+/* Studio motion system: communicate progress and invite exploration without competing with the data. */
+.studio-workspace-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.studio-workspace-status { display: inline-flex; align-items: center; gap: 7px; margin: 0; color: var(--text3); font-size: 12px; font-weight: 600; white-space: nowrap; }
+.studio-workspace-status > span { width: 7px; height: 7px; border-radius: 50%; background: var(--text4); }
+.studio-workspace-status.is-working { color: var(--accent); }.studio-workspace-status.is-working > span { background: var(--accent); animation: studio-status-pulse 1.25s ease-in-out infinite; }
+.studio-workspace-status.is-ready { color: #16845b; }.studio-workspace-status.is-ready > span { background: #16a36b; box-shadow: 0 0 0 4px rgba(22,163,107,.1); }
+
+.studio-process-node { transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease, background .24s ease; }
+.studio-process-node:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 42%, var(--border)); box-shadow: 0 12px 24px rgba(42,95,234,.1); }
+.studio-process-node.is-current { border-color: color-mix(in srgb, var(--accent) 56%, var(--border)); background: color-mix(in srgb, var(--accent-light) 40%, var(--surface)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 13%, transparent), 0 10px 23px rgba(42,95,234,.1); }
+.studio-process-node.is-current .studio-process-number { color: #fff; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 10%, transparent); }
+.studio-process-node.is-complete .studio-process-number { color: #fff; background: #16a36b; }
+.studio-process-node.is-complete .studio-process-number::after { content: '✓'; position: absolute; font-size: 12px; }
+.studio-process-node.is-complete .studio-process-number { position: relative; font-size: 0; }
+.studio-process-arrow { transition: color .25s ease, transform .25s ease; }
+#page-studio[data-flow-stage="identify"] .studio-process-arrow-1,
+#page-studio[data-flow-stage="calibrate"] .studio-process-arrow-1,
+#page-studio[data-flow-stage="calibrate"] .studio-process-arrow-2,
+#page-studio[data-flow-stage="setup"] .studio-process-arrow,
+#page-studio[data-flow-stage="results"] .studio-process-arrow { animation: studio-flow-pulse 1.45s ease-in-out infinite; }
+
+.studio-reveal { opacity: 0; transform: translateY(16px); transition: opacity .58s ease, transform .58s cubic-bezier(.2,.7,.2,1); }
+.studio-reveal.is-visible { opacity: 1; transform: none; }
+.studio-feature-grid.is-identified .studio-signal-line { stroke-dasharray: 420; stroke-dashoffset: 420; animation: studio-draw-signal .82s cubic-bezier(.45,0,.3,1) forwards; }
+.studio-feature-grid.is-identified .studio-signal-card:nth-child(2) .studio-signal-line { animation-delay: .07s; }
+.studio-feature-grid.is-identified .studio-signal-card:nth-child(3) .studio-signal-line { animation-delay: .14s; }
+.studio-feature-grid.is-identified .studio-signal-card:nth-child(4) .studio-signal-line { animation-delay: .21s; }
+.studio-feature-grid.is-identified .studio-signal-card:nth-child(5) .studio-signal-line { animation-delay: .28s; }
+.studio-feature-grid.is-identified .studio-signal-card:nth-child(6) .studio-signal-line { animation-delay: .35s; }
+.studio-feature-grid.is-identified .studio-signal-band { animation: studio-band-in .45s ease .28s both; }
+.studio-live-loss.is-training .studio-loss-train { stroke-dasharray: 430; stroke-dashoffset: 430; animation: studio-draw-signal 1.05s cubic-bezier(.45,0,.3,1) forwards; }
+.studio-live-loss.is-training .studio-loss-validation { stroke-dasharray: 430; stroke-dashoffset: 430; animation: studio-draw-signal 1.05s cubic-bezier(.45,0,.3,1) .15s forwards; }
+.studio-live-loss.is-training .studio-loss-area { animation: studio-area-in .85s ease .45s both; }
+.is-calibrating .studio-progress-ring { box-shadow: 0 0 0 7px rgba(42,95,234,.07), 0 0 25px rgba(42,95,234,.15); }
+.is-calibrating .studio-twin-visual { animation: studio-visual-awake 1.3s ease-in-out infinite; }
+.studio-twin-beam { background-size: 100% 100%, 200% 100%; animation: studio-beam-flow 4.2s linear infinite; }
+.studio-twin-particles { animation: studio-particles-drift 7s ease-in-out infinite alternate; }
+.studio-prediction-block .studio-curve { stroke-dasharray: 620; stroke-dashoffset: 620; animation: studio-draw-signal .9s cubic-bezier(.45,0,.3,1) .18s forwards; }
+.studio-prediction-block .studio-chart-area { animation: studio-area-in .5s ease .55s both; }
+
+@keyframes studio-status-pulse { 50% { box-shadow: 0 0 0 5px rgba(42,95,234,.12); } }
+@keyframes studio-flow-pulse { 50% { color: #6ea1ff; transform: scale(1.18); text-shadow: 0 0 13px rgba(42,95,234,.32); } }
+@keyframes studio-draw-signal { to { stroke-dashoffset: 0; } }
+@keyframes studio-band-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes studio-area-in { from { opacity: 0; } to { opacity: .07; } }
+@keyframes studio-visual-awake { 50% { filter: saturate(1.18) brightness(1.03); } }
+@keyframes studio-beam-flow { to { background-position: 0 0, 200% 0; } }
+@keyframes studio-particles-drift { to { transform: translateY(-9px) scale(1.03); opacity: .9; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-workspace-status.is-working > span, #page-studio[data-flow-stage] .studio-process-arrow,
+  .studio-twin-beam, .studio-twin-particles, .is-calibrating .studio-twin-visual,
+  .studio-feature-grid.is-identified .studio-signal-line, .studio-feature-grid.is-identified .studio-signal-band,
+  .studio-live-loss.is-training .studio-loss-line, .studio-live-loss.is-training .studio-loss-area,
+  .studio-prediction-block .studio-curve, .studio-prediction-block .studio-chart-area { animation: none; }
+  .studio-reveal { opacity: 1; transform: none; transition: none; }
+}
+@media (max-width:780px) { .studio-workspace-heading { align-items: flex-start; flex-direction: column; gap: 6px; }.studio-workspace-status { white-space: normal; } }

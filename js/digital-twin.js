@@ -10,6 +10,7 @@
   let filters = emptyFilters();
   let pendingFilters = emptyFilters();
   let calibrationFrame = 0;
+  let revealObserver = null;
   const filterTypes = { chem: 'chemistry', form: 'form', cat: 'category', domain: 'domain', duty: 'profile' };
   // Reuse Benchmark's filter markup and tokens, with independent Studio state.
   const filterTemplate = document.getElementById('bwr-dataset-filter-popover').cloneNode(true);
@@ -111,6 +112,42 @@
     el('calibration-ring').style.setProperty('--progress', progress);
     el('calibration-value').textContent = progress + '%';
   }
+  function setWorkspaceStatus(message, stage) {
+    const status = el('workspace-status');
+    if (!status) return;
+    status.className = 'studio-workspace-status' + (stage ? ' is-' + stage : '');
+    status.replaceChildren();
+    const mark = document.createElement('span');
+    mark.setAttribute('aria-hidden', 'true');
+    status.append(mark, document.createTextNode(message));
+  }
+  function setFlowStage(stage) {
+    const nodes = {
+      select: root.querySelector('.studio-process-step-1'),
+      identify: root.querySelector('.studio-process-step-2'),
+      calibrate: root.querySelector('.studio-process-calibration'),
+      engine: root.querySelector('.studio-process-engine'),
+      setup: root.querySelector('.studio-process-setup'),
+      results: root.querySelector('.studio-process-result')
+    };
+    const completed = {
+      select: [], identify: ['select'], calibrate: ['select', 'identify'],
+      setup: ['select', 'identify', 'calibrate', 'engine'],
+      results: ['select', 'identify', 'calibrate', 'engine', 'setup', 'results']
+    };
+    Object.entries(nodes).forEach(([name, node]) => {
+      if (!node) return;
+      node.classList.toggle('is-complete', completed[stage]?.includes(name));
+      node.classList.toggle('is-current', stage !== 'results' && name === stage);
+    });
+    root.dataset.flowStage = stage;
+  }
+  function restartSignalAnimation(selector, className) {
+    const node = root.querySelector(selector);
+    if (!node) return;
+    node.classList.remove(className);
+    requestAnimationFrame(() => node.classList.add(className));
+  }
   function calibrateTwin(dataset) {
     cancelAnimationFrame(calibrationFrame);
     el('run').disabled = true;
@@ -124,8 +161,14 @@
       if (ratio < 1) calibrationFrame = requestAnimationFrame(tick);
       else {
         el('run').disabled = false;
+        root.classList.remove('is-calibrating');
+        setFlowStage('setup');
+        setWorkspaceStatus('Digital twin ready · configure a synthetic scenario', 'ready');
       }
     };
+    root.classList.add('is-calibrating');
+    setFlowStage('calibrate');
+    setWorkspaceStatus('Calibrating the digital twin…', 'working');
     calibrationFrame = requestAnimationFrame(tick);
   }
   function renderTwin() {
@@ -202,6 +245,7 @@
       const choose = () => {
         state.selected = d.id;
         renderDatasets();
+        setWorkspaceStatus('Dataset selected · confirm to begin', 'ready');
         Array.from(el('dataset-list').children).find(c => c.dataset.datasetId === d.id)?.focus({ preventScroll: true });
       };
       card.addEventListener('click', choose);
@@ -308,6 +352,8 @@
       })
     };
     el('download').disabled = false;
+    setFlowStage('results');
+    setWorkspaceStatus('Synthetic dataset ready · download or refine the setup', 'ready');
     const metric = (label, value, unit, change = '', note = '') => `<div class="studio-metric"${note ? ` title="${note}"` : ''}><span>${label}</span><div><strong>${value}</strong><small>${unit}</small>${change ? `<span class="studio-metric-delta">${change}</span>` : ''}</div></div>`;
     const info = text => `<span class="studio-info" tabindex="0" role="note" aria-label="${text}">i<span class="studio-info-tip">${text}</span></span>`;
     el('results').classList.add('has-results');
@@ -418,7 +464,12 @@
     el('search').value = '';
     root.querySelector('.studio-feature-grid')?.classList.add('is-reset');
     root.querySelector('.studio-live-loss')?.classList.add('is-reset');
+    root.querySelector('.studio-feature-grid')?.classList.remove('is-identified');
+    root.querySelector('.studio-live-loss')?.classList.remove('is-training');
     closeFilters(); syncFilters(); clearResults(true); renderDatasets(); renderTwin();
+    root.classList.remove('is-calibrating');
+    setFlowStage('select');
+    setWorkspaceStatus('Start by selecting a dataset');
     el('search').focus({ preventScroll: true });
   });
   el('confirm').addEventListener('click', () => {
@@ -426,13 +477,26 @@
     state.confirmed = state.selected;
     root.querySelector('.studio-feature-grid')?.classList.remove('is-reset');
     root.querySelector('.studio-live-loss')?.classList.remove('is-reset');
+    restartSignalAnimation('.studio-feature-grid', 'is-identified');
+    restartSignalAnimation('.studio-live-loss', 'is-training');
     clearResults(true); renderTwin(); renderDatasets();
     const dataset = catalog().find(d => d.id === state.confirmed);
     if (dataset) calibrateTwin(dataset);
   });
-  el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); });
+  el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); setWorkspaceStatus('Scenario updated · generate when ready', 'ready'); });
   el('prediction-form').addEventListener('submit', runGeneration);
   el('download').addEventListener('click', downloadGeneratedData);
   window.BatteryLakeDigitalTwin = { refresh };
+  const revealNodes = root.querySelectorAll('.studio-explainer, .studio-step');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealNodes.forEach(node => node.classList.add('studio-reveal'));
+    revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }), { threshold: .12 });
+    revealNodes.forEach(node => revealObserver.observe(node));
+  }
+  setFlowStage('select');
   syncControls(); refresh();
 })();
