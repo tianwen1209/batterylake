@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-25T20:33:12Z",
-  "total_visits": 2936,
+  "updated_at": "2026-09-26T19:56:57Z",
+  "total_visits": 2946,
   "dataset_downloads": 466,
   "skill_uses": 111,
   "model_downloads": {
@@ -16,11 +16,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-09-25T20:33:12Z",
+    "updatedAt": "2026-09-26T19:56:57Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-25"
+      "endDate": "2026-09-26"
     },
     "countries": [
       {
@@ -175,6 +175,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Chongzuo",
+        "visitors": 2,
+        "lng": 107.368,
+        "lat": 22.382
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Xiamen",
         "visitors": 2,
         "lng": 118.082,
@@ -203,14 +211,6 @@
         "visitors": 2,
         "lng": -118.244,
         "lat": 34.052
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Chongzuo",
-        "visitors": 1,
-        "lng": 107.368,
-        "lat": 22.382
       },
       {
         "country": "China",
