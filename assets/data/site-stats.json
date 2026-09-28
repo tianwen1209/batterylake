@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-27T20:13:16Z",
-  "total_visits": 2951,
-  "dataset_downloads": 466,
+  "updated_at": "2026-09-28T22:34:35Z",
+  "total_visits": 2954,
+  "dataset_downloads": 467,
   "skill_uses": 111,
   "model_downloads": {
     "cnn": 15,
@@ -16,11 +16,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-09-27T20:13:16Z",
+    "updatedAt": "2026-09-28T22:34:35Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-27"
+      "endDate": "2026-09-28"
     },
     "countries": [
       {
