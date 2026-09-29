@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-28T22:34:35Z",
-  "total_visits": 2954,
-  "dataset_downloads": 467,
+  "updated_at": "2026-09-29T21:27:01Z",
+  "total_visits": 2964,
+  "dataset_downloads": 488,
   "skill_uses": 111,
   "model_downloads": {
     "cnn": 15,
@@ -16,11 +16,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-09-28T22:34:35Z",
+    "updatedAt": "2026-09-29T21:27:01Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-28"
+      "endDate": "2026-09-29"
     },
     "countries": [
       {
@@ -31,7 +31,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 39
+        "visitors": 40
       },
       {
         "country": "United States",
@@ -133,6 +133,14 @@
         "lat": 32.062
       },
       {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Shenzhen",
+        "visitors": 4,
+        "lng": 114.068,
+        "lat": 22.546
+      },
+      {
         "country": "United States",
         "countryCode": "US",
         "city": "Santa Clara",
@@ -155,14 +163,6 @@
         "visitors": 3,
         "lng": 120.38,
         "lat": 36.065
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Shenzhen",
-        "visitors": 3,
-        "lng": 114.068,
-        "lat": 22.546
       },
       {
         "country": "China",
