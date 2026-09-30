@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-29T21:27:01Z",
-  "total_visits": 2964,
+  "updated_at": "2026-09-30T21:27:27Z",
+  "total_visits": 2971,
   "dataset_downloads": 488,
   "skill_uses": 111,
   "model_downloads": {
@@ -16,11 +16,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-09-29T21:27:01Z",
+    "updatedAt": "2026-09-30T21:27:27Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-09-29"
+      "endDate": "2026-09-30"
     },
     "countries": [
       {
@@ -71,6 +71,11 @@
       {
         "country": "United Kingdom",
         "countryCode": "GB",
+        "visitors": 1
+      },
+      {
+        "country": "Indonesia",
+        "countryCode": "ID",
         "visitors": 1
       },
       {
@@ -291,6 +296,14 @@
         "visitors": 1,
         "lng": 114.175,
         "lat": 22.278
+      },
+      {
+        "country": "Indonesia",
+        "countryCode": "ID",
+        "city": "Jakarta",
+        "visitors": 1,
+        "lng": 106.845,
+        "lat": -6.215
       },
       {
         "country": "Ireland",
