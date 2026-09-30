@@ -1,0 +1,384 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_41",
+ "identity": {
+  "ref_name": "2022_HUST_LFP_18650_MultiC_MultiC_30T",
+  "ref_name_aliases": [],
+  "dataset_name": "HUST Cycle Aging",
+  "institution": "Huazhong University of Science and Technology",
+  "year": 2022,
+  "doi": "10.17632/nsc7hnsg4s.2",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/nsc7hnsg4s/2",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "LFP",
+  "anode_chemistry": "graphite",
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 1.1,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": 3.3,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": 30.0,
+  "temperature_max_C": 30.0,
+  "temperature_setpoints_C": [
+   30.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 5.002364,
+  "discharge_c_rate_max": 5.001691,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 77,
+  "n_entities_declared": 77,
+  "n_cycles_total": 146122,
+  "cycles_per_entity_median": 1875.0,
+  "n_raw_files": 1,
+  "raw_bytes": 1188136932
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "cycle_index",
+   "step_type",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Capacity (mAh)",
+   "Current (mA)",
+   "Cycle number",
+   "Status",
+   "Time (s)",
+   "Voltage (V)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "number of per-cycle DataFrames in the pickle's `data` dict",
+  "observed": {
+   "voltage_V": [
+    1.8291,
+    3.6018
+   ],
+   "current_A": [
+    -5.50186,
+    5.5026
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "pkl"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "1-1"
+  },
+  {
+   "cell_id": "1-2"
+  },
+  {
+   "cell_id": "1-3"
+  },
+  {
+   "cell_id": "1-4"
+  },
+  {
+   "cell_id": "1-5"
+  },
+  {
+   "cell_id": "1-6"
+  },
+  {
+   "cell_id": "1-7"
+  },
+  {
+   "cell_id": "1-8"
+  },
+  {
+   "cell_id": "10-1"
+  },
+  {
+   "cell_id": "10-2"
+  },
+  {
+   "cell_id": "10-3"
+  },
+  {
+   "cell_id": "10-4"
+  },
+  {
+   "cell_id": "10-5"
+  },
+  {
+   "cell_id": "10-6"
+  },
+  {
+   "cell_id": "10-7"
+  },
+  {
+   "cell_id": "10-8"
+  },
+  {
+   "cell_id": "2-2"
+  },
+  {
+   "cell_id": "2-3"
+  },
+  {
+   "cell_id": "2-4"
+  },
+  {
+   "cell_id": "2-5"
+  },
+  {
+   "cell_id": "2-6"
+  },
+  {
+   "cell_id": "2-7"
+  },
+  {
+   "cell_id": "2-8"
+  },
+  {
+   "cell_id": "3-1"
+  },
+  {
+   "cell_id": "3-2"
+  },
+  {
+   "cell_id": "3-3"
+  },
+  {
+   "cell_id": "3-4"
+  },
+  {
+   "cell_id": "3-5"
+  },
+  {
+   "cell_id": "3-6"
+  },
+  {
+   "cell_id": "3-7"
+  },
+  {
+   "cell_id": "3-8"
+  },
+  {
+   "cell_id": "4-1"
+  },
+  {
+   "cell_id": "4-2"
+  },
+  {
+   "cell_id": "4-3"
+  },
+  {
+   "cell_id": "4-4"
+  },
+  {
+   "cell_id": "4-5"
+  },
+  {
+   "cell_id": "4-6"
+  },
+  {
+   "cell_id": "4-7"
+  },
+  {
+   "cell_id": "4-8"
+  },
+  {
+   "cell_id": "5-1"
+  },
+  {
+   "cell_id": "5-2"
+  },
+  {
+   "cell_id": "5-3"
+  },
+  {
+   "cell_id": "5-4"
+  },
+  {
+   "cell_id": "5-5"
+  },
+  {
+   "cell_id": "5-6"
+  },
+  {
+   "cell_id": "5-7"
+  },
+  {
+   "cell_id": "6-1"
+  },
+  {
+   "cell_id": "6-2"
+  },
+  {
+   "cell_id": "6-3"
+  },
+  {
+   "cell_id": "6-4"
+  },
+  {
+   "cell_id": "6-5"
+  },
+  {
+   "cell_id": "6-6"
+  },
+  {
+   "cell_id": "6-8"
+  },
+  {
+   "cell_id": "7-1"
+  },
+  {
+   "cell_id": "7-2"
+  },
+  {
+   "cell_id": "7-3"
+  },
+  {
+   "cell_id": "7-4"
+  },
+  {
+   "cell_id": "7-5"
+  },
+  {
+   "cell_id": "7-6"
+  },
+  {
+   "cell_id": "7-7"
+  },
+  {
+   "cell_id": "7-8"
+  },
+  {
+   "cell_id": "8-1"
+  },
+  {
+   "cell_id": "8-2"
+  },
+  {
+   "cell_id": "8-3"
+  },
+  {
+   "cell_id": "8-4"
+  },
+  {
+   "cell_id": "8-5"
+  },
+  {
+   "cell_id": "8-6"
+  },
+  {
+   "cell_id": "8-7"
+  },
+  {
+   "cell_id": "8-8"
+  },
+  {
+   "cell_id": "9-1"
+  },
+  {
+   "cell_id": "9-2"
+  },
+  {
+   "cell_id": "9-3"
+  },
+  {
+   "cell_id": "9-4"
+  },
+  {
+   "cell_id": "9-5"
+  },
+  {
+   "cell_id": "9-6"
+  },
+  {
+   "cell_id": "9-7"
+  },
+  {
+   "cell_id": "9-8"
+  }
+ ],
+ "quality": {
+  "flags": [],
+  "notes": "Per-cycle voltage-current-capacity DataFrames with the authors' RUL and dq; no temperature channel. Current is in mA and capacity in mAh (from the column names). Voltage cutoffs and manufacturer are not stated on the landing page, so voltage_min_V/voltage_max_V stay null (not inferred from the matching 1.1 Ah/3.3 V A123 spec). Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached extraction covers all 77 recognised pickle cell records; both maximum values were independently located in their original per-cycle DataFrames. The observed maxima are approximately 5C with small measurement variations; the exact protocol setpoint is not inferred by rounding them to 5C."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "registry",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "registry",
+   "cell.anode_chemistry": "landing_page",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "landing_page",
+   "cell.nominal_voltage_V": "landing_page",
+   "conditions.temperature_setpoints_C": "landing_page",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_data",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_41.json",
+  "landing_evidence": "evidence/landing/dataset_41.json"
+ }
+}

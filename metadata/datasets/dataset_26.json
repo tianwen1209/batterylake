@@ -1,0 +1,493 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_26",
+ "identity": {
+  "ref_name": "2024_Stanford_Onori_LiIon_Parallel_MultiC_25T",
+  "ref_name_aliases": [],
+  "dataset_name": "Stanford-Onori Parallel Cells",
+  "institution": "University of Warwick; dataset collected at the Stanford Energy Control Laboratory (Onori Lab)",
+  "year": 2024,
+  "doi": "10.17632/zh58byr53c.1",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/zh58byr53c/1",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "NCA; NMC",
+  "chemistry_is_multi": true,
+  "form_factor": "cylindrical",
+  "cell_format_code": null,
+  "dimensions_mm": {
+   "diameter": 21.25,
+   "height": 70.8,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 4.9,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": "constant",
+  "protocol_class": "RPT_only",
+  "protocol_charge_raw": "single cells: pseudo-OCV and HPPC multisine characterization; modules: experiments at set rates and temperatures",
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "module",
+  "n_entities": 95,
+  "n_entities_declared": null,
+  "n_cycles_total": 352,
+  "cycles_per_entity_median": 9.0,
+  "n_raw_files": 194,
+  "raw_bytes": 762469662
+ },
+ "content": {
+  "signals": [
+   "current",
+   "cycle_index",
+   "ocv",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Ambient_TemperatureC",
+   "CurrentA",
+   "CurrentA_Cell_1",
+   "CurrentA_Cell_2",
+   "CurrentA_Cell_3",
+   "CurrentA_Cell_4",
+   "CurrentData",
+   "CycleIndex",
+   "Cycle_Index",
+   "OCV",
+   "StepIndex",
+   "Step_Index",
+   "Step_Times",
+   "TempData",
+   "TemperatureC_Cell_1",
+   "TemperatureC_Cell_2",
+   "TemperatureC_Cell_3",
+   "TemperatureC_Cell_4",
+   "Test_Times",
+   "TimeData",
+   "VoltageData",
+   "VoltageV"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none; single cells have characterization runs (pseudo-OCV, HPPC multisine) and modules have processed and raw experiments per rate and temperature",
+  "observed": {
+   "voltage_V": [
+    2.499819,
+    4.201131
+   ],
+   "current_A": [
+    -19.357117,
+    7.316236
+   ],
+   "temperature_C": [
+    8.805645,
+    46.41254
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "mat",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "characterization"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "F1",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F10",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F11",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F12",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F13",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F14",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F15",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F16",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F17",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F18",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F2",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F3",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F4",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F5",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F6",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F7",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F8",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "F9",
+   "cathode_chemistry": "NCA"
+  },
+  {
+   "cell_id": "HPPC_MultiSine_GS3"
+  },
+  {
+   "cell_id": "HPPC_MultiSine_Y1"
+  },
+  {
+   "cell_id": "M1_Mixed_Aged_R0_T10"
+  },
+  {
+   "cell_id": "M1_Mixed_Aged_R0_T25"
+  },
+  {
+   "cell_id": "M1_Mixed_Aged_R0_T40"
+  },
+  {
+   "cell_id": "M1_Mixed_Aged_R3_T25"
+  },
+  {
+   "cell_id": "M1_Mixed_Unaged_R0_T10"
+  },
+  {
+   "cell_id": "M1_Mixed_Unaged_R0_T25"
+  },
+  {
+   "cell_id": "M1_Mixed_Unaged_R0_T40"
+  },
+  {
+   "cell_id": "M1_Mixed_Unaged_R3_T25"
+  },
+  {
+   "cell_id": "M1_NCA_Aged_R0_T10"
+  },
+  {
+   "cell_id": "M1_NCA_Aged_R0_T25"
+  },
+  {
+   "cell_id": "M1_NCA_Aged_R0_T40"
+  },
+  {
+   "cell_id": "M1_NCA_Aged_R3_T10"
+  },
+  {
+   "cell_id": "M1_NCA_Aged_R3_T40"
+  },
+  {
+   "cell_id": "M1_NCA_Unaged_R0_T10"
+  },
+  {
+   "cell_id": "M1_NCA_Unaged_R0_T25"
+  },
+  {
+   "cell_id": "M1_NCA_Unaged_R0_T40"
+  },
+  {
+   "cell_id": "M1_NCA_Unaged_R3_T10"
+  },
+  {
+   "cell_id": "M1_NCA_Unaged_R3_T25"
+  },
+  {
+   "cell_id": "M1_NMC_Aged_R0_T10"
+  },
+  {
+   "cell_id": "M1_NMC_Aged_R0_T25"
+  },
+  {
+   "cell_id": "M1_NMC_Aged_R0_T40"
+  },
+  {
+   "cell_id": "M1_NMC_Aged_R1_T40"
+  },
+  {
+   "cell_id": "M1_NMC_Unaged_R0_T10"
+  },
+  {
+   "cell_id": "M1_NMC_Unaged_R0_T25"
+  },
+  {
+   "cell_id": "M1_NMC_Unaged_R0_T40"
+  },
+  {
+   "cell_id": "M1_NMC_Unaged_R3_T10"
+  },
+  {
+   "cell_id": "M1_NMC_Unaged_R3_T25"
+  },
+  {
+   "cell_id": "M1_NMC_Unaged_R3_T40"
+  },
+  {
+   "cell_id": "M2_Mixed_Aged_R1_T10"
+  },
+  {
+   "cell_id": "M2_Mixed_Aged_R1_T25"
+  },
+  {
+   "cell_id": "M2_Mixed_Aged_R1_T40"
+  },
+  {
+   "cell_id": "M2_Mixed_Aged_R3_T10"
+  },
+  {
+   "cell_id": "M2_Mixed_Aged_R3_T40"
+  },
+  {
+   "cell_id": "M2_Mixed_Unaged_R1_T10"
+  },
+  {
+   "cell_id": "M2_Mixed_Unaged_R1_T25"
+  },
+  {
+   "cell_id": "M2_Mixed_Unaged_R1_T40"
+  },
+  {
+   "cell_id": "M2_Mixed_Unaged_R3_T10"
+  },
+  {
+   "cell_id": "M2_Mixed_Unaged_R3_T40"
+  },
+  {
+   "cell_id": "M2_NCA_Aged_R1_T10"
+  },
+  {
+   "cell_id": "M2_NCA_Aged_R1_T25"
+  },
+  {
+   "cell_id": "M2_NCA_Aged_R1_T40"
+  },
+  {
+   "cell_id": "M2_NCA_Aged_R3_T25"
+  },
+  {
+   "cell_id": "M2_NCA_Unaged_R1_T10"
+  },
+  {
+   "cell_id": "M2_NCA_Unaged_R1_T25"
+  },
+  {
+   "cell_id": "M2_NCA_Unaged_R1_T40"
+  },
+  {
+   "cell_id": "M2_NCA_Unaged_R3_T40"
+  },
+  {
+   "cell_id": "M2_NMC_Aged_R1_T10"
+  },
+  {
+   "cell_id": "M2_NMC_Aged_R1_T25"
+  },
+  {
+   "cell_id": "M2_NMC_Aged_R3_T10"
+  },
+  {
+   "cell_id": "M2_NMC_Aged_R3_T25"
+  },
+  {
+   "cell_id": "M2_NMC_Aged_R3_T40"
+  },
+  {
+   "cell_id": "M2_NMC_Unaged_R1_T10"
+  },
+  {
+   "cell_id": "M2_NMC_Unaged_R1_T25"
+  },
+  {
+   "cell_id": "M2_NMC_Unaged_R1_T40"
+  },
+  {
+   "cell_id": "OCVDis_GS3"
+  },
+  {
+   "cell_id": "OCVDis_Y1"
+  },
+  {
+   "cell_id": "P10",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P11",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P12",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P13",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P14",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P15",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P16",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P17",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P18",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P19",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P2",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P20",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P3",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P4",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P5",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P6",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P7",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P8",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "P9",
+   "cathode_chemistry": "NMC"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Single-cell characterization data for NCA Samsung INR21700-50E and NMC LG-Chem INR21700-M50T cells, and parallel-connected module experiments. The README warns modules are not single cells. Two cell models are used in the modules (Samsung INR21700-50E, NCA, and LG-Chem INR21700-M50T, NMC), per the landing page. Both are ~5 Ah-class 21700 cells with matching 2.5-4.2V limits; recorded values are for the Samsung cell specifically (official datasheet), with LG M50T's nearly identical spec (18.2Wh/3.63V nominal = ~5.0Ah, 2.5-4.2V, dia<=21.10mm x height<=70.15mm, from LG's INR21700 M50 18.2Wh spec, the closest available document to the exact M50T tab variant) noted here rather than forced into these singular fields."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "paper",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "curated",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "curated",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_filenames",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "cell.form_factor": "curated",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.protocol_charge_raw": "curated",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_26.json",
+  "landing_evidence": "evidence/landing/dataset_26.json"
+ }
+}

@@ -1,0 +1,2166 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_37",
+ "identity": {
+  "ref_name": "2024_HM_Stroebl_NMC_21700_Multistage_MultiT",
+  "ref_name_aliases": [
+   {
+    "name": "2024_HM_Stroebl_NMC_21700_Multistage_25T",
+    "status": "historical",
+    "seen_in": [
+     "raw_readme"
+    ]
+   },
+   {
+    "name": "2024_TUM_Stroebl_NMC_21700_Multistage_25T",
+    "status": "historical",
+    "seen_in": [
+     "registry_history"
+    ]
+   }
+  ],
+  "dataset_name": "Munich Multistage Aging Samsung 21700",
+  "institution": "Munich University of Applied Sciences (HM)",
+  "year": 2024,
+  "doi": "10.6084/m9.figshare.25975315",
+  "paper_doi": "10.1038/s41597-024-03859-z",
+  "source_url": "https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "Samsung SDI",
+  "model": "INR21700-50E",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "21700",
+  "dimensions_mm": {
+   "diameter": 21.0,
+   "height": 70.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 4.9,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 10.0,
+  "temperature_max_C": 45.0,
+  "temperature_setpoints_C": [
+   10.0,
+   23.0,
+   35.0,
+   45.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 1.0,
+  "discharge_c_rate_max": 2.0,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "mixed",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 279,
+  "n_entities_declared": 279,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 280,
+  "raw_bytes": 10292649424
+ },
+ "content": {
+  "signals": [
+   "current",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "amb_temp",
+   "c_cur",
+   "c_surf_temp",
+   "c_vol",
+   "run_time",
+   "step_type"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none; each zip is one test point (a short multi-stage protocol run)",
+  "observed": {
+   "voltage_V": [
+    -4.440181,
+    4.56828
+   ],
+   "current_A": [
+    -28.543562,
+    10.181042
+   ],
+   "temperature_C": [
+    -99.98115,
+    73.04572
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "47627050__TP_k01_01",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627053__TP_k02_05",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627056__TP_k01_02",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627059__TP_k02_03",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627062__TP_k02_04",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627068__TP_k01_03",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627071__TP_k03_04",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627074__TP_k03_05",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627080__TP_k02_06",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627083__TP_k03_01",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627089__TP_k01_06",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627092__TP_k01_05",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627095__TP_k02_01",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627098__TP_k03_03",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627104__TP_k04_06"
+  },
+  {
+   "cell_id": "47627107__TP_k04_04"
+  },
+  {
+   "cell_id": "47627110__TP_k04_05"
+  },
+  {
+   "cell_id": "47627401__TP_k08_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627404__TP_k09_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627413__TP_k09_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627425__TP_k08_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627428__TP_k07_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627431__TP_k07_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627434__TP_k06_05"
+  },
+  {
+   "cell_id": "47627437__TP_k08_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627440__TP_k07_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627446__TP_k06_04"
+  },
+  {
+   "cell_id": "47627449__TP_k05_05"
+  },
+  {
+   "cell_id": "47627452__TP_k05_06"
+  },
+  {
+   "cell_id": "47627455__TP_k09_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627458__TP_k06_06"
+  },
+  {
+   "cell_id": "47627461__TP_k05_04"
+  },
+  {
+   "cell_id": "47627464__TP_k02_02",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627491__TP_k11_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627494__TP_k10_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627506__TP_k10_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627509__TP_k11_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627515__TP_k11_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627518__TP_k10_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627524__TP_k03_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627599__TP_k01_02",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627620__TP_k01_01",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627623__TP_k02_05",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627626__TP_k03_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627629__TP_k02_02",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627638__TP_k02_01",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627641__TP_k03_05",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627644__TP_k03_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627647__TP_k02_03",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47627656__TP_k01_03",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628238__TP_k05_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628241__TP_k01_04",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628244__TP_k05_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628247__TP_k04_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628253__TP_k04_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628256__TP_k05_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628259__TP_k02_04",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628262__TP_k06_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628265__TP_k02_06",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628271__TP_k06_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628274__TP_k06_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628277__TP_k04_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628292__TP_k09_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628304__TP_k08_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628307__TP_k10_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628313__TP_k01_06",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628319__TP_k03_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628322__TP_k07_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628328__TP_k07_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628331__TP_k09_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628334__TP_k07_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628343__TP_k08_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628346__TP_k08_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628352__TP_k09_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628358__TP_k10_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628373__TP_k01_05",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628376__TP_k03_06",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628388__TP_k11_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628403__TP_k10_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628406__TP_k11_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628409__TP_k11_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47628571__TP_k08_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629369__TP_k10_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629381__TP_k09_05",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629387__TP_k10_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629390__TP_k09_06",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629393__TP_k08_05",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629396__TP_k09_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629402__TP_k08_06",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629411__TP_k11_04",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629423__TP_k10_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629486__TP_z04_01"
+  },
+  {
+   "cell_id": "47629642__TP_z04_03"
+  },
+  {
+   "cell_id": "47629687__TP_k11_06",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629771__TP_z20_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47629774__TP_k11_05",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629804__TP_k05_05"
+  },
+  {
+   "cell_id": "47629813__TP_k06_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629819__TP_k04_06",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629822__TP_k04_05",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629825__TP_z23_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47629831__TP_k07_06"
+  },
+  {
+   "cell_id": "47629834__TP_k07_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629846__TP_k05_06",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629906__TP_k05_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629909__TP_k07_05",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629915__TP_k04_04",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629942__TP_k06_05",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629945__TP_k06_06",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47629960__TP_z23_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47630290__TP_z20_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47630293__TP_z04_02"
+  },
+  {
+   "cell_id": "47630314__TP_z02_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47630320__TP_z20_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47630323__TP_z23_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47630359__TP_k05_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630362__TP_k05_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630371__TP_k04_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630380__TP_k08_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630383__TP_k04_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630431__TP_k08_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630437__TP_k07_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630440__TP_k04_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630443__TP_k06_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630674__TP_k07_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630677__TP_k07_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630680__TP_k08_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630686__TP_k05_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630689__TP_k06_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630692__TP_k06_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630698__TP_k10_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630701__TP_k10_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630716__TP_k09_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630719__TP_k10_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630722__TP_k09_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630728__TP_k09_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630755__TP_k11_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630773__TP_k11_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47630776__TP_k11_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47631133__TP_z02_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47631232__TP_z10_01",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.1
+   }
+  },
+  {
+   "cell_id": "47631268__TP_z02_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632228__TP_z13_01"
+  },
+  {
+   "cell_id": "47632234__TP_z25_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.9
+   }
+  },
+  {
+   "cell_id": "47632252__TP_z15_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.26
+   }
+  },
+  {
+   "cell_id": "47632270__TP_z19_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.9
+   }
+  },
+  {
+   "cell_id": "47632273__TP_z20_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.9
+   }
+  },
+  {
+   "cell_id": "47632279__TP_z21_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 1.3
+   }
+  },
+  {
+   "cell_id": "47632282__TP_z19_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.9
+   }
+  },
+  {
+   "cell_id": "47632285__TP_z25_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.9
+   }
+  },
+  {
+   "cell_id": "47632288__TP_z19_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.9
+   }
+  },
+  {
+   "cell_id": "47632291__TP_z22_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632294__TP_z22_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632297__TP_z21_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 1.3
+   }
+  },
+  {
+   "cell_id": "47632300__TP_z20_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.9
+   }
+  },
+  {
+   "cell_id": "47632303__TP_z23_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.6
+   }
+  },
+  {
+   "cell_id": "47632309__TP_z24_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.8
+   }
+  },
+  {
+   "cell_id": "47632312__TP_z07_01"
+  },
+  {
+   "cell_id": "47632315__TP_z10_02",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.1
+   }
+  },
+  {
+   "cell_id": "47632321__TP_z17_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.26
+   }
+  },
+  {
+   "cell_id": "47632324__TP_z10_02"
+  },
+  {
+   "cell_id": "47632327__TP_z09_03"
+  },
+  {
+   "cell_id": "47632330__TP_z10_03",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.1
+   }
+  },
+  {
+   "cell_id": "47632333__TP_z10_01"
+  },
+  {
+   "cell_id": "47632336__TP_z15_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.26
+   }
+  },
+  {
+   "cell_id": "47632339__TP_z15_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.26
+   }
+  },
+  {
+   "cell_id": "47632342__TP_z17_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.26
+   }
+  },
+  {
+   "cell_id": "47632345__TP_z14_03"
+  },
+  {
+   "cell_id": "47632351__TP_z17_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.26
+   }
+  },
+  {
+   "cell_id": "47632357__TP_z11_01"
+  },
+  {
+   "cell_id": "47632360__TP_z12_01"
+  },
+  {
+   "cell_id": "47632366__TP_z13_02"
+  },
+  {
+   "cell_id": "47632369__TP_z11_03"
+  },
+  {
+   "cell_id": "47632372__TP_z20_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.9
+   }
+  },
+  {
+   "cell_id": "47632375__TP_z14_02"
+  },
+  {
+   "cell_id": "47632378__TP_z16_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 0.2
+   }
+  },
+  {
+   "cell_id": "47632381__TP_z23_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.6
+   }
+  },
+  {
+   "cell_id": "47632384__TP_z09_01"
+  },
+  {
+   "cell_id": "47632387__TP_z17_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.4
+   }
+  },
+  {
+   "cell_id": "47632390__TP_z22_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632393__TP_z25_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.9
+   }
+  },
+  {
+   "cell_id": "47632399__TP_z24_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.8
+   }
+  },
+  {
+   "cell_id": "47632405__TP_z12_03"
+  },
+  {
+   "cell_id": "47632408__TP_z13_03"
+  },
+  {
+   "cell_id": "47632411__TP_z12_02"
+  },
+  {
+   "cell_id": "47632414__TP_z08_01"
+  },
+  {
+   "cell_id": "47632417__TP_z03_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632420__TP_z08_02"
+  },
+  {
+   "cell_id": "47632426__TP_z14_01"
+  },
+  {
+   "cell_id": "47632429__TP_z09_02"
+  },
+  {
+   "cell_id": "47632432__TP_z03_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632441__TP_z15_03"
+  },
+  {
+   "cell_id": "47632444__TP_z08_03"
+  },
+  {
+   "cell_id": "47632447__TP_z01_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 1.9
+   }
+  },
+  {
+   "cell_id": "47632450__TP_z01_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 1.9
+   }
+  },
+  {
+   "cell_id": "47632453__TP_z17_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.4
+   }
+  },
+  {
+   "cell_id": "47632456__TP_z21_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 1.3
+   }
+  },
+  {
+   "cell_id": "47632462__TP_z01_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 1.9
+   }
+  },
+  {
+   "cell_id": "47632465__TP_z01_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.6,
+    "discharge_c_rate": 1.1
+   }
+  },
+  {
+   "cell_id": "47632471__TP_z07_03"
+  },
+  {
+   "cell_id": "47632474__TP_z11_02"
+  },
+  {
+   "cell_id": "47632477__TP_z05_01"
+  },
+  {
+   "cell_id": "47632480__TP_z01_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.6,
+    "discharge_c_rate": 1.1
+   }
+  },
+  {
+   "cell_id": "47632483__TP_z06_02"
+  },
+  {
+   "cell_id": "47632486__TP_z07_02"
+  },
+  {
+   "cell_id": "47632489__TP_z05_03"
+  },
+  {
+   "cell_id": "47632507__TP_z03_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632510__TP_z02_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "47632513__TP_z01_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.6,
+    "discharge_c_rate": 1.1
+   }
+  },
+  {
+   "cell_id": "47632516__TP_z15_02"
+  },
+  {
+   "cell_id": "47632522__TP_z17_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.4
+   }
+  },
+  {
+   "cell_id": "47632525__TP_z02_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "47632528__TP_z16_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 0.2
+   }
+  },
+  {
+   "cell_id": "47632531__TP_z15_01"
+  },
+  {
+   "cell_id": "47632534__TP_z06_03"
+  },
+  {
+   "cell_id": "47632537__TP_z03_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632540__TP_z06_01"
+  },
+  {
+   "cell_id": "47632543__TP_z18_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.6
+   }
+  },
+  {
+   "cell_id": "47632549__TP_z18_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.6
+   }
+  },
+  {
+   "cell_id": "47632552__TP_z02_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "47632555__TP_z03_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632558__TP_z18_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 0.6
+   }
+  },
+  {
+   "cell_id": "47632561__TP_z03_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632588__TP_z13_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.3,
+    "discharge_c_rate": 0.7
+   }
+  },
+  {
+   "cell_id": "47632591__TP_z21_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632597__TP_z13_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.3,
+    "discharge_c_rate": 0.7
+   }
+  },
+  {
+   "cell_id": "47632603__TP_z13_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.3,
+    "discharge_c_rate": 0.7
+   }
+  },
+  {
+   "cell_id": "47632615__TP_z08_01",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.3
+   }
+  },
+  {
+   "cell_id": "47632618__TP_z08_02",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.3
+   }
+  },
+  {
+   "cell_id": "47632621__TP_z18_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632624__TP_z18_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632627__TP_z14_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.0
+   }
+  },
+  {
+   "cell_id": "47632630__TP_z18_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632633__TP_z08_03",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.3
+   }
+  },
+  {
+   "cell_id": "47632636__TP_z21_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632639__TP_z21_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632645__TP_z14_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.0
+   }
+  },
+  {
+   "cell_id": "47632648__TP_z05_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 0.3
+   }
+  },
+  {
+   "cell_id": "47632654__TP_z14_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.0
+   }
+  },
+  {
+   "cell_id": "47632657__TP_z06_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 1.7
+   }
+  },
+  {
+   "cell_id": "47632660__TP_z05_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 0.3
+   }
+  },
+  {
+   "cell_id": "47632663__TP_z05_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.4,
+    "discharge_c_rate": 0.3
+   }
+  },
+  {
+   "cell_id": "47632666__TP_z24_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632669__TP_z22_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632672__TP_z16_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632675__TP_z07_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632678__TP_z16_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632681__TP_z11_01",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 0.8
+   }
+  },
+  {
+   "cell_id": "47632684__TP_z16_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632735__TP_z19_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632741__TP_z09_03",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 0.2
+   }
+  },
+  {
+   "cell_id": "47632744__TP_z07_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632747__TP_z24_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632750__TP_z04_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.5
+   }
+  },
+  {
+   "cell_id": "47632753__TP_z07_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632756__TP_z11_03",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 0.8
+   }
+  },
+  {
+   "cell_id": "47632774__TP_z11_02",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 0.8
+   }
+  },
+  {
+   "cell_id": "47632780__TP_z09_01",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 0.2
+   }
+  },
+  {
+   "cell_id": "47632783__TP_z06_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.8,
+    "discharge_c_rate": 1.7
+   }
+  },
+  {
+   "cell_id": "47632786__TP_z24_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632789__TP_z19_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47632792__TP_z09_02",
+   "temperature_C": 35.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 0.2
+   }
+  },
+  {
+   "cell_id": "47632795__TP_z22_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632798__TP_z22_01",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 0.44
+   }
+  },
+  {
+   "cell_id": "47632804__TP_z12_01",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632807__TP_z06_03"
+  },
+  {
+   "cell_id": "47632810__TP_z04_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 0.5
+   }
+  },
+  {
+   "cell_id": "47632831__TP_z12_02",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47632834__TP_z12_03",
+   "temperature_C": 23.0,
+   "labels": {
+    "charge_c_rate": 0.2,
+    "discharge_c_rate": 1.4
+   }
+  },
+  {
+   "cell_id": "47639005__TP_k01_04",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47639008__TP_k03_02",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47639011__TP_k03_06",
+   "temperature_C": 10.0,
+   "labels": {
+    "charge_c_rate": 0.0,
+    "discharge_c_rate": 0.0
+   }
+  },
+  {
+   "cell_id": "47639014__TP_z04_03"
+  },
+  {
+   "cell_id": "47639017__TP_z19_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.24,
+    "discharge_c_rate": 2.0
+   }
+  },
+  {
+   "cell_id": "47639020__TP_z10_03"
+  },
+  {
+   "cell_id": "47639023__TP_z05_02"
+  },
+  {
+   "cell_id": "47639026__TP_z23_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.9,
+    "discharge_c_rate": 1.6
+   }
+  },
+  {
+   "cell_id": "47639029__TP_z16_03",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.7,
+    "discharge_c_rate": 0.2
+   }
+  },
+  {
+   "cell_id": "47639032__TP_z24_02",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.8
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Multi-stage protocol test points (TP_k##_##) on 279 cells; experiments_meta.csv and each *_meta.txt (author files in the raw data) give the laboratory, chamber temperature, SOC and DOD, and C-rates per cell. Cell model named on the landing page and in the paper abstract; specs from the manufacturer datasheet. The recorded cathode (NMC, from the registry) differs from the NCA the Stanford dataset_26 landing page calls this same Samsung INR21700-50E - not resolved here; flag for review. Experiment-table labels repeat across two stages. Matching now requires the testpoint label, laboratory and internal cell serial together: 230 exact matches, with 93 prior stage assignments corrected; 49 inconsistent raw/table identities retain their raw metadata but no experiment assignment. The 279 archives are extracted experiment entities, while raw laboratory/internal-serial pairs number 261; physical cell reuse across stages is unresolved. Rate maxima 1C/2C remain supported by the matched author-table rows."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.paper_doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "landing_page",
+   "cell.model": "landing_page",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "derived",
+   "conditions.discharge_c_rate_max": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_37.json",
+  "landing_evidence": "evidence/landing/dataset_37.json"
+ }
+}

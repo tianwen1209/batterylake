@@ -1,0 +1,576 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_35",
+ "identity": {
+  "ref_name": "2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Zenodo ARC Calorimetry 21700",
+  "institution": "Karlsruhe Institute of Technology (KIT)",
+  "year": 2023,
+  "doi": "10.5281/zenodo.7707929",
+  "paper_doi": "10.3390/batteries9050237",
+  "source_url": "https://zenodo.org/records/7707929",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LFP; NCA; NMC",
+  "chemistry_is_multi": true,
+  "form_factor": "cylindrical",
+  "cell_format_code": "21700",
+  "dimensions_mm": {
+   "diameter": 21.0,
+   "height": 70.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "onset",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": "abuse",
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": 0.0,
+  "soc_window_max_pct": 100.0,
+  "aging_type": "abuse_thermal",
+  "application_domain": "safety"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 55,
+  "n_entities_declared": 55,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 55,
+  "raw_bytes": 228140
+ },
+ "content": {
+  "signals": [
+   "temperature",
+   "time"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "temperature / C",
+   "time / min"
+  ],
+  "has_waveforms": false,
+  "cycle_basis": "none; each file is one accelerating-rate-calorimetry run",
+  "observed": {
+   "voltage_V": null,
+   "current_A": null,
+   "temperature_C": [
+    57.95,
+    705.003
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "txt"
+  ],
+  "supported_tasks": [
+   "thermal_safety"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "LFP_SOC0_M1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC0_M2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC100_M1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC100_M2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC100_M3",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC100_M4",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC30_M1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC30_M2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC30_M3",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC60_M1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC60_M2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC80_M1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC80_M2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "LFP_SOC80_M3",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC0_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC0_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC100_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC100_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC30_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC30_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC60_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC60_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC80_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEII_SOC80_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC0_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC0_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC100_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC100_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC30_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC30_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC60_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC60_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC80_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NCA_HEI_SOC80_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC0_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC0_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC100_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC100_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC30_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC30_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC60_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC60_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC60_M3",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC80_M1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NCA_HP_SOC80_M2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC0_M1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC0_M2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC100_M1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC100_M2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC30_M1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC30_M2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC60_M1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC60_M2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC80_M1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NMC_SOC80_M2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Accelerating-rate-calorimetry heating curves (time in minutes, sample temperature, temperature rate) for NMC, NCA and LFP cells at several SOC. The temperature is the sample temperature during the run, not a chamber setpoint."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "paper",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.paper_doi": "landing_page",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "landing_page",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_filenames",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "cell.form_factor": "landing_page",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_35.json",
+  "landing_evidence": "evidence/landing/dataset_35.json"
+ }
+}

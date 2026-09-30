@@ -1,0 +1,333 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_09",
+ "identity": {
+  "ref_name": "2024_XJTU_NCM_18650_2Ah_MultiC_MultiC_25T",
+  "ref_name_aliases": [
+   {
+    "name": "2023_XJTU_NCM_Prismatic_MultiC_MultiC_25T",
+    "status": "historical",
+    "seen_in": [
+     "registry_history",
+     "raw_readme"
+    ]
+   }
+  ],
+  "dataset_name": "XJTU NCM Prismatic",
+  "institution": "Xi'an Jiaotong University",
+  "year": 2024,
+  "doi": "10.5281/zenodo.10963339",
+  "paper_doi": "10.1038/s41467-024-48779-z",
+  "source_url": "https://zenodo.org/records/10963339",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "LISHEN",
+  "model": "18650 NCM",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LiNi0.5Co0.2Mn0.3O2",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 2.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": 3.6,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": 3.0,
+  "discharge_c_rate_max": 5.0,
+  "c_rate_profile": "constant",
+  "protocol_class": "CC-CV",
+  "protocol_charge_raw": "CC-CV to 4.2 V (CV until 0.02-0.05C), charge rates by batch: 2C, 3C, and variable/random-walk strategies; 5 min rests",
+  "protocol_discharge_raw": "CC to 2.5 V at 1C (fixed) or 0.5-5C (variable strategies); first cycle 0.5C charge / 0.2C discharge for initial capacity",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 55,
+  "n_entities_declared": 55,
+  "n_cycles_total": 27642,
+  "cycles_per_entity_median": 403.0,
+  "n_raw_files": 1,
+  "raw_bytes": 2438769934
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "capacity_Ah",
+   "current_A",
+   "relative_time_min",
+   "temperature_C",
+   "voltage_V"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "number of cycle records in the `data` struct; `summary.cycle_life` is the authors' cycle life",
+  "observed": {
+   "voltage_V": [
+    2.4794,
+    4.6397
+   ],
+   "current_A": [
+    -10.0,
+    6.0012
+   ],
+   "temperature_C": [
+    16.8,
+    56.3
+   ],
+   "discharge_capacity_Ah_max": 2.077,
+   "discharge_capacity_Ah_median_of_entity_max": 1.989
+  },
+  "source_format": [
+   "mat"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "2C_battery-1"
+  },
+  {
+   "cell_id": "2C_battery-2"
+  },
+  {
+   "cell_id": "2C_battery-3"
+  },
+  {
+   "cell_id": "2C_battery-4"
+  },
+  {
+   "cell_id": "2C_battery-5"
+  },
+  {
+   "cell_id": "2C_battery-6"
+  },
+  {
+   "cell_id": "2C_battery-7"
+  },
+  {
+   "cell_id": "2C_battery-8"
+  },
+  {
+   "cell_id": "3C_battery-1"
+  },
+  {
+   "cell_id": "3C_battery-10"
+  },
+  {
+   "cell_id": "3C_battery-11"
+  },
+  {
+   "cell_id": "3C_battery-12"
+  },
+  {
+   "cell_id": "3C_battery-13"
+  },
+  {
+   "cell_id": "3C_battery-14"
+  },
+  {
+   "cell_id": "3C_battery-15"
+  },
+  {
+   "cell_id": "3C_battery-2"
+  },
+  {
+   "cell_id": "3C_battery-3"
+  },
+  {
+   "cell_id": "3C_battery-4"
+  },
+  {
+   "cell_id": "3C_battery-5"
+  },
+  {
+   "cell_id": "3C_battery-6"
+  },
+  {
+   "cell_id": "3C_battery-7"
+  },
+  {
+   "cell_id": "3C_battery-8"
+  },
+  {
+   "cell_id": "3C_battery-9"
+  },
+  {
+   "cell_id": "R2.5_battery-1"
+  },
+  {
+   "cell_id": "R2.5_battery-2"
+  },
+  {
+   "cell_id": "R2.5_battery-3"
+  },
+  {
+   "cell_id": "R2.5_battery-4"
+  },
+  {
+   "cell_id": "R2.5_battery-5"
+  },
+  {
+   "cell_id": "R2.5_battery-6"
+  },
+  {
+   "cell_id": "R2.5_battery-7"
+  },
+  {
+   "cell_id": "R2.5_battery-8"
+  },
+  {
+   "cell_id": "R3_battery-1"
+  },
+  {
+   "cell_id": "R3_battery-2"
+  },
+  {
+   "cell_id": "R3_battery-3"
+  },
+  {
+   "cell_id": "R3_battery-4"
+  },
+  {
+   "cell_id": "R3_battery-5"
+  },
+  {
+   "cell_id": "R3_battery-6"
+  },
+  {
+   "cell_id": "R3_battery-7"
+  },
+  {
+   "cell_id": "R3_battery-8"
+  },
+  {
+   "cell_id": "RW_battery-1"
+  },
+  {
+   "cell_id": "RW_battery-2"
+  },
+  {
+   "cell_id": "RW_battery-3"
+  },
+  {
+   "cell_id": "RW_battery-4"
+  },
+  {
+   "cell_id": "RW_battery-5"
+  },
+  {
+   "cell_id": "RW_battery-6"
+  },
+  {
+   "cell_id": "RW_battery-7"
+  },
+  {
+   "cell_id": "RW_battery-8"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-1"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-2"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-3"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-4"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-5"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-6"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-7"
+  },
+  {
+   "cell_id": "Sim_satellite_battery-8"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "XJTU battery dataset: 55 cells in 6 batches under different charge/discharge strategies at room temperature (not given numerically). Temperature_Compensation_Data.mat is not a cell."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.paper_doi": "landing_page",
+   "conditions.aging_type": "paper",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "raw_docs",
+   "cell.form_factor": "raw_docs",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.nominal_voltage_V": "raw_docs",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "curated",
+   "conditions.discharge_c_rate_max": "curated"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_09.json",
+  "landing_evidence": "evidence/landing/dataset_09.json"
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_31",
+ "identity": {
+  "ref_name": "2023_Mendeley_NMC811-LFP_18650_Relaxation_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Mendeley NMC811-LFP Relaxation",
+  "institution": "Hawaii Natural Energy Institute",
+  "year": 2023,
+  "doi": "10.17632/y8nstxmdrg.1",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/y8nstxmdrg/1",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": "A",
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": "mixed",
+  "chemistry_label_raw": "Gr,Si//NMC811; Gr//LFP",
+  "chemistry_is_multi": true,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": -15.0,
+  "temperature_max_C": 55.0,
+  "temperature_setpoints_C": [
+   -15.0,
+   -10.0,
+   -5.0,
+   0.0,
+   5.0,
+   10.0,
+   15.0,
+   20.0,
+   25.0,
+   30.0,
+   35.0,
+   40.0,
+   45.0,
+   50.0,
+   55.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 1.0,
+  "discharge_c_rate_max": 1.0,
+  "c_rate_profile": "constant",
+  "protocol_class": "pulse",
+  "protocol_charge_raw": "formation, reference performance tests and depth-of-discharge relaxation tests at C/25 to C/1",
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 12,
+  "n_entities_declared": null,
+  "n_cycles_total": 124,
+  "cycles_per_entity_median": 10.0,
+  "n_raw_files": 137,
+  "raw_bytes": 1292019622
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "cycle_index",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "ACImp/Ohms",
+   "Capacity",
+   "Current",
+   "Cycle",
+   "DCIR/Ohms",
+   "Energy",
+   "Step",
+   "Test Time",
+   "Voltage"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "Cycle column of the tester files; parts are formation (FORM) and reference performance tests (RPT) with rest steps",
+  "observed": {
+   "voltage_V": [
+    1.999,
+    4.333
+   ],
+   "current_A": [
+    0.0,
+    3.406
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "mat"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "characterization"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "A123005"
+  },
+  {
+   "cell_id": "A123006"
+  },
+  {
+   "cell_id": "A123007"
+  },
+  {
+   "cell_id": "A123008"
+  },
+  {
+   "cell_id": "A123009"
+  },
+  {
+   "cell_id": "A123010"
+  },
+  {
+   "cell_id": "MJ1002",
+   "model": "MJ",
+   "cathode_chemistry": "NMC811"
+  },
+  {
+   "cell_id": "MJ1003",
+   "model": "MJ",
+   "cathode_chemistry": "NMC811"
+  },
+  {
+   "cell_id": "MJ1004",
+   "model": "MJ",
+   "cathode_chemistry": "NMC811"
+  },
+  {
+   "cell_id": "MJ1005",
+   "model": "MJ",
+   "cathode_chemistry": "NMC811"
+  },
+  {
+   "cell_id": "MJ1006",
+   "model": "MJ",
+   "cathode_chemistry": "NMC811"
+  },
+  {
+   "cell_id": "MJ1007",
+   "model": "MJ",
+   "cathode_chemistry": "NMC811"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Relaxation study of NMC811 and LFP cells (landing page); cell ids A123### (LFP) and MJ#### (NMC811). ACImp/DCIR columns exist in the tester files but hold only zeros. The cell is identified only as \"Cell A\" (an internal study label) - no manufacturer or model name appears anywhere in the source, so nominal_capacity_Ah, voltage_min_V/voltage_max_V and dimensions_mm cannot be sourced from a manufacturer datasheet; likely permanently unfillable from public information. The formatted-archive author README documents both Gr,Si//NMC811 and Gr//LFP systems, so dataset-level cathode and anode are mixed; NMC811 alone did not describe the full release. The archive explicitly includes charge records at C/1. All four formatted MAT files were inspected: their fifth column is constant within each relaxation segment and exactly matches the listed temperature conditions. This does not establish measured cell temperature; its measurement-versus-setpoint meaning remains unverified."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.model": "raw_filenames",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.anode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "raw_docs",
+   "cell.form_factor": "registry",
+   "conditions.temperature_setpoints_C": "landing_page",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_docs",
+   "conditions.discharge_c_rate_max": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_31.json",
+  "landing_evidence": "evidence/landing/dataset_31.json"
+ }
+}

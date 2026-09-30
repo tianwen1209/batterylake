@@ -1,0 +1,232 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_18",
+ "identity": {
+  "ref_name": "2022_A123_LFP_18650_1.1Ah_CalCyc_50T",
+  "ref_name_aliases": [],
+  "dataset_name": "A123 LFP Calendar+Cycle 50°C",
+  "institution": "Universite Grenoble Alpes and Universite Lyon 1",
+  "year": 2022,
+  "doi": "10.57745/OLBXKT",
+  "paper_doi": "10.1038/s41597-025-04712-7",
+  "source_url": "https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi:10.57745/OLBXKT",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "A123",
+  "model": null,
+  "cathode_chemistry": "LFP",
+  "anode_chemistry": "graphite",
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": null,
+  "dimensions_mm": {
+   "diameter": 18.2,
+   "height": 64.95,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 1.1,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": 3.2,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 3.65
+ },
+ "conditions": {
+  "temperature_min_C": 25.0,
+  "temperature_max_C": 50.0,
+  "temperature_setpoints_C": [
+   25.0,
+   50.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 2.0,
+  "discharge_c_rate_max": 2.7,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "drive_cycle",
+  "protocol_charge_raw": "EV-use, high-current, partial-discharge and reduced-voltage-window ageing profiles (WLTP cycle in WLTPcycle.txt)",
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "mixed",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 20,
+  "n_entities_declared": 20,
+  "n_cycles_total": 84221,
+  "cycles_per_entity_median": 3981.5,
+  "n_raw_files": 24,
+  "raw_bytes": 26298927784
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "AC_Impedance",
+   "Charge_Capacity",
+   "Charge_Energy",
+   "Current",
+   "Cycle_Index",
+   "DateTime",
+   "Discharge_Capacity",
+   "Discharge_Energy",
+   "Internal_Resistance",
+   "Step_Index",
+   "Step_Time",
+   "Test_Time",
+   "Voltage"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "Cycle_Index column of the aging files (agingdata_50degC)",
+  "observed": {
+   "voltage_V": [
+    -0.00581,
+    3.660992
+   ],
+   "current_A": [
+    -5.284058,
+    5.893386
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": 1.951398,
+   "discharge_capacity_Ah_median_of_entity_max": 1.0189214999999998
+  },
+  "source_format": [
+   "csv",
+   "mat"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "Cell1a"
+  },
+  {
+   "cell_id": "Cell1b"
+  },
+  {
+   "cell_id": "Cell1c"
+  },
+  {
+   "cell_id": "Cell2a"
+  },
+  {
+   "cell_id": "Cell2b"
+  },
+  {
+   "cell_id": "Cell2c"
+  },
+  {
+   "cell_id": "Cell3a"
+  },
+  {
+   "cell_id": "Cell3b"
+  },
+  {
+   "cell_id": "Cell4a"
+  },
+  {
+   "cell_id": "Cell4b"
+  },
+  {
+   "cell_id": "Cell4c"
+  },
+  {
+   "cell_id": "Cell5a"
+  },
+  {
+   "cell_id": "Cell5b"
+  },
+  {
+   "cell_id": "Cell5c"
+  },
+  {
+   "cell_id": "Cell6a"
+  },
+  {
+   "cell_id": "Cell6b"
+  },
+  {
+   "cell_id": "Cell6c"
+  },
+  {
+   "cell_id": "Cell7a"
+  },
+  {
+   "cell_id": "Cell7b"
+  },
+  {
+   "cell_id": "Cell7c"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff"
+  ],
+  "notes": "Twenty cells in first and second life; characterised every 100 cycles for capacity and pseudo-OCV. Folder names give the chamber temperature (aging 50 C, characterization 25 C). The cycling files carry no temperature channel. The exact A123 model is not named in the source paper; the previous APR18650M1A identification relied on matching nominal specifications and has been removed. Dimensions and nominal voltage are explicitly stated in paper Table1. Voltage bounds now describe the study cutoffs 2.5-3.65 V; Table1 separately lists a 2 V manufacturer operating minimum. This supersedes the earlier model-specific datasheet cutoff of 3.6 V. Rate maxima are documented study protocol maxima from the paper: charge 2C, WLTP discharge peak 2.7C; the WLTP mean is C/3 and regenerative charge peak is 1.1C. Table 4 states Current in A and identifies positive/negative current as charge/discharge. Cached ageing-current extrema are +5.893386 A (Cell7c) and -5.284058 A (Cell1c), corresponding to 5.357624C and 4.803689C at 1.1 Ah. These exceed the stated protocol maxima and the +/-5 A upper equipment range in Table 5, so they were not used as testing setpoints or inferred rates. Their exact rows and cause were not independently traced; no sensor-fault cause is asserted."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "paper",
+   "identity.year": "ref_name",
+   "identity.doi": "raw_docs",
+   "identity.paper_doi": "raw_docs",
+   "conditions.aging_type": "curated",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.anode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "raw_docs",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.nominal_voltage_V": "paper",
+   "cell.voltage_max_V": "paper",
+   "cell.voltage_min_V": "paper",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "conditions.protocol_charge_raw": "landing_page",
+   "cell.dimensions_mm": "paper",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "paper",
+   "conditions.discharge_c_rate_max": "paper"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_18.json",
+  "landing_evidence": "evidence/landing/dataset_18.json"
+ }
+}

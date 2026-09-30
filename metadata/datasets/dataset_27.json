@@ -1,0 +1,215 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_27",
+ "identity": {
+  "ref_name": "2024_Stanford_Onori_LiIon_SecondLife_GridStorage_25T",
+  "ref_name_aliases": [],
+  "dataset_name": "Stanford-Onori Second-Life Grid",
+  "institution": "Stanford University, Onori Lab",
+  "year": 2024,
+  "doi": "10.17605/OSF.IO/8JNR5",
+  "paper_doi": null,
+  "source_url": "https://osf.io/8jnr5/",
+  "study_group": "onori_second_life_8jnr5"
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": "INR21700-M50T",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "Multi",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "21700",
+  "dimensions_mm": {
+   "diameter": 21.1,
+   "height": 70.15,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 5.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": 0.470643,
+  "discharge_c_rate_max": 0.941071,
+  "c_rate_profile": "constant",
+  "protocol_class": "calendar_hold",
+  "protocol_charge_raw": "second-life grid-storage synthetic duty cycles (residential and commercial)",
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "second_life",
+  "application_domain": "grid_storage"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 6,
+  "n_entities_declared": 6,
+  "n_cycles_total": 1451,
+  "cycles_per_entity_median": 245.0,
+  "n_raw_files": 1,
+  "raw_bytes": 2153883052
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Aux_Temperature(¡æ)_1",
+   "Aux_Temperature(¡æ)_10",
+   "Aux_Temperature(¡æ)_11",
+   "Aux_Temperature(¡æ)_12",
+   "Aux_Temperature(¡æ)_13",
+   "Aux_Temperature(¡æ)_14",
+   "Aux_Temperature(¡æ)_16",
+   "Aux_Temperature(¡æ)_17",
+   "Aux_Temperature(¡æ)_2",
+   "Aux_Temperature(¡æ)_3",
+   "Aux_Temperature(¡æ)_4",
+   "Aux_Temperature(¡æ)_5",
+   "Aux_Temperature(¡æ)_6",
+   "Aux_Temperature(¡æ)_7",
+   "Aux_Temperature(¡æ)_8",
+   "Aux_Temperature(¡æ)_9",
+   "Aux_Voltage(V)_1",
+   "Aux_Voltage(V)_10",
+   "Aux_Voltage(V)_2",
+   "Aux_Voltage(V)_3",
+   "Aux_Voltage(V)_4",
+   "Aux_Voltage(V)_5",
+   "Aux_Voltage(V)_6",
+   "Aux_Voltage(V)_7",
+   "Aux_Voltage(V)_8",
+   "Aux_Voltage(V)_9",
+   "Charge_Capacity(Ah)",
+   "Charge_Energy(Wh)",
+   "Current(A)",
+   "Cycle_ID",
+   "Cycle_Index",
+   "Date_Time",
+   "Discharge_Capacity(Ah)",
+   "Discharge_Energy(Wh)",
+   "Freq",
+   "Internal Resistance(Ohm)",
+   "Step_ID",
+   "Step_Index",
+   "Step_Time(s)",
+   "Test_Time(s)",
+   "Voltage(V)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "Cycle_Index of the tester workbooks; several workbooks per cell continue the count",
+  "observed": {
+   "voltage_V": [
+    2.499894,
+    4.208571
+   ],
+   "current_A": [
+    -4.705354,
+    2.353214
+   ],
+   "temperature_C": [
+    19.302469,
+    39.816719
+   ],
+   "discharge_capacity_Ah_max": 0.143721,
+   "discharge_capacity_Ah_median_of_entity_max": 0.07421950000000001
+  },
+  "source_format": [
+   "mat",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "G1"
+  },
+  {
+   "cell_id": "V4"
+  },
+  {
+   "cell_id": "V5"
+  },
+  {
+   "cell_id": "W10"
+  },
+  {
+   "cell_id": "W8"
+  },
+  {
+   "cell_id": "W9"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "shared_cells_with_other_dataset"
+  ],
+  "notes": "Six second-life NMC cells cycled with residential and commercial duty cycles at Stanford. Cell ids G1, V4, V5 also appear in dataset_25. Cell spec is from LG's INR21700 M50 18.2Wh document (2017-09-22), the closest available datasheet to the exact M50T tab variant this dataset names; electrical/physical specs are expected to match across M50-series tab variants. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached extraction covers six cells and parsed cycling, RPT and EIS workbook parts; the positive maximum includes diagnostic RPT charge rather than the grid-storage cycling protocol alone. stored nominal capacity 5.0 Ah comes from the nearest LG M50 datasheet, with an existing exact M50T model caveat; the inspected cycling workbook Global_Info Capacity field is 4.85. No denominator is inferred from measured current. Finite auxiliary temperature readings exist, but the sensor placement on the cell versus ambient air was not established; measured cell-temperature availability is therefore unclear."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "landing_page",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.study_group": "relationships",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "landing_page",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.model": "raw_filenames",
+   "cell.cathode_chemistry": "landing_page",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "curated",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.protocol_charge_raw": "landing_page",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_data",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_27.json",
+  "landing_evidence": "evidence/landing/dataset_27.json"
+ }
+}

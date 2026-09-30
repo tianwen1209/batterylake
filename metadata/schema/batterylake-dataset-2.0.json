@@ -1,0 +1,827 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatteryLake dataset metadata",
+  "description": "One record per dataset, built from Raw_Dataset (its measurement files and author documentation) with the registry, landing pages and papers as fallbacks. Dataset-level fields hold the aggregate across all entities; cells[] carries per-entity overrides only where an entity differs from the dataset value. Missing information is null, never a placeholder string.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "identity",
+    "cell",
+    "conditions",
+    "scale",
+    "content",
+    "cells",
+    "quality",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^dataset_[A-Za-z0-9_]+$"
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "ref_name",
+        "ref_name_aliases",
+        "dataset_name",
+        "institution",
+        "year",
+        "doi",
+        "source_url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ref_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ref_name_aliases": {
+          "description": "Every other name this dataset has gone by, kept so old references still resolve. ref_name is the corrected name.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "status",
+              "seen_in"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "historical",
+                  "mismatched"
+                ]
+              },
+              "seen_in": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "enum": [
+                    "registry_history",
+                    "raw_readme"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "dataset_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "institution": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "year": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1990,
+          "maximum": 2100
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "paper_doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "study_group": {
+          "description": "The study-group label source_relationships.json assigns this dataset, if it appears there - a hand-maintained note of which datasets share an upstream study, independent of whether their raw cell ids overlap. Null if the dataset is not in that file.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "cell": {
+      "type": "object",
+      "required": [
+        "cathode_chemistry",
+        "anode_chemistry",
+        "form_factor",
+        "nominal_capacity_Ah",
+        "voltage_min_V",
+        "voltage_max_V"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "manufacturer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cathode_chemistry": {
+          "$ref": "#/$defs/cathode"
+        },
+        "anode_chemistry": {
+          "$ref": "#/$defs/anode"
+        },
+        "chemistry_label_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "chemistry_is_multi": {
+          "type": "boolean"
+        },
+        "form_factor": {
+          "$ref": "#/$defs/form_factor"
+        },
+        "cell_format_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dimensions_mm": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "diameter": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "height": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "length": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "width": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "thickness": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "basis": {
+              "enum": [
+                "stated",
+                "inferred_from_format_code",
+                null
+              ]
+            }
+          }
+        },
+        "nominal_capacity_Ah": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "capacity_basis": {
+          "enum": [
+            "rated",
+            "measured",
+            null
+          ]
+        },
+        "nominal_voltage_V": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "voltage_level": {
+          "enum": [
+            "cell",
+            "pack",
+            null
+          ]
+        },
+        "voltage_min_V": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "voltage_max_V": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "required": [
+        "temperature_min_C",
+        "temperature_max_C",
+        "temperature_basis",
+        "protocol_class",
+        "aging_type",
+        "application_domain"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "temperature_min_C": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "temperature_max_C": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "temperature_setpoints_C": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "temperature_basis": {
+          "enum": [
+            "chamber_setpoint",
+            "measured",
+            "onset",
+            "unspecified",
+            null
+          ]
+        },
+        "charge_c_rate_max": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "discharge_c_rate_max": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "c_rate_profile": {
+          "enum": [
+            "constant",
+            "multistage",
+            "dynamic",
+            "drive_cycle",
+            "none",
+            null
+          ]
+        },
+        "protocol_class": {
+          "$ref": "#/$defs/protocol_class"
+        },
+        "protocol_charge_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "protocol_discharge_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "soc_window_min_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "soc_window_max_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "aging_type": {
+          "$ref": "#/$defs/aging_type"
+        },
+        "application_domain": {
+          "$ref": "#/$defs/application_domain"
+        }
+      }
+    },
+    "scale": {
+      "type": "object",
+      "required": [
+        "entity_type",
+        "n_entities",
+        "n_entities_declared",
+        "n_raw_files",
+        "raw_bytes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entity_type": {
+          "enum": [
+            "cell",
+            "module",
+            "pack",
+            "vehicle"
+          ]
+        },
+        "n_entities": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "n_entities_declared": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "n_cycles_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cycles_per_entity_median": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "n_raw_files": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "raw_bytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "signals",
+        "has_waveforms",
+        "source_format",
+        "supported_tasks"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "signals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/signal"
+          }
+        },
+        "signals_basis": {
+          "enum": [
+            "raw_data",
+            "raw_docs",
+            "landing_page",
+            "paper",
+            "curated",
+            null
+          ]
+        },
+        "raw_columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "has_waveforms": {
+          "type": "boolean"
+        },
+        "cycle_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observed": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "voltage_V": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "current_A": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "temperature_C": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "discharge_capacity_Ah_max": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "discharge_capacity_Ah_median_of_entity_max": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        },
+        "source_format": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supported_tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task"
+          }
+        }
+      }
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "cell_id"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "cell_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "manufacturer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cathode_chemistry": {
+            "$ref": "#/$defs/cathode"
+          },
+          "anode_chemistry": {
+            "$ref": "#/$defs/anode"
+          },
+          "form_factor": {
+            "$ref": "#/$defs/form_factor"
+          },
+          "nominal_capacity_Ah": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "nominal_voltage_V": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "voltage_min_V": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "voltage_max_V": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "temperature_C": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "protocol_charge_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "protocol_discharge_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "labels": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "flags"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/flag"
+          }
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "field_sources",
+        "confidence",
+        "last_verified"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "field_sources": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "confidence": {
+          "enum": [
+            "verified",
+            "asserted",
+            "inferred"
+          ]
+        },
+        "last_verified": {
+          "type": "string",
+          "format": "date"
+        },
+        "raw_evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "landing_evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "cathode": {
+      "enum": [
+        "LFP",
+        "NMC",
+        "NMC811",
+        "NCA",
+        "LCO",
+        "LMO",
+        "LTO",
+        "NMC-LMO",
+        "LMO-LNO",
+        "LCO-NCO",
+        "LCO-NMC",
+        "mixed",
+        null
+      ]
+    },
+    "anode": {
+      "enum": [
+        "graphite",
+        "Si-graphite",
+        "LTO",
+        "mixed",
+        null
+      ]
+    },
+    "form_factor": {
+      "enum": [
+        "cylindrical",
+        "pouch",
+        "prismatic",
+        "module",
+        "pack",
+        null
+      ]
+    },
+    "protocol_class": {
+      "enum": [
+        "CC-CV",
+        "multistage_CC",
+        "drive_cycle",
+        "calendar_hold",
+        "pulse",
+        "RPT_only",
+        "abuse",
+        "mixed",
+        null
+      ]
+    },
+    "aging_type": {
+      "enum": [
+        "cyclic",
+        "calendar",
+        "profile",
+        "second_life",
+        "abuse_mechanical",
+        "abuse_thermal",
+        "field",
+        "characterization",
+        "mixed",
+        null
+      ]
+    },
+    "application_domain": {
+      "enum": [
+        "lab",
+        "EV_field",
+        "HEV",
+        "eVTOL",
+        "grid_storage",
+        "safety",
+        "consumer",
+        null
+      ]
+    },
+    "signal": {
+      "enum": [
+        "time",
+        "voltage",
+        "current",
+        "temperature",
+        "charge_capacity",
+        "discharge_capacity",
+        "capacity",
+        "internal_resistance",
+        "soh",
+        "rul",
+        "step_type",
+        "cycle_index",
+        "force",
+        "displacement",
+        "eis",
+        "soc",
+        "ocv",
+        "power",
+        "energy"
+      ]
+    },
+    "task": {
+      "enum": [
+        "SOH",
+        "RUL",
+        "SOC",
+        "anomaly",
+        "fault_diagnosis",
+        "thermal_safety",
+        "characterization"
+      ]
+    },
+    "source": {
+      "enum": [
+        "raw_data",
+        "raw_filenames",
+        "raw_docs",
+        "raw_inventory",
+        "registry",
+        "landing_page",
+        "paper",
+        "relationships",
+        "datasheet",
+        "curated",
+        "ref_name",
+        "derived"
+      ]
+    },
+    "flag": {
+      "enum": [
+        "multi_chemistry",
+        "capacity_exceeds_nominal",
+        "voltage_excursion_below_cutoff",
+        "voltage_excursion_above_cutoff",
+        "pack_level_voltage",
+        "temperature_basis_differs_from_data",
+        "partial_raw",
+        "incomplete_raw_files",
+        "unreadable_raw_files",
+        "sample_only_raw",
+        "shared_cells_with_other_dataset",
+        "duplicate_of_other_dataset"
+      ]
+    }
+  }
+}

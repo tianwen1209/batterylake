@@ -1,0 +1,317 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_05",
+ "identity": {
+  "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "RWTH Aachen Lithium-Ion",
+  "institution": "RWTH Aachen University",
+  "year": 2021,
+  "doi": "10.18154/RWTH-2021-04545",
+  "paper_doi": null,
+  "source_url": "https://publications.rwth-aachen.de/record/818642",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "Sanyo/Panasonic",
+  "model": "UR18650E",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": "graphite",
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 1.85,
+  "capacity_basis": "measured",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 3.0,
+  "voltage_max_V": 4.1
+ },
+ "conditions": {
+  "temperature_min_C": 25.0,
+  "temperature_max_C": 25.0,
+  "temperature_setpoints_C": [
+   25.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 2.16,
+  "discharge_c_rate_max": 2.16,
+  "c_rate_profile": "constant",
+  "protocol_class": "CC-CV",
+  "protocol_charge_raw": "capacity tests: CC 2 A to 4.1 V, CV until 40 mA; cycling: 30 min CC discharge to 3.5 V and 30 min CC charge to 3.9 V, both limited to 4 A",
+  "protocol_discharge_raw": "capacity tests at several rates down to 3.0 V; cycling as above (about 20-80% SOC)",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 48,
+  "n_entities_declared": 48,
+  "n_cycles_total": 116749,
+  "cycles_per_entity_median": 2507.5,
+  "n_raw_files": 2,
+  "raw_bytes": 5444269241
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "AhAkku",
+   "AhEla",
+   "AhLad",
+   "Energie",
+   "Programmdauer",
+   "Schritt",
+   "Spannung",
+   "Strom",
+   "Temp1",
+   "Zyklus"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "Zyklus (cycle) counter of each tester file; parts are BOL Part 1/2, ZYK (cycling), EOL Test",
+  "observed": {
+   "voltage_V": [
+    -0.216339,
+    5.342288
+   ],
+   "current_A": [
+    -17.871077,
+    15.184755
+   ],
+   "temperature_C": [
+    0.0,
+    255.9375
+   ],
+   "discharge_capacity_Ah_max": 0.840305,
+   "discharge_capacity_Ah_median_of_entity_max": 0.68607
+  },
+  "source_format": [
+   "csv"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "ep sanyo 002"
+  },
+  {
+   "cell_id": "ep sanyo 003"
+  },
+  {
+   "cell_id": "ep sanyo 004"
+  },
+  {
+   "cell_id": "ep sanyo 005"
+  },
+  {
+   "cell_id": "ep sanyo 006"
+  },
+  {
+   "cell_id": "ep sanyo 007"
+  },
+  {
+   "cell_id": "ep sanyo 008"
+  },
+  {
+   "cell_id": "ep sanyo 009"
+  },
+  {
+   "cell_id": "ep sanyo 010"
+  },
+  {
+   "cell_id": "ep sanyo 011"
+  },
+  {
+   "cell_id": "ep sanyo 012"
+  },
+  {
+   "cell_id": "ep sanyo 013"
+  },
+  {
+   "cell_id": "ep sanyo 014"
+  },
+  {
+   "cell_id": "ep sanyo 015"
+  },
+  {
+   "cell_id": "ep sanyo 016"
+  },
+  {
+   "cell_id": "ep sanyo 017"
+  },
+  {
+   "cell_id": "ep sanyo 018"
+  },
+  {
+   "cell_id": "ep sanyo 019"
+  },
+  {
+   "cell_id": "ep sanyo 020"
+  },
+  {
+   "cell_id": "ep sanyo 021"
+  },
+  {
+   "cell_id": "ep sanyo 022"
+  },
+  {
+   "cell_id": "ep sanyo 023"
+  },
+  {
+   "cell_id": "ep sanyo 024"
+  },
+  {
+   "cell_id": "ep sanyo 025"
+  },
+  {
+   "cell_id": "ep sanyo 026"
+  },
+  {
+   "cell_id": "ep sanyo 027"
+  },
+  {
+   "cell_id": "ep sanyo 028"
+  },
+  {
+   "cell_id": "ep sanyo 029"
+  },
+  {
+   "cell_id": "ep sanyo 030"
+  },
+  {
+   "cell_id": "ep sanyo 031"
+  },
+  {
+   "cell_id": "ep sanyo 032"
+  },
+  {
+   "cell_id": "ep sanyo 033"
+  },
+  {
+   "cell_id": "ep sanyo 034"
+  },
+  {
+   "cell_id": "ep sanyo 035"
+  },
+  {
+   "cell_id": "ep sanyo 036"
+  },
+  {
+   "cell_id": "ep sanyo 037"
+  },
+  {
+   "cell_id": "ep sanyo 038"
+  },
+  {
+   "cell_id": "ep sanyo 039"
+  },
+  {
+   "cell_id": "ep sanyo 040"
+  },
+  {
+   "cell_id": "ep sanyo 041"
+  },
+  {
+   "cell_id": "ep sanyo 042"
+  },
+  {
+   "cell_id": "ep sanyo 043"
+  },
+  {
+   "cell_id": "ep sanyo 044"
+  },
+  {
+   "cell_id": "ep sanyo 045"
+  },
+  {
+   "cell_id": "ep sanyo 046"
+  },
+  {
+   "cell_id": "ep sanyo 047"
+  },
+  {
+   "cell_id": "ep sanyo 048"
+  },
+  {
+   "cell_id": "ep sanyo 049"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff",
+   "unreadable_raw_files"
+  ],
+  "notes": "The capacity is the measured mean of the delivered grade-C lot, not the A-grade rating. Voltage limits are those of the reference tests. Tester capacity columns (AhLad, AhEla) are running counters. Content_RWTH-2021-04545.pdf states both 1.85 Ah (measured mean of the grade-C cells this dataset actually contains) and 2.05 Ah (the A-grade nominal spec for the same cell model, not used here) in one sentence; 2.05 Ah is not a competing claim about these cells, so it is not flagged against the recorded 1.85 Ah nominal capacity."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "raw_docs",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.anode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "raw_docs",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_docs",
+   "conditions.discharge_c_rate_max": "raw_docs"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_05.json",
+  "landing_evidence": "evidence/landing/dataset_05.json"
+ }
+}

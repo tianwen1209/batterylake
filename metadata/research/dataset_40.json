@@ -1,0 +1,86 @@
+{
+ "$schema": "../schema/batterylake-research-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_40",
+ "ref_name": "2022_THI_Geisbauer_MultiChem_Calendar_3SOC_50-60T",
+ "category": "calendar_aging",
+ "timeseries": {
+  "has_voltage_timeseries": false,
+  "has_current_timeseries": false,
+  "has_temperature_timeseries": false,
+  "complete_v_i_t_timeseries": false,
+  "resolution": "summary_tables_only",
+  "signals_basis": "raw_data",
+  "caveats": []
+ },
+ "soc": {
+  "computable": true,
+  "basis": "explicit_soc_column"
+ },
+ "soh": {
+  "computable": true,
+  "basis": "curated_supported_tasks_and_raw_capacity_signal",
+  "blocking_flags": [],
+  "curated_task_present": true
+ },
+ "capacity_degradation": {
+  "present": true,
+  "aging_type": "calendar",
+  "n_cycles_total": 478,
+  "cycles_per_entity_median": 5.0
+ },
+ "ocv": {
+  "present": false,
+  "confidence": null,
+  "basis": null
+ },
+ "internal_resistance": {
+  "present": false,
+  "confidence": null,
+  "basis": "no populated resistance column and no impedance measurement in the raw data"
+ },
+ "eis": {
+  "present": false,
+  "basis": null
+ },
+ "thermal": {
+  "temperature_logging": false,
+  "thermal_characterization": false,
+  "application_domain": "lab",
+  "aging_type": "calendar"
+ },
+ "research_applicability": {
+  "parameter_identification": false,
+  "piml_calibration": false,
+  "soh_rul_prediction": true,
+  "simulation": false,
+  "synthetic_data_generation": false
+ },
+ "suitable_tasks": [
+  "SOH_estimation"
+ ],
+ "source_quality_flags": [
+  "multi_chemistry"
+ ],
+ "provenance": {
+  "derived_from": "datasets/dataset_40.json",
+  "generated": "2026-09-29",
+  "field_sources": {
+   "ref_name": "dataset_record",
+   "category": "folder_layout",
+   "timeseries.*": "derived",
+   "soc.*": "derived",
+   "soh.*": "derived",
+   "capacity_degradation.*": "derived",
+   "ocv.*": "derived",
+   "internal_resistance.*": "raw_data",
+   "eis.*": "raw_data",
+   "thermal.*": "derived",
+   "research_applicability.*": "derived",
+   "suitable_tasks": "derived",
+   "source_quality_flags": "dataset_record"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29"
+ }
+}

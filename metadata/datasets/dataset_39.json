@@ -1,0 +1,264 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_39",
+ "identity": {
+  "ref_name": "2023_CQU_NCA-LFP_Pouch-Prismatic_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "CQU Battery Aging",
+  "institution": "Chongqing University",
+  "year": 2023,
+  "doi": "10.17632/n3b54nsw8m.9",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/n3b54nsw8m/9",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "NCA-LFP",
+  "chemistry_is_multi": true,
+  "form_factor": "pouch",
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 47,
+  "n_entities_declared": 47,
+  "n_cycles_total": 104817,
+  "cycles_per_entity_median": 2317.0,
+  "n_raw_files": 3,
+  "raw_bytes": 272160209
+ },
+ "content": {
+  "signals": [
+   "capacity"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Capacity"
+  ],
+  "has_waveforms": false,
+  "cycle_basis": "length of each cell's Capacity vector (one value per cycle)",
+  "observed": {
+   "voltage_V": null,
+   "current_A": null,
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "mat"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "Dataset1_Dataset2:C1"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C2"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C3"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C4"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C5"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C6"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C7"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C8"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C9"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C10"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C11"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C12"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C13"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C14"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C15"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C1 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C2 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C3 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C4 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C5 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C6 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C7 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C8 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C9 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C10 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C11 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C12 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C13 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C14 SL"
+  },
+  {
+   "cell_id": "Dataset1_Dataset2:C15 SL"
+  },
+  {
+   "cell_id": "Dataset3:C1"
+  },
+  {
+   "cell_id": "Dataset3:C2"
+  },
+  {
+   "cell_id": "Dataset3:C3"
+  },
+  {
+   "cell_id": "Dataset3:C4"
+  },
+  {
+   "cell_id": "Dataset3:C5"
+  },
+  {
+   "cell_id": "Dataset3:C6"
+  },
+  {
+   "cell_id": "Dataset3:C7"
+  },
+  {
+   "cell_id": "Dataset3:C8"
+  },
+  {
+   "cell_id": "Dataset3:C9"
+  },
+  {
+   "cell_id": "Dataset3:C10"
+  },
+  {
+   "cell_id": "Dataset3:C11"
+  },
+  {
+   "cell_id": "Dataset4:C1"
+  },
+  {
+   "cell_id": "Dataset4:C2"
+  },
+  {
+   "cell_id": "Dataset4:C3"
+  },
+  {
+   "cell_id": "Dataset4:C4"
+  },
+  {
+   "cell_id": "Dataset4:C5"
+  },
+  {
+   "cell_id": "Dataset4:C6"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Only per-cycle capacity and partial-charge features are stored (no voltage, current or temperature waveforms). working_profile names the load profile of each cell. No manufacturer or model name is given for any of the pouch/prismatic cells - only chemistry and form factor. nominal_capacity_Ah, voltage_min_V/voltage_max_V and dimensions_mm are left null; not identifiable from a public datasheet. The registry lists NCA-LFP, so the collection-level cathode is mixed rather than LFP alone. This registry label does not independently assign cathode chemistry to each delivered MAT cell."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_39.json",
+  "landing_evidence": "evidence/landing/dataset_39.json"
+ }
+}

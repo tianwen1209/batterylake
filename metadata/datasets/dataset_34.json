@@ -1,0 +1,1984 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_34",
+ "identity": {
+  "ref_name": "2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Mendeley Mech-Induced Thermal Runaway",
+  "institution": "Oak Ridge National Laboratory and Sandia National Laboratories",
+  "year": 2023,
+  "doi": "10.17632/sn2kv34r4h.2",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/sn2kv34r4h/2",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "1500mAh1-100S0C; 1500mAh1-20S0C; 1500mAh1-40S0C; 1500mAh1-60S0C; 1500mAh1-80S0C; 1500mAh2-100S0C; 1500mAh2-20S0C; 1500mAh2-40S0C; 1500mAh2-60S0C; 1500mAh2-80S0C; 1500mAh3-100S0C; 1500mAh3-20S0C; 1500mAh3-40S0C; 1500mAh3-60S0C; 1500mAh3-80S0C; 2000mAh1-100S0C; 2000mAh1-20S0C; 2000mAh1-40S0C; 2000mAh1-60S0C; 2000mAh1-80S0C; 2000mAh2-100S0C; 2000mAh2-20S0C; 2000mAh2-40S0C; 2000mAh2-60S0C; 2000mAh2-80S0C; 2017ChevyVolt-60SOC-6mm-cell1; 500mAh1-100S0C; 500mAh1-20S0C; 500mAh1-40S0C; 500mAh1-60S0C; 500mAh1-80S0C; 500mAh2-100S0C; 500mAh2-20S0C; 500mAh2-40S0C; 500mAh2-60S0C; 500mAh2-80S0C; 500mAh3-100S0C; 500mAh3-20S0C; 500mAh3-40S0C; 500mAh3-60S0C; 500mAh3-80S0C; ChevyVolt-0SOC-6mm-cell1; ChevyVolt-100SOC-6mm-cell1; ChevyVolt-100SOC-6mm-cell2; ChevyVolt-100SOC-6mm-cell3; ChevyVolt-100SOC-6mm-cell4; ChevyVolt-20SOC-6mm-cell1; ChevyVolt-20SOC-6mm-cell2; ChevyVolt-20SOC-6mm-cell3; ChevyVolt-20SOC-6mm-cell4; ChevyVolt-40SOC-6mm-cell1; ChevyVolt-40SOC-6mm-cell2; ChevyVolt-40SOC-6mm-cell3; ChevyVolt-40SOC-6mm-cell4; ChevyVolt-60SOC-6mm-cell2; ChevyVolt-60SOC-6mm-cell3; ChevyVolt-60SOC-6mm-cell4; ChevyVolt-80SOC-6mm-cell1; ChevyVolt-80SOC-6mm-cell2; ChevyVolt-80SOC-6mm-cell3; ChevyVolt-80SOC-6mm-cell4; Copy of SNL_LMO-LNO_Graphite_33Ah_50SOC_b-copy; LCO-LP-6400mAh-100SOC-cell1; LCO-LP-6400mAh-100SOC-cell2; LCO-LP-6400mAh-80SOC-Cell3; LCO-LP6400mAh-80SOC-cell4; LCO4000mAh-0SOC-cell1; LCO6400mAh-40SOC-cell1-Load-Voltage; LCO_4000mAh-0SOC_cell2_MAX; LCO_4000mAh-10SOC_cell2_MAX; LCO_4000mAh-40SOC_cell1_MAX; LCO_4000mAh-40SOC_cell2_MAX; LCO_4000mAh-50SOC_cell1_MAX; LCO_4000mAh-50SOC_cell2_MAX; LCO_4Ah_100SOC_cell1_MAX; LCO_4Ah_10SOC_cell1_MAX; LCO_4Ah_20SOC_cell1_MAX; LCO_4Ah_20SOC_cell2_MAX; LCO_4Ah_30SOC_cell1_MAX; LCO_4Ah_30SOC_cell2_MAX; LCO_4Ah_60SOC_cell1_MAX; LCO_4Ah_60SOC_cell2_MAX; LCO_4Ah_70SOC_cell1_MAX; LFP10Ah-60SOC-Cell17; LFP_15000mAh_10SOC_max; LFP_15Ah_0SOC_MAX; LFP_15Ah_100SOC_MAX; LFP_15Ah_100SOC_cell2_MAX; LFP_15Ah_20SOC_cell1_MAX; LFP_15Ah_40SOC_cell1_MAX; LFP_15Ah_40SOC_cell2_MAX; LFP_15Ah_50SOC_cell1_MAX; LFP_15Ah_50SOC_cell2; LFP_15Ah_60SOC_cell1_MAX; LFP_15Ah_60SOC_cell2_MAX; LFP_15Ah_80SOC__cell1_MAX_2; LFP_15Ah_80SOC__cell2_MAX_2; NMC_10000mAh-0SOC_cell1_MAX; NMC_10000mAh-100SOC_cell1_MAX; NMC_10000mAh-10SOC_cell1MAX; NMC_10000mAh-20SOC_cell1_MAX; NMC_10000mAh-30SOC_cell1_MAX; NMC_10000mAh-40SOC_cell1_MAX; NMC_10000mAh-50SOC_cell1_MAX; NMC_10000mAh-50SOC_cell2_MAX; NMC_10000mAh-60SOC_cell1_MAX; NMC_10000mAh-70SOC_cell1_MAX; NMC_10000mAh-80SOC_cell1_MAX; NMC_10000mAh-90SOC_cell1_MAX; NMC_10Ah_70SOC_cell2_MAX; NisanLeaf_40SOC-6mm-cell3; NisanLeaf_40SOC-6mm-cell4; NissanLeaf-20SOC-6mm-Cell4; NissanLeaf-20SOC-6mm-cell1; NissanLeaf-20SOC-6mm-cell3; NissanLeaf-60SOC-cell4; Nissan_Leaf-60SOC-6mm-cell1; Nissan_Leaf-60SOC-6mm-cell2; Nissan_Leaf-60SOC-6mm-cell3; OE-10AHr-NMC-40SOC-Cell4; OE-10Ahr-NMC-0SOC-cell1; OE-10Ahr-NMC-0SOC-cell2; OE-10Ahr-NMC-100SOC-cell10; OE-10Ahr-NMC-100SOC-cell11; OE-10Ahr-NMC-40SOC-cell1; OE-10Ahr-NMC-40SOC-cell5; OE-10Ahr-NMC-70SOC-cell6; OE-10Ahr-NMC-70SOC-cell7; OE-10Ahr-NMC-80SOC-Cell9; OE-10Ahr-NMC-80SOC-cell8; OE-LCO-6270mAh-40SOC; OE-LCO-6340mAh-0SOC; OE-LCO-6400mAh-20SOC; OE-LCO-6490mAh-60SOC; OE-LCO-6500mAh-20SOC; OE-LCO-6500mAh-40SOC; OE-LCO-6550mAh-20SOC; OE-LCO-6560mAh-0SOC; OE-LCo-6470mAh-60SOC; OE-LFP-cell14-60SOC-10Ah; OE-LFP10Ah-0SOC-cell10; OE-LFP10Ah-0SOC-cell9; OE-LFP10Ah-100SOC-Cell16; OE-LFP10Ah-100SOC-Cell16-original; OE-LFP10Ah-100SOC-cell1; OE-LFP10Ah-100SOC-cell12; OE-LFP10Ah-100SOC-cell2; OE-LFP10Ah-20SOC; OE-LFP10Ah-40SOC-cell7; OE-LFP10Ah-40SOC-cell8; OE-LFP10Ah-60SOC; OE-LFP10Ah-60SOC-Cell17; OE-LFP10Ah-70SOC-cell5; OE-LFP10Ah-70SOC-cell6; OE-LFP10Ah-80SOC-Cell15; OE-LFP10Ah-80SOC-Cell15-origina; OE-LFP10Ah-80SOC-Cell15-original; OE-LFP10Ah-80SOC-cell13; OE-LFP10Ah-80SOC-cell3; OE-LFP10Ah-80SOC-cell4; OE-NMC10Ah-20SOC; OE-NMC10Ah-20SOC-cell2; OE-NMC10Ah-45SOC; OE-NMC10Ah-45SOC-cell2; OE-NMC10Ah-50SOC; OE-NMC10Ah-60SOC; SNL_LCO_Graphite_6.4Ah_0SOC_a; SNL_LCO_Graphite_6.4Ah_0SOC_b; SNL_LCO_Graphite_6.4Ah_100SOC_a; SNL_LCO_Graphite_6.4Ah_100SOC_b; SNL_LCO_Graphite_6.4Ah_50SOC_a; SNL_LCO_Graphite_6.4Ah_50SOC_b; SNL_LCO_Graphite_6.4Ah_70SOC_a; SNL_LCO_Graphite_6.4Ah_70SOC_b; SNL_LCO_Graphite_6.4Ah_90SOC_a; SNL_LCO_Graphite_6.4Ah_90SOC_b; SNL_LFP_Graphite_10Ah_0SOC_a; SNL_LFP_Graphite_10Ah_0SOC_b; SNL_LFP_Graphite_10Ah_100SOC_a; SNL_LFP_Graphite_10Ah_100SOC_b; SNL_LFP_Graphite_10Ah_50SOC_a; SNL_LFP_Graphite_10Ah_50SOC_b; SNL_LFP_Graphite_10Ah_70SOC_a; SNL_LFP_Graphite_10Ah_70SOC_b; SNL_LFP_Graphite_10Ah_90SOC_a; SNL_LFP_Graphite_10Ah_90SOC_b; SNL_LMO-LNO_Graphite_33Ah_100SOC_a; SNL_LMO-LNO_Graphite_33Ah_100SOC_b; SNL_LMO-LNO_Graphite_33Ah_30SOC_a; SNL_LMO-LNO_Graphite_33Ah_30SOC_b; SNL_LMO-LNO_Graphite_33Ah_50SOC_a; SNL_LMO-LNO_Graphite_33Ah_50SOC_b; SNL_LMO-LNO_Graphite_33Ah_50SOC_b-copy; SNL_LMO-LNO_Graphite_33Ah_75SOC_a; SNL_LMO-LNO_Graphite_33Ah_75SOC_b; SNL_NMC-LMO_Graphite_26Ah_100SOC_a; SNL_NMC-LMO_Graphite_26Ah_100SOC_b; SNL_NMC-LMO_Graphite_26Ah_30SOC_a; SNL_NMC-LMO_Graphite_26Ah_30SOC_b; SNL_NMC-LMO_Graphite_26Ah_50SOC_a; SNL_NMC-LMO_Graphite_26Ah_50SOC_b; SNL_NMC-LMO_Graphite_26Ah_50SOC_c; SNL_NMC-LMO_Graphite_26Ah_75SOC_a; SNL_NMC-LMO_Graphite_26Ah_75SOC_b; SNL_NMC-LMO_Graphite_26Ah_85SOC_a; SNL_NMC-LMO_Graphite_26Ah_85SOC_b; SNL_NMC-LMO_Graphite_26Ah_90SOC_a; SNL_NMC-LMO_Graphite_26Ah_90SOC_b; SNL_NMC-LMO_Graphite_26Ah_90SOC_c; SNL_NMC_Graphite_10Ah_0SOC_a; SNL_NMC_Graphite_10Ah_0SOC_b; SNL_NMC_Graphite_10Ah_0SOC_c; SNL_NMC_Graphite_10Ah_100SOC_a; SNL_NMC_Graphite_10Ah_100SOC_b; SNL_NMC_Graphite_10Ah_50SOC_a; SNL_NMC_Graphite_10Ah_50SOC_b; SNL_NMC_Graphite_10Ah_50SOC_c; SNL_NMC_Graphite_10Ah_70SOC_a; SNL_NMC_Graphite_10Ah_70SOC_b; SNL_NMC_Graphite_10Ah_90SOC_a; SNL_NMC_Graphite_10Ah_90SOC_b; Soetria-80SOC-cell3; Soetria-Control-45SOC-cell1; Sorteria-100SOC-cell1; Sorteria-100SOC-cell2; Sorteria-Control-100SOC-cell1; Sorteria-Control-100SOC-cell2; Sorteria-Control-60SOC-cell1; Sorteria-control-20SOC-cell1; Sorteria-control-40SOC-cell2; Soteria-Control-0SOC-cell1; Soteria-Control-5010mAh-20SOC; Soteria-Control-5030mAh-10SOC; Soteria-Control-50SOC; Soteria-Control-5100mAh-55SOC; Soteria-Control-5120mAh-50SOC; Soteria-SCC-20SOC-5180mAh; Soteria-SCC-4160mAh-100SOC-8mm; Soteria-SCC-4630mAh-10SOC; Soteria-SCC-4700mAh-100SOC-12mm; Soteria-SCC-4720mAh-40SOC; Soteria-SCC-4870mah-0SOC; Soteria-SCC-5050mAhr-100SOC; Soteria-SCC-5070-70SOC; Soteria-SCC-5080mAh-20SOC; Soteria-SCC-5170mAh-60SOC; Soteria-SCC-60SOC-cell1; Soteria-SCC-80SOC-cell1; Soteria-SCC-90SOC-cell1; Soteria-control-10SOC-cell1; Soteria-control-30SOC-cell1; Soteria-control-30SOC-cell2; Soteria-control-5100mAh-50SOC",
+  "chemistry_is_multi": true,
+  "form_factor": null,
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": 10.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": "abuse",
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": 0.0,
+  "soc_window_max_pct": 100.0,
+  "aging_type": "abuse_mechanical",
+  "application_domain": "safety"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 253,
+  "n_entities_declared": 109,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 254,
+  "raw_bytes": 292283310
+ },
+ "content": {
+  "signals": [
+   "displacement",
+   "force",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "3x3 temp (C)",
+   "Cell Voltage (V)",
+   "Displacement (mm)",
+   "Displacement [mm]",
+   "Max temp (C) ",
+   "Penetrator Force (N)",
+   "Penetrator Force [mm]",
+   "TC1 (°C)",
+   "TC1 near positive terminal [C]",
+   "TC2 (°C)",
+   "TC2 near negative terminal [C]",
+   "TC3 (°C)",
+   "TC3 bottom - bottom [C]",
+   "TC4 (°C)",
+   "TC4 bottom - top [C]",
+   "TC5 above punch [C]",
+   "TC6 below punch [C]",
+   "Temp (C)",
+   "Temperature [C]",
+   "Time",
+   "Time (s)",
+   "Time (sec)",
+   "Time (sec) ",
+   "Time (second)",
+   "Voltage (V)",
+   "time (s)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none; each workbook is one destructive mechanical test",
+  "observed": {
+   "voltage_V": [
+    -0.079041,
+    4.189
+   ],
+   "current_A": null,
+   "temperature_C": [
+    12.2,
+    767.5
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "thermal_safety"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "1500mAh1-100S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "1500mAh1-20S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "1500mAh1-40S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "1500mAh1-60S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "1500mAh1-80S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "1500mAh2-100S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "1500mAh2-20S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "1500mAh2-40S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "1500mAh2-60S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "1500mAh2-80S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "1500mAh3-100S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "1500mAh3-20S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "1500mAh3-40S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "1500mAh3-60S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "1500mAh3-80S0C",
+   "nominal_capacity_Ah": 1.5,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "2000mAh1-100S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "2000mAh1-20S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "2000mAh1-40S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "2000mAh1-60S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "2000mAh1-80S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "2000mAh2-100S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "2000mAh2-20S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "2000mAh2-40S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "2000mAh2-60S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "2000mAh2-80S0C",
+   "nominal_capacity_Ah": 2.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "2017ChevyVolt-60SOC-6mm-cell1",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "500mAh1-100S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "500mAh1-20S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "500mAh1-40S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "500mAh1-60S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "500mAh1-80S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "500mAh2-100S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "500mAh2-20S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "500mAh2-40S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "500mAh2-60S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "500mAh2-80S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "500mAh3-100S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "500mAh3-20S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "500mAh3-40S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "500mAh3-60S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "500mAh3-80S0C",
+   "nominal_capacity_Ah": 0.5,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-0SOC-6mm-cell1",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-100SOC-6mm-cell1",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-100SOC-6mm-cell2",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-100SOC-6mm-cell3",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-100SOC-6mm-cell4",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-20SOC-6mm-cell1",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-20SOC-6mm-cell2",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-20SOC-6mm-cell3",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-20SOC-6mm-cell4",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-40SOC-6mm-cell1",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-40SOC-6mm-cell2",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-40SOC-6mm-cell3",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-40SOC-6mm-cell4",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-60SOC-6mm-cell2",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-60SOC-6mm-cell3",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-60SOC-6mm-cell4",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-80SOC-6mm-cell1",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-80SOC-6mm-cell2",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-80SOC-6mm-cell3",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "ChevyVolt-80SOC-6mm-cell4",
+   "nominal_capacity_Ah": 26.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "Copy of SNL_LMO-LNO_Graphite_33Ah_50SOC_b-copy",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "LCO-LP-6400mAh-100SOC-cell1",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.4,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO-LP-6400mAh-100SOC-cell2",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.4,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO-LP-6400mAh-80SOC-Cell3",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.4,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "LCO-LP6400mAh-80SOC-cell4",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.4,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "LCO4000mAh-0SOC-cell1",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "LCO6400mAh-40SOC-cell1-Load-Voltage",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.4,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "LCO_4000mAh-0SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "LCO_4000mAh-10SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "LCO_4000mAh-40SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "LCO_4000mAh-40SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "LCO_4000mAh-50SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_4000mAh-50SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_100SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_10SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_20SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_20SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_30SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_30SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_60SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_60SOC_cell2_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LCO_4Ah_70SOC_cell1_MAX",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 4.0,
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "LFP10Ah-60SOC-Cell17",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LFP_15000mAh_10SOC_max",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_0SOC_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_100SOC_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_100SOC_cell2_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_20SOC_cell1_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_40SOC_cell1_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_40SOC_cell2_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_50SOC_cell1_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_50SOC_cell2",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_60SOC_cell1_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_60SOC_cell2_MAX",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_80SOC__cell1_MAX_2",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "LFP_15Ah_80SOC__cell2_MAX_2",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 15.0,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-0SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-100SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-10SOC_cell1MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-20SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-30SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-40SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-50SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-50SOC_cell2_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-60SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-70SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-80SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "NMC_10000mAh-90SOC_cell1_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 90.0,
+    "soc_window_max_pct": 90.0
+   }
+  },
+  {
+   "cell_id": "NMC_10Ah_70SOC_cell2_MAX",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "NisanLeaf_40SOC-6mm-cell3",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "NisanLeaf_40SOC-6mm-cell4",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "NissanLeaf-20SOC-6mm-Cell4",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NissanLeaf-20SOC-6mm-cell1",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NissanLeaf-20SOC-6mm-cell3",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NissanLeaf-60SOC-cell4",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "Nissan_Leaf-60SOC-6mm-cell1",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "Nissan_Leaf-60SOC-6mm-cell2",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "Nissan_Leaf-60SOC-6mm-cell3",
+   "nominal_capacity_Ah": 33.0,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "OE-10AHr-NMC-40SOC-Cell4",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-0SOC-cell1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-0SOC-cell2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-100SOC-cell10",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-100SOC-cell11",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-40SOC-cell1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-40SOC-cell5",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-70SOC-cell6",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-70SOC-cell7",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-80SOC-Cell9",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-10Ahr-NMC-80SOC-cell8",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6270mAh-40SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.27,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6340mAh-0SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.34,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6400mAh-20SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.4,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6490mAh-60SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.49,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6500mAh-20SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.5,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6500mAh-40SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.5,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6550mAh-20SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.55,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "OE-LCO-6560mAh-0SOC",
+   "cathode_chemistry": "LCO",
+   "nominal_capacity_Ah": 6.56,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "OE-LCo-6470mAh-60SOC",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "OE-LFP-cell14-60SOC-10Ah",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-0SOC-cell10",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-0SOC-cell9",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-100SOC-Cell16",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "OE-LFP10Ah-100SOC-Cell16-original",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "OE-LFP10Ah-100SOC-cell1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-100SOC-cell12",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-100SOC-cell2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-20SOC",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-40SOC-cell7",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-40SOC-cell8",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-60SOC",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-60SOC-Cell17",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-70SOC-cell5",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-70SOC-cell6",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-80SOC-Cell15",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-80SOC-Cell15-origina",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-80SOC-Cell15-original",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-80SOC-cell13",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-80SOC-cell3",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-LFP10Ah-80SOC-cell4",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "OE-NMC10Ah-20SOC",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "OE-NMC10Ah-20SOC-cell2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "OE-NMC10Ah-45SOC",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 45.0,
+    "soc_window_max_pct": 45.0
+   }
+  },
+  {
+   "cell_id": "OE-NMC10Ah-45SOC-cell2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 45.0,
+    "soc_window_max_pct": 45.0
+   }
+  },
+  {
+   "cell_id": "OE-NMC10Ah-50SOC",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "OE-NMC10Ah-60SOC",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_0SOC_a",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_0SOC_b",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_100SOC_a",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_100SOC_b",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_50SOC_a",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_50SOC_b",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_70SOC_a",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_70SOC_b",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_90SOC_a",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LCO_Graphite_6.4Ah_90SOC_b",
+   "cathode_chemistry": "LCO"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_0SOC_a",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_0SOC_b",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_100SOC_a",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_100SOC_b",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_50SOC_a",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_50SOC_b",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_70SOC_a",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_70SOC_b",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_90SOC_a",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LFP_Graphite_10Ah_90SOC_b",
+   "cathode_chemistry": "LFP"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_100SOC_a",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_100SOC_b",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_30SOC_a",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_30SOC_b",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_50SOC_a",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_50SOC_b",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_50SOC_b-copy",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_75SOC_a",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_LMO-LNO_Graphite_33Ah_75SOC_b",
+   "cathode_chemistry": "LMO-LNO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_100SOC_a",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_100SOC_b",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_30SOC_a",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_30SOC_b",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_50SOC_a",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_50SOC_b",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_50SOC_c",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_75SOC_a",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_75SOC_b",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_85SOC_a",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_85SOC_b",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_90SOC_a",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_90SOC_b",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC-LMO_Graphite_26Ah_90SOC_c",
+   "cathode_chemistry": "NMC-LMO"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_0SOC_a",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_0SOC_b",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_0SOC_c",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_100SOC_a",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_100SOC_b",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_50SOC_a",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_50SOC_b",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_50SOC_c",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_70SOC_a",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_70SOC_b",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_90SOC_a",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "SNL_NMC_Graphite_10Ah_90SOC_b",
+   "cathode_chemistry": "NMC"
+  },
+  {
+   "cell_id": "Soetria-80SOC-cell3",
+   "nominal_capacity_Ah": 4.96,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "Soetria-Control-45SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 45.0,
+    "soc_window_max_pct": 45.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-100SOC-cell1",
+   "nominal_capacity_Ah": 4.96,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-100SOC-cell2",
+   "nominal_capacity_Ah": 4.96,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-Control-100SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-Control-100SOC-cell2",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-Control-60SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-control-20SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "Sorteria-control-40SOC-cell2",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "Soteria-Control-0SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "Soteria-Control-5010mAh-20SOC",
+   "nominal_capacity_Ah": 5.01,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "Soteria-Control-5030mAh-10SOC",
+   "nominal_capacity_Ah": 5.03,
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "Soteria-Control-50SOC",
+   "nominal_capacity_Ah": 4.62,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "Soteria-Control-5100mAh-55SOC",
+   "nominal_capacity_Ah": 5.1,
+   "labels": {
+    "soc_window_min_pct": 55.0,
+    "soc_window_max_pct": 55.0
+   }
+  },
+  {
+   "cell_id": "Soteria-Control-5120mAh-50SOC",
+   "nominal_capacity_Ah": 5.12,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-20SOC-5180mAh",
+   "nominal_capacity_Ah": 5.18,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-4160mAh-100SOC-8mm",
+   "nominal_capacity_Ah": 4.16,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-4630mAh-10SOC",
+   "nominal_capacity_Ah": 4.63,
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-4700mAh-100SOC-12mm",
+   "nominal_capacity_Ah": 4.7,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-4720mAh-40SOC",
+   "nominal_capacity_Ah": 4.72,
+   "labels": {
+    "soc_window_min_pct": 40.0,
+    "soc_window_max_pct": 40.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-4870mah-0SOC",
+   "nominal_capacity_Ah": 4.87,
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 0.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-5050mAhr-100SOC",
+   "nominal_capacity_Ah": 5.05,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-5070-70SOC",
+   "nominal_capacity_Ah": 5.07,
+   "labels": {
+    "soc_window_min_pct": 70.0,
+    "soc_window_max_pct": 70.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-5080mAh-20SOC",
+   "nominal_capacity_Ah": 5.08,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-5170mAh-60SOC",
+   "nominal_capacity_Ah": 5.17,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-60SOC-cell1",
+   "nominal_capacity_Ah": 5.18,
+   "labels": {
+    "soc_window_min_pct": 60.0,
+    "soc_window_max_pct": 60.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-80SOC-cell1",
+   "nominal_capacity_Ah": 5.18,
+   "labels": {
+    "soc_window_min_pct": 80.0,
+    "soc_window_max_pct": 80.0
+   }
+  },
+  {
+   "cell_id": "Soteria-SCC-90SOC-cell1",
+   "nominal_capacity_Ah": 5.18,
+   "labels": {
+    "soc_window_min_pct": 90.0,
+    "soc_window_max_pct": 90.0
+   }
+  },
+  {
+   "cell_id": "Soteria-control-10SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 10.0,
+    "soc_window_max_pct": 10.0
+   }
+  },
+  {
+   "cell_id": "Soteria-control-30SOC-cell1",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "Soteria-control-30SOC-cell2",
+   "nominal_capacity_Ah": 5.19,
+   "labels": {
+    "soc_window_min_pct": 30.0,
+    "soc_window_max_pct": 30.0
+   }
+  },
+  {
+   "cell_id": "Soteria-control-5100mAh-50SOC",
+   "nominal_capacity_Ah": 5.1,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Single-side indentation tests that induce thermal runaway; each workbook is one test. main.xlsx (author table) gives capacity, SOC and observed/calculated severity scores per test."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "paper",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "landing_page",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_filenames",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_34.json",
+  "landing_evidence": "evidence/landing/dataset_34.json"
+ }
+}

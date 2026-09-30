@@ -1,0 +1,237 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_21",
+ "identity": {
+  "ref_name": "2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T",
+  "ref_name_aliases": [],
+  "dataset_name": "CMU VTC6 eVTOL Duty Cycle",
+  "institution": "Carnegie Mellon University",
+  "year": 2023,
+  "doi": "10.1184/R1/14226830.v3",
+  "paper_doi": null,
+  "source_url": "https://figshare.com/articles/dataset/eVTOL_Battery_Dataset/14226830",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "Sony-Murata",
+  "model": "18650 VTC-6",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.5,
+   "height": 65.2,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 3.12,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.0,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": 1.5,
+  "discharge_c_rate_max": 6.930328,
+  "c_rate_profile": "dynamic",
+  "protocol_class": "CC-CV",
+  "protocol_charge_raw": "CC-CV charge (baseline 4.2 V; variants reduce CC current to C/2 or 1.5C, or CV voltage to 4.0/4.1 V)",
+  "protocol_discharge_raw": "eVTOL mission profile: discharge segment with cruise (400-1000 s), power reductions of 10-20%; 4.2 V baseline",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "profile",
+  "application_domain": "eVTOL"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 22,
+  "n_entities_declared": 22,
+  "n_cycles_total": 7139,
+  "cycles_per_entity_median": 250.0,
+  "n_raw_files": 44,
+  "raw_bytes": 1539394976
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "20%_1_second",
+   "20%_30_second",
+   "60%_1_second",
+   "60%_30_second",
+   "Ecell_V",
+   "EnergyCharge_W_h",
+   "EnergyDischarge_W_h",
+   "I_mA",
+   "Ns",
+   "QCharge_mA_h",
+   "QDischarge_mA_h",
+   "Temperature__C",
+   "cycleNumber",
+   "time_s"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "cycleNumber as recorded by the cell tester; the authors' README warns it is not accurate (tester output files were merged)",
+  "observed": {
+   "voltage_V": [
+    2.499885,
+    7.180042
+   ],
+   "current_A": [
+    -21.622623,
+    4.492399
+   ],
+   "temperature_C": [
+    14.466017,
+    69.837273
+   ],
+   "discharge_capacity_Ah_max": 2.055527,
+   "discharge_capacity_Ah_median_of_entity_max": 1.7705294999999999
+  },
+  "source_format": [
+   "csv"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "VAH01"
+  },
+  {
+   "cell_id": "VAH02"
+  },
+  {
+   "cell_id": "VAH05"
+  },
+  {
+   "cell_id": "VAH06"
+  },
+  {
+   "cell_id": "VAH07"
+  },
+  {
+   "cell_id": "VAH09"
+  },
+  {
+   "cell_id": "VAH10"
+  },
+  {
+   "cell_id": "VAH11"
+  },
+  {
+   "cell_id": "VAH12"
+  },
+  {
+   "cell_id": "VAH13"
+  },
+  {
+   "cell_id": "VAH15"
+  },
+  {
+   "cell_id": "VAH16"
+  },
+  {
+   "cell_id": "VAH17"
+  },
+  {
+   "cell_id": "VAH20"
+  },
+  {
+   "cell_id": "VAH22"
+  },
+  {
+   "cell_id": "VAH23"
+  },
+  {
+   "cell_id": "VAH24"
+  },
+  {
+   "cell_id": "VAH25"
+  },
+  {
+   "cell_id": "VAH26"
+  },
+  {
+   "cell_id": "VAH27"
+  },
+  {
+   "cell_id": "VAH28"
+  },
+  {
+   "cell_id": "VAH30"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Chamber temperature is documented only for the variants (20, 30, 35 C); the baseline chamber temperature is not stated. cycleNumber is unreliable (the authors merged tester output files); VAHxx_impedance.csv holds pulse resistances at 20% and 60% SOC. Cell spec from Murata's official US18650VTC6 product datasheet. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached ranges cover 22 cell files, including mission and capacity-test segments; the maximum discharge value was independently located in VAH01.csv. The discharge maximum was traced to the mission segment ending at 2.5001111 V, with preceding increasing discharge currents; it is not a fixed-current discharge."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "landing_page",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "raw_docs",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "curated",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "derived",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_21.json",
+  "landing_evidence": "evidence/landing/dataset_21.json"
+ }
+}

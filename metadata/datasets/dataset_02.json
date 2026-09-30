@@ -1,0 +1,190 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_02",
+ "identity": {
+  "ref_name": "2013_CALCE_UMD_LCO_Prismatic_1.1Ah_0.5C_1C_25T",
+  "ref_name_aliases": [
+   {
+    "name": "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T",
+    "status": "historical",
+    "seen_in": [
+     "registry_history",
+     "raw_readme"
+    ]
+   }
+  ],
+  "dataset_name": "CALCE CS2 Battery Aging",
+  "institution": "CALCE, University of Maryland",
+  "year": 2013,
+  "doi": null,
+  "paper_doi": null,
+  "source_url": "https://calce.umd.edu",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "LCO",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LiCoO2 cathode (trace Mn)",
+  "chemistry_is_multi": false,
+  "form_factor": "prismatic",
+  "cell_format_code": null,
+  "dimensions_mm": {
+   "diameter": null,
+   "height": null,
+   "length": 50.6,
+   "width": 33.6,
+   "thickness": 5.4,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 1.1,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.7,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": 0.5,
+  "discharge_c_rate_max": 1.0,
+  "c_rate_profile": "constant",
+  "protocol_class": "mixed",
+  "protocol_charge_raw": "CC 0.5C to 4.2 V, then CV at 4.2 V until current drops below 0.05 A",
+  "protocol_discharge_raw": "varies by cell group: constant 0.5C or 1C, alternating current levels, or partial-SOC cycling; see raw file names for group",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 6,
+  "n_entities_declared": 6,
+  "n_cycles_total": 5686,
+  "cycles_per_entity_median": 956.0,
+  "n_raw_files": 6,
+  "raw_bytes": 248444385
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "AC_Impedance(Ohm)",
+   "Charge_Capacity(Ah)",
+   "Charge_Energy(Wh)",
+   "Current(A)",
+   "Cycle_Index",
+   "Date_Time",
+   "Discharge_Capacity(Ah)",
+   "Discharge_Energy(Wh)",
+   "Internal_Resistance(Ohm)",
+   "Step_Index",
+   "Step_Time(s)",
+   "Test_Time(s)",
+   "Voltage(V)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "Cycle_Index of the Arbin data sheets; workbooks of one cell continue the count",
+  "observed": {
+   "voltage_V": [
+    2.698494,
+    4.273362
+   ],
+   "current_A": [
+    -1.100436,
+    1.188118
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": 0.990275,
+   "discharge_capacity_Ah_median_of_entity_max": 0.6354335
+  },
+  "source_format": [
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "CS2_33"
+  },
+  {
+   "cell_id": "CS2_34"
+  },
+  {
+   "cell_id": "CS2_35"
+  },
+  {
+   "cell_id": "CS2_36"
+  },
+  {
+   "cell_id": "CS2_37"
+  },
+  {
+   "cell_id": "CS2_38"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Raw_Dataset holds only Arbin workbooks (an Info sheet and Channel data sheets); no README or cell specification ships with them. The CALCE battery-data landing page lists several battery models on one page (INR 18650-20R, A123, CS2, CX2, PL); an earlier pass mistakenly cited the page's first table (INR 18650-20R, 2000 mAh) instead of the CS2-specific one (1100 mAh), which is what these CS2_n cells actually are. The Arbin schedule name in the Info sheet is CS2_point5C."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "landing_page",
+   "identity.year": "ref_name",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "landing_page",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "landing_page",
+   "cell.voltage_max_V": "landing_page",
+   "cell.voltage_min_V": "landing_page",
+   "conditions.protocol_charge_raw": "landing_page",
+   "conditions.protocol_discharge_raw": "landing_page",
+   "cell.dimensions_mm": "landing_page",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "derived",
+   "conditions.discharge_c_rate_max": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_02.json",
+  "landing_evidence": "evidence/landing/dataset_02.json"
+ }
+}

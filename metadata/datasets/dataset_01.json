@@ -1,0 +1,268 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_01",
+ "identity": {
+  "ref_name": "2007_NASA_PCoE_LCO_18650_1C_1C_25T",
+  "ref_name_aliases": [],
+  "dataset_name": "NASA PCoE Battery Aging",
+  "institution": "NASA Prognostics Center of Excellence",
+  "year": 2007,
+  "doi": null,
+  "paper_doi": null,
+  "source_url": "https://data.nasa.gov",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "LCO",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LCO",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 2.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.0,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 4.0,
+  "temperature_max_C": 44.0,
+  "temperature_setpoints_C": [
+   4.0,
+   24.0,
+   43.0,
+   44.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 0.75,
+  "discharge_c_rate_max": 2.0,
+  "c_rate_profile": "constant",
+  "protocol_class": "CC-CV",
+  "protocol_charge_raw": "CC 1.5 A to 4.2 V, then CV until the current falls to 20 mA",
+  "protocol_discharge_raw": "CC 2 A (some sets 1 A or 4 A; one set a 0.05 Hz 4 A square wave) to a cut-off of 2.0-2.7 V",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 34,
+  "n_entities_declared": 34,
+  "n_cycles_total": 2794,
+  "cycles_per_entity_median": 69.5,
+  "n_raw_files": 1,
+  "raw_bytes": 209708670
+ },
+ "content": {
+  "signals": [
+   "current",
+   "discharge_capacity",
+   "eis",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Battery_impedance",
+   "Capacity",
+   "Current_measured",
+   "Rct",
+   "Re",
+   "Rectified_Impedance",
+   "Temperature_measured",
+   "Time",
+   "Voltage_measured"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "number of discharge cycles in the MATLAB `cycle` struct (charge and impedance steps are separate entries)",
+  "observed": {
+   "voltage_V": [
+    -0.001422,
+    8.393141
+   ],
+   "current_A": [
+    -4.508828,
+    1.536047
+   ],
+   "temperature_C": [
+    2.852221,
+    69.869746
+   ],
+   "discharge_capacity_Ah_max": 2.640149,
+   "discharge_capacity_Ah_median_of_entity_max": 1.795612
+  },
+  "source_format": [
+   "mat"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "B0005"
+  },
+  {
+   "cell_id": "B0006"
+  },
+  {
+   "cell_id": "B0007"
+  },
+  {
+   "cell_id": "B0018"
+  },
+  {
+   "cell_id": "B0025"
+  },
+  {
+   "cell_id": "B0026"
+  },
+  {
+   "cell_id": "B0027"
+  },
+  {
+   "cell_id": "B0028"
+  },
+  {
+   "cell_id": "B0029"
+  },
+  {
+   "cell_id": "B0030"
+  },
+  {
+   "cell_id": "B0031"
+  },
+  {
+   "cell_id": "B0032"
+  },
+  {
+   "cell_id": "B0033"
+  },
+  {
+   "cell_id": "B0034"
+  },
+  {
+   "cell_id": "B0036"
+  },
+  {
+   "cell_id": "B0038"
+  },
+  {
+   "cell_id": "B0039"
+  },
+  {
+   "cell_id": "B0040"
+  },
+  {
+   "cell_id": "B0041"
+  },
+  {
+   "cell_id": "B0042"
+  },
+  {
+   "cell_id": "B0043"
+  },
+  {
+   "cell_id": "B0044"
+  },
+  {
+   "cell_id": "B0045"
+  },
+  {
+   "cell_id": "B0046"
+  },
+  {
+   "cell_id": "B0047"
+  },
+  {
+   "cell_id": "B0048"
+  },
+  {
+   "cell_id": "B0049"
+  },
+  {
+   "cell_id": "B0050"
+  },
+  {
+   "cell_id": "B0051"
+  },
+  {
+   "cell_id": "B0052"
+  },
+  {
+   "cell_id": "B0053"
+  },
+  {
+   "cell_id": "B0054"
+  },
+  {
+   "cell_id": "B0055"
+  },
+  {
+   "cell_id": "B0056"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Impedance (EIS) sweeps 0.1 Hz-5 kHz are interleaved with charge and discharge cycles. Cathode/format come from the registry; the README says only 'Li-ion'. Stated end of life: 30% fade of the rated capacity (2 to 1.4 Ah)."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "curated",
+   "conditions.discharge_c_rate_max": "curated"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_01.json",
+  "landing_evidence": "evidence/landing/dataset_01.json"
+ }
+}

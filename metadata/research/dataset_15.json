@@ -1,0 +1,90 @@
+{
+ "$schema": "../schema/batterylake-research-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_15",
+ "ref_name": "2023_IVST_Changan_LiIon_EV_MultiChem_MultiC_MultiT",
+ "category": "field_data",
+ "timeseries": {
+  "has_voltage_timeseries": true,
+  "has_current_timeseries": true,
+  "has_temperature_timeseries": true,
+  "complete_v_i_t_timeseries": false,
+  "resolution": "waveform_sample_only",
+  "signals_basis": "raw_data",
+  "caveats": [
+   "sample_only_raw"
+  ]
+ },
+ "soc": {
+  "computable": true,
+  "basis": "explicit_soc_column"
+ },
+ "soh": {
+  "computable": false,
+  "basis": null,
+  "blocking_flags": [],
+  "curated_task_present": true
+ },
+ "capacity_degradation": {
+  "present": false,
+  "aging_type": "field",
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null
+ },
+ "ocv": {
+  "present": false,
+  "confidence": null,
+  "basis": null
+ },
+ "internal_resistance": {
+  "present": false,
+  "confidence": null,
+  "basis": "no populated resistance column and no impedance measurement in the raw data"
+ },
+ "eis": {
+  "present": false,
+  "basis": null
+ },
+ "thermal": {
+  "temperature_logging": true,
+  "thermal_characterization": false,
+  "application_domain": "EV_field",
+  "aging_type": "field"
+ },
+ "research_applicability": {
+  "parameter_identification": true,
+  "piml_calibration": false,
+  "soh_rul_prediction": false,
+  "simulation": true,
+  "synthetic_data_generation": false
+ },
+ "suitable_tasks": [
+  "SOC_estimation",
+  "digital_twin_calibration",
+  "simulation"
+ ],
+ "source_quality_flags": [
+  "sample_only_raw"
+ ],
+ "provenance": {
+  "derived_from": "datasets/dataset_15.json",
+  "generated": "2026-09-29",
+  "field_sources": {
+   "ref_name": "dataset_record",
+   "category": "folder_layout",
+   "timeseries.*": "derived",
+   "soc.*": "derived",
+   "soh.*": "derived",
+   "capacity_degradation.*": "derived",
+   "ocv.*": "derived",
+   "internal_resistance.*": "raw_data",
+   "eis.*": "raw_data",
+   "thermal.*": "derived",
+   "research_applicability.*": "derived",
+   "suitable_tasks": "derived",
+   "source_quality_flags": "dataset_record"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29"
+ }
+}

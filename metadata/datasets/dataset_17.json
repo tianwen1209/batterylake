@@ -1,0 +1,175 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_17",
+ "identity": {
+  "ref_name": "2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T",
+  "ref_name_aliases": [],
+  "dataset_name": "A123 LFP HEV-WLTP Drive Cycle",
+  "institution": "McMaster University and Politecnico di Torino",
+  "year": 2021,
+  "doi": "10.5683/SP3/23MFNE",
+  "paper_doi": "10.1016/j.apenergy.2021.116440",
+  "source_url": "https://borealisdata.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/23MFNE",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "A123",
+  "model": "2p5Ah",
+  "cathode_chemistry": "LFP",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "26650",
+  "dimensions_mm": {
+   "diameter": 26,
+   "height": 65,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 2.5,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": null,
+  "voltage_max_V": 3.6
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": 8.00052,
+  "discharge_c_rate_max": 19.2004,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "drive_cycle",
+  "protocol_charge_raw": "HPPC and two 1C discharge capacity tests, then 300 repetitions of a WLTP-based HEV power profile per ageing block",
+  "protocol_discharge_raw": "1C reference discharge; WLTP-derived hybrid power profile",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "profile",
+  "application_domain": "HEV"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 3,
+  "n_entities_declared": 3,
+  "n_cycles_total": 13424,
+  "cycles_per_entity_median": 4962.0,
+  "n_raw_files": 6,
+  "raw_bytes": 3373208982
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "cycle_index",
+   "energy",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Capacity",
+   "Current",
+   "Cycle",
+   "Status",
+   "Step",
+   "Temperature",
+   "Time Stamp",
+   "Voltage",
+   "Wh"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "sum of per-file distinct tester Cycle values across parsed CSV parts, including HPPC and reference tests; not the WLTP aging-folder counter or an independently reconciled count of full aging cycles",
+  "observed": {
+   "voltage_V": [
+    0.0,
+    3.6037
+   ],
+   "current_A": [
+    -48.001,
+    20.0013
+   ],
+   "temperature_C": [
+    9.9972,
+    36.7639
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv",
+   "mat",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "SOC"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "SN0030"
+  },
+  {
+   "cell_id": "SN0756"
+  },
+  {
+   "cell_id": "SN1140"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "incomplete_raw_files"
+  ],
+  "notes": "Three cells aged to 70% (300k km), 40% (206k km) and 15% (95k km) SOH. One partial download marker (Data Summary.tab.part) is present. Cell spec from A123's official ANR26650M1-B datasheet. voltage_min_V left unset: this document does not state a discharge cutoff voltage explicitly (only charge parameters and discharge current limits); other sources commonly cite 2.0V for this cell family but that was not independently confirmed here. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached ranges cover all parsed CSV parts of three cells; the maximum charge value was independently located in one HPPC CSV. The charge maximum is an HPPC pulse, so it does not describe a sustained recharge rate. Both observed directional maxima now use cached global current extrema: 8.00052C charge in an HPPC pulse, and 19.2004C discharge in a WLTP segment. The global -48.001 A was independently located in 2-95k km case.zip::95k km case/Cycle 0/951_WLTP_90a.csv line 506, with Current [A] and sign checked against DCH/CHA rows. The 1C value remains the reference-discharge protocol; 15.00176C is only a separately traced HPPC subset peak. The extracted cycle total counts per-file tester cycles across diagnostic and aging parts; it is not the independently reconciled WLTP aging-folder count."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.paper_doi": "raw_docs",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "raw_docs",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "conditions.protocol_charge_raw": "landing_page",
+   "conditions.protocol_discharge_raw": "landing_page",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_data",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_17.json",
+  "landing_evidence": "evidence/landing/dataset_17.json"
+ }
+}

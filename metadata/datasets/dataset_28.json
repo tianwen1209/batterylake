@@ -1,0 +1,205 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_28",
+ "identity": {
+  "ref_name": "2024_Stanford_Onori_LFP_Cyl_SOC-ML_25T",
+  "ref_name_aliases": [],
+  "dataset_name": "Stanford-Onori LFP SOC ML",
+  "institution": "Stanford University, Onori Lab",
+  "year": 2024,
+  "doi": null,
+  "paper_doi": "10.1021/acsenergylett.4c03223",
+  "source_url": "https://github.com/LeXuSECL/ML_SOC_Estimation_ACS_Energy_Letters",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "LFP",
+  "anode_chemistry": "graphite",
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "26650",
+  "dimensions_mm": {
+   "diameter": 26.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.0,
+  "voltage_max_V": 3.6
+ },
+ "conditions": {
+  "temperature_min_C": 10.0,
+  "temperature_max_C": 45.0,
+  "temperature_setpoints_C": [
+   10.0,
+   25.0,
+   35.0,
+   45.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 1.0,
+  "discharge_c_rate_max": 1.0,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "pulse",
+  "protocol_charge_raw": "CC-CV 1C to full, capacity test at C/5, GITT and pseudo-OCV at C/30, C/20, C/10, dynamic WLTP/random profiles at four temperatures",
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 8,
+  "n_entities_declared": null,
+  "n_cycles_total": 116,
+  "cycles_per_entity_median": 10.0,
+  "n_raw_files": 1,
+  "raw_bytes": 2419728427
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Aux_Temperature(¡æ)_1",
+   "Aux_Temperature(¡æ)_2",
+   "Aux_Temperature(¡æ)_3",
+   "Aux_Temperature(¡æ)_4",
+   "Aux_Temperature(¡æ)_5",
+   "Aux_Voltage(V)_1",
+   "Aux_Voltage(V)_2",
+   "Aux_Voltage(V)_3",
+   "Aux_Voltage(V)_4",
+   "Aux_Voltage(V)_5",
+   "Charge_Capacity(Ah)",
+   "Charge_Energy(Wh)",
+   "Current(A)",
+   "Cycle_Index",
+   "Date_Time",
+   "Discharge_Capacity(Ah)",
+   "Discharge_Energy(Wh)",
+   "Internal Resistance(Ohm)",
+   "Step_Index",
+   "Step_Time(s)",
+   "Test_Time(s)",
+   "Voltage(V)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "no cycle index; parts are capacity, GITT, pseudo-OCV and dynamic-profile experiments per temperature",
+  "observed": {
+   "voltage_V": [
+    1.99913,
+    3.889704
+   ],
+   "current_A": [
+    -44.811394,
+    28.873169
+   ],
+   "temperature_C": [
+    9.216756,
+    48.881331
+   ],
+   "discharge_capacity_Ah_max": 0.005496,
+   "discharge_capacity_Ah_median_of_entity_max": 0.0005560000000000001
+  },
+  "source_format": [
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOC"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "YX01"
+  },
+  {
+   "cell_id": "YX02"
+  },
+  {
+   "cell_id": "YX03"
+  },
+  {
+   "cell_id": "YX04"
+  },
+  {
+   "cell_id": "YX05"
+  },
+  {
+   "cell_id": "YX06"
+  },
+  {
+   "cell_id": "YX07"
+  },
+  {
+   "cell_id": "YX08"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Capacity, GITT, pseudo-OCV and dynamic-profile tests on LFP cells for SOC estimation. Tester capacity columns are running counters. The paper p. 745 identifies 26650 LFP/graphite cells. The 1C discharge scalar is the largest explicitly stated CC or average profile rate in the author README; it does not bound instantaneous WLTP or HPPC peaks. Nominal Ah remains null because no supported numeric nominal Ah was obtained from the reviewed sources. Auxiliary temperature readings are finite, but sensor placement has not been established by the reviewed main paper or README."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.paper_doi": "raw_docs",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "landing_page",
+   "cell.anode_chemistry": "paper",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "derived",
+   "conditions.discharge_c_rate_max": "raw_docs"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_28.json",
+  "landing_evidence": "evidence/landing/dataset_28.json"
+ }
+}

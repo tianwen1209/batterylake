@@ -1,0 +1,284 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_24",
+ "identity": {
+  "ref_name": "2021_Stanford_Onori_NMC-NCA-LFP_18650_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Stanford-Onori Galvanostatic Discharge",
+  "institution": "Stanford University, Onori Lab",
+  "year": 2021,
+  "doi": "10.17632/kxsbr4x3j2.2",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/kxsbr4x3j2/2",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LFP; NCA; NMC",
+  "chemistry_is_multi": true,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": 2.0,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": 5.0,
+  "temperature_max_C": 35.0,
+  "temperature_setpoints_C": [
+   5.0,
+   25.0,
+   35.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": 20.0,
+  "c_rate_profile": "constant",
+  "protocol_class": "CC-CV",
+  "protocol_charge_raw": "CC-CV to full charge, then galvanostatic discharge at a set C-rate",
+  "protocol_discharge_raw": "galvanostatic discharge to the voltage cut-off (2.5 V for NCA and NMC, 2 V for LFP)",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 18,
+  "n_entities_declared": null,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 334,
+  "raw_bytes": 638231736
+ },
+ "content": {
+  "signals": [
+   "current",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Current(A)",
+   "Date_Time",
+   "Step_Index",
+   "Step_Time(s)",
+   "Surface_Temp(degC)",
+   "Test_Time(s)",
+   "Voltage(V)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "no cycle index; each workbook is one galvanostatic discharge at a C-rate and temperature",
+  "observed": {
+   "voltage_V": [
+    1.997846,
+    4.347189
+   ],
+   "current_A": [
+    -50.007584,
+    2.644049
+   ],
+   "temperature_C": [
+    3.690753,
+    85.180519
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "characterization"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "LFP_k1",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "LFP_k2",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "LFP_k3",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "LFP_k4",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "LFP_k5",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "LFP_k6",
+   "cathode_chemistry": "LFP",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NCA_k1",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NCA_k2",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NCA_k3",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NCA_k4",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NCA_k5",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NCA_k6",
+   "cathode_chemistry": "NCA",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NMC_k1",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NMC_k2",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NMC_k3",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NMC_k4",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NMC_k5",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  },
+  {
+   "cell_id": "NMC_k6",
+   "cathode_chemistry": "NMC",
+   "labels": {
+    "discharge_c_rate": 5.0
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Three lithium-ion chemistries (LFP, NMC, NCA); file names give cell, C-rate and temperature. Surface temperature is measured with T-type thermocouples. The delivered LFP discharge filenames include 20C tests; the earlier 5C scalar was a modal per-entity attribute, not the maximum across all test parts. The 20C maximum applies to LFP tests, not every cell chemistry."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "registry",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_filenames",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "cell.form_factor": "registry",
+   "cell.voltage_min_V": "landing_page",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "conditions.protocol_charge_raw": "landing_page",
+   "conditions.protocol_discharge_raw": "landing_page",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.discharge_c_rate_max": "raw_filenames"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_24.json",
+  "landing_evidence": "evidence/landing/dataset_24.json"
+ }
+}

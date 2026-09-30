@@ -1,0 +1,838 @@
+{
+ "$schema": "./schema/batterylake-research-index-2.0.json",
+ "schema_version": "2.0.0",
+ "generated": "2026-09-29",
+ "record_schema": "./schema/batterylake-research-2.0.json",
+ "count": 40,
+ "facets": {
+  "category": [
+   "calendar_aging",
+   "characterization",
+   "cycle_aging",
+   "eis",
+   "ev",
+   "field_data",
+   "field_fault_diagnosis",
+   "soc_estimation",
+   "soh_estimation",
+   "thermal_runaway"
+  ],
+  "suitable_tasks": [
+   "EIS_characterization",
+   "OCV_curve_extraction",
+   "RUL_prediction",
+   "SOC_estimation",
+   "SOH_estimation",
+   "digital_twin_calibration",
+   "fault_diagnosis",
+   "simulation",
+   "synthetic_data_generation",
+   "thermal_modelling"
+  ],
+  "source_confidence": [
+   "verified"
+  ]
+ },
+ "datasets": [
+  {
+   "dataset_id": "dataset_01",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_01.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": true,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "EIS_characterization"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_02",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_02.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_03",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_03.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_04",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_04.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": true,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_05",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_05.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_06",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_06.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_07",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_07.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_08",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_08.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_09",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_09.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_11",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_11.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": true,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_12",
+   "category": "ev",
+   "record_path": "research/dataset_12.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "fault_diagnosis"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_13",
+   "category": "field_data",
+   "record_path": "research/dataset_13.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": true,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_14",
+   "category": "characterization",
+   "record_path": "research/dataset_14.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": true,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "EIS_characterization"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_15",
+   "category": "field_data",
+   "record_path": "research/dataset_15.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_16",
+   "category": "soh_estimation",
+   "record_path": "research/dataset_16.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_17",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_17.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_18",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_18.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": true,
+   "internal_resistance_present": false,
+   "eis_present": true,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "EIS_characterization",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_19",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_19.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": false,
+   "ocv_present": true,
+   "internal_resistance_present": true,
+   "eis_present": true,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "EIS_characterization",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_20",
+   "category": "characterization",
+   "record_path": "research/dataset_20.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_21",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_21.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_22",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_22.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_23",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_23.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_24",
+   "category": "characterization",
+   "record_path": "research/dataset_24.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_25",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_25.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_26",
+   "category": "characterization",
+   "record_path": "research/dataset_26.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": true,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_27",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_27.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": true,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "EIS_characterization"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_28",
+   "category": "soc_estimation",
+   "record_path": "research/dataset_28.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": true,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+    "synthetic_data_generation",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_29",
+   "category": "calendar_aging",
+   "record_path": "research/dataset_29.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_30",
+   "category": "field_fault_diagnosis",
+   "record_path": "research/dataset_30.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "fault_diagnosis"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_31",
+   "category": "eis",
+   "record_path": "research/dataset_31.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": false,
+   "ocv_present": true,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "OCV_curve_extraction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_32",
+   "category": "eis",
+   "record_path": "research/dataset_32.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": true,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "EIS_characterization"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_33",
+   "category": "thermal_runaway",
+   "record_path": "research/dataset_33.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": true,
+   "suitable_tasks": [
+    "thermal_modelling"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_34",
+   "category": "thermal_runaway",
+   "record_path": "research/dataset_34.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": true,
+   "suitable_tasks": [
+    "thermal_modelling"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_35",
+   "category": "thermal_runaway",
+   "record_path": "research/dataset_35.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": true,
+   "suitable_tasks": [
+    "thermal_modelling"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_36",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_36.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": true,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_37",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_37.json",
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+   "soh_computable": false,
+   "capacity_degradation_present": false,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_38",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_38.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": true,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_39",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_39.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": false,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_40",
+   "category": "calendar_aging",
+   "record_path": "research/dataset_40.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation"
+   ],
+   "source_confidence": "verified"
+  },
+  {
+   "dataset_id": "dataset_41",
+   "category": "cycle_aging",
+   "record_path": "research/dataset_41.json",
+   "complete_v_i_t_timeseries": false,
+   "soc_computable": true,
+   "soh_computable": true,
+   "capacity_degradation_present": true,
+   "ocv_present": false,
+   "internal_resistance_present": false,
+   "eis_present": false,
+   "thermal_characterization": false,
+   "suitable_tasks": [
+    "SOH_estimation",
+    "RUL_prediction",
+    "SOC_estimation",
+    "digital_twin_calibration"
+   ],
+   "source_confidence": "verified"
+  }
+ ]
+}

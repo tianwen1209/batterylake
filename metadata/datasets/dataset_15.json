@@ -1,0 +1,148 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_15",
+ "identity": {
+  "ref_name": "2023_IVST_Changan_LiIon_EV_MultiChem_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "IVST Changan Large-Scale NEV",
+  "institution": "IVST / Changan Automobile",
+  "year": 2023,
+  "doi": null,
+  "paper_doi": null,
+  "source_url": "http://ivstskl.changan.com.cn/?p=2697",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": null,
+  "anode_chemistry": null,
+  "chemistry_label_raw": "Multi",
+  "chemistry_is_multi": false,
+  "form_factor": "pack",
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "field",
+  "application_domain": "EV_field"
+ },
+ "scale": {
+  "entity_type": "vehicle",
+  "n_entities": 1,
+  "n_entities_declared": null,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 1,
+  "raw_bytes": 108263512
+ },
+ "content": {
+  "signals": [
+   "current",
+   "soc",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "batteryvoltage",
+   "chargestatus",
+   "maxtemperaturevalue",
+   "maxvoltagebattery",
+   "mintemperaturevalue",
+   "minvoltagebattery",
+   "probetemperatures",
+   "soc",
+   "terminaltime",
+   "totalcurrent",
+   "totalvoltage"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none; continuous vehicle BMS log",
+  "observed": {
+   "voltage_V": [
+    0.0,
+    407.3
+   ],
+   "current_A": [
+    -1000.0,
+    310.3
+   ],
+   "temperature_C": [
+    -40.0,
+    45.0
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "vin93"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "sample_only_raw"
+  ],
+  "notes": "Only sample_data.rar (one vehicle, vin93.csv) is present, so the raw data is a sample of the vehicle data set. Pack voltage/current and cell min/max voltage and temperature are logged; -1000 A, -40 C and 0 V occur as invalid-value codes."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "conditions.aging_type": "registry",
+   "conditions.application_domain": "registry",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "curated",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_15.json",
+  "landing_evidence": "evidence/landing/dataset_15.json"
+ }
+}

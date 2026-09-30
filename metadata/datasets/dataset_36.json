@@ -1,0 +1,335 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_36",
+ "identity": {
+  "ref_name": "2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Imperial College 21700 Cycle Aging",
+  "institution": "Imperial College London",
+  "year": 2024,
+  "doi": "10.5281/zenodo.10637534",
+  "paper_doi": "10.1016/j.jpowsour.2024.234185",
+  "source_url": "https://doi.org/10.5281/zenodo.10637534",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "LG",
+  "model": "M50",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "21700",
+  "dimensions_mm": {
+   "diameter": 21.0,
+   "height": 70.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 5.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 10.0,
+  "temperature_max_C": 40.0,
+  "temperature_setpoints_C": [
+   10.0,
+   25.0,
+   40.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 0.3,
+  "discharge_c_rate_max": 1.0,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "drive_cycle",
+  "protocol_charge_raw": "cycle ageing under Si-, C- and cathode-degradation and drive-cycle experiments; performance checks (RPT) at 10, 25 and 40 degC",
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 40,
+  "n_entities_declared": 40,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 7,
+  "raw_bytes": 49420634660
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "cycle_index",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Capacity/mA.h",
+   "Ecell/V",
+   "Energy charge/W.h",
+   "Energy discharge/W.h",
+   "Energy/W.h",
+   "Ns",
+   "R/Ohm",
+   "Temperature/C",
+   "cycle number",
+   "half cycle",
+   "mode",
+   "time/s",
+   "|Energy|/W.h"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none in the raw performance-check files; ageing cycles are counted by the cycling (Cycle Aging) experiments",
+  "observed": {
+   "voltage_V": [
+    2.415509,
+    4.362096
+   ],
+   "current_A": null,
+   "temperature_C": [
+    -4.199089,
+    55.659416
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv",
+   "mpr",
+   "mps",
+   "mpt",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "exp1_cellA",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp1_cellB",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp1_cellD",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp1_cellE",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp1_cellF",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp1_cellJ",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp1_cellK",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp1_cellL",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp1_cellM",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp2,2_cellA",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp2,2_cellB",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp2,2_cellC",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp2,2_cellD",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp2,2_cellE",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp2,2_cellF",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp3_cellA",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp3_cellB",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp3_cellC",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp3_cellD",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp3_cellE",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp3_cellF",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp3_cellG",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp3_cellH",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp3_cellI",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp4_cellA",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp4_cellB",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp4_cellC",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp4_cellD",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp4_cellE",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp4_cellF",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp4_cellG",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp4_cellH",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp5_cellA",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp5_cellB",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp5_cellC",
+   "temperature_C": 10.0
+  },
+  {
+   "cell_id": "exp5_cellD",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp5_cellE",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "exp5_cellF",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp5_cellG",
+   "temperature_C": 40.0
+  },
+  {
+   "cell_id": "exp5_cellH",
+   "temperature_C": 40.0
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Only the BioLogic .mpt text exports are read (the same runs also exist as .mpr and processed csv files). Each experiment zip has a real \"Raw Data/Degradation Cycling/\" folder with the actual aging cycles, but only as .mpr (BioLogic binary); \"Raw Data/Performance Checks/\" is the only data also exported as .mpt (text), which is the only format this adapter reads. So scale.n_cycles_total is empty not because the cycling data is missing, but because it only exists in a format not yet parsed - the registry's cycle_summary_done = yes looks correct. Cell spec (LG M50 (21700 NMC)) from LG's INR21700 M50 18.2Wh document, the same source used for dataset_27."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "paper",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.paper_doi": "landing_page",
+   "conditions.aging_type": "curated",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_filenames",
+   "cell.model": "raw_filenames",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "landing_page",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "conditions.protocol_charge_raw": "landing_page",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "landing_page",
+   "conditions.discharge_c_rate_max": "landing_page"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_36.json",
+  "landing_evidence": "evidence/landing/dataset_36.json"
+ }
+}

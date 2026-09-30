@@ -1,0 +1,2606 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_29",
+ "identity": {
+  "ref_name": "2025_Stanford_Chueh_MultiChem_Calendar_MultiT",
+  "ref_name_aliases": [
+   {
+    "name": "2025_Stanford_Onori_LiIon_Calendar_MultiT",
+    "status": "historical",
+    "seen_in": [
+     "registry_history",
+     "raw_readme"
+    ]
+   }
+  ],
+  "dataset_name": "Stanford-SLAC Decade Calendar Aging",
+  "institution": "Stanford University and SLAC (Chueh group)",
+  "year": 2025,
+  "doi": "10.17605/OSF.IO/JU325",
+  "paper_doi": null,
+  "source_url": "https://osf.io/ju325/",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": "K2 Energy LFP18650P",
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LCO; LFP; NCA; NMC",
+  "chemistry_is_multi": true,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": 24.0,
+  "temperature_max_C": 85.0,
+  "temperature_setpoints_C": [
+   24.0,
+   45.0,
+   60.0,
+   85.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": 50.0,
+  "soc_window_max_pct": 100.0,
+  "aging_type": "calendar",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 248,
+  "n_entities_declared": 259,
+  "n_cycles_total": 9035,
+  "cycles_per_entity_median": 28.5,
+  "n_raw_files": 488,
+  "raw_bytes": 4881376736
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "cycle_index",
+   "energy",
+   "step_type",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Capacity (Ah)",
+   "Current (A)",
+   "Cycle",
+   "Energy (Wh)",
+   "Step",
+   "Voltage (V)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "number of check-up (RPT) months in summary_data; the raw tables hold the check-up test procedures, not the ageing cycles",
+  "observed": {
+   "voltage_V": [
+    -2.0,
+    6.314183
+   ],
+   "current_A": [
+    0.0,
+    9.00607
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv",
+   "json",
+   "pkl"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "C00001",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00002",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00004",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00005",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00006",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00007",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00008",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00009",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00010",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00011",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00012",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00013",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00014",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00015",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00016",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00017",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00018",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00019",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00020",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00021",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00022",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00023",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00024",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00025",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00026",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00027",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00028",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00029",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00030",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00031",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00032",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00033",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00034",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00035",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00036",
+   "model": "Panasonic NCR18650GA",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00037",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00038",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00039",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00040",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00041",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00042",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00043",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00044",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00045",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00046",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00047",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00048",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00049",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00050",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00051",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00052",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00053",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00054",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00055",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00056",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00057",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00058",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00059",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00060",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00061",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00062",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00063",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00064",
+   "model": "Panasonic NCR18650B",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00065",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00066",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00067",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00068",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00069",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00070",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00071",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00072",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00073",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00074",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00075",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00076",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00077",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00078",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00079",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00081",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00082",
+   "model": "Ultralife UBP001",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00083",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00084",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00085",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00086",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00087",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00088",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00089",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00090",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00091",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00092",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00093",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00094",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00095",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00097",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00098",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00099",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00100",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00101",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00102",
+   "model": "Ultralife 502030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00103",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00104",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00105",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00107",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00108",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00109",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00110",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00111",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00112",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00114",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00115",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00116",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00117",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00118",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00119",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00120",
+   "model": "Sony-Murata US18650VTC6",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00121",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00122",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00123",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00124",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00125",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00126",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00127",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00128",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00129",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00130",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00131",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00132",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00133",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00134",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00135",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00136",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00137",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00138",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00139",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00140",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00141",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00142",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00143",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00144",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00145",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00146",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00147",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00148",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00149",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00150",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00151",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00152",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00153",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00154",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00155",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00156",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00157",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00158",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00159",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00160",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00162",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00163",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00164",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00165",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00166",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00167",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00169",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00170",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00171",
+   "model": "K2 Energy LFP18650P_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00173",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00174",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00175",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00176",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00177",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00179",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00180",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00181",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00182",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00183",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00184",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00185",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00186",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00187",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00188",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00189",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00190",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00191",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00192",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00193",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00195",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00196",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00197",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00198",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00199",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00200",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00202",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00203",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00204",
+   "model": "Tenergy 302030",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00205",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00206",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00207",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00208",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00209",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00210",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00211",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00212",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00213",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00214",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00215",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00216",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00217",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00218",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00219",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00220",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00221",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00222",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00223",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00224",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 45.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00225",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00226",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00227",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00228",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00229",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00230",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00231",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00232",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00233",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00234",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00235",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00236",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00237",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00238",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00239",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00240",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00241",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00242",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00243",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00244",
+   "model": "K2 Energy LFP18650E",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00245",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00246",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00247",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00248",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00249",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 24.0,
+   "labels": {
+    "soc_window_min_pct": 50,
+    "soc_window_max_pct": 50
+   }
+  },
+  {
+   "cell_id": "C00250",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00251",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00252",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00253",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00254",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00255",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00256",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00257",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00258",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  },
+  {
+   "cell_id": "C00259",
+   "model": "K2 Energy LFP18650E_v2",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 85.0,
+   "labels": {
+    "soc_window_min_pct": 100,
+    "soc_window_max_pct": 100
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry",
+   "partial_raw",
+   "incomplete_raw_files"
+  ],
+  "notes": "Long-term calendar aging: 8 cell types stored at 2 SOC and 4 temperatures (landing page). Joule_cell_id.csv, shipped in the raw data, gives each cell's type, chemistry, form factor, storage SOC and temperature. Check-ups (RPT) are recorded as summary and raw tables; there is no temperature channel. 8 distinct commercial cell types are used (Joule_cell_id.csv: Panasonic NCR18650GA, K2 Energy LFP18650E/LFP18650E_v2/LFP18650P, and others), each with its own capacity/voltage/dimensions - a single scalar nominal_capacity_Ah/voltage_min_V/voltage_max_V cannot represent all 8 without being misleading for the others, so these are left null rather than forced to one cell type's spec."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "raw_docs",
+   "cell.form_factor": "raw_docs",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_29.json",
+  "landing_evidence": "evidence/landing/dataset_29.json"
+ }
+}

@@ -1,0 +1,431 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatteryLake research-oriented dataset profile",
+  "description": "One record per dataset, derived from the corresponding metadata/datasets/dataset_NN.json record by metadata/scripts/generate/build_research.py. States what a researcher can do with the dataset - which physical quantities are present or derivable, and which modelling tasks it supports - rather than what the raw data contains. Missing information is null, never a placeholder string. Never hand-edit; regenerate with build_research.py.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "category",
+    "timeseries",
+    "soc",
+    "soh",
+    "capacity_degradation",
+    "ocv",
+    "internal_resistance",
+    "eis",
+    "thermal",
+    "research_applicability",
+    "suitable_tasks",
+    "source_quality_flags",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^dataset_[A-Za-z0-9_]+$"
+    },
+    "ref_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "category": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timeseries": {
+      "type": "object",
+      "required": [
+        "has_voltage_timeseries",
+        "has_current_timeseries",
+        "has_temperature_timeseries",
+        "complete_v_i_t_timeseries",
+        "resolution",
+        "signals_basis",
+        "caveats"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "has_voltage_timeseries": {
+          "type": "boolean"
+        },
+        "has_current_timeseries": {
+          "type": "boolean"
+        },
+        "has_temperature_timeseries": {
+          "type": "boolean"
+        },
+        "complete_v_i_t_timeseries": {
+          "type": "boolean"
+        },
+        "resolution": {
+          "enum": [
+            "full_waveforms",
+            "partial_waveforms",
+            "waveform_sample_only",
+            "summary_tables_only",
+            "unlabelled_channels"
+          ]
+        },
+        "signals_basis": {
+          "enum": [
+            "raw_data",
+            "raw_docs",
+            "landing_page",
+            "paper",
+            "curated",
+            null
+          ]
+        },
+        "caveats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "soc": {
+      "type": "object",
+      "required": [
+        "computable",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "computable": {
+          "type": "boolean"
+        },
+        "basis": {
+          "enum": [
+            "coulomb_counting_from_voltage_current",
+            "explicit_soc_column",
+            null
+          ]
+        }
+      }
+    },
+    "soh": {
+      "type": "object",
+      "required": [
+        "computable",
+        "basis",
+        "blocking_flags",
+        "curated_task_present"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "computable": {
+          "type": "boolean"
+        },
+        "basis": {
+          "enum": [
+            "curated_supported_tasks_and_raw_capacity_signal",
+            null
+          ]
+        },
+        "blocking_flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/flag"
+          }
+        },
+        "curated_task_present": {
+          "type": "boolean"
+        }
+      }
+    },
+    "capacity_degradation": {
+      "type": "object",
+      "required": [
+        "present",
+        "aging_type",
+        "n_cycles_total",
+        "cycles_per_entity_median"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "aging_type": {
+          "$ref": "#/$defs/aging_type"
+        },
+        "n_cycles_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cycles_per_entity_median": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "ocv": {
+      "type": "object",
+      "required": [
+        "present",
+        "confidence",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "confidence": {
+          "enum": [
+            "confirmed",
+            "estimated",
+            "derivable",
+            null
+          ]
+        },
+        "basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "internal_resistance": {
+      "type": "object",
+      "required": [
+        "present",
+        "confidence",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "confidence": {
+          "enum": [
+            "confirmed",
+            "estimated",
+            "derivable",
+            null
+          ]
+        },
+        "basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "eis": {
+      "type": "object",
+      "required": [
+        "present",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "thermal": {
+      "type": "object",
+      "required": [
+        "temperature_logging",
+        "thermal_characterization",
+        "application_domain",
+        "aging_type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "temperature_logging": {
+          "type": "boolean"
+        },
+        "thermal_characterization": {
+          "type": "boolean"
+        },
+        "application_domain": {
+          "$ref": "#/$defs/application_domain"
+        },
+        "aging_type": {
+          "$ref": "#/$defs/aging_type"
+        }
+      }
+    },
+    "research_applicability": {
+      "type": "object",
+      "required": [
+        "parameter_identification",
+        "piml_calibration",
+        "soh_rul_prediction",
+        "simulation",
+        "synthetic_data_generation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "parameter_identification": {
+          "type": "boolean"
+        },
+        "piml_calibration": {
+          "type": "boolean"
+        },
+        "soh_rul_prediction": {
+          "type": "boolean"
+        },
+        "simulation": {
+          "type": "boolean"
+        },
+        "synthetic_data_generation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "suitable_tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/suitable_task"
+      }
+    },
+    "source_quality_flags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/flag"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Where this profile came from. derived_from is the base record it was computed from; field_sources maps each research field group to its origin; confidence and last_verified are inherited from the base record.",
+      "required": [
+        "derived_from",
+        "generated",
+        "field_sources",
+        "confidence",
+        "last_verified"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "derived_from": {
+          "type": "string",
+          "pattern": "^datasets/dataset_[A-Za-z0-9_]+\\.json$"
+        },
+        "generated": {
+          "type": "string",
+          "format": "date"
+        },
+        "field_sources": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "confidence": {
+          "enum": [
+            "verified",
+            "asserted",
+            "inferred",
+            null
+          ]
+        },
+        "last_verified": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "aging_type": {
+      "enum": [
+        "cyclic",
+        "calendar",
+        "profile",
+        "second_life",
+        "abuse_mechanical",
+        "abuse_thermal",
+        "field",
+        "characterization",
+        "mixed",
+        null
+      ]
+    },
+    "application_domain": {
+      "enum": [
+        "lab",
+        "EV_field",
+        "HEV",
+        "eVTOL",
+        "grid_storage",
+        "safety",
+        "consumer",
+        null
+      ]
+    },
+    "source": {
+      "enum": [
+        "dataset_record",
+        "derived",
+        "hand_checked",
+        "raw_data",
+        "folder_layout"
+      ]
+    },
+    "suitable_task": {
+      "enum": [
+        "SOH_estimation",
+        "RUL_prediction",
+        "SOC_estimation",
+        "digital_twin_calibration",
+        "thermal_modelling",
+        "simulation",
+        "synthetic_data_generation",
+        "EIS_characterization",
+        "OCV_curve_extraction",
+        "fault_diagnosis"
+      ]
+    },
+    "flag": {
+      "enum": [
+        "multi_chemistry",
+        "capacity_exceeds_nominal",
+        "voltage_excursion_below_cutoff",
+        "voltage_excursion_above_cutoff",
+        "pack_level_voltage",
+        "temperature_basis_differs_from_data",
+        "partial_raw",
+        "incomplete_raw_files",
+        "unreadable_raw_files",
+        "sample_only_raw",
+        "shared_cells_with_other_dataset",
+        "duplicate_of_other_dataset"
+      ]
+    }
+  }
+}

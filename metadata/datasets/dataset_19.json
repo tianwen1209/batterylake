@@ -1,0 +1,273 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_19",
+ "identity": {
+  "ref_name": "2020_Oxford_Howey_LiIon_PathDep_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Oxford Path-Dependent Degradation",
+  "institution": "University of Oxford, Howey Research Group",
+  "year": 2020,
+  "doi": "10.5287/bodleian:v0ervBv6p; 10.5287/bodleian:2zvyknyRg",
+  "paper_doi": "10.1002/batt.202000160",
+  "source_url": "https://ora.ox.ac.uk/objects/uuid:de62b5d2-6154-426d-bcbb-30253ddb7d1e",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": "NCR18650BD",
+  "cathode_chemistry": "NCA",
+  "anode_chemistry": "graphite",
+  "chemistry_label_raw": "Multi",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 3.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 24.0,
+  "temperature_max_C": 24.0,
+  "temperature_setpoints_C": [
+   24.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 0.5,
+  "discharge_c_rate_max": 0.5,
+  "c_rate_profile": "constant",
+  "protocol_class": "calendar_hold",
+  "protocol_charge_raw": "CC-CV charge at C/2 to 4.2 V until C/60 (reference tests)",
+  "protocol_discharge_raw": "Reference CC/CC-CV discharge at C/2 to 2.5 V; pseudo-OCV discharge at C/24; aging groups combine CC/CC-CV cycling at C/4 or C/2 with calendar storage at 90% SOC or 4.2 V",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "mixed",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 27,
+  "n_entities_declared": 28,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 33,
+  "raw_bytes": 8950721185
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "cycle_index",
+   "eis",
+   "energy",
+   "internal_resistance",
+   "soc",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Amphr",
+   "Amps",
+   "Capacity",
+   "Current",
+   "Cyc",
+   "ImZOhm",
+   "N_A",
+   "ReZOhm",
+   "ReZ_Ohm",
+   "SoC",
+   "State",
+   "Step",
+   "Temp",
+   "Temp1",
+   "TestTime",
+   "Time",
+   "Volt1",
+   "Volt2",
+   "Volt3",
+   "Volt4",
+   "Volt5",
+   "Volt6",
+   "Volt7",
+   "Volt8",
+   "Voltage",
+   "Volts",
+   "Watthr"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none in the tables; each MAT-file is one test of one cell (cycling groups and EIS)",
+  "observed": {
+   "voltage_V": [
+    0.0,
+    4.708934
+   ],
+   "current_A": [
+    -128.81015,
+    127.6651
+   ],
+   "temperature_C": [
+    -985.051453,
+    47.854301
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "json",
+   "mat",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "CH_FC_POCV.mat"
+  },
+  {
+   "cell_id": "CH_HC_anode.mat"
+  },
+  {
+   "cell_id": "CH_HC_cathode.mat"
+  },
+  {
+   "cell_id": "Cell1"
+  },
+  {
+   "cell_id": "Cell10"
+  },
+  {
+   "cell_id": "Cell11"
+  },
+  {
+   "cell_id": "Cell12"
+  },
+  {
+   "cell_id": "Cell14"
+  },
+  {
+   "cell_id": "Cell15"
+  },
+  {
+   "cell_id": "Cell16"
+  },
+  {
+   "cell_id": "Cell18"
+  },
+  {
+   "cell_id": "Cell19"
+  },
+  {
+   "cell_id": "Cell2"
+  },
+  {
+   "cell_id": "Cell20"
+  },
+  {
+   "cell_id": "Cell22"
+  },
+  {
+   "cell_id": "Cell25"
+  },
+  {
+   "cell_id": "Cell27"
+  },
+  {
+   "cell_id": "Cell3"
+  },
+  {
+   "cell_id": "Cell4"
+  },
+  {
+   "cell_id": "Cell5"
+  },
+  {
+   "cell_id": "Cell6"
+  },
+  {
+   "cell_id": "Cell8"
+  },
+  {
+   "cell_id": "Cell9"
+  },
+  {
+   "cell_id": "DCH_FC_POCV.mat"
+  },
+  {
+   "cell_id": "DCH_HC_anode.mat"
+  },
+  {
+   "cell_id": "DHC_HC_cathode.mat"
+  },
+  {
+   "cell_id": "TPG3.8-cell14.mat"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff",
+   "partial_raw"
+  ],
+  "notes": "Measurements are MATLAB table objects, decoded from the MCOS subsystem. Part 1 groups age from beginning of life; parts 2 and 3 continue after middle of life. Table columns TestTime and Amphr have no unit in the file. n_entities (27) is not a clean cell count: it mixes genuine numbered battery cells (20 numbered Cell IDs among Cell1..Cell27) with 6 auxiliary full-cell/half-cell reference files (CH_FC_POCV.mat, CH_HC_anode.mat, CH_HC_cathode.mat, DCH_FC_POCV.mat, DCH_HC_anode.mat, DHC_HC_cathode.mat - characterization/reference files, not six additional independently identified batteries) plus one oddly-named TPG3.8-cell14.mat. The closeness of 27 to the registry's 28 is partly coincidental: real cells are undercounted, offset by these non-cell files. The prior protocol summary incorrectly included 1C; the three author READMEs instead state C/4 or C/2 cycling. Recorded C-rate maxima refer to the explicitly stated cycling/reference constant-current rates; pulse-characterization amplitudes are not specified in those lists."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "raw_docs",
+   "identity.paper_doi": "landing_page",
+   "conditions.aging_type": "curated",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.anode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "raw_docs",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_docs",
+   "conditions.discharge_c_rate_max": "raw_docs"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_19.json",
+  "landing_evidence": "evidence/landing/dataset_19.json"
+ }
+}

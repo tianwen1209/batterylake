@@ -1,0 +1,86 @@
+{
+ "$schema": "../schema/batterylake-research-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_34",
+ "ref_name": "2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT",
+ "category": "thermal_runaway",
+ "timeseries": {
+  "has_voltage_timeseries": true,
+  "has_current_timeseries": false,
+  "has_temperature_timeseries": true,
+  "complete_v_i_t_timeseries": false,
+  "resolution": "partial_waveforms",
+  "signals_basis": "raw_data",
+  "caveats": []
+ },
+ "soc": {
+  "computable": false,
+  "basis": null
+ },
+ "soh": {
+  "computable": false,
+  "basis": null,
+  "blocking_flags": [],
+  "curated_task_present": false
+ },
+ "capacity_degradation": {
+  "present": false,
+  "aging_type": "abuse_mechanical",
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null
+ },
+ "ocv": {
+  "present": false,
+  "confidence": null,
+  "basis": null
+ },
+ "internal_resistance": {
+  "present": false,
+  "confidence": null,
+  "basis": "no populated resistance column and no impedance measurement in the raw data"
+ },
+ "eis": {
+  "present": false,
+  "basis": null
+ },
+ "thermal": {
+  "temperature_logging": true,
+  "thermal_characterization": true,
+  "application_domain": "safety",
+  "aging_type": "abuse_mechanical"
+ },
+ "research_applicability": {
+  "parameter_identification": false,
+  "piml_calibration": false,
+  "soh_rul_prediction": false,
+  "simulation": false,
+  "synthetic_data_generation": false
+ },
+ "suitable_tasks": [
+  "thermal_modelling"
+ ],
+ "source_quality_flags": [
+  "multi_chemistry"
+ ],
+ "provenance": {
+  "derived_from": "datasets/dataset_34.json",
+  "generated": "2026-09-29",
+  "field_sources": {
+   "ref_name": "dataset_record",
+   "category": "folder_layout",
+   "timeseries.*": "derived",
+   "soc.*": "derived",
+   "soh.*": "derived",
+   "capacity_degradation.*": "derived",
+   "ocv.*": "derived",
+   "internal_resistance.*": "raw_data",
+   "eis.*": "raw_data",
+   "thermal.*": "derived",
+   "research_applicability.*": "derived",
+   "suitable_tasks": "derived",
+   "source_quality_flags": "dataset_record"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29"
+ }
+}

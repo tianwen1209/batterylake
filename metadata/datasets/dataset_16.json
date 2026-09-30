@@ -1,0 +1,2075 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_16",
+ "identity": {
+  "ref_name": "2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "TBSI-Lijing Pulse Voltage",
+  "institution": "Tsinghua Berkeley Shenzhen Institute",
+  "year": 2024,
+  "doi": "10.5281/zenodo.13360631",
+  "paper_doi": null,
+  "source_url": "https://zenodo.org/records/13360631",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LFP; LMO; NMC",
+  "chemistry_is_multi": true,
+  "form_factor": null,
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": 26.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": 2.531,
+  "discharge_c_rate_max": 2.52794,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 397,
+  "n_entities_declared": 464,
+  "n_cycles_total": 262409,
+  "cycles_per_entity_median": 751.0,
+  "n_raw_files": 2,
+  "raw_bytes": 14409915853
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "power",
+   "temperature",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "中值电压(V)",
+   "充电容量(Ah)",
+   "充电比能量(Wh/kg)",
+   "充电能量(Wh)",
+   "净放电能量(Wh)",
+   "实际功率(W)",
+   "实际电压(V)",
+   "实际电流(A)",
+   "容量(Ah)",
+   "开始温度1(℃)",
+   "开始温度2(℃)",
+   "开始温度3(℃)",
+   "循环",
+   "循环序号",
+   "总容量(Ah)",
+   "总能量(Wh)",
+   "放电容量(Ah)",
+   "放电容量衰减率(%)",
+   "放电比能量(Wh/kg)",
+   "放电能量(Wh)",
+   "最大温度1(℃)",
+   "最大温度2(℃)",
+   "最大温度3(℃)",
+   "最大电压(V)",
+   "电池平均温度(℃)",
+   "电池最低温度(℃)",
+   "电池最高温度(℃)",
+   "电池温度1(℃)",
+   "电池温度2(℃)",
+   "电池温度3(℃)",
+   "结束温度1(℃)",
+   "结束温度2(℃)",
+   "结束温度3(℃)",
+   "结束电压(V)",
+   "结束电流(A)",
+   "能量(Wh)",
+   "设定功率(W)",
+   "设定电压(V)",
+   "设定电流(A)",
+   "起始电压(V)",
+   "起始电流(A)",
+   "辅助通道TU1 T(℃)",
+   "辅助通道TU1 U(V)",
+   "通道压差(V)",
+   "通道温差(℃)",
+   "通道温度"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "cycle ids from the tester's cycle layer (循环序号 sheet), counted per workbook; each workbook is a test segment of a retired cell (SOC sweep)",
+  "observed": {
+   "voltage_V": [
+    0.0,
+    4.3829
+   ],
+   "current_A": [
+    -87.6144,
+    87.6059
+   ],
+   "temperature_C": [
+    21.3,
+    43.0
+   ],
+   "discharge_capacity_Ah_max": 33.6816,
+   "discharge_capacity_Ah_median_of_entity_max": 20.9776
+  },
+  "source_format": [
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "02LCC02100101A87B0008516",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87B0101984",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0004465",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0004534",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0007152",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0010168",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0010456",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0011479",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0013547",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0015122",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0015732",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0017692",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0020833",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0026421",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0027455",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0027576",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0052124",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0055909",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0057127",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0059325",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0063458",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0073559",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0074479",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0081320",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0083146",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0085499",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0086451",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0151531",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0151614",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0161151",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0161743",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0163103",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0163477",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0164869",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0165035",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0172641",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0173907",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0175162",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0175573",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0177229",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0178524",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0184257",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0184358",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0185122",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0186122",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A87Y0187911",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A8810050555",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A8810119814",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A8810124384",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A8BC0103482",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A8BC0103791",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "02LCC02100101A8BC0104122",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 21.0
+  },
+  {
+   "cell_id": "1",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "10",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "11",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "12",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "13",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "14",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "15",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "16",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "17",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "18",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "19",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "2",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "20",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "21",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "22",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "23",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "24",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "25",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "26",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "27",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "28",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "29",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "3",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "30",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "31",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "32",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "33",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "34",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "35",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "36",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "37",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "38",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "39",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "4",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "40",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "41",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "42",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "43",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "44",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "45",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "46",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "47",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "48",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "49",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "5",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "50",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "51",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "514091415127",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "514091418304",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "514091522210",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515091901822",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515091902419",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092300265",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092501338",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092800774",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092900941",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092901155",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092901182",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092901199",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092901207",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092901384",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092903484",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904019",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904410",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904546",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904584",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904585",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904611",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904713",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904740",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904825",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904858",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904916",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092904978",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092905201",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092905212",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092905216",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092905281",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092905289",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515092905478",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000008",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000036",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000076",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000353",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000439",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000451",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000549",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000552",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000596",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000605",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000629",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000663",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000724",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000809",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093000874",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001000",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001221",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001225",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001367",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001444",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001608",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001782",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001787",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001911",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001936",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093001940",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002151",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002193",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002276",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002313",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002328",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002348",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002402",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002457",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002576",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002646",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002726",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093002758",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093003101",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093004000",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093004064",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093004182",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093004235",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093004482",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093004893",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093005020",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515093005302",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100100012",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100100526",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100100624",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100100832",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100101239",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100101320",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100101563",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100102031",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100102065",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100102714",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515100102992",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515112901566",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "515113004202",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "516020603556",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "516102900376",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "516112602143",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 25.0
+  },
+  {
+   "cell_id": "52",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "53",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "54",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "55",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "56",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "6",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "7",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "8",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "9",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 35.0
+  },
+  {
+   "cell_id": "H27730690448",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27732377027",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733293021",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733490499",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733491033",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733590292",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733590603",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733590604",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733590761",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733590854",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733590985",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733591038",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733591566",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733591752",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733591761",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733592611",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733592761",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733592774",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733690394",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733690397",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733690426",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733690449",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733690634",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733691977",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27733692287",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734090416",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091053",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091117",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091265",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091304",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091346",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091573",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734091705",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734092807",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734291854",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734291972",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734390547",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734390551",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734390633",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734391053",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734391178",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734490172",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734490574",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734490575",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734490764",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734490929",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734491479",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734491651",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734492449",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734492453",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734492478",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734590174",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734590982",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734591085",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734591466",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734592855",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734676393",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734690849",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27734691342",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735076055",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735076056",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735076555",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735076802",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735076818",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735076930",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735077114",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735077206",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735077215",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735077716",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735176665",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735176737",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735177085",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735177571",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735177821",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735178005",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735178133",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735190683",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735190732",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735275911",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735276637",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735290390",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735290428",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735290860",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735291063",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735376431",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735376790",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735376805",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735390834",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735391329",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735391963",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735490342",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735490718",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735490849",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735490851",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735491006",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735492200",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27735576091",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "H27743090243",
+   "cathode_chemistry": "LMO"
+  },
+  {
+   "cell_id": "PIP15502C00208544",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15512A50200009",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15512A50200153",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15710A00246135",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15825A00103075",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15825A00103143",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15825A00238596",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15825A50203005",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15826A00208229",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15826A00208751",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15826A00211185",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15827A00205450",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15827A00205589",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15827A00220999",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15827A00221153",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15827A00221240",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15828A00213703",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15828A00225770",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15828A06100365",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00206931",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00209415",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00210663",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00217239",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00217327",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00218444",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00218512",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A00218550",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15829A06101445",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03206727",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03210683",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03214955",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03217542",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03218382",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03220958",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03221296",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03224640",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03229494",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03233061",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03235252",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03238599",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03238995",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03241499",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03243668",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03245962",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D01A03250557",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D15A03236357",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D15A03236532",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D15A03236823",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D19A03226854",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D19A03261038",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D19A03271997",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D19A03280145",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D22A03248005",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D23A03282874",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03205744",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03209658",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03219538",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03222735",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03226076",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03226871",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03236724",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D25A03243702",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D26A03200099",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D26A03252860",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D26A03256484",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D26A03261343",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D28A03264309",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15D29A03204639",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N08A03228420",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N08A03230424",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N08A03232183",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N08A03232188",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N12A03225967",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N14A03235525",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N14A03236503",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03204208",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208341",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208363",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208383",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208398",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208431",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208672",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208683",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N15A03208989",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N21A03201737",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N21A03207437",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N21A03210500",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N21A50200177",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N21A50200566",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N21A50200990",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N22A03240032",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N26A01201901",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP15N30A03228344",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP1622500C087737",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  },
+  {
+   "cell_id": "PIP16N1700C039158",
+   "cathode_chemistry": "LMO",
+   "nominal_capacity_Ah": 10.0
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry",
+   "partial_raw"
+  ],
+  "notes": "Retired (second-life) cells; the folder names carry the rated capacity and cathode (e.g. 10Ah LMO). Each workbook is a pulse-test segment across an SOC sweep. The source-supported observed rate estimates use each cell's own filename-rated Ah, rather than the dataset's modal 26 Ah scalar: charge 2.531C (PIP15D01A03214955, 25.31 A / 10 Ah) and discharge 2.52794C (PIP15826A00208229, -25.2794 A / 10 Ah). Actual-current headers and charge/discharge step labels were checked in the cited original RawData workbook. All 397 cached entities supply current bounds and their own rated Ah. These are observed maxima over the available cached pulse/test measurements, not sustained protocol rates; the exact two extremum worksheet rows were not independently relocated. One original record workbook explicitly labels battery-temperature sensors 电池温度1(℃), paired with relative time; finite readings establish delivered cell-temperature series. Dataset scalar nominal capacity26Ah is representative across heterogeneous retired cells, not common to all397."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "landing_page",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_filenames",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "raw_filenames",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_data",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_16.json",
+  "landing_evidence": "evidence/landing/dataset_16.json"
+ }
+}

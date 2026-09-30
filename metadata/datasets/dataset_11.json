@@ -1,0 +1,860 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_11",
+ "identity": {
+  "ref_name": "2024_KIT_NMC-SiO_18650_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "KIT NMC/C-SiO 228 Cells",
+  "institution": "Karlsruhe Institute of Technology",
+  "year": 2024,
+  "doi": "10.35097/1969",
+  "paper_doi": "10.1038/s41597-024-03831-x",
+  "source_url": "https://doi.org/10.1038/s41597-024-03831-x",
+  "study_group": "KIT_Luh_Blank_228cells"
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": "Si-graphite",
+  "chemistry_label_raw": "NMC/C+SiO",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 3.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 0.0,
+  "temperature_max_C": 60.0,
+  "temperature_setpoints_C": [
+   0.0,
+   10.0,
+   25.0,
+   40.0,
+   60.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 1.67,
+  "discharge_c_rate_max": 1.0,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "calendar_hold",
+  "protocol_charge_raw": "CC-CV to 4.2 V",
+  "protocol_discharge_raw": "CC 1/3 C (1 A) reference discharge to 2.5 V; cyclic, calendar and drive-cycle aging",
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "mixed",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 228,
+  "n_entities_declared": 228,
+  "n_cycles_total": 186644,
+  "cycles_per_entity_median": 718.5,
+  "n_raw_files": 13,
+  "raw_bytes": 5812295792
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "current",
+   "cycle_index",
+   "internal_resistance",
+   "ocv",
+   "soc",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "EFC",
+   "R0_mOhm",
+   "R1_mOhm",
+   "cap_aged_est_Ah",
+   "delta_q_Ah",
+   "i_raw_A",
+   "ocv_est_V",
+   "soc_est",
+   "t_cell_degC",
+   "timestamp_s",
+   "v_raw_V"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "EFC (equivalent full cycles) column of each cell log",
+  "observed": {
+   "voltage_V": [
+    0.0,
+    4.2053
+   ],
+   "current_A": [
+    -4.0661,
+    5.0221
+   ],
+   "temperature_C": [
+    -0.2667,
+    48.4427
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "P001_1_S01_C10"
+  },
+  {
+   "cell_id": "P001_2_S04_C09"
+  },
+  {
+   "cell_id": "P001_3_S05_C06"
+  },
+  {
+   "cell_id": "P002_1_S02_C10"
+  },
+  {
+   "cell_id": "P002_2_S03_C10"
+  },
+  {
+   "cell_id": "P002_3_S04_C10"
+  },
+  {
+   "cell_id": "P003_1_S01_C11"
+  },
+  {
+   "cell_id": "P003_2_S02_C11"
+  },
+  {
+   "cell_id": "P003_3_S05_C07"
+  },
+  {
+   "cell_id": "P004_1_S03_C11"
+  },
+  {
+   "cell_id": "P004_2_S04_C11"
+  },
+  {
+   "cell_id": "P004_3_S05_C08"
+  },
+  {
+   "cell_id": "P005_1_S07_C09"
+  },
+  {
+   "cell_id": "P005_2_S08_C09"
+  },
+  {
+   "cell_id": "P005_3_S09_C09"
+  },
+  {
+   "cell_id": "P006_1_S06_C10"
+  },
+  {
+   "cell_id": "P006_2_S07_C10"
+  },
+  {
+   "cell_id": "P006_3_S08_C10"
+  },
+  {
+   "cell_id": "P007_1_S06_C11"
+  },
+  {
+   "cell_id": "P007_2_S09_C10"
+  },
+  {
+   "cell_id": "P007_3_S10_C05"
+  },
+  {
+   "cell_id": "P008_1_S07_C11"
+  },
+  {
+   "cell_id": "P008_2_S08_C11"
+  },
+  {
+   "cell_id": "P008_3_S09_C11"
+  },
+  {
+   "cell_id": "P009_1_S12_C09"
+  },
+  {
+   "cell_id": "P009_2_S13_C09"
+  },
+  {
+   "cell_id": "P009_3_S14_C09"
+  },
+  {
+   "cell_id": "P010_1_S11_C10"
+  },
+  {
+   "cell_id": "P010_2_S12_C10"
+  },
+  {
+   "cell_id": "P010_3_S13_C10"
+  },
+  {
+   "cell_id": "P011_1_S10_C11"
+  },
+  {
+   "cell_id": "P011_2_S11_C11"
+  },
+  {
+   "cell_id": "P011_3_S14_C10"
+  },
+  {
+   "cell_id": "P012_1_S12_C11"
+  },
+  {
+   "cell_id": "P012_2_S13_C11"
+  },
+  {
+   "cell_id": "P012_3_S14_C11"
+  },
+  {
+   "cell_id": "P013_1_S15_C09"
+  },
+  {
+   "cell_id": "P013_2_S16_C10"
+  },
+  {
+   "cell_id": "P013_3_S19_C09"
+  },
+  {
+   "cell_id": "P014_1_S17_C10"
+  },
+  {
+   "cell_id": "P014_2_S18_C10"
+  },
+  {
+   "cell_id": "P014_3_S19_C10"
+  },
+  {
+   "cell_id": "P015_1_S15_C10"
+  },
+  {
+   "cell_id": "P015_2_S16_C11"
+  },
+  {
+   "cell_id": "P015_3_S17_C11"
+  },
+  {
+   "cell_id": "P016_1_S15_C11"
+  },
+  {
+   "cell_id": "P016_2_S18_C11"
+  },
+  {
+   "cell_id": "P016_3_S19_C11"
+  },
+  {
+   "cell_id": "P017_1_S01_C08"
+  },
+  {
+   "cell_id": "P017_2_S04_C07"
+  },
+  {
+   "cell_id": "P017_3_S05_C05"
+  },
+  {
+   "cell_id": "P018_1_S01_C06"
+  },
+  {
+   "cell_id": "P018_2_S02_C06"
+  },
+  {
+   "cell_id": "P018_3_S04_C05"
+  },
+  {
+   "cell_id": "P019_1_S01_C04"
+  },
+  {
+   "cell_id": "P019_2_S02_C04"
+  },
+  {
+   "cell_id": "P019_3_S05_C02"
+  },
+  {
+   "cell_id": "P020_1_S01_C00"
+  },
+  {
+   "cell_id": "P020_2_S02_C00"
+  },
+  {
+   "cell_id": "P020_3_S03_C00"
+  },
+  {
+   "cell_id": "P021_1_S02_C08"
+  },
+  {
+   "cell_id": "P021_2_S03_C08"
+  },
+  {
+   "cell_id": "P021_3_S04_C08"
+  },
+  {
+   "cell_id": "P022_1_S03_C06"
+  },
+  {
+   "cell_id": "P022_2_S04_C06"
+  },
+  {
+   "cell_id": "P022_3_S05_C04"
+  },
+  {
+   "cell_id": "P023_1_S03_C04"
+  },
+  {
+   "cell_id": "P023_2_S04_C04"
+  },
+  {
+   "cell_id": "P023_3_S05_C03"
+  },
+  {
+   "cell_id": "P024_1_S01_C01"
+  },
+  {
+   "cell_id": "P024_2_S04_C00"
+  },
+  {
+   "cell_id": "P024_3_S05_C00"
+  },
+  {
+   "cell_id": "P025_1_S01_C09"
+  },
+  {
+   "cell_id": "P025_2_S02_C09"
+  },
+  {
+   "cell_id": "P025_3_S03_C09"
+  },
+  {
+   "cell_id": "P026_1_S01_C07"
+  },
+  {
+   "cell_id": "P026_2_S02_C07"
+  },
+  {
+   "cell_id": "P026_3_S03_C07"
+  },
+  {
+   "cell_id": "P027_1_S01_C05"
+  },
+  {
+   "cell_id": "P027_2_S02_C05"
+  },
+  {
+   "cell_id": "P027_3_S03_C05"
+  },
+  {
+   "cell_id": "P028_1_S02_C01"
+  },
+  {
+   "cell_id": "P028_2_S03_C01"
+  },
+  {
+   "cell_id": "P028_3_S04_C01"
+  },
+  {
+   "cell_id": "P029_1_S06_C08"
+  },
+  {
+   "cell_id": "P029_2_S08_C07"
+  },
+  {
+   "cell_id": "P029_3_S09_C07"
+  },
+  {
+   "cell_id": "P030_1_S06_C06"
+  },
+  {
+   "cell_id": "P030_2_S08_C05"
+  },
+  {
+   "cell_id": "P030_3_S09_C05"
+  },
+  {
+   "cell_id": "P031_1_S06_C04"
+  },
+  {
+   "cell_id": "P031_2_S07_C04"
+  },
+  {
+   "cell_id": "P031_3_S09_C03"
+  },
+  {
+   "cell_id": "P032_1_S06_C00"
+  },
+  {
+   "cell_id": "P032_2_S07_C00"
+  },
+  {
+   "cell_id": "P032_3_S08_C00"
+  },
+  {
+   "cell_id": "P033_1_S07_C08"
+  },
+  {
+   "cell_id": "P033_2_S08_C08"
+  },
+  {
+   "cell_id": "P033_3_S09_C08"
+  },
+  {
+   "cell_id": "P034_1_S07_C06"
+  },
+  {
+   "cell_id": "P034_2_S08_C06"
+  },
+  {
+   "cell_id": "P034_3_S09_C06"
+  },
+  {
+   "cell_id": "P035_1_S08_C04"
+  },
+  {
+   "cell_id": "P035_2_S09_C04"
+  },
+  {
+   "cell_id": "P035_3_S10_C02"
+  },
+  {
+   "cell_id": "P036_1_S05_C09"
+  },
+  {
+   "cell_id": "P036_2_S09_C00"
+  },
+  {
+   "cell_id": "P036_3_S10_C00"
+  },
+  {
+   "cell_id": "P037_1_S05_C11"
+  },
+  {
+   "cell_id": "P037_2_S06_C09"
+  },
+  {
+   "cell_id": "P037_3_S10_C04"
+  },
+  {
+   "cell_id": "P038_1_S06_C07"
+  },
+  {
+   "cell_id": "P038_2_S07_C07"
+  },
+  {
+   "cell_id": "P038_3_S10_C03"
+  },
+  {
+   "cell_id": "P039_1_S05_C10"
+  },
+  {
+   "cell_id": "P039_2_S06_C05"
+  },
+  {
+   "cell_id": "P039_3_S07_C05"
+  },
+  {
+   "cell_id": "P040_1_S06_C01"
+  },
+  {
+   "cell_id": "P040_2_S07_C01"
+  },
+  {
+   "cell_id": "P040_3_S08_C01"
+  },
+  {
+   "cell_id": "P041_1_S11_C08"
+  },
+  {
+   "cell_id": "P041_2_S13_C07"
+  },
+  {
+   "cell_id": "P041_3_S14_C07"
+  },
+  {
+   "cell_id": "P042_1_S11_C06"
+  },
+  {
+   "cell_id": "P042_2_S13_C05"
+  },
+  {
+   "cell_id": "P042_3_S14_C05"
+  },
+  {
+   "cell_id": "P043_1_S11_C04"
+  },
+  {
+   "cell_id": "P043_2_S12_C04"
+  },
+  {
+   "cell_id": "P043_3_S14_C03"
+  },
+  {
+   "cell_id": "P044_1_S11_C00"
+  },
+  {
+   "cell_id": "P044_2_S12_C00"
+  },
+  {
+   "cell_id": "P044_3_S13_C00"
+  },
+  {
+   "cell_id": "P045_1_S12_C08"
+  },
+  {
+   "cell_id": "P045_2_S13_C08"
+  },
+  {
+   "cell_id": "P045_3_S14_C08"
+  },
+  {
+   "cell_id": "P046_1_S12_C06"
+  },
+  {
+   "cell_id": "P046_2_S13_C06"
+  },
+  {
+   "cell_id": "P046_3_S14_C06"
+  },
+  {
+   "cell_id": "P047_1_S13_C04"
+  },
+  {
+   "cell_id": "P047_2_S14_C04"
+  },
+  {
+   "cell_id": "P047_3_S15_C01"
+  },
+  {
+   "cell_id": "P048_1_S10_C06"
+  },
+  {
+   "cell_id": "P048_2_S14_C00"
+  },
+  {
+   "cell_id": "P048_3_S15_C00"
+  },
+  {
+   "cell_id": "P049_1_S10_C10"
+  },
+  {
+   "cell_id": "P049_2_S11_C09"
+  },
+  {
+   "cell_id": "P049_3_S15_C02"
+  },
+  {
+   "cell_id": "P050_1_S10_C09"
+  },
+  {
+   "cell_id": "P050_2_S11_C07"
+  },
+  {
+   "cell_id": "P050_3_S12_C07"
+  },
+  {
+   "cell_id": "P051_1_S10_C08"
+  },
+  {
+   "cell_id": "P051_2_S11_C05"
+  },
+  {
+   "cell_id": "P051_3_S12_C05"
+  },
+  {
+   "cell_id": "P052_1_S11_C01"
+  },
+  {
+   "cell_id": "P052_2_S12_C01"
+  },
+  {
+   "cell_id": "P052_3_S13_C01"
+  },
+  {
+   "cell_id": "P053_1_S15_C08"
+  },
+  {
+   "cell_id": "P053_2_S16_C08"
+  },
+  {
+   "cell_id": "P053_3_S19_C07"
+  },
+  {
+   "cell_id": "P054_1_S16_C06"
+  },
+  {
+   "cell_id": "P054_2_S17_C06"
+  },
+  {
+   "cell_id": "P054_3_S19_C05"
+  },
+  {
+   "cell_id": "P055_1_S15_C05"
+  },
+  {
+   "cell_id": "P055_2_S16_C04"
+  },
+  {
+   "cell_id": "P055_3_S17_C04"
+  },
+  {
+   "cell_id": "P056_1_S16_C00"
+  },
+  {
+   "cell_id": "P056_2_S17_C00"
+  },
+  {
+   "cell_id": "P056_3_S18_C00"
+  },
+  {
+   "cell_id": "P057_1_S17_C08"
+  },
+  {
+   "cell_id": "P057_2_S18_C08"
+  },
+  {
+   "cell_id": "P057_3_S19_C08"
+  },
+  {
+   "cell_id": "P058_1_S15_C07"
+  },
+  {
+   "cell_id": "P058_2_S18_C06"
+  },
+  {
+   "cell_id": "P058_3_S19_C06"
+  },
+  {
+   "cell_id": "P059_1_S15_C06"
+  },
+  {
+   "cell_id": "P059_2_S18_C04"
+  },
+  {
+   "cell_id": "P059_3_S19_C04"
+  },
+  {
+   "cell_id": "P060_1_S15_C03"
+  },
+  {
+   "cell_id": "P060_2_S16_C01"
+  },
+  {
+   "cell_id": "P060_3_S19_C00"
+  },
+  {
+   "cell_id": "P061_1_S16_C09"
+  },
+  {
+   "cell_id": "P061_2_S17_C09"
+  },
+  {
+   "cell_id": "P061_3_S18_C09"
+  },
+  {
+   "cell_id": "P062_1_S16_C07"
+  },
+  {
+   "cell_id": "P062_2_S17_C07"
+  },
+  {
+   "cell_id": "P062_3_S18_C07"
+  },
+  {
+   "cell_id": "P063_1_S16_C05"
+  },
+  {
+   "cell_id": "P063_2_S17_C05"
+  },
+  {
+   "cell_id": "P063_3_S18_C05"
+  },
+  {
+   "cell_id": "P064_1_S17_C01"
+  },
+  {
+   "cell_id": "P064_2_S18_C01"
+  },
+  {
+   "cell_id": "P064_3_S19_C01"
+  },
+  {
+   "cell_id": "P065_1_S01_C03"
+  },
+  {
+   "cell_id": "P065_2_S03_C02"
+  },
+  {
+   "cell_id": "P065_3_S04_C02"
+  },
+  {
+   "cell_id": "P066_1_S02_C03"
+  },
+  {
+   "cell_id": "P066_2_S03_C03"
+  },
+  {
+   "cell_id": "P066_3_S04_C03"
+  },
+  {
+   "cell_id": "P067_1_S01_C02"
+  },
+  {
+   "cell_id": "P067_2_S02_C02"
+  },
+  {
+   "cell_id": "P067_3_S05_C01"
+  },
+  {
+   "cell_id": "P068_1_S06_C03"
+  },
+  {
+   "cell_id": "P068_2_S07_C03"
+  },
+  {
+   "cell_id": "P068_3_S08_C03"
+  },
+  {
+   "cell_id": "P069_1_S08_C02"
+  },
+  {
+   "cell_id": "P069_2_S09_C02"
+  },
+  {
+   "cell_id": "P069_3_S10_C01"
+  },
+  {
+   "cell_id": "P070_1_S06_C02"
+  },
+  {
+   "cell_id": "P070_2_S07_C02"
+  },
+  {
+   "cell_id": "P070_3_S09_C01"
+  },
+  {
+   "cell_id": "P071_1_S11_C03"
+  },
+  {
+   "cell_id": "P071_2_S12_C03"
+  },
+  {
+   "cell_id": "P071_3_S13_C03"
+  },
+  {
+   "cell_id": "P072_1_S10_C07"
+  },
+  {
+   "cell_id": "P072_2_S13_C02"
+  },
+  {
+   "cell_id": "P072_3_S14_C02"
+  },
+  {
+   "cell_id": "P073_1_S11_C02"
+  },
+  {
+   "cell_id": "P073_2_S12_C02"
+  },
+  {
+   "cell_id": "P073_3_S14_C01"
+  },
+  {
+   "cell_id": "P074_1_S17_C03"
+  },
+  {
+   "cell_id": "P074_2_S18_C03"
+  },
+  {
+   "cell_id": "P074_3_S19_C03"
+  },
+  {
+   "cell_id": "P075_1_S16_C03"
+  },
+  {
+   "cell_id": "P075_2_S18_C02"
+  },
+  {
+   "cell_id": "P075_3_S19_C02"
+  },
+  {
+   "cell_id": "P076_1_S15_C04"
+  },
+  {
+   "cell_id": "P076_2_S16_C02"
+  },
+  {
+   "cell_id": "P076_3_S17_C02"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "shared_cells_with_other_dataset"
+  ],
+  "notes": "Log data of 228 cells (v1 raw release). ocv_est_V, R0_mOhm, R1_mOhm and cap_aged_est_Ah are the authors' estimates, not direct measurements."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "raw_docs",
+   "identity.paper_doi": "raw_docs",
+   "identity.study_group": "relationships",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "landing_page",
+   "cell.anode_chemistry": "landing_page",
+   "cell.chemistry_label_raw": "landing_page",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "raw_docs",
+   "conditions.discharge_c_rate_max": "raw_docs"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_11.json",
+  "landing_evidence": "evidence/landing/dataset_11.json"
+ }
+}

@@ -1,0 +1,268 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_23",
+ "identity": {
+  "ref_name": "2022_EVERLASTING_4TU_NMC_18650_3.5Ah_MultiC_25-45T",
+  "ref_name_aliases": [],
+  "dataset_name": "EVERLASTING 4TU (25°C+45°C)",
+  "institution": "VITO / EnergyVille (EVERLASTING project)",
+  "year": 2022,
+  "doi": "10.4121/13739296.v1",
+  "paper_doi": null,
+  "source_url": "https://data.4tu.nl/datasets/e19fe272-4f46-450c-9125-6545c4c1a98b",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "LG Chem",
+  "model": "INR18650 MJ1",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.5,
+   "height": 65.1,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 3.5,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 25.0,
+  "temperature_max_C": 45.0,
+  "temperature_setpoints_C": [
+   25.0,
+   45.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 1.0,
+  "discharge_c_rate_max": 1.5,
+  "c_rate_profile": null,
+  "protocol_class": "CC-CV",
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 17,
+  "n_entities_declared": 17,
+  "n_cycles_total": 2392329,
+  "cycles_per_entity_median": 19002.0,
+  "n_raw_files": 2,
+  "raw_bytes": 9746284630
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "discharge_capacity",
+   "energy",
+   "step_type",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Charge_Capacity_Ah",
+   "Charge_Capacity_Wh",
+   "Current_A",
+   "Discharge_Capacity_Ah",
+   "Discharge_Capacity_Wh",
+   "Step",
+   "Total_Time_Seconds",
+   "Unnamed: 0",
+   "Voltage_V"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "current-sign discharge events counted by Acc.sign_run_ids because no cycle-index column is delivered; dynamic drive-profile reversals can create multiple events within one aging cycle, so this is not a verified physical aging-cycle count",
+  "observed": {
+   "voltage_V": [
+    -0.092804,
+    4.401001
+   ],
+   "current_A": [
+    -16.800331,
+    7.909668
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": 1.862742,
+   "discharge_capacity_Ah_median_of_entity_max": 0.169591
+  },
+  "source_format": [
+   "csv"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "Cycl_T25_SOC10-90_Dch0.5C_Ch0.5C_Vito_Cell78",
+   "temperature_C": 25.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 0.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T25_SOC10-90_Dch0.5C_Ch0.5C_Vito_Cell79",
+   "temperature_C": 25.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 0.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T25_SOC10-90_Dch1.5C_Ch0.5C_Vito_Cell82",
+   "temperature_C": 25.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T25_SOC10-90_Dch1.5C_Ch0.5C_Vito_Cell83",
+   "temperature_C": 25.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T25_SOC10-90_Dch1.5C_Ch1.0C_Vito_Cell85",
+   "temperature_C": 25.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T45_SOC10-90_Dch0.5C_Ch0.5C_Vito_Cell63",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 0.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T45_SOC10-90_Dch1.5C_Ch0.5C_Vito_Cell64",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T45_SOC10-90_Dch1.5C_Ch0.5C_Vito_Cell65",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "Cycl_T45_SOC10-90_Dch1.5C_Ch1.0C_Vito_Cell66",
+   "temperature_C": 45.0,
+   "labels": {
+    "charge_c_rate": 1.0,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "DrivingAgeingPower_T25_SOC10-90_Vito_Cell91",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T25_SOC10-90_Vito_Cell88",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T25_SOC10-90_Vito_Cell89",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T25_SOC70-90_Vito_Cell86",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T25_SOC70-90_Vito_Cell87",
+   "temperature_C": 25.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T45_SOC10-90_Vito_Cell71",
+   "temperature_C": 45.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T45_SOC70-90_Vito_Cell68",
+   "temperature_C": 45.0
+  },
+  {
+   "cell_id": "DrivingAgeing_T45_SOC70-90_Vito_Cell69",
+   "temperature_C": 45.0
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff",
+   "duplicate_of_other_dataset"
+  ],
+  "notes": "Zipped copy of the 4TU release also held loose as dataset_22. The zip stores the Cell91 CSV twice (identical CRC); it is counted once. Cell spec from LG's official INR18650 MJ1 3500mAh product specification. The author README claims cell-level temperature measurements, but every locally available measurement CSV header was checked and contains no temperature channel (17 loose CSVs in dataset_22, 18 archive CSVs in dataset_23). Local cell-temperature data are absent at this inspected source scope. The extracted cycle total is a count of current-sign discharge events because no cycle-index column is delivered; dynamic drive reversals may create many events within one aging cycle. It must not be used as a verified count of physical aging cycles."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "identity.doi": "landing_page",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.model": "raw_docs",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "landing_page",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "derived",
+   "conditions.discharge_c_rate_max": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_23.json",
+  "landing_evidence": "evidence/landing/dataset_23.json"
+ }
+}

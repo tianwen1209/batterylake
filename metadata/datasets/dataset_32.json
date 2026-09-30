@@ -1,0 +1,181 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_32",
+ "identity": {
+  "ref_name": "2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Figshare LFP Pouch EIS",
+  "institution": null,
+  "year": 2023,
+  "doi": "10.6084/m9.figshare.23736582",
+  "paper_doi": null,
+  "source_url": "https://figshare.com/articles/dataset/Li-ion_Batteries_EIS_measurements/23736582",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "LFP",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+  "form_factor": "pouch",
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": 0.6,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": 2.0,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": 20.0,
+  "temperature_max_C": 20.0,
+  "temperature_setpoints_C": [
+   20.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": 0.2,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 11,
+  "n_entities_declared": null,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 1,
+  "raw_bytes": 465799
+ },
+ "content": {
+  "signals": [
+   "current",
+   "eis",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Cur(A)",
+   "Frequency(Hz)",
+   "R(ohm)",
+   "T(deg C)",
+   "Time(S)",
+   "V(V)",
+   "Vol(V)",
+   "X(ohm)"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "none; per cell there are EIS sweeps at several SOC and constant-current capacity tests",
+  "observed": {
+   "voltage_V": [
+    0.293,
+    3.60749
+   ],
+   "current_A": [
+    0.0,
+    0.12
+   ],
+   "temperature_C": [
+    20.0,
+    20.0
+   ],
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv"
+  ],
+  "supported_tasks": [
+   "characterization"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "B01"
+  },
+  {
+   "cell_id": "B02"
+  },
+  {
+   "cell_id": "B03"
+  },
+  {
+   "cell_id": "B04"
+  },
+  {
+   "cell_id": "B05"
+  },
+  {
+   "cell_id": "B06"
+  },
+  {
+   "cell_id": "B07"
+  },
+  {
+   "cell_id": "B08"
+  },
+  {
+   "cell_id": "B09"
+  },
+  {
+   "cell_id": "B10"
+  },
+  {
+   "cell_id": "B11"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff"
+  ],
+  "notes": "EIS sweeps (0.01 Hz-1 kHz) at 5-100% SOC and 0.12 A constant-current capacity tests on LFP cells. File names read IFR14500, a cylindrical 14500 size, while the registry calls the cell a pouch cell. All 11 capacity-test CSV headers were inspected: discharge mode D-CC at 0.12 A to 2.00 V, equivalent to 0.2C using the source nominal 0.6 Ah. Their time-series headers are Time(S),Cur(A),Vol(V), with no temperature. All 440 EIS CSV headers were checked: temperature is recorded only against frequency, always 20 C, with no time column. This is not evidence of a delivered cell-temperature time series; generic temperature logging and temperature time-series availability must be distinguished. The charge rate and upper cutoff remain unsupported."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "curated",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "landing_page",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "cell.nominal_capacity_Ah": "landing_page",
+   "cell.voltage_min_V": "raw_data",
+   "conditions.temperature_setpoints_C": "raw_data",
+   "conditions.c_rate": "derived",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_32.json",
+  "landing_evidence": "evidence/landing/dataset_32.json"
+ }
+}

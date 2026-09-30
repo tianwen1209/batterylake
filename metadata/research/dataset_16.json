@@ -1,0 +1,93 @@
+{
+ "$schema": "../schema/batterylake-research-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_16",
+ "ref_name": "2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT",
+ "category": "soh_estimation",
+ "timeseries": {
+  "has_voltage_timeseries": true,
+  "has_current_timeseries": true,
+  "has_temperature_timeseries": true,
+  "complete_v_i_t_timeseries": true,
+  "resolution": "full_waveforms",
+  "signals_basis": "raw_data",
+  "caveats": [
+   "partial_raw"
+  ]
+ },
+ "soc": {
+  "computable": true,
+  "basis": "coulomb_counting_from_voltage_current"
+ },
+ "soh": {
+  "computable": true,
+  "basis": "curated_supported_tasks_and_raw_capacity_signal",
+  "blocking_flags": [],
+  "curated_task_present": true
+ },
+ "capacity_degradation": {
+  "present": false,
+  "aging_type": "characterization",
+  "n_cycles_total": 262409,
+  "cycles_per_entity_median": 751.0
+ },
+ "ocv": {
+  "present": false,
+  "confidence": null,
+  "basis": null
+ },
+ "internal_resistance": {
+  "present": false,
+  "confidence": null,
+  "basis": "no populated resistance column and no impedance measurement in the raw data"
+ },
+ "eis": {
+  "present": false,
+  "basis": null
+ },
+ "thermal": {
+  "temperature_logging": true,
+  "thermal_characterization": false,
+  "application_domain": "lab",
+  "aging_type": "characterization"
+ },
+ "research_applicability": {
+  "parameter_identification": true,
+  "piml_calibration": false,
+  "soh_rul_prediction": false,
+  "simulation": true,
+  "synthetic_data_generation": true
+ },
+ "suitable_tasks": [
+  "SOH_estimation",
+  "SOC_estimation",
+  "digital_twin_calibration",
+  "simulation",
+  "synthetic_data_generation"
+ ],
+ "source_quality_flags": [
+  "multi_chemistry",
+  "partial_raw"
+ ],
+ "provenance": {
+  "derived_from": "datasets/dataset_16.json",
+  "generated": "2026-09-29",
+  "field_sources": {
+   "ref_name": "dataset_record",
+   "category": "folder_layout",
+   "timeseries.*": "derived",
+   "soc.*": "derived",
+   "soh.*": "derived",
+   "capacity_degradation.*": "derived",
+   "ocv.*": "derived",
+   "internal_resistance.*": "raw_data",
+   "eis.*": "raw_data",
+   "thermal.*": "derived",
+   "research_applicability.*": "derived",
+   "suitable_tasks": "derived",
+   "source_quality_flags": "dataset_record"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29"
+ }
+}

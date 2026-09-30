@@ -1,0 +1,296 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_07",
+ "identity": {
+  "ref_name": "2018_HNEI_BatteryArchive_NMC-LCO_18650_2.8Ah_0.5C_1.5C_25T",
+  "ref_name_aliases": [
+   {
+    "name": "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T",
+    "status": "historical",
+    "seen_in": [
+     "registry_history",
+     "raw_readme"
+    ]
+   }
+  ],
+  "dataset_name": "HNEI BatteryArchive NMC",
+  "institution": "Hawaii Natural Energy Institute",
+  "year": 2018,
+  "doi": null,
+  "paper_doi": null,
+  "source_url": "https://batteryarchive.org",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "LCO-NMC",
+  "anode_chemistry": "graphite",
+  "chemistry_label_raw": "LiCoO2+LiNi0.4Co0.4Mn0.2O2",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": "18650",
+  "dimensions_mm": {
+   "diameter": 18.0,
+   "height": 65.0,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "inferred_from_format_code"
+  },
+  "nominal_capacity_Ah": 2.8,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 3.0,
+  "voltage_max_V": 4.3
+ },
+ "conditions": {
+  "temperature_min_C": 25.0,
+  "temperature_max_C": 25.0,
+  "temperature_setpoints_C": [
+   25.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 0.5,
+  "discharge_c_rate_max": 1.5,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": 0.0,
+  "soc_window_max_pct": 100.0,
+  "aging_type": "cyclic",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 14,
+  "n_entities_declared": 14,
+  "n_cycles_total": 15164,
+  "cycles_per_entity_median": 1081.5,
+  "n_raw_files": 4,
+  "raw_bytes": 43090441
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "internal_resistance",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "charge_capacity_in_Ah",
+   "current_in_A",
+   "cycle_number",
+   "discharge_capacity_in_Ah",
+   "internal_resistance_in_ohm",
+   "temperature_in_C",
+   "time_in_s",
+   "voltage_in_V"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "length of the pickle's cycle_data list (one entry per cycle)",
+  "observed": {
+   "voltage_V": [
+    0.0,
+    4.4
+   ],
+   "current_A": [
+    -4.205,
+    2.084
+   ],
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": 2.657,
+   "discharge_capacity_Ah_median_of_entity_max": 2.6464999999999996
+  },
+  "source_format": [
+   "json",
+   "pkl"
+  ],
+  "supported_tasks": [
+   "SOH",
+   "RUL"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_a",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_b",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_c",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_d",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_e",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_f",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_g",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_j",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_l",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_n",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_o",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_p",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_s",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  },
+  {
+   "cell_id": "HNEI_18650_NMC_LCO_25C_0-100_0.5-1.5C_t",
+   "labels": {
+    "soc_window_min_pct": 0.0,
+    "soc_window_max_pct": 100.0,
+    "charge_c_rate": 0.5,
+    "discharge_c_rate": 1.5
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_below_cutoff",
+   "voltage_excursion_above_cutoff"
+  ],
+  "notes": "Third-party BatteryLife v12 pickles of the HNEI cells; materials, nominal capacity and voltage limits are read from each pickle and the test conditions from the cell id. All 14 locally present HNEI BatteryLife pickles were checked with SafeUnpickler: the temperature_in_C column contains 7,359,143 NaN values and zero finite cell-temperature measurements. Chamber/filename temperature (25 C) is a testing condition, not a measured cell-temperature channel."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "raw_docs",
+   "identity.year": "ref_name",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_data",
+   "cell.anode_chemistry": "raw_data",
+   "cell.chemistry_label_raw": "raw_data",
+   "cell.form_factor": "raw_data",
+   "cell.nominal_capacity_Ah": "raw_data",
+   "cell.voltage_max_V": "raw_data",
+   "cell.voltage_min_V": "raw_data",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "cell.dimensions_mm": "derived",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "derived",
+   "conditions.discharge_c_rate_max": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_07.json",
+  "landing_evidence": "evidence/landing/dataset_07.json"
+ }
+}

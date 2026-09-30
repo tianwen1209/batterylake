@@ -1,0 +1,346 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_14",
+ "identity": {
+  "ref_name": "2025_Stanford_Onori_NMC_21700_Molicel-P42A_MultiC_MultiT",
+  "ref_name_aliases": [
+   {
+    "name": "2021_KIT_NMC-SiO_18650_MultiC_MultiT",
+    "status": "historical",
+    "seen_in": [
+     "registry_history"
+    ]
+   }
+  ],
+  "dataset_name": "Stanford High-Power Cell Characterization",
+  "institution": "Stanford University, Onori Lab",
+  "year": 2025,
+  "doi": "10.17605/OSF.IO/9CEAV",
+  "paper_doi": null,
+  "source_url": "https://osf.io/9ceav/",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": "Molicel",
+  "model": "P42A",
+  "cathode_chemistry": "NMC",
+  "anode_chemistry": "Si-graphite",
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "form_factor": "cylindrical",
+  "cell_format_code": null,
+  "dimensions_mm": {
+   "diameter": 21.7,
+   "height": 70.2,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 4.2,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2
+ },
+ "conditions": {
+  "temperature_min_C": 5.0,
+  "temperature_max_C": 40.0,
+  "temperature_setpoints_C": [
+   5.0,
+   25.0,
+   40.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 8.0,
+  "discharge_c_rate_max": 8.0,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "characterization",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 45,
+  "n_entities_declared": 45,
+  "n_cycles_total": 386,
+  "cycles_per_entity_median": 2.0,
+  "n_raw_files": 1,
+  "raw_bytes": 2745069193
+ },
+ "content": {
+  "signals": [
+   "capacity",
+   "charge_capacity",
+   "current",
+   "cycle_index",
+   "discharge_capacity",
+   "energy",
+   "internal_resistance",
+   "step_type",
+   "temperature",
+   "time",
+   "voltage"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Aux_Temperature(¡æ)_1",
+   "Aux_Temperature(¡æ)_2",
+   "Aux_Temperature(¡æ)_3",
+   "Aux_Temperature(¡æ)_4",
+   "Aux_Temperature(¡æ)_5",
+   "Aux_Temperature(¡æ)_6",
+   "Aux_Temperature(¡æ)_7",
+   "Aux_Temperature(¡æ)_8",
+   "Aux_Voltage(V)_1",
+   "Aux_Voltage(V)_2",
+   "Aux_Voltage(V)_3",
+   "Aux_Voltage(V)_4",
+   "Aux_Voltage(V)_5",
+   "Capacity/mA.h",
+   "Charge_Capacity(Ah)",
+   "Charge_Energy(Wh)",
+   "Current(A)",
+   "CurrentA",
+   "Cycle_ID",
+   "Cycle_Index",
+   "Date_Time",
+   "Discharge_Capacity(Ah)",
+   "Discharge_Energy(Wh)",
+   "Ecell/V",
+   "Energy charge/W.h",
+   "Energy discharge/W.h",
+   "Freq",
+   "Internal Resistance(Ohm)",
+   "Ns",
+   "R/Ohm",
+   "Step_ID",
+   "Step_Index",
+   "Step_Time(s)",
+   "Test_Time(s)",
+   "Voltage(V)",
+   "VoltageV",
+   "cycle number",
+   "mode",
+   "time/s"
+  ],
+  "has_waveforms": true,
+  "cycle_basis": "no cycle index in the characterization files; parts are test types (CDT, HCGT, EIS, pulse) by phase",
+  "observed": {
+   "voltage_V": [
+    2.49765,
+    4.261355
+   ],
+   "current_A": [
+    -32.043633,
+    32.025719
+   ],
+   "temperature_C": [
+    4.577226,
+    43.677528
+   ],
+   "discharge_capacity_Ah_max": 0.079788,
+   "discharge_capacity_Ah_median_of_entity_max": 0.040079500000000004
+  },
+  "source_format": [
+   "csv",
+   "mat",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "characterization"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "A1"
+  },
+  {
+   "cell_id": "A10"
+  },
+  {
+   "cell_id": "A11"
+  },
+  {
+   "cell_id": "A12"
+  },
+  {
+   "cell_id": "A13"
+  },
+  {
+   "cell_id": "A14"
+  },
+  {
+   "cell_id": "A15"
+  },
+  {
+   "cell_id": "A16"
+  },
+  {
+   "cell_id": "A17"
+  },
+  {
+   "cell_id": "A18"
+  },
+  {
+   "cell_id": "A19"
+  },
+  {
+   "cell_id": "A2"
+  },
+  {
+   "cell_id": "A20"
+  },
+  {
+   "cell_id": "A21"
+  },
+  {
+   "cell_id": "A22"
+  },
+  {
+   "cell_id": "A23"
+  },
+  {
+   "cell_id": "A24"
+  },
+  {
+   "cell_id": "A25"
+  },
+  {
+   "cell_id": "A26"
+  },
+  {
+   "cell_id": "A27"
+  },
+  {
+   "cell_id": "A28"
+  },
+  {
+   "cell_id": "A29"
+  },
+  {
+   "cell_id": "A3"
+  },
+  {
+   "cell_id": "A30"
+  },
+  {
+   "cell_id": "A31"
+  },
+  {
+   "cell_id": "A32"
+  },
+  {
+   "cell_id": "A33"
+  },
+  {
+   "cell_id": "A34"
+  },
+  {
+   "cell_id": "A35"
+  },
+  {
+   "cell_id": "A36"
+  },
+  {
+   "cell_id": "A37"
+  },
+  {
+   "cell_id": "A38"
+  },
+  {
+   "cell_id": "A39"
+  },
+  {
+   "cell_id": "A4"
+  },
+  {
+   "cell_id": "A40"
+  },
+  {
+   "cell_id": "A41"
+  },
+  {
+   "cell_id": "A42"
+  },
+  {
+   "cell_id": "A43"
+  },
+  {
+   "cell_id": "A44"
+  },
+  {
+   "cell_id": "A45"
+  },
+  {
+   "cell_id": "A5"
+  },
+  {
+   "cell_id": "A6"
+  },
+  {
+   "cell_id": "A7"
+  },
+  {
+   "cell_id": "A8"
+  },
+  {
+   "cell_id": "A9"
+  }
+ ],
+ "quality": {
+  "flags": [
+   "voltage_excursion_above_cutoff",
+   "unreadable_raw_files"
+  ],
+  "notes": "The registry describes an NMC 21700 cell; the raw folder is named for the Molicel P42A. Characterization (CDT, HCGT, EIS, pulse) at 5, 25 and 40 C in two phases. Cell spec from Molicel's official INR-21700-P42A product data sheet. The source paper explicitly identifies a silicon-graphite anode and 8C charge/discharge pulses in the HCGT protocol. These maxima describe 12-second pulses, not sustained CC rates. Data Records p. 10 identifies Aux_Temperature as cell surface temperature; finite readings occur in Phase 2, not every Phase 1 screening file. The paper distinguishes 45 screened cells from the 12 subsequently characterized cells."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "registry",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "raw_docs",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_filenames",
+   "cell.model": "raw_filenames",
+   "cell.cathode_chemistry": "registry",
+   "cell.anode_chemistry": "paper",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "curated",
+   "cell.nominal_capacity_Ah": "datasheet",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "paper",
+   "conditions.discharge_c_rate_max": "paper"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_14.json",
+  "landing_evidence": "evidence/landing/dataset_14.json"
+ }
+}

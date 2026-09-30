@@ -1,0 +1,2901 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_12",
+ "identity": {
+  "ref_name": "2022_Tsinghua_LiIon_EV_MultiChem_MultiC_MultiT",
+  "ref_name_aliases": [],
+  "dataset_name": "Tsinghua Li-ion EV Field",
+  "institution": "Tsinghua University",
+  "year": 2022,
+  "doi": "10.17632/mcsh4hnb8b.1",
+  "paper_doi": null,
+  "source_url": "https://data.mendeley.com/datasets/mcsh4hnb8b/1",
+  "study_group": null
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": null,
+  "anode_chemistry": null,
+  "chemistry_label_raw": "Multi",
+  "chemistry_is_multi": false,
+  "form_factor": "pack",
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": null,
+  "temperature_max_C": null,
+  "temperature_setpoints_C": [],
+  "temperature_basis": "unspecified",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": null,
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": null,
+  "soc_window_max_pct": null,
+  "aging_type": "field",
+  "application_domain": "EV_field"
+ },
+ "scale": {
+  "entity_type": "vehicle",
+  "n_entities": 464,
+  "n_entities_declared": 464,
+  "n_cycles_total": null,
+  "cycles_per_entity_median": null,
+  "n_raw_files": 3,
+  "raw_bytes": 1408209405
+ },
+ "content": {
+  "signals": [],
+  "signals_basis": null,
+  "raw_columns": [],
+  "has_waveforms": false,
+  "cycle_basis": "none; each pickle is one 128-row charging segment of a vehicle",
+  "observed": {
+   "voltage_V": null,
+   "current_A": null,
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": null,
+   "discharge_capacity_Ah_median_of_entity_max": null
+  },
+  "source_format": [
+   "csv",
+   "pkl"
+  ],
+  "supported_tasks": [
+   "anomaly"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "car0",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car1",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car2",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car3",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car4",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car5",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car6",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car7",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car8",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car9",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car10",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car11",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car12",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car13",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car14",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car15",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car16",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car17",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car18",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car19",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car20",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car21",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car22",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car23",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car24",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car25",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car26",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car27",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car28",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car29",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car30",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car31",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car32",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car33",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car34",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car35",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car36",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car37",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car38",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car39",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car40",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car41",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car42",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car43",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car44",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car45",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car46",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car47",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car48",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car49",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car50",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car51",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car52",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car53",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car54",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car55",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car56",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car57",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car58",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car59",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car60",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car61",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car62",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car63",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car64",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car65",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car66",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car67",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car68",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car69",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car70",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car71",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car72",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car73",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car74",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car75",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car76",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car77",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car78",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car79",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car80",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car81",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car82",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car83",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car84",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car85",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car86",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car87",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car88",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car89",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car90",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car91",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car92",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car93",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car94",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car95",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car96",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car97",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car98",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car99",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car100",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car101",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car102",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car103",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car104",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car105",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car106",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car107",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car108",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car109",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car110",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car111",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car112",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car113",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car114",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car115",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car116",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car117",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car118",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car119",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car120",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car121",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car122",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car123",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car124",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car125",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car126",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car127",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car128",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car129",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car130",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car131",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car132",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car133",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car134",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car135",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car136",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car137",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car138",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car139",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car140",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car141",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car142",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car143",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car144",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car145",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car146",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car147",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car148",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car149",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car150",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car151",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car152",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car153",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car154",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car155",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car156",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car157",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car158",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car159",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car160",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car161",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car162",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car163",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car164",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car165",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car166",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car167",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car168",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car169",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car170",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car171",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car172",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car173",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car174",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car175",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car176",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car177",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car178",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car179",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car180",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car181",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car182",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car183",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car184",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car185",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car186",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car187",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car188",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car189",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car190",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car191",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car192",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car193",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car194",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car195",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car196",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car197",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car198",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car199",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car200",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car201",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car202",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car203",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car204",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car205",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car206",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car207",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car208",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car209",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car210",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car211",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car212",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car213",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car214",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car215",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car216",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car300",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car301",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car302",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car303",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car304",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car305",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car306",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car307",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car308",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car309",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car310",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car311",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car312",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car313",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car314",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car315",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car316",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car317",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car318",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car319",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car320",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car321",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car322",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car323",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car324",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car325",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car326",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car327",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car328",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car329",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car330",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car331",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car332",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car333",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car334",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car335",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car336",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car337",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car338",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car339",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car340",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car341",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car342",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car343",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car344",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car345",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car346",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car347",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car348",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car349",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car350",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car351",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car352",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car353",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car354",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car355",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car356",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car357",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car358",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car359",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car360",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car361",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car362",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car363",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car364",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car365",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car366",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car367",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car368",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car369",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car370",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car371",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car372",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car373",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car374",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car375",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car376",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car377",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car378",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car379",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car380",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car381",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car382",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car383",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car384",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car385",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car386",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car387",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car388",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car389",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car390",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car391",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car392",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car393",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car394",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car395",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car396",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car397",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car398",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car399",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car400",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car401",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car402",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car403",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car404",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car405",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car406",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car407",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car408",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car409",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car410",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car411",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car412",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car413",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car414",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car415",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car416",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car417",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car418",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car419",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car420",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car421",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car422",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car423",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car424",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car425",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car426",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car427",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car428",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car429",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car430",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car431",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car432",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car433",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car434",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car435",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car436",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car437",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car438",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car439",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car440",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car441",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car442",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car443",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car444",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car445",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car446",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car447",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car448",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car449",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car450",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car451",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car452",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car453",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car454",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car455",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car456",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car457",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car458",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car459",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car460",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car461",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car462",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car463",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car464",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car465",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car466",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car467",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car468",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car469",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car470",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car471",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car472",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car473",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car474",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car475",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car476",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car477",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car478",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car479",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car480",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car481",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car482",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car483",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car484",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car485",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car486",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car487",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car488",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car489",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car490",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car491",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car492",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car493",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car494",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car495",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car496",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car497",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car500",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car501",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car502",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car503",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car504",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car505",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car506",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car507",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car508",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car509",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car510",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car511",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car512",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car513",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car514",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car515",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car516",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car517",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car518",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car519",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car520",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car521",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car522",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car523",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car524",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car525",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car526",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car527",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car528",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car529",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car530",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car531",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car532",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car533",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car534",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car535",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car536",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car537",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car538",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car539",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car540",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car541",
+   "labels": {
+    "anomaly_label": "10"
+   }
+  },
+  {
+   "cell_id": "car542",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car543",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car544",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car546",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car547",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car548",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  },
+  {
+   "cell_id": "car549",
+   "labels": {
+    "anomaly_label": "00"
+   }
+  }
+ ],
+ "quality": {
+  "flags": [],
+  "notes": "Three EV fleets (464 vehicles). Each pickle is one 128-row charging segment as an unlabelled 8-column matrix plus a meta record (label, car, charge_segment, mileage, capacity); the columns are recorded as col0..col7. The registry's 'source' column points at the KIT dataset by mistake; its source_url (Mendeley, Tsinghua EV fleets) matches the data."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "landing_page",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "registry",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "curated",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "registry",
+   "cell.chemistry_label_raw": "registry",
+   "cell.form_factor": "registry",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_12.json",
+  "landing_evidence": "evidence/landing/dataset_12.json"
+ }
+}

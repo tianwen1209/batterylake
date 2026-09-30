@@ -1,0 +1,1116 @@
+{
+ "$schema": "../schema/batterylake-dataset-2.0.json",
+ "schema_version": "2.0.0",
+ "dataset_id": "dataset_40",
+ "identity": {
+  "ref_name": "2022_THI_Geisbauer_MultiChem_Calendar_3SOC_50-60T",
+  "ref_name_aliases": [
+   {
+    "name": "2022_JRC_NMC-LFP-LTO_MultiForm_Calendar_MultiT",
+    "status": "historical",
+    "seen_in": [
+     "registry_history"
+    ]
+   }
+  ],
+  "dataset_name": "THI Experimental Calendar Ageing",
+  "institution": "Technische Hochschule Ingolstadt (THI)",
+  "year": 2022,
+  "doi": "10.5281/zenodo.6685365",
+  "paper_doi": null,
+  "source_url": "https://zenodo.org/records/6685365",
+  "study_group": "THI_Geisbauer_calendar"
+ },
+ "cell": {
+  "manufacturer": null,
+  "model": null,
+  "cathode_chemistry": "mixed",
+  "anode_chemistry": null,
+  "chemistry_label_raw": "LCO; LFP; LMO; LTO; NCA; NMC",
+  "chemistry_is_multi": true,
+  "form_factor": null,
+  "cell_format_code": null,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": null,
+  "capacity_basis": null,
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null
+ },
+ "conditions": {
+  "temperature_min_C": 50.0,
+  "temperature_max_C": 60.0,
+  "temperature_setpoints_C": [
+   50.0,
+   60.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": null,
+  "discharge_c_rate_max": null,
+  "c_rate_profile": null,
+  "protocol_class": "calendar_hold",
+  "protocol_charge_raw": null,
+  "protocol_discharge_raw": null,
+  "soc_window_min_pct": 20.0,
+  "soc_window_max_pct": 100.0,
+  "aging_type": "calendar",
+  "application_domain": "lab"
+ },
+ "scale": {
+  "entity_type": "cell",
+  "n_entities": 108,
+  "n_entities_declared": 108,
+  "n_cycles_total": 478,
+  "cycles_per_entity_median": 5.0,
+  "n_raw_files": 1,
+  "raw_bytes": 79545
+ },
+ "content": {
+  "signals": [
+   "charge_capacity",
+   "discharge_capacity",
+   "soc",
+   "temperature",
+   "time"
+  ],
+  "signals_basis": "raw_data",
+  "raw_columns": [
+   "Charge Capacity",
+   "Days Passed",
+   "Discharge Capacity",
+   "State-of-Charge",
+   "Temperature"
+  ],
+  "has_waveforms": false,
+  "cycle_basis": "one row per check-up (RPT) day; n_cycles counts check-ups, not cycles",
+  "observed": {
+   "voltage_V": null,
+   "current_A": null,
+   "temperature_C": null,
+   "discharge_capacity_Ah_max": 2.537457,
+   "discharge_capacity_Ah_median_of_entity_max": 1.9925895
+  },
+  "source_format": [
+   "csv",
+   "xlsx"
+  ],
+  "supported_tasks": [
+   "SOH"
+  ]
+ },
+ "cells": [
+  {
+   "cell_id": "LCO_7",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LCO_8",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LCO_25",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_26",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_43",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO_44",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO_71",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LCO_72",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LCO_83",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_84",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_95",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO_96",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO_112",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LCO_115",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LCO_118",
+   "cathode_chemistry": "LCO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LFP_7",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LFP_8",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LFP_25",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_26",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_43",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_44",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_71",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LFP_72",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LFP_83",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_84",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_95",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_96",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_112",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LFP_115",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LFP_118",
+   "cathode_chemistry": "LFP",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_1",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_2",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_4",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_5",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_7",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_8",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_11",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_12",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_13",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_14",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_15",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_16",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_17",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_18",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LMO_23",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_24",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_25",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_26",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_27",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_28",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_29",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_30",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LMO_35",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_36",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_37",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_38",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_39",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_40",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_41",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LMO_42",
+   "cathode_chemistry": "LMO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LTO_1",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LTO_2",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LTO_3",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LTO_7",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LTO_8",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LTO_9",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "LTO_19",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LTO_20",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LTO_21",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LTO_25",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LTO_26",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LTO_27",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "LTO_37",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LTO_38",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LTO_39",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 50.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LTO_43",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LTO_44",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "LTO_45",
+   "cathode_chemistry": "LTO",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_7",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NCA_8",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NCA_25",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NCA_26",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NCA_43",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_44",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_71",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NCA_72",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NCA_83",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NCA_84",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NCA_95",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_96",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_112",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NCA_115",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NCA_118",
+   "cathode_chemistry": "NCA",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NMC_7",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NMC_8",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NMC_25",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_26",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_43",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_44",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_71",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NMC_72",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  },
+  {
+   "cell_id": "NMC_83",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_84",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_95",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_96",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_112",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 100.0,
+    "soc_window_max_pct": 100.0
+   }
+  },
+  {
+   "cell_id": "NMC_115",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 50.0,
+    "soc_window_max_pct": 50.0
+   }
+  },
+  {
+   "cell_id": "NMC_118",
+   "cathode_chemistry": "NMC",
+   "temperature_C": 60.0,
+   "labels": {
+    "soc_window_min_pct": 20.0,
+    "soc_window_max_pct": 20.0
+   }
+  }
+ ],
+ "quality": {
+  "flags": [
+   "multi_chemistry"
+  ],
+  "notes": "Author capacity tables (Discharge/Charge Capacity per check-up day) for cells stored at three SOC and 50/60 C; no waveforms. The zip repeats every table as csv, xlsx and txt; only the csv is read. Five chemistries (LCO/LFP/LMO/LTO/NCA) are tested with no manufacturer or model name disclosed for any of them. nominal_capacity_Ah, voltage_min_V/voltage_max_V and dimensions_mm are left null for all - not identifiable from a public datasheet, and would differ per chemistry regardless."
+ },
+ "provenance": {
+  "field_sources": {
+   "identity.dataset_name": "registry",
+   "identity.source_url": "registry",
+   "identity.institution": "landing_page",
+   "identity.year": "ref_name",
+   "identity.doi": "registry",
+   "identity.study_group": "relationships",
+   "conditions.aging_type": "landing_page",
+   "conditions.application_domain": "derived",
+   "content.supported_tasks": "curated",
+   "scale.entity_type": "derived",
+   "scale.n_entities": "raw_data",
+   "scale.n_cycles_total": "raw_data",
+   "scale.n_entities_declared": "registry",
+   "scale.n_raw_files": "raw_inventory",
+   "scale.raw_bytes": "raw_inventory",
+   "content.signals": "raw_data",
+   "content.raw_columns": "raw_data",
+   "content.observed": "raw_data",
+   "content.source_format": "raw_inventory",
+   "quality.flags": "derived",
+   "identity.ref_name": "registry",
+   "cell.cathode_chemistry": "raw_docs",
+   "cell.chemistry_label_raw": "raw_docs",
+   "cell.form_factor": "registry",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.c_rate": "derived"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-09-29",
+  "raw_evidence": "evidence/raw/dataset_40.json",
+  "landing_evidence": "evidence/landing/dataset_40.json"
+ }
+}
