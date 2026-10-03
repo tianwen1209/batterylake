@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-02T21:21:53Z",
-  "total_visits": 3021,
-  "dataset_downloads": 491,
+  "updated_at": "2026-10-03T20:00:06Z",
+  "total_visits": 3064,
+  "dataset_downloads": 493,
   "skill_uses": 111,
   "model_downloads": {
     "cnn": 15,
@@ -16,27 +16,27 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-02T21:21:53Z",
+    "updatedAt": "2026-10-03T20:00:06Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-02"
+      "endDate": "2026-10-03"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 53
+        "visitors": 54
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 40
+        "visitors": 41
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 20
+        "visitors": 31
       },
       {
         "country": "Hong Kong",
@@ -44,13 +44,23 @@
         "visitors": 5
       },
       {
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "visitors": 4
+      },
+      {
         "country": "Taiwan",
         "countryCode": "TW",
         "visitors": 4
       },
       {
-        "country": "Netherlands",
-        "countryCode": "NL",
+        "country": "India",
+        "countryCode": "IN",
+        "visitors": 3
+      },
+      {
+        "country": "Poland",
+        "countryCode": "PL",
         "visitors": 3
       },
       {
@@ -66,11 +76,6 @@
       {
         "country": "United Kingdom",
         "countryCode": "GB",
-        "visitors": 2
-      },
-      {
-        "country": "India",
-        "countryCode": "IN",
         "visitors": 2
       },
       {
@@ -104,11 +109,6 @@
         "visitors": 1
       },
       {
-        "country": "Poland",
-        "countryCode": "PL",
-        "visitors": 1
-      },
-      {
         "country": "Thailand",
         "countryCode": "TH",
         "visitors": 1
@@ -119,9 +119,17 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 51,
+        "visitors": 52,
         "lng": 103.85,
         "lat": 1.29
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Ashburn",
+        "visitors": 9,
+        "lng": -77.487,
+        "lat": 39.044
       },
       {
         "country": "China",
@@ -134,10 +142,18 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "city": "Ashburn",
+        "city": "Boardman",
         "visitors": 6,
-        "lng": -77.487,
-        "lat": 39.044
+        "lng": -80.663,
+        "lat": 41.024
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Shenzhen",
+        "visitors": 5,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "China",
@@ -156,12 +172,12 @@
         "lat": 32.062
       },
       {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Shenzhen",
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "city": "Haarlem",
         "visitors": 4,
-        "lng": 114.068,
-        "lat": 22.546
+        "lng": 4.637,
+        "lat": 52.381
       },
       {
         "country": "United States",
@@ -196,12 +212,12 @@
         "lat": 36.065
       },
       {
-        "country": "Netherlands",
-        "countryCode": "NL",
-        "city": "Haarlem",
+        "country": "Poland",
+        "countryCode": "PL",
+        "city": "Warsaw",
         "visitors": 3,
-        "lng": 4.637,
-        "lat": 52.381
+        "lng": 21.012,
+        "lat": 52.23
       },
       {
         "country": "United States",
@@ -230,6 +246,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Guangzhou",
+        "visitors": 2,
+        "lng": 113.25,
+        "lat": 23.117
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Xiamen",
         "visitors": 2,
         "lng": 118.082,
@@ -250,14 +274,6 @@
         "visitors": 2,
         "lng": -0.126,
         "lat": 51.509
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Guangzhou",
-        "visitors": 1,
-        "lng": 113.25,
-        "lat": 23.117
       },
       {
         "country": "China",
@@ -372,14 +388,6 @@
         "lat": 43.252
       },
       {
-        "country": "Poland",
-        "countryCode": "PL",
-        "city": "Warsaw",
-        "visitors": 1,
-        "lng": 21.012,
-        "lat": 52.23
-      },
-      {
         "country": "Thailand",
         "countryCode": "TH",
         "city": "Bangkok",
@@ -402,6 +410,14 @@
         "visitors": 1,
         "lng": -123.262,
         "lat": 44.565
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Glenview",
+        "visitors": 1,
+        "lng": -87.788,
+        "lat": 42.07
       },
       {
         "country": "United States",
