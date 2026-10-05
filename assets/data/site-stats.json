@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-04T20:14:38Z",
-  "total_visits": 3129,
-  "dataset_downloads": 494,
+  "updated_at": "2026-10-05T23:13:09Z",
+  "total_visits": 3226,
+  "dataset_downloads": 495,
   "skill_uses": 114,
   "model_downloads": {
     "cnn": 15,
@@ -10,39 +10,39 @@
   "model_runs": {
     "cnn": 9,
     "linear": 3,
+    "pinn": 3,
     "xgboost": 3,
     "lstm": 2,
-    "pinn": 2,
     "baseline-package": 1,
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-04T20:14:38Z",
+    "updatedAt": "2026-10-05T23:13:09Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-04"
+      "endDate": "2026-10-05"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 55
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "visitors": 42
+        "visitors": 56
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 42
+        "visitors": 45
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "visitors": 43
       },
       {
         "country": "Poland",
         "countryCode": "PL",
-        "visitors": 6
+        "visitors": 7
       },
       {
         "country": "Hong Kong",
@@ -65,6 +65,11 @@
         "visitors": 4
       },
       {
+        "country": "Iran",
+        "countryCode": "IR",
+        "visitors": 3
+      },
+      {
         "country": "Vietnam",
         "countryCode": "VN",
         "visitors": 3
@@ -80,11 +85,6 @@
         "visitors": 2
       },
       {
-        "country": "Iran",
-        "countryCode": "IR",
-        "visitors": 2
-      },
-      {
         "country": "T\u00fcrkiye",
         "countryCode": "TR",
         "visitors": 2
@@ -92,6 +92,11 @@
       {
         "country": "Canada",
         "countryCode": "CA",
+        "visitors": 1
+      },
+      {
+        "country": "France",
+        "countryCode": "FR",
         "visitors": 1
       },
       {
@@ -130,7 +135,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 53,
+        "visitors": 54,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -146,7 +151,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 9,
+        "visitors": 10,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -154,7 +159,7 @@
         "country": "China",
         "countryCode": "CN",
         "city": "Shanghai",
-        "visitors": 8,
+        "visitors": 9,
         "lng": 121.458,
         "lat": 31.222
       },
@@ -170,7 +175,7 @@
         "country": "Poland",
         "countryCode": "PL",
         "city": "Warsaw",
-        "visitors": 6,
+        "visitors": 7,
         "lng": 21.012,
         "lat": 52.23
       },
@@ -239,6 +244,14 @@
         "lat": 36.065
       },
       {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Glenview",
+        "visitors": 3,
+        "lng": -87.788,
+        "lat": 42.07
+      },
+      {
         "country": "China",
         "countryCode": "CN",
         "city": "Chengdu",
@@ -293,14 +306,6 @@
         "visitors": 2,
         "lng": 51.422,
         "lat": 35.694
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Glenview",
-        "visitors": 2,
-        "lng": -87.788,
-        "lat": 42.07
       },
       {
         "country": "Canada",
@@ -365,6 +370,14 @@
         "visitors": 1,
         "lng": 108.929,
         "lat": 34.258
+      },
+      {
+        "country": "France",
+        "countryCode": "FR",
+        "city": "Paris",
+        "visitors": 1,
+        "lng": 2.349,
+        "lat": 48.853
       },
       {
         "country": "Hong Kong",
