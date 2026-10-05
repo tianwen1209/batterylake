@@ -73,12 +73,6 @@
   var MAP_MIN_ZOOM = 1;
   var MAP_MAX_ZOOM = 10;
 
-  // Marker radius uses a restrained sqrt scale with hard clamps (px).
-  var MARKER_RADIUS_MIN = 3.5;
-  var MARKER_RADIUS_MAX = 18;
-  /** Floor for the sqrt reference so sparse/small datasets stay subtle. */
-  var MARKER_RADIUS_VISITORS_FLOOR = 64;
-
   /** Dev-only sample locations. Enabled with ?demoLocations=1 — never used as production data. */
   var DEV_SAMPLE_LOCATIONS = {
     _devSample: true,
@@ -316,10 +310,6 @@
     }
   }
 
-  function isDarkTheme() {
-    return document.documentElement.dataset.theme === 'dark';
-  }
-
   function wantDevLocationSample() {
     try {
       return /(?:\?|&)demoLocations=1(?:&|$)/.test(location.search || '');
@@ -390,22 +380,19 @@
   function resolveMapPlaces(locations) {
     var countries = normalizeCountries(locations && locations.countries);
     var cities = normalizeCities(locations && locations.cities);
-    if (cities.length) {
-      // Prefer city markers; add country markers only for countries with no city points.
-      var covered = Object.create(null);
-      cities.forEach(function (row) { covered[row.countryCode] = true; });
-      var places = cities.slice();
-      countries.forEach(function (row) {
-        if (!covered[row.countryCode]) places.push(row);
-      });
-      places.sort(function (a, b) {
-        return b.visitors - a.visitors
-          || a.countryCode.localeCompare(b.countryCode)
-          || String(a.city || '').localeCompare(String(b.city || ''));
-      });
-      return places;
-    }
-    return countries;
+    if (!cities.length) return countries;
+    var covered = Object.create(null);
+    cities.forEach(function (row) { covered[row.countryCode] = true; });
+    var places = cities.slice();
+    countries.forEach(function (row) {
+      if (!covered[row.countryCode]) places.push(row);
+    });
+    places.sort(function (a, b) {
+      return b.visitors - a.visitors
+        || a.countryCode.localeCompare(b.countryCode)
+        || String(a.city || '').localeCompare(String(b.city || ''));
+    });
+    return places;
   }
 
   function resolveLocations(data) {
@@ -473,24 +460,6 @@
     }
   }
 
-  function radiusForVisitors(value, maxVisitors) {
-    var visitors = Math.max(0, Number(value) || 0);
-    if (visitors <= 0) return MARKER_RADIUS_MIN;
-    // Non-linear (sqrt) scale with a stable floor so counts under ~20 stay
-    // small even when they are the largest point on a sparse map.
-    var reference = Math.max(MARKER_RADIUS_VISITORS_FLOOR, Number(maxVisitors) || 0);
-    var t = Math.sqrt(Math.min(visitors, reference) / reference);
-    return Math.round((MARKER_RADIUS_MIN + t * (MARKER_RADIUS_MAX - MARKER_RADIUS_MIN)) * 10) / 10;
-  }
-
-  function opacityForVisitors(value, maxVisitors) {
-    var visitors = Math.max(0, Number(value) || 0);
-    if (visitors <= 0) return 0.42;
-    var reference = Math.max(MARKER_RADIUS_VISITORS_FLOOR, Number(maxVisitors) || 0);
-    var t = Math.sqrt(Math.min(visitors, reference) / reference);
-    return Math.round((0.42 + t * 0.48) * 100) / 100;
-  }
-
   function formatPlaceLabel(data) {
     if (!data) return '';
     // Only use analytics fields — never invent city labels from the basemap.
@@ -518,54 +487,136 @@
     );
   }
 
-  function resolvePlaceLatLng(place, centroids) {
-    var lng = Number(place.lng);
-    var lat = Number(place.lat);
-    if (Number.isFinite(lng) && Number.isFinite(lat)) {
-      return [lat, lng];
-    }
-    var coord = centroids && centroids[place.countryCode];
-    if (!coord || coord.length < 2) return null;
-    // Centroids file stores [lng, lat].
-    return [coord[1], coord[0]];
-  }
+  var MAP_COUNTRY_COLORS = ['#dff3ff', '#def7f1', '#e8efff', '#e2f7f7', '#edf7ff'];
 
-  function buildMarkerPoints(places, centroids) {
-    var maxVisitors = 0;
-    var points = [];
-    (places || []).forEach(function (row) {
-      var latLng = resolvePlaceLatLng(row, centroids);
-      if (!latLng) return;
-      if (row.visitors > maxVisitors) maxVisitors = row.visitors;
-      points.push({
-        place: row,
-        latLng: latLng
-      });
-    });
-    return { points: points, maxVisitors: maxVisitors };
-  }
-
-  function countryStyle() {
-    var dark = isDarkTheme();
+  function countryStyle(feature) {
+    var colorIndex = feature && feature.properties
+      ? Number(feature.properties._mapColorIndex) || 0
+      : 0;
     return {
-      color: dark ? '#3a4656' : '#d5dde3',
-      weight: 0.75,
+      color: '#ffffff',
+      weight: 0.9,
       opacity: 1,
-      fillColor: dark ? '#283241' : '#e8edf1',
+      fillColor: MAP_COUNTRY_COLORS[colorIndex % MAP_COUNTRY_COLORS.length],
       fillOpacity: 1,
-      interactive: false
+      interactive: false,
+      className: 'sc-reach-country'
     };
   }
 
   function ensureCountryLayer() {
     if (!visitorMap.map || !visitorMap.countries || typeof window.L === 'undefined') return;
-    if (visitorMap.countryLayer) {
-      visitorMap.countryLayer.setStyle(countryStyle());
-      return;
-    }
+    if (visitorMap.countryLayer) return;
     visitorMap.countryLayer = window.L.geoJSON(visitorMap.countries, {
       style: countryStyle
     }).addTo(visitorMap.map);
+  }
+
+  function resolvePlaceLatLng(place) {
+    var lng = Number(place.lng);
+    var lat = Number(place.lat);
+    if (Number.isFinite(lng) && Number.isFinite(lat)) return [lat, lng];
+    var coord = visitorMap.centroids && visitorMap.centroids[place.countryCode];
+    if (!coord || coord.length < 2) return null;
+    return [Number(coord[1]), Number(coord[0])];
+  }
+
+  function clusterDistanceForZoom(zoom) {
+    if (zoom >= 6) return 26;
+    if (zoom >= 4) return 38;
+    if (zoom >= 2.5) return 52;
+    return 68;
+  }
+
+  function buildLocationClusters(places) {
+    if (!visitorMap.map) return [];
+    var threshold = clusterDistanceForZoom(visitorMap.map.getZoom());
+    var clusters = [];
+    (places || []).forEach(function (place) {
+      var latLng = resolvePlaceLatLng(place);
+      if (!latLng) return;
+      var pixel = visitorMap.map.latLngToLayerPoint(latLng);
+      var target = null;
+      for (var i = 0; i < clusters.length; i += 1) {
+        var dx = clusters[i].pixel.x - pixel.x;
+        var dy = clusters[i].pixel.y - pixel.y;
+        if (Math.sqrt(dx * dx + dy * dy) <= threshold) {
+          target = clusters[i];
+          break;
+        }
+      }
+      if (!target) {
+        target = { places: [], visitors: 0, latTotal: 0, lngTotal: 0, pixel: pixel };
+        clusters.push(target);
+      }
+      var weight = Math.max(1, place.visitors);
+      target.places.push(place);
+      target.visitors += place.visitors;
+      target.latTotal += latLng[0] * weight;
+      target.lngTotal += latLng[1] * weight;
+    });
+    clusters.forEach(function (cluster) {
+      var weight = Math.max(1, cluster.visitors);
+      cluster.latLng = [cluster.latTotal / weight, cluster.lngTotal / weight];
+    });
+    return clusters;
+  }
+
+  function clusterTooltipHtml(cluster) {
+    if (cluster.places.length === 1) return tooltipHtml(cluster.places[0]);
+    return (
+      '<div class="sc-reach-map-tooltip">' +
+        '<div class="sc-reach-map-tooltip-title">' +
+          escapeHtml(numberFmt.format(cluster.places.length)) + ' locations' +
+        '</div>' +
+        '<div class="sc-reach-map-tooltip-meta">Visitors: ' +
+          escapeHtml(numberFmt.format(cluster.visitors)) +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderLocationClusters() {
+    if (!visitorMap.map || !visitorMap.markerLayer || typeof window.L === 'undefined') return false;
+    visitorMap.markerLayer.clearLayers();
+    var clusters = buildLocationClusters(visitorMap.places);
+    if (!clusters.length) return false;
+    var maxVisitors = clusters.reduce(function (max, cluster) {
+      return Math.max(max, cluster.visitors);
+    }, 1);
+    clusters.forEach(function (cluster) {
+      var strength = Math.sqrt(cluster.visitors / maxVisitors);
+      var fillOpacity = Math.round((0.38 + strength * 0.5) * 100) / 100;
+      var strokeOpacity = Math.min(0.96, fillOpacity + 0.12);
+      var size = Math.round(18 + strength * 18);
+      var multiClass = cluster.places.length > 1 ? ' is-multi' : '';
+      var icon = window.L.divIcon({
+        className: 'sc-reach-cluster-marker',
+        html: '<span class="sc-reach-cluster-bubble' + multiClass +
+          '" style="--cluster-fill:' + fillOpacity + ';--cluster-stroke:' + strokeOpacity +
+          '" aria-hidden="true"></span>',
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2]
+      });
+      var marker = window.L.marker(cluster.latLng, {
+        icon: icon,
+        keyboard: true,
+        title: numberFmt.format(cluster.visitors) + ' visitors'
+      });
+      marker.bindTooltip(clusterTooltipHtml(cluster), {
+        direction: 'top',
+        opacity: 1,
+        className: 'sc-reach-map-leaflet-tooltip',
+        sticky: false
+      });
+      if (cluster.places.length > 1) {
+        marker.on('click', function () {
+          visitorMap.map.setView(cluster.latLng, Math.min(MAP_MAX_ZOOM, visitorMap.map.getZoom() + 2));
+        });
+      }
+      visitorMap.markerLayer.addLayer(marker);
+    });
+    return true;
   }
 
   function ensureLeafletMap(mapEl) {
@@ -592,42 +643,13 @@
     visitorMap.markerLayer = L.layerGroup().addTo(visitorMap.map);
     visitorMap.map.on('moveend zoomend', function () {
       visitorMap.savedView = captureMapView();
+      renderLocationClusters();
     });
     // Invalidate size after layout settles (aspect-ratio panel).
     setTimeout(function () {
       if (visitorMap.map) visitorMap.map.invalidateSize();
     }, 0);
     return visitorMap.map;
-  }
-
-  function renderVisitorMarkers(places) {
-    if (!visitorMap.map || !visitorMap.markerLayer || !visitorMap.centroids) return false;
-    var L = window.L;
-    var built = buildMarkerPoints(places, visitorMap.centroids);
-    visitorMap.markerLayer.clearLayers();
-    if (!built.points.length) return false;
-
-    var accent = cssVar('--accent', isDarkTheme() ? '#7db3ff' : '#2a5fea');
-    built.points.forEach(function (point) {
-      var visitors = point.place.visitors;
-      var marker = L.circleMarker(point.latLng, {
-        radius: radiusForVisitors(visitors, built.maxVisitors),
-        color: accent,
-        weight: 1.25,
-        opacity: Math.min(1, opacityForVisitors(visitors, built.maxVisitors) + 0.15),
-        fillColor: accent,
-        fillOpacity: opacityForVisitors(visitors, built.maxVisitors),
-        interactive: true
-      });
-      marker.bindTooltip(tooltipHtml(point.place), {
-        direction: 'top',
-        opacity: 1,
-        className: 'sc-reach-map-leaflet-tooltip',
-        sticky: false
-      });
-      visitorMap.markerLayer.addLayer(marker);
-    });
-    return true;
   }
 
   function renderVisitorMap(places) {
@@ -639,7 +661,7 @@
     }
 
     ensureMapAssets().then(function () {
-      if (!visitorMap.centroids || typeof window.L === 'undefined') {
+      if (!visitorMap.centroids || !visitorMap.countries || typeof window.L === 'undefined') {
         disposeVisitorMap();
         setMapEmptyState(true);
         return;
@@ -647,15 +669,8 @@
 
       ensureLeafletMap(mapEl);
       ensureCountryLayer();
-
-      var hasMarkers = false;
-      if (places && places.length) {
-        hasMarkers = renderVisitorMarkers(places);
-      } else if (visitorMap.markerLayer) {
-        visitorMap.markerLayer.clearLayers();
-      }
-
-      setMapEmptyState(!hasMarkers);
+      var hasClusters = renderLocationClusters();
+      setMapEmptyState(!hasClusters);
       if (visitorMap.map) visitorMap.map.invalidateSize();
       bindMapChrome();
     }).catch(function () {
@@ -706,6 +721,12 @@
       if (typeof window.L === 'undefined') throw new Error('leaflet missing');
       visitorMap.centroids = assets[0] || {};
       visitorMap.countries = assets[1] || null;
+      if (visitorMap.countries && Array.isArray(visitorMap.countries.features)) {
+        visitorMap.countries.features.forEach(function (feature, index) {
+          feature.properties = feature.properties || {};
+          feature.properties._mapColorIndex = index % MAP_COUNTRY_COLORS.length;
+        });
+      }
     });
   }
 
@@ -713,16 +734,17 @@
     if (!visitorMap.resizeBound) {
       visitorMap.resizeBound = true;
       window.addEventListener('resize', function () {
-        if (visitorMap.map) visitorMap.map.invalidateSize();
+        if (visitorMap.map) {
+          visitorMap.map.invalidateSize();
+          renderLocationClusters();
+        }
       });
     }
     if (!visitorMap.themeObserver && typeof MutationObserver !== 'undefined') {
       visitorMap.themeObserver = new MutationObserver(function () {
         if (!visitorMap.map) return;
-        ensureCountryLayer();
-        if (visitorMap.places && visitorMap.places.length) {
-          renderVisitorMarkers(visitorMap.places);
-        }
+        if (visitorMap.countryLayer) visitorMap.countryLayer.setStyle(countryStyle);
+        renderLocationClusters();
       });
       visitorMap.themeObserver.observe(document.documentElement, {
         attributes: true,

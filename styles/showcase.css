@@ -593,7 +593,7 @@
 .api-roadmap-status.wip  { color: var(--accent); background: var(--accent-light); }
 .api-roadmap-status.plan { color: var(--text3); background: var(--bg3); }
 
-/* platform usage — quiet supporting metadata with visitor map */
+/* platform usage — clustered visitor activity map */
 .sc-reach {
   padding-top: 12px;
   padding-bottom: 8px;
@@ -637,22 +637,31 @@
   max-height: 420px;
   border-radius: 8px;
   overflow: hidden;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--accent-light) 55%, var(--bg2)) 0%,
-      var(--bg2) 100%
-    );
+  background: #f4faff;
+  border: 1px solid #dcecf5;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    inset 0 -30px 70px rgba(62, 135, 178, 0.025);
   isolation: isolate;
 }
 .sc-reach-map {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: #f7f9fb;
+  background:
+    linear-gradient(rgba(66, 139, 181, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(66, 139, 181, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 68% 36%, rgba(91, 209, 194, 0.035), transparent 44%),
+    linear-gradient(145deg, #fbfdff 0%, #f4faff 52%, #edf7fd 100%);
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
 }
 [data-theme="dark"] .sc-reach-map {
-  background: #18202b;
+  background:
+    linear-gradient(rgba(66, 139, 181, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(66, 139, 181, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 68% 36%, rgba(91, 209, 194, 0.035), transparent 44%),
+    linear-gradient(145deg, #fbfdff 0%, #f4faff 52%, #edf7fd 100%);
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
 }
 .sc-reach-map-empty {
   position: absolute;
@@ -681,9 +690,12 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--surface, var(--bg)) 90%, transparent);
+  padding: 6px 9px;
+  border: 1px solid rgba(115, 151, 163, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 5px 16px rgba(54, 91, 105, 0.1);
+  backdrop-filter: blur(7px);
   pointer-events: none;
 }
 .sc-reach-map-legend[hidden] {
@@ -693,27 +705,44 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--text3);
+  color: #526d78;
   white-space: nowrap;
 }
 .sc-reach-map-legend-scale {
+  position: relative;
   display: inline-block;
-  width: 72px;
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--accent) 28%, transparent),
-    var(--accent)
-  );
+  width: 48px;
+  height: 20px;
+  background: none;
+  box-shadow: none;
+}
+.sc-reach-map-legend-scale::before,
+.sc-reach-map-legend-scale::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  border: 1px solid rgba(42, 95, 234, 0.62);
+  border-radius: 50%;
+}
+.sc-reach-map-legend-scale::before {
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background: rgba(42, 95, 234, 0.38);
+}
+.sc-reach-map-legend-scale::after {
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  background: rgba(42, 95, 234, 0.88);
 }
 
 /* Leaflet chrome — keep only zoom, themed to BatteryLake */
 .sc-reach-map-panel .leaflet-control-zoom {
-  border: 1px solid var(--border) !important;
+  border: 1px solid rgba(115, 151, 163, 0.2) !important;
   border-radius: 8px !important;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(22, 30, 48, 0.06);
+  box-shadow: 0 4px 14px rgba(54, 91, 105, 0.12);
   margin-top: 10px !important;
   margin-left: 10px !important;
 }
@@ -722,13 +751,45 @@
   height: 30px;
   line-height: 30px;
   font-size: 16px;
-  color: var(--text2) !important;
-  background: var(--surface, var(--bg)) !important;
-  border-bottom-color: var(--border) !important;
+  color: #526d78 !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-bottom-color: rgba(115, 151, 163, 0.18) !important;
 }
 .sc-reach-map-panel .leaflet-control-zoom a:hover {
-  color: var(--text1) !important;
-  background: var(--bg3) !important;
+  color: #244e61 !important;
+  background: #f4f9fa !important;
+}
+.sc-reach-country {
+  transition: fill .18s ease, stroke-width .18s ease;
+}
+.sc-reach-cluster-marker {
+  border: 0 !important;
+  background: transparent !important;
+}
+.sc-reach-cluster-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1.25px solid rgb(42 95 234 / var(--cluster-stroke, .72));
+  border-radius: 999px;
+  background: rgb(42 95 234 / var(--cluster-fill, .62));
+  box-shadow: 0 1px 3px rgba(42, 95, 234, 0.16);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.sc-reach-cluster-bubble.is-multi {
+  box-shadow:
+    0 1px 3px rgba(42, 95, 234, 0.17),
+    0 0 0 2px rgba(42, 95, 234, 0.07);
+  cursor: zoom-in;
+}
+.sc-reach-cluster-marker:hover .sc-reach-cluster-bubble,
+.sc-reach-cluster-marker:focus .sc-reach-cluster-bubble {
+  transform: translateY(-1px);
+  box-shadow:
+    0 2px 5px rgba(42, 95, 234, 0.2),
+    0 0 0 2px rgba(42, 95, 234, 0.08);
 }
 .sc-reach-map-leaflet-tooltip {
   background: var(--surface, var(--bg)) !important;
