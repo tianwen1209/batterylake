@@ -4,7 +4,7 @@
   const root = document.getElementById('page-studio');
   if (!root) return;
   const el = id => document.getElementById('studio-' + id);
-  const state = { selected: null, confirmed: null, page: 1, query: '', charge: 1, temperature: 25, socMin: 10, socMax: 90, cycleMin: 1, cycleMax: 500, scenario: 'constant', generatedData: null };
+  const state = { selected: null, confirmed: null, initialized: false, estimated: false, validated: false, page: 1, query: '', charge: 1, discharge: 1, temperature: 25, initialSoc: 90, cycles: 500, scenario: 'constant', generatedData: null };
   const datasetPageSize = 6;
   const emptyFilters = () => ({ all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() });
   let filters = emptyFilters();
@@ -60,13 +60,14 @@
   }
   const controls = [
     { label: 'Charge Rate (C)', keys: ['charge'], min: 0.1, max: 5, step: 0.1, unit: 'C' },
+    { label: 'Discharge Rate (C)', keys: ['discharge'], min: 0.1, max: 5, step: 0.1, unit: 'C' },
     { label: 'Temperature (°C)', keys: ['temperature'], min: -20, max: 60, step: 1, unit: '°C' },
-    { label: 'SOC Window (%)', keys: ['socMin', 'socMax'], min: 0, max: 100, step: 1, unit: '%' },
-    { label: 'Cycle Range', keys: ['cycleMin', 'cycleMax'], min: 1, max: 1000, step: 1, unit: '' }
+    { label: 'Initial SOC (%)', keys: ['initialSoc'], min: 10, max: 100, step: 1, unit: '%' },
+    { label: 'Number of Cycles', keys: ['cycles'], min: 1, max: 1000, step: 1, unit: '' }
   ];
   // Use the same cycle-aging catalog and ordering as Benchmark's data selection.
   const catalog = () => bwFlowSortedDatasets(getCatalogDatasets().filter(bwIsCycleAgingDataset));
-  const format = (key, value) => key === 'charge' ? value.toFixed(1) : String(value);
+  const format = (key, value) => ['charge', 'discharge'].includes(key) ? value.toFixed(1) : String(value);
   const twinAssets = {
     '18650': 'assets/images/studio-batteries/18650.png?v=2',
     '21700': 'assets/images/studio-batteries/21700.png?v=2',
@@ -98,49 +99,47 @@
     el('download').disabled = true;
     if (!reset && el('results').classList.contains('has-results')) {
       el('results').classList.add('is-stale');
-      el('result-status').textContent = 'Setup changed · generate again to update';
-      el('run').textContent = 'Update';
+      el('result-status').textContent = 'Setup changed · run simulation again to update';
+      el('run').textContent = 'Run Simulation & Generate Data';
       return;
     }
     state.generatedData = null;
     el('results').classList.remove('has-results', 'is-stale');
-    el('results').innerHTML = '<div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Build a digital twin, adjust the setup, then generate data.</span></div>';
-    el('run').textContent = 'Generate';
+    el('results').innerHTML = '<div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Validate the digital twin, configure operating conditions, then run a simulation.</span></div>';
+    el('run').textContent = 'Run Simulation & Generate Data';
   }
   function setCalibrationProgress(value) {
     const progress = Math.max(0, Math.min(100, Math.round(value)));
     el('calibration-ring').style.setProperty('--progress', progress);
     el('calibration-value').textContent = progress + '%';
   }
-  function setWorkspaceStatus(message, stage) {
-    const status = el('workspace-status');
-    if (!status) return;
-    status.className = 'studio-workspace-status' + (stage ? ' is-' + stage : '');
-    status.replaceChildren();
-    const mark = document.createElement('span');
-    mark.setAttribute('aria-hidden', 'true');
-    status.append(mark, document.createTextNode(message));
-  }
   function setFlowStage(stage) {
-    const nodes = {
-      select: root.querySelector('.studio-process-step-1'),
-      identify: root.querySelector('.studio-process-step-2'),
-      calibrate: root.querySelector('.studio-process-calibration'),
-      engine: root.querySelector('.studio-process-engine'),
-      setup: root.querySelector('.studio-process-setup'),
-      results: root.querySelector('.studio-process-result')
-    };
-    const completed = {
-      select: [], identify: ['select'], calibrate: ['select', 'identify'],
-      setup: ['select', 'identify', 'calibrate', 'engine'],
-      results: ['select', 'identify', 'calibrate', 'engine', 'setup', 'results']
-    };
-    Object.entries(nodes).forEach(([name, node]) => {
-      if (!node) return;
-      node.classList.toggle('is-complete', completed[stage]?.includes(name));
-      node.classList.toggle('is-current', stage !== 'results' && name === stage);
+    const stages = ['data', 'model', 'estimation', 'validation', 'simulation'];
+    const selectors = ['.studio-process-data', '.studio-process-model', '.studio-process-estimation', '.studio-process-validation', '.studio-process-simulation'];
+    const current = stages.indexOf(stage);
+    selectors.forEach((selector, index) => {
+      const node = root.querySelector(selector);
+      node.classList.toggle('is-complete', index < current);
+      node.classList.toggle('is-current', index === current);
     });
     root.dataset.flowStage = stage;
+  }
+  function syncWorkflow() {
+    const enabled = { data: true, model: !!state.confirmed, estimation: state.initialized, validation: state.estimated, simulation: state.validated };
+    Object.entries(enabled).forEach(([step, active]) => {
+      const article = root.querySelector(`[data-studio-step="${step}"]`);
+      article.classList.toggle('is-locked', !active);
+    });
+    el('initialize').disabled = !state.confirmed || state.initialized;
+    el('validate').disabled = !state.estimated;
+    el('run').disabled = !state.validated;
+    el('scenario').disabled = !state.validated;
+    el('controls').querySelectorAll('input').forEach(input => { input.disabled = !state.validated; });
+    if (!state.confirmed) setFlowStage('data');
+    else if (!state.initialized) setFlowStage('model');
+    else if (!state.estimated) setFlowStage('estimation');
+    else if (!state.validated) setFlowStage('validation');
+    else setFlowStage('simulation');
   }
   function restartSignalAnimation(selector, className) {
     const node = root.querySelector(selector);
@@ -148,9 +147,18 @@
     node.classList.remove(className);
     requestAnimationFrame(() => node.classList.add(className));
   }
-  function calibrateTwin(dataset) {
+  function calibrateTwin() {
     cancelAnimationFrame(calibrationFrame);
-    el('run').disabled = true;
+    state.estimated = false;
+    state.validated = false;
+    clearResults(true);
+    el('validation-results').innerHTML = '<div class="studio-empty studio-results-empty">Complete battery parameter estimation to validate measured and simulated responses.</div>';
+    renderParameters();
+    setCalibrationProgress(0);
+    root.querySelector('.studio-live-loss').classList.remove('is-reset');
+    root.classList.add('is-calibrating');
+    syncWorkflow();
+    restartSignalAnimation('.studio-live-loss', 'is-training');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const started = performance.now();
     const duration = reduced ? 0 : 1300;
@@ -160,19 +168,72 @@
       setCalibrationProgress(eased * 100);
       if (ratio < 1) calibrationFrame = requestAnimationFrame(tick);
       else {
-        el('run').disabled = false;
         root.classList.remove('is-calibrating');
-        setFlowStage('setup');
-        setWorkspaceStatus('Digital twin ready · configure a synthetic scenario', 'ready');
+        state.estimated = true;
+        renderParameters();
+        syncWorkflow();
       }
     };
-    root.classList.add('is-calibrating');
-    setFlowStage('calibrate');
-    setWorkspaceStatus('Calibrating the digital twin…', 'working');
     calibrationFrame = requestAnimationFrame(tick);
   }
+  function selectedDataset() { return catalog().find(d => d.id === state.confirmed); }
+  function demoCapacity(dataset) {
+    const seed = Number(String(dataset?.id || '').match(/\d+/)?.[0] || 1);
+    return 2.8 + seed % 5 * .08;
+  }
+  function renderParameters() {
+    if (!state.estimated) { el('estimated-parameters').innerHTML = '<span class="studio-placeholder-copy">Estimated values appear after initialization.</span>'; return; }
+    const dataset = selectedDataset();
+    const seed = Number(String(dataset.id).match(/\d+/)?.[0] || 1);
+    const values = [
+      ['Capacity', demoCapacity(dataset).toFixed(2), 'Ah'],
+      ['Internal Resistance', (34 + seed % 7 * 2.1).toFixed(1), 'mΩ'],
+      ['Thermal parameter', (0.72 + seed % 4 * .03).toFixed(2), 'W/K'],
+      ['Aging coefficient', (0.013 + seed % 5 * .001).toFixed(3), 'cycle⁻¹']
+    ];
+    el('estimated-parameters').innerHTML = values.map(([label, number, unit]) => `<div><span>${label}</span><strong>${number} <small>${unit}</small></strong></div>`).join('') + '<small class="studio-demo-note">Illustrative prototype estimates; no optimization is run.</small>';
+  }
+  function comparisonChart(title, measured, simulated, unit) {
+    const min = Math.floor(Math.min(...measured, ...simulated) * 10) / 10 - .1;
+    const max = Math.ceil(Math.max(...measured, ...simulated) * 10) / 10 + .1;
+    const x = index => 40 + index / (measured.length - 1) * 240;
+    const y = value => 150 - (value - min) / (max - min) * 120;
+    const line = series => series.map((value, index) => `${x(index).toFixed(1)},${y(value).toFixed(1)}`).join(' ');
+    const ticks = [min, (min + max) / 2, max];
+    return `<svg class="studio-chart" viewBox="0 0 300 180" role="img" aria-label="${title}, measured and simulated response"><g class="studio-chart-grid">${ticks.map(tick => `<line x1="40" x2="280" y1="${y(tick)}" y2="${y(tick)}"/><text x="34" y="${y(tick) + 4}" text-anchor="end">${tick.toFixed(1)}${unit}</text>`).join('')}<text x="40" y="174">0</text><text x="280" y="174" text-anchor="end">Time</text></g><polyline class="studio-curve studio-measured-curve" points="${line(measured)}"/><polyline class="studio-curve studio-simulated-curve" points="${line(simulated)}"/></svg>`;
+  }
+  function enableDatasetReviewAction() {
+    el('validation-results').querySelector('.studio-review-action')?.addEventListener('click', () => {
+      el('reset').click();
+      root.querySelector('[data-studio-step="data"]').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+  function runValidation() {
+    if (!state.estimated) return;
+    const dataset = selectedDataset();
+    // Prototype-only variation: catalog processing flags are not measured-response validation evidence.
+    const seed = Array.from(String(dataset.id)).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 0);
+    const reviewDemo = seed % 5 === 0;
+    const measuredVoltage = Array.from({ length: 25 }, (_, i) => 4.15 - .91 * i / 24 - .11 * Math.pow(i / 24, 5));
+    const simulatedVoltage = measuredVoltage.map((value, i) => value + (reviewDemo ? .09 : .012) * Math.sin(i * .8 + seed));
+    const measuredTemp = Array.from({ length: 25 }, (_, i) => 25 + 5.8 * (1 - Math.exp(-i / 7)));
+    const simulatedTemp = measuredTemp.map((value, i) => value + (reviewDemo ? .8 : .19) * Math.sin(i * .55 + seed));
+    const rmse = (a, b) => Math.sqrt(a.reduce((sum, value, i) => sum + (value - b[i]) ** 2, 0) / a.length);
+    const voltageRmse = rmse(measuredVoltage, simulatedVoltage);
+    const tempRmse = rmse(measuredTemp, simulatedTemp);
+    const capacityError = reviewDemo ? 2.4 : .8 + seed % 5 * .1;
+    const residual = reviewDemo ? .06 : .011 + seed % 4 * .001;
+    state.validated = voltageRmse < .05 && tempRmse < .5 && capacityError < 2 && residual < .05;
+    const metric = (label, value) => `<div><span>${label}</span><strong>${value}</strong></div>`;
+    el('validation-results').innerHTML = `<div class="studio-subsection-head"><span class="studio-status-pill ${state.validated ? 'is-ready' : 'is-review'}">${state.validated ? 'Validation Passed' : 'Needs Review'}</span></div>
+      <div class="studio-validation-charts"><figure class="studio-prediction-block"><figcaption>Measured Voltage vs PIML Twin Voltage</figcaption>${comparisonChart('Voltage comparison', measuredVoltage, simulatedVoltage, ' V')}</figure><figure class="studio-prediction-block"><figcaption>Measured Temperature vs PIML Twin Temperature</figcaption>${comparisonChart('Temperature comparison', measuredTemp, simulatedTemp, ' °C')}</figure></div>
+      <div class="studio-response-legend"><span><i></i>Measured Response</span><span><i></i>Simulated Response</span></div>
+      <section class="studio-validation-metrics"><div class="studio-subsection-head"><h4>Validation Metrics</h4></div><div class="studio-parameter-grid">${metric('Voltage RMSE', voltageRmse.toFixed(3) + ' V')}${metric('Temperature RMSE', tempRmse.toFixed(2) + ' °C')}${metric('Capacity Error', capacityError.toFixed(1) + '%')}${metric('Physics Residual', residual.toFixed(3))}</div><small class="studio-demo-note">Illustrative only: both response traces and metrics are generated in the browser from the selected dataset ID. No measured files or real PIML validation are used.</small></section>${state.validated ? '' : '<div class="studio-validation-review"><div class="studio-review-guidance"><div><strong>Why this appears</strong><p>One or more demo metrics exceed the prototype limits. This does not evaluate the actual dataset or twin.</p></div><div><strong>What to do</strong><p>Try another dataset to explore a different result. Real validation would require measured responses and model recalibration.</p></div></div><button type="button" class="bw-pg studio-action studio-review-action">Choose Another Dataset</button></div>'}`;
+    if (!state.validated) enableDatasetReviewAction();
+    syncWorkflow();
+  }
   function renderTwin() {
-    const dataset = catalog().find(d => d.id === state.confirmed);
+    const dataset = state.initialized ? selectedDataset() : null;
     el('twin').classList.toggle('is-confirmed', !!dataset);
     el('twin').replaceChildren();
     if (dataset) {
@@ -209,10 +270,9 @@
         el('twin').append(caption, placeholder);
       }
     } else {
-      el('twin').textContent = 'Select and confirm a dataset to build its digital twin';
+      el('twin').textContent = 'Initialize the PIML Battery Digital Twin to begin calibration.';
       setCalibrationProgress(0);
     }
-    el('run').disabled = !dataset;
   }
   function renderDatasets() {
     const list = catalog().filter(d => {
@@ -245,7 +305,6 @@
       const choose = () => {
         state.selected = d.id;
         renderDatasets();
-        setWorkspaceStatus('Dataset selected · confirm to begin', 'ready');
         Array.from(el('dataset-list').children).find(c => c.dataset.datasetId === d.id)?.focus({ preventScroll: true });
       };
       card.addEventListener('click', choose);
@@ -281,8 +340,8 @@
   function refresh() {
     const list = catalog();
     if (!list.some(d => d.id === state.selected)) state.selected = null;
-    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; clearResults(true); }
-    renderDatasets(); renderTwin();
+    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; clearResults(true); }
+    renderDatasets(); renderTwin(); syncWorkflow();
   }
   controls.forEach((control, index) => {
     const row = document.createElement('div');
@@ -327,57 +386,55 @@
   }
   function runGeneration(event) {
     event.preventDefault(); syncControls();
-    if (!state.confirmed) return;
+    if (!state.validated) return;
     const firstRun = !el('results').classList.contains('has-results');
     const params = { ...state };
-    // Deterministic mock, sensitive to setup controls. No training or API request.
-    const stress = Math.pow(params.charge, 0.35) * (1 + Math.abs(params.temperature - 25) * 0.012) * ((params.socMax - params.socMin) / 80) * ({ constant: 1, fast: 1.2, dynamic: 1.1 }[params.scenario]);
+    // Deterministic prototype response, sensitive to setup controls; no backend request.
+    const stress = Math.pow((params.charge + params.discharge) / 2, 0.35) * (1 + Math.abs(params.temperature - 25) * 0.012) * (params.initialSoc / 90) * ({ constant: 1, fast: 1.2, dynamic: 1.1 }[params.scenario]);
     const soh = cycle => Math.max(40, 100 - 16.8 * Math.pow(cycle / 500, 0.72) * stress);
-    const currentCycle = params.cycleMin - 1;
-    const current = soh(currentCycle);
+    const current = soh(0);
     const peak = params.temperature + 4.4 * Math.pow(params.charge, 1.2);
-    const capacity = 3 * current / 100 * (params.socMax - params.socMin) / 80 / (1 + Math.max(0, params.charge - 1) * 0.04);
     const duration = Math.round(130 / params.charge);
-    const cycleCount = Math.max(1, params.cycleMax - params.cycleMin + 1);
-    const sampleCount = cycleCount * Math.max(60, Math.round(duration * 6));
+    const cycleCount = params.cycles;
     const consistency = Math.max(94, 99.4 - Math.abs(params.temperature - 25) * .025 - Math.max(0, params.charge - 1) * .3);
-    const finalCapacity = 3 * soh(params.cycleMax) / 100;
+    const temperatureValid = peak >= 0 && peak <= 60;
     const dataset = catalog().find(d => d.id === params.confirmed);
+    const baselineCapacity = demoCapacity(dataset);
+    const finalCapacity = baselineCapacity * soh(params.cycles) / 100;
     state.generatedData = {
       dataset,
       params,
       rows: Array.from({ length: cycleCount }, (_, index) => {
-        const cycle = params.cycleMin + index;
-        return { cycle, soh: soh(cycle), capacity: 3 * soh(cycle) / 100 };
+        const cycle = index + 1;
+        return { cycle, soh: soh(cycle), capacity: baselineCapacity * soh(cycle) / 100 };
       })
     };
     el('download').disabled = false;
-    setFlowStage('results');
-    setWorkspaceStatus('Synthetic dataset ready · download or refine the setup', 'ready');
     const metric = (label, value, unit, change = '', note = '') => `<div class="studio-metric"${note ? ` title="${note}"` : ''}><span>${label}</span><div><strong>${value}</strong><small>${unit}</small>${change ? `<span class="studio-metric-delta">${change}</span>` : ''}</div></div>`;
     const info = text => `<span class="studio-info" tabindex="0" role="note" aria-label="${text}">i<span class="studio-info-tip">${text}</span></span>`;
     el('results').classList.add('has-results');
     el('results').classList.remove('is-stale');
-    el('run').textContent = 'Generate Again';
+    el('run').textContent = 'Run Simulation & Generate Data';
     const datasetName = dataset?.name || '';
-    el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)} · Synthetic dataset</strong><span>${params.charge.toFixed(1)} C · ${params.temperature} °C · SOC ${params.socMin}–${params.socMax}% · Cycles ${params.cycleMin}–${params.cycleMax}</span></div><span id="studio-result-status" role="status">Illustrative output · generated by calibrated twin</span></div>
+    el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)} · Synthetic dataset</strong></div><span id="studio-result-status" role="status">Illustrative output · prototype simulation</span></div>
       <section class="studio-prediction-block" aria-labelledby="studio-performance-title">
-        <div class="studio-chart-heading"><h3 id="studio-performance-title">Synthetic Signal Profile ${info('Illustrative signals generated from the selected operating envelope. No real model training or API request is performed.')}</h3>
+        <div class="studio-chart-heading"><h3 id="studio-performance-title">Synthetic Signal Profile ${info('Illustrative signals generated from the selected operating envelope. No backend parameter optimization or simulation API request is performed.')}</h3>
           <select class="studio-input" id="studio-performance-view" aria-label="Synthetic signal chart metric"><option value="temperature">Temperature (°C)</option><option value="voltage">Voltage (V)</option><option value="current">Current (A)</option></select></div>
         <div class="studio-output-grid"><div class="studio-metrics">
-          ${metric('Generated Cycles', cycleCount.toLocaleString(), '')}
-          ${metric('Profile Samples', sampleCount.toLocaleString(), '')}
-          ${metric('Physics Consistency', consistency.toFixed(1), '%')}
+          ${metric('Simulated Cycles', cycleCount.toLocaleString(), '')}
+          ${metric('Generated Samples', cycleCount.toLocaleString(), 'cycle records')}
+          ${metric('Conditions Covered', '1', 'scenario')}
         </div><div id="studio-performance-chart"></div></div>
       </section>
       <section class="studio-prediction-block" aria-labelledby="studio-soh-title">
-        <div class="studio-chart-heading"><h3 id="studio-soh-title">Synthetic Capacity Trajectory ${info('Capacity retention is generated across the requested cycle range using the calibrated digital twin.')}</h3></div>
+        <div class="studio-chart-heading"><h3 id="studio-soh-title">Synthetic Capacity Trajectory ${info('Illustrative capacity retention derived from the selected operating conditions; no calibrated backend twin is run.')}</h3></div>
         <div class="studio-output-grid"><div class="studio-metrics">
-          ${metric('Initial Capacity', (3 * current / 100).toFixed(2), 'Ah')}
+          ${metric('Initial Capacity', (baselineCapacity * current / 100).toFixed(2), 'Ah')}
           ${metric('Final Capacity', finalCapacity.toFixed(2), 'Ah')}
-          ${metric('Capacity Retention', soh(params.cycleMax).toFixed(1), '%')}
+          ${metric('Capacity Retention', soh(params.cycles).toFixed(1), '%')}
         </div><div id="studio-soh-chart"></div></div>
-      </section>`;
+      </section>
+      <section class="studio-physics-checks"><div class="studio-subsection-head"><h4>Physics Checks</h4><span class="studio-status-pill ${temperatureValid ? 'is-ready' : 'is-review'}">${temperatureValid ? consistency.toFixed(1) + '% consistent' : 'Needs Review'}</span></div><div class="studio-check-grid"><span class="${temperatureValid ? 'is-pass' : 'is-review'}">${temperatureValid ? '✓' : '!'} Temperature range valid</span><span class="is-pass">✓ Voltage range valid</span><span class="is-pass">✓ Energy consistency</span><span class="is-pass">✓ Physics constraints satisfied</span></div><small class="studio-demo-note">Illustrative prototype checks; they do not certify a physical dataset.</small></section>`;
     // Both figures share scales, typography, grid, area fill, markers and line treatments.
     function chart({ title, values, min, max, ticks, labels, unit, split, limit, endpoint }) {
       const x = i => 42 + i / (values.length - 1) * 228;
@@ -409,10 +466,10 @@
       const endpoint = mode === 'temperature' ? `${peak.toFixed(1)} °C` : mode === 'voltage' ? `${lastValue.toFixed(2)} V` : `${lastValue.toFixed(2)} A`;
       el('performance-chart').innerHTML = chart({ ...config, values, ticks: Array.from({ length: 4 }, (_, i) => +(config.min + (config.max - config.min) * i / 3).toFixed(1)), labels: [{ index: 0, label: '0' }, { index: 20, label: Math.round(duration / 2) }, { index: 40, label: `${duration} min` }], endpoint });
     }
-    const values = Array.from({ length: 51 }, (_, i) => 3 * soh(params.cycleMin + (params.cycleMax - params.cycleMin) * i / 50) / 100);
+    const values = Array.from({ length: 51 }, (_, i) => baselineCapacity * soh(1 + (params.cycles - 1) * i / 50) / 100);
     const lower = Math.max(0, Math.floor((Math.min(...values) - .1) * 10) / 10);
     const upper = Math.ceil((Math.max(...values) + .05) * 10) / 10;
-    el('soh-chart').innerHTML = chart({ title: 'Synthetic capacity trajectory over requested cycles', values, min: lower, max: upper, ticks: [lower, +((lower + upper) / 2).toFixed(2), upper], unit: '', labels: [{ index: 0, label: `Cycle ${params.cycleMin}` }, { index: 25, label: Math.round((params.cycleMin + params.cycleMax) / 2) }, { index: 50, label: `Cycle ${params.cycleMax}` }], endpoint: `${finalCapacity.toFixed(2)} Ah` });
+    el('soh-chart').innerHTML = chart({ title: 'Synthetic capacity trajectory over requested cycles', values, min: lower, max: upper, ticks: [lower, +((lower + upper) / 2).toFixed(2), upper], unit: '', labels: [{ index: 0, label: 'Cycle 1' }, { index: 25, label: Math.round(params.cycles / 2) }, { index: 50, label: `Cycle ${params.cycles}` }], endpoint: `${finalCapacity.toFixed(2)} Ah` });
     el('performance-view').addEventListener('change', renderPerformance);
     renderPerformance();
     if (firstRun && el('results-title').getBoundingClientRect().top > window.innerHeight * 0.5) {
@@ -428,19 +485,19 @@
       return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
     };
     const { dataset, params, rows } = generated;
-    const header = ['dataset_id', 'dataset_name', 'scenario', 'cycle', 'charge_rate_c', 'temperature_c', 'soc_min_pct', 'soc_max_pct', 'soh_pct', 'capacity_ah'];
-    const csv = [header, ...rows.map(row => [dataset?.id || '', dataset?.name || '', params.scenario, row.cycle, params.charge.toFixed(1), params.temperature, params.socMin, params.socMax, row.soh.toFixed(3), row.capacity.toFixed(4)])]
+    const header = ['dataset_id', 'dataset_name', 'scenario', 'cycle', 'charge_rate_c', 'discharge_rate_c', 'temperature_c', 'initial_soc_pct', 'soh_pct', 'capacity_ah'];
+    const csv = [header, ...rows.map(row => [dataset?.id || '', dataset?.name || '', params.scenario, row.cycle, params.charge.toFixed(1), params.discharge.toFixed(1), params.temperature, params.initialSoc, row.soh.toFixed(3), row.capacity.toFixed(4)])]
       .map(row => row.map(csvEscape).join(','))
       .join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `batterylake-synthetic-${dataset?.id || 'dataset'}-cycles-${params.cycleMin}-${params.cycleMax}.csv`;
+    link.download = `batterylake-synthetic-${dataset?.id || 'dataset'}-${params.cycles}-cycles.csv`;
     document.body.append(link);
     link.click();
     link.remove();
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   el('search').addEventListener('input', event => { state.query = event.target.value.trim().toLowerCase(); state.page = 1; renderDatasets(); });
   function closeFilters() { el('filters').classList.remove('open'); el('filter-toggle').setAttribute('aria-expanded', 'false'); }
@@ -459,31 +516,41 @@
   });
   el('reset').addEventListener('click', () => {
     cancelAnimationFrame(calibrationFrame);
-    state.selected = null; state.confirmed = null; state.page = 1; state.query = '';
+    state.selected = null; state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.page = 1; state.query = '';
     filters = emptyFilters(); pendingFilters = emptyFilters();
     el('search').value = '';
-    root.querySelector('.studio-feature-grid')?.classList.add('is-reset');
     root.querySelector('.studio-live-loss')?.classList.add('is-reset');
-    root.querySelector('.studio-feature-grid')?.classList.remove('is-identified');
     root.querySelector('.studio-live-loss')?.classList.remove('is-training');
     closeFilters(); syncFilters(); clearResults(true); renderDatasets(); renderTwin();
+    renderParameters();
+    el('validation-results').innerHTML = '<div class="studio-empty studio-results-empty">Complete battery parameter estimation to validate measured and simulated responses.</div>';
+    el('initialize-status').textContent = '';
     root.classList.remove('is-calibrating');
-    setFlowStage('select');
-    setWorkspaceStatus('Start by selecting a dataset');
+    syncWorkflow();
     el('search').focus({ preventScroll: true });
   });
   el('confirm').addEventListener('click', () => {
     if (!state.selected) return;
+    cancelAnimationFrame(calibrationFrame);
     state.confirmed = state.selected;
-    root.querySelector('.studio-feature-grid')?.classList.remove('is-reset');
-    root.querySelector('.studio-live-loss')?.classList.remove('is-reset');
-    restartSignalAnimation('.studio-feature-grid', 'is-identified');
-    restartSignalAnimation('.studio-live-loss', 'is-training');
-    clearResults(true); renderTwin(); renderDatasets();
-    const dataset = catalog().find(d => d.id === state.confirmed);
-    if (dataset) calibrateTwin(dataset);
+    state.initialized = false; state.estimated = false; state.validated = false;
+    root.classList.remove('is-calibrating');
+    root.querySelector('.studio-live-loss')?.classList.add('is-reset');
+    root.querySelector('.studio-live-loss')?.classList.remove('is-training');
+    setCalibrationProgress(0);
+    el('initialize-status').textContent = '';
+    el('validation-results').innerHTML = '<div class="studio-empty studio-results-empty">Complete battery parameter estimation to validate measured and simulated responses.</div>';
+    clearResults(true); renderTwin(); renderDatasets(); renderParameters(); syncWorkflow();
   });
-  el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); setWorkspaceStatus('Scenario updated · generate when ready', 'ready'); });
+  el('initialize').addEventListener('click', () => {
+    if (!state.confirmed || state.initialized) return;
+    state.initialized = true;
+    el('initialize-status').textContent = 'PIML Battery Twin Initialized';
+    renderTwin();
+    calibrateTwin();
+  });
+  el('validate').addEventListener('click', runValidation);
+  el('scenario').addEventListener('change', event => { state.scenario = event.target.value; clearResults(); });
   el('prediction-form').addEventListener('submit', runGeneration);
   el('download').addEventListener('click', downloadGeneratedData);
   window.BatteryLakeDigitalTwin = { refresh };
@@ -497,6 +564,5 @@
     }), { threshold: .12 });
     revealNodes.forEach(node => revealObserver.observe(node));
   }
-  setFlowStage('select');
   syncControls(); refresh();
 })();

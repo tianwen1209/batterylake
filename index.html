@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="styles/preprocessing.css?v=numbered-cards-8">
 <link rel="stylesheet" href="styles/contribute.css?v=workflow-1">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workspace-38">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-44">
 </head>
 <body>
 <div class="app">
@@ -914,57 +914,34 @@ bash run_benchmark.sh</pre>
 
   </div>
 
-  <!-- Battery Digital Twin Studio: local, illustrative first-pass workspace. -->
+  <!-- Battery Digital Twin Studio: local, illustrative workflow prototype. -->
   <div class="page" id="page-studio">
     <header class="page-header studio-hero visual-page-hero">
       <h1 class="page-title">Battery Digital Twin Studio</h1>
-      <div class="page-desc">Train dataset-specific digital twins for simulation, prediction, and synthetic data generation.</div>
+      <div class="page-desc">Build and validate dataset-specific battery digital twins for simulation, prediction, and synthetic data generation.</div>
       <img class="studio-hero-art visual-page-hero-art" src="assets/images/studio-hero-transparent.png" alt="" aria-hidden="true">
     </header>
     <div class="studio-workspace">
       <section class="studio-explainer" aria-labelledby="studio-overview-title">
         <div class="studio-section-heading"><h2 id="studio-overview-title">How the Studio Works</h2></div>
-        <div class="studio-process-flow" role="img" aria-label="Select a dataset, identify its features, calibrate a digital twin, run the generation engine, configure data generation, then review generated results.">
-          <div class="studio-process-node studio-process-step-1"><div class="studio-process-node-head"><span class="studio-process-number">01</span><strong>Select Dataset</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/select-dataset.png" alt="" aria-hidden="true"></div></div>
+        <div class="studio-process-flow" role="img" aria-label="Prepare data, configure the fixed PIML battery model, estimate battery parameters, validate the model, then run digital twin simulations and generate data.">
+          <div class="studio-process-node studio-process-data"><div class="studio-process-node-head"><span class="studio-process-number">01</span><strong>Data Preparation</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/select-dataset.png" alt="" aria-hidden="true"></div></div>
           <i class="studio-process-arrow studio-process-arrow-1" aria-hidden="true">→</i>
-          <div class="studio-process-node studio-process-step-2"><div class="studio-process-node-head"><span class="studio-process-number">02</span><strong>Feature Identification</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/feature-identification.png" alt="" aria-hidden="true"></div></div>
+          <div class="studio-process-node studio-process-model"><div class="studio-process-node-head"><span class="studio-process-number">02</span><strong>Battery Model Configuration</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/feature-identification.png" alt="" aria-hidden="true"></div></div>
           <i class="studio-process-arrow studio-process-arrow-2" aria-hidden="true">→</i>
-          <div class="studio-process-node studio-process-calibration"><div class="studio-process-node-head"><span class="studio-process-number">03</span><strong>Calibrate Digital Twin</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/calibrate-digital-twin.png" alt="" aria-hidden="true"></div></div>
-          <i class="studio-process-arrow studio-process-arrow-3" aria-hidden="true">↓</i>
-          <div class="studio-process-node studio-process-setup"><div class="studio-process-node-head"><span class="studio-process-number">04</span><strong>Data Generation Setup</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/data-generation-setup.png" alt="" aria-hidden="true"></div></div>
-          <i class="studio-process-arrow studio-process-arrow-4" aria-hidden="true">←</i>
-          <div class="studio-process-node studio-process-engine"><div class="studio-process-node-head"><span class="studio-process-number">PIML</span><strong>Generation Engine</strong></div><div class="studio-process-logo studio-engine-logo"><img src="assets/images/studio-flow/generation-engine.png" alt="" aria-hidden="true"></div></div>
-          <i class="studio-process-arrow studio-process-arrow-5" aria-hidden="true">←</i>
-          <div class="studio-process-node studio-process-result"><div class="studio-process-node-head"><span class="studio-process-number">05</span><strong>Data Generation Results</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/data-generation-results.png" alt="" aria-hidden="true"></div></div>
-        </div>
-        <div class="studio-piml-explanation" aria-label="Inside the Calibration Engine">
-          <div class="studio-piml-heading"><span aria-hidden="true">⚙</span><strong>Inside the Calibration Engine</strong></div>
-          <div class="studio-piml-panel-grid">
-            <div class="studio-piml-formula-card">
-              <div class="studio-piml-card-title"><span class="studio-piml-atom" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="3"/><ellipse cx="16" cy="16" rx="13" ry="5.5"/><ellipse cx="16" cy="16" rx="13" ry="5.5" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="13" ry="5.5" transform="rotate(120 16 16)"/></svg></span><div><strong>PIML Objective</strong></div></div>
-              <div class="studio-formula" aria-label="Physics-informed machine learning loss formula"><span>ℒ(θ)</span> = ℒ<sub>data</sub> + λ ℒ<sub>physics</sub></div>
-            </div>
-            <div class="studio-piml-input-card">
-              <div class="studio-piml-card-title"><span class="studio-piml-database" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="7" ry="3"/><path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7"/></svg></span><div><strong>Inputs</strong></div></div>
-              <div class="studio-piml-inputs" role="list">
-                <span role="listitem"><i class="piml-electrical"><svg viewBox="0 0 24 24"><path d="M2 13h4l2.2-8 3.3 14 2.7-10 2 4H22"/></svg></i><b>Electrical Data</b></span>
-                <span role="listitem"><i class="piml-thermal"><svg viewBox="0 0 24 24"><path d="M10 4a2 2 0 1 1 4 0v9.6a5 5 0 1 1-4 0V4Z"/><path d="M12 8v8M12 19h.01"/></svg></i><b>Thermal Data</b></span>
-                <span role="listitem"><i class="piml-operating"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="11" cy="18" r="2"/></svg></i><b>Operating Conditions</b></span>
-                <span role="listitem"><i class="piml-physics"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg></i><b>Physics Constraints</b></span>
-              </div>
-            </div>
-            <figure class="studio-piml-illustration">
-              <img src="assets/images/studio-flow/piml-calibration.png" alt="Battery measurements feeding a physics-informed neural network">
-            </figure>
-          </div>
+          <div class="studio-process-node studio-process-estimation"><div class="studio-process-node-head"><span class="studio-process-number">03</span><strong>Battery Parameter Estimation</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/calibrate-digital-twin.png" alt="" aria-hidden="true"></div></div>
+          <i class="studio-process-arrow studio-process-arrow-3" aria-hidden="true">→</i>
+          <div class="studio-process-node studio-process-validation"><div class="studio-process-node-head"><span class="studio-process-number">04</span><strong>Model Validation</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/generation-engine.png" alt="" aria-hidden="true"></div></div>
+          <i class="studio-process-arrow studio-process-arrow-4" aria-hidden="true">→</i>
+          <div class="studio-process-node studio-process-simulation"><div class="studio-process-node-head"><span class="studio-process-number">05</span><strong>Data Generation</strong></div><div class="studio-process-logo"><img src="assets/images/studio-flow/data-generation-results.png" alt="" aria-hidden="true"></div></div>
         </div>
       </section>
 
       <section class="studio-operations" aria-labelledby="studio-workspace-title">
-        <div class="studio-section-heading studio-workspace-heading"><h2 id="studio-workspace-title">Studio Workspace</h2><p id="studio-workspace-status" class="studio-workspace-status" role="status"><span aria-hidden="true"></span>Start by selecting a dataset</p></div>
+        <div class="studio-section-heading studio-workspace-heading"><h2 id="studio-workspace-title">Studio Workspace</h2></div>
         <div class="studio-operation-grid">
-          <article class="studio-step studio-datasets" aria-labelledby="studio-datasets-title">
-            <div class="studio-step-head"><span class="studio-step-number">01</span><h3 id="studio-datasets-title">Select Dataset</h3></div>
+          <article class="studio-step studio-datasets studio-operation-wide" data-studio-step="data" aria-labelledby="studio-datasets-title">
+            <div class="studio-step-head"><span class="studio-step-number">01</span><div class="studio-step-title"><h3 id="studio-datasets-title">Data Preparation</h3><span class="studio-step-info" tabindex="0" aria-label="Data Preparation information"><span aria-hidden="true">i</span><span class="studio-step-info-text" role="tooltip">Choose a battery dataset with measurements the digital twin can use. Search or filter, then select Use Dataset.</span></span></div></div>
             <div class="studio-search-tools">
               <div class="dataset-search-row">
                 <div class="dataset-search">
@@ -983,45 +960,60 @@ bash run_benchmark.sh</pre>
             </div>
           </article>
 
-          <article class="studio-step studio-features-step" aria-labelledby="studio-features-title">
-            <div class="studio-step-head"><span class="studio-step-number">02</span><h3 id="studio-features-title">Feature Identification</h3></div>
-            <div class="studio-feature-grid is-reset">
-              <figure class="studio-signal-card"><figcaption><strong>Voltage (V)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative voltage line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-blue" d="M28 77 C47 74 55 56 76 58 S106 71 124 46 S157 25 176 32 S204 51 226 21"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
-              <figure class="studio-signal-card"><figcaption><strong>Current (A)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative current line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-cyan" d="M28 68 L52 68 L52 28 L84 28 L84 78 L112 78 L112 42 L146 42 L146 72 L178 72 L178 24 L206 24 L206 60 L226 60"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
-              <figure class="studio-signal-card"><figcaption><strong>Temperature (°C)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative temperature line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-amber" d="M28 78 C48 75 59 67 75 60 S103 36 120 44 S148 71 164 55 S194 28 226 35"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
-              <figure class="studio-signal-card"><figcaption><strong>Capacity (Ah)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative capacity line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-violet" d="M28 22 C58 24 75 27 96 31 S132 39 151 48 S191 65 226 78"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
-              <figure class="studio-signal-card"><figcaption><strong>Internal Resistance (mΩ)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative internal resistance line chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-line line-rose" d="M28 78 C56 76 78 71 97 67 S128 57 147 54 S184 38 226 21"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
-              <figure class="studio-signal-card"><figcaption><strong>SOC Range (%)</strong></figcaption><svg viewBox="0 0 240 112" role="img" aria-label="Illustrative state of charge range chart"><g class="studio-mini-grid"><path d="M28 12v76h198M28 31h198M28 50h198M28 69h198"/></g><path class="studio-signal-band" d="M28 26 C66 28 91 32 124 30 S185 23 226 28 L226 69 C184 66 157 72 124 68 S65 70 28 65Z"/><path class="studio-signal-line line-green" d="M28 26 C66 28 91 32 124 30 S185 23 226 28M28 65 C65 70 91 66 124 68 S184 66 226 69"/><text x="226" y="104" text-anchor="end">Cycle / time</text></svg></figure>
+          <article class="studio-step studio-operation-wide is-locked" data-studio-step="model" aria-labelledby="studio-model-title">
+            <div class="studio-step-head"><span class="studio-step-number">02</span><div class="studio-step-title"><h3 id="studio-model-title">Battery Model Configuration</h3><span class="studio-step-info" tabindex="0" aria-label="Battery Model Configuration information"><span aria-hidden="true">i</span><span class="studio-step-info-text" role="tooltip">Review the model inputs and objective, then initialize the battery digital twin for your dataset.</span></span></div></div>
+            <div class="studio-model-grid">
+              <section class="studio-model-identity"><h4>Model</h4><p>Physics-Informed Machine Learning (PIML)<br>Battery Digital Twin</p></section>
+              <figure class="studio-model-illustration"><img src="assets/images/studio-flow/piml-calibration.png" alt="Battery measurements feeding the physics-informed machine learning twin"></figure>
+              <section class="studio-model-inputs"><h4>Model inputs</h4><div class="studio-input-list">
+                <span><i class="piml-electrical" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 13h4l2.2-8 3.3 14 2.7-10 2 4H22"/></svg></i>Electrical data</span>
+                <span><i class="piml-thermal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4a2 2 0 1 1 4 0v9.6a5 5 0 1 1-4 0V4Z"/><path d="M12 8v8"/></svg></i>Thermal data</span>
+                <span><i class="piml-operating" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="11" cy="18" r="2"/></svg></i>Operating conditions</span>
+                <span><i class="piml-physics" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg></i>Physics constraints</span>
+              </div></section>
+              <section class="studio-piml-formula-card">
+                <h4>PIML objective</h4>
+                <div class="studio-formula" aria-label="Physics-informed machine learning loss formula"><span class="studio-formula-expression"><b>ℒ(θ)</b> = ℒ<sub>data</sub> + λ ℒ<sub>physics</sub></span></div>
+              </section>
             </div>
+            <div class="studio-step-actions"><span id="studio-initialize-status" class="studio-inline-status" aria-live="polite"></span><button type="button" class="bw-pg active studio-action studio-run" id="studio-initialize" disabled>Initialize Digital Twin</button></div>
           </article>
 
-          <article class="studio-step studio-calibration-twin-step studio-operation-wide" aria-labelledby="studio-piml-title">
-            <div class="studio-step-head"><span class="studio-step-number">03</span><h3 id="studio-piml-title">Calibrate Battery Digital Twin</h3></div>
+          <article class="studio-step studio-calibration-twin-step studio-operation-wide is-locked" data-studio-step="estimation" aria-labelledby="studio-piml-title">
+            <div class="studio-step-head"><span class="studio-step-number">03</span><div class="studio-step-title"><h3 id="studio-piml-title">Battery Parameter Estimation</h3><span class="studio-step-info" tabindex="0" aria-label="Battery Parameter Estimation information"><span aria-hidden="true">i</span><span class="studio-step-info-text" role="tooltip">Calibrate the twin by adjusting battery parameters until its predictions better match measured data and physics constraints.</span></span></div></div>
             <div class="studio-calibration-workbench">
-              <figure class="studio-loss-chart studio-live-loss is-reset"><figcaption><strong>Training Loss</strong><span class="studio-loss-legend" aria-label="Loss-series legend"><i class="studio-loss-key train"></i>Train <i class="studio-loss-key validation"></i>Val</span></figcaption><svg viewBox="0 0 390 178" role="img" aria-label="Training and validation loss by iterations"><g class="studio-loss-grid"><path d="M42 18v125h326M42 49h326M42 80h326M42 111h326"/><text x="34" y="23" text-anchor="end">10⁰</text><text x="34" y="54" text-anchor="end">10⁻¹</text><text x="34" y="85" text-anchor="end">10⁻²</text><text x="34" y="116" text-anchor="end">10⁻³</text><text x="42" y="161">0</text><text x="199" y="161">500</text><text x="368" y="161" text-anchor="end">1k</text></g><path class="studio-loss-area" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134 L368 143H42Z"/><path class="studio-loss-line studio-loss-train" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134"/><path class="studio-loss-line studio-loss-validation" d="M42 31 C69 39 89 49 112 64 S148 75 173 91 S211 97 244 110 S296 115 368 122"/><text class="studio-axis-title" x="205" y="176" text-anchor="middle">Iterations</text></svg></figure>
+              <figure class="studio-loss-chart studio-live-loss is-reset"><figcaption><strong>Training Loss</strong><span class="studio-loss-legend" aria-label="Loss-series legend"><i class="studio-loss-key train"></i>Train <i class="studio-loss-key validation"></i>Val</span></figcaption><svg viewBox="0 0 390 178" role="img" aria-label="Training and validation loss during battery parameter estimation"><g class="studio-loss-grid"><path d="M42 18v125h326M42 49h326M42 80h326M42 111h326"/><text x="34" y="23" text-anchor="end">10⁰</text><text x="34" y="54" text-anchor="end">10⁻¹</text><text x="34" y="85" text-anchor="end">10⁻²</text><text x="34" y="116" text-anchor="end">10⁻³</text><text x="42" y="161">0</text><text x="199" y="161">500</text><text x="368" y="161" text-anchor="end">1k</text></g><path class="studio-loss-area" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134 L368 143H42Z"/><path class="studio-loss-line studio-loss-train" d="M42 26 C77 34 89 52 113 59 S145 78 173 88 S220 106 245 113 S298 126 368 134"/><path class="studio-loss-line studio-loss-validation" d="M42 31 C69 39 89 49 112 64 S148 75 173 91 S211 97 244 110 S296 115 368 122"/><text class="studio-axis-title" x="205" y="176" text-anchor="middle">Iterations</text></svg></figure>
               <div class="studio-twin-build-panel">
                 <div class="studio-progress-wrap">
-                  <div class="studio-progress-ring" id="studio-calibration-ring" style="--progress:0"><div><strong id="studio-calibration-value">0%</strong><span>Twin build</span></div></div>
-                  <span class="studio-progress-caption">Calibration Progress</span>
+                  <div class="studio-progress-ring" id="studio-calibration-ring" style="--progress:0"><div><strong id="studio-calibration-value">0%</strong></div></div>
+                  <span class="studio-progress-caption">Parameter Estimation Progress</span>
                 </div>
-                <div id="studio-twin" class="studio-stage" role="status">Select and confirm a dataset to build its digital twin</div>
+                <div id="studio-twin" class="studio-stage" role="status">Initialize the PIML Battery Digital Twin to begin calibration.</div>
               </div>
             </div>
+            <section class="studio-parameter-card" aria-labelledby="studio-parameters-title"><div class="studio-subsection-head"><h4 id="studio-parameters-title">Estimated Battery Parameters</h4></div><div id="studio-estimated-parameters" class="studio-parameter-grid"><span class="studio-placeholder-copy">Estimated values appear after initialization.</span></div></section>
           </article>
 
-          <article class="studio-step studio-operation-wide" aria-labelledby="studio-setup-title">
-            <div class="studio-step-head"><span class="studio-step-number">04</span><h3 id="studio-setup-title">Synthetic Data Generation Setup</h3></div>
-            <form id="studio-prediction-form" class="studio-setup">
-              <div id="studio-controls"></div>
-              <label class="studio-scenario" for="studio-scenario">Scenario<select class="studio-input" id="studio-scenario"><option value="constant">Cycle Aging (Constant Current)</option><option value="fast">Fast Charging</option><option value="dynamic">Dynamic Cycling</option></select></label>
-              <button class="bw-pg active studio-action studio-run" id="studio-run" type="submit" disabled>Generate</button>
-            </form>
+          <article class="studio-step studio-operation-wide is-locked" data-studio-step="validation" aria-labelledby="studio-validation-title">
+            <div class="studio-step-head studio-step-head-actions"><span class="studio-step-number">04</span><div class="studio-step-title"><h3 id="studio-validation-title">Model Validation</h3><span class="studio-step-info" tabindex="0" aria-label="Model Validation information"><span aria-hidden="true">i</span><span class="studio-step-info-text" role="tooltip">Compare the twin's predicted response with measured data. In this prototype, the comparison and pass/review result are illustrative, not a real dataset assessment.</span></span></div><button type="button" class="bw-pg active studio-action studio-run" id="studio-validate" disabled>Run Validation</button></div>
+            <div id="studio-validation-results" class="studio-validation-results" aria-live="polite"><div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Complete battery parameter estimation to validate measured and simulated responses.</span></div></div>
           </article>
 
-          <article class="studio-step studio-results-step studio-operation-wide" aria-labelledby="studio-results-title">
-            <div class="studio-step-head"><span class="studio-step-number">05</span><h3 id="studio-results-title" tabindex="-1">Synthetic Data Generation Results</h3></div>
-            <div id="studio-results" class="studio-results" aria-live="polite"><div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Build a digital twin, adjust the setup, then generate data.</span></div></div>
-            <div class="studio-results-actions"><button class="bw-pg active studio-action studio-run" id="studio-download" type="button" disabled>Download</button></div>
+          <article class="studio-step studio-results-step studio-operation-wide is-locked" data-studio-step="simulation" aria-labelledby="studio-simulation-title">
+            <div class="studio-step-head"><span class="studio-step-number">05</span><div class="studio-step-title"><h3 id="studio-simulation-title">Digital Twin Simulation &amp; Data Generation</h3><span class="studio-step-info" tabindex="0" aria-label="Digital Twin Simulation and Data Generation information"><span aria-hidden="true">i</span><span class="studio-step-info-text" role="tooltip">Set virtual operating conditions, run the twin after validation, then download the synthetic battery data it generates.</span></span></div></div>
+            <section class="studio-simulation-panel" aria-labelledby="studio-setup-title">
+              <div class="studio-subsection-head"><h4 id="studio-setup-title">Operating Conditions</h4></div>
+              <form id="studio-prediction-form" class="studio-setup">
+                <label class="studio-scenario" for="studio-scenario">Scenario<select class="studio-input" id="studio-scenario" disabled><option value="constant">Cycle Aging (Constant Current)</option><option value="fast">Fast Charging</option><option value="dynamic">Dynamic Cycling</option></select></label>
+                <div id="studio-controls"></div>
+                <button class="bw-pg active studio-action studio-run" id="studio-run" type="submit" disabled>Run Simulation &amp; Generate Data</button>
+              </form>
+            </section>
+            <section class="studio-generation-panel" aria-labelledby="studio-results-title">
+              <div class="studio-subsection-head"><h4 id="studio-results-title" tabindex="-1">Generated Dataset</h4></div>
+              <div id="studio-results" class="studio-results" aria-live="polite"><div class="studio-empty studio-results-empty"><div class="studio-empty-mark" aria-hidden="true"><span></span><span></span><span></span></div><span>Validate the digital twin, configure operating conditions, then run a simulation.</span></div></div>
+              <div class="studio-results-actions"><button class="bw-pg active studio-action studio-run" id="studio-download" type="button" disabled>Download Synthetic Dataset</button></div>
+            </section>
           </article>
         </div>
       </section>
@@ -2106,7 +2098,7 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/main.js"></script>
-<script src="js/digital-twin.js?v=studio-workspace-21"></script>
+<script src="js/digital-twin.js?v=studio-workflow-26"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>
