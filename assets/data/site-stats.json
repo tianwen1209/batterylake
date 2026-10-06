@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-10-05T23:13:09Z",
-  "total_visits": 3226,
+  "updated_at": "2026-10-06T21:43:43Z",
+  "total_visits": 3271,
   "dataset_downloads": 495,
   "skill_uses": 114,
   "model_downloads": {
-    "cnn": 15,
+    "cnn": 16,
     "linear": 4
   },
   "model_runs": {
-    "cnn": 9,
+    "cnn": 10,
     "linear": 3,
     "pinn": 3,
     "xgboost": 3,
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-05T23:13:09Z",
+    "updatedAt": "2026-10-06T21:43:43Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-05"
+      "endDate": "2026-10-06"
     },
     "countries": [
       {
@@ -32,12 +32,12 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 45
+        "visitors": 50
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 43
+        "visitors": 44
       },
       {
         "country": "Poland",
@@ -47,7 +47,7 @@
       {
         "country": "Hong Kong",
         "countryCode": "HK",
-        "visitors": 5
+        "visitors": 6
       },
       {
         "country": "India",
@@ -75,8 +75,18 @@
         "visitors": 3
       },
       {
+        "country": "Canada",
+        "countryCode": "CA",
+        "visitors": 2
+      },
+      {
         "country": "Germany",
         "countryCode": "DE",
+        "visitors": 2
+      },
+      {
+        "country": "France",
+        "countryCode": "FR",
         "visitors": 2
       },
       {
@@ -88,16 +98,6 @@
         "country": "T\u00fcrkiye",
         "countryCode": "TR",
         "visitors": 2
-      },
-      {
-        "country": "Canada",
-        "countryCode": "CA",
-        "visitors": 1
-      },
-      {
-        "country": "France",
-        "countryCode": "FR",
-        "visitors": 1
       },
       {
         "country": "Indonesia",
@@ -125,6 +125,11 @@
         "visitors": 1
       },
       {
+        "country": "Russia",
+        "countryCode": "RU",
+        "visitors": 1
+      },
+      {
         "country": "Thailand",
         "countryCode": "TH",
         "visitors": 1
@@ -143,7 +148,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 10,
+        "visitors": 11,
         "lng": -77.487,
         "lat": 39.044
       },
@@ -151,7 +156,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 10,
+        "visitors": 11,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -167,7 +172,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Boardman",
-        "visitors": 8,
+        "visitors": 9,
         "lng": -80.663,
         "lat": 41.024
       },
@@ -186,6 +191,14 @@
         "visitors": 5,
         "lng": 114.068,
         "lat": 22.546
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Glenview",
+        "visitors": 5,
+        "lng": -87.788,
+        "lat": 42.07
       },
       {
         "country": "China",
@@ -244,12 +257,12 @@
         "lat": 36.065
       },
       {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Glenview",
-        "visitors": 3,
-        "lng": -87.788,
-        "lat": 42.07
+        "country": "Canada",
+        "countryCode": "CA",
+        "city": "Burnaby",
+        "visitors": 2,
+        "lng": -122.953,
+        "lat": 49.266
       },
       {
         "country": "China",
@@ -306,14 +319,6 @@
         "visitors": 2,
         "lng": 51.422,
         "lat": 35.694
-      },
-      {
-        "country": "Canada",
-        "countryCode": "CA",
-        "city": "Burnaby",
-        "visitors": 1,
-        "lng": -122.953,
-        "lat": 49.266
       },
       {
         "country": "China",
@@ -434,6 +439,14 @@
         "visitors": 1,
         "lng": 76.912,
         "lat": 43.252
+      },
+      {
+        "country": "Russia",
+        "countryCode": "RU",
+        "city": "Khabarovsk",
+        "visitors": 1,
+        "lng": 135.097,
+        "lat": 48.462
       },
       {
         "country": "Thailand",
