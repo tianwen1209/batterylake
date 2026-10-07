@@ -21,8 +21,17 @@ whether two copies have skewed instead of diffing every dataset file by hand:
 
 Filtering rules:
   * scalar field -> exact match, or a list/tuple/set to mean "any of"
+<<<<<<< Updated upstream
   * list field (signals, supported_tasks, quality_flags) -> every value given
     must be present in the dataset's list
+=======
+  * list field (signals, supported_tasks, quality_flags, source_format, cathode_chemistries,
+    anode_chemistries, form_factors, cell_format_codes, charge_profiles, discharge_profiles)
+    -> every value given must be present in the dataset's list
+  * cathode_chemistry, anode_chemistry, form_factor and cell_format_code are accepted as names for
+    the lists above, so find(index, cathode_chemistry="LFP") means "LFP is among the dataset's
+    cathode_chemistries" (a dataset that mixes LFP with other cathodes matches too)
+>>>>>>> Stashed changes
   * min_* / max_* prefixes compare numerically against the field that follows
 """
 from __future__ import annotations
@@ -32,7 +41,15 @@ import os
 from typing import Any, Iterable, Iterator
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+<<<<<<< Updated upstream
 LIST_FIELDS = {"signals", "supported_tasks", "quality_flags", "source_format"}
+=======
+LIST_FIELDS = {"signals", "supported_tasks", "quality_flags", "source_format", "cathode_chemistries",
+               "anode_chemistries", "form_factors", "cell_format_codes", "charge_profiles", "discharge_profiles"}
+# the single-value names that these lists replaced in the records and the index
+ALIASES = {"cathode_chemistry": "cathode_chemistries", "anode_chemistry": "anode_chemistries",
+           "form_factor": "form_factors", "cell_format_code": "cell_format_codes"}
+>>>>>>> Stashed changes
 
 
 def load_index(path: str | None = None) -> dict:
@@ -59,6 +76,10 @@ def find(index: dict, **filters: Any) -> list[dict]:
     for key, wanted in filters.items():
         if wanted is None:
             continue
+<<<<<<< Updated upstream
+=======
+        key = ALIASES.get(key, key)
+>>>>>>> Stashed changes
         if key.startswith(("min_", "max_")):
             bound, field = key.split("_", 1)
             rows = [
@@ -107,12 +128,25 @@ def iter_cells(record: dict) -> Iterator[dict]:
     A record stores only the values where a cell differs from its dataset, so
     this resolves each cell to a complete row before yielding it.
     """
+<<<<<<< Updated upstream
     defaults = {
         "manufacturer": record["cell"]["manufacturer"],
         "model": record["cell"]["model"],
         "cathode_chemistry": record["cell"]["cathode_chemistry"],
         "anode_chemistry": record["cell"]["anode_chemistry"],
         "form_factor": record["cell"]["form_factor"],
+=======
+    def sole(values):
+        """The one value of a dataset-level list, or None when it holds several (the cell rows say which)."""
+        return values[0] if len(values) == 1 else None
+
+    defaults = {
+        "manufacturer": record["cell"]["manufacturer"],
+        "model": record["cell"]["model"],
+        "cathode_chemistry": sole(record["cell"]["cathode_chemistries"]),
+        "anode_chemistry": sole(record["cell"]["anode_chemistries"]),
+        "form_factor": sole(record["cell"]["form_factors"]),
+>>>>>>> Stashed changes
         "nominal_capacity_Ah": record["cell"]["nominal_capacity_Ah"],
         "nominal_voltage_V": record["cell"]["nominal_voltage_V"],
         "voltage_min_V": record["cell"]["voltage_min_V"],

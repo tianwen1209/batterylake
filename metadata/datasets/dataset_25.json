@@ -9,6 +9,7 @@
   "institution": "Stanford University, Onori Lab",
   "year": 2022,
   "doi": null,
+<<<<<<< Updated upstream
   "paper_doi": null,
   "source_url": "https://osf.io/qsabn/",
   "study_group": "onori_second_life_8jnr5"
@@ -48,6 +49,141 @@
   "protocol_class": "drive_cycle",
   "protocol_charge_raw": "residential/commercial synthetic UDDS-based duty cycle ageing",
   "protocol_discharge_raw": null,
+=======
+  "paper_doi": "10.1016/j.dib.2022.107995",
+  "source_url": "https://osf.io/qsabn/",
+  "study_group": "onori_second_life_8jnr5",
+  "notes": "6 NMC 21700 cells (10 declared); INR21700-M50T; UDDS ageing (80-20% SOC) after CC-CV charges at C/4 to 3C; shares cell ids with dataset_27; Pozzato et al. Data in Brief 2022"
+ },
+ "cell": {
+  "manufacturer": "LG Chem",
+  "model": "INR21700-M50T",
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+  "dimensions_mm": {
+   "diameter": 21.44,
+   "height": 70.8,
+   "length": null,
+   "width": null,
+   "thickness": null,
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 4.85,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": 3.63,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "21700"
+  ],
+  "cathode_chemistries": [
+   "NMC"
+  ],
+  "anode_chemistries": [],
+  "electrode_combinations": [],
+  "nominal_capacities_Ah": [
+   4.85
+  ]
+ },
+ "conditions": {
+  "temperature_min_C": 23.0,
+  "temperature_max_C": 23.0,
+  "temperature_setpoints_C": [
+   23.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 3.0,
+  "discharge_c_rate_max": 1.0,
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "drive_cycle",
+  "charging_profile": "dynamic",
+  "protocol_charge_raw": "6-step cycle: CC charge at C/4, C/2, 1C or 3C (per cell) to 4 V, CV until 50 mA, CC at C/4 to 4.2 V (100% SOC), CV until 50 mA, 30 min rest",
+  "protocol_discharge_raw": "CC discharge at C/4 from 100% to 80% SOC, then concatenated UDDS cycles from 80% to 20% SOC; reference tests every 25 or 50 cycles: capacity at C/20 from 100% SOC, HPPC, EIS at 20, 50 and 80% SOC; cells returned to 100% SOC with a 1C CC-CV charge after each test",
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "dynamic"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.25,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.25
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.25
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.05
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.25
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 3.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.25
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.25,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "UDDS"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "UDDS"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "UDDS"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 3.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "UDDS"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [
+   {
+    "name": "UDDS",
+    "kind": "drive_cycle",
+    "detail": "UDDS cycles from 80% to 20% SOC, charge at C/4, C/2, 1C or 3C per cell"
+   }
+  ],
+>>>>>>> Stashed changes
   "soc_window_min_pct": 20.0,
   "soc_window_max_pct": 80.0,
   "aging_type": "profile",
@@ -111,6 +247,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "Cycle_Index of the tester workbooks; several workbooks per cell continue the count",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "10 original LG INR21700-M50T cells; the full UDDS cycle count is unknown.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.490634,
@@ -185,7 +325,11 @@
    "partial_raw",
    "shared_cells_with_other_dataset"
   ],
+<<<<<<< Updated upstream
   "notes": "Stanford second-life release (OSF qsabn): hash-named cycling workbooks for six cells. It shares cell ids G1, V4, V5 with dataset_27. Landing page (osf.io/qsabn) not fetched: the OSF project is private, so the API node lookup returns 401 for every anonymous request; confirmed by manually visiting the URL, which requires login. Cell spec (INR21700-M50T) from LG's INR21700 M50 18.2Wh document, the same source used for dataset_27. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached extraction covers six recognised cells and parsed workbooks, including diagnostic parts; 2077 lock markers remain, so coverage is the available parsed local delivery. stored nominal capacity 5.0 Ah comes from the nearest LG M50 datasheet, not an independently matched exact M50T sheet. The witness workbook Global_Info Capacity field is 4.85, and its 14.55 A charge plateau is consistent with its CC_3C label using that author denominator. The proposal uses the stored 5.0 Ah denominator as requested. CC_3C in this workbook's filename accompanies positive charging segments 7/8, rather than establishing a discharge C-rate. The existing 0.5C discharge scalar obtained by assigning CC filename tokens to discharge is unsupported and should be replaced. Finite auxiliary temperature readings exist, but the sensor placement on the cell versus ambient air was not established; measured cell-temperature availability is therefore unclear."
+=======
+  "notes": "Stanford second-life release (OSF qsabn): hash-named cycling workbooks for six cells. It shares cell ids G1, V4, V5 with dataset_27. Landing page (osf.io/qsabn) not fetched: the OSF project is private (401 anonymously, login in a browser). The paper is open access and was read in full via Europe PMC: ten cells (W3, W4, W5, W7, W8, W9, W10, G1, V4, V5) tested at 23 C; this release holds six of them (W3, W5, W7, V4, V5, G1). Cell spec (INR21700-M50T) from LG's INR21700 M50 18.2Wh document, the same source used for dataset_27. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached extraction covers six recognised cells and parsed workbooks, including diagnostic parts; 2077 lock markers remain, so coverage is the available parsed local delivery. nominal capacity 4.85 Ah is the data article's Table 1 value for these INR21700-M50T cells (Moy et al. 2024, which describes the ten first-life cells of this dataset), matching the workbooks' Global_Info Capacity field; the 14.55 A charge plateau of the CC_3C files is 3C of 4.85 Ah. The earlier 5.0 Ah came from the generic LG M50 datasheet and is superseded, so datasets 25 and 27 now agree. CC_3C in this workbook's filename accompanies positive charging segments 7/8, rather than establishing a discharge C-rate. The existing 0.5C discharge scalar obtained by assigning CC filename tokens to discharge is unsupported and should be replaced. Finite auxiliary temperature readings exist, but the sensor placement on the cell versus ambient air was not established; measured cell-temperature availability is therefore unclear. Charging profile: the discharge is the same drive-cycle profile for every cell and is time-varying; the constant-current charge rate differs between cells (0.25C to 3C). Likely paper (unread): Pozzato, Allam and Onori, Data in Brief 2022 (10.1016/j.dib.2022.107995), matched on the title only. Rate groups: the CC charge rates by cell, from the file names, are 0.25C (V4, W7 and W5 first), 0.5C (W5 later), 1C (V5) and 3C (G1, W3), all against the same UDDS-based dynamic discharge."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -193,7 +337,13 @@
    "identity.source_url": "registry",
    "identity.institution": "registry",
    "identity.year": "ref_name",
+<<<<<<< Updated upstream
    "identity.study_group": "relationships",
+=======
+   "identity.paper_doi": "paper",
+   "identity.study_group": "relationships",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "registry",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -203,11 +353,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.model": "raw_filenames",
    "cell.cathode_chemistry": "registry",
@@ -224,6 +379,36 @@
   },
   "confidence": "verified",
   "last_verified": "2026-09-29",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "curated",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "paper",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "paper",
+   "conditions.rate_combinations": "paper",
+   "conditions.single_side_profiles": "paper",
+   "conditions.dynamic_subprofiles": "raw_data",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "paper",
+   "cell.model": "raw_filenames",
+   "cell.chemistry_label_raw": "registry",
+   "cell.nominal_capacity_Ah": "paper",
+   "cell.nominal_voltage_V": "paper",
+   "cell.voltage_max_V": "paper",
+   "cell.voltage_min_V": "paper",
+   "conditions.temperature_setpoints_C": "paper",
+   "conditions.protocol_charge_raw": "curated",
+   "conditions.protocol_discharge_raw": "curated",
+   "cell.dimensions_mm": "paper",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "paper",
+   "conditions.discharge_c_rate_max": "raw_data"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_25.json",
   "landing_evidence": "evidence/landing/dataset_25.json"
  }

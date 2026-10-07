@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatteryLake multi-stage charge/discharge records",
+  "description": "One entry per surveyed dataset. A value no source gives is null, never a placeholder. Every stage states how it is known (verification).",
+  "type": "object",
+  "required": ["schema_version", "generated", "surveyed", "not_surveyed", "datasets"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "generated": {"type": "string", "format": "date"},
+    "description": {"type": "string"},
+    "vocabulary": {"type": "object"},
+    "surveyed": {"type": "array", "items": {"type": "string", "pattern": "^dataset_[0-9]{2}$"}},
+    "not_surveyed": {"type": "array", "items": {"type": "string", "pattern": "^dataset_[0-9]{2}$"}, "description": "Datasets whose raw files were not checked for stage structure; absence here is not evidence of no stages."},
+    "datasets": {"type": "array", "items": {"$ref": "#/$defs/dataset"}}
+  },
+  "$defs": {
+    "dataset": {
+      "type": "object",
+      "required": ["dataset_id", "recording", "scope", "cells", "conflicts", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "dataset_id": {"type": "string", "pattern": "^dataset_[0-9]{2}$"},
+        "recording": {
+          "type": "object",
+          "required": ["method", "stage_labels_in_raw", "raw_fields", "summary"],
+          "additionalProperties": false,
+          "properties": {
+            "method": {"enum": ["status_label", "policy_string", "waveform_only", "not_in_raw"]},
+            "stage_labels_in_raw": {"type": "boolean"},
+            "raw_fields": {"type": "array", "items": {"type": "string"}},
+            "summary": {"type": "string"}
+          }
+        },
+        "scope": {
+          "type": "object",
+          "required": ["raw_files", "cells_covered", "cells_in_metadata", "missing"],
+          "additionalProperties": false,
+          "properties": {
+            "raw_files": {"type": "array", "items": {"type": "object", "required": ["path", "bytes"], "additionalProperties": false, "properties": {"path": {"type": "string"}, "bytes": {"type": "integer"}}}},
+            "cells_covered": {"type": "integer", "minimum": 0},
+            "cells_in_metadata": {"type": ["integer", "null"]},
+            "missing": {"type": ["string", "null"]}
+          }
+        },
+        "cells": {"type": "array", "items": {"$ref": "#/$defs/cell"}},
+        "documented_only": {"type": "object", "description": "Stage list known only from text, when it cannot be attached to individual cells."},
+        "observations": {"type": "object", "description": "Raw-data counts behind the entry; observations.derived_by says whether this script reproduces them."},
+        "conflicts": {"type": "array", "items": {"type": "object", "required": ["field", "metadata_says", "raw_shows", "resolved"], "additionalProperties": false, "properties": {"field": {"type": "string"}, "metadata_says": {"type": "string"}, "raw_shows": {"type": "string"}, "resolved": {"type": "boolean"}}}},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cell": {
+      "type": "object",
+      "required": ["cell_id", "parse_status", "raw", "stages"],
+      "additionalProperties": false,
+      "properties": {
+        "cell_id": {"type": "string"},
+        "parse_status": {"enum": ["parsed", "truncated_in_raw", "label_order_varies"]},
+        "raw": {"type": "object"},
+        "stages": {"type": "array", "items": {"$ref": "#/$defs/stage"}, "description": "In the order they occur within one cycle (charge stages, then discharge stages)."}
+      }
+    },
+    "stage": {
+      "type": "object",
+      "required": ["index", "direction", "mode", "c_rate", "verification"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "direction": {"enum": ["charge", "discharge"]},
+        "mode": {"enum": ["CC", "CV", "CC-CV"]},
+        "raw_label": {"type": ["string", "null"]},
+        "c_rate": {"type": ["number", "null"]},
+        "c_rate_basis": {"type": "string"},
+        "soc_range_pct": {"type": ["object", "null"], "properties": {"start": {"type": ["number", "null"]}, "end": {"type": ["number", "null"]}}},
+        "soc_verification": {"enum": ["documented_only"]},
+        "voltage_limit_V": {"type": "number"},
+        "cutoff_current_c_rate": {"type": "number"},
+        "verification": {"enum": ["raw_label", "raw_policy_string", "documented_only"]}
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@
   "institution": "Hawaii Natural Energy Institute",
   "year": 2018,
   "doi": null,
+<<<<<<< Updated upstream
   "paper_doi": null,
   "source_url": "https://batteryarchive.org",
   "study_group": null
@@ -31,6 +32,18 @@
   "chemistry_is_multi": false,
   "form_factor": "cylindrical",
   "cell_format_code": "18650",
+=======
+  "paper_doi": "10.3390/en11051031",
+  "source_url": "https://batteryarchive.org",
+  "study_group": null,
+  "notes": "14 LCO-NMC/graphite 18650 cells; BatteryLife v12 copy of HNEI cycling data at 25 °C; Devie et al. Energies 2018"
+ },
+ "cell": {
+  "manufacturer": "LG Chem",
+  "model": "ICR18650 C2",
+  "chemistry_label_raw": "LiCoO2+LiNi0.4Co0.4Mn0.2O2",
+  "chemistry_is_multi": false,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.0,
    "height": 65.0,
@@ -44,7 +57,32 @@
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 3.0,
+<<<<<<< Updated upstream
   "voltage_max_V": 4.3
+=======
+  "voltage_max_V": 4.3,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "18650"
+  ],
+  "cathode_chemistries": [
+   "LCO-NMC"
+  ],
+  "anode_chemistries": [
+   "graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "LCO-NMC",
+    "anode": "graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   2.8
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 25.0,
@@ -55,10 +93,36 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 0.5,
   "discharge_c_rate_max": 1.5,
+<<<<<<< Updated upstream
   "c_rate_profile": null,
   "protocol_class": null,
   "protocol_charge_raw": null,
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "constant",
+  "protocol_class": "CC-CV",
+  "charging_profile": "CC-CV",
+  "protocol_charge_raw": "CC-CV at C/2 to 4.3 V (50 mA cut-off), no rests between cycles",
+  "protocol_discharge_raw": "1.5C to 3.0 V at 25 C; simplified RPT (C/25) every 100 cycles and an extended cycle with three 4 h rests every 25 cycles",
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.5
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [],
+>>>>>>> Stashed changes
   "soc_window_min_pct": 0.0,
   "soc_window_max_pct": 100.0,
   "aging_type": "cyclic",
@@ -97,6 +161,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "length of the pickle's cycle_data list (one entry per cycle)",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "14 HNEI cells; the BatteryLife copy does not establish the original cycle total.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -252,7 +320,11 @@
    "voltage_excursion_below_cutoff",
    "voltage_excursion_above_cutoff"
   ],
+<<<<<<< Updated upstream
   "notes": "Third-party BatteryLife v12 pickles of the HNEI cells; materials, nominal capacity and voltage limits are read from each pickle and the test conditions from the cell id. All 14 locally present HNEI BatteryLife pickles were checked with SafeUnpickler: the temperature_in_C column contains 7,359,143 NaN values and zero finite cell-temperature measurements. Chamber/filename temperature (25 C) is a testing condition, not a measured cell-temperature channel."
+=======
+  "notes": "Third-party BatteryLife v12 pickles of the HNEI cells; materials, nominal capacity and voltage limits are read from each pickle and the test conditions from the cell id. All 14 locally present HNEI BatteryLife pickles were checked with SafeUnpickler: the temperature_in_C column contains 7,359,143 NaN values and zero finite cell-temperature measurements. Chamber/filename temperature (25 C) is a testing condition, not a measured cell-temperature channel. Charging profile: the cached BatteryLife README says \"2 different fast-charging protocols\" and the pickles' charge_protocol metadata says 2C, but the cell ids and the waveforms show one 0.5C charge and 1.5C discharge for every cell; the files are followed. The paper (Devie, Baure and Dubarry, Energies 2018, 11(5), 1031; full text read) and the Battery Archive HNEI study summary agree with this record. Cell: LG Chemical ICR18650 C2, 18650, graphite negative electrode, positive electrode a blend of LiCoO2 and LiNi0.4Mn0.2Co0.4O2 (estimated 60% LCO / 40% NMC), nominal capacity 2800 mAh, recommended 3.00-4.30 V (50 mA cut-off current), recommended charge C/2 (maximum 1C) and maximum discharge 2C. Nominal voltage is not stated. Cycling: 15 of a 51-cell batch (this record holds 14 of them) for 1000 cycles at 25 C between 3.0 and 4.3 V, CC-CV charge at C/2, 1.5C discharge, no rests between cycles, a C/25 RPT every 100 cycles and an extended cycle with three 4 h rests every 25 cycles (Arbin tester, Amerex chambers). The charge rate is therefore C/2: the 2C in the pickles' charge_protocol metadata is wrong, as the waveforms already showed. The registry lists NMC only; the paper (SEM/EDX) shows an LCO/NMC composite, which supports this record's LCO-NMC."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -260,6 +332,11 @@
    "identity.source_url": "registry",
    "identity.institution": "raw_docs",
    "identity.year": "ref_name",
+<<<<<<< Updated upstream
+=======
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -269,27 +346,57 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "raw_data",
    "cell.anode_chemistry": "raw_data",
    "cell.chemistry_label_raw": "raw_data",
    "cell.form_factor": "raw_data",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "raw_data",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "raw_data",
+   "cell.anode_chemistries": "raw_data",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "paper",
+   "conditions.rate_combinations": "paper",
+   "conditions.single_side_profiles": "paper",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "paper",
+   "cell.model": "paper",
+   "cell.chemistry_label_raw": "raw_data",
+>>>>>>> Stashed changes
    "cell.nominal_capacity_Ah": "raw_data",
    "cell.voltage_max_V": "raw_data",
    "cell.voltage_min_V": "raw_data",
    "conditions.temperature_setpoints_C": "raw_filenames",
+<<<<<<< Updated upstream
+=======
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.protocol_discharge_raw": "paper",
+>>>>>>> Stashed changes
    "cell.dimensions_mm": "derived",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "derived",
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_07.json",
   "landing_evidence": "evidence/landing/dataset_07.json"
  }

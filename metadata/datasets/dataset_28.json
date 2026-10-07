@@ -11,6 +11,7 @@
   "doi": null,
   "paper_doi": "10.1021/acsenergylett.4c03223",
   "source_url": "https://github.com/LeXuSECL/ML_SOC_Estimation_ACS_Energy_Letters",
+<<<<<<< Updated upstream
   "study_group": null
  },
  "cell": {
@@ -22,6 +23,16 @@
   "chemistry_is_multi": false,
   "form_factor": "cylindrical",
   "cell_format_code": "26650",
+=======
+  "study_group": null,
+  "notes": "8 LFP/graphite 26650 cells; capacity, GITT, pseudo-OCV and dynamic-profile tests at 10-45 °C for SOC estimation; Che et al. ACS Energy Letters 2025"
+ },
+ "cell": {
+  "manufacturer": "Lithiumwerks",
+  "model": "NR26650WJB",
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 26.0,
    "height": 65.0,
@@ -30,12 +41,42 @@
    "thickness": null,
    "basis": "inferred_from_format_code"
   },
+<<<<<<< Updated upstream
   "nominal_capacity_Ah": null,
   "capacity_basis": null,
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 2.0,
   "voltage_max_V": 3.6
+=======
+  "nominal_capacity_Ah": 2.5,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": 3.3,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.0,
+  "voltage_max_V": 3.6,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "26650"
+  ],
+  "cathode_chemistries": [
+   "LFP"
+  ],
+  "anode_chemistries": [
+   "graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "LFP",
+    "anode": "graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   2.5
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 10.0,
@@ -49,10 +90,154 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 1.0,
   "discharge_c_rate_max": 1.0,
+<<<<<<< Updated upstream
   "c_rate_profile": "drive_cycle",
   "protocol_class": "pulse",
   "protocol_charge_raw": "CC-CV 1C to full, capacity test at C/5, GITT and pseudo-OCV at C/30, C/20, C/10, dynamic WLTP/random profiles at four temperatures",
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "mixed",
+  "charging_profile": "multi-rate",
+  "protocol_charge_raw": "training/validation tests: 1C CC-CV full charge then 2 h rest; CC charge tests: 1C CC discharge to 2 V with a hold until C/30, 2 h rest, charge to set SOC with C/10, C/2 or 1C and 1 h rest; capacity tests: C/5 CC charge and discharge",
+  "protocol_discharge_raw": "capacity tests at C/5; GITT: C/5 pulses of 2.5% SOC with 2 h rests; pseudo-OCV at C/30; CC and WLTP discharges (average C/10, C/2, 1C) to set SOC levels then 1 h rest; HPPC+WLTP in 10% SOC steps; temperatures 10, 25 and 45 C (cells 1-6) and 25 and 35 C (cells 7, 8)",
+  "profile_combinations": [
+   {
+    "charge": "CC",
+    "discharge": "CC"
+   },
+   {
+    "charge": "CC",
+    "discharge": "CC-CV"
+   },
+   {
+    "charge": "CC",
+    "discharge": "pulse"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "dynamic"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.1,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.1
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.5
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 0.1,
+    "discharge_subprofile": "HPPC + WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 0.1,
+    "discharge_subprofile": "WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 0.5,
+    "discharge_subprofile": "HPPC + WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 0.5,
+    "discharge_subprofile": "Shifted WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 0.5,
+    "discharge_subprofile": "WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 1.0,
+    "discharge_subprofile": "HPPC + WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 1.0,
+    "discharge_subprofile": "Shifted WLTP"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": 1.0,
+    "discharge_subprofile": "WLTP"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [
+   {
+    "name": "WLTP",
+    "kind": "drive_cycle",
+    "detail": "average 1C, C/2 and C/10"
+   },
+   {
+    "name": "Shifted WLTP",
+    "kind": "drive_cycle",
+    "detail": "time-shifted WLTP used for cells 7 and 8"
+   },
+   {
+    "name": "HPPC + WLTP",
+    "kind": "drive_cycle",
+    "detail": "HPPC pulses followed by WLTP, 10% SOC steps"
+   }
+  ],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -107,6 +292,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "no cycle index; parts are capacity, GITT, pseudo-OCV and dynamic-profile experiments per temperature",
+<<<<<<< Updated upstream
+=======
+  "count_basis": null,
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     1.99913,
@@ -160,7 +349,11 @@
   "flags": [
    "voltage_excursion_above_cutoff"
   ],
+<<<<<<< Updated upstream
   "notes": "Capacity, GITT, pseudo-OCV and dynamic-profile tests on LFP cells for SOC estimation. Tester capacity columns are running counters. The paper p. 745 identifies 26650 LFP/graphite cells. The 1C discharge scalar is the largest explicitly stated CC or average profile rate in the author README; it does not bound instantaneous WLTP or HPPC peaks. Nominal Ah remains null because no supported numeric nominal Ah was obtained from the reviewed sources. Auxiliary temperature readings are finite, but sensor placement has not been established by the reviewed main paper or README."
+=======
+  "notes": "Capacity, GITT, pseudo-OCV and dynamic-profile tests on LFP cells for SOC estimation. Tester capacity columns are running counters. The paper p. 745 identifies 26650 LFP/graphite cells. The 1C discharge scalar is the largest explicitly stated CC or average profile rate in the author README; it does not bound instantaneous WLTP or HPPC peaks. Nominal Ah remains null because no supported numeric nominal Ah was obtained from the reviewed sources. Auxiliary temperature readings are finite, but sensor placement has not been established by the reviewed main paper or README. Charging profile: the test suite mixes patterns; multi-rate is the dominant one. The paper (Che et al., ACS Energy Letters 10 (2025) 741-749; main text read, supporting information not available) confirms: eight cylindrical 26650 LFP/graphite cells (Table S2 of the SI holds the cell specification, which is not available here), 434 testing conditions at the Stanford Energy Control Laboratory; cells 1-6 at 10, 25 and 45 C and cells 7 and 8 at 25 and 35 C; capacity tests at C/5; GITT at C/5 in 2.5% SOC steps with a 2 h rest, from 100% SOC (3.6 V) to 0% SOC (2 V) or charged from 2.8 V to 3.6 V; pseudo-OCV at C/30; training and validation tests with CC, WLTP and HPPC+WLTP discharges to SOC levels followed by 1 h rests and CC charges at C/10, C/5 and 1C; a shifted WLTP profile for cells 7 and 8 (unseen-profile validation). The paper's Fig. 3 lists a cell-surface temperature variation among the features, which suggests a surface temperature measurement, but it does not say which delivered auxiliary channel that is, so the temperature series stays unclear. The paper is dated January 2025 while the ref_name year is 2024. The supporting information (supplied by the project owner) gives the cell specification in Table S2: Lithiumwerks (China), nominal capacity 2.5 Ah at 0.5C, LFP cathode, graphite anode, nominal voltage 3.3 V; the model NR26650WJB is named in the Figure S5 caption. Measured C/5 capacities of all eight cells at each temperature are in Figure S13 (about 2.4 to 2.55 Ah, no numbers given). Cases: 354 for cells 1-6 (WLTP 166, HPPC+WLTP 78, CC discharge 65, CC charge 45; average rates 1C, 0.5C and 0.1C) and 80 for the unseen cells 7 and 8 (WLTP and shifted WLTP at 1C and 0.5C average, 25 and 35 C). The 1C maximum recorded here is the average C-rate of the profiles: the WLTP and HPPC+WLTP current profiles in Figures S3 and S4 swing between about -20C and +10C instantaneously. Table S1 lists a 'variation of the surface temperature dT' during relaxation among the features and the chamber setpoint as another, but the SI does not identify which delivered auxiliary channel is the surface temperature, so the temperature series stays unclear. Rate combinations (supporting information, Note 3): the 1C CC-CV full charge is followed by CC discharges at C/10, C/2 or 1C, or by WLTP discharges with those average rates, at 10, 25 and 45 C; the CC-charge tests discharge at 1C CC with a CV hold to C/30 and then charge at C/10, C/2 or 1C. The capacity tests use C/5 for charge and discharge, the OCV tests C/5 GITT and C/30 pseudo-OCV. Rate groups: the WLTP discharges are listed with their average rates (C/10, C/2 and 1C) against the 1C CC-CV charge."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -168,7 +361,12 @@
    "identity.source_url": "registry",
    "identity.institution": "registry",
    "identity.year": "ref_name",
+<<<<<<< Updated upstream
    "identity.paper_doi": "raw_docs",
+=======
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -178,11 +376,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_docs",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "landing_page",
    "cell.anode_chemistry": "paper",
@@ -192,13 +395,40 @@
    "cell.voltage_min_V": "raw_docs",
    "conditions.temperature_setpoints_C": "raw_docs",
    "conditions.protocol_charge_raw": "raw_docs",
+=======
+   "cell.form_factors": "registry",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "paper",
+   "cell.anode_chemistries": "paper",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "paper",
+   "conditions.rate_combinations": "paper",
+   "conditions.single_side_profiles": "paper",
+   "conditions.dynamic_subprofiles": "paper",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "paper",
+   "cell.model": "paper",
+   "cell.chemistry_label_raw": "registry",
+   "cell.nominal_capacity_Ah": "paper",
+   "cell.nominal_voltage_V": "paper",
+   "cell.voltage_max_V": "paper",
+   "cell.voltage_min_V": "paper",
+   "conditions.temperature_setpoints_C": "paper",
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.protocol_discharge_raw": "paper",
+>>>>>>> Stashed changes
    "cell.dimensions_mm": "derived",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "derived",
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_28.json",
   "landing_evidence": "evidence/landing/dataset_28.json"
  }

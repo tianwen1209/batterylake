@@ -8,39 +8,110 @@
   "dataset_name": "TUM Thermal Runaway Propagation",
   "institution": "Technical University of Munich",
   "year": 2023,
+<<<<<<< Updated upstream
   "doi": null,
   "paper_doi": null,
   "source_url": "https://mediatum.ub.tum.de/node?id=1717758",
   "study_group": null
+=======
+  "doi": "10.14459/2023mp1717758",
+  "paper_doi": "10.1016/j.etran.2023.100305",
+  "source_url": "https://mediatum.ub.tum.de/node?id=1717758",
+  "study_group": null,
+  "notes": "2 prismatic modules; thermal-runaway propagation in multi-cell modules (GraphiteLFP and GraphiteNMC-811); cell voltage plus cell, venting and surface temperatures; Schöberl et al. eTransportation 2024"
+>>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
+<<<<<<< Updated upstream
   "cathode_chemistry": "mixed",
   "anode_chemistry": "graphite",
   "chemistry_label_raw": "GraphiteLFP; GraphiteNMC-811",
   "chemistry_is_multi": true,
   "form_factor": null,
   "cell_format_code": null,
+=======
+  "chemistry_label_raw": "GraphiteLFP; GraphiteNMC-811",
+  "chemistry_is_multi": true,
+>>>>>>> Stashed changes
   "dimensions_mm": null,
   "nominal_capacity_Ah": null,
   "capacity_basis": null,
   "nominal_voltage_V": null,
   "voltage_level": null,
   "voltage_min_V": null,
+<<<<<<< Updated upstream
   "voltage_max_V": null
+=======
+  "voltage_max_V": null,
+  "form_factors": [
+   "prismatic"
+  ],
+  "cell_format_codes": [],
+  "cathode_chemistries": [
+   "LFP",
+   "NMC"
+  ],
+  "anode_chemistries": [
+   "graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "LFP",
+    "anode": "graphite"
+   },
+   {
+    "cathode": "NMC",
+    "anode": "graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   96.3,
+   163.3
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": null,
   "temperature_max_C": null,
   "temperature_setpoints_C": [],
   "temperature_basis": "unspecified",
+<<<<<<< Updated upstream
   "charge_c_rate_max": null,
   "discharge_c_rate_max": null,
   "c_rate_profile": null,
   "protocol_class": "abuse",
   "protocol_charge_raw": null,
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max": 0.1,
+  "discharge_c_rate_max": 0.3333,
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": "1/3",
+  "c_rate_profile": "constant",
+  "protocol_class": "abuse",
+  "charging_profile": null,
+  "protocol_charge_raw": "all cells charged to 100% SOC with a C/10 CC-CV charge before the test; stacks braced at 30% SOC; thermal runaway of the first cell triggered by overheating (6.2 W/cm2: 600 W NMC-811, 1200 W LFP)",
+  "protocol_discharge_raw": null,
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.1,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.3333,
+    "discharge_c_rate_fraction": "1/3"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "abuse_thermal",
@@ -158,6 +229,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none; each chemistry has one thermal-runaway propagation experiment",
+<<<<<<< Updated upstream
+=======
+  "count_basis": null,
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     -0.144963,
@@ -181,18 +256,34 @@
  "cells": [
   {
    "cell_id": "GraphiteLFP",
+<<<<<<< Updated upstream
    "cathode_chemistry": "LFP"
   },
   {
    "cell_id": "GraphiteNMC-811",
    "cathode_chemistry": "NMC"
+=======
+   "manufacturer": "CATL",
+   "cathode_chemistry": "LFP",
+   "nominal_capacity_Ah": 163.3
+  },
+  {
+   "cell_id": "GraphiteNMC-811",
+   "manufacturer": "CATL",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 96.3
+>>>>>>> Stashed changes
   }
  ],
  "quality": {
   "flags": [
    "multi_chemistry"
   ],
+<<<<<<< Updated upstream
   "notes": "Thermal-runaway propagation experiments on multi-cell modules; measurements are MATLAB table objects (also given as txt): cell voltages, cell temperatures, venting temperatures and surface temperatures. The landing page (mediaTUM) is behind a bot check, so no description could be read. Both delivered electrode-system folders explicitly identify graphite (GraphiteLFP and GraphiteNMC-811). The two extracted entities are modules, not two individual cells; the author surface-temperature READMEs reference cells 1 through 5 within each module. Temperature includes cell, venting and module-surface channels; cached combined extrema do not isolate cell sensors."
+=======
+  "notes": "Thermal-runaway propagation experiments on multi-cell modules; measurements are MATLAB table objects (also given as txt): cell voltages, cell temperatures, venting temperatures and surface temperatures. Both delivered electrode-system folders explicitly identify graphite (GraphiteLFP and GraphiteNMC-811). The two extracted entities are modules, not two individual cells; the author surface-temperature READMEs reference cells 1 through 5 within each module. Temperature includes cell, venting and module-surface channels; cached combined extrema do not isolate cell sensors. Charging profile: null: abuse (thermal runaway) tests; no charge protocol. The article (Schoberl et al., eTransportation 19 (2024) 100305; full text read) describes the data: five CATL prismatic hardcase cells (two jelly rolls each) per module, Graphite | NMC-811 from a MINI Cooper SE (96.3 Ah, 3.65 V, 173 x 42 x 85 mm, 1420 g) and Graphite | LFP from a Tesla Model 3 SR+ (163.3 Ah, 3.2 V, 280 x 63 x 82 mm, 3100 g), the capacities determined by a CC C/3 discharge (so measured, not rated; the NMC data come from the data sheet and own measurements, the LFP data from teardown studies); cells charged to 100% SOC at C/10 CCCV, braced at 30% SOC with 65 kPa preload (1000 N and 1500 N), overheating trigger on the first cell, type K thermocouples between the cells and at the safety vents, a FLIR A70 thermal camera (surface temperatures qualitative only) and cell voltages through an imc CANSASflex module. The cell model names are not given, and the per-cell dimensions are not recorded because the schema holds one set of dimensions per dataset. The entities in the data are the two modules; the DOI of the data is 10.14459/2023mp1717758 (mediaTUM)."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -200,6 +291,12 @@
    "identity.source_url": "registry",
    "identity.institution": "landing_page",
    "identity.year": "ref_name",
+<<<<<<< Updated upstream
+=======
+   "identity.doi": "paper",
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "registry",
    "conditions.application_domain": "registry",
    "content.supported_tasks": "curated",
@@ -214,6 +311,7 @@
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "raw_filenames",
    "cell.anode_chemistry": "raw_filenames",
@@ -223,6 +321,26 @@
   },
   "confidence": "verified",
   "last_verified": "2026-09-29",
+=======
+   "cell.form_factors": "paper",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "raw_filenames",
+   "cell.anode_chemistries": "raw_filenames",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "paper",
+   "conditions.rate_combinations": "paper",
+   "conditions.single_side_profiles": "paper",
+   "identity.ref_name": "registry",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "paper",
+   "conditions.discharge_c_rate_max": "paper"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_33.json",
   "landing_evidence": "evidence/landing/dataset_33.json"
  }

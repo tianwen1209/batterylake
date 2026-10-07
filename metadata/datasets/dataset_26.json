@@ -9,19 +9,31 @@
   "institution": "University of Warwick; dataset collected at the Stanford Energy Control Laboratory (Onori Lab)",
   "year": 2024,
   "doi": "10.17632/zh58byr53c.1",
+<<<<<<< Updated upstream
   "paper_doi": null,
   "source_url": "https://data.mendeley.com/datasets/zh58byr53c/1",
   "study_group": null
+=======
+  "paper_doi": "10.1016/j.dib.2024.110227",
+  "source_url": "https://data.mendeley.com/datasets/zh58byr53c/1",
+  "study_group": null,
+  "notes": "95 cylindrical modules; single-cell Samsung INR21700-50E and LG INR21700-M50T characterization plus parallel-connected module experiments; entities are modules, not single cells; Piombo et al. Data in Brief 2024"
+>>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
+<<<<<<< Updated upstream
   "cathode_chemistry": "mixed",
   "anode_chemistry": null,
   "chemistry_label_raw": "NCA; NMC",
   "chemistry_is_multi": true,
   "form_factor": "cylindrical",
   "cell_format_code": null,
+=======
+  "chemistry_label_raw": "NCA; NMC",
+  "chemistry_is_multi": true,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 21.25,
    "height": 70.8,
@@ -30,11 +42,16 @@
    "thickness": null,
    "basis": "stated"
   },
+<<<<<<< Updated upstream
   "nominal_capacity_Ah": 4.9,
+=======
+  "nominal_capacity_Ah": null,
+>>>>>>> Stashed changes
   "capacity_basis": "rated",
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
+<<<<<<< Updated upstream
   "voltage_max_V": 4.2
  },
  "conditions": {
@@ -48,6 +65,98 @@
   "protocol_class": "RPT_only",
   "protocol_charge_raw": "single cells: pseudo-OCV and HPPC multisine characterization; modules: experiments at set rates and temperatures",
   "protocol_discharge_raw": null,
+=======
+  "voltage_max_V": 4.2,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "21700"
+  ],
+  "cathode_chemistries": [
+   "NCA",
+   "NMC"
+  ],
+  "anode_chemistries": [
+   "Si-graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "NCA",
+    "anode": "Si-graphite"
+   },
+   {
+    "cathode": "NMC",
+    "anode": "Si-graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   4.85,
+   4.9
+  ]
+ },
+ "conditions": {
+  "temperature_min_C": 10.0,
+  "temperature_max_C": 40.0,
+  "temperature_setpoints_C": [
+   10.0,
+   23.0,
+   25.0,
+   40.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 0.3333,
+  "discharge_c_rate_max": 1.0,
+  "charge_c_rate_max_fraction": "1/3",
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "multistage",
+  "protocol_class": "mixed",
+  "charging_profile": "CC-CV",
+  "protocol_charge_raw": "modules: 90 min rest, CC charge at C/3 to 4.2 V, CV to 200 mA, 30 min rest, 0.75C CC discharge to 2.5 V, 1 h rest, then a second C/3 CC-CV charge; single cells: C/3 CC-CV charge to 4.2 V (CV to 50 mA), C/20 pseudo-OCV discharge, 1C discharge steps of 6 min with HPPC (10 s pulses) and MultiSine, final CC-CV charge",
+  "protocol_discharge_raw": "modules: 0.75C CC discharge to 2.5 V; single cells: C/20 discharge and 1C discharge steps to 2.5 V; modules at 10, 25 and 40 C, single cells at 23 C",
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "pulse"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.05,
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.75,
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.0,
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "pulse",
+    "discharge_c_rate": null,
+    "charge_c_rate_fraction": "1/3"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -99,6 +208,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none; single cells have characterization runs (pseudo-OCV, HPPC multisine) and modules have processed and raw experiments per rate and temperature",
+<<<<<<< Updated upstream
+=======
+  "count_basis": null,
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.499819,
@@ -126,6 +239,7 @@
  "cells": [
   {
    "cell_id": "F1",
+<<<<<<< Updated upstream
    "cathode_chemistry": "NCA"
   },
   {
@@ -201,6 +315,145 @@
   },
   {
    "cell_id": "HPPC_MultiSine_Y1"
+=======
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F10",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F11",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F12",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F13",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F14",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F15",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F16",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F17",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F18",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F2",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F3",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F4",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F5",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F6",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F7",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F8",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "F9",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "HPPC_MultiSine_GS3",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "HPPC_MultiSine_Y1",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+>>>>>>> Stashed changes
   },
   {
    "cell_id": "M1_Mixed_Aged_R0_T10"
@@ -365,6 +618,7 @@
    "cell_id": "M2_NMC_Unaged_R1_T40"
   },
   {
+<<<<<<< Updated upstream
    "cell_id": "OCVDis_GS3"
   },
   {
@@ -445,13 +699,164 @@
   {
    "cell_id": "P9",
    "cathode_chemistry": "NMC"
+=======
+   "cell_id": "OCVDis_GS3",
+   "manufacturer": "Samsung",
+   "model": "INR21700-50E",
+   "cathode_chemistry": "NCA",
+   "nominal_capacity_Ah": 4.9
+  },
+  {
+   "cell_id": "OCVDis_Y1",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P10",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P11",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P12",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P13",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P14",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P15",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P16",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P17",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P18",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P19",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P2",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P20",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P3",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P4",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P5",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P6",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P7",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P8",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+  },
+  {
+   "cell_id": "P9",
+   "manufacturer": "LG Chem",
+   "model": "INR21700-M50T",
+   "cathode_chemistry": "NMC",
+   "nominal_capacity_Ah": 4.85
+>>>>>>> Stashed changes
   }
  ],
  "quality": {
   "flags": [
    "multi_chemistry"
   ],
+<<<<<<< Updated upstream
   "notes": "Single-cell characterization data for NCA Samsung INR21700-50E and NMC LG-Chem INR21700-M50T cells, and parallel-connected module experiments. The README warns modules are not single cells. Two cell models are used in the modules (Samsung INR21700-50E, NCA, and LG-Chem INR21700-M50T, NMC), per the landing page. Both are ~5 Ah-class 21700 cells with matching 2.5-4.2V limits; recorded values are for the Samsung cell specifically (official datasheet), with LG M50T's nearly identical spec (18.2Wh/3.63V nominal = ~5.0Ah, 2.5-4.2V, dia<=21.10mm x height<=70.15mm, from LG's INR21700 M50 18.2Wh spec, the closest available document to the exact M50T tab variant) noted here rather than forced into these singular fields."
+=======
+  "notes": "Single-cell characterization data for NCA Samsung INR21700-50E and NMC LG-Chem INR21700-M50T cells, and parallel-connected module experiments. The README warns modules are not single cells. Two cell models are used in the modules (Samsung INR21700-50E, NCA, and LG-Chem INR21700-M50T, NMC), per the landing page. Both are ~5 Ah-class 21700 cells with matching 2.5-4.2V limits; recorded values are for the Samsung cell specifically (official datasheet), with LG M50T's nearly identical spec (18.2Wh/3.63V nominal = ~5.0Ah, 2.5-4.2V, dia<=21.10mm x height<=70.15mm, from LG's INR21700 M50 18.2Wh spec, the closest available document to the exact M50T tab variant) noted here rather than forced into these singular fields. Charging profile: the conditions vary temperature, interconnection resistance, chemistry and ageing, not the charge rate. The registry says MultiC; all 54 module experiments charge at 6.5 A and discharge at 14.6 A, and the single-cell files are pseudo-OCV and HPPC multisine, so no varying C-rate was found. Unresolved. The data article (Piombo et al., Data in Brief 53 (2024) 110227; full text read) states: 39 single cells (19 new LG Chem INR21700-M50T NMC with codes P1-P20, 18 new Samsung INR21700-50E NCA with codes F1-F18, one pre-aged cell per chemistry, GS3 for NCA and Y1 for NMC) with Silicon-doped graphite negative electrodes, characterised at 23 C (C/20 pseudo-OCV, HPPC, MultiSine), and 54 module-level experiments on two twin test benches (M1, M2), four cells in parallel in a ladder configuration, in a full factorial design: temperature 10, 25 and 40 C, interconnection resistance 0, 1 and 3 mOhm, chemistry NMC, NCA or mixed (two NMC and two NCA), aged or unaged. Module test: C/3 CC-CV charge to 4.2 V (CV to 200 mA), 0.75C CC discharge to 2.5 V, 1 s sampling, Arbin LBT22013 and an Amerex IC500R chamber, T-type thermocouples at the centre of each cell (surface temperature) and Honeywell SS495A Hall sensors for the branch currents; the module C-rates refer to the four-cell capacity (C/3 is the 6.5 A and 0.75C the 14.6 A seen in the data). Per-single-cell capacities are the paper's Table 1 values (Samsung 4.90 Ah, LG 4.85 Ah); the dataset-level capacity is null because the two differ, and the module entities carry none. Table 1 gives the nominal voltage 3.63 V and the diameter 21.44 mm only for the LG cell, the Samsung diameter being 21.25 mm; the recorded 21.25 x 70.8 mm dimensions are the Samsung ones. The related analysis paper is Piombo et al., Journal of Energy Storage 84 (2024) 110783, 10.1016/j.est.2024.110783. Rate groups: the C/3 CC-CV charge against the HPPC pulses, whose current levels are not stated."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -460,6 +865,11 @@
    "identity.institution": "paper",
    "identity.year": "ref_name",
    "identity.doi": "registry",
+<<<<<<< Updated upstream
+=======
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "curated",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -469,11 +879,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "raw_filenames",
    "cell.chemistry_label_raw": "raw_filenames",
@@ -487,6 +902,31 @@
   },
   "confidence": "verified",
   "last_verified": "2026-09-29",
+=======
+   "cell.form_factors": "curated",
+   "cell.cell_format_codes": "paper",
+   "cell.cathode_chemistries": "raw_filenames",
+   "cell.anode_chemistries": "paper",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "raw_docs",
+   "conditions.rate_combinations": "raw_docs",
+   "conditions.single_side_profiles": "raw_docs",
+   "identity.ref_name": "registry",
+   "cell.chemistry_label_raw": "raw_filenames",
+   "cell.voltage_max_V": "paper",
+   "cell.voltage_min_V": "paper",
+   "conditions.temperature_setpoints_C": "paper",
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.protocol_discharge_raw": "paper",
+   "cell.dimensions_mm": "datasheet",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "paper",
+   "conditions.discharge_c_rate_max": "paper"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_26.json",
   "landing_evidence": "evidence/landing/dataset_26.json"
  }

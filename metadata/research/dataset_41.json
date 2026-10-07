@@ -11,7 +11,13 @@
   "complete_v_i_t_timeseries": false,
   "resolution": "partial_waveforms",
   "signals_basis": "raw_data",
+<<<<<<< Updated upstream
   "caveats": []
+=======
+  "caveats": [
+   "voltage_excursion_below_cutoff"
+  ]
+>>>>>>> Stashed changes
  },
  "soc": {
   "computable": true,
@@ -62,10 +68,19 @@
   "SOC_estimation",
   "digital_twin_calibration"
  ],
+<<<<<<< Updated upstream
  "source_quality_flags": [],
  "provenance": {
   "derived_from": "datasets/dataset_41.json",
   "generated": "2026-09-29",
+=======
+ "source_quality_flags": [
+  "voltage_excursion_below_cutoff"
+ ],
+ "provenance": {
+  "derived_from": "datasets/dataset_41.json",
+  "generated": "2026-10-07",
+>>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -82,6 +97,10 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29"
+=======
+  "last_verified": "2026-10-07"
+>>>>>>> Stashed changes
  }
 }

@@ -11,17 +11,27 @@
   "doi": "10.57745/OLBXKT",
   "paper_doi": "10.1038/s41597-025-04712-7",
   "source_url": "https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi:10.57745/OLBXKT",
+<<<<<<< Updated upstream
   "study_group": null
+=======
+  "study_group": null,
+  "notes": "20 LFP/graphite 18650 cells; A123 LFP cells in first and second life; calendar and cycle ageing at 50 °C; capacity and pseudo-OCV characterisation every 100 cycles; Wheeler et al. Scientific Data 2025"
+>>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "A123",
   "model": null,
+<<<<<<< Updated upstream
   "cathode_chemistry": "LFP",
   "anode_chemistry": "graphite",
   "chemistry_label_raw": "LFP",
   "chemistry_is_multi": false,
   "form_factor": "cylindrical",
   "cell_format_code": null,
+=======
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.2,
    "height": 64.95,
@@ -35,7 +45,32 @@
   "nominal_voltage_V": 3.2,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
+<<<<<<< Updated upstream
   "voltage_max_V": 3.65
+=======
+  "voltage_max_V": 3.65,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "18650"
+  ],
+  "cathode_chemistries": [
+   "LFP"
+  ],
+  "anode_chemistries": [
+   "graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "LFP",
+    "anode": "graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   1.1
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 25.0,
@@ -47,10 +82,73 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 2.0,
   "discharge_c_rate_max": 2.7,
+<<<<<<< Updated upstream
   "c_rate_profile": "drive_cycle",
   "protocol_class": "drive_cycle",
   "protocol_charge_raw": "EV-use, high-current, partial-discharge and reduced-voltage-window ageing profiles (WLTP cycle in WLTPcycle.txt)",
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "drive_cycle",
+  "charging_profile": "dynamic",
+  "protocol_charge_raw": "EV-use, high-current, partial-discharge and reduced-voltage-window ageing profiles (WLTP cycle in WLTPcycle.txt)",
+  "protocol_discharge_raw": "WLTP-derived current profile (about C/3 on average, 1800 s, repeated to 70% DoD; 100% DoD to 2.5 V in case 7) in most cases, or a fast 2C discharge in the high-rate cases; characterisation: C/3 and C/25 charge and discharge steps with impedance at 100, 50 and 0% SoC",
+  "profile_combinations": [
+   {
+    "charge": "CC",
+    "discharge": "dynamic"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "dynamic"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "WLTP",
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 2.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 2.0
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "WLTP",
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 2.0,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "WLTP"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [
+   {
+    "name": "WLTP",
+    "kind": "drive_cycle",
+    "detail": "WLTP cycle current profile, 1800 s, about C/3 on average"
+   }
+  ],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "mixed",
@@ -95,6 +193,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "Cycle_Index column of the aging files (agingdata_50degC)",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "20 A123 18650 cells; cycles sum each cell's last reference-test aging-cycle count: 82,600.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     -0.00581,
@@ -183,7 +285,11 @@
   "flags": [
    "voltage_excursion_below_cutoff"
   ],
+<<<<<<< Updated upstream
   "notes": "Twenty cells in first and second life; characterised every 100 cycles for capacity and pseudo-OCV. Folder names give the chamber temperature (aging 50 C, characterization 25 C). The cycling files carry no temperature channel. The exact A123 model is not named in the source paper; the previous APR18650M1A identification relied on matching nominal specifications and has been removed. Dimensions and nominal voltage are explicitly stated in paper Table1. Voltage bounds now describe the study cutoffs 2.5-3.65 V; Table1 separately lists a 2 V manufacturer operating minimum. This supersedes the earlier model-specific datasheet cutoff of 3.6 V. Rate maxima are documented study protocol maxima from the paper: charge 2C, WLTP discharge peak 2.7C; the WLTP mean is C/3 and regenerative charge peak is 1.1C. Table 4 states Current in A and identifies positive/negative current as charge/discharge. Cached ageing-current extrema are +5.893386 A (Cell7c) and -5.284058 A (Cell1c), corresponding to 5.357624C and 4.803689C at 1.1 Ah. These exceed the stated protocol maxima and the +/-5 A upper equipment range in Table 5, so they were not used as testing setpoints or inferred rates. Their exact rows and cause were not independently traced; no sensor-fault cause is asserted."
+=======
+  "notes": "Twenty cells in first and second life; characterised every 100 cycles for capacity and pseudo-OCV. Folder names give the chamber temperature (aging 50 C, characterization 25 C). The cycling files carry no temperature channel. The exact A123 model is not named in the source paper; the previous APR18650M1A identification relied on matching nominal specifications and has been removed. Dimensions and nominal voltage are explicitly stated in paper Table1. Voltage bounds now describe the study cutoffs 2.5-3.65 V; Table1 separately lists a 2 V manufacturer operating minimum. This supersedes the earlier model-specific datasheet cutoff of 3.6 V. Rate maxima are documented study protocol maxima from the paper: charge 2C, WLTP discharge peak 2.7C; the WLTP mean is C/3 and regenerative charge peak is 1.1C. Table 4 states Current in A and identifies positive/negative current as charge/discharge. Cached ageing-current extrema are +5.893386 A (Cell7c) and -5.284058 A (Cell1c), corresponding to 5.357624C and 4.803689C at 1.1 Ah. These exceed the stated protocol maxima and the +/-5 A upper equipment range in Table 5, so they were not used as testing setpoints or inferred rates. Their exact rows and cause were not independently traced; no sensor-fault cause is asserted. Charging profile: 17 of the 20 cells (cases 1-5 and 7) follow the WLTP discharge and case 6 (3 cells) discharges at constant 2C (Table 2). Cases 3 and 7 charge CC only to 3.65 V (no CV phase); the others charge CC-CV with a C/10 cut-off. The charge rate is C/3 or 2C."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -192,7 +298,12 @@
    "identity.institution": "paper",
    "identity.year": "ref_name",
    "identity.doi": "raw_docs",
+<<<<<<< Updated upstream
    "identity.paper_doi": "raw_docs",
+=======
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "curated",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -202,30 +313,59 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.manufacturer": "raw_docs",
    "cell.cathode_chemistry": "raw_docs",
    "cell.anode_chemistry": "raw_docs",
    "cell.chemistry_label_raw": "registry",
    "cell.form_factor": "raw_docs",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "raw_docs",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "raw_docs",
+   "cell.anode_chemistries": "raw_docs",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "paper",
+   "conditions.rate_combinations": "paper",
+   "conditions.single_side_profiles": "paper",
+   "conditions.dynamic_subprofiles": "raw_data",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.chemistry_label_raw": "registry",
+>>>>>>> Stashed changes
    "cell.nominal_capacity_Ah": "raw_docs",
    "cell.nominal_voltage_V": "paper",
    "cell.voltage_max_V": "paper",
    "cell.voltage_min_V": "paper",
    "conditions.temperature_setpoints_C": "raw_filenames",
    "conditions.protocol_charge_raw": "landing_page",
+<<<<<<< Updated upstream
+=======
+   "conditions.protocol_discharge_raw": "paper",
+>>>>>>> Stashed changes
    "cell.dimensions_mm": "paper",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "paper",
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_18.json",
   "landing_evidence": "evidence/landing/dataset_18.json"
  }

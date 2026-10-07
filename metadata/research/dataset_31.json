@@ -11,7 +11,13 @@
   "complete_v_i_t_timeseries": false,
   "resolution": "partial_waveforms",
   "signals_basis": "raw_data",
+<<<<<<< Updated upstream
   "caveats": []
+=======
+  "caveats": [
+   "voltage_excursion_above_cutoff"
+  ]
+>>>>>>> Stashed changes
  },
  "soc": {
   "computable": true,
@@ -63,11 +69,20 @@
   "OCV_curve_extraction"
  ],
  "source_quality_flags": [
+<<<<<<< Updated upstream
   "multi_chemistry"
  ],
  "provenance": {
   "derived_from": "datasets/dataset_31.json",
   "generated": "2026-09-29",
+=======
+  "multi_chemistry",
+  "voltage_excursion_above_cutoff"
+ ],
+ "provenance": {
+  "derived_from": "datasets/dataset_31.json",
+  "generated": "2026-10-07",
+>>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -84,6 +99,10 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29"
+=======
+  "last_verified": "2026-10-07"
+>>>>>>> Stashed changes
  }
 }

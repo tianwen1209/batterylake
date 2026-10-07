@@ -26,17 +26,27 @@
   "doi": "10.6084/m9.figshare.25975315",
   "paper_doi": "10.1038/s41597-024-03859-z",
   "source_url": "https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315",
+<<<<<<< Updated upstream
   "study_group": null
+=======
+  "study_group": null,
+  "notes": "279 NMC 21700 cells; Samsung INR21700-50E; multi-stage ageing test points with per-cell C-rate, SOC and DOD at 10-45 °C; Stroebl et al. Scientific Data 2024"
+>>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "Samsung SDI",
   "model": "INR21700-50E",
+<<<<<<< Updated upstream
   "cathode_chemistry": "NMC",
   "anode_chemistry": null,
   "chemistry_label_raw": "NMC",
   "chemistry_is_multi": false,
   "form_factor": "cylindrical",
   "cell_format_code": "21700",
+=======
+  "chemistry_label_raw": "NMC",
+  "chemistry_is_multi": false,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 21.0,
    "height": 70.0,
@@ -50,7 +60,25 @@
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
+<<<<<<< Updated upstream
   "voltage_max_V": 4.2
+=======
+  "voltage_max_V": 4.2,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "21700"
+  ],
+  "cathode_chemistries": [
+   "NMC"
+  ],
+  "anode_chemistries": [],
+  "electrode_combinations": [],
+  "nominal_capacities_Ah": [
+   4.9
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 10.0,
@@ -64,10 +92,278 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 1.0,
   "discharge_c_rate_max": 2.0,
+<<<<<<< Updated upstream
   "c_rate_profile": null,
   "protocol_class": null,
   "protocol_charge_raw": null,
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "constant",
+  "protocol_class": "calendar_hold",
+  "charging_profile": "multi-rate",
+  "protocol_charge_raw": "cycling at a constant charge C-rate (maximum 1C, 4.9 A) between SOCmax and a depth of discharge; calendar cells set to SOCmax by CC-CV; check-ups: C/20 pseudo-OCV, capacity and HPPC at several SOC; ambient 10, 23, 35 or 45 C",
+  "protocol_discharge_raw": "cycling at a constant discharge C-rate (maximum 2C, 9.8 A per datasheet); DoD termination during charging; break-in of three full cycles at 23 C",
+  "profile_combinations": [
+   {
+    "charge": "CC",
+    "discharge": "CC"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "CC-CV"
+   },
+   {
+    "charge": "pulse",
+    "discharge": "pulse"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.2,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.44
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.2,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.9
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.2,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.2,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.4
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.24,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 2.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.3,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.7
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.3,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.2
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.4,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.3
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.4,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.7
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.4,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.3
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.4,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.4
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.4,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.5
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.2
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.8
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.3
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.4
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.6,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.1
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.7,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.2
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.7,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.8
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.7,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.7
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.7,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.9
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.8,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.3
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.8,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.4
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.8,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.5
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.8,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.6
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.8,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.9
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.8,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.7
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.9,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.9
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.9,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.1
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.9,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.6
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.9,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.9
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.9,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 2.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.26
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.4
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.5
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.8
+   },
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 2.0
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "mixed",
@@ -101,6 +397,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none; each zip is one test point (a short multi-stage protocol run)",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "279 cells in the full study per the author documentation; no cycle total (an earlier estimate was removed).",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     -4.440181,
@@ -2119,7 +2419,11 @@
    "voltage_excursion_below_cutoff",
    "voltage_excursion_above_cutoff"
   ],
+<<<<<<< Updated upstream
   "notes": "Multi-stage protocol test points (TP_k##_##) on 279 cells; experiments_meta.csv and each *_meta.txt (author files in the raw data) give the laboratory, chamber temperature, SOC and DOD, and C-rates per cell. Cell model named on the landing page and in the paper abstract; specs from the manufacturer datasheet. The recorded cathode (NMC, from the registry) differs from the NCA the Stanford dataset_26 landing page calls this same Samsung INR21700-50E - not resolved here; flag for review. Experiment-table labels repeat across two stages. Matching now requires the testpoint label, laboratory and internal cell serial together: 230 exact matches, with 93 prior stage assignments corrected; 49 inconsistent raw/table identities retain their raw metadata but no experiment assignment. The 279 archives are extracted experiment entities, while raw laboratory/internal-serial pairs number 261; physical cell reuse across stages is unresolved. Rate maxima 1C/2C remain supported by the matched author-table rows."
+=======
+  "notes": "Multi-stage protocol test points (TP_k##_##) on 279 cells; experiments_meta.csv and each *_meta.txt (author files in the raw data) give the laboratory, chamber temperature, SOC and DOD, and C-rates per cell. Cell model named on the landing page and in the paper abstract; specs from the manufacturer datasheet. The recorded cathode (NMC, from the registry) differs from the NCA the Stanford dataset_26 landing page calls this same Samsung INR21700-50E - not resolved here; flag for review. Experiment-table labels repeat across two stages. Matching now requires the testpoint label, laboratory and internal cell serial together: 230 exact matches, with 93 prior stage assignments corrected; 49 inconsistent raw/table identities retain their raw metadata but no experiment assignment. The 279 archives are extracted experiment entities, while raw laboratory/internal-serial pairs number 261; physical cell reuse across stages is unresolved. Rate maxima 1C/2C remain supported by the matched author-table rows. Charging profile: the cycling units repeat blocks of charges at several C-rates. Paper (read in full): the paper states neither the cathode chemistry nor a nominal voltage, so the NMC/NCA question above stays open and nominal_voltage_V stays null. Ambient temperatures 10, 23, 35 and 45 °C across three labs (SIE, INT, HM) on BaSyTec testers; RPTs at 23 °C; capacity step CC C/2 charge to 4.2 V (C/20 cut-off) and CC 1C discharge to 2.5 V (C/20 cut-off). Rate combinations: besides the CC-CV C/2 charge with CC-CV 1C discharge of the capacity tests, the cycling cells run plain CC charge and CC discharge (the authors kept the SOC window at 20-80% to avoid CV), at the 39 distinct (charge, discharge) pairs of experiments_meta.csv, charge 0.2 to 1.0C and discharge 0.2 to 2.0C; these C-rates are the authors' table values."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -2128,7 +2432,12 @@
    "identity.institution": "registry",
    "identity.year": "ref_name",
    "identity.doi": "registry",
+<<<<<<< Updated upstream
    "identity.paper_doi": "registry",
+=======
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -2138,11 +2447,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.manufacturer": "landing_page",
    "cell.model": "landing_page",
@@ -2153,13 +2467,38 @@
    "cell.voltage_max_V": "datasheet",
    "cell.voltage_min_V": "datasheet",
    "conditions.temperature_setpoints_C": "raw_docs",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "registry",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "registry",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "raw_data",
+   "conditions.rate_combinations": "raw_data",
+   "conditions.single_side_profiles": "raw_data",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "landing_page",
+   "cell.model": "landing_page",
+   "cell.chemistry_label_raw": "registry",
+   "cell.nominal_capacity_Ah": "paper",
+   "cell.voltage_max_V": "datasheet",
+   "cell.voltage_min_V": "datasheet",
+   "conditions.temperature_setpoints_C": "raw_docs",
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.protocol_discharge_raw": "paper",
+>>>>>>> Stashed changes
    "cell.dimensions_mm": "derived",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "derived",
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_37.json",
   "landing_evidence": "evidence/landing/dataset_37.json"
  }

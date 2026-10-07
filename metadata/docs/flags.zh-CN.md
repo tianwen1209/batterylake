@@ -27,7 +27,11 @@
 
 | 标记 | 含义 | 出现位置 |
 |---|---|---|
+<<<<<<< Updated upstream
 | `multi_chemistry` | 数据集涵盖多种正极化学体系，因此 `cathode_chemistry` 为 `mixed`，真实取值按电芯给出。 | 06, 16, 20, 24, 26, 29, 33, 34, 35, 40 |
+=======
+| `multi_chemistry` | 数据集涵盖多种正极化学体系，因此 `chemistry_is_multi` 为 true，`cathode_chemistries` 列出多个值，逐电芯的值在 `cells[]` 中。 | 06, 16, 20, 24, 26, 29, 31, 33, 34, 35, 39, 40 |
+>>>>>>> Stashed changes
 | `voltage_excursion_below_cutoff` / `voltage_excursion_above_cutoff` | 观测电压超出文档记载截止值 0.05 V 以上。通常是传感器毛刺、静置步骤的伪迹或文档不一致；裁剪之前先查看 `content.observed.voltage_V`。 | 低于：01, 05, 06, 07, 08, 11, 13, 19, 22, 23, 38 · 高于：01, 02, 05, 06, 07, 09, 19, 21, 22, 23, 28, 38 |
 | `pack_level_voltage` | 观测电压超过单体截止电压的 10 倍，说明原始数据是电池组级别。取代"高于截止值"标记。 | 目前无 |
 | `temperature_basis_differs_from_data` | 文档记载的测试温度与原始数据测得的温度相差超过 10 °C，说明记录的温度是设定值、起始值或其他量，而不是实际测得的值。请阅读 `temperature_basis`。 | 目前无 |

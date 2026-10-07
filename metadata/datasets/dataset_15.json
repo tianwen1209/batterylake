@@ -9,13 +9,21 @@
   "institution": "IVST / Changan Automobile",
   "year": 2023,
   "doi": null,
+<<<<<<< Updated upstream
   "paper_doi": null,
   "source_url": "http://ivstskl.changan.com.cn/?p=2697",
   "study_group": null
+=======
+  "paper_doi": "10.1038/s41467-025-56485-7",
+  "source_url": "http://ivstskl.changan.com.cn/?p=2697",
+  "study_group": null,
+  "notes": "1 vehicle; single-vehicle sample of the IVST/Changan NEV data; pack voltage/current, cell min/max voltage and temperature; Liu et al. Nature Communications 2025"
+>>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
+<<<<<<< Updated upstream
   "cathode_chemistry": null,
   "anode_chemistry": null,
   "chemistry_label_raw": "Multi",
@@ -29,18 +37,80 @@
   "voltage_level": null,
   "voltage_min_V": null,
   "voltage_max_V": null
+=======
+  "chemistry_label_raw": "NCM",
+  "chemistry_is_multi": false,
+  "dimensions_mm": null,
+  "nominal_capacity_Ah": 155.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": null,
+  "voltage_level": null,
+  "voltage_min_V": null,
+  "voltage_max_V": null,
+  "form_factors": [
+   "pack"
+  ],
+  "cell_format_codes": [],
+  "cathode_chemistries": [
+   "NMC"
+  ],
+  "anode_chemistries": [],
+  "electrode_combinations": [],
+  "nominal_capacities_Ah": [
+   155.0
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": null,
   "temperature_max_C": null,
   "temperature_setpoints_C": [],
   "temperature_basis": "unspecified",
+<<<<<<< Updated upstream
   "charge_c_rate_max": null,
   "discharge_c_rate_max": null,
   "c_rate_profile": null,
   "protocol_class": null,
   "protocol_charge_raw": null,
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max": 0.8,
+  "discharge_c_rate_max": null,
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "multistage",
+  "protocol_class": "multistage_CC",
+  "charging_profile": "multi-rate",
+  "protocol_charge_raw": "fast charging: multi-stage constant current up to 0.8C, the current set by pack temperature, highest cell voltage and charger power; slow charging about 0.15C; charging stops when the maximum cell voltage reaches 4.25 V",
+  "protocol_discharge_raw": "random, user-determined load in service (high-current acceleration, low-current cruising, regenerative braking)",
+  "profile_combinations": [
+   {
+    "charge": "CC",
+    "discharge": "dynamic"
+   },
+   {
+    "charge": "multi-stage CC",
+    "discharge": "dynamic"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC",
+    "charge_c_rate": 0.15,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "Real driving"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [
+   {
+    "name": "Real driving",
+    "kind": "real_driving",
+    "detail": "random, user-determined load of vehicles in service"
+   }
+  ],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "field",
@@ -80,6 +150,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none; continuous vehicle BMS log",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "300 EVs in the full release (paper and data page: \"operating data from 300 EVs\", 72 GB); only one vehicle's sample (0.1 GB) is held here.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -100,7 +174,12 @@
    "csv"
   ],
   "supported_tasks": [
+<<<<<<< Updated upstream
    "SOH"
+=======
+   "SOH",
+   "SOC"
+>>>>>>> Stashed changes
   ]
  },
  "cells": [
@@ -112,7 +191,11 @@
   "flags": [
    "sample_only_raw"
   ],
+<<<<<<< Updated upstream
   "notes": "Only sample_data.rar (one vehicle, vin93.csv) is present, so the raw data is a sample of the vehicle data set. Pack voltage/current and cell min/max voltage and temperature are logged; -1000 A, -40 C and 0 V occur as invalid-value codes."
+=======
+  "notes": "Only sample_data.rar (one vehicle, vin93.csv) is present, so the raw data is a sample of the vehicle data set. Pack voltage/current and cell min/max voltage and temperature are logged; -1000 A, -40 C and 0 V occur as invalid-value codes. Charging profile: a single vehicle; the levels change between sessions, so this is real-world charging rather than a set protocol. The dataset page (State Key Laboratory of Intelligent Vehicle Safety Technology, IVST; licence CC BY-NC-SA 4.0; academic research only) describes the full dataset: 300 operating fleet vehicles (discontinued model) with 0-500 thousand km mileage and 0.5-4 years of operation, all driving conditions (charging, discharging, rest), CSV files, 10 s sampling, about 850 million frames, about 581 GB raw and 72 GB compressed, ternary lithium batteries over the full life cycle, with the fields terminaltime, soc, speed, totalodometer, chargestatus, totalvoltage, totalcurrent, minvoltagebattery, maxvoltagebattery, mintemperaturevalue (minimum sensor temperature), maxtemperaturevalue (maximum sensor temperature), batteryvoltage (cell voltage list) and probetemperatures (sensor temperature list). The local copy is only the 100 MB sample (one vehicle, 108 MB extracted). The cell chemistry is only given as ternary (NMC or NCA is not stated), and no cell model, capacity or pack configuration is given, so those stay null. The page names the paper above as the reference to cite; its full text has not been read. The paper (Liu et al., Nature Communications 16 (2025) 1137; full text read) states for the 300 EVs of this dataset: NCM lithium-ion batteries, a pack with 155 Ah rated capacity and 96 cells in series, three years of operation, 0.1 Hz sampling (10 s), driving, resting and charging records (the BMS stops recording when the vehicle is off, so there are no idle records), charging in two scenarios (multi-stage constant-current fast charging up to 0.8C, current set jointly by pack temperature, highest cell voltage and charger power, and slow charging at about 0.15C), charging stopped when the highest cell voltage reaches 4.25 V, and SOH labels from ampere-hour integration with OCV-SOC correction. The temperatures are those of 'the battery system' (average and minimum); the paper lists individual cell temperature sensors as future work, so the sensor channels are not per-cell. The paper also tests a separate batch of LiFePO4 vehicles (Supplementary Note 5); whether those are in this dataset is not stated. The 4.25 V figure is a charge-end limit, not a documented cell voltage range, so voltage limits stay null. Rate groups: the slow charge, about 0.15C constant current, against the user-driven dynamic discharge; the multi-stage fast charge is not paired with a rate."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -120,6 +203,11 @@
    "identity.source_url": "registry",
    "identity.institution": "registry",
    "identity.year": "ref_name",
+<<<<<<< Updated upstream
+=======
+   "identity.paper_doi": "landing_page",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "registry",
    "conditions.application_domain": "registry",
    "content.supported_tasks": "curated",
@@ -129,11 +217,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "registry",
    "cell.chemistry_label_raw": "registry",
@@ -142,6 +235,28 @@
   },
   "confidence": "verified",
   "last_verified": "2026-09-29",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "registry",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "paper",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "landing_page",
+   "conditions.rate_combinations": "landing_page",
+   "conditions.single_side_profiles": "landing_page",
+   "conditions.dynamic_subprofiles": "raw_data",
+   "identity.ref_name": "registry",
+   "cell.chemistry_label_raw": "paper",
+   "cell.nominal_capacity_Ah": "paper",
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.protocol_discharge_raw": "paper",
+   "conditions.c_rate": "derived",
+   "conditions.charge_c_rate_max": "paper"
+  },
+  "confidence": "verified",
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_15.json",
   "landing_evidence": "evidence/landing/dataset_15.json"
  }

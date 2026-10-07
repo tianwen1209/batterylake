@@ -115,6 +115,7 @@
               "null"
             ]
           },
+<<<<<<< Updated upstream
           "cathode_chemistry": {
             "type": [
               "string",
@@ -142,6 +143,11 @@
               "null"
             ]
           },
+=======
+          "chemistry_is_multi": {
+            "type": "boolean"
+          },
+>>>>>>> Stashed changes
           "nominal_capacity_Ah": {
             "type": [
               "number",
@@ -202,6 +208,17 @@
               "null"
             ]
           },
+<<<<<<< Updated upstream
+=======
+          "charging_profile": {
+            "enum": [
+              "CC-CV",
+              "dynamic",
+              "multi-rate",
+              null
+            ]
+          },
+>>>>>>> Stashed changes
           "aging_type": {
             "type": [
               "string",
@@ -286,6 +303,58 @@
           },
           "has_waveforms": {
             "type": "boolean"
+<<<<<<< Updated upstream
+=======
+          },
+          "notes": {
+            "description": "identity.notes of the record: the registry-style one-line description.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "form_factors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cell_format_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cathode_chemistries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "anode_chemistries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "nominal_capacities_Ah": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "charge_profiles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "discharge_profiles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+>>>>>>> Stashed changes
           }
         }
       }

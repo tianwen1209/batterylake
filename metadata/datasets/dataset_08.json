@@ -9,6 +9,7 @@
   "institution": "UL Research Institutes and Purdue University",
   "year": 2020,
   "doi": null,
+<<<<<<< Updated upstream
   "paper_doi": null,
   "source_url": "https://batteryarchive.org",
   "study_group": null
@@ -22,6 +23,18 @@
   "chemistry_is_multi": false,
   "form_factor": "cylindrical",
   "cell_format_code": "18650",
+=======
+  "paper_doi": "10.1149/1945-7111/abc8c0",
+  "source_url": "https://batteryarchive.org",
+  "study_group": null,
+  "notes": "10 NCA/graphite 18650 cells (21 declared); BatteryLife v12 copy of UL-Purdue cycling data; Panasonic NCR18650B; 0.5C cycling at 23 °C; Juarez-Robles et al. Journal of The Electrochemical Society 2020"
+ },
+ "cell": {
+  "manufacturer": "Panasonic",
+  "model": "NCR18650B",
+  "chemistry_label_raw": "LiNi0.8Co0.15Al0.05O2",
+  "chemistry_is_multi": false,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.0,
    "height": 65.0,
@@ -32,10 +45,38 @@
   },
   "nominal_capacity_Ah": 3.4,
   "capacity_basis": "rated",
+<<<<<<< Updated upstream
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 2.7,
   "voltage_max_V": 4.2
+=======
+  "nominal_voltage_V": 3.6,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.7,
+  "voltage_max_V": 4.2,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "18650"
+  ],
+  "cathode_chemistries": [
+   "NCA"
+  ],
+  "anode_chemistries": [
+   "graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "NCA",
+    "anode": "graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   3.4
+  ]
+>>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 23.0,
@@ -46,10 +87,36 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 0.5,
   "discharge_c_rate_max": 0.5,
+<<<<<<< Updated upstream
   "c_rate_profile": null,
   "protocol_class": null,
   "protocol_charge_raw": null,
   "protocol_discharge_raw": null,
+=======
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "constant",
+  "protocol_class": "pulse",
+  "charging_profile": "CC-CV",
+  "protocol_charge_raw": "CC-CV at C/2 to the upper voltage (4.2 V in the normal window, 4.0 V in the reduced window), 50 mA cut-off current; delivered cells all use the normal 2.7-4.2 V window",
+  "protocol_discharge_raw": "CC at C/2 to the lower voltage (2.7 V normal window, 2.9 V reduced window); capacity and pulse characterisation before and after cycling, including a 1.5C (5.1 A) 100 ms pulse",
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.5,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 0.5
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [],
+>>>>>>> Stashed changes
   "soc_window_min_pct": 0.0,
   "soc_window_max_pct": 100.0,
   "aging_type": "cyclic",
@@ -88,6 +155,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "length of the pickle's cycle_data list (one entry per cycle)",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "21 cells in the original UL-PUR Part I study; the local BatteryLife copy holds only 10. Cycle total unknown.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.548,
@@ -210,7 +281,11 @@
    "voltage_excursion_below_cutoff",
    "partial_raw"
   ],
+<<<<<<< Updated upstream
   "notes": "Third-party BatteryLife v12 pickles of the UL-PUR cells (10 of the source's cells are present); materials, nominal capacity and voltage limits are read from each pickle."
+=======
+  "notes": "Third-party BatteryLife v12 pickles of the UL-PUR cells (10 of the source's cells are present); materials, nominal capacity and voltage limits are read from each pickle. Charging profile: the cached BatteryLife README says both \"varied fast-charging protocols\" and \"all batteries underwent the same cycling protocol\", and the pickles' metadata says 2C; the cell ids and waveforms show one 0.5C protocol; 2 cells run about 1.13 A for their first ~20 cycles."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -218,6 +293,11 @@
    "identity.source_url": "registry",
    "identity.institution": "registry",
    "identity.year": "ref_name",
+<<<<<<< Updated upstream
+=======
+   "identity.paper_doi": "paper",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "registry",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -227,11 +307,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "raw_data",
    "cell.anode_chemistry": "raw_data",
@@ -241,13 +326,40 @@
    "cell.voltage_max_V": "raw_data",
    "cell.voltage_min_V": "raw_data",
    "conditions.temperature_setpoints_C": "raw_filenames",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "raw_data",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "raw_data",
+   "cell.anode_chemistries": "raw_data",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "raw_data",
+   "conditions.rate_combinations": "raw_data",
+   "conditions.single_side_profiles": "raw_data",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "paper",
+   "cell.model": "paper",
+   "cell.chemistry_label_raw": "raw_data",
+   "cell.nominal_capacity_Ah": "raw_data",
+   "cell.nominal_voltage_V": "paper",
+   "cell.voltage_max_V": "raw_data",
+   "cell.voltage_min_V": "raw_data",
+   "conditions.temperature_setpoints_C": "raw_filenames",
+   "conditions.protocol_charge_raw": "paper",
+   "conditions.protocol_discharge_raw": "paper",
+>>>>>>> Stashed changes
    "cell.dimensions_mm": "derived",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "derived",
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_08.json",
   "landing_evidence": "evidence/landing/dataset_08.json"
  }

@@ -5,6 +5,7 @@
  "ref_name": "2022_Tsinghua_LiIon_EV_MultiChem_MultiC_MultiT",
  "category": "ev",
  "timeseries": {
+<<<<<<< Updated upstream
   "has_voltage_timeseries": false,
   "has_current_timeseries": false,
   "has_temperature_timeseries": false,
@@ -16,6 +17,19 @@
  "soc": {
   "computable": false,
   "basis": null
+=======
+  "has_voltage_timeseries": true,
+  "has_current_timeseries": true,
+  "has_temperature_timeseries": true,
+  "complete_v_i_t_timeseries": true,
+  "resolution": "full_waveforms",
+  "signals_basis": "raw_data",
+  "caveats": []
+ },
+ "soc": {
+  "computable": true,
+  "basis": "explicit_soc_column"
+>>>>>>> Stashed changes
  },
  "soh": {
   "computable": false,
@@ -44,12 +58,17 @@
   "basis": null
  },
  "thermal": {
+<<<<<<< Updated upstream
   "temperature_logging": false,
+=======
+  "temperature_logging": true,
+>>>>>>> Stashed changes
   "thermal_characterization": false,
   "application_domain": "EV_field",
   "aging_type": "field"
  },
  "research_applicability": {
+<<<<<<< Updated upstream
   "parameter_identification": false,
   "piml_calibration": false,
   "soh_rul_prediction": false,
@@ -57,12 +76,28 @@
   "synthetic_data_generation": false
  },
  "suitable_tasks": [
+=======
+  "parameter_identification": true,
+  "piml_calibration": false,
+  "soh_rul_prediction": false,
+  "simulation": true,
+  "synthetic_data_generation": false
+ },
+ "suitable_tasks": [
+  "SOC_estimation",
+  "digital_twin_calibration",
+  "simulation",
+>>>>>>> Stashed changes
   "fault_diagnosis"
  ],
  "source_quality_flags": [],
  "provenance": {
   "derived_from": "datasets/dataset_12.json",
+<<<<<<< Updated upstream
   "generated": "2026-09-29",
+=======
+  "generated": "2026-10-07",
+>>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -79,6 +114,10 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29"
+=======
+  "last_verified": "2026-10-07"
+>>>>>>> Stashed changes
  }
 }

@@ -36,7 +36,12 @@
         "institution",
         "year",
         "doi",
+<<<<<<< Updated upstream
         "source_url"
+=======
+        "source_url",
+        "notes"
+>>>>>>> Stashed changes
       ],
       "additionalProperties": false,
       "properties": {
@@ -124,15 +129,31 @@
             "string",
             "null"
           ]
+<<<<<<< Updated upstream
+=======
+        },
+        "notes": {
+          "description": "A one-line description in the registry's style: count, chemistry and format of what the raw data delivers, a few facts about the tests, and the linked paper. Composed by build.py from this record's own fields plus curated detail clauses. Not the same as quality.notes, which records caveats and source conflicts for people working with the data.",
+          "type": [
+            "string",
+            "null"
+          ]
+>>>>>>> Stashed changes
         }
       }
     },
     "cell": {
       "type": "object",
       "required": [
+<<<<<<< Updated upstream
         "cathode_chemistry",
         "anode_chemistry",
         "form_factor",
+=======
+        "cathode_chemistries",
+        "anode_chemistries",
+        "form_factors",
+>>>>>>> Stashed changes
         "nominal_capacity_Ah",
         "voltage_min_V",
         "voltage_max_V"
@@ -151,12 +172,15 @@
             "null"
           ]
         },
+<<<<<<< Updated upstream
         "cathode_chemistry": {
           "$ref": "#/$defs/cathode"
         },
         "anode_chemistry": {
           "$ref": "#/$defs/anode"
         },
+=======
+>>>>>>> Stashed changes
         "chemistry_label_raw": {
           "type": [
             "string",
@@ -166,6 +190,7 @@
         "chemistry_is_multi": {
           "type": "boolean"
         },
+<<<<<<< Updated upstream
         "form_factor": {
           "$ref": "#/$defs/form_factor"
         },
@@ -175,6 +200,8 @@
             "null"
           ]
         },
+=======
+>>>>>>> Stashed changes
         "dimensions_mm": {
           "type": [
             "object",
@@ -260,6 +287,64 @@
             "number",
             "null"
           ]
+<<<<<<< Updated upstream
+=======
+        },
+        "form_factors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/form_factor"
+          },
+          "description": "Every form factor present in the dataset, sorted."
+        },
+        "cell_format_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Every cell size code present (18650, 21700, 26650, 502030 ...), sorted; empty when none is documented."
+        },
+        "cathode_chemistries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cathode"
+          },
+          "description": "Every cathode chemistry present, sorted; empty when none is documented."
+        },
+        "anode_chemistries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/anode"
+          },
+          "description": "Every anode chemistry present, sorted; empty when none is documented."
+        },
+        "electrode_combinations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "cathode",
+              "anode"
+            ],
+            "properties": {
+              "cathode": {
+                "$ref": "#/$defs/cathode"
+              },
+              "anode": {
+                "$ref": "#/$defs/anode"
+              }
+            }
+          },
+          "description": "Cathode-anode pairs present together on the same cells; pairs with an undocumented electrode are left out."
+        },
+        "nominal_capacities_Ah": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "Every nominal capacity present as a discrete value, sorted ascending."
+>>>>>>> Stashed changes
         }
       }
     },
@@ -329,6 +414,12 @@
         "protocol_class": {
           "$ref": "#/$defs/protocol_class"
         },
+<<<<<<< Updated upstream
+=======
+        "charging_profile": {
+          "$ref": "#/$defs/charging_profile"
+        },
+>>>>>>> Stashed changes
         "protocol_charge_raw": {
           "type": [
             "string",
@@ -362,6 +453,168 @@
         },
         "application_domain": {
           "$ref": "#/$defs/application_domain"
+<<<<<<< Updated upstream
+=======
+        },
+        "profile_combinations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "charge",
+              "discharge"
+            ],
+            "properties": {
+              "charge": {
+                "$ref": "#/$defs/charge_profile_type"
+              },
+              "discharge": {
+                "$ref": "#/$defs/discharge_profile_type"
+              }
+            }
+          },
+          "description": "Charging and discharging profile types that are applied together. Together with single_side_profiles this is the full list of profiles of the dataset."
+        },
+        "single_side_profiles": {
+          "type": "array",
+          "description": "Profiles that belong to no charge/discharge pair because the dataset (or the part of it that uses the profile) has data on one side only, such as charging snippets from a vehicle or discharge-only tests. Each entry names the side and the profile. Empty when every profile is in a pair. The display label (\"CC Charging\") and the per-dataset lists of charge and discharge profiles are not stored: readers derive them from profile_combinations and these entries.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "side",
+              "profile"
+            ],
+            "properties": {
+              "side": {
+                "enum": [
+                  "charge",
+                  "discharge"
+                ]
+              },
+              "profile": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "dynamic_subprofiles": {
+          "type": "array",
+          "description": "The named profiles inside the dynamic type: standard drive cycles (UDDS, WLTP, US06), recorded real driving, duty cycles of an application (an eVTOL mission, grid-storage peak shaving) and a square wave. Filled for every dataset that has a dynamic profile and empty otherwise. kind groups them: drive_cycle, real_driving, duty_cycle or square_wave. detail is free text (parameters, which cells) or null. Dynamic stays one profile type; this list says what it consists of.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "kind",
+              "detail"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "drive_cycle",
+                  "real_driving",
+                  "duty_cycle",
+                  "square_wave"
+                ]
+              },
+              "detail": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "rate_combinations": {
+          "type": "array",
+          "description": "C-rates stated for the profiles of the dataset, as one list of rows. A row belongs to one charge/discharge pair of profile_combinations, or to one profile of single_side_profiles (the other side's profile is then null). charge_c_rate is the constant-current stage; a rate is null where no source gives it for that side, for example a dynamic or multi-stage side. Rows are not a cross product: when several rates face several rates on the other side and the source does not say which meets which, each side has rows of its own with the other rate null.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "charge_profile",
+              "charge_c_rate",
+              "discharge_profile",
+              "discharge_c_rate"
+            ],
+            "properties": {
+              "charge_profile": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/charge_profile_type"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "charge_c_rate": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0
+              },
+              "discharge_profile": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/discharge_profile_type"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "discharge_c_rate": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0
+              },
+              "charge_c_rate_fraction": {
+                "type": "string",
+                "pattern": "^[0-9]+/[0-9]+$",
+                "description": "Exact fraction of 1C for charge_c_rate; present only when the source writes it as a fraction."
+              },
+              "discharge_c_rate_fraction": {
+                "type": "string",
+                "pattern": "^[0-9]+/[0-9]+$",
+                "description": "Exact fraction of 1C for discharge_c_rate; present only when the source writes it as a fraction."
+              },
+              "charge_subprofile": {
+                "type": "string",
+                "description": "Name of the dynamic_subprofiles entry this row's charge side runs; present only when charge_profile is dynamic."
+              },
+              "discharge_subprofile": {
+                "type": "string",
+                "description": "Name of the dynamic_subprofiles entry this row's discharge side runs (for example Square wave or UDDS); present only when discharge_profile is dynamic. A frontend shows it in place of the word Dynamic."
+              }
+            }
+          }
+        },
+        "charge_c_rate_max_fraction": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]+/[0-9]+$",
+          "description": "Exact fraction of 1C (for example 1/3 or 5/3) when the source writes the rate as a fraction and the decimal recurs; null otherwise. A frontend shows this as C/3 or 5C/3 when it is present and the decimal when it is not."
+        },
+        "discharge_c_rate_max_fraction": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]+/[0-9]+$",
+          "description": "Exact fraction of 1C (for example 1/3 or 5/3) when the source writes the rate as a fraction and the decimal recurs; null otherwise. A frontend shows this as C/3 or 5C/3 when it is present and the decimal when it is not."
+>>>>>>> Stashed changes
         }
       }
     },
@@ -469,6 +722,15 @@
             "null"
           ]
         },
+<<<<<<< Updated upstream
+=======
+        "count_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+>>>>>>> Stashed changes
         "observed": {
           "type": "object",
           "additionalProperties": false,
@@ -718,6 +980,17 @@
         null
       ]
     },
+<<<<<<< Updated upstream
+=======
+    "charging_profile": {
+      "enum": [
+        "CC-CV",
+        "dynamic",
+        "multi-rate",
+        null
+      ]
+    },
+>>>>>>> Stashed changes
     "protocol_class": {
       "enum": [
         "CC-CV",
@@ -822,6 +1095,32 @@
         "shared_cells_with_other_dataset",
         "duplicate_of_other_dataset"
       ]
+<<<<<<< Updated upstream
+=======
+    },
+    "charge_profile_type": {
+      "type": "string",
+      "enum": [
+        "CC",
+        "CC-CV",
+        "multi-stage CC",
+        "multi-stage CC-CV",
+        "pulse",
+        "dynamic"
+      ],
+      "description": "How the cell is charged: constant current; constant current then constant voltage; several constant-current stages (without or with the final constant-voltage phase); pulses; or a time-varying current or power profile."
+    },
+    "discharge_profile_type": {
+      "type": "string",
+      "enum": [
+        "CC",
+        "CC-CV",
+        "multi-stage CC",
+        "pulse",
+        "dynamic"
+      ],
+      "description": "How the cell is discharged: constant current; constant current then constant voltage; several constant-current stages; pulses; or a time-varying current or power profile (drive cycle, duty cycle, mission)."
+>>>>>>> Stashed changes
     }
   }
 }

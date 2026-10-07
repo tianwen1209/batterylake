@@ -6,10 +6,17 @@
  "category": "cycle_aging",
  "timeseries": {
   "has_voltage_timeseries": true,
+<<<<<<< Updated upstream
   "has_current_timeseries": false,
   "has_temperature_timeseries": true,
   "complete_v_i_t_timeseries": false,
   "resolution": "partial_waveforms",
+=======
+  "has_current_timeseries": true,
+  "has_temperature_timeseries": true,
+  "complete_v_i_t_timeseries": true,
+  "resolution": "full_waveforms",
+>>>>>>> Stashed changes
   "signals_basis": "raw_data",
   "caveats": [
    "voltage_excursion_above_cutoff",
@@ -17,8 +24,13 @@
   ]
  },
  "soc": {
+<<<<<<< Updated upstream
   "computable": false,
   "basis": null
+=======
+  "computable": true,
+  "basis": "coulomb_counting_from_voltage_current"
+>>>>>>> Stashed changes
  },
  "soh": {
   "computable": true,
@@ -53,6 +65,7 @@
   "aging_type": "cyclic"
  },
  "research_applicability": {
+<<<<<<< Updated upstream
   "parameter_identification": false,
   "piml_calibration": false,
   "soh_rul_prediction": false,
@@ -61,6 +74,19 @@
  },
  "suitable_tasks": [
   "SOH_estimation"
+=======
+  "parameter_identification": true,
+  "piml_calibration": false,
+  "soh_rul_prediction": false,
+  "simulation": true,
+  "synthetic_data_generation": false
+ },
+ "suitable_tasks": [
+  "SOH_estimation",
+  "SOC_estimation",
+  "digital_twin_calibration",
+  "simulation"
+>>>>>>> Stashed changes
  ],
  "source_quality_flags": [
   "voltage_excursion_above_cutoff",
@@ -68,7 +94,11 @@
  ],
  "provenance": {
   "derived_from": "datasets/dataset_36.json",
+<<<<<<< Updated upstream
   "generated": "2026-09-29",
+=======
+  "generated": "2026-10-07",
+>>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -85,6 +115,10 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29"
+=======
+  "last_verified": "2026-10-07"
+>>>>>>> Stashed changes
  }
 }

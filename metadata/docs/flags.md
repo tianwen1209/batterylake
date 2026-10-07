@@ -32,7 +32,11 @@ three groups. The **Where it appears** column lists the datasets that carry the 
 
 | Flag | Meaning | Where it appears |
 |---|---|---|
+<<<<<<< Updated upstream
 | `multi_chemistry` | The dataset spans more than one cathode chemistry, so `cathode_chemistry` is `mixed` and the real value is per cell. | 06, 16, 20, 24, 26, 29, 33, 34, 35, 40 |
+=======
+| `multi_chemistry` | The dataset spans more than one cathode chemistry, so `chemistry_is_multi` is true, `cathode_chemistries` lists several values and the per-cell value is in `cells[]`. | 06, 16, 20, 24, 26, 29, 31, 33, 34, 35, 39, 40 |
+>>>>>>> Stashed changes
 | `voltage_excursion_below_cutoff` / `voltage_excursion_above_cutoff` | The observed voltage passes the documented cutoff by more than 0.05 V. Usually a sensor spike, a rest-step artefact or a documentation mismatch; check `content.observed.voltage_V` before trimming. | below: 01, 05, 06, 07, 08, 11, 13, 19, 22, 23, 38 · above: 01, 02, 05, 06, 07, 09, 19, 21, 22, 23, 28, 38 |
 | `pack_level_voltage` | Observed voltage is more than 10x the cell-level cutoff, so the raw data is pack level. Replaces the above-cutoff flag. | none at present |
 | `temperature_basis_differs_from_data` | The documented test temperature lies more than 10 C away from the temperatures the raw data measures, so the recorded temperature is a setpoint, an onset value or another quantity rather than what was measured. Read `temperature_basis`. | none at present |

@@ -11,6 +11,7 @@
   "doi": "10.35097/1969",
   "paper_doi": "10.1038/s41597-024-03831-x",
   "source_url": "https://doi.org/10.1038/s41597-024-03831-x",
+<<<<<<< Updated upstream
   "study_group": "KIT_Luh_Blank_228cells"
  },
  "cell": {
@@ -24,10 +25,23 @@
   "cell_format_code": "18650",
   "dimensions_mm": {
    "diameter": 18.0,
+=======
+  "study_group": "KIT_Luh_Blank_228cells",
+  "notes": "228 NMC/Si-graphite 18650 cells; KIT v1 log release; cyclic, calendar and drive-cycle ageing at 0-40 °C; CC-CV charge to 4.2 V, 1/3C reference discharge to 2.5 V; Luh et al. Scientific Data 2024"
+ },
+ "cell": {
+  "manufacturer": "LG",
+  "model": "INR18650HG2",
+  "chemistry_label_raw": "NMC/C+SiO",
+  "chemistry_is_multi": false,
+  "dimensions_mm": {
+   "diameter": 18.3,
+>>>>>>> Stashed changes
    "height": 65.0,
    "length": null,
    "width": null,
    "thickness": null,
+<<<<<<< Updated upstream
    "basis": "inferred_from_format_code"
   },
   "nominal_capacity_Ah": 3.0,
@@ -40,10 +54,46 @@
  "conditions": {
   "temperature_min_C": 0.0,
   "temperature_max_C": 60.0,
+=======
+   "basis": "stated"
+  },
+  "nominal_capacity_Ah": 3.0,
+  "capacity_basis": "rated",
+  "nominal_voltage_V": 3.6,
+  "voltage_level": "cell",
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 4.2,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "18650"
+  ],
+  "cathode_chemistries": [
+   "NMC"
+  ],
+  "anode_chemistries": [
+   "Si-graphite"
+  ],
+  "electrode_combinations": [
+   {
+    "cathode": "NMC",
+    "anode": "Si-graphite"
+   }
+  ],
+  "nominal_capacities_Ah": [
+   3.0
+  ]
+ },
+ "conditions": {
+  "temperature_min_C": 0.0,
+  "temperature_max_C": 40.0,
+>>>>>>> Stashed changes
   "temperature_setpoints_C": [
    0.0,
    10.0,
    25.0,
+<<<<<<< Updated upstream
    40.0,
    60.0
   ],
@@ -54,6 +104,89 @@
   "protocol_class": "calendar_hold",
   "protocol_charge_raw": "CC-CV to 4.2 V",
   "protocol_discharge_raw": "CC 1/3 C (1 A) reference discharge to 2.5 V; cyclic, calendar and drive-cycle aging",
+=======
+   40.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 1.6667,
+  "discharge_c_rate_max": 1.0,
+  "charge_c_rate_max_fraction": "5/3",
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "calendar_hold",
+  "charging_profile": "multi-rate",
+  "protocol_charge_raw": "CC-CV to 4.2 V",
+  "protocol_discharge_raw": "CC 1/3 C (1 A) reference discharge to 2.5 V; cyclic, calendar and drive-cycle aging",
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC-CV"
+   },
+   {
+    "charge": "CC-CV",
+    "discharge": "dynamic"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 0.3333,
+    "charge_c_rate_fraction": "1/3",
+    "discharge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0,
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.6667,
+    "discharge_profile": "CC-CV",
+    "discharge_c_rate": 1.0,
+    "charge_c_rate_fraction": "5/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 0.3333,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "WLTP Class 3b",
+    "charge_c_rate_fraction": "1/3"
+   },
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.6667,
+    "discharge_profile": "dynamic",
+    "discharge_c_rate": null,
+    "discharge_subprofile": "WLTP Class 3b Extra High",
+    "charge_c_rate_fraction": "5/3"
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [
+   {
+    "name": "WLTP Class 3b",
+    "kind": "drive_cycle",
+    "detail": "power profile of all four phases (low, medium, high, extra high), profile A"
+   },
+   {
+    "name": "WLTP Class 3b Extra High",
+    "kind": "drive_cycle",
+    "detail": "extra-high phase only, profile B"
+   }
+  ],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "mixed",
@@ -96,6 +229,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "EFC (equivalent full cycles) column of each cell log",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "228 cells of the original KIT study; no cycle total.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -811,7 +948,11 @@
    "voltage_excursion_below_cutoff",
    "shared_cells_with_other_dataset"
   ],
+<<<<<<< Updated upstream
   "notes": "Log data of 228 cells (v1 raw release). ocv_est_V, R0_mOhm, R1_mOhm and cap_aged_est_Ah are the authors' estimates, not direct measurements."
+=======
+  "notes": "Log data of 228 cells (v1 raw release). ocv_est_V, R0_mOhm, R1_mOhm and cap_aged_est_Ah are the authors' estimates, not direct measurements. Charging profile: read from the documentation and the paper: each cyclic cell has one fixed rate, but rates differ between cells. The first five logs of the solid 7z archive (the only reachable ones) are profile-ageing cells and gave mixed results in evidence/charge_profile.json, so they do not decide it. Paper (read in full): 228 cells at 76 operating conditions (16 calendar, 48 cyclic, 12 driving-profile parameter sets, three cells each), aged at four temperatures, 0, 10, 25 and 40 °C, in oil-filled pools; check-ups at 25 °C. Setpoints 0, 10, 25 and 40 °C (paper, Readme v2.pdf table and raw logs agree; an earlier 60 °C entry was wrong: the hottest cell log reaches 48.4 °C). Paper: cathode LiNixMnyCo1-x-yO2, anode graphite with SiO, allowed voltage 2.0-4.2 V, used 2.5-4.2 V, charge rates 1/3, 1 and 5/3 C (1C = 3.0 A), discharge 1/3 and 1 C, cut-off 1/10 C for cycling and 1/20 C at check-ups; WLTP class 3b profile for the driving cells."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -820,8 +961,14 @@
    "identity.institution": "raw_docs",
    "identity.year": "ref_name",
    "identity.doi": "raw_docs",
+<<<<<<< Updated upstream
    "identity.paper_doi": "raw_docs",
    "identity.study_group": "relationships",
+=======
+   "identity.paper_doi": "paper",
+   "identity.study_group": "relationships",
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -831,11 +978,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_docs",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.cathode_chemistry": "landing_page",
    "cell.anode_chemistry": "landing_page",
@@ -848,12 +1000,41 @@
    "conditions.protocol_charge_raw": "raw_docs",
    "conditions.protocol_discharge_raw": "raw_docs",
    "cell.dimensions_mm": "derived",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "registry",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "landing_page",
+   "cell.anode_chemistries": "landing_page",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "paper",
+   "conditions.rate_combinations": "paper",
+   "conditions.single_side_profiles": "paper",
+   "conditions.dynamic_subprofiles": "raw_docs",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "paper",
+   "cell.model": "paper",
+   "cell.chemistry_label_raw": "landing_page",
+   "cell.nominal_capacity_Ah": "raw_docs",
+   "cell.nominal_voltage_V": "paper",
+   "cell.voltage_max_V": "raw_docs",
+   "cell.voltage_min_V": "raw_docs",
+   "conditions.temperature_setpoints_C": "paper",
+   "conditions.protocol_charge_raw": "raw_docs",
+   "conditions.protocol_discharge_raw": "raw_docs",
+   "cell.dimensions_mm": "paper",
+>>>>>>> Stashed changes
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "raw_docs",
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_11.json",
   "landing_evidence": "evidence/landing/dataset_11.json"
  }

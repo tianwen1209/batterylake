@@ -1,7 +1,11 @@
 {
  "$schema": "./schema/batterylake-research-index-2.0.json",
  "schema_version": "2.0.0",
+<<<<<<< Updated upstream
  "generated": "2026-09-29",
+=======
+ "generated": "2026-10-07",
+>>>>>>> Stashed changes
  "record_schema": "./schema/batterylake-research-2.0.json",
  "count": 40,
  "facets": {
@@ -251,8 +255,13 @@
    "dataset_id": "dataset_12",
    "category": "ev",
    "record_path": "research/dataset_12.json",
+<<<<<<< Updated upstream
    "complete_v_i_t_timeseries": false,
    "soc_computable": false,
+=======
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+>>>>>>> Stashed changes
    "soh_computable": false,
    "capacity_degradation_present": false,
    "ocv_present": false,
@@ -260,6 +269,12 @@
    "eis_present": false,
    "thermal_characterization": false,
    "suitable_tasks": [
+<<<<<<< Updated upstream
+=======
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation",
+>>>>>>> Stashed changes
     "fault_diagnosis"
    ],
    "source_confidence": "verified"
@@ -727,8 +742,13 @@
    "dataset_id": "dataset_36",
    "category": "cycle_aging",
    "record_path": "research/dataset_36.json",
+<<<<<<< Updated upstream
    "complete_v_i_t_timeseries": false,
    "soc_computable": false,
+=======
+   "complete_v_i_t_timeseries": true,
+   "soc_computable": true,
+>>>>>>> Stashed changes
    "soh_computable": true,
    "capacity_degradation_present": false,
    "ocv_present": false,
@@ -736,7 +756,14 @@
    "eis_present": false,
    "thermal_characterization": false,
    "suitable_tasks": [
+<<<<<<< Updated upstream
     "SOH_estimation"
+=======
+    "SOH_estimation",
+    "SOC_estimation",
+    "digital_twin_calibration",
+    "simulation"
+>>>>>>> Stashed changes
    ],
    "source_confidence": "verified"
   },

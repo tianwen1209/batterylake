@@ -11,6 +11,7 @@
   "doi": "10.5683/SP3/23MFNE",
   "paper_doi": "10.1016/j.apenergy.2021.116440",
   "source_url": "https://borealisdata.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/23MFNE",
+<<<<<<< Updated upstream
   "study_group": null
  },
  "cell": {
@@ -22,6 +23,16 @@
   "chemistry_is_multi": false,
   "form_factor": "cylindrical",
   "cell_format_code": "26650",
+=======
+  "study_group": null,
+  "notes": "3 LFP 26650 cells; A123 ANR26650M1-B; WLTP-based HEV power-profile ageing to 70%, 40% and 15% SOH; 1C reference tests; Anselma et al. Applied Energy 2021"
+ },
+ "cell": {
+  "manufacturer": "A123",
+  "model": "ANR26650M1-B",
+  "chemistry_label_raw": "LFP",
+  "chemistry_is_multi": false,
+>>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 26,
    "height": 65,
@@ -34,6 +45,7 @@
   "capacity_basis": "rated",
   "nominal_voltage_V": null,
   "voltage_level": "cell",
+<<<<<<< Updated upstream
   "voltage_min_V": null,
   "voltage_max_V": 3.6
  },
@@ -48,6 +60,67 @@
   "protocol_class": "drive_cycle",
   "protocol_charge_raw": "HPPC and two 1C discharge capacity tests, then 300 repetitions of a WLTP-based HEV power profile per ageing block",
   "protocol_discharge_raw": "1C reference discharge; WLTP-derived hybrid power profile",
+=======
+  "voltage_min_V": 2.5,
+  "voltage_max_V": 3.6,
+  "form_factors": [
+   "cylindrical"
+  ],
+  "cell_format_codes": [
+   "26650"
+  ],
+  "cathode_chemistries": [
+   "LFP"
+  ],
+  "anode_chemistries": [],
+  "electrode_combinations": [],
+  "nominal_capacities_Ah": [
+   2.5
+  ]
+ },
+ "conditions": {
+  "temperature_min_C": 25.0,
+  "temperature_max_C": 25.0,
+  "temperature_setpoints_C": [
+   25.0
+  ],
+  "temperature_basis": "chamber_setpoint",
+  "charge_c_rate_max": 8.0,
+  "discharge_c_rate_max": 19.2,
+  "charge_c_rate_max_fraction": null,
+  "discharge_c_rate_max_fraction": null,
+  "c_rate_profile": "drive_cycle",
+  "protocol_class": "drive_cycle",
+  "charging_profile": "dynamic",
+  "protocol_charge_raw": "characterisation every 300 WLTP cycles: HPPC and two 1C discharge capacity tests; charge to full, discharge to 50% SOC, then 20 WLTP-derived HEV current cycles, repeated 15 times (300 cycles); charging current limited to 20 A (8C) in the profiles",
+  "protocol_discharge_raw": "1C reference discharge; WLTP-derived hybrid power profile",
+  "profile_combinations": [
+   {
+    "charge": "CC-CV",
+    "discharge": "CC"
+   },
+   {
+    "charge": "dynamic",
+    "discharge": "dynamic"
+   }
+  ],
+  "rate_combinations": [
+   {
+    "charge_profile": "CC-CV",
+    "charge_c_rate": 1.0,
+    "discharge_profile": "CC",
+    "discharge_c_rate": 1.0
+   }
+  ],
+  "single_side_profiles": [],
+  "dynamic_subprofiles": [
+   {
+    "name": "WLTP (HEV)",
+    "kind": "drive_cycle",
+    "detail": "WLTP-derived hybrid power profile, scaled per cell for 95k, 206k and 300k km"
+   }
+  ],
+>>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "profile",
@@ -87,6 +160,10 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "sum of per-file distinct tester Cycle values across parsed CSV parts, including HPPC and reference tests; not the WLTP aging-folder counter or an independently reconciled count of full aging cycles",
+<<<<<<< Updated upstream
+=======
+  "count_basis": "3 A123 2.5 Ah cells (95k, 206k and 300k km cases); drive-cycle aging has no simple cycle count.",
+>>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -126,9 +203,16 @@
  ],
  "quality": {
   "flags": [
+<<<<<<< Updated upstream
    "incomplete_raw_files"
   ],
   "notes": "Three cells aged to 70% (300k km), 40% (206k km) and 15% (95k km) SOH. One partial download marker (Data Summary.tab.part) is present. Cell spec from A123's official ANR26650M1-B datasheet. voltage_min_V left unset: this document does not state a discharge cutoff voltage explicitly (only charge parameters and discharge current limits); other sources commonly cite 2.0V for this cell family but that was not independently confirmed here. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached ranges cover all parsed CSV parts of three cells; the maximum charge value was independently located in one HPPC CSV. The charge maximum is an HPPC pulse, so it does not describe a sustained recharge rate. Both observed directional maxima now use cached global current extrema: 8.00052C charge in an HPPC pulse, and 19.2004C discharge in a WLTP segment. The global -48.001 A was independently located in 2-95k km case.zip::95k km case/Cycle 0/951_WLTP_90a.csv line 506, with Current [A] and sign checked against DCH/CHA rows. The 1C value remains the reference-discharge protocol; 15.00176C is only a separately traced HPPC subset peak. The extracted cycle total counts per-file tester cycles across diagnostic and aging parts; it is not the independently reconciled WLTP aging-folder count."
+=======
+   "voltage_excursion_below_cutoff",
+   "incomplete_raw_files"
+  ],
+  "notes": "Three cells aged to 70% (300k km), 40% (206k km) and 15% (95k km) SOH. One partial download marker (Data Summary.tab.part) is present. Cell spec from A123's official ANR26650M1-B datasheet. voltage_min_V left unset: this document does not state a discharge cutoff voltage explicitly (only charge parameters and discharge current limits); other sources commonly cite 2.0V for this cell family but that was not independently confirmed here. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached ranges cover all parsed CSV parts of three cells; the maximum charge value was independently located in one HPPC CSV. The charge maximum is an HPPC pulse, so it does not describe a sustained recharge rate. Both observed directional maxima now use cached global current extrema: 8.00052C charge in an HPPC pulse, and 19.2004C discharge in a WLTP segment. The global -48.001 A was independently located in 2-95k km case.zip::95k km case/Cycle 0/951_WLTP_90a.csv line 506, with Current [A] and sign checked against DCH/CHA rows. The 1C value remains the reference-discharge protocol; 15.00176C is only a separately traced HPPC subset peak. The extracted cycle total counts per-file tester cycles across diagnostic and aging parts; it is not the independently reconciled WLTP aging-folder count. Charging profile: the three cells run different power profiles (95k, 206k and 300k km cases) but all are time-varying; the HEV profile charges only through regenerative bursts. The paper (Anselma et al., Applied Energy 285 (2021) 116440; full text read) confirms the cell: A123 ANR26650M1-B, 2.5 Ah rated, 26650 LiFePO4 (the readme's \"2p5Ah\" is not a model name). Three cells were aged, one per current profile ('95k', '206k', '300k' km lifetime cases, packs of 140, 240 and 240 cells at 1.06, 1.82 and 1.82 kWh; RMS current 10.36, 7.31 and 6.19 A; planned maximum charging current about 20 A, maximum discharge 45.9, 44.2 and 25.6 A), in a 25 C chamber (measured cell surface temperatures during ageing about 27.6, 26.8 and 26.6 C) with a Digatron MCT 75-0/5-8ME cycler and a temperature sensor on the front centre face of each cell. The discharge cut-off of the 1C capacity test is 2.5 V and the charge limit 3.6 V. Each block is characterisation (HPPC 10 s 1C pulses, two 1C capacity discharges), discharge to 50% SOC of the measured capacity, and 300 WLTP cycles (15 x 20); the paper stopped at 80% SOH, while the 95k and 206k cells were kept running further. The charging current limit of 20 A stops the cell reaching 3.6 V, so the 20 A charge (8C) is a profile limit, as the observed 8C extremum here shows; the observed -48 A discharge (19.2C) exceeds the planned 45.9 A maximum."
+>>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -138,6 +222,10 @@
    "identity.year": "ref_name",
    "identity.doi": "registry",
    "identity.paper_doi": "raw_docs",
+<<<<<<< Updated upstream
+=======
+   "identity.notes": "curated",
+>>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "raw_docs",
    "content.supported_tasks": "curated",
@@ -147,11 +235,16 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
+<<<<<<< Updated upstream
+=======
+   "conditions.charging_profile": "raw_data",
+>>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
+<<<<<<< Updated upstream
    "identity.ref_name": "registry",
    "cell.manufacturer": "raw_docs",
    "cell.model": "raw_docs",
@@ -161,6 +254,27 @@
    "cell.nominal_capacity_Ah": "datasheet",
    "cell.voltage_max_V": "datasheet",
    "conditions.protocol_charge_raw": "landing_page",
+=======
+   "content.count_basis": "registry",
+   "cell.form_factors": "registry",
+   "cell.cell_format_codes": "derived",
+   "cell.cathode_chemistries": "raw_docs",
+   "cell.electrode_combinations": "derived",
+   "cell.nominal_capacities_Ah": "derived",
+   "conditions.profile_combinations": "raw_data",
+   "conditions.rate_combinations": "raw_data",
+   "conditions.single_side_profiles": "raw_data",
+   "conditions.dynamic_subprofiles": "raw_docs",
+   "identity.ref_name": "registry",
+   "cell.manufacturer": "raw_docs",
+   "cell.model": "paper",
+   "cell.chemistry_label_raw": "registry",
+   "cell.nominal_capacity_Ah": "paper",
+   "cell.voltage_max_V": "paper",
+   "cell.voltage_min_V": "paper",
+   "conditions.temperature_setpoints_C": "paper",
+   "conditions.protocol_charge_raw": "paper",
+>>>>>>> Stashed changes
    "conditions.protocol_discharge_raw": "landing_page",
    "cell.dimensions_mm": "datasheet",
    "conditions.c_rate": "derived",
@@ -168,7 +282,11 @@
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
+<<<<<<< Updated upstream
   "last_verified": "2026-09-29",
+=======
+  "last_verified": "2026-10-07",
+>>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_17.json",
   "landing_evidence": "evidence/landing/dataset_17.json"
  }
