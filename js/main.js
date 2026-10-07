@@ -549,20 +549,6 @@ function animateHomeMetrics() {
 /* ══════════════════════════════════════════════════════════════
    RENDERING (same as before, but reads from mutable DATASETS)
    ══════════════════════════════════════════════════════════════ */
-let activeChems = new Set();
-let activeForms = new Set();
-let activeCategories = new Set();
-let activeSort = 'oldest';
-let activeDomains = new Set();
-let activeDuties = new Set();
-let allDatasetsApplied = false;
-let expandedDatasetCategories = new Set(['cycle_aging']);
-let pendingChems = new Set();
-let pendingForms = new Set();
-let pendingCategories = new Set();
-let pendingDomains = new Set();
-let pendingDuties = new Set();
-let pendingAllDatasets = false;
 
 const FILTER_TYPE_STYLES = {
   chemistry: { cls: 'filter-type-chemistry' },
@@ -580,7 +566,7 @@ function filterTypeClass(type) {
 /* Datasets page category taxonomy (browse sections + Category filter chips).
    Benchmarks Step 2 keeps its own Category filter options and raw dataset.category keys. */
 const DATASET_CATEGORIES = [
-  { key: 'cycle_aging', label: 'Cycle Aging', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.22-8.56"/><path d="M21 4v6h-6"/></svg>' },
+  { key: 'cycle_aging', label: 'Cycle Aging', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>' },
   { key: 'calendar_aging', label: 'Calendar Aging', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>' },
   { key: 'characterization', label: 'Characterization', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>' },
   { key: 'field_data', label: 'Field Data', icon: '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17h10l2-7H5l2 7z"/><path d="M7 17l-1 3M17 17l1 3M8 10l1-4h6l1 4"/><circle cx="9" cy="20" r="1"/><circle cx="15" cy="20" r="1"/></svg>' },
@@ -609,14 +595,6 @@ function datasetCategoryToggleIcon(expanded) {
     : '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
 }
 
-function toggleDatasetCategorySection(cat) {
-  if (expandedDatasetCategories.has(cat)) {
-    expandedDatasetCategories.delete(cat);
-  } else {
-    expandedDatasetCategories.add(cat);
-  }
-  filterDatasets();
-}
 
 function getChemClass(chem) {
   if (!chem) return 'chem-Unknown';
@@ -699,45 +677,7 @@ function getCategoryFromSlug(slug) {
     'ev-field': 'field_data'
   }[slug] || null;
 }
-function hasAppliedDatasetFilters() {
-  return activeChems.size > 0 || activeForms.size > 0 || activeCategories.size > 0 || activeDomains.size > 0 || activeDuties.size > 0;
-}
-function hasSearchText() {
-  const input = document.getElementById('searchInput');
-  return !!(input && input.value.trim());
-}
-function isDatasetResultsMode() {
-  return hasSearchText() || hasAppliedDatasetFilters() || allDatasetsApplied;
-}
 function cloneSet(set) { return new Set(Array.from(set)); }
-function syncPendingFromActive() {
-  pendingChems = cloneSet(activeChems);
-  pendingForms = cloneSet(activeForms);
-  pendingCategories = cloneSet(activeCategories);
-  pendingDomains = cloneSet(activeDomains);
-  pendingDuties = cloneSet(activeDuties);
-  pendingAllDatasets = allDatasetsApplied;
-  syncFilterPopupTags();
-}
-function syncFilterPopupTags() {
-  document.querySelectorAll('#page-datasets .filter-tag[data-chem]').forEach(t => t.classList.toggle('active', pendingChems.has(t.dataset.chem)));
-  document.querySelectorAll('#page-datasets .filter-tag[data-form]').forEach(t => t.classList.toggle('active', pendingForms.has(t.dataset.form)));
-  document.querySelectorAll('#page-datasets .filter-tag[data-cat]').forEach(t => t.classList.toggle('active', pendingCategories.has(t.dataset.cat)));
-  document.querySelectorAll('#page-datasets .filter-tag[data-domain]').forEach(t => t.classList.toggle('active', pendingDomains.has(t.dataset.domain)));
-  document.querySelectorAll('#page-datasets .filter-tag[data-duty]').forEach(t => t.classList.toggle('active', pendingDuties.has(t.dataset.duty)));
-  const all = document.querySelector('#page-datasets .filter-tag[data-all-datasets]');
-  if (all) all.classList.toggle('active', pendingAllDatasets);
-}
-function clearPendingAllDatasets() {
-  pendingAllDatasets = false;
-  const all = document.querySelector('#page-datasets .filter-tag[data-all-datasets]');
-  if (all) all.classList.remove('active');
-}
-function updatePendingSet(set, value, el) {
-  clearPendingAllDatasets();
-  if (set.has(value)) set.delete(value); else set.add(value);
-  el.classList.toggle('active', set.has(value));
-}
 function inferDatasetDomains(d) {
   const n = (d.notes || '').toLowerCase();
   const c = d.category || '';
@@ -755,19 +695,6 @@ function inferDatasetProfiles(d) {
   if (n.includes('dynamic') || n.includes('drive cycle') || n.includes('pulse') || rn.includes('hppc')) out.push('Dynamic');
   if (rn.includes('multic') || n.includes('multi-protocol') || n.includes('multi-condition') || n.includes('fast charging')) out.push('Multi-rate');
   return out;
-}
-function renderAppliedFilterChips() {
-  const box = document.getElementById('applied-filter-chips');
-  if (!box) return;
-  const chips = [];
-  if (allDatasetsApplied) chips.push({ type: 'all', tokenType: 'all', value: 'all', label: 'All datasets' });
-  activeChems.forEach(v => chips.push({ type: 'chem', tokenType: 'chemistry', value: v, label: v }));
-  activeForms.forEach(v => chips.push({ type: 'form', tokenType: 'form', value: v, label: v }));
-  activeCategories.forEach(v => chips.push({ type: 'cat', tokenType: 'category', value: v, label: getSectionCatLabel(v) }));
-  activeDomains.forEach(v => chips.push({ type: 'domain', tokenType: 'domain', value: v, label: v.toUpperCase() === 'EV' ? 'EV' : v.charAt(0).toUpperCase() + v.slice(1) }));
-  activeDuties.forEach(v => chips.push({ type: 'duty', tokenType: 'profile', value: v, label: ({ cccv: 'CC/CV', dynamic: 'Dynamic', multi: 'Multi-rate' }[v] || v) }));
-  box.classList.toggle('has-chips', chips.length > 0);
-  box.innerHTML = chips.map(chip => `<span class="applied-chip ${filterTypeClass(chip.tokenType || 'status')}">${esc(chip.label)}<button aria-label="Remove ${esc(chip.label)} filter" onclick="removeAppliedFilter('${chip.type}','${escAttr(chip.value)}')">×</button></span>`).join('');
 }
 /** "34" -> "<b>34</b> cells"; "464 EVs" -> "<b>464</b> EVs" (unit already present). */
 function formatCellsStat(cells) {
@@ -818,233 +745,21 @@ function datasetCardHTML(d) {
   `;
 }
 
-function renderDatasets(data) {
-  const grid = document.getElementById('dataset-grid');
-  const countEl = document.getElementById('filter-count');
-  const head = document.querySelector('.dataset-results-head');
-  const resultsMode = isDatasetResultsMode();
-  if (head) head.classList.toggle('browse', !resultsMode);
-  if (data.length === 0) {
-    grid.innerHTML = '<div class="dataset-empty">No datasets match your filters.</div>';
-    countEl.textContent = '0 datasets found';
-    return;
-  }
-
-  if (resultsMode) {
-    grid.innerHTML = `<div class="dataset-card-grid">${data.map(datasetCardHTML).join('')}</div>`;
-    countEl.textContent = data.length + ' datasets found';
-    return;
-  }
-
-  // Browse sections ordered by dataset count (desc), independent of Category filter chip order.
-  const viewCats = DATASET_CATEGORIES
-    .map(cat => {
-      const allForCat = data.filter(d => getDatasetPageCategory(d.category) === cat.key);
-      return { cat, allForCat, count: allForCat.length };
-    })
-    .filter(entry => entry.count > 0)
-    .sort((a, b) => b.count - a.count || a.cat.label.localeCompare(b.cat.label));
-
-  grid.innerHTML = viewCats.map(({ cat, allForCat }) => {
-    const expanded = expandedDatasetCategories.has(cat.key);
-    return `
-      <section class="dataset-section ${expanded ? 'is-expanded' : 'is-collapsed'}">
-        <div class="dataset-section-head" role="button" tabindex="0" aria-expanded="${expanded ? 'true' : 'false'}" onclick="toggleDatasetCategorySection('${cat.key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDatasetCategorySection('${cat.key}')}">
-          <div class="dataset-section-title">
-            <span class="dataset-section-icon ${getCatClass(cat.key)}">${cat.icon}</span>
-            <h2>${esc(cat.label)}</h2>
-            <span class="dataset-section-meta">${allForCat.length}</span>
-          </div>
-          <button class="dataset-see-all" type="button" aria-label="${expanded ? 'Collapse' : 'Expand'} ${escAttr(cat.label)}" onclick="event.stopPropagation();toggleDatasetCategorySection('${cat.key}')">${datasetCategoryToggleIcon(expanded)}</button>
-        </div>
-        ${expanded ? `<div class="dataset-card-grid">${allForCat.map(datasetCardHTML).join('')}</div>` : ''}
-      </section>
-    `;
-  }).join('') || '<div class="dataset-empty">No datasets match your filters.</div>';
-  countEl.textContent = data.length + ' datasets found';
-}
 
 // XSS-safe escape
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 function escAttr(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
 
-function getFiltered() {
-  const catalog = getCatalogDatasets();
-  if (allDatasetsApplied) return sortDatasets(catalog, activeSort);
-  const raw = document.getElementById('searchInput').value.trim().toLowerCase();
-  // Multi-token search: split by whitespace, every token must match (AND logic)
-  const tokens = raw ? raw.split(/\s+/).filter(Boolean) : [];
 
-  const filtered = catalog.filter(d => {
-    // Chemistry (multi-select, OR within group)
-    if (activeChems.size > 0) {
-      let match = false;
-      activeChems.forEach(c => { if (d.chemistry && d.chemistry.includes(c)) match = true; });
-      if (!match) return false;
-    }
-    // Form factor (multi-select, OR within group)
-    if (activeForms.size > 0) {
-      let match = false;
-      activeForms.forEach(f => { if (d.form && d.form.toLowerCase() === f.toLowerCase()) match = true; });
-      if (!match) return false;
-    }
-    // Category (empty = no filter). Datasets page uses canonical keys + legacy aliases.
-    if (activeCategories.size > 0 && !activeCategories.has(getDatasetPageCategory(d.category))) return false;
 
-    // Domain filter (inferred from category/notes)
-    if (activeDomains.size > 0) {
-      const n = (d.notes || '').toLowerCase();
-      const c = d.category || '';
-      let domainMatch = false;
-      activeDomains.forEach(dom => {
-        if (dom === 'lab' && (c === 'cycle_aging' || c === 'eis' || n.includes('lab') || n.includes('controlled'))) domainMatch = true;
-        if (dom === 'ev' && (c === 'ev' || n.includes('ev') || n.includes('vehicle') || n.includes('bms') || n.includes('fleet'))) domainMatch = true;
-        if (dom === 'grid' && (n.includes('grid') || n.includes('storage') || n.includes('stationary'))) domainMatch = true;
-      });
-      if (!domainMatch) return false;
-    }
 
-    // Duty profile filter (inferred from ref_name/notes)
-    if (activeDuties.size > 0) {
-      const rn = (d.ref_name || '').toLowerCase();
-      const n = (d.notes || '').toLowerCase();
-      let dutyMatch = false;
-      activeDuties.forEach(duty => {
-        if (duty === 'cccv' && (rn.includes('1c') || n.includes('cc/cv') || n.includes('cccv') || (rn.includes('_1c_') || rn.match(/_\d+c_/i)))) dutyMatch = true;
-        if (duty === 'dynamic' && (n.includes('dynamic') || n.includes('drive cycle') || n.includes('pulse') || rn.includes('hppc'))) dutyMatch = true;
-        if (duty === 'multi' && (rn.includes('multic') || n.includes('multi-protocol') || n.includes('multi-condition') || n.includes('fast charging'))) dutyMatch = true;
-      });
-      if (!dutyMatch) return false;
-    }
 
-    // Multi-token search across all visible text fields
-    if (tokens.length > 0) {
-      const haystack = [d.name, d.ref_name, d.notes, d.chemistry, d.form, d.id, getCatLabel(d.category)]
-        .join(' ').toLowerCase();
-      for (const t of tokens) {
-        if (!haystack.includes(t)) return false;
-      }
-    }
-    return true;
-  });
 
-  // Sort
-  return sortDatasets(filtered, activeSort);
-}
 
-function sortDatasets(arr, mode) {
-  const copy = arr.slice();
-  const yearOf = d => extractYearFromRef(d.ref_name) || 0;
-  const cellsOf = d => parseInt(('' + d.cells).replace(/[^\d]/g, ''), 10) || 0;
-  const cyclesOf = d => Number(d.cycles) || 0;
-  switch (mode) {
-    case 'oldest':      copy.sort((a,b) => yearOf(a) - yearOf(b)); break;
-    case 'most-cells':  copy.sort((a,b) => cellsOf(b) - cellsOf(a)); break;
-    case 'most-cycles': copy.sort((a,b) => cyclesOf(b) - cyclesOf(a)); break;
-    case 'az':          copy.sort((a,b) => (a.name||'').localeCompare(b.name||'')); break;
-    case 'newest':
-    default:            copy.sort((a,b) => yearOf(b) - yearOf(a)); break;
-  }
-  // Keep the TBD placeholder dataset at the bottom of the catalog.
-  const pinned = [];
-  for (let i = copy.length - 1; i >= 0; i--) {
-    const d = copy[i];
-    if (d.id === 'dataset_internal' || d.ref_name === 'TBD_NTU_Internal_LiIon_TBD_TBD_TBD') {
-      pinned.unshift(copy.splice(i, 1)[0]);
-    }
-  }
-  return copy.concat(pinned);
-}
 
-function filterDatasets() { renderDatasets(getFiltered()); }
 
-function toggleChemFilter(el) {
-  updatePendingSet(pendingChems, el.dataset.chem, el);
-}
-function toggleFormFilter(el) {
-  updatePendingSet(pendingForms, el.dataset.form, el);
-}
-function toggleCatFilter(el) {
-  updatePendingSet(pendingCategories, el.dataset.cat, el);
-}
-function changeSort(mode) {
-  activeSort = mode;
-  filterDatasets();
-}
 
-function toggleDomainFilter(el) {
-  updatePendingSet(pendingDomains, el.dataset.domain, el);
-}
-function toggleDutyFilter(el) {
-  updatePendingSet(pendingDuties, el.dataset.duty, el);
-}
 
-function toggleDatasetFilters() {
-  const popover = document.getElementById('dataset-filter-popover');
-  const btn = document.querySelector('#page-datasets .dataset-filter-toggle');
-  const willOpen = !popover.classList.contains('open');
-  if (willOpen) syncPendingFromActive();
-  popover.classList.toggle('open', willOpen);
-  if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-}
-
-function closeDatasetFilters() {
-  const popover = document.getElementById('dataset-filter-popover');
-  const btn = document.querySelector('#page-datasets .dataset-filter-toggle');
-  if (popover) popover.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function toggleAllDatasetsFilter(el) {
-  pendingAllDatasets = !pendingAllDatasets;
-  if (pendingAllDatasets) {
-    pendingChems.clear();
-    pendingForms.clear();
-    pendingCategories.clear();
-    pendingDomains.clear();
-    pendingDuties.clear();
-  }
-  syncFilterPopupTags();
-}
-
-function applyDatasetFilters() {
-  allDatasetsApplied = pendingAllDatasets;
-  activeChems = pendingAllDatasets ? new Set() : cloneSet(pendingChems);
-  activeForms = pendingAllDatasets ? new Set() : cloneSet(pendingForms);
-  activeCategories = pendingAllDatasets ? new Set() : cloneSet(pendingCategories);
-  activeDomains = pendingAllDatasets ? new Set() : cloneSet(pendingDomains);
-  activeDuties = pendingAllDatasets ? new Set() : cloneSet(pendingDuties);
-  if (location.hash !== '#datasets') history.replaceState(null, '', '#datasets');
-  closeDatasetFilters();
-  renderAppliedFilterChips();
-  filterDatasets();
-}
-
-function clearPendingDatasetFilters() {
-  pendingChems.clear();
-  pendingForms.clear();
-  pendingCategories.clear();
-  pendingDomains.clear();
-  pendingDuties.clear();
-  pendingAllDatasets = false;
-  activeChems.clear();
-  activeForms.clear();
-  activeCategories.clear();
-  activeDomains.clear();
-  activeDuties.clear();
-  allDatasetsApplied = false;
-  syncFilterPopupTags();
-  renderAppliedFilterChips();
-  filterDatasets();
-  closeDatasetFilters();
-}
-
-document.addEventListener('click', e => {
-  const popover = document.getElementById('dataset-filter-popover');
-  if (!popover || !popover.classList.contains('open')) return;
-  if (e.target.closest('#dataset-filter-popover') || e.target.closest('#page-datasets .dataset-filter-toggle')) return;
-  closeDatasetFilters();
-});
 document.addEventListener('click', e => {
   const popover = document.getElementById('model-filter-popover');
   if (!popover || !popover.classList.contains('open')) return;
@@ -1052,45 +767,8 @@ document.addEventListener('click', e => {
   mlCloseFilters();
 });
 
-function removeAppliedFilter(type, value) {
-  if (type === 'all') allDatasetsApplied = false;
-  if (type === 'chem') activeChems.delete(value);
-  if (type === 'form') activeForms.delete(value);
-  if (type === 'cat') activeCategories.delete(value);
-  if (type === 'domain') activeDomains.delete(value);
-  if (type === 'duty') activeDuties.delete(value);
-  syncPendingFromActive();
-  renderAppliedFilterChips();
-  filterDatasets();
-}
 
-function showDatasetCategory(cat) {
-  allDatasetsApplied = false;
-  activeChems.clear();
-  activeForms.clear();
-  activeCategories.clear();
-  activeCategories.add(getDatasetPageCategory(cat));
-  activeDomains.clear();
-  activeDuties.clear();
-  syncPendingFromActive();
-  renderAppliedFilterChips();
-  showPage('datasets', document.getElementById('nav-datasets'), { preserveHash: true });
-  if (location.hash !== '#datasets') history.replaceState(null, '', '#datasets');
-  filterDatasets();
-}
 
-function showAllDatasetCategories() {
-  allDatasetsApplied = false;
-  activeChems.clear();
-  activeForms.clear();
-  activeCategories.clear();
-  activeDomains.clear();
-  activeDuties.clear();
-  syncPendingFromActive();
-  renderAppliedFilterChips();
-  history.replaceState(null, '', '#datasets');
-  filterDatasets();
-}
 
 function handleDatasetUpload(event) {
   const files = Array.from(event.target.files || []);
@@ -1101,24 +779,6 @@ function handleDatasetUpload(event) {
 }
 
 /* Search input handlers */
-function onSearchInput() {
-  const input = document.getElementById('searchInput');
-  const box = document.getElementById('search-box');
-  if (input.value) box.classList.add('has-text'); else box.classList.remove('has-text');
-  if (input.value.trim() && allDatasetsApplied) {
-    allDatasetsApplied = false;
-    syncPendingFromActive();
-    renderAppliedFilterChips();
-  }
-  filterDatasets();
-}
-function clearSearch() {
-  const input = document.getElementById('searchInput');
-  input.value = '';
-  document.getElementById('search-box').classList.remove('has-text');
-  input.focus();
-  filterDatasets();
-}
 
 function runDatasetSearch(query) {
   const q = (query || '').trim();
@@ -1131,10 +791,7 @@ function runDatasetSearch(query) {
     input.value = q;
     if (box) box.classList.toggle('has-text', Boolean(q));
   }
-  allDatasetsApplied = false;
-  syncPendingFromActive();
-  renderAppliedFilterChips();
-  filterDatasets();
+  window.DatasetsPage.searchChanged();
   if (input) input.focus();
   return true;
 }
@@ -1190,51 +847,6 @@ function initTopbarControls() {
 }
 
 /* ── MODAL ── */
-function openDatasetModal(id) {
-  const d = DATASETS.find(item => item.id === id);
-  if (!d || isHiddenFromCatalog(d)) return;
-  document.getElementById('modal-name').textContent = d.name;
-  document.getElementById('modal-refname').textContent = d.ref_name;
-  document.getElementById('modal-details').innerHTML = `
-    <div class="modal-field"><div class="modal-label">ID</div><div class="modal-value mono">${esc(d.id)}</div></div>
-    <div class="modal-field"><div class="modal-label">Chemistry</div><div class="modal-value">${esc(d.chemistry)}</div></div>
-    <div class="modal-field"><div class="modal-label">Form Factor</div><div class="modal-value">${esc(d.form)}</div></div>
-    <div class="modal-field"><div class="modal-label">Cells</div><div class="modal-value">${esc(d.cells)}</div></div>
-    <div class="modal-field"><div class="modal-label">Category</div><div class="modal-value">${getCatLabel(d.category)}</div></div>
-    <div class="modal-field"><div class="modal-label">Year</div><div class="modal-value">${extractYearFromRef(d.ref_name) || '—'}</div></div>
-    ${d.cycles ? `<div class="modal-field"><div class="modal-label">Cycles</div><div class="modal-value">${Number(d.cycles).toLocaleString('en-US')}</div></div>` : ''}
-    ${d.evidence ? `<div class="modal-field modal-field--wide"><div class="modal-label">Count basis</div><div class="modal-value modal-value--note">${esc(d.evidence)}</div></div>` : ''}
-  `;
-  const checks = ['meta','ts','cs','qc'];
-  const labels = ['Metadata','Time-series','Cycle Summary','QC'];
-  document.getElementById('modal-checklist').innerHTML = checks.map((k,i) =>
-    `<div class="check-item"><span class="ci-icon ${d[k]==='yes'?'ci-yes':'ci-no'}">${d[k]==='yes'?'✓':'—'}</span>${labels[i]}</div>`
-  ).join('');
-  document.getElementById('modal-notes').textContent = d.notes;
-  const linksEl = document.getElementById('modal-links');
-  const linksSec = document.getElementById('modal-links-section');
-  const hasDoi = d.doi && d.doi.startsWith('http');
-  const hasProcessed = d.processed_url && d.processed_url.startsWith('http');
-  linksSec.style.display = 'block';
-  const extIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
-  const dlIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
-  const qaIcon  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M8 15l2.3-4.2 2.4 2 3.3-6.1"/></svg>`;
-  const srcBtn = hasDoi
-    ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.doi)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'source_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn">${extIcon} Source</span></a>`
-    : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">Source Dataset</span><span class="modal-link-dl-btn modal-link-btn-na">${extIcon} Source</span></div>`;
-  const procBtn = hasProcessed
-    ? `<a class="modal-link-row modal-link-row--dl" href="${esc(d.processed_url)}" target="_blank" rel="noopener noreferrer" onclick="if(window.BatteryLakeAnalytics)BatteryLakeAnalytics.trackDatasetDownload({download_type:'processed_dataset',dataset_id:'${escAttr(d.id)}',dataset_name:'${escAttr(d.name)}'})"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn">${dlIcon} Download</span></a>`
-    : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">Processed Dataset</span><span class="modal-link-dl-btn modal-link-btn-na">${dlIcon} Download</span></div>`;
-  const qaBtn = `<button class="modal-link-row modal-link-row--dl" type="button" onclick="closeModal(); showDatasetQuality('${esc(d.id)}')"><span class="modal-link-label">Quality Report</span><span class="modal-link-dl-btn">${qaIcon} View</span></button>`;
-  linksEl.innerHTML = `<div class="modal-links-row">${srcBtn}${procBtn}${qaBtn}</div>`;
-  document.getElementById('modal').classList.add('show');
-}
-function openModal(idx) {
-  const d = getFiltered()[idx];
-  if (d) openDatasetModal(d.id);
-}
-function closeModal() { document.getElementById('modal').classList.remove('show'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 /* ── TASKS PAGE ── */
 function renderTasks() {
@@ -1304,6 +916,7 @@ function showPage(name, navEl, options = {}) {
   if (page) page.classList.add('active');
   if (navEl) navEl.classList.add('active');
   document.getElementById('sidebar').classList.remove('open');
+  if (name === 'datasets' && window.DatasetsPage) window.DatasetsPage.ensureLoaded();
   if (name === 'contribute' && window.BatteryLakeContribute && typeof window.BatteryLakeContribute.init === 'function') {
     window.BatteryLakeContribute.init();
     window.BatteryLakeContribute.refresh();
@@ -1335,15 +948,7 @@ function applyInitialPageFromHash() {
   if (name.startsWith('datasets-')) {
     const cat = getCategoryFromSlug(name.replace(/^datasets-/, ''));
     if (cat) {
-      allDatasetsApplied = false;
-      activeChems.clear();
-      activeForms.clear();
-      activeCategories.clear();
-      activeCategories.add(cat);
-      activeDomains.clear();
-      activeDuties.clear();
-      syncPendingFromActive();
-      renderAppliedFilterChips();
+      window.DatasetsPage.showCategory(cat);
       showPage('datasets', document.getElementById('nav-datasets'), {
         preserveHash: true,
         deferPageView: true
@@ -1352,7 +957,6 @@ function applyInitialPageFromHash() {
       if (window.BatteryLakeAnalytics && typeof window.BatteryLakeAnalytics.trackPageView === 'function') {
         window.BatteryLakeAnalytics.trackPageView();
       }
-      filterDatasets();
       return;
     }
   }

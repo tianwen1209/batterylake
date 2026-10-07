@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="styles/contribute.css?v=workflow-1">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
 <link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-44">
+<link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-4">
 </head>
 <body>
 <div class="app">
@@ -510,48 +511,7 @@ for ds in resp.json()["items"]:
         <div class="dataset-filter-all">
           <button class="filter-tag filter-token filter-type-all" data-all-datasets="true" onclick="toggleAllDatasetsFilter(this)">All datasets</button>
         </div>
-        <div class="dataset-filter-grid" id="dataset-filter-grid">
-          <div class="filter-group filter-group--category">
-            <span class="filter-label">Category</span>
-            <div class="filter-tag filter-token filter-type-category" data-cat="calendar_aging" onclick="toggleCatFilter(this)">Calendar Aging</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="characterization" onclick="toggleCatFilter(this)">Characterization</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="cycle_aging" onclick="toggleCatFilter(this)">Cycle Aging</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="eis" onclick="toggleCatFilter(this)">EIS</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="field_data" onclick="toggleCatFilter(this)">Field Data</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="field_fault_diagnosis" onclick="toggleCatFilter(this)">Field Fault Diagnosis</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="relaxation" onclick="toggleCatFilter(this)">Relaxation</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="soc_estimation" onclick="toggleCatFilter(this)">SOC Estimation</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="soh_estimation" onclick="toggleCatFilter(this)">SOH Estimation</div>
-            <div class="filter-tag filter-token filter-type-category" data-cat="thermal_runaway" onclick="toggleCatFilter(this)">Thermal Runaway</div>
-          </div>
-          <div class="filter-group">
-            <span class="filter-label">Chemistry</span>
-            <div class="filter-tag filter-token filter-type-chemistry" data-chem="LCO" onclick="toggleChemFilter(this)">LCO</div>
-            <div class="filter-tag filter-token filter-type-chemistry" data-chem="LFP" onclick="toggleChemFilter(this)">LFP</div>
-            <div class="filter-tag filter-token filter-type-chemistry" data-chem="NCA" onclick="toggleChemFilter(this)">NCA</div>
-            <div class="filter-tag filter-token filter-type-chemistry" data-chem="NMC" onclick="toggleChemFilter(this)">NMC</div>
-          </div>
-          <div class="filter-group">
-            <span class="filter-label">Domain</span>
-            <div class="filter-tag filter-token filter-type-domain" data-domain="ev" onclick="toggleDomainFilter(this)">EV</div>
-            <div class="filter-tag filter-token filter-type-domain" data-domain="grid" onclick="toggleDomainFilter(this)">Grid</div>
-            <div class="filter-tag filter-token filter-type-domain" data-domain="lab" onclick="toggleDomainFilter(this)">Lab</div>
-          </div>
-          <div class="filter-group">
-            <span class="filter-label">Form</span>
-            <div class="filter-tag filter-token filter-type-form" data-form="18650" onclick="toggleFormFilter(this)">18650</div>
-            <div class="filter-tag filter-token filter-type-form" data-form="21700" onclick="toggleFormFilter(this)">21700</div>
-            <div class="filter-tag filter-token filter-type-form" data-form="Cyl" onclick="toggleFormFilter(this)">Cyl</div>
-            <div class="filter-tag filter-token filter-type-form" data-form="Pouch" onclick="toggleFormFilter(this)">Pouch</div>
-            <div class="filter-tag filter-token filter-type-form" data-form="Prismatic" onclick="toggleFormFilter(this)">Prismatic</div>
-          </div>
-          <div class="filter-group">
-            <span class="filter-label">Profile</span>
-            <div class="filter-tag filter-token filter-type-profile" data-duty="cccv" onclick="toggleDutyFilter(this)">CC/CV</div>
-            <div class="filter-tag filter-token filter-type-profile" data-duty="dynamic" onclick="toggleDutyFilter(this)">Dynamic</div>
-            <div class="filter-tag filter-token filter-type-profile" data-duty="multi" onclick="toggleDutyFilter(this)">Multi-rate</div>
-          </div>
-        </div>
+        <div class="dataset-filter-grid" id="dataset-filter-grid"></div>
         <div class="dataset-filter-actions">
           <button class="dataset-filter-action" onclick="clearPendingDatasetFilters()">Clear</button>
           <button class="dataset-filter-action apply" onclick="applyDatasetFilters()">Apply</button>
@@ -563,10 +523,11 @@ for ds in resp.json()["items"]:
       <span class="filter-count" id="filter-count">0 datasets</span>
       <div class="dataset-results-tools">
         <div class="filter-sort">
+        <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16"/><path d="M3 16l4 4 4-4"/><path d="M17 20V4"/><path d="M13 8l4-4 4 4"/></svg>
         <select id="sort-select" onchange="changeSort(this.value)" aria-label="Sort datasets">
           <option value="newest">Newest first</option>
           <option value="oldest" selected>Oldest first</option>
-          <option value="most-cells">Most cells</option>
+          <option value="most-entities">Most entities</option>
           <option value="most-cycles">Most cycles</option>
           <option value="az">Name A-Z</option>
         </select>
@@ -2067,13 +2028,13 @@ for dataset in resp.json()["items"]:
 
 <!-- DETAIL MODAL -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-name">
     <div class="modal-header">
       <div>
         <div id="modal-name" style="font-size:18px;font-weight:600;color:var(--text1);"></div>
         <div id="modal-refname" style="font-family:var(--mono);font-size:13px;color:var(--text3);margin-top:4px;"></div>
       </div>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
       <div class="modal-section">
@@ -2097,7 +2058,9 @@ for dataset in resp.json()["items"]:
 </div>
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
-<script src="js/main.js"></script>
+<script src="js/dataset-metadata.js?v=catalog-redesign-2"></script>
+<script src="js/datasets-page.js?v=catalog-redesign-4"></script>
+<script src="js/main.js?v=catalog-redesign-2"></script>
 <script src="js/digital-twin.js?v=studio-workflow-26"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
