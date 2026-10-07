@@ -9,48 +9,22 @@
   "institution": "Stanford University, Onori Lab",
   "year": 2021,
   "doi": "10.17632/kxsbr4x3j2.2",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://data.mendeley.com/datasets/kxsbr4x3j2/2",
-  "study_group": null
-=======
   "paper_doi": "10.1016/j.dib.2021.106894",
   "source_url": "https://data.mendeley.com/datasets/kxsbr4x3j2/2",
   "study_group": null,
   "notes": "18 mixed-cathode/graphite cylindrical cells; LFP, NMC and NCA cells; galvanostatic discharge at set C-rates (up to 20C on LFP) at 5, 25 and 35 °C; Catenaro et al. Data in Brief 2021"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
-<<<<<<< Updated upstream
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "LFP; NCA; NMC",
-  "chemistry_is_multi": true,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-  "dimensions_mm": {
-   "diameter": 18.0,
-   "height": 65.0,
-   "length": null,
-   "width": null,
-   "thickness": null,
-   "basis": "inferred_from_format_code"
-  },
-=======
   "chemistry_label_raw": "LFP; NCA; NMC",
   "chemistry_is_multi": true,
   "dimensions_mm": null,
->>>>>>> Stashed changes
   "nominal_capacity_Ah": null,
   "capacity_basis": null,
   "nominal_voltage_V": null,
   "voltage_level": null,
   "voltage_min_V": 2.0,
-<<<<<<< Updated upstream
-  "voltage_max_V": null
-=======
   "voltage_max_V": null,
   "form_factors": [
    "cylindrical"
@@ -87,7 +61,6 @@
    3.35,
    4.85
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 5.0,
@@ -100,12 +73,6 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": null,
   "discharge_c_rate_max": 20.0,
-<<<<<<< Updated upstream
-  "c_rate_profile": "constant",
-  "protocol_class": "CC-CV",
-  "protocol_charge_raw": "CC-CV to full charge, then galvanostatic discharge at a set C-rate",
-  "protocol_discharge_raw": "galvanostatic discharge to the voltage cut-off (2.5 V for NCA and NMC, 2 V for LFP)",
-=======
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
   "c_rate_profile": "constant",
@@ -171,7 +138,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -206,10 +172,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "no cycle index; each workbook is one galvanostatic discharge at a C-rate and temperature",
-<<<<<<< Updated upstream
-=======
   "count_basis": null,
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     1.997846,
@@ -236,264 +199,192 @@
  "cells": [
   {
    "cell_id": "LFP_k1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "A123 Systems",
    "model": "ANR26650m1-B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "LFP_k2",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "A123 Systems",
    "model": "ANR26650m1-B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "LFP_k3",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "A123 Systems",
    "model": "ANR26650m1-B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "LFP_k4",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "A123 Systems",
    "model": "ANR26650m1-B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "LFP_k5",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "A123 Systems",
    "model": "ANR26650m1-B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "LFP_k6",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "A123 Systems",
    "model": "ANR26650m1-B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NCA_k1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.35,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NCA_k2",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.35,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NCA_k3",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.35,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NCA_k4",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.35,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NCA_k5",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.35,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NCA_k6",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.35,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NMC_k1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "LG Chem",
    "model": "INR21700-M50",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 4.85,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NMC_k2",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "LG Chem",
    "model": "INR21700-M50",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 4.85,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NMC_k3",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "LG Chem",
    "model": "INR21700-M50",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 4.85,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NMC_k4",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "LG Chem",
    "model": "INR21700-M50",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 4.85,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NMC_k5",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "LG Chem",
    "model": "INR21700-M50",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 4.85,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
   },
   {
    "cell_id": "NMC_k6",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "LG Chem",
    "model": "INR21700-M50",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 4.85,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "discharge_c_rate": 5.0
    }
@@ -503,11 +394,7 @@
   "flags": [
    "multi_chemistry"
   ],
-<<<<<<< Updated upstream
-  "notes": "Three lithium-ion chemistries (LFP, NMC, NCA); file names give cell, C-rate and temperature. Surface temperature is measured with T-type thermocouples. The delivered LFP discharge filenames include 20C tests; the earlier 5C scalar was a modal per-entity attribute, not the maximum across all test parts. The 20C maximum applies to LFP tests, not every cell chemistry."
-=======
   "notes": "Three lithium-ion chemistries (LFP, NMC, NCA); file names give cell, C-rate and temperature. Surface temperature is measured with T-type thermocouples. The delivered LFP discharge filenames include 20C tests; the earlier 5C scalar was a modal per-entity attribute, not the maximum across all test parts. The 20C maximum applies to LFP tests, not every cell chemistry. Charging profile: the charge is the same CC-CV in every file; the C-rate differs between files and cells through the discharge current. The data article (Catenaro and Onori, Data in Brief 35 (2021) 106894; full text read) confirms and extends the record: six samples (k1-k6) of each of three cells, Panasonic NCR-18650B NCA (3350 mAh), LG Chem INR21700-M50 NMC (4850 mAh) and A123 Systems ANR26650m1-B LFP (2500 mAh), all with graphite anodes, tested at 5, 25 and 35 C (IncuMax IC-500R chamber, Arbin LBT21024, 1 s sampling, T-type thermocouple on the cell centre measuring the skin temperature, unfiltered data). Charging is CC-CV at the manufacturer-specified current (the value is not given), then CV to a cut-off current (NCA, NMC) or for 1 h (LFP); discharge rates are C/20, 1C, 2C, 3C, 5C for NCA and NMC and also 10C, 15C and 20C for LFP, to 2.5 V (NCA, NMC) or 2 V (LFP), with a stop at 75 C. The three cells have three different formats: 18650, 21700 and 26650. The dataset-level format code 18650 and the 18 x 65 mm dimensions inferred from it describe only the NCA cell; they come from the registry and are listed in the discrepancy matrix. The related analysis paper is Catenaro, Rizzo and Onori, Applied Energy 2021, 10.1016/j.apenergy.2021.116473. The dataset-level format code and the 18 x 65 mm dimensions are left null on purpose: the three chemistries come in three formats. Rate combinations: the charge is CC-CV at the manufacturer-specified current, which the data article does not state, so the charge C-rate is null for every discharge rate listed."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -516,11 +403,8 @@
    "identity.institution": "registry",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "registry",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -530,26 +414,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.cathode_chemistry": "raw_filenames",
-   "cell.chemistry_label_raw": "raw_filenames",
-   "cell.form_factor": "registry",
-   "cell.voltage_min_V": "landing_page",
-   "conditions.temperature_setpoints_C": "raw_filenames",
-   "conditions.protocol_charge_raw": "landing_page",
-   "conditions.protocol_discharge_raw": "landing_page",
-   "cell.dimensions_mm": "derived",
-=======
    "cell.form_factors": "registry",
    "cell.cell_format_codes": "paper",
    "cell.cathode_chemistries": "raw_filenames",
@@ -565,16 +435,11 @@
    "conditions.temperature_setpoints_C": "raw_filenames",
    "conditions.protocol_charge_raw": "paper",
    "conditions.protocol_discharge_raw": "paper",
->>>>>>> Stashed changes
    "conditions.c_rate": "derived",
    "conditions.discharge_c_rate_max": "raw_filenames"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_24.json",
   "landing_evidence": "evidence/landing/dataset_24.json"
  }

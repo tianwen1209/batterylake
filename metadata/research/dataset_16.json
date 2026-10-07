@@ -12,13 +12,9 @@
   "resolution": "full_waveforms",
   "signals_basis": "raw_data",
   "caveats": [
-<<<<<<< Updated upstream
-   "partial_raw"
-=======
    "partial_raw",
    "voltage_excursion_above_cutoff",
    "voltage_excursion_below_cutoff"
->>>>>>> Stashed changes
   ]
  },
  "soc": {
@@ -73,13 +69,6 @@
  ],
  "source_quality_flags": [
   "multi_chemistry",
-<<<<<<< Updated upstream
-  "partial_raw"
- ],
- "provenance": {
-  "derived_from": "datasets/dataset_16.json",
-  "generated": "2026-09-29",
-=======
   "partial_raw",
   "voltage_excursion_above_cutoff",
   "voltage_excursion_below_cutoff"
@@ -87,7 +76,6 @@
  "provenance": {
   "derived_from": "datasets/dataset_16.json",
   "generated": "2026-10-07",
->>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -104,10 +92,6 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29"
-=======
   "last_verified": "2026-10-07"
->>>>>>> Stashed changes
  }
 }

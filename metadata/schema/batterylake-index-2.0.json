@@ -115,39 +115,9 @@
               "null"
             ]
           },
-<<<<<<< Updated upstream
-          "cathode_chemistry": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "anode_chemistry": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
           "chemistry_is_multi": {
             "type": "boolean"
           },
-          "form_factor": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "cell_format_code": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-=======
-          "chemistry_is_multi": {
-            "type": "boolean"
-          },
->>>>>>> Stashed changes
           "nominal_capacity_Ah": {
             "type": [
               "number",
@@ -208,8 +178,6 @@
               "null"
             ]
           },
-<<<<<<< Updated upstream
-=======
           "charging_profile": {
             "enum": [
               "CC-CV",
@@ -218,7 +186,6 @@
               null
             ]
           },
->>>>>>> Stashed changes
           "aging_type": {
             "type": [
               "string",
@@ -303,8 +270,6 @@
           },
           "has_waveforms": {
             "type": "boolean"
-<<<<<<< Updated upstream
-=======
           },
           "notes": {
             "description": "identity.notes of the record: the registry-style one-line description.",
@@ -354,7 +319,6 @@
             "items": {
               "type": "string"
             }
->>>>>>> Stashed changes
           }
         }
       }

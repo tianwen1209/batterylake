@@ -11,47 +11,25 @@
   "doi": "10.5281/zenodo.7707929",
   "paper_doi": "10.3390/batteries9050237",
   "source_url": "https://zenodo.org/records/7707929",
-<<<<<<< Updated upstream
-  "study_group": null
-=======
   "study_group": null,
   "notes": "55 mixed-chemistry 21700 cells; accelerating-rate-calorimetry heating curves of NMC, NCA and LFP cells at several SOC; Ohneseit et al. Batteries 2023"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
-<<<<<<< Updated upstream
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": null,
   "chemistry_label_raw": "LFP; NCA; NMC",
   "chemistry_is_multi": true,
-  "form_factor": "cylindrical",
-  "cell_format_code": "21700",
-=======
-  "chemistry_label_raw": "LFP; NCA; NMC",
-  "chemistry_is_multi": true,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 21.0,
    "height": 70.0,
    "length": null,
    "width": null,
    "thickness": null,
-<<<<<<< Updated upstream
-   "basis": "inferred_from_format_code"
-=======
    "basis": "stated"
->>>>>>> Stashed changes
   },
   "nominal_capacity_Ah": null,
   "capacity_basis": null,
   "nominal_voltage_V": null,
-<<<<<<< Updated upstream
-  "voltage_level": null,
-  "voltage_min_V": null,
-  "voltage_max_V": null
-=======
   "voltage_level": "cell",
   "voltage_min_V": 2.0,
   "voltage_max_V": 4.2,
@@ -91,21 +69,12 @@
    4.893,
    4.959
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": null,
   "temperature_max_C": null,
   "temperature_setpoints_C": [],
   "temperature_basis": "onset",
-<<<<<<< Updated upstream
-  "charge_c_rate_max": null,
-  "discharge_c_rate_max": null,
-  "c_rate_profile": null,
-  "protocol_class": "abuse",
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max": 0.3333,
   "discharge_c_rate_max": 0.3333,
   "charge_c_rate_max_fraction": "1/3",
@@ -138,7 +107,6 @@
    }
   ],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": 0.0,
   "soc_window_max_pct": 100.0,
   "aging_type": "abuse_thermal",
@@ -165,10 +133,7 @@
   ],
   "has_waveforms": false,
   "cycle_basis": "none; each file is one accelerating-rate-calorimetry run",
-<<<<<<< Updated upstream
-=======
   "count_basis": "55 ARC test specimens; cycling does not apply.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": null,
    "current_A": null,
@@ -190,12 +155,9 @@
   {
    "cell_id": "LFP_SOC0_M1",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -204,12 +166,9 @@
   {
    "cell_id": "LFP_SOC0_M2",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -218,12 +177,9 @@
   {
    "cell_id": "LFP_SOC100_M1",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -232,12 +188,9 @@
   {
    "cell_id": "LFP_SOC100_M2",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -246,12 +199,9 @@
   {
    "cell_id": "LFP_SOC100_M3",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -260,12 +210,9 @@
   {
    "cell_id": "LFP_SOC100_M4",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -274,12 +221,9 @@
   {
    "cell_id": "LFP_SOC30_M1",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -288,12 +232,9 @@
   {
    "cell_id": "LFP_SOC30_M2",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -302,12 +243,9 @@
   {
    "cell_id": "LFP_SOC30_M3",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -316,12 +254,9 @@
   {
    "cell_id": "LFP_SOC60_M1",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -330,12 +265,9 @@
   {
    "cell_id": "LFP_SOC60_M2",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -344,12 +276,9 @@
   {
    "cell_id": "LFP_SOC80_M1",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -358,12 +287,9 @@
   {
    "cell_id": "LFP_SOC80_M2",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -372,12 +298,9 @@
   {
    "cell_id": "LFP_SOC80_M3",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 3.117,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -386,12 +309,9 @@
   {
    "cell_id": "NCA_HEII_SOC0_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -400,12 +320,9 @@
   {
    "cell_id": "NCA_HEII_SOC0_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -414,12 +331,9 @@
   {
    "cell_id": "NCA_HEII_SOC100_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -428,12 +342,9 @@
   {
    "cell_id": "NCA_HEII_SOC100_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -442,12 +353,9 @@
   {
    "cell_id": "NCA_HEII_SOC30_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -456,12 +364,9 @@
   {
    "cell_id": "NCA_HEII_SOC30_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -470,12 +375,9 @@
   {
    "cell_id": "NCA_HEII_SOC60_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -484,12 +386,9 @@
   {
    "cell_id": "NCA_HEII_SOC60_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -498,12 +397,9 @@
   {
    "cell_id": "NCA_HEII_SOC80_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -512,12 +408,9 @@
   {
    "cell_id": "NCA_HEII_SOC80_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.873,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -526,12 +419,9 @@
   {
    "cell_id": "NCA_HEI_SOC0_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -540,12 +430,9 @@
   {
    "cell_id": "NCA_HEI_SOC0_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -554,12 +441,9 @@
   {
    "cell_id": "NCA_HEI_SOC100_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -568,12 +452,9 @@
   {
    "cell_id": "NCA_HEI_SOC100_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -582,12 +463,9 @@
   {
    "cell_id": "NCA_HEI_SOC30_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -596,12 +474,9 @@
   {
    "cell_id": "NCA_HEI_SOC30_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -610,12 +485,9 @@
   {
    "cell_id": "NCA_HEI_SOC60_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -624,12 +496,9 @@
   {
    "cell_id": "NCA_HEI_SOC60_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -638,12 +507,9 @@
   {
    "cell_id": "NCA_HEI_SOC80_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -652,12 +518,9 @@
   {
    "cell_id": "NCA_HEI_SOC80_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.893,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -666,12 +529,9 @@
   {
    "cell_id": "NCA_HP_SOC0_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -680,12 +540,9 @@
   {
    "cell_id": "NCA_HP_SOC0_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -694,12 +551,9 @@
   {
    "cell_id": "NCA_HP_SOC100_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -708,12 +562,9 @@
   {
    "cell_id": "NCA_HP_SOC100_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -722,12 +573,9 @@
   {
    "cell_id": "NCA_HP_SOC30_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -736,12 +584,9 @@
   {
    "cell_id": "NCA_HP_SOC30_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -750,12 +595,9 @@
   {
    "cell_id": "NCA_HP_SOC60_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -764,12 +606,9 @@
   {
    "cell_id": "NCA_HP_SOC60_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -778,12 +617,9 @@
   {
    "cell_id": "NCA_HP_SOC60_M3",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -792,12 +628,9 @@
   {
    "cell_id": "NCA_HP_SOC80_M1",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -806,12 +639,9 @@
   {
    "cell_id": "NCA_HP_SOC80_M2",
    "cathode_chemistry": "NCA",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.892,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -820,12 +650,9 @@
   {
    "cell_id": "NMC_SOC0_M1",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -834,12 +661,9 @@
   {
    "cell_id": "NMC_SOC0_M2",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 0.0,
     "soc_window_max_pct": 0.0
@@ -848,12 +672,9 @@
   {
    "cell_id": "NMC_SOC100_M1",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -862,12 +683,9 @@
   {
    "cell_id": "NMC_SOC100_M2",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 100.0,
     "soc_window_max_pct": 100.0
@@ -876,12 +694,9 @@
   {
    "cell_id": "NMC_SOC30_M1",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -890,12 +705,9 @@
   {
    "cell_id": "NMC_SOC30_M2",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 30.0,
     "soc_window_max_pct": 30.0
@@ -904,12 +716,9 @@
   {
    "cell_id": "NMC_SOC60_M1",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -918,12 +727,9 @@
   {
    "cell_id": "NMC_SOC60_M2",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 60.0,
     "soc_window_max_pct": 60.0
@@ -932,12 +738,9 @@
   {
    "cell_id": "NMC_SOC80_M1",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -946,12 +749,9 @@
   {
    "cell_id": "NMC_SOC80_M2",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-=======
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 4.959,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "labels": {
     "soc_window_min_pct": 80.0,
     "soc_window_max_pct": 80.0
@@ -962,11 +762,7 @@
   "flags": [
    "multi_chemistry"
   ],
-<<<<<<< Updated upstream
-  "notes": "Accelerating-rate-calorimetry heating curves (time in minutes, sample temperature, temperature rate) for NMC, NCA and LFP cells at several SOC. The temperature is the sample temperature during the run, not a chamber setpoint."
-=======
   "notes": "Accelerating-rate-calorimetry heating curves (time in minutes, sample temperature, temperature rate) for NMC, NCA and LFP cells at several SOC. The temperature is the sample temperature during the run, not a chamber setpoint. Charging profile: null: abuse (calorimetry) tests; no charge protocol. The article (Ohneseit et al., Batteries 9 (2023) 237; full text read) is the study behind this data: commercial type 21700 cells, 21 mm x 70 mm, bought in bulk after formation from five different manufacturers (not named), five types: NMC, NCA high-energy I and II (the same chemistry from two makers) and NCA high-power, and LFP. Table 5 gives the mean capacity over at least 160 cells per type (NMC 4959 mAh, NCA-HE I 4893, NCA-HE II 4873, NCA-HP 3892, LFP 3117; SD 16-27 mAh; a measured value, not a rating), maximum discharge rate (1.5C, 2-3C, 2-4C, 7-16C, 1-3C) and cut-offs (charge 4.2 V, LFP 3.65 V; discharge 2.5 V, LFP 2.0 V); Table 6 the electrodes (cathode LixNi0.807Mn0.092Co0.102O2 close to NMC 811, about 90% Ni NCA cathodes, LiFePO4; carbon anodes with 1.6, 1.4, 1.4 and 1% silicon for NMC and the three NCA cells, none for LFP). 57 cells were thermal-abused at five SOC (0, 30, 60, 80, 100%) and 41 by nail penetration at four; this dataset holds the exothermal (rate above 0.02 C/min) records of 55 cells in the heat-wait-seek tests (the ES ARC, sensitivity 0.005 C/min, type N bomb thermocouple at the centre of the cell side, type K auxiliary; stop at 350 C). The temperature is therefore the cell surface temperature during the test and the setpoints are not constant. Cell models are not given. The paper's data availability statement points to this Zenodo record (10.5281/zenodo.7707929) and to 10.5281/zenodo.7867730 for the maximum temperatures."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -975,12 +771,8 @@
    "identity.institution": "paper",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-   "identity.paper_doi": "landing_page",
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "landing_page",
    "content.supported_tasks": "curated",
@@ -995,17 +787,6 @@
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.cathode_chemistry": "raw_filenames",
-   "cell.chemistry_label_raw": "raw_filenames",
-   "cell.form_factor": "landing_page",
-   "cell.dimensions_mm": "derived",
-   "conditions.c_rate": "derived"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "landing_page",
    "cell.cell_format_codes": "derived",
@@ -1028,7 +809,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_35.json",
   "landing_evidence": "evidence/landing/dataset_35.json"
  }

@@ -9,31 +9,16 @@
   "institution": "Carnegie Mellon University",
   "year": 2023,
   "doi": "10.1184/R1/14226830.v3",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://figshare.com/articles/dataset/eVTOL_Battery_Dataset/14226830",
-  "study_group": null
-=======
   "paper_doi": "10.1038/s41597-023-02180-5",
   "source_url": "https://figshare.com/articles/dataset/eVTOL_Battery_Dataset/14226830",
   "study_group": null,
   "notes": "22 NMC 18650 cells; Sony-Murata VTC6; eVTOL mission-profile discharge with CC-CV charge variants; Bills et al. Scientific Data 2023"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "Sony-Murata",
   "model": "18650 VTC-6",
-<<<<<<< Updated upstream
-  "cathode_chemistry": "NMC",
-  "anode_chemistry": null,
   "chemistry_label_raw": "NMC",
   "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-=======
-  "chemistry_label_raw": "NMC",
-  "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.5,
    "height": 65.2,
@@ -44,24 +29,6 @@
   },
   "nominal_capacity_Ah": 3.12,
   "capacity_basis": "rated",
-<<<<<<< Updated upstream
-  "nominal_voltage_V": null,
-  "voltage_level": "cell",
-  "voltage_min_V": 2.0,
-  "voltage_max_V": 4.2
- },
- "conditions": {
-  "temperature_min_C": null,
-  "temperature_max_C": null,
-  "temperature_setpoints_C": [],
-  "temperature_basis": "unspecified",
-  "charge_c_rate_max": 1.5,
-  "discharge_c_rate_max": 6.930328,
-  "c_rate_profile": "dynamic",
-  "protocol_class": "CC-CV",
-  "protocol_charge_raw": "CC-CV charge (baseline 4.2 V; variants reduce CC current to C/2 or 1.5C, or CV voltage to 4.0/4.1 V)",
-  "protocol_discharge_raw": "eVTOL mission profile: discharge segment with cruise (400-1000 s), power reductions of 10-20%; 4.2 V baseline",
-=======
   "nominal_voltage_V": 3.6,
   "voltage_level": "cell",
   "voltage_min_V": 2.0,
@@ -159,7 +126,6 @@
     "detail": "constant power: take-off 54 W for 75 s, cruise 16 W for 400 to 1000 s, landing 54 W for 105 s; variants at -10% and -20% power"
    }
   ],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "profile",
@@ -206,10 +172,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "cycleNumber as recorded by the cell tester; the authors' README warns it is not accurate (tester output files were merged)",
-<<<<<<< Updated upstream
-=======
   "count_basis": "22 cells (VAH01-VAH30) in the full figshare release; 21,392 cycles as reported by the authors. The tester cycleNumber is inaccurate (7,139 distinct values).",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.499885,
@@ -306,11 +269,7 @@
   "flags": [
    "voltage_excursion_above_cutoff"
   ],
-<<<<<<< Updated upstream
-  "notes": "Chamber temperature is documented only for the variants (20, 30, 35 C); the baseline chamber temperature is not stated. cycleNumber is unreliable (the authors merged tester output files); VAHxx_impedance.csv holds pulse resistances at 20% and 60% SOC. Cell spec from Murata's official US18650VTC6 product datasheet. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached ranges cover 22 cell files, including mission and capacity-test segments; the maximum discharge value was independently located in VAH01.csv. The discharge maximum was traced to the mission segment ending at 2.5001111 V, with preceding increasing discharge currents; it is not a fixed-current discharge."
-=======
   "notes": "Chamber temperature is documented only for the variants (20, 30, 35 C); the baseline chamber temperature is not stated. cycleNumber is unreliable (the authors merged tester output files); VAHxx_impedance.csv holds pulse resistances at 20% and 60% SOC. Cell spec from Murata's official US18650VTC6 product datasheet. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached ranges cover 22 cell files, including mission and capacity-test segments; the maximum discharge value was independently located in VAH01.csv. The discharge maximum was traced to the mission segment ending at 2.5001111 V, with preceding increasing discharge currents; it is not a fixed-current discharge. Charging profile: the discharge is a time-varying mission profile for all 22 cells; the charge is CC-CV at one of three rates. The paper states a rated capacity of 3000 mAh and 3.6 V; the capacity recorded here, 3.12 Ah, is from the Murata datasheet and is listed in the discrepancy matrix. The data article is Bills et al., Sci Data 10 (2023) 344 (10.1038/s41597-023-02180-5). The full text (Bills et al., Sci Data 10 (2023) 344) confirms: 22 cells and 21,392 cycles, Sony-Murata 18650 VTC-6 rated 3000 mAh at 3.6 V (maximum continuous discharge 10C, 80 C upper temperature cut-off, 230 Wh/kg), Arbin 200 A cylindrical cell holder with a BioLogic BCS-815 cycler, cell can temperature by a thermocouple fixed with aluminium tape. Baseline mission 54 W for 75 s, 16 W for 800 s and 54 W for 105 s (take-off, cruise, landing) with no rest, then rest below 27 C, a 1C CC-CV charge to 4.2 V with a C/30 end current, and a rest to 35 C plus 15 min; the cell ran until 2.5 V or 70 C during discharge, so end of life is not defined by capacity. The one-at-a-time variants are in Table 2: cruise 400, 600 and 1000 s (VAH12, 13, 02, 15, 22, 26), power -10% (VAH05, 28) and -20% (VAH11, VAH12 as the longest-lived cell, 2348 cycles), charge C/2 (VAH06, 24) and 1.5C (VAH16, 20), end-of-charge 4.0 V (VAH07, the shortest-lived with 275 cycles) and 4.1 V (VAH23), chamber 20 C (VAH09, 25), 30 C (VAH10) and 35 C (VAH30), baseline VAH01, 17 and 27. The 2.5 V figure is the test cut-off, not a rating, so the recorded 2.0 V lower limit stays the Murata datasheet value. The recorded 3.12 Ah is the datasheet value; the paper's rated capacity is 3000 mAh. The anode is not named. The observed 6.9C discharge maximum is the end-of-life current that holds the constant power as capacity and voltage fall; at the start 54 W is about 15 A (5C). Rate combinations: the discharge is a constant-power mission profile, so no CC discharge rate pairs are listed; the CC-CV charge is 1C (variants C/2 and 1.5C)."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -319,11 +278,8 @@
    "identity.institution": "raw_docs",
    "identity.year": "ref_name",
    "identity.doi": "landing_page",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "raw_docs",
    "content.supported_tasks": "curated",
@@ -333,28 +289,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_docs",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "raw_docs",
-   "cell.model": "raw_docs",
-   "cell.cathode_chemistry": "registry",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "curated",
-   "cell.nominal_capacity_Ah": "datasheet",
-   "cell.voltage_max_V": "datasheet",
-   "cell.voltage_min_V": "datasheet",
-   "conditions.protocol_charge_raw": "raw_docs",
-   "conditions.protocol_discharge_raw": "raw_docs",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "curated",
    "cell.cell_format_codes": "derived",
@@ -376,18 +316,13 @@
    "conditions.temperature_setpoints_C": "paper",
    "conditions.protocol_charge_raw": "paper",
    "conditions.protocol_discharge_raw": "paper",
->>>>>>> Stashed changes
    "cell.dimensions_mm": "datasheet",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "derived",
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_21.json",
   "landing_evidence": "evidence/landing/dataset_21.json"
  }

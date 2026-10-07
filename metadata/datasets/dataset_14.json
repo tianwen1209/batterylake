@@ -17,21 +17,6 @@
   "institution": "Stanford University, Onori Lab",
   "year": 2025,
   "doi": "10.17605/OSF.IO/9CEAV",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://osf.io/9ceav/",
-  "study_group": null
- },
- "cell": {
-  "manufacturer": "Molicel",
-  "model": "P42A",
-  "cathode_chemistry": "NMC",
-  "anode_chemistry": "Si-graphite",
-  "chemistry_label_raw": "NMC",
-  "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": null,
-=======
   "paper_doi": "10.1038/s41597-025-05725-y",
   "source_url": "https://osf.io/9ceav/",
   "study_group": null,
@@ -42,7 +27,6 @@
   "model": "INR-21700-P42A",
   "chemistry_label_raw": "NMC",
   "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 21.7,
    "height": 70.2,
@@ -53,12 +37,6 @@
   },
   "nominal_capacity_Ah": 4.2,
   "capacity_basis": "rated",
-<<<<<<< Updated upstream
-  "nominal_voltage_V": null,
-  "voltage_level": "cell",
-  "voltage_min_V": 2.5,
-  "voltage_max_V": 4.2
-=======
   "nominal_voltage_V": 3.6,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
@@ -84,7 +62,6 @@
   "nominal_capacities_Ah": [
    4.2
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 5.0,
@@ -97,12 +74,6 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 8.0,
   "discharge_c_rate_max": 8.0,
-<<<<<<< Updated upstream
-  "c_rate_profile": null,
-  "protocol_class": null,
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
   "c_rate_profile": "multistage",
@@ -150,7 +121,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -208,10 +178,7 @@
    "Energy charge/W.h",
    "Energy discharge/W.h",
    "Freq",
-<<<<<<< Updated upstream
-=======
    "I/mA",
->>>>>>> Stashed changes
    "Internal Resistance(Ohm)",
    "Ns",
    "R/Ohm",
@@ -227,10 +194,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "no cycle index in the characterization files; parts are test types (CDT, HCGT, EIS, pulse) by phase",
-<<<<<<< Updated upstream
-=======
   "count_basis": "45 cells of the Molicel P42A study; characterization tests are not aging cycles, so no cycle total.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.49765,
@@ -398,11 +362,7 @@
    "voltage_excursion_above_cutoff",
    "unreadable_raw_files"
   ],
-<<<<<<< Updated upstream
-  "notes": "The registry describes an NMC 21700 cell; the raw folder is named for the Molicel P42A. Characterization (CDT, HCGT, EIS, pulse) at 5, 25 and 40 C in two phases. Cell spec from Molicel's official INR-21700-P42A product data sheet. The source paper explicitly identifies a silicon-graphite anode and 8C charge/discharge pulses in the HCGT protocol. These maxima describe 12-second pulses, not sustained CC rates. Data Records p. 10 identifies Aux_Temperature as cell surface temperature; finite readings occur in Phase 2, not every Phase 1 screening file. The paper distinguishes 45 screened cells from the 12 subsequently characterized cells."
-=======
   "notes": "The registry describes an NMC 21700 cell; the raw folder is named for the Molicel P42A. Characterization (CDT, HCGT, EIS, pulse) at 5, 25 and 40 C in two phases. Cell spec from Molicel's official INR-21700-P42A product data sheet. The source paper explicitly identifies a silicon-graphite anode and 8C charge/discharge pulses in the HCGT protocol. These maxima describe 12-second pulses, not sustained CC rates. Data Records p. 10 identifies Aux_Temperature as cell surface temperature; finite readings occur in Phase 2, not every Phase 1 screening file. The paper distinguishes 45 screened cells from the 12 subsequently characterized cells. Charging profile: a characterization dataset (capacity, high-current, EIS and pulse tests); there is no ageing protocol. The paper DOI is 10.1038/s41597-025-05725-y: its Crossref record matches the OSF project's title and author list and cites the dataset DOI. The OSF project page itself carries no description, wiki or paper link (the saved landing page is only the JavaScript shell). The full text of the paper (Khan et al., Scientific Data 12 (2025) 1506) was read and agrees with this record: Molicel INR-21700-P42A, NMC cathode, graphite and silicon anode, 4.2 Ah, 3.6 V, 2.5-4.2 V, maximum discharge 11C (45 A) and 60 C; 45 cells screened at 25 C at SLAC (BioLogic cycler) and 12 characterised in phase 2 at SECL (Arbin cycler, Amerex chamber) at 5, 25 and 40 C with CDT (C/3, C/10, C/20 after 1C preconditioning), HCGT (12 s pulses at C/2 to 8C, the 8C being the manufacturer-limited maximum in the protocol) and EIS (galvanostatic at 5 and 25 C, potentiostatic at 40 C). The cells are fresh and not aged. Current is negative for discharge. For about 20% of the 5 C EIS tests the chamber recorded 8-10 C. The paper's open-access licence is CC BY-NC-ND 4.0 while the OSF/DataCite record says CC BY 4.0; the schema has no licence field. Rate combinations: the capacity-test (CDT) files show the pairing directly: each CC-CV charge (CV hold tapering to about 50-60 mA at 4.2 V) is followed by a CC discharge at the same current, 4.1 A twice, then 1.36, 0.41 and 0.205 A, i.e. the paper's 1C, C/3, C/10 and C/20. The pairing is read from the file sequence, not stated in the text, and the C-rates are the paper's labels: 1C is 4.1 A in these files against the 4.2 Ah nominal capacity."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -411,11 +371,8 @@
    "identity.institution": "registry",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -425,28 +382,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "raw_filenames",
-   "cell.model": "raw_filenames",
-   "cell.cathode_chemistry": "registry",
-   "cell.anode_chemistry": "paper",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "curated",
-   "cell.nominal_capacity_Ah": "datasheet",
-   "cell.voltage_max_V": "datasheet",
-   "cell.voltage_min_V": "datasheet",
-   "conditions.temperature_setpoints_C": "raw_filenames",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "curated",
    "cell.cell_format_codes": "derived",
@@ -468,18 +409,13 @@
    "conditions.temperature_setpoints_C": "raw_filenames",
    "conditions.protocol_charge_raw": "paper",
    "conditions.protocol_discharge_raw": "paper",
->>>>>>> Stashed changes
    "cell.dimensions_mm": "datasheet",
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "paper",
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_14.json",
   "landing_evidence": "evidence/landing/dataset_14.json"
  }

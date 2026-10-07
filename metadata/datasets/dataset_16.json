@@ -9,47 +9,14 @@
   "institution": "Tsinghua Berkeley Shenzhen Institute",
   "year": 2024,
   "doi": "10.5281/zenodo.13360631",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://zenodo.org/records/13360631",
-  "study_group": null
-=======
   "paper_doi": "10.1038/s41467-024-54454-0",
   "source_url": "https://zenodo.org/records/13360631",
   "study_group": null,
   "notes": "397 mixed-cathode cells (464 declared); retired second-life cells; pulse-test workbooks across an SOC sweep; Tao et al. Nature Communications 2024"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
-<<<<<<< Updated upstream
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "LFP; LMO; NMC",
-  "chemistry_is_multi": true,
-  "form_factor": null,
-  "cell_format_code": null,
-  "dimensions_mm": null,
-  "nominal_capacity_Ah": 26.0,
-  "capacity_basis": "rated",
-  "nominal_voltage_V": null,
-  "voltage_level": null,
-  "voltage_min_V": null,
-  "voltage_max_V": null
- },
- "conditions": {
-  "temperature_min_C": null,
-  "temperature_max_C": null,
-  "temperature_setpoints_C": [],
-  "temperature_basis": "unspecified",
-  "charge_c_rate_max": 2.531,
-  "discharge_c_rate_max": 2.52794,
-  "c_rate_profile": null,
-  "protocol_class": null,
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "chemistry_label_raw": "LFP; LMO; NMC",
   "chemistry_is_multi": true,
   "dimensions_mm": null,
@@ -116,7 +83,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -194,10 +160,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "cycle ids from the tester's cycle layer (循环序号 sheet), counted per workbook; each workbook is a test segment of a retired cell (SOC sweep)",
-<<<<<<< Updated upstream
-=======
   "count_basis": "464 retired-cell IDs in the author pulse-feature tables (4,628 pulse samples); no cycle axis.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -225,2486 +188,1279 @@
   {
    "cell_id": "02LCC02100101A87B0008516",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87B0101984",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0004465",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0004534",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0007152",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0010168",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0010456",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0011479",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0013547",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0015122",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0015732",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0017692",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0020833",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0026421",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0027455",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0027576",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0052124",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0055909",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0057127",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0059325",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0063458",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0073559",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0074479",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0081320",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0083146",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0085499",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0086451",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0151531",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0151614",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0161151",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0161743",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0163103",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0163477",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0164869",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0165035",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0172641",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0173907",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0175162",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0175573",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0177229",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0178524",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0184257",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0184358",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0185122",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0186122",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A87Y0187911",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A8810050555",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A8810119814",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A8810124384",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A8BC0103482",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A8BC0103791",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "02LCC02100101A8BC0104122",
    "cathode_chemistry": "NMC",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 21.0
-=======
    "nominal_capacity_Ah": 21.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "1",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "10",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "11",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "12",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "13",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "14",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "15",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "16",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "17",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "18",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "19",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "2",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "20",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "21",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "22",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "23",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "24",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "25",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "26",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "27",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "28",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "29",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "3",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "30",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "31",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "32",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "33",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "34",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "35",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "36",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "37",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "38",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "39",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "4",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "40",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "41",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "42",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "43",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "44",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "45",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "46",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "47",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "48",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "49",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "5",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "50",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "51",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "514091415127",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "514091418304",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "514091522210",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515091901822",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515091902419",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092300265",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092501338",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092800774",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092900941",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092901155",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092901182",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092901199",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092901207",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092901384",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092903484",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904019",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904410",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904546",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904584",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904585",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904611",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904713",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904740",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904825",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904858",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904916",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092904978",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092905201",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092905212",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092905216",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092905281",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092905289",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515092905478",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000008",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000036",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000076",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000353",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000439",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000451",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000549",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000552",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000596",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000605",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000629",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000663",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000724",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000809",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093000874",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001000",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001221",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001225",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001367",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001444",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001608",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001782",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001787",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001911",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001936",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093001940",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002151",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002193",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002276",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002313",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002328",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002348",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002402",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002457",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002576",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002646",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002726",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093002758",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093003101",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093004000",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093004064",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093004182",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093004235",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093004482",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093004893",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093005020",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515093005302",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100100012",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100100526",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100100624",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100100832",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100101239",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100101320",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100101563",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100102031",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100102065",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100102714",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515100102992",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515112901566",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "515113004202",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "516020603556",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "516102900376",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "516112602143",
    "cathode_chemistry": "LMO",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 25.0
-=======
    "nominal_capacity_Ah": 25.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "52",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "53",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "54",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "55",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "56",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "6",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "7",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "8",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
->>>>>>> Stashed changes
   },
   {
    "cell_id": "9",
    "cathode_chemistry": "LFP",
-<<<<<<< Updated upstream
-   "nominal_capacity_Ah": 35.0
-  },
-  {
-   "cell_id": "H27730690448",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27732377027",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733293021",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733490499",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733491033",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733590292",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733590603",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733590604",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733590761",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733590854",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733590985",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733591038",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733591566",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733591752",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733591761",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733592611",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733592761",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733592774",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733690394",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733690397",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733690426",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733690449",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733690634",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733691977",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27733692287",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734090416",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091053",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091117",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091265",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091304",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091346",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091573",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734091705",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734092807",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734291854",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734291972",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734390547",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734390551",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734390633",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734391053",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734391178",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734490172",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734490574",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734490575",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734490764",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734490929",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734491479",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734491651",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734492449",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734492453",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734492478",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734590174",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734590982",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734591085",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734591466",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734592855",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734676393",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734690849",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27734691342",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735076055",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735076056",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735076555",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735076802",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735076818",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735076930",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735077114",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735077206",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735077215",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735077716",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735176665",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735176737",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735177085",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735177571",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735177821",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735178005",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735178133",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735190683",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735190732",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735275911",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735276637",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735290390",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735290428",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735290860",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735291063",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735376431",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735376790",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735376805",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735390834",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735391329",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735391963",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735490342",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735490718",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735490849",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735490851",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735491006",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735492200",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27735576091",
-   "cathode_chemistry": "LMO"
-  },
-  {
-   "cell_id": "H27743090243",
-   "cathode_chemistry": "LMO"
-=======
    "nominal_capacity_Ah": 35.0,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65
@@ -3296,7 +2052,6 @@
    "cathode_chemistry": "LMO",
    "nominal_capacity_Ah": 26.0,
    "voltage_min_V": 2.7
->>>>>>> Stashed changes
   },
   {
    "cell_id": "PIP15502C00208544",
@@ -3777,17 +2532,11 @@
  "quality": {
   "flags": [
    "multi_chemistry",
-<<<<<<< Updated upstream
-   "partial_raw"
-  ],
-  "notes": "Retired (second-life) cells; the folder names carry the rated capacity and cathode (e.g. 10Ah LMO). Each workbook is a pulse-test segment across an SOC sweep. The source-supported observed rate estimates use each cell's own filename-rated Ah, rather than the dataset's modal 26 Ah scalar: charge 2.531C (PIP15D01A03214955, 25.31 A / 10 Ah) and discharge 2.52794C (PIP15826A00208229, -25.2794 A / 10 Ah). Actual-current headers and charge/discharge step labels were checked in the cited original RawData workbook. All 397 cached entities supply current bounds and their own rated Ah. These are observed maxima over the available cached pulse/test measurements, not sustained protocol rates; the exact two extremum worksheet rows were not independently relocated. One original record workbook explicitly labels battery-temperature sensors 电池温度1(℃), paired with relative time; finite readings establish delivered cell-temperature series. Dataset scalar nominal capacity26Ah is representative across heterogeneous retired cells, not common to all397."
-=======
    "voltage_excursion_below_cutoff",
    "voltage_excursion_above_cutoff",
    "partial_raw"
   ],
   "notes": "Retired (second-life) cells; the folder names carry the rated capacity and cathode (e.g. 10Ah LMO). Each workbook is a pulse-test segment across an SOC sweep. The source-supported observed rate estimates use each cell's own filename-rated Ah, rather than the dataset's modal 26 Ah scalar: charge 2.531C (PIP15D01A03214955, 25.31 A / 10 Ah) and discharge 2.52794C (PIP15826A00208229, -25.2794 A / 10 Ah). Actual-current headers and charge/discharge step labels were checked in the cited original RawData workbook. All 397 cached entities supply current bounds and their own rated Ah. These are observed maxima over the available cached pulse/test measurements, not sustained protocol rates; the exact two extremum worksheet rows were not independently relocated. One original record workbook explicitly labels battery-temperature sensors 电池温度1(℃), paired with relative time; finite readings establish delivered cell-temperature series. Dataset scalar nominal capacity26Ah is representative across heterogeneous retired cells, not common to all397. Charging profile: a pulse-test dataset on retired cells; there is no cycling charge protocol, so this follows the pulse load. The raw files hold step tables and processed pulse responses, not a raw current trace. The GitHub README of the dataset (Tsinghua Berkeley Shenzhen Institute and Xiamen Lijing New Energy Technology, who collected the data) gives the groups: 464 physically tested retired cells with 3 cathode types, 6 historical usages, 3 physical formats and 6 capacity designs. Batch 1 (model establishment): NMC 2.1 Ah cylinder lab-aged (67 records from 12 physical cells, not in the local archives), LMO 10 Ah pouch HEV1 (95), NMC 21 Ah pouch BEV1 (52), LFP 35 Ah square aluminium shell HEV2 (56); batch 2 (validation): LMO 25 Ah pouch PHEV1 (96) and LMO 26 Ah pouch HEV3 (98). The local 397 cells are exactly the five EV-retired groups (464 minus the 67 lab-aged records). The 26 Ah value is therefore the rating of the LMO HEV3 group and not an artefact; the dataset-level capacity is now left null because the groups differ and each cell carries its group rating. Cut-off voltages by group are set per cell (discharge/charge: LMO 10 Ah 2.0/4.2 V, NMC 21 Ah 2.7/4.2 V, LFP 35 Ah 2.5/3.65 V, LMO 25 and 26 Ah 2.7/4.2 V); the protection voltages during pulses are slightly wider (for example LFP 2.45/3.7 V). The README's cut-off and protection tables list an NMC 15 Ah group where the overview table has NMC 2.1 Ah, an inconsistency in the source. Tests ran on a BAT-NEEFLCT-05300-V010 tester (NEBULA) in a room at 25 C air-conditioning; sampling is 1 Hz for calibration and conditioning and 100 Hz for the pulses; the form factors are pouch for the LMO and NMC groups and prismatic (square aluminium shell) for LFP, which the per-cell schema cannot record. The paper (Tao et al., Nature Communications 15 (2024) 10154; full text read) covers only part of the local data: 270 physically retired batteries / 2700 pulse samples (10 SOC levels, 5-50% in 5% steps) in 4 capacity designs, namely 119 NMC (67 cylindrical 2.1 Ah lab-aged plus 52 pouch 21 Ah BEV), 95 LMO (pouch 10 Ah) and 56 LFP (prismatic 35 Ah), with 4 historical usages (1 laboratory accelerated aging, 1 pure battery-EV, 2 hybrid-EV). That is batch 1 of the README; the LMO 25 Ah and 26 Ah groups of batch 2 (194 cells) are not in the paper, so of the 397 local cells 203 are described by it. The paper counts 67 cylindrical cells where the README says 67 records from 12 physical cells. It confirms the formats (cylindrical, pouch, prismatic), 100 Hz recording of the pulse response, 25 s rest between pulses in its figure (the README gives rest times of 15 times the pulse width) and 25 C ambient temperature; capacity calibration by CCCV is the SOH benchmark. It does not give voltage cut-offs (they are in its supplementary notes) and states that the historical driving profiles are unknown (data privacy). The paper cites the data deposit as Zenodo 10.5281/zenodo.13923083, a different record from this dataset's 10.5281/zenodo.13360631. Zenodo folder structure re-read: Batch 1 (Model Establishment) holds RawData for 10Ah LMO (95 cells), 21Ah NMC (99 files, 52 cells), 35Ah LFP (57 files, 56 cells) and a processed-only workbook for the 2.1Ah NMC accelerated-aging cells (67 cells, no raw files); Batch 2 (Model Validation) holds 25Ah LMO (96 cells) and 26Ah LMO (98 cells), which the paper does not list among its four designs (2.1, 10, 21 and 35 Ah). The processed workbooks carry each cell's rated capacity (Qn) and measured capacity (Q). So the 464 declared cells are the 397 delivered with raw data plus the 67 processed-only 2.1Ah NMC cells, and the 25 and 26 Ah LMO entries are the validation batch. The folders and workbooks do not state the cell format."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -3796,11 +2545,8 @@
    "identity.institution": "landing_page",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -3810,22 +2556,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.cathode_chemistry": "raw_filenames",
-   "cell.chemistry_label_raw": "raw_filenames",
-   "cell.form_factor": "registry",
-   "cell.nominal_capacity_Ah": "raw_filenames",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "paper",
    "cell.cell_format_codes": "paper",
@@ -3842,17 +2578,12 @@
    "conditions.temperature_setpoints_C": "paper",
    "conditions.protocol_charge_raw": "landing_page",
    "conditions.protocol_discharge_raw": "landing_page",
->>>>>>> Stashed changes
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "raw_data",
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_16.json",
   "landing_evidence": "evidence/landing/dataset_16.json"
  }

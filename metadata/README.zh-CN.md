@@ -18,26 +18,6 @@
 
 ```
 metadata/
-<<<<<<< Updated upstream
-  index.json                  <- 首先阅读：每个数据集一行 + 各分面的取值集合
-  index_research.json         <- research/ 中研究画像的可筛选索引
-  README.md / README.zh-CN.md 本概览（英文 / 简体中文）
-  datasets/                   完整记录，包含逐电芯的行
-    README.md / README.zh-CN.md   字段参考、出处、约定
-    dataset_NN.json               40 条记录（dataset_01 至 dataset_41，无 dataset_10）
-  research/                   基于 datasets/ 生成的面向研究的画像
-    README.md / README.zh-CN.md   各字段的含义及其推导方式
-    dataset_NN.json               40 份画像
-  docs/
-    flags.md / flags.zh-CN.md         质量标记词表
-    pipeline.md / pipeline.zh-CN.md   各值的来源及可信程度
-  schema/
-    batterylake-dataset-2.0.json         记录 schema
-    batterylake-index-2.0.json           索引 schema
-    batterylake-research-2.0.json        研究画像 schema
-    batterylake-research-index-2.0.json  研究索引 schema
-  read.py                     无依赖的读取器，供基准测试和平台使用
-=======
 ├── index.json                     首先阅读：每个数据集一行 + 各分面的取值集合
 ├── index_research.json            research/ 中研究画像的可筛选索引
 ├── read.py                        无依赖的读取器，供基准测试和平台使用
@@ -60,7 +40,6 @@ metadata/
     ├── batterylake-index-2.0.json             索引 schema
     ├── batterylake-research-2.0.json          研究画像 schema
     └── batterylake-research-index-2.0.json    研究索引 schema
->>>>>>> Stashed changes
 ```
 
 ## 使用方式
@@ -73,11 +52,7 @@ metadata/
 from metadata.read import load_index, find, load_record, iter_cells, usable_for, by_ref_name
 
 index = load_index()
-<<<<<<< Updated upstream
-find(index, cathode_chemistry="LFP", form_factor="cylindrical", min_n_entities=10)
-=======
 find(index, cathode_chemistry="LFP", form_factor="cylindrical", min_n_entities=10)   # 单值名称按列表筛选：LFP 在正极列表中
->>>>>>> Stashed changes
 find(index, application_domain=["EV_field", "HEV"], supported_tasks="SOH")
 record = load_record("dataset_41")
 by_ref_name(index, "2021_KIT_NMC-SiO_18650_MultiC_MultiT")   # 旧名称仍能找到 dataset_14
@@ -90,15 +65,9 @@ for cell in iter_cells(record):       # 数据集默认值已补全到每个电�
 import index from "../metadata/index.json";
 
 const rows = index.datasets.filter(
-<<<<<<< Updated upstream
-  (d) => d.cathode_chemistry === "NMC" && d.n_entities >= 20,
-);
-const options = index.facets.form_factor;          // 构建筛选控件
-=======
   (d) => d.cathode_chemistries.includes("NMC") && d.n_entities >= 20,
 );
 const options = index.facets.form_factors;         // 构建筛选控件
->>>>>>> Stashed changes
 const record = await fetch(`/metadata/${rows[0].record_path}`).then((r) => r.json());
 ```
 
@@ -112,25 +81,6 @@ const record = await fetch(`/metadata/${rows[0].record_path}`).then((r) => r.jso
 
 ### 值得筛选的字段
 
-<<<<<<< Updated upstream
-`cathode_chemistry`、`anode_chemistry`、`form_factor`、`cell_format_code`、`manufacturer`、`institution`、`year`、`aging_type`、`application_domain`、`protocol_class`、`c_rate_profile`、`entity_type`、`supported_tasks`、`signals`、`source_format`、`quality_flags`，以及数值范围 `nominal_capacity_Ah`、`nominal_voltage_V`、`voltage_min_V` / `voltage_max_V`、`temperature_min_C` / `temperature_max_C`、`charge_c_rate_max` / `discharge_c_rate_max`、`n_entities`、`raw_bytes`。
-
-## 当前构建的覆盖情况
-
-40 个数据集，3,451 个实体（电芯、模组或车辆，由 `entity_type` 说明），4,135 个原始文件，300.8 GB，记录的循环计数之和为 7,848,847。各数据集的计数定义不同，比较前请查阅 `content.cycle_basis`。40 个数据集均已从原始文件解析（`provenance.confidence: verified`）；已知缺失、无法读取或尚未解析的输入在各条记录中有注明。
-
-| 字段 | 有值的数据集数 |
-|---|---:|
-| 正极化学体系 | 36 / 40 |
-| 形态 | 36 / 40 |
-| 标称容量 | 29 / 40 |
-| 完整电压截止值 | 23 / 40 |
-| 数据集 DOI / 论文 DOI | 31 / 14（共 40） |
-| 有名称的信号 | 38 / 40（12 和 30 存储的是无标签通道） |
-| 循环数 | 29 / 40（11 个仍为空，包括循环老化数据集 19、36、37） |
-
-有些字段保持 `null`，因为原始数据及其文档没有记载——例如许多数据集的标称容量只出现在数据及其 README 都没有附带的论文中。`datasets/README.zh-CN.md` 说明了如何理解 `null`，每条记录中的 `provenance.field_sources` 说明每个已填字段的来源。
-=======
 | 分组 | 字段 |
 |---|---|
 | 标识 | `institution`、`year`、`manufacturer` |
@@ -192,6 +142,5 @@ const record = await fetch(`/metadata/${rows[0].record_path}`).then((r) => r.jso
 | 内容 | `count_basis` | 8 |
 
 `null` 表示原始数据、其文档、落地页和论文都没有给出该值（对 `observed.*` 而言，则是没有记录对应通道）；有些字段本身就应为 `null`，例如不固定 SOC 窗口的研究的 `soc_window_*`。例如许多数据集的标称容量只出现在数据及其 README 都没有附带的论文中。`datasets/README.zh-CN.md` 说明了如何理解 `null`，每条记录中的 `provenance.field_sources` 说明每个已填字段的来源。
->>>>>>> Stashed changes
 
 部分电芯数与登记表不同，因为记录统计的是原始数据实际提供的对象（`scale.n_entities`），而登记表可能统计整个上游研究（`scale.n_entities_declared`）；`partial_raw` 标记会标出这些数据集。

@@ -6,47 +6,11 @@
   "ref_name": "2021_Mendeley_LFP-NCA-NMC_18650_DriveCycle_MultiT",
   "ref_name_aliases": [],
   "dataset_name": "Mendeley Drive Cycle Multi-Chem",
-<<<<<<< Updated upstream
-  "institution": null,
-=======
   "institution": "University of Malaya",
->>>>>>> Stashed changes
   "year": 2021,
   "doi": "10.17632/29kw38kzwj.1",
   "paper_doi": "10.1016/j.est.2022.106049",
   "source_url": "https://data.mendeley.com/datasets/29kw38kzwj/1",
-<<<<<<< Updated upstream
-  "study_group": null
- },
- "cell": {
-  "manufacturer": null,
-  "model": "LiFePO4 18650 Rechargeable Cell 3.3V 1100 mAh",
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "LFP; NCA; NMC",
-  "chemistry_is_multi": true,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-  "dimensions_mm": {
-   "diameter": 18.0,
-   "height": 65.0,
-   "length": null,
-   "width": null,
-   "thickness": null,
-   "basis": "inferred_from_format_code"
-  },
-  "nominal_capacity_Ah": 1.1,
-  "capacity_basis": "rated",
-  "nominal_voltage_V": 3.3,
-  "voltage_level": null,
-  "voltage_min_V": null,
-  "voltage_max_V": null
- },
- "conditions": {
-  "temperature_min_C": 5.0,
-  "temperature_max_C": 45.0,
-  "temperature_setpoints_C": [
-=======
   "study_group": null,
   "notes": "3 mixed-cathode cylindrical cells; LFP, NCA and NMC cell types; constant-rate discharge (0.5C-1.5C), DST/FUDS/UDDS/WLTP/US06 drive cycles and HPPC at 5, 25 and 45 °C; Shrivastava et al. Journal of Energy Storage 2022"
  },
@@ -87,20 +51,11 @@
   "temperature_max_C": 45.0,
   "temperature_setpoints_C": [
    -5.0,
->>>>>>> Stashed changes
    5.0,
    25.0,
    45.0
   ],
   "temperature_basis": "chamber_setpoint",
-<<<<<<< Updated upstream
-  "charge_c_rate_max": null,
-  "discharge_c_rate_max": 1.5,
-  "c_rate_profile": "drive_cycle",
-  "protocol_class": "drive_cycle",
-  "protocol_charge_raw": "constant-rate discharges (0.5C, 1C, 1.5C), dynamic drive profiles (DST, FUDS, UDDS, WLTP, US06) and HPPC at four temperatures",
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max": 1.0,
   "discharge_c_rate_max": 1.5,
   "charge_c_rate_max_fraction": null,
@@ -184,7 +139,6 @@
     "detail": null
    }
   ],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -345,10 +299,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "no cycle index; files are constant-rate discharges and dynamic profiles per temperature",
-<<<<<<< Updated upstream
-=======
   "count_basis": null,
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     1.9618,
@@ -377,14 +328,6 @@
  "cells": [
   {
    "cell_id": "LiFePO4 18650 Rechargeable Cell 3.3V 1100 mAh",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP"
-  },
-  {
-   "cell_id": "NCA - NCR18650B",
-   "model": "NCA - NCR18650B",
-   "cathode_chemistry": "NCA"
-=======
    "model": "ANR26650M1B",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 2.6
@@ -395,7 +338,6 @@
    "model": "NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.4
->>>>>>> Stashed changes
   },
   {
    "cell_id": "NMC - Murata VTC6 18650 3000mAh 15A",
@@ -408,28 +350,17 @@
   "flags": [
    "multi_chemistry"
   ],
-<<<<<<< Updated upstream
-  "notes": "Three cell types (LFP, NCA, NMC) in separate folders named with model, voltage and capacity. Current is in mA and capacity in mAh (verified by Q = integral of I dt on the first seconds); the headers carry no units."
-=======
   "notes": "Three cell types (LFP, NCA, NMC) in separate folders named with model, voltage and capacity. Current is in mA and capacity in mAh (verified by Q = integral of I dt on the first seconds); the headers carry no units. Charging profile: the dynamic profiles are the larger part of each test set (6 of 9 sheets); the constant-rate discharges at three rates are the rest, so it is also multi-rate. The C-rates are the authors' sheet labels: the 1C current is 2.3 to 2.8 A for all three chemistries, which does not match the 1.1 Ah (LFP), 3.4 Ah (NCA) and 3.0 Ah (NMC) ratings in the folder names. No documentation ships with the dataset. Nominal capacities (checked against the paper, which covers the LFP and NCA cells at 5 and 25 C with US06, HPPC and 0.5/1/1.5C discharges): LFP is an ANR26650M1B 26650 cell rated 2.6 Ah and 3.3 V (not the 1.1 Ah 18650 in the folder name); NCA is an NCR18650B rated 3.4 Ah and 3.6 V; NMC (VTC6) 3.0 Ah is from the folder name only, the paper does not cover it. The authors' 1C matches the measured capacity at each temperature (NCA 2.39 Ah at 5 C and 2.764 Ah at 25 C; LFP 2.45 and 2.55 Ah), not the rating. Dataset-level model, capacity and voltage are left null because the three cells differ; see the cell rows."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
    "identity.dataset_name": "registry",
    "identity.source_url": "registry",
-<<<<<<< Updated upstream
-   "identity.institution": "curated",
-   "identity.year": "ref_name",
-   "identity.doi": "registry",
-   "identity.paper_doi": "landing_page",
-=======
    "identity.institution": "landing_page",
    "identity.year": "ref_name",
    "identity.doi": "registry",
    "identity.paper_doi": "landing_page",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "curated",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -439,32 +370,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.model": "raw_filenames",
-   "cell.cathode_chemistry": "raw_filenames",
-   "cell.chemistry_label_raw": "raw_filenames",
-   "cell.form_factor": "landing_page",
-   "cell.nominal_capacity_Ah": "raw_filenames",
-   "cell.nominal_voltage_V": "raw_filenames",
-   "conditions.temperature_setpoints_C": "raw_filenames",
-   "conditions.protocol_charge_raw": "landing_page",
-   "cell.dimensions_mm": "derived",
-   "conditions.c_rate": "derived",
-   "conditions.discharge_c_rate_max": "derived"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "cell.form_factors": "landing_page",
    "cell.cell_format_codes": "paper",
    "cell.cathode_chemistries": "raw_filenames",
@@ -485,7 +396,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_20.json",
   "landing_evidence": "evidence/landing/dataset_20.json"
  }

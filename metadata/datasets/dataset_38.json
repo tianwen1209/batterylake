@@ -25,35 +25,14 @@
   "institution": "Iowa State University and Iowa Lakes Community College",
   "year": 2023,
   "doi": "10.25380/iastate.22582234.v2",
-<<<<<<< Updated upstream
-  "paper_doi": "10.48550/arXiv.2307.08382",
-  "source_url": "https://iastate.figshare.com/articles/dataset/_b_ISU-ILCC_Battery_Aging_Dataset_b_/22582234",
-  "study_group": null
-=======
   "paper_doi": "10.1016/j.xcrp.2024.101891; 10.48550/arXiv.2307.08382",
   "source_url": "https://iastate.figshare.com/articles/dataset/_b_ISU-ILCC_Battery_Aging_Dataset_b_/22582234",
   "study_group": null,
   "notes": "251 NMC/graphite 502030 pouch cells; capacity fade versus charge rate, discharge rate and depth of discharge at 30 °C; reference tests at C/5 and C/2"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "Shenzhen Honghaosheng Electronics",
   "model": null,
-<<<<<<< Updated upstream
-  "cathode_chemistry": "NMC",
-  "anode_chemistry": "graphite",
-  "chemistry_label_raw": "NMC",
-  "chemistry_is_multi": false,
-  "form_factor": "pouch",
-  "cell_format_code": "502030",
-  "dimensions_mm": null,
-  "nominal_capacity_Ah": 0.25,
-  "capacity_basis": "rated",
-  "nominal_voltage_V": null,
-  "voltage_level": "cell",
-  "voltage_min_V": 3.0,
-  "voltage_max_V": 4.2
-=======
   "chemistry_label_raw": "NMC",
   "chemistry_is_multi": false,
   "dimensions_mm": {
@@ -91,7 +70,6 @@
   "nominal_capacities_Ah": [
    0.25
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 30.0,
@@ -102,12 +80,6 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 3.0,
   "discharge_c_rate_max": 2.475,
-<<<<<<< Updated upstream
-  "c_rate_profile": null,
-  "protocol_class": null,
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
   "c_rate_profile": "constant",
@@ -425,7 +397,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "cyclic",
@@ -461,10 +432,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "length of capacity_discharge (one value per cycle)",
-<<<<<<< Updated upstream
-=======
   "count_basis": "251 NMC/graphite 502030 pouch cells under 63 conditions (README_V2.0.pdf); 1,331,994 partial-DoD cycles counted from the per-cell Cycling_json capacity records.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     -0.1726,
@@ -1247,11 +1215,7 @@
    "voltage_excursion_below_cutoff",
    "voltage_excursion_above_cutoff"
   ],
-<<<<<<< Updated upstream
-  "notes": "ISU-ILCC dataset (251 cells) studying capacity fade against charge rate, discharge rate and depth of discharge (landing page). Cycling, RPT and interpolated-capacity files per cell; the README describes the capacity normalization. Appendix A1 documents a maximum cycling charge rate of 3.000C and discharge rate of 2.475C across the released groups; reference performance tests use C/5 and C/2. The author text in section 3.3 calls the discharge step constant-voltage but also refers to CC discharge; this wording is unresolved and no discharge protocol class is inferred from it. QV_charge/QV_discharge contain V/I/t curves, not only per-cycle capacity summaries; the cached extraction reports qv_curves for all 251 entities but leaves n_rows=0."
-=======
   "notes": "ISU-ILCC dataset (251 cells) studying capacity fade against charge rate, discharge rate and depth of discharge (landing page). Cycling, RPT and interpolated-capacity files per cell; the README describes the capacity normalization. Appendix A1 documents a maximum cycling charge rate of 3.000C and discharge rate of 2.475C across the released groups; reference performance tests use C/5 and C/2. The author text in section 3.3 calls the discharge step constant-voltage but also refers to CC discharge; this wording is unresolved and no discharge protocol class is inferred from it. QV_charge/QV_discharge contain V/I/t curves, not only per-cycle capacity summaries; the cached extraction reports qv_curves for all 251 entities but leaves n_rows=0. Charging profile: the charge C-rate is fixed within each cell and differs between the cell groups. Paper (read in full): it describes 225 NMC/graphite cells, four per condition, while the landing page and README count 251; the record keeps 251 (the data release) and the difference is unresolved. Cells are 502030 Li-polymer pouch cells tested on two 64-channel Neware BTS4000 testers in 30 °C chambers; RPTs at C/2 and C/5; end of life below 200 mAh (80% of rated); charge and discharge rates sampled from 0.5-3C, discharge fixed at 0.5C in the first grid-search groups; per-group conditions are in its Supplementary Table S1 (not supplied). Published paper and supplement (supplied; the 2024 Cell Reports Physical Science version of the arXiv preprint) confirm the cell: vendor specification 250 mAh, 3.7 V nominal, 4.2 V full, 3.0 V empty, 502030 pouch annotated 32 x 20.5 x 5.3 mm. Supplemental Table S1 lists 63 test groups (groups 1-64, no group 11) with charge 0.5-3C, discharge 0.5-2.475C, mean DoD 4-100% and mean lifetime 5.4-49.3 weeks; its maxima 3.0C (groups 12-15) and 2.475C (group 55) equal the recorded values. Note S2: from G20 an extra RPT was added at week 0.5; G15 is omitted from the dataset (severe first-week degradation, cells removed for safety); G49 and G57 had no cell at end of life when the paper was written, so they are not in the study but are in the data release. This partly explains why the paper analyses 225 cells while the release has 251; the remaining difference is not stated and stays unresolved."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -1260,12 +1224,8 @@
    "identity.institution": "raw_docs",
    "identity.year": "ref_name",
    "identity.doi": "landing_page",
-<<<<<<< Updated upstream
-   "identity.paper_doi": "raw_docs",
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -1275,27 +1235,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "raw_docs",
-   "cell.cathode_chemistry": "raw_docs",
-   "cell.anode_chemistry": "raw_docs",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "registry",
-   "cell.nominal_capacity_Ah": "raw_docs",
-   "cell.voltage_max_V": "raw_docs",
-   "cell.voltage_min_V": "raw_docs",
-   "conditions.temperature_setpoints_C": "raw_docs",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "registry",
    "cell.cell_format_codes": "derived",
@@ -1317,17 +1262,12 @@
    "conditions.protocol_charge_raw": "paper",
    "conditions.protocol_discharge_raw": "paper",
    "cell.dimensions_mm": "paper",
->>>>>>> Stashed changes
    "conditions.c_rate": "derived",
    "conditions.charge_c_rate_max": "raw_docs",
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_38.json",
   "landing_evidence": "evidence/landing/dataset_38.json"
  }

@@ -1,13 +1,8 @@
 {
  "$schema": "./schema/batterylake-index-2.0.json",
  "schema_version": "2.0.0",
-<<<<<<< Updated upstream
- "generated": "2026-09-29",
- "content_hash": "1d2cbb02eb4f881777d44057fc8b37377f0b564a01dd71677cdebfafc9ee8910",
-=======
  "generated": "2026-10-07",
  "content_hash": "60da622998e41fb269e255c88a2f3c2d4361033013fcc7dc56b18bcda786beb6",
->>>>>>> Stashed changes
  "record_schema": "./schema/batterylake-dataset-2.0.json",
  "description": "Single source of truth for BatteryLake dataset metadata. One row per dataset; record_path points at the full record, which additionally carries per-cell rows. Read-only consumers should filter on this file and open a record only when per-cell detail is needed.",
  "counts": {
@@ -17,36 +12,12 @@
   "raw_bytes": 300770200085
  },
  "facets": {
-<<<<<<< Updated upstream
-  "cathode_chemistry": [
-   "LCO",
-   "LCO-NMC",
-   "LFP",
-   "NCA",
-   "NMC",
-   "mixed"
-  ],
-  "anode_chemistry": [
-   "Si-graphite",
-   "graphite",
-   "mixed"
-  ],
-  "form_factor": [
-=======
   "form_factors": [
->>>>>>> Stashed changes
    "cylindrical",
    "pack",
    "pouch",
    "prismatic"
   ],
-<<<<<<< Updated upstream
-  "cell_format_code": [
-   "18650",
-   "21700",
-   "26650",
-   "502030"
-=======
   "cell_format_codes": [
    "14500",
    "18650",
@@ -87,7 +58,6 @@
    "dynamic",
    "multi-stage CC",
    "pulse"
->>>>>>> Stashed changes
   ],
   "aging_type": [
    "abuse_mechanical",
@@ -118,12 +88,6 @@
    "multistage_CC",
    "pulse"
   ],
-<<<<<<< Updated upstream
-  "c_rate_profile": [
-   "constant",
-   "drive_cycle",
-   "dynamic"
-=======
   "charging_profile": [
    "CC-CV",
    "dynamic",
@@ -134,7 +98,6 @@
    "drive_cycle",
    "dynamic",
    "multistage"
->>>>>>> Stashed changes
   ],
   "entity_type": [
    "cell",
@@ -196,11 +159,7 @@
    "Beihang University",
    "CALCE, University of Maryland",
    "Carnegie Mellon University",
-<<<<<<< Updated upstream
-   "Chongqing University",
-=======
    "Chongqing University; Aalborg University",
->>>>>>> Stashed changes
    "Hawaii Natural Energy Institute",
    "Huazhong University of Science and Technology",
    "IVST / Changan Automobile",
@@ -223,11 +182,8 @@
    "Tsinghua University",
    "UL Research Institutes and Purdue University",
    "Universite Grenoble Alpes and Universite Lyon 1",
-<<<<<<< Updated upstream
-=======
    "University of Cassino and Southern Lazio",
    "University of Malaya",
->>>>>>> Stashed changes
    "University of Oxford, Howey Research Group",
    "University of Warwick; dataset collected at the Stanford Energy Control Laboratory (Onori Lab)",
    "VITO / EnergyVille (EVERLASTING project)",
@@ -252,14 +208,10 @@
    "LG",
    "LG Chem",
    "LISHEN",
-<<<<<<< Updated upstream
-   "Molicel",
-=======
    "Lithiumwerks",
    "Molicel",
    "O'Cell New Energy Technology Co., Ltd",
    "Panasonic",
->>>>>>> Stashed changes
    "Samsung SDI",
    "Sanyo/Panasonic",
    "Shenzhen Honghaosheng Electronics",
@@ -272,22 +224,12 @@
    "ref_name": "2007_NASA_PCoE_LCO_18650_1C_1C_25T",
    "ref_name_aliases": [],
    "dataset_name": "NASA PCoE Battery Aging",
-<<<<<<< Updated upstream
-=======
    "notes": "34 LCO 18650 cells; charge/discharge cycling with interleaved EIS sweeps (0.1 Hz-5 kHz) to 30% fade; 4-44 °C; CC-CV charge, 1-4 A discharge",
->>>>>>> Stashed changes
    "institution": "NASA Prognostics Center of Excellence",
    "year": 2007,
    "doi": null,
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -309,7 +251,6 @@
     "CC",
     "dynamic"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 2.0,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.0,
@@ -320,10 +261,7 @@
    "discharge_c_rate_max": 2.0,
    "c_rate_profile": "constant",
    "protocol_class": "CC-CV",
-<<<<<<< Updated upstream
-=======
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -363,22 +301,12 @@
     "2013_CALCE_UMD_LCO_18650_0.5C_1C_25T"
    ],
    "dataset_name": "CALCE CS2 Battery Aging",
-<<<<<<< Updated upstream
-=======
    "notes": "6 LCO prismatic cells; CS2 type; Arbin workbooks; CC-CV charge at 0.5C; 0.5C, 1C, alternating-level and partial-SOC discharge groups",
->>>>>>> Stashed changes
    "institution": "CALCE, University of Maryland",
    "year": 2013,
    "doi": null,
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "prismatic",
-   "cell_format_code": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "prismatic"
@@ -397,7 +325,6 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.7,
@@ -407,12 +334,8 @@
    "charge_c_rate_max": 0.5,
    "discharge_c_rate_max": 1.0,
    "c_rate_profile": "constant",
-<<<<<<< Updated upstream
-   "protocol_class": "mixed",
-=======
    "protocol_class": "CC-CV",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -452,24 +375,12 @@
    "ref_name": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T",
    "ref_name_aliases": [],
    "dataset_name": "Stanford-MIT-TRI Fast Charging",
-<<<<<<< Updated upstream
-=======
    "notes": "94 LFP/graphite 18650 cells (124 declared); multi-policy fast charging (up to 8C) with 4C CC-CV discharge at 30 °C; two of the three study batches; Severson et al. Nature Energy 2019",
->>>>>>> Stashed changes
    "institution": "Stanford University, MIT and Toyota Research Institute",
    "year": 2019,
    "doi": "10.1038/s41560-019-0356-8",
    "manufacturer": "A123",
    "model": "APR18650M1A",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 1.1,
-   "nominal_voltage_V": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -494,21 +405,15 @@
    ],
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": 3.3,
->>>>>>> Stashed changes
    "voltage_min_V": 2.0,
    "voltage_max_V": 3.6,
    "temperature_min_C": 30.0,
    "temperature_max_C": 30.0,
    "charge_c_rate_max": 8.0,
    "discharge_c_rate_max": 4.0,
-<<<<<<< Updated upstream
-   "c_rate_profile": "constant",
-   "protocol_class": "multistage_CC",
-=======
    "c_rate_profile": "multistage",
    "protocol_class": "multistage_CC",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -550,22 +455,12 @@
     "2019_Oxford_Howey_LCO-NCA_18650-Pouch_1C_1C_25T"
    ],
    "dataset_name": "Oxford Battery Degradation",
-<<<<<<< Updated upstream
-=======
    "notes": "8 LCO-NCO/graphite 533459 pouch cells; Artemis urban drive-cycle ageing at 40 °C; 1C and pseudo-OCV characterisation every 100 cycles; Birkl University of Oxford 2017",
->>>>>>> Stashed changes
    "institution": "University of Oxford, Howey Research Group",
    "year": 2017,
    "doi": "10.5287/bodleian:KO2kdmYGg",
    "manufacturer": "Kokam",
    "model": "SLPB533459H4",
-<<<<<<< Updated upstream
-   "cathode_chemistry": null,
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "pouch",
-   "cell_format_code": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "pouch"
@@ -590,7 +485,6 @@
     "CC",
     "dynamic"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 0.74,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
@@ -598,16 +492,10 @@
    "temperature_min_C": 40.0,
    "temperature_max_C": 40.0,
    "charge_c_rate_max": 2.0,
-<<<<<<< Updated upstream
-   "discharge_c_rate_max": 1.0,
-   "c_rate_profile": "drive_cycle",
-   "protocol_class": "drive_cycle",
-=======
    "discharge_c_rate_max": 6.76,
    "c_rate_profile": "drive_cycle",
    "protocol_class": "drive_cycle",
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "profile",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -640,23 +528,12 @@
    "ref_name": "2021_RWTH_Aachen_NMC_18650_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "RWTH Aachen Lithium-Ion",
-<<<<<<< Updated upstream
-=======
    "notes": "48 NMC/graphite 18650 cells; Sanyo/Panasonic UR18650E; CC-CV capacity tests and 20-80% SOC cycling at 25 °C",
->>>>>>> Stashed changes
    "institution": "RWTH Aachen University",
    "year": 2021,
    "doi": "10.18154/RWTH-2021-04545",
    "manufacturer": "Sanyo/Panasonic",
    "model": "UR18650E",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 1.85,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -684,24 +561,16 @@
     "pulse"
    ],
    "nominal_capacity_Ah": 2.05,
->>>>>>> Stashed changes
    "nominal_voltage_V": null,
    "voltage_min_V": 3.0,
    "voltage_max_V": 4.1,
    "temperature_min_C": 25.0,
    "temperature_max_C": 25.0,
-<<<<<<< Updated upstream
-   "charge_c_rate_max": 2.16,
-   "discharge_c_rate_max": 2.16,
-   "c_rate_profile": "constant",
-   "protocol_class": "CC-CV",
-=======
    "charge_c_rate_max": 2.0,
    "discharge_c_rate_max": 2.0,
    "c_rate_profile": "constant",
    "protocol_class": "CC-CV",
    "charging_profile": "CC-CV",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -746,22 +615,12 @@
     "2020_SNL_BatteryArchive_MultiChem_MultiForm_MultiC_MultiT"
    ],
    "dataset_name": "SNL BatteryArchive Cycle Aging",
-<<<<<<< Updated upstream
-=======
    "notes": "61 mixed-cathode/graphite 18650 cells; BatteryLife v12 copy of Sandia (SNL) cycling data; LFP, NCA and NMC cells at 15, 25 and 35 °C; Preger et al. Journal of The Electrochemical Society 2020",
->>>>>>> Stashed changes
    "institution": "Sandia National Laboratories",
    "year": 2020,
    "doi": "10.5281/zenodo.21149533",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "cylindrical"
@@ -791,7 +650,6 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.0,
@@ -800,14 +658,9 @@
    "temperature_max_C": 35.0,
    "charge_c_rate_max": 0.5,
    "discharge_c_rate_max": 3.0,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "c_rate_profile": "constant",
    "protocol_class": "CC-CV",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -851,18 +704,6 @@
     "2020_HNEI_BatteryArchive_NMC_18650_MultiC_25T"
    ],
    "dataset_name": "HNEI BatteryArchive NMC",
-<<<<<<< Updated upstream
-   "institution": "Hawaii Natural Energy Institute",
-   "year": 2018,
-   "doi": null,
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "LCO-NMC",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "notes": "14 LCO-NMC/graphite 18650 cells; BatteryLife v12 copy of HNEI cycling data at 25 °C; Devie et al. Energies 2018",
    "institution": "Hawaii Natural Energy Institute",
    "year": 2018,
@@ -891,7 +732,6 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 2.8,
    "nominal_voltage_V": null,
    "voltage_min_V": 3.0,
@@ -900,14 +740,9 @@
    "temperature_max_C": 25.0,
    "charge_c_rate_max": 0.5,
    "discharge_c_rate_max": 1.5,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "c_rate_profile": "constant",
    "protocol_class": "CC-CV",
    "charging_profile": "CC-CV",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -948,20 +783,6 @@
    "ref_name": "2020_UL_PUR_BatteryArchive_NCA_18650_0.5C_0.5C_23T",
    "ref_name_aliases": [],
    "dataset_name": "UL-Purdue BatteryArchive NCA",
-<<<<<<< Updated upstream
-   "institution": "UL Research Institutes and Purdue University",
-   "year": 2020,
-   "doi": null,
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "NCA",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 3.4,
-   "nominal_voltage_V": null,
-=======
    "notes": "10 NCA/graphite 18650 cells (21 declared); BatteryLife v12 copy of UL-Purdue cycling data; Panasonic NCR18650B; 0.5C cycling at 23 °C; Juarez-Robles et al. Journal of The Electrochemical Society 2020",
    "institution": "UL Research Institutes and Purdue University",
    "year": 2020,
@@ -992,21 +813,15 @@
    ],
    "nominal_capacity_Ah": 3.4,
    "nominal_voltage_V": 3.6,
->>>>>>> Stashed changes
    "voltage_min_V": 2.7,
    "voltage_max_V": 4.2,
    "temperature_min_C": 23.0,
    "temperature_max_C": 23.0,
    "charge_c_rate_max": 0.5,
    "discharge_c_rate_max": 0.5,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "c_rate_profile": "constant",
    "protocol_class": "pulse",
    "charging_profile": "CC-CV",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1049,22 +864,12 @@
     "2023_XJTU_NCM_Prismatic_MultiC_MultiC_25T"
    ],
    "dataset_name": "XJTU NCM Prismatic",
-<<<<<<< Updated upstream
-=======
    "notes": "55 NMC 18650 cells; XJTU LISHEN NCM cells in 6 batches with fixed and variable charge/discharge strategies; CC-CV charge to 4.2 V, discharge to 2.5 V; Wang et al. Nature Communications 2024",
->>>>>>> Stashed changes
    "institution": "Xi'an Jiaotong University",
    "year": 2024,
    "doi": "10.5281/zenodo.10963339",
    "manufacturer": "LISHEN",
    "model": "18650 NCM",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -1085,7 +890,6 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 2.0,
    "nominal_voltage_V": 3.6,
    "voltage_min_V": 2.5,
@@ -1096,10 +900,7 @@
    "discharge_c_rate_max": 5.0,
    "c_rate_profile": "constant",
    "protocol_class": "CC-CV",
-<<<<<<< Updated upstream
-=======
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1135,28 +936,6 @@
    "ref_name": "2024_KIT_NMC-SiO_18650_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "KIT NMC/C-SiO 228 Cells",
-<<<<<<< Updated upstream
-   "institution": "Karlsruhe Institute of Technology",
-   "year": 2024,
-   "doi": "10.35097/1969",
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": "Si-graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 3.0,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.5,
-   "voltage_max_V": 4.2,
-   "temperature_min_C": 0.0,
-   "temperature_max_C": 60.0,
-   "charge_c_rate_max": 1.67,
-   "discharge_c_rate_max": 1.0,
-   "c_rate_profile": "drive_cycle",
-   "protocol_class": "calendar_hold",
-=======
    "notes": "228 NMC/Si-graphite 18650 cells; KIT v1 log release; cyclic, calendar and drive-cycle ageing at 0-40 °C; CC-CV charge to 4.2 V, 1/3C reference discharge to 2.5 V; Luh et al. Scientific Data 2024",
    "institution": "Karlsruhe Institute of Technology",
    "year": 2024,
@@ -1197,7 +976,6 @@
    "c_rate_profile": "drive_cycle",
    "protocol_class": "calendar_hold",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "mixed",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1238,22 +1016,12 @@
    "ref_name": "2022_Tsinghua_LiIon_EV_MultiChem_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Tsinghua Li-ion EV Field",
-<<<<<<< Updated upstream
-=======
    "notes": "464 vehicles; Tsinghua EV fleet data from three vehicle types; 128-row charging segments with unlabelled channels; Lu et al. eTransportation 2024",
->>>>>>> Stashed changes
    "institution": "Tsinghua University",
    "year": 2022,
    "doi": "10.17632/mcsh4hnb8b.1",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": null,
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "pack",
-   "cell_format_code": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "pack"
@@ -1274,7 +1042,6 @@
     "multi-stage CC"
    ],
    "discharge_profiles": [],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
@@ -1285,10 +1052,7 @@
    "discharge_c_rate_max": null,
    "c_rate_profile": null,
    "protocol_class": null,
-<<<<<<< Updated upstream
-=======
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "field",
    "application_domain": "EV_field",
    "entity_type": "vehicle",
@@ -1298,10 +1062,6 @@
    "cycles_per_entity_median": null,
    "n_raw_files": 3,
    "raw_bytes": 1408209405,
-<<<<<<< Updated upstream
-   "signals": [],
-   "has_waveforms": false,
-=======
    "signals": [
     "current",
     "soc",
@@ -1310,7 +1070,6 @@
     "voltage"
    ],
    "has_waveforms": true,
->>>>>>> Stashed changes
    "supported_tasks": [
     "anomaly"
    ],
@@ -1327,28 +1086,6 @@
    "ref_name": "2024_KIT_Luh_NMC_18650_MultiC_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Comprehensive battery aging dataset for NMC/C-SiO cells",
-<<<<<<< Updated upstream
-   "institution": "Karlsruhe Institute of Technology",
-   "year": 2024,
-   "doi": "10.35097/1947",
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": "Si-graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 3.0,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.5,
-   "voltage_max_V": 4.2,
-   "temperature_min_C": 0.0,
-   "temperature_max_C": 60.0,
-   "charge_c_rate_max": 1.67,
-   "discharge_c_rate_max": 1.0,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "notes": "240 NMC/Si-graphite 18650 cells (228 declared); KIT v2 log release (228 cells shared with dataset_11 plus 12 more); 0-60 °C ageing; Luh et al. Scientific Data 2024",
    "institution": "Karlsruhe Institute of Technology",
    "year": 2024,
@@ -1389,7 +1126,6 @@
    "c_rate_profile": null,
    "protocol_class": null,
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "mixed",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1431,24 +1167,11 @@
     "2021_KIT_NMC-SiO_18650_MultiC_MultiT"
    ],
    "dataset_name": "Stanford High-Power Cell Characterization",
-<<<<<<< Updated upstream
-=======
    "notes": "45 NMC/Si-graphite 21700 cells; Molicel P42A; CDT, HCGT, EIS and pulse characterization at 5, 25 and 40 °C; Khan et al. Scientific Data 2025",
->>>>>>> Stashed changes
    "institution": "Stanford University, Onori Lab",
    "year": 2025,
    "doi": "10.17605/OSF.IO/9CEAV",
    "manufacturer": "Molicel",
-<<<<<<< Updated upstream
-   "model": "P42A",
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": "Si-graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": null,
-   "nominal_capacity_Ah": 4.2,
-   "nominal_voltage_V": null,
-=======
    "model": "INR-21700-P42A",
    "chemistry_is_multi": false,
    "form_factors": [
@@ -1476,21 +1199,15 @@
    ],
    "nominal_capacity_Ah": 4.2,
    "nominal_voltage_V": 3.6,
->>>>>>> Stashed changes
    "voltage_min_V": 2.5,
    "voltage_max_V": 4.2,
    "temperature_min_C": 5.0,
    "temperature_max_C": 40.0,
    "charge_c_rate_max": 8.0,
    "discharge_c_rate_max": 8.0,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "c_rate_profile": "multistage",
    "protocol_class": "pulse",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1534,19 +1251,6 @@
    "ref_name": "2023_IVST_Changan_LiIon_EV_MultiChem_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "IVST Changan Large-Scale NEV",
-<<<<<<< Updated upstream
-   "institution": "IVST / Changan Automobile",
-   "year": 2023,
-   "doi": null,
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": null,
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "pack",
-   "cell_format_code": null,
-   "nominal_capacity_Ah": null,
-=======
    "notes": "1 vehicle; single-vehicle sample of the IVST/Changan NEV data; pack voltage/current, cell min/max voltage and temperature; Liu et al. Nature Communications 2025",
    "institution": "IVST / Changan Automobile",
    "year": 2023,
@@ -1573,24 +1277,16 @@
     "dynamic"
    ],
    "nominal_capacity_Ah": 155.0,
->>>>>>> Stashed changes
    "nominal_voltage_V": null,
    "voltage_min_V": null,
    "voltage_max_V": null,
    "temperature_min_C": null,
    "temperature_max_C": null,
-<<<<<<< Updated upstream
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "charge_c_rate_max": 0.8,
    "discharge_c_rate_max": null,
    "c_rate_profile": "multistage",
    "protocol_class": "multistage_CC",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "field",
    "application_domain": "EV_field",
    "entity_type": "vehicle",
@@ -1610,12 +1306,8 @@
    ],
    "has_waveforms": true,
    "supported_tasks": [
-<<<<<<< Updated upstream
-    "SOH"
-=======
     "SOH",
     "SOC"
->>>>>>> Stashed changes
    ],
    "source_format": [
     "csv"
@@ -1631,32 +1323,12 @@
    "ref_name": "2024_TBSI_Lijing_LiIon_Retired_PulseVoltage_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "TBSI-Lijing Pulse Voltage",
-<<<<<<< Updated upstream
-=======
    "notes": "397 mixed-cathode cells (464 declared); retired second-life cells; pulse-test workbooks across an SOC sweep; Tao et al. Nature Communications 2024",
->>>>>>> Stashed changes
    "institution": "Tsinghua Berkeley Shenzhen Institute",
    "year": 2024,
    "doi": "10.5281/zenodo.13360631",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": null,
-   "cell_format_code": null,
-   "nominal_capacity_Ah": 26.0,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": 2.531,
-   "discharge_c_rate_max": 2.52794,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "cylindrical",
@@ -1696,7 +1368,6 @@
    "c_rate_profile": "multistage",
    "protocol_class": "pulse",
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1726,11 +1397,8 @@
    ],
    "quality_flags": [
     "multi_chemistry",
-<<<<<<< Updated upstream
-=======
     "voltage_excursion_below_cutoff",
     "voltage_excursion_above_cutoff",
->>>>>>> Stashed changes
     "partial_raw"
    ],
    "confidence": "verified",
@@ -1741,32 +1409,11 @@
    "ref_name": "2021_A123_LFP_18650_2.5Ah_HEV-WLTP_25T",
    "ref_name_aliases": [],
    "dataset_name": "A123 LFP HEV-WLTP Drive Cycle",
-<<<<<<< Updated upstream
-=======
    "notes": "3 LFP 26650 cells; A123 ANR26650M1-B; WLTP-based HEV power-profile ageing to 70%, 40% and 15% SOH; 1C reference tests; Anselma et al. Applied Energy 2021",
->>>>>>> Stashed changes
    "institution": "McMaster University and Politecnico di Torino",
    "year": 2021,
    "doi": "10.5683/SP3/23MFNE",
    "manufacturer": "A123",
-<<<<<<< Updated upstream
-   "model": "2p5Ah",
-   "cathode_chemistry": "LFP",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "26650",
-   "nominal_capacity_Ah": 2.5,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": 3.6,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": 8.00052,
-   "discharge_c_rate_max": 19.2004,
-   "c_rate_profile": "drive_cycle",
-   "protocol_class": "drive_cycle",
-=======
    "model": "ANR26650M1-B",
    "chemistry_is_multi": false,
    "form_factors": [
@@ -1801,7 +1448,6 @@
    "c_rate_profile": "drive_cycle",
    "protocol_class": "drive_cycle",
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "profile",
    "application_domain": "HEV",
    "entity_type": "cell",
@@ -1832,10 +1478,7 @@
     "xlsx"
    ],
    "quality_flags": [
-<<<<<<< Updated upstream
-=======
     "voltage_excursion_below_cutoff",
->>>>>>> Stashed changes
     "incomplete_raw_files"
    ],
    "confidence": "verified",
@@ -1846,22 +1489,12 @@
    "ref_name": "2022_A123_LFP_18650_1.1Ah_CalCyc_50T",
    "ref_name_aliases": [],
    "dataset_name": "A123 LFP Calendar+Cycle 50°C",
-<<<<<<< Updated upstream
-=======
    "notes": "20 LFP/graphite 18650 cells; A123 LFP cells in first and second life; calendar and cycle ageing at 50 °C; capacity and pseudo-OCV characterisation every 100 cycles; Wheeler et al. Scientific Data 2025",
->>>>>>> Stashed changes
    "institution": "Universite Grenoble Alpes and Universite Lyon 1",
    "year": 2022,
    "doi": "10.57745/OLBXKT",
    "manufacturer": "A123",
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -1886,7 +1519,6 @@
     "CC",
     "dynamic"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": 3.2,
    "voltage_min_V": 2.5,
@@ -1897,10 +1529,7 @@
    "discharge_c_rate_max": 2.7,
    "c_rate_profile": "drive_cycle",
    "protocol_class": "drive_cycle",
-<<<<<<< Updated upstream
-=======
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "mixed",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -1941,18 +1570,6 @@
    "ref_name": "2020_Oxford_Howey_LiIon_PathDep_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Oxford Path-Dependent Degradation",
-<<<<<<< Updated upstream
-   "institution": "University of Oxford, Howey Research Group",
-   "year": 2020,
-   "doi": "10.5287/bodleian:v0ervBv6p; 10.5287/bodleian:2zvyknyRg",
-   "manufacturer": null,
-   "model": "NCR18650BD",
-   "cathode_chemistry": "NCA",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "notes": "27 NCA/graphite 18650 cells (28 declared); Oxford path-dependent degradation in three parts; Panasonic NCR18650BD at 24 °C; CC/CC-CV cycling at C/4 or C/2; count includes 6 auxiliary half/full-cell reference files; Raj et al. Batteries & Supercaps 2020",
    "institution": "University of Oxford, Howey Research Group",
    "year": 2020,
@@ -1982,7 +1599,6 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 3.0,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.5,
@@ -1990,16 +1606,10 @@
    "temperature_min_C": 24.0,
    "temperature_max_C": 24.0,
    "charge_c_rate_max": 0.5,
-<<<<<<< Updated upstream
-   "discharge_c_rate_max": 0.5,
-   "c_rate_profile": "constant",
-   "protocol_class": "calendar_hold",
-=======
    "discharge_c_rate_max": 3.33,
    "c_rate_profile": "constant",
    "protocol_class": "mixed",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "mixed",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2044,28 +1654,6 @@
    "ref_name": "2021_Mendeley_LFP-NCA-NMC_18650_DriveCycle_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Mendeley Drive Cycle Multi-Chem",
-<<<<<<< Updated upstream
-   "institution": null,
-   "year": 2021,
-   "doi": "10.17632/29kw38kzwj.1",
-   "manufacturer": null,
-   "model": "LiFePO4 18650 Rechargeable Cell 3.3V 1100 mAh",
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 1.1,
-   "nominal_voltage_V": 3.3,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": 5.0,
-   "temperature_max_C": 45.0,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": 1.5,
-   "c_rate_profile": "drive_cycle",
-   "protocol_class": "drive_cycle",
-=======
    "notes": "3 mixed-cathode cylindrical cells; LFP, NCA and NMC cell types; constant-rate discharge (0.5C-1.5C), DST/FUDS/UDDS/WLTP/US06 drive cycles and HPPC at 5, 25 and 45 °C; Shrivastava et al. Journal of Energy Storage 2022",
    "institution": "University of Malaya",
    "year": 2021,
@@ -2111,7 +1699,6 @@
    "c_rate_profile": "drive_cycle",
    "protocol_class": "pulse",
    "charging_profile": "CC-CV",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2155,32 +1742,12 @@
    "ref_name": "2023_CMU_Bills_NMC_18650_VTC6_eVTOL_25T",
    "ref_name_aliases": [],
    "dataset_name": "CMU VTC6 eVTOL Duty Cycle",
-<<<<<<< Updated upstream
-=======
    "notes": "22 NMC 18650 cells; Sony-Murata VTC6; eVTOL mission-profile discharge with CC-CV charge variants; Bills et al. Scientific Data 2023",
->>>>>>> Stashed changes
    "institution": "Carnegie Mellon University",
    "year": 2023,
    "doi": "10.1184/R1/14226830.v3",
    "manufacturer": "Sony-Murata",
    "model": "18650 VTC-6",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 3.12,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.0,
-   "voltage_max_V": 4.2,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": 1.5,
-   "discharge_c_rate_max": 6.930328,
-   "c_rate_profile": "dynamic",
-   "protocol_class": "CC-CV",
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -2213,7 +1780,6 @@
    "c_rate_profile": "dynamic",
    "protocol_class": "mixed",
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "profile",
    "application_domain": "eVTOL",
    "entity_type": "cell",
@@ -2254,22 +1820,12 @@
    "ref_name": "2022_EVERLASTING_4TU_NMC-SiGr_18650_3.5Ah_MultiC_25-45T",
    "ref_name_aliases": [],
    "dataset_name": "EVERLASTING 4TU (25°C+45°C)",
-<<<<<<< Updated upstream
-=======
    "notes": "17 NMC811/Si-graphite 18650 cells; EVERLASTING 4TU release as loose files (repeated in dataset_23); LG INR18650 MJ1; rate-based cycling and drive-cycle ageing at 25 and 45 °C",
->>>>>>> Stashed changes
    "institution": "VITO / EnergyVille (EVERLASTING project)",
    "year": 2022,
    "doi": "10.4121/13739296.v1",
    "manufacturer": "LG Chem",
    "model": "INR18650 MJ1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -2294,7 +1850,6 @@
     "CC",
     "dynamic"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 3.5,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.5,
@@ -2303,14 +1858,9 @@
    "temperature_max_C": 45.0,
    "charge_c_rate_max": 1.0,
    "discharge_c_rate_max": 1.5,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": "CC-CV",
-=======
    "c_rate_profile": "drive_cycle",
    "protocol_class": "CC-CV",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2349,22 +1899,12 @@
    "ref_name": "2022_EVERLASTING_4TU_NMC_18650_3.5Ah_MultiC_25-45T",
    "ref_name_aliases": [],
    "dataset_name": "EVERLASTING 4TU (25°C+45°C)",
-<<<<<<< Updated upstream
-=======
    "notes": "17 NMC811/Si-graphite 18650 cells; EVERLASTING 4TU release as a zip (repeated in dataset_22); LG INR18650 MJ1; rate-based cycling and drive-cycle ageing at 25 and 45 °C",
->>>>>>> Stashed changes
    "institution": "VITO / EnergyVille (EVERLASTING project)",
    "year": 2022,
    "doi": "10.4121/13739296.v1",
    "manufacturer": "LG Chem",
    "model": "INR18650 MJ1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -2389,7 +1929,6 @@
     "CC",
     "dynamic"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 3.5,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.5,
@@ -2398,14 +1937,9 @@
    "temperature_max_C": 45.0,
    "charge_c_rate_max": 1.0,
    "discharge_c_rate_max": 1.5,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": "CC-CV",
-=======
    "c_rate_profile": "drive_cycle",
    "protocol_class": "CC-CV",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2445,22 +1979,12 @@
    "ref_name": "2021_Stanford_Onori_NMC-NCA-LFP_18650_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Stanford-Onori Galvanostatic Discharge",
-<<<<<<< Updated upstream
-=======
    "notes": "18 mixed-cathode/graphite cylindrical cells; LFP, NMC and NCA cells; galvanostatic discharge at set C-rates (up to 20C on LFP) at 5, 25 and 35 °C; Catenaro et al. Data in Brief 2021",
->>>>>>> Stashed changes
    "institution": "Stanford University, Onori Lab",
    "year": 2021,
    "doi": "10.17632/kxsbr4x3j2.2",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "cylindrical"
@@ -2489,7 +2013,6 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.0,
@@ -2500,10 +2023,7 @@
    "discharge_c_rate_max": 20.0,
    "c_rate_profile": "constant",
    "protocol_class": "CC-CV",
-<<<<<<< Updated upstream
-=======
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2538,28 +2058,6 @@
    "ref_name": "2022_Stanford_Onori_NMC_Cyl_RealDriving_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Stanford-Onori EV Real-Driving",
-<<<<<<< Updated upstream
-   "institution": "Stanford University, Onori Lab",
-   "year": 2022,
-   "doi": null,
-   "manufacturer": null,
-   "model": "INR21700-M50T",
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "21700",
-   "nominal_capacity_Ah": 5.0,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.5,
-   "voltage_max_V": 4.2,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": 2.917362,
-   "discharge_c_rate_max": 0.970327,
-   "c_rate_profile": "drive_cycle",
-   "protocol_class": "drive_cycle",
-=======
    "notes": "6 NMC 21700 cells (10 declared); INR21700-M50T; UDDS ageing (80-20% SOC) after CC-CV charges at C/4 to 3C; shares cell ids with dataset_27; Pozzato et al. Data in Brief 2022",
    "institution": "Stanford University, Onori Lab",
    "year": 2022,
@@ -2598,7 +2096,6 @@
    "c_rate_profile": "drive_cycle",
    "protocol_class": "drive_cycle",
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "profile",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2641,32 +2138,12 @@
    "ref_name": "2024_Stanford_Onori_LiIon_Parallel_MultiC_25T",
    "ref_name_aliases": [],
    "dataset_name": "Stanford-Onori Parallel Cells",
-<<<<<<< Updated upstream
-=======
    "notes": "95 cylindrical modules; single-cell Samsung INR21700-50E and LG INR21700-M50T characterization plus parallel-connected module experiments; entities are modules, not single cells; Piombo et al. Data in Brief 2024",
->>>>>>> Stashed changes
    "institution": "University of Warwick; dataset collected at the Stanford Energy Control Laboratory (Onori Lab)",
    "year": 2024,
    "doi": "10.17632/zh58byr53c.1",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": null,
-   "nominal_capacity_Ah": 4.9,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.5,
-   "voltage_max_V": 4.2,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": "constant",
-   "protocol_class": "RPT_only",
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "cylindrical"
@@ -2703,7 +2180,6 @@
    "c_rate_profile": "multistage",
    "protocol_class": "mixed",
    "charging_profile": "CC-CV",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "module",
@@ -2741,28 +2217,6 @@
    "ref_name": "2024_Stanford_Onori_LiIon_SecondLife_GridStorage_25T",
    "ref_name_aliases": [],
    "dataset_name": "Stanford-Onori Second-Life Grid",
-<<<<<<< Updated upstream
-   "institution": "Stanford University, Onori Lab",
-   "year": 2024,
-   "doi": "10.17605/OSF.IO/8JNR5",
-   "manufacturer": null,
-   "model": "INR21700-M50T",
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "21700",
-   "nominal_capacity_Ah": 5.0,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.5,
-   "voltage_max_V": 4.2,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": 0.470643,
-   "discharge_c_rate_max": 0.941071,
-   "c_rate_profile": "constant",
-   "protocol_class": "calendar_hold",
-=======
    "notes": "6 NMC/Si-graphite 21700 cells; second-life INR21700-M50T cells under residential and commercial grid-storage duty cycles; shares cell ids with dataset_25; Moy et al. Data in Brief 2024",
    "institution": "Stanford University, Onori Lab",
    "year": 2024,
@@ -2804,7 +2258,6 @@
    "c_rate_profile": "dynamic",
    "protocol_class": "calendar_hold",
    "charging_profile": "dynamic",
->>>>>>> Stashed changes
    "aging_type": "second_life",
    "application_domain": "grid_storage",
    "entity_type": "cell",
@@ -2845,20 +2298,6 @@
    "ref_name": "2024_Stanford_Onori_LFP_Cyl_SOC-ML_25T",
    "ref_name_aliases": [],
    "dataset_name": "Stanford-Onori LFP SOC ML",
-<<<<<<< Updated upstream
-   "institution": "Stanford University, Onori Lab",
-   "year": 2024,
-   "doi": "10.1021/acsenergylett.4c03223",
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "LFP",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "26650",
-   "nominal_capacity_Ah": null,
-   "nominal_voltage_V": null,
-=======
    "notes": "8 LFP/graphite 26650 cells; capacity, GITT, pseudo-OCV and dynamic-profile tests at 10-45 °C for SOC estimation; Che et al. ACS Energy Letters 2025",
    "institution": "Stanford University, Onori Lab",
    "year": 2024,
@@ -2893,7 +2332,6 @@
    ],
    "nominal_capacity_Ah": 2.5,
    "nominal_voltage_V": 3.3,
->>>>>>> Stashed changes
    "voltage_min_V": 2.0,
    "voltage_max_V": 3.6,
    "temperature_min_C": 10.0,
@@ -2901,12 +2339,8 @@
    "charge_c_rate_max": 1.0,
    "discharge_c_rate_max": 1.0,
    "c_rate_profile": "drive_cycle",
-<<<<<<< Updated upstream
-   "protocol_class": "pulse",
-=======
    "protocol_class": "mixed",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -2948,32 +2382,11 @@
     "2025_Stanford_Onori_LiIon_Calendar_MultiT"
    ],
    "dataset_name": "Stanford-SLAC Decade Calendar Aging",
-<<<<<<< Updated upstream
-=======
    "notes": "248 mixed-chemistry cells (259 declared); calendar ageing of 8 cell types stored at 2 SOC and 4 temperatures (24-85 °C); check-up summary and raw tables; Lam et al. Joule 2025",
->>>>>>> Stashed changes
    "institution": "Stanford University and SLAC (Chueh group)",
    "year": 2025,
    "doi": "10.17605/OSF.IO/JU325",
    "manufacturer": null,
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650P",
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": null,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": 24.0,
-   "temperature_max_C": 85.0,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "model": null,
    "chemistry_is_multi": true,
    "form_factors": [
@@ -3023,7 +2436,6 @@
    "c_rate_profile": "constant",
    "protocol_class": "calendar_hold",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "calendar",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -3052,11 +2464,8 @@
    ],
    "quality_flags": [
     "multi_chemistry",
-<<<<<<< Updated upstream
-=======
     "voltage_excursion_below_cutoff",
     "voltage_excursion_above_cutoff",
->>>>>>> Stashed changes
     "partial_raw",
     "incomplete_raw_files"
    ],
@@ -3068,22 +2477,12 @@
    "ref_name": "2025_Beihang_LiIon_EV-BMS_MultiChem_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Beihang EV Fault Diagnosis",
-<<<<<<< Updated upstream
-=======
    "notes": "121 vehicles (515 declared); BMS data from EV fleets (DTI and GIS groups) as unlabelled tensors; Cao et al. Nature Communications 2025",
->>>>>>> Stashed changes
    "institution": "Beihang University",
    "year": 2025,
    "doi": "10.5281/zenodo.10656500",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": null,
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "pack",
-   "cell_format_code": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "pack"
@@ -3094,7 +2493,6 @@
    "nominal_capacities_Ah": [],
    "charge_profiles": [],
    "discharge_profiles": [],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
@@ -3105,10 +2503,7 @@
    "discharge_c_rate_max": null,
    "c_rate_profile": null,
    "protocol_class": null,
-<<<<<<< Updated upstream
-=======
    "charging_profile": null,
->>>>>>> Stashed changes
    "aging_type": "field",
    "application_domain": "EV_field",
    "entity_type": "vehicle",
@@ -3138,32 +2533,11 @@
    "ref_name": "2023_Mendeley_NMC811-LFP_18650_Relaxation_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Mendeley NMC811-LFP Relaxation",
-<<<<<<< Updated upstream
-=======
    "notes": "12 mixed-chemistry 18650 cells; NMC811 and LFP cells; formation, reference performance and depth-of-discharge relaxation tests at C/25-C/1 from -15 to 55 °C; Fernando et al. Cell Reports Physical Science 2024",
->>>>>>> Stashed changes
    "institution": "Hawaii Natural Energy Institute",
    "year": 2023,
    "doi": "10.17632/y8nstxmdrg.1",
    "manufacturer": null,
-<<<<<<< Updated upstream
-   "model": "A",
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": "mixed",
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": null,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": -15.0,
-   "temperature_max_C": 55.0,
-   "charge_c_rate_max": 1.0,
-   "discharge_c_rate_max": 1.0,
-   "c_rate_profile": "constant",
-   "protocol_class": "pulse",
-=======
    "model": null,
    "chemistry_is_multi": true,
    "form_factors": [
@@ -3201,7 +2575,6 @@
    "c_rate_profile": "multistage",
    "protocol_class": "multistage_CC",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -3230,12 +2603,8 @@
     "mat"
    ],
    "quality_flags": [
-<<<<<<< Updated upstream
-    "multi_chemistry"
-=======
     "multi_chemistry",
     "voltage_excursion_above_cutoff"
->>>>>>> Stashed changes
    ],
    "confidence": "verified",
    "record_path": "datasets/dataset_31.json"
@@ -3245,28 +2614,6 @@
    "ref_name": "2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Figshare LFP Pouch EIS",
-<<<<<<< Updated upstream
-   "institution": null,
-   "year": 2023,
-   "doi": "10.6084/m9.figshare.23736582",
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "LFP",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "pouch",
-   "cell_format_code": null,
-   "nominal_capacity_Ah": 0.6,
-   "nominal_voltage_V": null,
-   "voltage_min_V": 2.0,
-   "voltage_max_V": null,
-   "temperature_min_C": 20.0,
-   "temperature_max_C": 20.0,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": 0.2,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "notes": "11 LFP cells; EIS sweeps (0.01 Hz-1 kHz) at 5-100% SOC and 0.12 A capacity tests; file names read IFR14500; Mustafa et al. Data in Brief 2024",
    "institution": "University of Cassino and Southern Lazio",
    "year": 2023,
@@ -3304,7 +2651,6 @@
    "c_rate_profile": "multistage",
    "protocol_class": "pulse",
    "charging_profile": null,
->>>>>>> Stashed changes
    "aging_type": "characterization",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -3339,18 +2685,6 @@
    "ref_name": "2023_TUM_NMC811-LFP_Auto_ThermalRunaway_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "TUM Thermal Runaway Propagation",
-<<<<<<< Updated upstream
-   "institution": "Technical University of Munich",
-   "year": 2023,
-   "doi": null,
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": true,
-   "form_factor": null,
-   "cell_format_code": null,
-=======
    "notes": "2 prismatic modules; thermal-runaway propagation in multi-cell modules (GraphiteLFP and GraphiteNMC-811); cell voltage plus cell, venting and surface temperatures; Schöberl et al. eTransportation 2024",
    "institution": "Technical University of Munich",
    "year": 2023,
@@ -3379,25 +2713,17 @@
    "discharge_profiles": [
     "CC"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
    "voltage_max_V": null,
    "temperature_min_C": null,
    "temperature_max_C": null,
-<<<<<<< Updated upstream
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": null,
-   "protocol_class": "abuse",
-=======
    "charge_c_rate_max": 0.1,
    "discharge_c_rate_max": 0.3333,
    "c_rate_profile": "constant",
    "protocol_class": "abuse",
    "charging_profile": null,
->>>>>>> Stashed changes
    "aging_type": "abuse_thermal",
    "application_domain": "safety",
    "entity_type": "module",
@@ -3430,23 +2756,12 @@
    "ref_name": "2023_Mendeley_LiIon_MechAbuse_NailPenetration_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Mendeley Mech-Induced Thermal Runaway",
-<<<<<<< Updated upstream
-=======
    "notes": "253 mixed-cathode/graphite pouch cells (109 declared); single-side indentation tests that induce thermal runaway; force, displacement, voltage and temperature; Lin et al. Journal of Energy Storage 2023",
->>>>>>> Stashed changes
    "institution": "Oak Ridge National Laboratory and Sandia National Laboratories",
    "year": 2023,
    "doi": "10.17632/sn2kv34r4h.2",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": null,
-   "cell_format_code": null,
-   "nominal_capacity_Ah": 10.0,
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "pouch"
@@ -3489,7 +2804,6 @@
    "charge_profiles": [],
    "discharge_profiles": [],
    "nominal_capacity_Ah": null,
->>>>>>> Stashed changes
    "nominal_voltage_V": null,
    "voltage_min_V": null,
    "voltage_max_V": null,
@@ -3499,10 +2813,7 @@
    "discharge_c_rate_max": null,
    "c_rate_profile": null,
    "protocol_class": "abuse",
-<<<<<<< Updated upstream
-=======
    "charging_profile": null,
->>>>>>> Stashed changes
    "aging_type": "abuse_mechanical",
    "application_domain": "safety",
    "entity_type": "cell",
@@ -3537,32 +2848,12 @@
    "ref_name": "2023_Zenodo_NMC-NCA-LFP_21700_ARC_Calorimetry_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Zenodo ARC Calorimetry 21700",
-<<<<<<< Updated upstream
-=======
    "notes": "55 mixed-chemistry 21700 cells; accelerating-rate-calorimetry heating curves of NMC, NCA and LFP cells at several SOC; Ohneseit et al. Batteries 2023",
->>>>>>> Stashed changes
    "institution": "Karlsruhe Institute of Technology (KIT)",
    "year": 2023,
    "doi": "10.5281/zenodo.7707929",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": "cylindrical",
-   "cell_format_code": "21700",
-   "nominal_capacity_Ah": null,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": null,
-   "protocol_class": "abuse",
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "cylindrical"
@@ -3604,7 +2895,6 @@
    "c_rate_profile": "multistage",
    "protocol_class": "abuse",
    "charging_profile": null,
->>>>>>> Stashed changes
    "aging_type": "abuse_thermal",
    "application_domain": "safety",
    "entity_type": "cell",
@@ -3636,22 +2926,11 @@
    "ref_name": "2024_Imperial_Kirkaldy_NMC_21700_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "Imperial College 21700 Cycle Aging",
-<<<<<<< Updated upstream
-=======
    "notes": "40 NMC811/Si-graphite 21700 cells; LG M50T cycle ageing (Si-, C- and cathode-degradation and drive-cycle experiments); ageing at 10, 25 and 40 °C, performance checks at 25 °C; Kirkaldy et al. Journal of Power Sources 2024",
->>>>>>> Stashed changes
    "institution": "Imperial College London",
    "year": 2024,
    "doi": "10.5281/zenodo.10637534",
    "manufacturer": "LG",
-<<<<<<< Updated upstream
-   "model": "M50",
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "21700",
-=======
    "model": "M50T",
    "chemistry_is_multi": false,
    "form_factors": [
@@ -3676,7 +2955,6 @@
     "CC",
     "dynamic"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 5.0,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.5,
@@ -3686,12 +2964,8 @@
    "charge_c_rate_max": 0.3,
    "discharge_c_rate_max": 1.0,
    "c_rate_profile": "drive_cycle",
-<<<<<<< Updated upstream
-   "protocol_class": "drive_cycle",
-=======
    "protocol_class": "mixed",
    "charging_profile": "CC-CV",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -3703,10 +2977,7 @@
    "raw_bytes": 49420634660,
    "signals": [
     "capacity",
-<<<<<<< Updated upstream
-=======
     "current",
->>>>>>> Stashed changes
     "cycle_index",
     "energy",
     "internal_resistance",
@@ -3742,22 +3013,12 @@
     "2024_TUM_Stroebl_NMC_21700_Multistage_25T"
    ],
    "dataset_name": "Munich Multistage Aging Samsung 21700",
-<<<<<<< Updated upstream
-=======
    "notes": "279 NMC 21700 cells; Samsung INR21700-50E; multi-stage ageing test points with per-cell C-rate, SOC and DOD at 10-45 °C; Stroebl et al. Scientific Data 2024",
->>>>>>> Stashed changes
    "institution": "Munich University of Applied Sciences (HM)",
    "year": 2024,
    "doi": "10.6084/m9.figshare.25975315",
    "manufacturer": "Samsung SDI",
    "model": "INR21700-50E",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": null,
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "21700",
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "cylindrical"
@@ -3782,7 +3043,6 @@
     "CC-CV",
     "pulse"
    ],
->>>>>>> Stashed changes
    "nominal_capacity_Ah": 4.9,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.5,
@@ -3791,14 +3051,9 @@
    "temperature_max_C": 45.0,
    "charge_c_rate_max": 1.0,
    "discharge_c_rate_max": 2.0,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "c_rate_profile": "constant",
    "protocol_class": "calendar_hold",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "mixed",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -3838,24 +3093,12 @@
     "2023_ISU_ILCC_Thelen_NMC_Pouch_MultiC_30T"
    ],
    "dataset_name": "ISU-ILCC Battery Aging",
-<<<<<<< Updated upstream
-=======
    "notes": "251 NMC/graphite 502030 pouch cells; capacity fade versus charge rate, discharge rate and depth of discharge at 30 °C; reference tests at C/5 and C/2",
->>>>>>> Stashed changes
    "institution": "Iowa State University and Iowa Lakes Community College",
    "year": 2023,
    "doi": "10.25380/iastate.22582234.v2",
    "manufacturer": "Shenzhen Honghaosheng Electronics",
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "pouch",
-   "cell_format_code": "502030",
-   "nominal_capacity_Ah": 0.25,
-   "nominal_voltage_V": null,
-=======
    "chemistry_is_multi": false,
    "form_factors": [
     "pouch"
@@ -3880,21 +3123,15 @@
    ],
    "nominal_capacity_Ah": 0.25,
    "nominal_voltage_V": 3.7,
->>>>>>> Stashed changes
    "voltage_min_V": 3.0,
    "voltage_max_V": 4.2,
    "temperature_min_C": 30.0,
    "temperature_max_C": 30.0,
    "charge_c_rate_max": 3.0,
    "discharge_c_rate_max": 2.475,
-<<<<<<< Updated upstream
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "c_rate_profile": "constant",
    "protocol_class": "RPT_only",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -3933,33 +3170,12 @@
    "ref_name": "2023_CQU_NCA-LFP_Pouch-Prismatic_MultiC_MultiT",
    "ref_name_aliases": [],
    "dataset_name": "CQU Battery Aging",
-<<<<<<< Updated upstream
-   "institution": "Chongqing University",
-=======
    "notes": "47 mixed-cathode cells; pouch/prismatic cells; per-cycle capacity and partial-charge features only; load profile named per cell; Che et al. Cell Reports Physical Science 2023",
    "institution": "Chongqing University; Aalborg University",
->>>>>>> Stashed changes
    "year": 2023,
    "doi": "10.17632/n3b54nsw8m.9",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": "pouch",
-   "cell_format_code": null,
-   "nominal_capacity_Ah": null,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": null,
-   "temperature_max_C": null,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "pouch",
@@ -3996,7 +3212,6 @@
    "c_rate_profile": "drive_cycle",
    "protocol_class": "mixed",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -4030,32 +3245,12 @@
     "2022_JRC_NMC-LFP-LTO_MultiForm_Calendar_MultiT"
    ],
    "dataset_name": "THI Experimental Calendar Ageing",
-<<<<<<< Updated upstream
-=======
    "notes": "108 mixed-chemistry cylindrical cells; calendar-ageing capacity tables for five chemistries (LCO, LFP, LMO, LTO, NCA) at three SOC and 50/60 °C; no waveforms; Geisbauer et al. Energies 2021",
->>>>>>> Stashed changes
    "institution": "Technische Hochschule Ingolstadt (THI)",
    "year": 2022,
    "doi": "10.5281/zenodo.6685365",
    "manufacturer": null,
    "model": null,
-<<<<<<< Updated upstream
-   "cathode_chemistry": "mixed",
-   "anode_chemistry": null,
-   "chemistry_is_multi": true,
-   "form_factor": null,
-   "cell_format_code": null,
-   "nominal_capacity_Ah": null,
-   "nominal_voltage_V": null,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": 50.0,
-   "temperature_max_C": 60.0,
-   "charge_c_rate_max": null,
-   "discharge_c_rate_max": null,
-   "c_rate_profile": null,
-   "protocol_class": "calendar_hold",
-=======
    "chemistry_is_multi": true,
    "form_factors": [
     "cylindrical"
@@ -4099,7 +3294,6 @@
    "c_rate_profile": "constant",
    "protocol_class": "calendar_hold",
    "charging_profile": null,
->>>>>>> Stashed changes
    "aging_type": "calendar",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -4135,28 +3329,6 @@
    "ref_name": "2022_HUST_LFP_18650_MultiC_MultiC_30T",
    "ref_name_aliases": [],
    "dataset_name": "HUST Cycle Aging",
-<<<<<<< Updated upstream
-   "institution": "Huazhong University of Science and Technology",
-   "year": 2022,
-   "doi": "10.17632/nsc7hnsg4s.2",
-   "manufacturer": null,
-   "model": null,
-   "cathode_chemistry": "LFP",
-   "anode_chemistry": "graphite",
-   "chemistry_is_multi": false,
-   "form_factor": "cylindrical",
-   "cell_format_code": "18650",
-   "nominal_capacity_Ah": 1.1,
-   "nominal_voltage_V": 3.3,
-   "voltage_min_V": null,
-   "voltage_max_V": null,
-   "temperature_min_C": 30.0,
-   "temperature_max_C": 30.0,
-   "charge_c_rate_max": 5.002364,
-   "discharge_c_rate_max": 5.001691,
-   "c_rate_profile": null,
-   "protocol_class": null,
-=======
    "notes": "77 LFP/graphite 18650 cells; cycle ageing at 30 °C with per-cycle voltage-current-capacity frames and the authors' RUL labels; Ma et al. Energy & Environmental Science 2022",
    "institution": "Huazhong University of Science and Technology",
    "year": 2022,
@@ -4196,7 +3368,6 @@
    "c_rate_profile": "multistage",
    "protocol_class": "mixed",
    "charging_profile": "multi-rate",
->>>>>>> Stashed changes
    "aging_type": "cyclic",
    "application_domain": "lab",
    "entity_type": "cell",
@@ -4222,13 +3393,9 @@
    "source_format": [
     "pkl"
    ],
-<<<<<<< Updated upstream
-   "quality_flags": [],
-=======
    "quality_flags": [
     "voltage_excursion_below_cutoff"
    ],
->>>>>>> Stashed changes
    "confidence": "verified",
    "record_path": "datasets/dataset_41.json"
   }

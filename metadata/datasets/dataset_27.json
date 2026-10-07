@@ -9,24 +9,6 @@
   "institution": "Stanford University, Onori Lab",
   "year": 2024,
   "doi": "10.17605/OSF.IO/8JNR5",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://osf.io/8jnr5/",
-  "study_group": "onori_second_life_8jnr5"
- },
- "cell": {
-  "manufacturer": null,
-  "model": "INR21700-M50T",
-  "cathode_chemistry": "NMC",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "Multi",
-  "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": "21700",
-  "dimensions_mm": {
-   "diameter": 21.1,
-   "height": 70.15,
-=======
   "paper_doi": "10.1016/j.dib.2024.111046",
   "source_url": "https://osf.io/8jnr5/",
   "study_group": "onori_second_life_8jnr5",
@@ -40,32 +22,11 @@
   "dimensions_mm": {
    "diameter": 21.44,
    "height": 70.8,
->>>>>>> Stashed changes
    "length": null,
    "width": null,
    "thickness": null,
    "basis": "stated"
   },
-<<<<<<< Updated upstream
-  "nominal_capacity_Ah": 5.0,
-  "capacity_basis": "rated",
-  "nominal_voltage_V": null,
-  "voltage_level": "cell",
-  "voltage_min_V": 2.5,
-  "voltage_max_V": 4.2
- },
- "conditions": {
-  "temperature_min_C": null,
-  "temperature_max_C": null,
-  "temperature_setpoints_C": [],
-  "temperature_basis": "unspecified",
-  "charge_c_rate_max": 0.470643,
-  "discharge_c_rate_max": 0.941071,
-  "c_rate_profile": "constant",
-  "protocol_class": "calendar_hold",
-  "protocol_charge_raw": "second-life grid-storage synthetic duty cycles (residential and commercial)",
-  "protocol_discharge_raw": null,
-=======
   "nominal_capacity_Ah": 4.85,
   "capacity_basis": "rated",
   "nominal_voltage_V": 3.63,
@@ -172,7 +133,6 @@
     "detail": "synthetic 48 h peak-shaving profile for an office building; cells W8, V5, G1"
    }
   ],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "second_life",
@@ -246,10 +206,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "Cycle_Index of the tester workbooks; several workbooks per cell continue the count",
-<<<<<<< Updated upstream
-=======
   "count_basis": "6 second-life cells from the author paper, continuing the 10-cell first-life dataset_25 (same physical cells).",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.499894,
@@ -298,11 +255,7 @@
   "flags": [
    "shared_cells_with_other_dataset"
   ],
-<<<<<<< Updated upstream
-  "notes": "Six second-life NMC cells cycled with residential and commercial duty cycles at Stanford. Cell ids G1, V4, V5 also appear in dataset_25. Cell spec is from LG's INR21700 M50 18.2Wh document (2017-09-22), the closest available datasheet to the exact M50T tab variant this dataset names; electrical/physical specs are expected to match across M50-series tab variants. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached extraction covers six cells and parsed cycling, RPT and EIS workbook parts; the positive maximum includes diagnostic RPT charge rather than the grid-storage cycling protocol alone. stored nominal capacity 5.0 Ah comes from the nearest LG M50 datasheet, with an existing exact M50T model caveat; the inspected cycling workbook Global_Info Capacity field is 4.85. No denominator is inferred from measured current. Finite auxiliary temperature readings exist, but the sensor placement on the cell versus ambient air was not established; measured cell-temperature availability is therefore unclear."
-=======
   "notes": "Six second-life NMC cells cycled with residential and commercial duty cycles at Stanford. Cell ids G1, V4, V5 also appear in dataset_25. Cell spec is from LG's INR21700 M50 18.2Wh document (2017-09-22), the closest available datasheet to the exact M50T tab variant this dataset names; electrical/physical specs are expected to match across M50-series tab variants. Charge/discharge rate estimates, where explicitly marked raw_data in the citations, use signed observed current extrema divided by the stored nominal Ah. These are measurement estimates over the cached extraction scope, not imposed CC protocol setpoints; they may include pulse, dynamic, regenerative or diagnostic segments and measurement excursions. Current units and direction were checked against the cited original headers, status labels or separate charge/discharge counters. cached extraction covers six cells and parsed cycling, RPT and EIS workbook parts; the positive maximum includes diagnostic RPT charge rather than the grid-storage cycling protocol alone. nominal capacity 4.85 Ah and nominal voltage 3.63 V are from the data article's Table 1, matching the cycling workbook Global_Info Capacity field; the earlier 5.0 Ah came from the generic LG M50 datasheet and is superseded. Table 1 also gives 21.44 mm x 70.80 mm and 69.25 g, which differs from the datasheet maxima (21.1 x 70.15 mm); the paper values are used. No denominator is inferred from measured current. Finite auxiliary temperature readings exist, but the sensor placement on the cell versus ambient air was not established; measured cell-temperature availability is therefore unclear. Charging profile: the duty cycles (residential and commercial) are time-varying for every cell; the charge is CC-CV at one level. No documentation ships with the dataset. The data article is \"Second-life lithium-ion battery aging dataset based on grid storage cycling\", Data in Brief 2024 (10.1016/j.dib.2024.111046). Cell groups per the article: residential profile V4, W9, W10; commercial W8, V5, G1; first-life charge rates C/4, C/2, 1C, 1C, 3C, 3C (first-life data in the related article Pozzato et al., Data in Brief 2022, 10.1016/j.dib.2022.107995). Campaign runs 24 months from 2022-10-28; data shared up to 2024-10-06. Equipment: Arbin LBT21024 cycler, Amerex IC500R thermal chamber, Gamry EIS 1010E, T-type thermocouple on the cell surface centre. Chamber alternates 20 and 35 °C between batches. Raw data OSF DOI 10.17605/OSF.IO/8JNR5. The recorded rate maxima are the documented protocol maxima (0.5C pulses, 1C discharge), not the raw-current estimates. Rate groups: the 0.3C CC-CV charge against the 8 s C/2 charge and discharge pulses of the reference tests."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -311,13 +264,9 @@
    "identity.institution": "landing_page",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-   "identity.study_group": "relationships",
-=======
    "identity.paper_doi": "paper",
    "identity.study_group": "relationships",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "landing_page",
    "content.supported_tasks": "curated",
@@ -327,33 +276,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.model": "raw_filenames",
-   "cell.cathode_chemistry": "landing_page",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "curated",
-   "cell.nominal_capacity_Ah": "datasheet",
-   "cell.voltage_max_V": "datasheet",
-   "cell.voltage_min_V": "datasheet",
-   "conditions.protocol_charge_raw": "landing_page",
-   "cell.dimensions_mm": "datasheet",
-   "conditions.c_rate": "derived",
-   "conditions.charge_c_rate_max": "raw_data",
-   "conditions.discharge_c_rate_max": "raw_data"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "curated",
    "cell.cell_format_codes": "derived",
@@ -383,7 +311,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_27.json",
   "landing_evidence": "evidence/landing/dataset_27.json"
  }

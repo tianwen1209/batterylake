@@ -20,27 +20,14 @@
   "doi": "10.5281/zenodo.10963339",
   "paper_doi": "10.1038/s41467-024-48779-z",
   "source_url": "https://zenodo.org/records/10963339",
-<<<<<<< Updated upstream
-  "study_group": null
-=======
   "study_group": null,
   "notes": "55 NMC 18650 cells; XJTU LISHEN NCM cells in 6 batches with fixed and variable charge/discharge strategies; CC-CV charge to 4.2 V, discharge to 2.5 V; Wang et al. Nature Communications 2024"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "LISHEN",
   "model": "18650 NCM",
-<<<<<<< Updated upstream
-  "cathode_chemistry": "NMC",
-  "anode_chemistry": null,
   "chemistry_label_raw": "LiNi0.5Co0.2Mn0.3O2",
   "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-=======
-  "chemistry_label_raw": "LiNi0.5Co0.2Mn0.3O2",
-  "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.0,
    "height": 65.0,
@@ -54,9 +41,6 @@
   "nominal_voltage_V": 3.6,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
-<<<<<<< Updated upstream
-  "voltage_max_V": 4.2
-=======
   "voltage_max_V": 4.2,
   "form_factors": [
    "cylindrical"
@@ -72,7 +56,6 @@
   "nominal_capacities_Ah": [
    2.0
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": null,
@@ -81,12 +64,6 @@
   "temperature_basis": "unspecified",
   "charge_c_rate_max": 3.0,
   "discharge_c_rate_max": 5.0,
-<<<<<<< Updated upstream
-  "c_rate_profile": "constant",
-  "protocol_class": "CC-CV",
-  "protocol_charge_raw": "CC-CV to 4.2 V (CV until 0.02-0.05C), charge rates by batch: 2C, 3C, and variable/random-walk strategies; 5 min rests",
-  "protocol_discharge_raw": "CC to 2.5 V at 1C (fixed) or 0.5-5C (variable strategies); first cycle 0.5C charge / 0.2C discharge for initial capacity",
-=======
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
   "c_rate_profile": "constant",
@@ -116,7 +93,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "cyclic",
@@ -149,10 +125,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "number of cycle records in the `data` struct; `summary.cycle_life` is the authors' cycle life",
-<<<<<<< Updated upstream
-=======
   "count_basis": "55 LISHEN NCM 18650 cells in 6 batches (XJTU data introduction); 27,642 cycles counted from the 55 .mat files.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.4794,
@@ -348,11 +321,7 @@
   "flags": [
    "voltage_excursion_above_cutoff"
   ],
-<<<<<<< Updated upstream
-  "notes": "XJTU battery dataset: 55 cells in 6 batches under different charge/discharge strategies at room temperature (not given numerically). Temperature_Compensation_Data.mat is not a cell."
-=======
   "notes": "XJTU battery dataset: 55 cells in 6 batches under different charge/discharge strategies at room temperature (not given numerically). Temperature_Compensation_Data.mat is not a cell. Charging profile: each cell is CC-CV at a fixed charge rate; the rate differs between batches. Paper Table 1 and Data generation (read in full): XJTU batches 1-6 are 55 LISHEN LiNi0.5Co0.2Mn0.3O2 cells, 2000 mAh nominal, 3.6 V nominal, 2.5-4.2 V, at room temperature; the paper gives no numeric temperature, and batch 2 holds 15 cells while the others hold 8. Charge/discharge protocols differ between batches (its Supplementary Note 1, not read)."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -361,12 +330,8 @@
    "identity.institution": "registry",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-   "identity.paper_doi": "landing_page",
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "paper",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -376,23 +341,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "raw_docs",
-   "cell.model": "raw_docs",
-   "cell.cathode_chemistry": "raw_docs",
-   "cell.chemistry_label_raw": "raw_docs",
-   "cell.form_factor": "raw_docs",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "raw_docs",
    "cell.cell_format_codes": "derived",
@@ -406,7 +360,6 @@
    "cell.manufacturer": "raw_docs",
    "cell.model": "raw_docs",
    "cell.chemistry_label_raw": "raw_docs",
->>>>>>> Stashed changes
    "cell.nominal_capacity_Ah": "raw_docs",
    "cell.nominal_voltage_V": "raw_docs",
    "cell.voltage_max_V": "raw_docs",
@@ -419,11 +372,7 @@
    "conditions.discharge_c_rate_max": "curated"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_09.json",
   "landing_evidence": "evidence/landing/dataset_09.json"
  }

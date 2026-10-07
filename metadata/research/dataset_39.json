@@ -65,11 +65,7 @@
  ],
  "provenance": {
   "derived_from": "datasets/dataset_39.json",
-<<<<<<< Updated upstream
-  "generated": "2026-09-29",
-=======
   "generated": "2026-10-07",
->>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -86,10 +82,6 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29"
-=======
   "last_verified": "2026-10-07"
->>>>>>> Stashed changes
  }
 }

@@ -17,35 +17,14 @@
   "institution": "Technische Hochschule Ingolstadt (THI)",
   "year": 2022,
   "doi": "10.5281/zenodo.6685365",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://zenodo.org/records/6685365",
-  "study_group": "THI_Geisbauer_calendar"
-=======
   "paper_doi": "10.3390/en14113358",
   "source_url": "https://zenodo.org/records/6685365",
   "study_group": "THI_Geisbauer_calendar",
   "notes": "108 mixed-chemistry cylindrical cells; calendar-ageing capacity tables for five chemistries (LCO, LFP, LMO, LTO, NCA) at three SOC and 50/60 °C; no waveforms; Geisbauer et al. Energies 2021"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": null,
   "model": null,
-<<<<<<< Updated upstream
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "LCO; LFP; LMO; LTO; NCA; NMC",
-  "chemistry_is_multi": true,
-  "form_factor": null,
-  "cell_format_code": null,
-  "dimensions_mm": null,
-  "nominal_capacity_Ah": null,
-  "capacity_basis": null,
-  "nominal_voltage_V": null,
-  "voltage_level": null,
-  "voltage_min_V": null,
-  "voltage_max_V": null
-=======
   "chemistry_label_raw": "LCO; LFP; LMO; NCA; NMC",
   "chemistry_is_multi": true,
   "dimensions_mm": null,
@@ -105,7 +84,6 @@
    2.5,
    2.6
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 50.0,
@@ -115,14 +93,6 @@
    60.0
   ],
   "temperature_basis": "chamber_setpoint",
-<<<<<<< Updated upstream
-  "charge_c_rate_max": null,
-  "discharge_c_rate_max": null,
-  "c_rate_profile": null,
-  "protocol_class": "calendar_hold",
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max": 1.0,
   "discharge_c_rate_max": 1.0,
   "charge_c_rate_max_fraction": null,
@@ -153,7 +123,6 @@
    }
   ],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": 20.0,
   "soc_window_max_pct": 100.0,
   "aging_type": "calendar",
@@ -186,10 +155,7 @@
   ],
   "has_waveforms": false,
   "cycle_basis": "one row per check-up (RPT) day; n_cycles counts check-ups, not cycles",
-<<<<<<< Updated upstream
-=======
   "count_basis": "108 distinct (chemistry, Cell Identity Number) keys across six CSV tables, alternate formats counted once; calendar check-ups are not aging cycles.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": null,
    "current_A": null,
@@ -208,15 +174,11 @@
  "cells": [
   {
    "cell_id": "LCO_7",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -225,15 +187,11 @@
   },
   {
    "cell_id": "LCO_8",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -242,15 +200,11 @@
   },
   {
    "cell_id": "LCO_25",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -259,15 +213,11 @@
   },
   {
    "cell_id": "LCO_26",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -276,15 +226,11 @@
   },
   {
    "cell_id": "LCO_43",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -293,15 +239,11 @@
   },
   {
    "cell_id": "LCO_44",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -310,15 +252,11 @@
   },
   {
    "cell_id": "LCO_71",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -327,15 +265,11 @@
   },
   {
    "cell_id": "LCO_72",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -344,15 +278,11 @@
   },
   {
    "cell_id": "LCO_83",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -361,15 +291,11 @@
   },
   {
    "cell_id": "LCO_84",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -378,15 +304,11 @@
   },
   {
    "cell_id": "LCO_95",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -395,15 +317,11 @@
   },
   {
    "cell_id": "LCO_96",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -412,15 +330,11 @@
   },
   {
    "cell_id": "LCO_112",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -429,15 +343,11 @@
   },
   {
    "cell_id": "LCO_115",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -446,15 +356,11 @@
   },
   {
    "cell_id": "LCO_118",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Panasonic",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -463,16 +369,12 @@
   },
   {
    "cell_id": "LFP_7",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -481,16 +383,12 @@
   },
   {
    "cell_id": "LFP_8",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -499,16 +397,12 @@
   },
   {
    "cell_id": "LFP_25",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -517,16 +411,12 @@
   },
   {
    "cell_id": "LFP_26",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -535,16 +425,12 @@
   },
   {
    "cell_id": "LFP_43",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -553,16 +439,12 @@
   },
   {
    "cell_id": "LFP_44",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -571,16 +453,12 @@
   },
   {
    "cell_id": "LFP_71",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -589,16 +467,12 @@
   },
   {
    "cell_id": "LFP_72",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -607,16 +481,12 @@
   },
   {
    "cell_id": "LFP_83",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -625,16 +495,12 @@
   },
   {
    "cell_id": "LFP_84",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -643,16 +509,12 @@
   },
   {
    "cell_id": "LFP_95",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -661,16 +523,12 @@
   },
   {
    "cell_id": "LFP_96",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -679,16 +537,12 @@
   },
   {
    "cell_id": "LFP_112",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -697,16 +551,12 @@
   },
   {
    "cell_id": "LFP_115",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -715,16 +565,12 @@
   },
   {
    "cell_id": "LFP_118",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "Heter",
    "cathode_chemistry": "LFP",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 1.6,
    "voltage_min_V": 2.5,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -733,15 +579,11 @@
   },
   {
    "cell_id": "LMO_1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -750,15 +592,11 @@
   },
   {
    "cell_id": "LMO_2",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -767,15 +605,11 @@
   },
   {
    "cell_id": "LMO_4",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -784,15 +618,11 @@
   },
   {
    "cell_id": "LMO_5",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -801,15 +631,11 @@
   },
   {
    "cell_id": "LMO_7",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -818,15 +644,11 @@
   },
   {
    "cell_id": "LMO_8",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -835,15 +657,11 @@
   },
   {
    "cell_id": "LMO_11",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -852,15 +670,11 @@
   },
   {
    "cell_id": "LMO_12",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -869,15 +683,11 @@
   },
   {
    "cell_id": "LMO_13",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -886,15 +696,11 @@
   },
   {
    "cell_id": "LMO_14",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -903,15 +709,11 @@
   },
   {
    "cell_id": "LMO_15",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -920,15 +722,11 @@
   },
   {
    "cell_id": "LMO_16",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -937,15 +735,11 @@
   },
   {
    "cell_id": "LMO_17",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -954,15 +748,11 @@
   },
   {
    "cell_id": "LMO_18",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -971,15 +761,11 @@
   },
   {
    "cell_id": "LMO_23",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -988,15 +774,11 @@
   },
   {
    "cell_id": "LMO_24",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1005,15 +787,11 @@
   },
   {
    "cell_id": "LMO_25",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1022,15 +800,11 @@
   },
   {
    "cell_id": "LMO_26",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1039,15 +813,11 @@
   },
   {
    "cell_id": "LMO_27",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1056,15 +826,11 @@
   },
   {
    "cell_id": "LMO_28",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1073,15 +839,11 @@
   },
   {
    "cell_id": "LMO_29",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1090,15 +852,11 @@
   },
   {
    "cell_id": "LMO_30",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1107,15 +865,11 @@
   },
   {
    "cell_id": "LMO_35",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1124,15 +878,11 @@
   },
   {
    "cell_id": "LMO_36",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1141,15 +891,11 @@
   },
   {
    "cell_id": "LMO_37",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1158,15 +904,11 @@
   },
   {
    "cell_id": "LMO_38",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1175,15 +917,11 @@
   },
   {
    "cell_id": "LMO_39",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1192,15 +930,11 @@
   },
   {
    "cell_id": "LMO_40",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1209,15 +943,11 @@
   },
   {
    "cell_id": "LMO_41",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1226,15 +956,11 @@
   },
   {
    "cell_id": "LMO_42",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LMO",
-=======
    "manufacturer": "Nitecore",
    "cathode_chemistry": "LMO",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.0,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1243,15 +969,11 @@
   },
   {
    "cell_id": "LTO_1",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1260,15 +982,11 @@
   },
   {
    "cell_id": "LTO_2",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1277,15 +995,11 @@
   },
   {
    "cell_id": "LTO_3",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1294,15 +1008,11 @@
   },
   {
    "cell_id": "LTO_7",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1311,15 +1021,11 @@
   },
   {
    "cell_id": "LTO_8",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1328,15 +1034,11 @@
   },
   {
    "cell_id": "LTO_9",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1345,15 +1047,11 @@
   },
   {
    "cell_id": "LTO_19",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1362,15 +1060,11 @@
   },
   {
    "cell_id": "LTO_20",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1379,15 +1073,11 @@
   },
   {
    "cell_id": "LTO_21",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1396,15 +1086,11 @@
   },
   {
    "cell_id": "LTO_25",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1413,15 +1099,11 @@
   },
   {
    "cell_id": "LTO_26",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1430,15 +1112,11 @@
   },
   {
    "cell_id": "LTO_27",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1447,15 +1125,11 @@
   },
   {
    "cell_id": "LTO_37",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1464,15 +1138,11 @@
   },
   {
    "cell_id": "LTO_38",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1481,15 +1151,11 @@
   },
   {
    "cell_id": "LTO_39",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 50.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1498,15 +1164,11 @@
   },
   {
    "cell_id": "LTO_43",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1515,15 +1177,11 @@
   },
   {
    "cell_id": "LTO_44",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1532,15 +1190,11 @@
   },
   {
    "cell_id": "LTO_45",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LTO",
-=======
    "manufacturer": "LTOBATTERY Co.",
    "cathode_chemistry": "LCO",
    "anode_chemistry": "LTO",
    "nominal_capacity_Ah": 1.3,
    "voltage_max_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1549,15 +1203,11 @@
   },
   {
    "cell_id": "NCA_7",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1566,15 +1216,11 @@
   },
   {
    "cell_id": "NCA_8",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1583,15 +1229,11 @@
   },
   {
    "cell_id": "NCA_25",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1600,15 +1242,11 @@
   },
   {
    "cell_id": "NCA_26",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1617,15 +1255,11 @@
   },
   {
    "cell_id": "NCA_43",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1634,15 +1268,11 @@
   },
   {
    "cell_id": "NCA_44",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1651,15 +1281,11 @@
   },
   {
    "cell_id": "NCA_71",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1668,15 +1294,11 @@
   },
   {
    "cell_id": "NCA_72",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1685,15 +1307,11 @@
   },
   {
    "cell_id": "NCA_83",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1702,15 +1320,11 @@
   },
   {
    "cell_id": "NCA_84",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1719,15 +1333,11 @@
   },
   {
    "cell_id": "NCA_95",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1736,15 +1346,11 @@
   },
   {
    "cell_id": "NCA_96",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1753,15 +1359,11 @@
   },
   {
    "cell_id": "NCA_112",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1770,15 +1372,11 @@
   },
   {
    "cell_id": "NCA_115",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1787,15 +1385,11 @@
   },
   {
    "cell_id": "NCA_118",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NCA",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1804,15 +1398,11 @@
   },
   {
    "cell_id": "NMC_7",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1821,15 +1411,11 @@
   },
   {
    "cell_id": "NMC_8",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1838,15 +1424,11 @@
   },
   {
    "cell_id": "NMC_25",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1855,15 +1437,11 @@
   },
   {
    "cell_id": "NMC_26",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1872,15 +1450,11 @@
   },
   {
    "cell_id": "NMC_43",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1889,15 +1463,11 @@
   },
   {
    "cell_id": "NMC_44",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1906,15 +1476,11 @@
   },
   {
    "cell_id": "NMC_71",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1923,15 +1489,11 @@
   },
   {
    "cell_id": "NMC_72",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -1940,15 +1502,11 @@
   },
   {
    "cell_id": "NMC_83",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1957,15 +1515,11 @@
   },
   {
    "cell_id": "NMC_84",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -1974,15 +1528,11 @@
   },
   {
    "cell_id": "NMC_95",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -1991,15 +1541,11 @@
   },
   {
    "cell_id": "NMC_96",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -2008,15 +1554,11 @@
   },
   {
    "cell_id": "NMC_112",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100.0,
@@ -2025,15 +1567,11 @@
   },
   {
    "cell_id": "NMC_115",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50.0,
@@ -2042,15 +1580,11 @@
   },
   {
    "cell_id": "NMC_118",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Samsung",
    "cathode_chemistry": "NMC",
    "anode_chemistry": "graphite",
    "nominal_capacity_Ah": 2.6,
    "voltage_min_V": 2.75,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 20.0,
@@ -2062,11 +1596,7 @@
   "flags": [
    "multi_chemistry"
   ],
-<<<<<<< Updated upstream
-  "notes": "Author capacity tables (Discharge/Charge Capacity per check-up day) for cells stored at three SOC and 50/60 C; no waveforms. The zip repeats every table as csv, xlsx and txt; only the csv is read. Five chemistries (LCO/LFP/LMO/LTO/NCA) are tested with no manufacturer or model name disclosed for any of them. nominal_capacity_Ah, voltage_min_V/voltage_max_V and dimensions_mm are left null for all - not identifiable from a public datasheet, and would differ per chemistry regardless."
-=======
   "notes": "Author capacity tables (Discharge/Charge Capacity per check-up day) for cells stored at three SOC and 50/60 C; no waveforms. The zip repeats every table as csv, xlsx and txt; only the csv is read. Five chemistries (LCO/LFP/LMO/LTO/NCA) are tested with no manufacturer or model name disclosed for any of them. nominal_capacity_Ah, voltage_min_V/voltage_max_V and dimensions_mm are left null for all - not identifiable from a public datasheet, and would differ per chemistry regardless. Charging profile: null: calendar-ageing study; no charge protocol in the raw files, and none stated by the source. The data article (Geisbauer et al., Energies 14 (2021) 3358; full text read) states: six commercially available cylindrical cell types of 1.3 to 2.6 Ah (nominal capacities from the data sheets, cut-offs UMax/UMin): Samsung NCA 2500 mAh 4.20/2.50 V, Samsung NMC 2600 mAh 4.20/2.75 V, Heter LFP 1600 mAh 3.65/2.50 V, Panasonic LCO 2600 mAh 4.20/2.75 V, Nitecore LMO 2000 mAh 4.20/2.80 V and the titanate-oxide LTO cell of LTOBATTERY Co. 1300 mAh 2.80/1.60 V (positive electrode LiCoO2); carbon negative electrodes except for the LTO cell. 429 cells were aged in synchronized open-circuit storage: 87 each of NCA, NMC, LFP and LCO, 34 LMO and 47 LTO, at three storage temperatures, (18.5 +/- 2.5), (50 +/- 2) and (60 +/- 2) C, and three storage voltages UL, UM and UH per chemistry (Table 2: the 18.5 C cabinet cells at UM only, with 21 of each of the first four chemistries, 4 LMO and 11 LTO; 11 per voltage at 50 and 60 C for NCA, NMC, LFP and LCO, 5 for LMO, 6 for LTO). The storage conditions are voltages, not SOC percentages; the SOC labels recorded here are the repository's. This dataset holds 108 of those cells at 50 and 60 C only. Check-ups use a Neware BTS 4008-5V6A tester, Vötsch/climate chambers and a HIOKI 3554 impedance tester at 20 +/- 2 C: capacity (1C CCCV charge to C/50, 30 min rest, 1C discharge), DC resistance (10 s 1C pulse) and OCV (C/20). The paper says the data are available at THI on request; the Zenodo record 10.5281/zenodo.6685365 of this dataset is not the 10.5281/zenodo.6546753 that the related modelling paper (Celen et al. 2023), which also names the temperatures 50, 60 and 70 C, cites. The 70 C of that paper is not in this data paper's Table 2. Cell chemistry fix: the six cell types of the paper's Table 1 are NCA, NMC, LFP, LCO and LMO cells with a carbon (graphite) negative electrode and the 1300 mAh LTOBATTERY cell, which pairs a titanate-oxide (LTO) negative electrode with an LCO positive electrode; the file-name prefix 'LTO' had been read as the cathode, so the 18 LTO cells now carry cathode LCO and anode LTO."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -2075,13 +1605,9 @@
    "identity.institution": "landing_page",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-   "identity.study_group": "relationships",
-=======
    "identity.paper_doi": "paper",
    "identity.study_group": "relationships",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -2096,17 +1622,6 @@
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.cathode_chemistry": "raw_docs",
-   "cell.chemistry_label_raw": "raw_docs",
-   "cell.form_factor": "registry",
-   "conditions.temperature_setpoints_C": "raw_docs",
-   "conditions.c_rate": "derived"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "paper",
    "cell.cell_format_codes": "paper",
@@ -2130,7 +1645,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_40.json",
   "landing_evidence": "evidence/landing/dataset_40.json"
  }

@@ -18,40 +18,22 @@
   "institution": "University of Oxford, Howey Research Group",
   "year": 2017,
   "doi": "10.5287/bodleian:KO2kdmYGg",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac",
-  "study_group": null
-=======
   "paper_doi": "10.5287/ora-x55vvezkm",
   "source_url": "https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac",
   "study_group": null,
   "notes": "8 LCO-NCO/graphite 533459 pouch cells; Artemis urban drive-cycle ageing at 40 °C; 1C and pseudo-OCV characterisation every 100 cycles; Birkl University of Oxford 2017"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "Kokam",
   "model": "SLPB533459H4",
-<<<<<<< Updated upstream
-  "cathode_chemistry": null,
-  "anode_chemistry": null,
-  "chemistry_label_raw": "Multi",
-  "chemistry_is_multi": false,
-  "form_factor": "pouch",
-  "cell_format_code": null,
-=======
   "chemistry_label_raw": "LCO/NCO blend / graphite",
   "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": null,
   "nominal_capacity_Ah": 0.74,
   "capacity_basis": "rated",
   "nominal_voltage_V": null,
   "voltage_level": null,
   "voltage_min_V": null,
-<<<<<<< Updated upstream
-  "voltage_max_V": null
-=======
   "voltage_max_V": null,
   "form_factors": [
    "pouch"
@@ -74,7 +56,6 @@
   "nominal_capacities_Ah": [
    0.74
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 40.0,
@@ -84,13 +65,6 @@
   ],
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 2.0,
-<<<<<<< Updated upstream
-  "discharge_c_rate_max": 1.0,
-  "c_rate_profile": "drive_cycle",
-  "protocol_class": "drive_cycle",
-  "protocol_charge_raw": "CC-CV at 2C (1480 mA)",
-  "protocol_discharge_raw": "Artemis Urban drive-cycle discharge; characterisation every 100 cycles: 1C (740 mA) and pseudo-OCV at 40 mA",
-=======
   "discharge_c_rate_max": 6.76,
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
@@ -138,7 +112,6 @@
     "detail": "derived from the Artemis Urban profile"
    }
   ],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "profile",
@@ -169,10 +142,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "checkpoint names cycNNNN: the aging cycle at which the characterization was recorded (every 100 cycles); n_cycles is the last checkpoint",
-<<<<<<< Updated upstream
-=======
   "count_basis": "8 Kokam pouch cells of Oxford Dataset 1; cycles sum each cell's last reference-test aging-cycle count (tests every 100 cycles): 55,300.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.699652,
@@ -222,11 +192,7 @@
  ],
  "quality": {
   "flags": [],
-<<<<<<< Updated upstream
-  "notes": "Each cell has characterisation curves (1C and pseudo-OCV, charge and discharge) every 100 drive cycles; the drive-cycle waveform itself is only given for the first cycle in ExampleDC_C1.mat. Model (Kokam SLPB533459H4) is named, but no official Kokam datasheet for this exact model could be located publicly (only generic/other SLPB-series documents) - dimensions, cathode chemistry and voltage range left null rather than inferred from the model number's naming convention."
-=======
   "notes": "Each cell has characterisation curves (1C and pseudo-OCV, charge and discharge) every 100 drive cycles; the drive-cycle waveform itself is only given for the first cycle in ExampleDC_C1.mat. Model (Kokam SLPB533459H4) is named, but no official Kokam datasheet for this exact model could be located publicly (only generic/other SLPB-series documents) - dimensions, cathode chemistry and voltage range left null rather than inferred from the model number's naming convention. Charging profile: the same protocol for all eight cells: a 2C CC-CV charge and an Artemis drive-cycle discharge; the registry also names it Artemis. Only cycle 1 of the ageing cycles is delivered as a time series. The recorded discharge maximum is the observed drive-cycle peak of the delivered first cycle (about -5.0 A, 6.76C of 740 mAh); the characterisation cycles are 1C. The charge rate is 2C (1480 mA). Chemistry: the dataset's Readme.txt names the cells as 8 x Kokam SLPB533459H4, 740 mAh, and tells users to cite Birkl's 2017 DPhil thesis with the dataset; the thesis (Section 2.1) states for its Kokam SLPB 533459H 740 mAh pouch cells a graphite negative electrode and a positive electrode that is a blend of LCO and NCO (lithium nickel cobalt oxide, no Mn or Al named). The thesis model is written SLPB 533459H and the dataset's SLPB533459H4, the same family; the match rests on the model names. The Readme also gives: 1C characterisation 740 mA, pseudo-OCV 40 mA, 2C charge 1480 mA, 40 C chamber, Bio-Logic MPG-205 tester, tests started 2015-01-08. Rate combinations: the ageing charge is 2C CC-CV (readme) against the Artemis drive-cycle discharge (rate group, no pair). Each characterisation block every 100 ageing cycles holds two constant-current cycles with the same rate in both directions, checked in cell 1 at cycles 0 and 100: a 1C (about 740 mA) discharge from 4.19 to 2.70 V followed by a 1C charge to 4.20 V, then about 10 h later a pseudo-OCV discharge and charge at about 40 mA (0.05C). The delivered characterisation charges end at 4.2 V with no current taper, so they are listed as CC; the readme's CC-CV description applies to the ageing charge, whose first-cycle example also shows a constant 1483 mA to 4.2 V with no taper."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -235,11 +201,8 @@
    "identity.institution": "raw_docs",
    "identity.year": "ref_name",
    "identity.doi": "landing_page",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "landing_page",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -249,23 +212,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_docs",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "raw_docs",
-   "cell.model": "raw_docs",
-   "cell.cathode_chemistry": "registry",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "raw_docs",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "raw_docs",
    "cell.cell_format_codes": "derived",
@@ -281,25 +233,16 @@
    "cell.manufacturer": "raw_docs",
    "cell.model": "raw_docs",
    "cell.chemistry_label_raw": "paper",
->>>>>>> Stashed changes
    "cell.nominal_capacity_Ah": "raw_docs",
    "conditions.temperature_setpoints_C": "raw_docs",
    "conditions.protocol_charge_raw": "raw_docs",
    "conditions.protocol_discharge_raw": "raw_docs",
    "conditions.c_rate": "derived",
-<<<<<<< Updated upstream
-   "conditions.charge_c_rate_max": "curated",
-   "conditions.discharge_c_rate_max": "derived"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "conditions.charge_c_rate_max": "raw_data",
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_04.json",
   "landing_evidence": "evidence/landing/dataset_04.json"
  }

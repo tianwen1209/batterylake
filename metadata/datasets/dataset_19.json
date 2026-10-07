@@ -11,19 +11,6 @@
   "doi": "10.5287/bodleian:v0ervBv6p; 10.5287/bodleian:2zvyknyRg",
   "paper_doi": "10.1002/batt.202000160",
   "source_url": "https://ora.ox.ac.uk/objects/uuid:de62b5d2-6154-426d-bcbb-30253ddb7d1e",
-<<<<<<< Updated upstream
-  "study_group": null
- },
- "cell": {
-  "manufacturer": null,
-  "model": "NCR18650BD",
-  "cathode_chemistry": "NCA",
-  "anode_chemistry": "graphite",
-  "chemistry_label_raw": "Multi",
-  "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-=======
   "study_group": null,
   "notes": "27 NCA/graphite 18650 cells (28 declared); Oxford path-dependent degradation in three parts; Panasonic NCR18650BD at 24 °C; CC/CC-CV cycling at C/4 or C/2; count includes 6 auxiliary half/full-cell reference files; Raj et al. Batteries & Supercaps 2020"
  },
@@ -32,7 +19,6 @@
   "model": "NCR18650BD",
   "chemistry_label_raw": "Multi",
   "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.0,
    "height": 65.0,
@@ -46,9 +32,6 @@
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
-<<<<<<< Updated upstream
-  "voltage_max_V": 4.2
-=======
   "voltage_max_V": 4.2,
   "form_factors": [
    "cylindrical"
@@ -71,7 +54,6 @@
   "nominal_capacities_Ah": [
    3.0
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 24.0,
@@ -81,13 +63,6 @@
   ],
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 0.5,
-<<<<<<< Updated upstream
-  "discharge_c_rate_max": 0.5,
-  "c_rate_profile": "constant",
-  "protocol_class": "calendar_hold",
-  "protocol_charge_raw": "CC-CV charge at C/2 to 4.2 V until C/60 (reference tests)",
-  "protocol_discharge_raw": "Reference CC/CC-CV discharge at C/2 to 2.5 V; pseudo-OCV discharge at C/24; aging groups combine CC/CC-CV cycling at C/4 or C/2 with calendar storage at 90% SOC or 4.2 V",
-=======
   "discharge_c_rate_max": 3.33,
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
@@ -128,7 +103,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "mixed",
@@ -189,10 +163,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none in the tables; each MAT-file is one test of one cell (cycling groups and EIS)",
-<<<<<<< Updated upstream
-=======
   "count_basis": "28 cells in the full study per the author documentation; no cycle total (an earlier estimate was removed).",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -307,11 +278,7 @@
    "voltage_excursion_above_cutoff",
    "partial_raw"
   ],
-<<<<<<< Updated upstream
-  "notes": "Measurements are MATLAB table objects, decoded from the MCOS subsystem. Part 1 groups age from beginning of life; parts 2 and 3 continue after middle of life. Table columns TestTime and Amphr have no unit in the file. n_entities (27) is not a clean cell count: it mixes genuine numbered battery cells (20 numbered Cell IDs among Cell1..Cell27) with 6 auxiliary full-cell/half-cell reference files (CH_FC_POCV.mat, CH_HC_anode.mat, CH_HC_cathode.mat, DCH_FC_POCV.mat, DCH_HC_anode.mat, DHC_HC_cathode.mat - characterization/reference files, not six additional independently identified batteries) plus one oddly-named TPG3.8-cell14.mat. The closeness of 27 to the registry's 28 is partly coincidental: real cells are undercounted, offset by these non-cell files. The prior protocol summary incorrectly included 1C; the three author READMEs instead state C/4 or C/2 cycling. Recorded C-rate maxima refer to the explicitly stated cycling/reference constant-current rates; pulse-characterization amplitudes are not specified in those lists."
-=======
   "notes": "Measurements are MATLAB table objects, decoded from the MCOS subsystem. Part 1 groups age from beginning of life; parts 2 and 3 continue after middle of life. Table columns TestTime and Amphr have no unit in the file. n_entities (27) is not a clean cell count: it mixes genuine numbered battery cells (20 numbered Cell IDs among Cell1..Cell27) with 6 auxiliary full-cell/half-cell reference files (CH_FC_POCV.mat, CH_HC_anode.mat, CH_HC_cathode.mat, DCH_FC_POCV.mat, DCH_HC_anode.mat, DHC_HC_cathode.mat - characterization/reference files, not six additional independently identified batteries) plus one oddly-named TPG3.8-cell14.mat. The closeness of 27 to the registry's 28 is partly coincidental: real cells are undercounted, offset by these non-cell files. The prior protocol summary incorrectly included 1C; the three author READMEs instead state C/4 or C/2 cycling. Recorded C-rate maxima refer to the explicitly stated cycling/reference constant-current rates; pulse-characterization amplitudes are not specified in those lists. Charging profile: the charge rate is fixed within a cell but differs between the cycling groups. The paper (Raj et al. 2020; full text read) is the study of part 1 and confirms the cell: Panasonic NCR18650BD (the cell is called NCA/graphite in the text and carbon in Table 1), 3 Ah rated, 2.5-4.2 V, maximum charge current 1.5 A, maximum continuous discharge 10 A, at a constant 24 C in a Binder thermal chamber (Maccor 4200 tester, BioLogic MPG205 for EIS). It tested 12 cells, 3 in each of 4 groups: groups 1 and 2 cycle one day then store five days, groups 3 and 4 cycle two days then store ten days, cycling at C/2 (groups 1 and 3) or C/4 (groups 2 and 4) between 0 and 100% SoC (2.5-4.2 V) at constant current, calendar ageing at 90% of actual SoC, C-rates always relative to the rated capacity. Reference performance tests every 48 cycles: 3 h rest, CCCV capacity test at C/2 to C/60 (0.05 A), pseudo-OCV at C/24, then pulse-power tests at 80, 50 and 20% SoC with 10 s C/2 (1.5 A) charge and discharge pulses and 3.33C (10 A) discharge pulses; GITT at C/2 and EIS at beginning, middle (384 days) and end of life, plus CR2032 half cells from a fresh cell. So 3.33C (10 A, the rated maximum continuous discharge) is the highest rate and applies to short pulses, which is why discharge_c_rate_max is 3.33 here and not the C/2 cycling rate. The paper's 12 cells are a part of the 20 numbered cells in the three data parts; the readme and landing page counts of 3 do not describe the whole dataset. Temperature is a chamber setpoint; the paper mentions no cell sensor. The protocol class is 'mixed' because cycling and calendar storage are combined. Rate combinations: the ageing cycles apply constant current in both directions, at C/2 for groups 1 and 3 and C/4 for groups 2 and 4 (the paper gives one rate per group for charge and discharge); the reference tests charge CC-CV at C/2."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -321,10 +288,7 @@
    "identity.year": "ref_name",
    "identity.doi": "raw_docs",
    "identity.paper_doi": "landing_page",
-<<<<<<< Updated upstream
-=======
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "curated",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -334,24 +298,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.model": "raw_docs",
-   "cell.cathode_chemistry": "raw_docs",
-   "cell.anode_chemistry": "raw_docs",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "raw_docs",
-   "cell.nominal_capacity_Ah": "raw_docs",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "raw_docs",
    "cell.cell_format_codes": "derived",
@@ -367,7 +319,6 @@
    "cell.model": "paper",
    "cell.chemistry_label_raw": "registry",
    "cell.nominal_capacity_Ah": "paper",
->>>>>>> Stashed changes
    "cell.voltage_max_V": "raw_docs",
    "cell.voltage_min_V": "raw_docs",
    "conditions.temperature_setpoints_C": "raw_docs",
@@ -375,19 +326,11 @@
    "conditions.protocol_discharge_raw": "raw_docs",
    "cell.dimensions_mm": "derived",
    "conditions.c_rate": "derived",
-<<<<<<< Updated upstream
-   "conditions.charge_c_rate_max": "raw_docs",
-   "conditions.discharge_c_rate_max": "raw_docs"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "conditions.charge_c_rate_max": "paper",
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_19.json",
   "landing_evidence": "evidence/landing/dataset_19.json"
  }

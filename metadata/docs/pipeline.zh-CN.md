@@ -52,20 +52,13 @@
 
 | 字段 | 规则 |
 |---|---|
-<<<<<<< Updated upstream
-| `cell.cell_format_code` | 在形态或型号字符串中找到的第一个尺寸代码：18650、21700、26650、14500、502030、20700、32700 |
-=======
 | `cell.cell_format_codes` | 在形态或型号字符串中找到的第一个尺寸代码：18650、21700、26650、14500、502030、20700、32700 |
->>>>>>> Stashed changes
 | `cell.dimensions_mm` | 按惯例由尺寸代码得出（18650 = 18 x 65 mm），标记 `basis: inferred_from_format_code`；若来源明确给出尺寸则解析该值（`basis: stated`） |
 | `conditions.charge_c_rate_max`、`discharge_c_rate_max` | 分别从协议或原始名称中编码的倍率（`0.5C`、`C/5`、`1/3 C`）解析各方向的最大倍率，并汇总所有实体。若倍率由有符号观测电流除以额定 Ah 推算，则来源为 `raw_data`，记录备注会注明这是观测电流估计值。 |
 | `conditions.c_rate_profile` | WLTP、UDDS、Artemis、US06、FUDS 或 DST → `drive_cycle`；dynamic、profile 或 flight → `dynamic`；multistage 或 step → `multistage`；否则 `constant` |
 | `conditions.protocol_class` | 对协议文本按顺序做关键词匹配：abuse/indentation/ARC/runaway、calendar/storage、pulse/relaxation、drive cycle、multistage、RPT、CC-CV，否则 `mixed` |
 | `cell.chemistry_is_multi` | 出现多于一种不同正极化学体系时为真 |
-<<<<<<< Updated upstream
-=======
 | `identity.notes` | 开头（数量、化学体系、规格、实体类型；与登记数量不同时在括号中标出登记数）和论文引文（在 `evidence/paper_metadata.json` 中按 `paper_doi` 查找）由记录自身字段生成；二者之间的描述语句由人工整理（curation 中的 `notes_detail`），复述本记录的 `conditions.*`、`content.*` 和 `quality.notes`。来源为 `curated`。 |
->>>>>>> Stashed changes
 | `identity.year` | `ref_name` 开头的四位数字 |
 | `scale.n_cycles_total`、`cycles_per_entity_median` | 来自上述逐实体循环数 |
 | `quality.flags` | 由原始数据、文件清单和登记表计算——见 [flags.zh-CN.md](flags.zh-CN.md) |
@@ -78,10 +71,7 @@
 | 字段组 | 内容 |
 |---|---|
 | `institution`、`aging_type`、`application_domain`、`entity_type`、`supported_tasks` | 依据原始文档、落地页、论文或登记表中一处明确陈述做出的判断。`application_domain`（`lab`）与 `entity_type`（`cell`）在没有相反证据时取默认值。 |
-<<<<<<< Updated upstream
-=======
 | `charging_profile` | `CC-CV`、`dynamic` 或 `multi-rate`，按占主导的循环协议标注，只依据原始测量文件（抽样循环的充电电流）或随附文档。两者都没有显示协议时为 `null`。 |
->>>>>>> Stashed changes
 | `cell`、`conditions` | 从文档、落地页或论文读到的事实（化学体系、标称容量、电压窗口、温度设定点、协议文本） |
 | `doi`、`paper_doi` | 原始文档或落地页声明的 DOI |
 | 逐实体的值 | 温度、SOC 等取自原始名称而不是手工录入的值 |

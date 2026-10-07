@@ -11,19 +11,6 @@
   "doi": "10.5281/zenodo.10637534",
   "paper_doi": "10.1016/j.jpowsour.2024.234185",
   "source_url": "https://doi.org/10.5281/zenodo.10637534",
-<<<<<<< Updated upstream
-  "study_group": null
- },
- "cell": {
-  "manufacturer": "LG",
-  "model": "M50",
-  "cathode_chemistry": "NMC",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "NMC",
-  "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": "21700",
-=======
   "study_group": null,
   "notes": "40 NMC811/Si-graphite 21700 cells; LG M50T cycle ageing (Si-, C- and cathode-degradation and drive-cycle experiments); ageing at 10, 25 and 40 °C, performance checks at 25 °C; Kirkaldy et al. Journal of Power Sources 2024"
  },
@@ -32,7 +19,6 @@
   "model": "M50T",
   "chemistry_label_raw": "NMC811/C-SiOx",
   "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 21.0,
    "height": 70.0,
@@ -46,9 +32,6 @@
   "nominal_voltage_V": null,
   "voltage_level": "cell",
   "voltage_min_V": 2.5,
-<<<<<<< Updated upstream
-  "voltage_max_V": 4.2
-=======
   "voltage_max_V": 4.2,
   "form_factors": [
    "cylindrical"
@@ -71,7 +54,6 @@
   "nominal_capacities_Ah": [
    5.0
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 10.0,
@@ -84,12 +66,6 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 0.3,
   "discharge_c_rate_max": 1.0,
-<<<<<<< Updated upstream
-  "c_rate_profile": "drive_cycle",
-  "protocol_class": "drive_cycle",
-  "protocol_charge_raw": "cycle ageing under Si-, C- and cathode-degradation and drive-cycle experiments; performance checks (RPT) at 10, 25 and 40 degC",
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
   "c_rate_profile": "drive_cycle",
@@ -130,7 +106,6 @@
     "detail": "WLTP class 3 current profile scaled to the cell, 1.62 A average discharge and 0.53 A average charge; experiment 4 only"
    }
   ],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "cyclic",
@@ -148,10 +123,7 @@
  "content": {
   "signals": [
    "capacity",
-<<<<<<< Updated upstream
-=======
    "current",
->>>>>>> Stashed changes
    "cycle_index",
    "energy",
    "internal_resistance",
@@ -167,10 +139,7 @@
    "Energy charge/W.h",
    "Energy discharge/W.h",
    "Energy/W.h",
-<<<<<<< Updated upstream
-=======
    "I/mA",
->>>>>>> Stashed changes
    "Ns",
    "R/Ohm",
    "Temperature/C",
@@ -182,23 +151,16 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none in the raw performance-check files; ageing cycles are counted by the cycling (Cycle Aging) experiments",
-<<<<<<< Updated upstream
-=======
   "count_basis": "40 cells over five experiments (9+6+9+8+8); 131,301 aging cycles summed from the per-cell 'Summary per Cycle' tables.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     2.415509,
     4.362096
    ],
-<<<<<<< Updated upstream
-   "current_A": null,
-=======
    "current_A": [
     -7.512159,
     3.756064
    ],
->>>>>>> Stashed changes
    "temperature_C": [
     -4.199089,
     55.659416
@@ -385,11 +347,7 @@
    "voltage_excursion_below_cutoff",
    "voltage_excursion_above_cutoff"
   ],
-<<<<<<< Updated upstream
-  "notes": "Only the BioLogic .mpt text exports are read (the same runs also exist as .mpr and processed csv files). Each experiment zip has a real \"Raw Data/Degradation Cycling/\" folder with the actual aging cycles, but only as .mpr (BioLogic binary); \"Raw Data/Performance Checks/\" is the only data also exported as .mpt (text), which is the only format this adapter reads. So scale.n_cycles_total is empty not because the cycling data is missing, but because it only exists in a format not yet parsed - the registry's cycle_summary_done = yes looks correct. Cell spec (LG M50 (21700 NMC)) from LG's INR21700 M50 18.2Wh document, the same source used for dataset_27."
-=======
   "notes": "Only the BioLogic .mpt text exports are read (the same runs also exist as .mpr and processed csv files). Each experiment zip has a real \"Raw Data/Degradation Cycling/\" folder with the actual aging cycles, but only as .mpr (BioLogic binary); \"Raw Data/Performance Checks/\" is the only data also exported as .mpt (text), which is the only format this adapter reads. So scale.n_cycles_total is empty not because the cycling data is missing, but because it only exists in a format not yet parsed - the registry's cycle_summary_done = yes looks correct. Cell spec (LG M50 (21700 NMC)) from LG's INR21700 M50 18.2Wh document, the same source used for dataset_27. Charging profile: read from the paper because the ageing cycles exist only as BioLogic .mpr files (the exported performance-check files are not cycling). One protocol for all 40 cells apart from experiment 4 (8 cells), which has a WLTP discharge; the experiments differ in SOC window (0-30, 70-85, 85-100, 0-100%) and temperature (10, 25, 40 degC), not in C-rate. The registry says MultiC_MultiT. The paper (Kirkaldy et al., J. Power Sources 603 (2024) 234185; full text read) confirms: 40 cells in 15 conditions (Table 1: experiments 1 0-30% SoC 258 cycles per ageing set, 2 70-85% 515, 3 85-100% 515, 4 0-100% with a WLTP drive-cycle discharge 78, 5 0-100% 78; 3 cells per condition, 2 in experiments 2 and for 25 C in experiments 4 and 5), the same 0.3C charge and 1C discharge in all but experiment 4, cells base-cooled to 10, 25 and 40 C with the surface temperature measured by K-type thermocouples half way up the can, a BioLogic BCS-815 cycler, 5 break-in cycles at 0.2C at 25 C, and reference performance tests always at 25 C (not at 10, 25 and 40 C as an earlier version of this note said; 10, 25 and 40 C are the ageing set-points). SoC and C-rate use the beginning-of-life capacity 4.865 Ah (mean C/10 discharge capacity of 20 cells; mean C/10 and C/2 capacities of all 40 are 4.857 and 4.780 Ah), except experiment 1 which uses the nominal 5 Ah. The 5.0 Ah recorded here is the rated value from the LG sheet; the paper's measured value is 4.857 Ah. The paper calls the cells 'LG M50T, LG GBM50T2170' without separating them; the record uses M50T, and the GBM50T2170 designation is listed in the claims. The same LG INR21700-M50T cell appears in datasets 25 and 27 (4.85 Ah from their paper's Table 1, NMC cathode) and in dataset 26 (4.85 Ah); this record keeps the 5.0 Ah rating and the NMC811 label used by its own paper, so the capacity and cathode label of the M50T differ between the datasets by source, not by cell."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -399,10 +357,7 @@
    "identity.year": "ref_name",
    "identity.doi": "registry",
    "identity.paper_doi": "landing_page",
-<<<<<<< Updated upstream
-=======
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "curated",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -412,23 +367,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "paper",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "raw_filenames",
-   "cell.model": "raw_filenames",
-   "cell.cathode_chemistry": "registry",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "landing_page",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "landing_page",
    "cell.cell_format_codes": "derived",
@@ -444,21 +388,10 @@
    "cell.manufacturer": "raw_filenames",
    "cell.model": "paper",
    "cell.chemistry_label_raw": "paper",
->>>>>>> Stashed changes
    "cell.nominal_capacity_Ah": "datasheet",
    "cell.voltage_max_V": "datasheet",
    "cell.voltage_min_V": "datasheet",
    "conditions.temperature_setpoints_C": "raw_filenames",
-<<<<<<< Updated upstream
-   "conditions.protocol_charge_raw": "landing_page",
-   "cell.dimensions_mm": "derived",
-   "conditions.c_rate": "derived",
-   "conditions.charge_c_rate_max": "landing_page",
-   "conditions.discharge_c_rate_max": "landing_page"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "conditions.protocol_charge_raw": "paper",
    "conditions.protocol_discharge_raw": "paper",
    "cell.dimensions_mm": "derived",
@@ -468,7 +401,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_36.json",
   "landing_evidence": "evidence/landing/dataset_36.json"
  }

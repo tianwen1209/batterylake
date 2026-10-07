@@ -12,12 +12,8 @@
   "resolution": "full_waveforms",
   "signals_basis": "raw_data",
   "caveats": [
-<<<<<<< Updated upstream
-   "incomplete_raw_files"
-=======
    "incomplete_raw_files",
    "voltage_excursion_below_cutoff"
->>>>>>> Stashed changes
   ]
  },
  "soc": {
@@ -71,20 +67,12 @@
   "synthetic_data_generation"
  ],
  "source_quality_flags": [
-<<<<<<< Updated upstream
-  "incomplete_raw_files"
- ],
- "provenance": {
-  "derived_from": "datasets/dataset_17.json",
-  "generated": "2026-09-29",
-=======
   "incomplete_raw_files",
   "voltage_excursion_below_cutoff"
  ],
  "provenance": {
   "derived_from": "datasets/dataset_17.json",
   "generated": "2026-10-07",
->>>>>>> Stashed changes
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -101,10 +89,6 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29"
-=======
   "last_verified": "2026-10-07"
->>>>>>> Stashed changes
  }
 }

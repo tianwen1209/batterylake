@@ -18,21 +18,6 @@
   "institution": "Stanford University and SLAC (Chueh group)",
   "year": 2025,
   "doi": "10.17605/OSF.IO/JU325",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://osf.io/ju325/",
-  "study_group": null
- },
- "cell": {
-  "manufacturer": null,
-  "model": "K2 Energy LFP18650P",
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "LCO; LFP; NCA; NMC",
-  "chemistry_is_multi": true,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-=======
   "paper_doi": "10.1016/j.joule.2024.11.013",
   "source_url": "https://osf.io/ju325/",
   "study_group": null,
@@ -43,7 +28,6 @@
   "model": null,
   "chemistry_label_raw": "LCO; LFP; NCA; NMC",
   "chemistry_is_multi": true,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.0,
    "height": 65.0,
@@ -55,11 +39,6 @@
   "nominal_capacity_Ah": null,
   "capacity_basis": null,
   "nominal_voltage_V": null,
-<<<<<<< Updated upstream
-  "voltage_level": null,
-  "voltage_min_V": null,
-  "voltage_max_V": null
-=======
   "voltage_level": "cell",
   "voltage_min_V": 2.0,
   "voltage_max_V": 4.2,
@@ -110,7 +89,6 @@
    3.3,
    3.5
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 24.0,
@@ -122,14 +100,6 @@
    85.0
   ],
   "temperature_basis": "chamber_setpoint",
-<<<<<<< Updated upstream
-  "charge_c_rate_max": null,
-  "discharge_c_rate_max": null,
-  "c_rate_profile": null,
-  "protocol_class": null,
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max": 0.2,
   "discharge_c_rate_max": 3.0,
   "charge_c_rate_max_fraction": null,
@@ -177,7 +147,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": 50.0,
   "soc_window_max_pct": 100.0,
   "aging_type": "calendar",
@@ -212,10 +181,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "number of check-up (RPT) months in summary_data; the raw tables hold the check-up test procedures, not the ageing cycles",
-<<<<<<< Updated upstream
-=======
   "count_basis": "259 distinct Cell_id entries in Joule_cell_id.csv, including 27 excluded from the paper's analysis (232 analyzed); the original release is counted.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     -2.0,
@@ -241,16 +207,11 @@
  "cells": [
   {
    "cell_id": "C00001",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -259,16 +220,11 @@
   },
   {
    "cell_id": "C00002",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -277,16 +233,11 @@
   },
   {
    "cell_id": "C00004",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -295,16 +246,11 @@
   },
   {
    "cell_id": "C00005",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -313,16 +259,11 @@
   },
   {
    "cell_id": "C00006",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -331,16 +272,11 @@
   },
   {
    "cell_id": "C00007",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -349,16 +285,11 @@
   },
   {
    "cell_id": "C00008",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -367,16 +298,11 @@
   },
   {
    "cell_id": "C00009",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -385,16 +311,11 @@
   },
   {
    "cell_id": "C00010",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -403,16 +324,11 @@
   },
   {
    "cell_id": "C00011",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -421,16 +337,11 @@
   },
   {
    "cell_id": "C00012",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -439,16 +350,11 @@
   },
   {
    "cell_id": "C00013",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -457,16 +363,11 @@
   },
   {
    "cell_id": "C00014",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -475,16 +376,11 @@
   },
   {
    "cell_id": "C00015",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -493,16 +389,11 @@
   },
   {
    "cell_id": "C00016",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -511,16 +402,11 @@
   },
   {
    "cell_id": "C00017",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -529,16 +415,11 @@
   },
   {
    "cell_id": "C00018",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -547,16 +428,11 @@
   },
   {
    "cell_id": "C00019",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -565,16 +441,11 @@
   },
   {
    "cell_id": "C00020",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -583,16 +454,11 @@
   },
   {
    "cell_id": "C00021",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -601,16 +467,11 @@
   },
   {
    "cell_id": "C00022",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -619,16 +480,11 @@
   },
   {
    "cell_id": "C00023",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -637,16 +493,11 @@
   },
   {
    "cell_id": "C00024",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -655,16 +506,11 @@
   },
   {
    "cell_id": "C00025",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -673,16 +519,11 @@
   },
   {
    "cell_id": "C00026",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -691,16 +532,11 @@
   },
   {
    "cell_id": "C00027",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -709,16 +545,11 @@
   },
   {
    "cell_id": "C00028",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -727,16 +558,11 @@
   },
   {
    "cell_id": "C00029",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -745,16 +571,11 @@
   },
   {
    "cell_id": "C00030",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -763,16 +584,11 @@
   },
   {
    "cell_id": "C00031",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -781,16 +597,11 @@
   },
   {
    "cell_id": "C00032",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -799,16 +610,11 @@
   },
   {
    "cell_id": "C00033",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -817,16 +623,11 @@
   },
   {
    "cell_id": "C00034",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -835,16 +636,11 @@
   },
   {
    "cell_id": "C00035",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -853,16 +649,11 @@
   },
   {
    "cell_id": "C00036",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650GA",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650GA",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -871,16 +662,11 @@
   },
   {
    "cell_id": "C00037",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -889,16 +675,11 @@
   },
   {
    "cell_id": "C00038",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -907,16 +688,11 @@
   },
   {
    "cell_id": "C00039",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -925,16 +701,11 @@
   },
   {
    "cell_id": "C00040",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -943,16 +714,11 @@
   },
   {
    "cell_id": "C00041",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -961,16 +727,11 @@
   },
   {
    "cell_id": "C00042",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -979,16 +740,11 @@
   },
   {
    "cell_id": "C00043",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -997,16 +753,11 @@
   },
   {
    "cell_id": "C00044",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1015,16 +766,11 @@
   },
   {
    "cell_id": "C00045",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1033,16 +779,11 @@
   },
   {
    "cell_id": "C00046",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1051,16 +792,11 @@
   },
   {
    "cell_id": "C00047",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1069,16 +805,11 @@
   },
   {
    "cell_id": "C00048",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1087,16 +818,11 @@
   },
   {
    "cell_id": "C00049",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1105,16 +831,11 @@
   },
   {
    "cell_id": "C00050",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1123,16 +844,11 @@
   },
   {
    "cell_id": "C00051",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1141,16 +857,11 @@
   },
   {
    "cell_id": "C00052",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1159,16 +870,11 @@
   },
   {
    "cell_id": "C00053",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1177,16 +883,11 @@
   },
   {
    "cell_id": "C00054",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1195,16 +896,11 @@
   },
   {
    "cell_id": "C00055",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1213,16 +909,11 @@
   },
   {
    "cell_id": "C00056",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1231,16 +922,11 @@
   },
   {
    "cell_id": "C00057",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1249,16 +935,11 @@
   },
   {
    "cell_id": "C00058",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1267,16 +948,11 @@
   },
   {
    "cell_id": "C00059",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1285,16 +961,11 @@
   },
   {
    "cell_id": "C00060",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1303,16 +974,11 @@
   },
   {
    "cell_id": "C00061",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1321,16 +987,11 @@
   },
   {
    "cell_id": "C00062",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1339,16 +1000,11 @@
   },
   {
    "cell_id": "C00063",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1357,16 +1013,11 @@
   },
   {
    "cell_id": "C00064",
-<<<<<<< Updated upstream
-   "model": "Panasonic NCR18650B",
-   "cathode_chemistry": "NCA",
-=======
    "manufacturer": "Panasonic",
    "model": "Panasonic NCR18650B",
    "cathode_chemistry": "NCA",
    "nominal_capacity_Ah": 3.3,
    "voltage_min_V": 2.7,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1375,16 +1026,11 @@
   },
   {
    "cell_id": "C00065",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1393,16 +1039,11 @@
   },
   {
    "cell_id": "C00066",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1411,16 +1052,11 @@
   },
   {
    "cell_id": "C00067",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1429,16 +1065,11 @@
   },
   {
    "cell_id": "C00068",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1447,16 +1078,11 @@
   },
   {
    "cell_id": "C00069",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1465,16 +1091,11 @@
   },
   {
    "cell_id": "C00070",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1483,16 +1104,11 @@
   },
   {
    "cell_id": "C00071",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1501,16 +1117,11 @@
   },
   {
    "cell_id": "C00072",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1519,16 +1130,11 @@
   },
   {
    "cell_id": "C00073",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1537,16 +1143,11 @@
   },
   {
    "cell_id": "C00074",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1555,16 +1156,11 @@
   },
   {
    "cell_id": "C00075",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1573,16 +1169,11 @@
   },
   {
    "cell_id": "C00076",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1591,16 +1182,11 @@
   },
   {
    "cell_id": "C00077",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1609,16 +1195,11 @@
   },
   {
    "cell_id": "C00078",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1627,16 +1208,11 @@
   },
   {
    "cell_id": "C00079",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1645,16 +1221,11 @@
   },
   {
    "cell_id": "C00081",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1663,16 +1234,11 @@
   },
   {
    "cell_id": "C00082",
-<<<<<<< Updated upstream
-   "model": "Ultralife UBP001",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife UBP001",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 1.8,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1681,16 +1247,11 @@
   },
   {
    "cell_id": "C00083",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1699,16 +1260,11 @@
   },
   {
    "cell_id": "C00084",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1717,16 +1273,11 @@
   },
   {
    "cell_id": "C00085",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1735,16 +1286,11 @@
   },
   {
    "cell_id": "C00086",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1753,16 +1299,11 @@
   },
   {
    "cell_id": "C00087",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1771,16 +1312,11 @@
   },
   {
    "cell_id": "C00088",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1789,16 +1325,11 @@
   },
   {
    "cell_id": "C00089",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1807,16 +1338,11 @@
   },
   {
    "cell_id": "C00090",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1825,16 +1351,11 @@
   },
   {
    "cell_id": "C00091",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1843,16 +1364,11 @@
   },
   {
    "cell_id": "C00092",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1861,16 +1377,11 @@
   },
   {
    "cell_id": "C00093",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1879,16 +1390,11 @@
   },
   {
    "cell_id": "C00094",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1897,16 +1403,11 @@
   },
   {
    "cell_id": "C00095",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1915,16 +1416,11 @@
   },
   {
    "cell_id": "C00097",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -1933,16 +1429,11 @@
   },
   {
    "cell_id": "C00098",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1951,16 +1442,11 @@
   },
   {
    "cell_id": "C00099",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1969,16 +1455,11 @@
   },
   {
    "cell_id": "C00100",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -1987,16 +1468,11 @@
   },
   {
    "cell_id": "C00101",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2005,16 +1481,11 @@
   },
   {
    "cell_id": "C00102",
-<<<<<<< Updated upstream
-   "model": "Ultralife 502030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Ultralife",
    "model": "Ultralife 502030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.24,
    "voltage_min_V": 2.8,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2023,16 +1494,11 @@
   },
   {
    "cell_id": "C00103",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2041,16 +1507,11 @@
   },
   {
    "cell_id": "C00104",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2059,16 +1520,11 @@
   },
   {
    "cell_id": "C00105",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2077,16 +1533,11 @@
   },
   {
    "cell_id": "C00107",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2095,16 +1546,11 @@
   },
   {
    "cell_id": "C00108",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2113,16 +1559,11 @@
   },
   {
    "cell_id": "C00109",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2131,16 +1572,11 @@
   },
   {
    "cell_id": "C00110",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2149,16 +1585,11 @@
   },
   {
    "cell_id": "C00111",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2167,16 +1598,11 @@
   },
   {
    "cell_id": "C00112",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2185,16 +1611,11 @@
   },
   {
    "cell_id": "C00114",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2203,16 +1624,11 @@
   },
   {
    "cell_id": "C00115",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2221,16 +1637,11 @@
   },
   {
    "cell_id": "C00116",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2239,16 +1650,11 @@
   },
   {
    "cell_id": "C00117",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2257,16 +1663,11 @@
   },
   {
    "cell_id": "C00118",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2275,16 +1676,11 @@
   },
   {
    "cell_id": "C00119",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2293,16 +1689,11 @@
   },
   {
    "cell_id": "C00120",
-<<<<<<< Updated upstream
-   "model": "Sony-Murata US18650VTC6",
-   "cathode_chemistry": "NMC",
-=======
    "manufacturer": "Sony-Murata",
    "model": "Sony-Murata US18650VTC6",
    "cathode_chemistry": "NMC",
    "nominal_capacity_Ah": 3.0,
    "voltage_min_V": 2.5,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2311,15 +1702,11 @@
   },
   {
    "cell_id": "C00121",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2328,15 +1715,11 @@
   },
   {
    "cell_id": "C00122",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2345,15 +1728,11 @@
   },
   {
    "cell_id": "C00123",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2362,15 +1741,11 @@
   },
   {
    "cell_id": "C00124",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2379,15 +1754,11 @@
   },
   {
    "cell_id": "C00125",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2396,15 +1767,11 @@
   },
   {
    "cell_id": "C00126",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2413,15 +1780,11 @@
   },
   {
    "cell_id": "C00127",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2430,15 +1793,11 @@
   },
   {
    "cell_id": "C00128",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2447,15 +1806,11 @@
   },
   {
    "cell_id": "C00129",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2464,15 +1819,11 @@
   },
   {
    "cell_id": "C00130",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2481,15 +1832,11 @@
   },
   {
    "cell_id": "C00131",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2498,15 +1845,11 @@
   },
   {
    "cell_id": "C00132",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2515,15 +1858,11 @@
   },
   {
    "cell_id": "C00133",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2532,15 +1871,11 @@
   },
   {
    "cell_id": "C00134",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2549,15 +1884,11 @@
   },
   {
    "cell_id": "C00135",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2566,15 +1897,11 @@
   },
   {
    "cell_id": "C00136",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2583,15 +1910,11 @@
   },
   {
    "cell_id": "C00137",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2600,15 +1923,11 @@
   },
   {
    "cell_id": "C00138",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2617,15 +1936,11 @@
   },
   {
    "cell_id": "C00139",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2634,15 +1949,11 @@
   },
   {
    "cell_id": "C00140",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2651,15 +1962,11 @@
   },
   {
    "cell_id": "C00141",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2668,15 +1975,11 @@
   },
   {
    "cell_id": "C00142",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2685,15 +1988,11 @@
   },
   {
    "cell_id": "C00143",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2702,15 +2001,11 @@
   },
   {
    "cell_id": "C00144",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2719,15 +2014,11 @@
   },
   {
    "cell_id": "C00145",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2736,15 +2027,11 @@
   },
   {
    "cell_id": "C00146",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2753,15 +2040,11 @@
   },
   {
    "cell_id": "C00147",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2770,15 +2053,11 @@
   },
   {
    "cell_id": "C00148",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2787,15 +2066,11 @@
   },
   {
    "cell_id": "C00149",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2804,15 +2079,11 @@
   },
   {
    "cell_id": "C00150",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2821,15 +2092,11 @@
   },
   {
    "cell_id": "C00151",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2838,15 +2105,11 @@
   },
   {
    "cell_id": "C00152",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2855,15 +2118,11 @@
   },
   {
    "cell_id": "C00153",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2872,15 +2131,11 @@
   },
   {
    "cell_id": "C00154",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2889,15 +2144,11 @@
   },
   {
    "cell_id": "C00155",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -2906,15 +2157,11 @@
   },
   {
    "cell_id": "C00156",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2923,15 +2170,11 @@
   },
   {
    "cell_id": "C00157",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2940,15 +2183,11 @@
   },
   {
    "cell_id": "C00158",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2957,15 +2196,11 @@
   },
   {
    "cell_id": "C00159",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2974,15 +2209,11 @@
   },
   {
    "cell_id": "C00160",
-<<<<<<< Updated upstream
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650P",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.1,
    "voltage_max_V": 3.65,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -2991,10 +2222,7 @@
   },
   {
    "cell_id": "C00162",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -3005,10 +2233,7 @@
   },
   {
    "cell_id": "C00163",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -3019,10 +2244,7 @@
   },
   {
    "cell_id": "C00164",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -3033,10 +2255,7 @@
   },
   {
    "cell_id": "C00165",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -3047,10 +2266,7 @@
   },
   {
    "cell_id": "C00166",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -3061,10 +2277,7 @@
   },
   {
    "cell_id": "C00167",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -3075,10 +2288,7 @@
   },
   {
    "cell_id": "C00169",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -3089,10 +2299,7 @@
   },
   {
    "cell_id": "C00170",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -3103,10 +2310,7 @@
   },
   {
    "cell_id": "C00171",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650P_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -3117,16 +2321,11 @@
   },
   {
    "cell_id": "C00173",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3135,16 +2334,11 @@
   },
   {
    "cell_id": "C00174",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3153,16 +2347,11 @@
   },
   {
    "cell_id": "C00175",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3171,16 +2360,11 @@
   },
   {
    "cell_id": "C00176",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3189,16 +2373,11 @@
   },
   {
    "cell_id": "C00177",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3207,16 +2386,11 @@
   },
   {
    "cell_id": "C00179",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3225,16 +2399,11 @@
   },
   {
    "cell_id": "C00180",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3243,16 +2412,11 @@
   },
   {
    "cell_id": "C00181",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3261,16 +2425,11 @@
   },
   {
    "cell_id": "C00182",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3279,16 +2438,11 @@
   },
   {
    "cell_id": "C00183",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3297,16 +2451,11 @@
   },
   {
    "cell_id": "C00184",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3315,16 +2464,11 @@
   },
   {
    "cell_id": "C00185",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3333,16 +2477,11 @@
   },
   {
    "cell_id": "C00186",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3351,16 +2490,11 @@
   },
   {
    "cell_id": "C00187",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3369,16 +2503,11 @@
   },
   {
    "cell_id": "C00188",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3387,16 +2516,11 @@
   },
   {
    "cell_id": "C00189",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3405,16 +2529,11 @@
   },
   {
    "cell_id": "C00190",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3423,16 +2542,11 @@
   },
   {
    "cell_id": "C00191",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3441,16 +2555,11 @@
   },
   {
    "cell_id": "C00192",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3459,16 +2568,11 @@
   },
   {
    "cell_id": "C00193",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3477,16 +2581,11 @@
   },
   {
    "cell_id": "C00195",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3495,16 +2594,11 @@
   },
   {
    "cell_id": "C00196",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3513,16 +2607,11 @@
   },
   {
    "cell_id": "C00197",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3531,16 +2620,11 @@
   },
   {
    "cell_id": "C00198",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3549,16 +2633,11 @@
   },
   {
    "cell_id": "C00199",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3567,16 +2646,11 @@
   },
   {
    "cell_id": "C00200",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3585,16 +2659,11 @@
   },
   {
    "cell_id": "C00202",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3603,16 +2672,11 @@
   },
   {
    "cell_id": "C00203",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3621,16 +2685,11 @@
   },
   {
    "cell_id": "C00204",
-<<<<<<< Updated upstream
-   "model": "Tenergy 302030",
-   "cathode_chemistry": "LCO",
-=======
    "manufacturer": "Tenergy",
    "model": "Tenergy 302030",
    "cathode_chemistry": "LCO",
    "nominal_capacity_Ah": 0.12,
    "voltage_min_V": 3.0,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3639,16 +2698,11 @@
   },
   {
    "cell_id": "C00205",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3657,16 +2711,11 @@
   },
   {
    "cell_id": "C00206",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3675,16 +2724,11 @@
   },
   {
    "cell_id": "C00207",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3693,16 +2737,11 @@
   },
   {
    "cell_id": "C00208",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3711,16 +2750,11 @@
   },
   {
    "cell_id": "C00209",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3729,16 +2763,11 @@
   },
   {
    "cell_id": "C00210",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3747,16 +2776,11 @@
   },
   {
    "cell_id": "C00211",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3765,16 +2789,11 @@
   },
   {
    "cell_id": "C00212",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3783,16 +2802,11 @@
   },
   {
    "cell_id": "C00213",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3801,16 +2815,11 @@
   },
   {
    "cell_id": "C00214",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 24.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3819,16 +2828,11 @@
   },
   {
    "cell_id": "C00215",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3837,16 +2841,11 @@
   },
   {
    "cell_id": "C00216",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3855,16 +2854,11 @@
   },
   {
    "cell_id": "C00217",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3873,16 +2867,11 @@
   },
   {
    "cell_id": "C00218",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3891,16 +2880,11 @@
   },
   {
    "cell_id": "C00219",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -3909,16 +2893,11 @@
   },
   {
    "cell_id": "C00220",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3927,16 +2906,11 @@
   },
   {
    "cell_id": "C00221",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3945,16 +2919,11 @@
   },
   {
    "cell_id": "C00222",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3963,16 +2932,11 @@
   },
   {
    "cell_id": "C00223",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3981,16 +2945,11 @@
   },
   {
    "cell_id": "C00224",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 45.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -3999,16 +2958,11 @@
   },
   {
    "cell_id": "C00225",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4017,16 +2971,11 @@
   },
   {
    "cell_id": "C00226",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4035,16 +2984,11 @@
   },
   {
    "cell_id": "C00227",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4053,16 +2997,11 @@
   },
   {
    "cell_id": "C00228",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4071,16 +3010,11 @@
   },
   {
    "cell_id": "C00229",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4089,16 +3023,11 @@
   },
   {
    "cell_id": "C00230",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4107,16 +3036,11 @@
   },
   {
    "cell_id": "C00231",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4125,16 +3049,11 @@
   },
   {
    "cell_id": "C00232",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4143,16 +3062,11 @@
   },
   {
    "cell_id": "C00233",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4161,16 +3075,11 @@
   },
   {
    "cell_id": "C00234",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 60.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4179,16 +3088,11 @@
   },
   {
    "cell_id": "C00235",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4197,16 +3101,11 @@
   },
   {
    "cell_id": "C00236",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4215,16 +3114,11 @@
   },
   {
    "cell_id": "C00237",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4233,16 +3127,11 @@
   },
   {
    "cell_id": "C00238",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4251,16 +3140,11 @@
   },
   {
    "cell_id": "C00239",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 50,
@@ -4269,16 +3153,11 @@
   },
   {
    "cell_id": "C00240",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4287,16 +3166,11 @@
   },
   {
    "cell_id": "C00241",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4305,16 +3179,11 @@
   },
   {
    "cell_id": "C00242",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4323,16 +3192,11 @@
   },
   {
    "cell_id": "C00243",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4341,16 +3205,11 @@
   },
   {
    "cell_id": "C00244",
-<<<<<<< Updated upstream
-   "model": "K2 Energy LFP18650E",
-   "cathode_chemistry": "LFP",
-=======
    "manufacturer": "K2 Energy",
    "model": "K2 Energy LFP18650E",
    "cathode_chemistry": "LFP",
    "nominal_capacity_Ah": 1.5,
    "voltage_max_V": 3.6,
->>>>>>> Stashed changes
    "temperature_C": 85.0,
    "labels": {
     "soc_window_min_pct": 100,
@@ -4359,10 +3218,7 @@
   },
   {
    "cell_id": "C00245",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 24.0,
@@ -4373,10 +3229,7 @@
   },
   {
    "cell_id": "C00246",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 24.0,
@@ -4387,10 +3240,7 @@
   },
   {
    "cell_id": "C00247",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 24.0,
@@ -4401,10 +3251,7 @@
   },
   {
    "cell_id": "C00248",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 24.0,
@@ -4415,10 +3262,7 @@
   },
   {
    "cell_id": "C00249",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 24.0,
@@ -4429,10 +3273,7 @@
   },
   {
    "cell_id": "C00250",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -4443,10 +3284,7 @@
   },
   {
    "cell_id": "C00251",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -4457,10 +3295,7 @@
   },
   {
    "cell_id": "C00252",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -4471,10 +3306,7 @@
   },
   {
    "cell_id": "C00253",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -4485,10 +3317,7 @@
   },
   {
    "cell_id": "C00254",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 60.0,
@@ -4499,10 +3328,7 @@
   },
   {
    "cell_id": "C00255",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -4513,10 +3339,7 @@
   },
   {
    "cell_id": "C00256",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -4527,10 +3350,7 @@
   },
   {
    "cell_id": "C00257",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -4541,10 +3361,7 @@
   },
   {
    "cell_id": "C00258",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -4555,10 +3372,7 @@
   },
   {
    "cell_id": "C00259",
-<<<<<<< Updated upstream
-=======
    "manufacturer": "K2 Energy",
->>>>>>> Stashed changes
    "model": "K2 Energy LFP18650E_v2",
    "cathode_chemistry": "LFP",
    "temperature_C": 85.0,
@@ -4571,19 +3385,12 @@
  "quality": {
   "flags": [
    "multi_chemistry",
-<<<<<<< Updated upstream
-   "partial_raw",
-   "incomplete_raw_files"
-  ],
-  "notes": "Long-term calendar aging: 8 cell types stored at 2 SOC and 4 temperatures (landing page). Joule_cell_id.csv, shipped in the raw data, gives each cell's type, chemistry, form factor, storage SOC and temperature. Check-ups (RPT) are recorded as summary and raw tables; there is no temperature channel. 8 distinct commercial cell types are used (Joule_cell_id.csv: Panasonic NCR18650GA, K2 Energy LFP18650E/LFP18650E_v2/LFP18650P, and others), each with its own capacity/voltage/dimensions - a single scalar nominal_capacity_Ah/voltage_min_V/voltage_max_V cannot represent all 8 without being misleading for the others, so these are left null rather than forced to one cell type's spec."
-=======
    "voltage_excursion_below_cutoff",
    "voltage_excursion_above_cutoff",
    "partial_raw",
    "incomplete_raw_files"
   ],
   "notes": "Long-term calendar aging: 8 cell types stored at 2 SOC and 4 temperatures (landing page). Joule_cell_id.csv, shipped in the raw data, gives each cell's type, chemistry, form factor, storage SOC and temperature. Check-ups (RPT) are recorded as summary and raw tables; there is no temperature channel. 8 distinct commercial cell types are used (Joule_cell_id.csv: Panasonic NCR18650GA, K2 Energy LFP18650E/LFP18650E_v2/LFP18650P, and others), each with its own capacity/voltage/dimensions - a single scalar nominal_capacity_Ah/voltage_min_V/voltage_max_V cannot represent all 8 without being misleading for the others, so these are left null rather than forced to one cell type's spec. Charging profile: null: calendar-ageing storage study; no charge protocol in the raw files, and none stated by the source. The data article (Lam et al., Joule 9 (2025) 101796; full text and supplemental information read) states 232 commercial cells of eight cell types from five manufacturers and four chemistries (Table 1; cells per type: LFP18650E 40, LFP18650P 40, NCR18650B 28, NCR18650GA 36, US18650VTC6 18, Tenergy 302030 32, Ultralife 502030 20, UBP001 18), stored open circuit at 24, 45, 60 and 85 C and 50 or 100% SOC for up to 13.7 years (Cincinnati Sub Zero chambers; Maccor 4000 cyclers and Mueller Kelvin clips for the check-ups in a 24 +/- 4 C lab). Form factors: 18650 for five types, pouch for the Tenergy 302030 and Ultralife 502030, prismatic for the Ultralife UBP001; the dataset-level format code 18650 and the 18 x 65 mm dimensions inferred from it therefore describe only the cylindrical types. Table S2 holds nominal capacity, high-rate C-rate and cut-off voltages per type, set per cell here; the LFP18650P (1.10 Ah) and UBP001 (1.80 Ah) values are re-rated from initial testing. The check-up (Table S1) is three C/5 cycles, three high-rate cycles and a C/5 capacity check, each charge CC-CV at C/5 to a C/20 end current. Cell counts differ: the local cell table has 248 cells, the paper 232 (the NCR18650GA 35 against 36, US18650VTC6 16 against 18, Tenergy 302030 29 against 32, Ultralife 502030 19 against 20 and UBP001 17 against 18), and 24 cells belong to the K2 Energy LFP18650E_v2 (15) and LFP18650P_v2 (9) variants that the paper does not list; for those the paper gives no specification, so only the maker is recorded and capacity and cut-offs stay null. The paper names no sensor temperature channel for the cells themselves (storage temperatures are chamber setpoints). The charging profile is multi-rate because the identical C/5 CC-CV charge is paired with different discharge rates per type."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -4592,11 +3399,8 @@
    "identity.institution": "registry",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -4606,28 +3410,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "paper",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.model": "raw_docs",
-   "cell.cathode_chemistry": "raw_docs",
-   "cell.chemistry_label_raw": "raw_docs",
-   "cell.form_factor": "raw_docs",
-   "conditions.temperature_setpoints_C": "raw_docs",
-   "cell.dimensions_mm": "derived",
-   "conditions.c_rate": "derived"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "paper",
    "cell.cell_format_codes": "paper",
@@ -4652,7 +3440,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_29.json",
   "landing_evidence": "evidence/landing/dataset_29.json"
  }

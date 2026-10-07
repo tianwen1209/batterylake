@@ -2,15 +2,9 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-<<<<<<< Updated upstream
-每个数据集对应一个 `dataset_NN.json`，由 `../schema/batterylake-dataset-2.0.json` 描述。这些文件是只读数据。各值的来源见 [../docs/pipeline.zh-CN.md](../docs/pipeline.zh-CN.md)。质量标记的定义见 [../docs/flags.zh-CN.md](../docs/flags.zh-CN.md)；建立在这些记录之上的研究层见 [../research/](../research/README.zh-CN.md)。
-
-每个值都读取自数据集的原始文件——测量文件本身、文件名，以及随附的文档。这些无法提供某个值时，取自数据集的落地页或论文（登记表所列），并注明出处。**不从任何交付（delivery）URL 读取。** 没有任何来源记载的字段为 `null`。
-=======
 每个数据集对应一个 `dataset_NN.json`，由 `../schema/batterylake-dataset-2.0.json` 描述。这些文件是**构建产物**——不要编辑；如何修正某个值见 [../docs/pipeline.zh-CN.md](../docs/pipeline.zh-CN.md)。质量标记的定义见 [../docs/flags.zh-CN.md](../docs/flags.zh-CN.md)；建立在这些记录之上的研究层见 [../research/](../research/README.zh-CN.md)。
 
 每个值都读取自 `Raw_Dataset/`——测量文件本身、文件名，以及随附的文档。这些无法提供某个值时，取自数据集的落地页或论文（登记表所列），并注明出处。**不从任何交付（delivery）URL 读取。** 没有任何来源记载的字段为 `null`。
->>>>>>> Stashed changes
 
 ## 如何阅读一条记录
 
@@ -35,33 +29,21 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `ref_name_aliases` | 该数据集用过的所有其他名称，使旧引用仍可解析。每项含 `name`、`status`（`historical`：同一研究被取代的旧名；`mismatched`：属于另一项研究的名称）和 `seen_in`（`registry_history` 表示登记表在早期提交中用过的名称，`raw_readme` 表示原始 README 的"Other names"行）。索引行只保存名称。 |
 | `doi` 与 `paper_doi` | `doi` 标识数据集本身；`paper_doi` 标识描述它的论文。只有登记表的落地页、原始文档或落地页元数据声明了时才记录。通常只有其中一个。 |
 | `source_url` | 数据的上游来源，来自登记表。 |
-<<<<<<< Updated upstream
-=======
 | `notes` | 沿用登记表风格的一行描述，例如 `94 LFP/graphite 18650 cells (124 declared); multi-policy fast charging ...; Severson et al. Nature Energy 2019`。开头是原始数据实际交付内容的数量、化学体系和规格（`scale.n_entities`，与登记数量不同时在括号中标出登记数），随后是少量人工整理的测试事实，最后是关联论文（`paper_doi`）。数量、化学体系和引文由 `build.py` 依据本记录自身字段生成，因此不会与记录脱节；中间的描述语句复述 `conditions.*`、`content.*` 和 `quality.notes`。这是面向读者展示的文字。`quality.notes` 不同：它为使用数据的人记录注意事项和来源冲突，可能提到登记表的错误。 |
->>>>>>> Stashed changes
 
 ### 电芯（Cell）
 
 | 字段 | 含义 |
 |---|---|
-<<<<<<< Updated upstream
-| `cathode_chemistry` / `anode_chemistry` | 规范化为受控词表。`mixed` 表示数据集涵盖多种；此时逐电芯的值在 `cells[]` 中。 |
 | `chemistry_label_raw` | 规范化之前的原始化学体系字符串。 |
-| `cell_format_code` | 已声明或可推导出的行业尺寸代码（`18650`、`21700`、`26650`、`14500`、`502030`）。 |
-=======
-| `chemistry_label_raw` | 规范化之前的原始化学体系字符串。 |
->>>>>>> Stashed changes
 | `dimensions_mm.basis` | 来源给出尺寸时为 `stated`；由尺寸代码推得时为 `inferred_from_format_code`（18650 即 18 mm x 65 mm）。只有后者是惯例而非测量。 |
 | `capacity_basis` | `rated` 是厂家铭牌值；`measured` 表示该值是电芯实际放出的容量。 |
 | `voltage_level` | `cell` 或 `pack`。原始数据报告的是电池组电压而截止值是单体级时，二者不可比较（标记 `pack_level_voltage`）。 |
 | `voltage_min_V` / `voltage_max_V` | 文档记载的协议截止电压窗口，而非观测范围。 |
-<<<<<<< Updated upstream
-=======
 | `form_factors` / `cell_format_codes` | 数据集中出现的每种形态（`cylindrical`、`pouch`、`prismatic`、`pack` 等）和每个尺寸代码（`18650`、`21700`、`502030` 等），尺寸代码为已声明或可由型号推导出的代码。未记载时为空。 |
 | `cathode_chemistries` / `anode_chemistries` | 出现的每种正极和每种负极化学体系，分别为已排序的列表，已规范化为受控词表。未记载时为空。有两个或更多条目表示数据集涵盖多种（`chemistry_is_multi`），逐电芯的值在 `cells[]` 中。这些字段没有单值版本，形态和尺寸代码也一样：需要单个值时，仅当列表恰有一个条目才取它。 |
 | `electrode_combinations` | 同一批电芯上同时出现的正负极组合，以 `{cathode, anode}` 对象表示。任一电极未记载时不列出该组合。 |
 | `nominal_capacities_Ah` | 出现的每个标称容量，作为离散的排序数值（`cells[]` 中的逐电芯值加上数据集级的值）。数据集 34 和 35 中部分逐电芯值来自文件名或实测均值而非额定值，数据集备注中有说明。 |
->>>>>>> Stashed changes
 
 ### 条件（Conditions）
 
@@ -72,11 +54,6 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `charge_c_rate_max` / `discharge_c_rate_max` | 协议文本中声明或原始名称中编码的最高倍率。`null` 表示未声明，这在行驶工况和现场数据中很常见。 |
 | `c_rate_profile` | 电流的形状而非大小：`constant`、`multistage`、`dynamic`、`drive_cycle`。 |
 | `protocol_class` | 便于筛选的粗分类：`CC-CV`、`multistage_CC`、`drive_cycle`、`calendar_hold`、`pulse`、`RPT_only`、`abuse`、`mixed`。原文保留在 `protocol_charge_raw` 和 `protocol_discharge_raw`。 |
-<<<<<<< Updated upstream
-| `aging_type` | 使电芯老化的方式：`cyclic`、`calendar`、`profile`（重复的负载曲线）、`second_life`、`field`、`abuse_mechanical`、`abuse_thermal`、`characterization`（无老化）、`mixed`。 |
-| `soc_window_*` | 百分比，0–100。 |
-
-=======
 | `charging_profile` | 循环协议类型，按占主导的协议标注，且只依据原始文件及随附文档：`CC-CV`（一种标准的恒流后恒压协议，各电芯和各循环的充放电倍率相同）、`dynamic`（随时间变化的负载：脉冲、HPPC、驾驶工况或工况循环曲线）、`multi-rate`（同一电芯的充电或放电倍率逐循环不同，或数据集内各电芯的充放电倍率不同）。数据集混合多种类型时，以覆盖电芯最多的类型为准，其余类型写在 `quality.notes` 中。原始文件和文档没有显示协议时为 `null`，原因见 `quality.notes`。与对协议文本做关键词分类的 `protocol_class` 不同，它在 `provenance.field_sources` 中注明所依据的测量文件或文档。 |
 | `profile_combinations` | 同时使用的充电与放电曲线类型，形如 `{charge, discharge}`。任一曲线未记载时该组合不列出。充电类型：`CC`、`CC-CV`、`multi-stage CC`、`multi-stage CC-CV`、`pulse`、`dynamic`；放电类型：`CC`、`CC-CV`、`multi-stage CC`、`pulse`、`dynamic`。`dynamic` 指随时间变化的电流或功率曲线（行驶工况、工作循环、任务剖面）。数据集的充电曲线列表和放电曲线列表不再存储：它们就是这些组合中的曲线加上 `single_side_profiles`（索引中以 `charge_profiles` 和 `discharge_profiles` 给出推导出的列表）。 |
 | `single_side_profiles` | 不属于任何充放电组合的曲线，即数据只覆盖一侧（例如车辆充电片段、仅放电测试），形如 `{side, profile}`。前端把标签写作曲线加上 "Charging" 或 "Discharging"（"CC Charging"、"dynamic Discharging"），并把每一项显示为独立的标签，放在组合旁边。所有曲线都在组合中时为空。 |
@@ -95,7 +72,6 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 - **前端规则。** 若分数字段存在，按 C 的分数显示：`"1/3"` 显示为 `C/3`，`"5/3"` 显示为 `5C/3`，`"2/3"` 显示为 `2C/3`；若不存在，显示小数。不要自行把小数转换为分数：数据集 19 中的 `3.33` 是论文自己给出的小数，不是 10/3。有限小数（0.5、0.2、0.05）一律按小数显示，不带分数字段。
 - **一致性。** 每个分数字符串都会与其数值核对，误差不超过 0.0001，因此数值始终可以放心用于排序和筛选。
 
->>>>>>> Stashed changes
 ### 规模（Scale）
 
 | 字段 | 含义 |
@@ -104,11 +80,7 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `n_entities` 与 `n_entities_declared` | 原始数据中找到的实体数，与登记表声明的数量。二者有差距时设置 `partial_raw`。 |
 | `n_cycles_total` | 在原始数据中统计的循环数：每个文件内不同循环编号的个数，再对文件求和（测试仪在每个文件中重新计数）。对非循环数据集，一个单位是一次测试或一个检查点，而不是一个循环；`content.cycle_basis` 会说明。 |
 | `cycles_per_entity_median` | 各实体的中位数；当各电芯寿命差异很大时，它比总数更能描述数据集。 |
-<<<<<<< Updated upstream
-| `n_raw_files`、`raw_bytes` | 数据集原始数据文件夹顶层的文件数和字节数（压缩包只算一个）。 |
-=======
 | `n_raw_files`、`raw_bytes` | 数据集 `Raw_Dataset` 文件夹顶层的文件数和字节数（压缩包只算一个）。 |
->>>>>>> Stashed changes
 
 ### 内容（Content）
 
@@ -119,14 +91,9 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `raw_columns` | `signals` 背后的原始表头，原样保存。 |
 | `has_waveforms` | 存在逐采样点的电压数据时为真，区别于逐循环或逐测试的汇总表。 |
 | `cycle_basis` | 本数据集中一个循环是什么（见 `n_cycles_total`）。 |
-<<<<<<< Updated upstream
-| `observed` | 在所有实体上测得的范围：`voltage_V`、`current_A`、`temperature_C`、`discharge_capacity_Ah`、`discharge_capacity_Ah_median_of_entity_max`，以及存在时的电阻和 SOC。 |
-| `source_format` | 原始数据中的文件格式（含压缩包内）：csv、mat、xlsx、pkl 等。 |
-=======
 | `count_basis` | 实体数和循环数统计的口径（单位、范围和排除项），按数据发布方或登记表的范围给出；可能与按交付文件统计的 `n_entities`、`n_cycles_total` 不同。登记表未给出口径时为 `null`。 |
 | `observed` | 在所有实体上测得的范围：`voltage_V`、`current_A`、`temperature_C`、`discharge_capacity_Ah`、`discharge_capacity_Ah_median_of_entity_max`，以及存在时的电阻和 SOC。 |
 | `source_format` | `Raw_Dataset` 中的文件格式（含压缩包内）：csv、mat、xlsx、pkl 等。 |
->>>>>>> Stashed changes
 | `supported_tasks` | 数据集原则上可支持的任务，来自原始文档。还要检查 `quality.flags`——数据集可能列出 SOH，却仍无法用于 SOH。 |
 
 ### 电芯列表（Cells）
@@ -147,13 +114,8 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `field_sources` | 把字段路径（或用 `*` 表示的字段组）映射到其取值来源。可取的值见下表。 |
 | `confidence` | `verified` 表示已解析原始数据，`asserted` 表示仅凭文档信任地采用了取值。 |
 | `last_verified` | 原始数据最近一次被读取的时间，使过期记录一目了然。 |
-<<<<<<< Updated upstream
-| `raw_evidence` | 指向构建本记录所用的逐实体原始提取结果的引用。 |
-| `landing_evidence` | 指向所查阅的落地页和 DOI 记录的引用。 |
-=======
 | `raw_evidence` | 构建本记录所用的逐实体证据文件 `evidence/raw/dataset_NN.json`。 |
 | `landing_evidence` | 所查阅的落地页和 DOI 记录缓存 `evidence/landing/dataset_NN.json`。 |
->>>>>>> Stashed changes
 
 `field_sources` 各取值的含义：
 
@@ -161,18 +123,6 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 |---|---|---|
 | `raw_data` | 从原始测量文件测得：表头、数值、行数和循环数。 | `content.signals`、`content.observed`、`scale.n_entities`、`scale.n_cycles_total` |
 | `raw_filenames` | 从原始文件名或文件夹名解析（温度、SOC、倍率、电芯标识）。 | `conditions.temperature_setpoints_C`、`cells[].labels` |
-<<<<<<< Updated upstream
-| `raw_docs` | 读取自随原始数据附带的 README、PDF 或表格。 | `cell.nominal_capacity_Ah`、`conditions.protocol_charge_raw` |
-| `raw_inventory` | 按原始文件清单计数，不打开文件。 | `scale.n_raw_files`、`scale.raw_bytes`、`content.source_format` |
-| `registry` | 取自登记表 `dataset_registry.csv`（只读）。 | `identity.dataset_name`、`identity.source_url`、`identity.ref_name`、`scale.n_entities_declared` |
-| `landing_page` | 读取自数据集的公开落地页（登记表的 `source_url`），用于原始数据未声明的值。 | 文件只含 V 和 I 的数据集的 `cell.cathode_chemistry` |
-| `paper` | 读取自关联论文（通过其 DOI），用于原始数据和落地页都未声明的值。 | `cell.nominal_capacity_Ah` |
-| `datasheet` | 读取自该电芯本身的制造商数据手册（按型号查得），用于任何关于该*数据集*的来源都未声明的值。 | `cell.nominal_capacity_Ah`、`cell.voltage_min_V`/`voltage_max_V`、`cell.dimensions_mm` |
-| `relationships` | 取自人工维护的、记录哪些数据集共享同一上游研究的记录。 | `identity.study_group` |
-| `ref_name` | 从参考名称解析得到。 | `identity.year` |
-| `derived` | 按固定规则由其他字段计算，不含新信息。 | `cell.dimensions_mm`、`quality.flags` |
-| `curated` | 依据某个明确来源做出的人工判断。 | `conditions.aging_type`、`content.supported_tasks`、`scale.entity_type` |
-=======
 | `raw_docs` | 读取自 `Raw_Dataset` 内的 README、PDF 或表格。 | `cell.nominal_capacity_Ah`、`conditions.protocol_charge_raw` |
 | `raw_inventory` | 按原始文件清单计数，不打开文件。 | `scale.n_raw_files`、`scale.raw_bytes`、`content.source_format` |
 | `registry` | 取自兄弟项目的 `dataset_registry.csv`（只读）。 | `identity.dataset_name`、`identity.source_url`、`identity.ref_name`、`scale.n_entities_declared` |
@@ -183,17 +133,12 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `ref_name` | 从参考名称解析得到。 | `identity.year` |
 | `derived` | 按固定规则由其他字段计算，不含新信息。 | `cell.dimensions_mm`、`quality.flags` |
 | `curated` | 记录在 `curation/dataset_curation.json` 中的人工判断。 | `conditions.aging_type`、`content.supported_tasks`、`scale.entity_type` |
->>>>>>> Stashed changes
 
 `field_sources` 的意义在于：没有它，`null` 与经核对确认的缺失看起来毫无区别；而只想要实测事实的使用方可以只保留 `raw_data`、`raw_filenames` 和 `raw_inventory`。
 
 ## 约定
 
-<<<<<<< Updated upstream
-- **缺失用 `null` 表示**，绝不用 `"unknown"`、`"ambient"`、`"dynamic"` 或 `0`。绝不使用占位字符串。
-=======
 - **缺失用 `null` 表示**，绝不用 `"unknown"`、`"ambient"`、`"dynamic"` 或 `0`。`validate.py` 会拒绝占位字符串。
->>>>>>> Stashed changes
 - **单位写在字段名中**（`_Ah`、`_V`、`_C`、`_pct`）。范围用两个数值字段，或 `content.observed` 下的二元数组 `[min, max]`，绝不用 `"10/25/35/45"` 这样的字符串。
 - **受控词表**定义在数据集 schema 的 `$defs` 中；原始文本另存于 `*_raw` 字段，不丢失信息。
 - **电芯只保存差异值。** `cells[]` 中的条目只在该电芯与数据集级取值不同时才列出某字段；`iter_cells()` 负责补全。

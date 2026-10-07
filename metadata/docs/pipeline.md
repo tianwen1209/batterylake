@@ -99,20 +99,13 @@ fields stay `null` rather than being guessed.
 
 | Field | Rule |
 |---|---|
-<<<<<<< Updated upstream
-| `cell.cell_format_code` | first size code found in the form factor or model string: 18650, 21700, 26650, 14500, 502030, 20700, 32700 |
-=======
 | `cell.cell_format_codes` | first size code found in the form factor or model string: 18650, 21700, 26650, 14500, 502030, 20700, 32700 |
->>>>>>> Stashed changes
 | `cell.dimensions_mm` | from the size code by convention (18650 = 18 x 65 mm), marked `basis: inferred_from_format_code`; a stated size is parsed instead (`basis: stated`) |
 | `conditions.charge_c_rate_max`, `discharge_c_rate_max` | largest rate for each direction, parsed separately from the protocol or the rates encoded in raw names (`0.5C`, `C/5`, `1/3 C`), aggregated across all entities. Where a rate was estimated from the signed observed current divided by nominal Ah, the origin is `raw_data` and the record's notes say it is an observed-current estimate. |
 | `conditions.c_rate_profile` | WLTP, UDDS, Artemis, US06, FUDS or DST → `drive_cycle`; dynamic, profile or flight → `dynamic`; multistage or step → `multistage`; otherwise `constant` |
 | `conditions.protocol_class` | keyword match on the protocol text, in order: abuse/indentation/ARC/runaway, calendar/storage, pulse/relaxation, drive cycle, multistage, RPT, CC-CV, else `mixed` |
 | `cell.chemistry_is_multi` | true when more than one distinct cathode chemistry appears |
-<<<<<<< Updated upstream
-=======
 | `identity.notes` | the lead (count, chemistry, format, entity type; declared count in brackets when it differs) and the paper citation (`paper_doi` looked up in `evidence/paper_metadata.json`) are composed from the record's own fields; the clauses between them are curated (`notes_detail` in curation) and restate this record's `conditions.*`, `content.*` and `quality.notes`. Origin `curated`. |
->>>>>>> Stashed changes
 | `identity.year` | the leading four digits of `ref_name` |
 | `scale.n_cycles_total`, `cycles_per_entity_median` | from the per-entity cycle counts above |
 | `quality.flags` | computed from the raw data, the file listing and the registry — see [flags.md](flags.md) |
@@ -125,10 +118,7 @@ A curated value is a human judgement that rests on a named source. Curated value
 | Field group | Content |
 |---|---|
 | `institution`, `aging_type`, `application_domain`, `entity_type`, `supported_tasks` | judgements grounded in a literal statement in the raw documentation, landing page, paper or registry. `application_domain` (`lab`) and `entity_type` (`cell`) default when nothing indicates otherwise. |
-<<<<<<< Updated upstream
-=======
 | `charging_profile` | `CC-CV`, `dynamic` or `multi-rate`, labelled by the dominant cycling protocol and read only from the raw measurement files (the charge current of sampled cycles) or the documentation shipped with them. `null` where they do not show the protocol. |
->>>>>>> Stashed changes
 | `cell`, `conditions` | facts read from documentation, a landing page or a paper (chemistry, nominal capacity, voltage window, temperature setpoints, protocol text) |
 | `doi`, `paper_doi` | DOIs stated by the raw documentation or the landing pages |
 | per-entity values | values such as temperature or SOC read from raw names rather than typed in |

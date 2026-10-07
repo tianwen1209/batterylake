@@ -6,31 +6,6 @@
   "ref_name": "2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT",
   "ref_name_aliases": [],
   "dataset_name": "Figshare LFP Pouch EIS",
-<<<<<<< Updated upstream
-  "institution": null,
-  "year": 2023,
-  "doi": "10.6084/m9.figshare.23736582",
-  "paper_doi": null,
-  "source_url": "https://figshare.com/articles/dataset/Li-ion_Batteries_EIS_measurements/23736582",
-  "study_group": null
- },
- "cell": {
-  "manufacturer": null,
-  "model": null,
-  "cathode_chemistry": "LFP",
-  "anode_chemistry": null,
-  "chemistry_label_raw": "LFP",
-  "chemistry_is_multi": false,
-  "form_factor": "pouch",
-  "cell_format_code": null,
-  "dimensions_mm": null,
-  "nominal_capacity_Ah": 0.6,
-  "capacity_basis": "rated",
-  "nominal_voltage_V": null,
-  "voltage_level": null,
-  "voltage_min_V": 2.0,
-  "voltage_max_V": null
-=======
   "institution": "University of Cassino and Southern Lazio",
   "year": 2023,
   "doi": "10.6084/m9.figshare.23736582",
@@ -72,7 +47,6 @@
   "nominal_capacities_Ah": [
    0.6
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 20.0,
@@ -81,14 +55,6 @@
    20.0
   ],
   "temperature_basis": "chamber_setpoint",
-<<<<<<< Updated upstream
-  "charge_c_rate_max": null,
-  "discharge_c_rate_max": 0.2,
-  "c_rate_profile": null,
-  "protocol_class": null,
-  "protocol_charge_raw": null,
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max": 0.5,
   "discharge_c_rate_max": 0.2,
   "charge_c_rate_max_fraction": null,
@@ -114,7 +80,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -150,10 +115,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "none; per cell there are EIS sweeps at several SOC and constant-current capacity tests",
-<<<<<<< Updated upstream
-=======
   "count_basis": null,
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.293,
@@ -216,27 +178,17 @@
   "flags": [
    "voltage_excursion_below_cutoff"
   ],
-<<<<<<< Updated upstream
-  "notes": "EIS sweeps (0.01 Hz-1 kHz) at 5-100% SOC and 0.12 A constant-current capacity tests on LFP cells. File names read IFR14500, a cylindrical 14500 size, while the registry calls the cell a pouch cell. All 11 capacity-test CSV headers were inspected: discharge mode D-CC at 0.12 A to 2.00 V, equivalent to 0.2C using the source nominal 0.6 Ah. Their time-series headers are Time(S),Cur(A),Vol(V), with no temperature. All 440 EIS CSV headers were checked: temperature is recorded only against frequency, always 20 C, with no time column. This is not evidence of a delivered cell-temperature time series; generic temperature logging and temperature time-series availability must be distinguished. The charge rate and upper cutoff remain unsupported."
-=======
   "notes": "EIS sweeps (0.01 Hz-1 kHz) at 5-100% SOC and 0.12 A constant-current capacity tests on LFP cells. The cell is the cylindrical O'Cell IFR14500EC (14500 size) per the Data in Brief paper (Table 3) and the Mendeley record's description of 11 brand-new cylindrical LFP cells, while the registry calls it a pouch cell; this is the same dataset deposited twice (figshare 2023-07-25, Mendeley Data 2024-04-12), with cells B01-B11 in both. All 11 capacity-test CSV headers were inspected: discharge mode D-CC at 0.12 A to 2.00 V, equivalent to 0.2C using the source nominal 0.6 Ah. Their time-series headers are Time(S),Cur(A),Vol(V), with no temperature. All 440 EIS CSV headers were checked: temperature is recorded only against frequency, always 20 C, with no time column. This is not evidence of a delivered cell-temperature time series; generic temperature logging and temperature time-series availability must be distinguished. The paper gives the charge as CC-CV at 300 mA (0.5C) to 3.65 V with a 30 mA cut-off; the files hold no charge current. The paper says the capacity test and the EIS steps discharge at 0.5C, but all 11 capacity-test headers read 0.12 A (0.2C of 0.6 Ah): the record keeps the file value and this conflict is unresolved. Charging profile: CC-CV charge before each capacity test (paper), then CC discharge steps with EIS; no cycling protocol. Raw archive re-read (Measurements.rar, size and md5 match the upstream figshare file, so the .lock marker is a leftover and the archive is complete): 461 files, 11 cells B01-B11 with 40 EIS CSVs each (2 tests x 20 SoC levels, 5 to 100% in 5% steps, including 40%, so the 19-level list in the paper and the Mendeley description omits 40% by mistake) and one capacity-test CSV per cell plus 10 plot images (B08 has no image). Every capacity-test CSV is D-CC 0.12 A to 2.00 V with a constant 0.12 A in all rows (0.2C of 0.6 Ah), and the delivered capacities are 633 to 683 mAh (mean about 663 mAh); nothing in the files supports the paper's 0.5C for the capacity test, and the EIS-step discharges are not recorded as time series."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
    "identity.dataset_name": "registry",
    "identity.source_url": "registry",
-<<<<<<< Updated upstream
-   "identity.institution": "curated",
-   "identity.year": "ref_name",
-   "identity.doi": "registry",
-=======
    "identity.institution": "landing_page",
    "identity.year": "ref_name",
    "identity.doi": "registry",
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "landing_page",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -251,20 +203,6 @@
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.cathode_chemistry": "landing_page",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "registry",
-   "cell.nominal_capacity_Ah": "landing_page",
-   "cell.voltage_min_V": "raw_data",
-   "conditions.temperature_setpoints_C": "raw_data",
-   "conditions.c_rate": "derived",
-   "conditions.discharge_c_rate_max": "raw_data"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "cell.form_factors": "paper",
    "cell.cell_format_codes": "derived",
    "cell.cathode_chemistries": "landing_page",
@@ -291,7 +229,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_32.json",
   "landing_evidence": "evidence/landing/dataset_32.json"
  }

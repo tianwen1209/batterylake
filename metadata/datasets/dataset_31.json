@@ -9,21 +9,6 @@
   "institution": "Hawaii Natural Energy Institute",
   "year": 2023,
   "doi": "10.17632/y8nstxmdrg.1",
-<<<<<<< Updated upstream
-  "paper_doi": null,
-  "source_url": "https://data.mendeley.com/datasets/y8nstxmdrg/1",
-  "study_group": null
- },
- "cell": {
-  "manufacturer": null,
-  "model": "A",
-  "cathode_chemistry": "mixed",
-  "anode_chemistry": "mixed",
-  "chemistry_label_raw": "Gr,Si//NMC811; Gr//LFP",
-  "chemistry_is_multi": true,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-=======
   "paper_doi": "10.1016/j.xcrp.2023.101754",
   "source_url": "https://data.mendeley.com/datasets/y8nstxmdrg/1",
   "study_group": null,
@@ -34,7 +19,6 @@
   "model": null,
   "chemistry_label_raw": "Gr,Si//NMC811; Gr//LFP",
   "chemistry_is_multi": true,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.0,
    "height": 65.0,
@@ -46,11 +30,6 @@
   "nominal_capacity_Ah": null,
   "capacity_basis": null,
   "nominal_voltage_V": null,
-<<<<<<< Updated upstream
-  "voltage_level": null,
-  "voltage_min_V": null,
-  "voltage_max_V": null
-=======
   "voltage_level": "cell",
   "voltage_min_V": 2.0,
   "voltage_max_V": 4.2,
@@ -82,7 +61,6 @@
    1.1,
    3.5
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": -15.0,
@@ -105,14 +83,6 @@
    55.0
   ],
   "temperature_basis": "chamber_setpoint",
-<<<<<<< Updated upstream
-  "charge_c_rate_max": 1.0,
-  "discharge_c_rate_max": 1.0,
-  "c_rate_profile": "constant",
-  "protocol_class": "pulse",
-  "protocol_charge_raw": "formation, reference performance tests and depth-of-discharge relaxation tests at C/25 to C/1",
-  "protocol_discharge_raw": null,
-=======
   "charge_c_rate_max": 2.0,
   "discharge_c_rate_max": 2.0,
   "charge_c_rate_max_fraction": null,
@@ -131,7 +101,6 @@
   "rate_combinations": [],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "characterization",
@@ -171,10 +140,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "Cycle column of the tester files; parts are formation (FORM) and reference performance tests (RPT) with rest steps",
-<<<<<<< Updated upstream
-=======
   "count_basis": null,
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     1.999,
@@ -198,54 +164,6 @@
  },
  "cells": [
   {
-<<<<<<< Updated upstream
-   "cell_id": "A123005"
-  },
-  {
-   "cell_id": "A123006"
-  },
-  {
-   "cell_id": "A123007"
-  },
-  {
-   "cell_id": "A123008"
-  },
-  {
-   "cell_id": "A123009"
-  },
-  {
-   "cell_id": "A123010"
-  },
-  {
-   "cell_id": "MJ1002",
-   "model": "MJ",
-   "cathode_chemistry": "NMC811"
-  },
-  {
-   "cell_id": "MJ1003",
-   "model": "MJ",
-   "cathode_chemistry": "NMC811"
-  },
-  {
-   "cell_id": "MJ1004",
-   "model": "MJ",
-   "cathode_chemistry": "NMC811"
-  },
-  {
-   "cell_id": "MJ1005",
-   "model": "MJ",
-   "cathode_chemistry": "NMC811"
-  },
-  {
-   "cell_id": "MJ1006",
-   "model": "MJ",
-   "cathode_chemistry": "NMC811"
-  },
-  {
-   "cell_id": "MJ1007",
-   "model": "MJ",
-   "cathode_chemistry": "NMC811"
-=======
    "cell_id": "A123005",
    "manufacturer": "LithiumWerks",
    "model": "APR18650M1B",
@@ -352,21 +270,14 @@
    "anode_chemistry": "Si-graphite",
    "nominal_capacity_Ah": 3.5,
    "voltage_min_V": 2.5
->>>>>>> Stashed changes
   }
  ],
  "quality": {
   "flags": [
-<<<<<<< Updated upstream
-   "multi_chemistry"
-  ],
-  "notes": "Relaxation study of NMC811 and LFP cells (landing page); cell ids A123### (LFP) and MJ#### (NMC811). ACImp/DCIR columns exist in the tester files but hold only zeros. The cell is identified only as \"Cell A\" (an internal study label) - no manufacturer or model name appears anywhere in the source, so nominal_capacity_Ah, voltage_min_V/voltage_max_V and dimensions_mm cannot be sourced from a manufacturer datasheet; likely permanently unfillable from public information. The formatted-archive author README documents both Gr,Si//NMC811 and Gr//LFP systems, so dataset-level cathode and anode are mixed; NMC811 alone did not describe the full release. The archive explicitly includes charge records at C/1. All four formatted MAT files were inspected: their fifth column is constant within each relaxation segment and exactly matches the listed temperature conditions. This does not establish measured cell temperature; its measurement-versus-setpoint meaning remains unverified."
-=======
    "multi_chemistry",
    "voltage_excursion_above_cutoff"
   ],
   "notes": "Relaxation study of NMC811 and LFP cells (landing page); cell ids A123### (LFP) and MJ#### (NMC811). ACImp/DCIR columns exist in the tester files but hold only zeros. The earlier \"Cell A\" and \"MJ\" model labels came from file names; the paper names the cells. The formatted-archive author README documents both Gr,Si//NMC811 and Gr//LFP systems, so dataset-level cathode and anode are mixed; NMC811 alone did not describe the full release. The archive explicitly includes charge records at C/1. All four formatted MAT files were inspected: their fifth column is constant within each relaxation segment and exactly matches the listed temperature conditions. This does not establish measured cell temperature; its measurement-versus-setpoint meaning remains unverified. Charging profile: read from the documentation: the Maccor files are relaxation records, so the current could not be compared cycle by cycle. The data article (Fernando et al., Cell Reports Physical Science 5 (2024) 101754; full text read) names the cells: a 1.1 Ah GIC/LFP APR18650M1B (LithiumWerks) and a 3.5 Ah Si,GIC/NMC 811 INR18650MJ1 (LG Chem), both 18650, cycled between 2 and 3.6 V (LFP) and 2.5 and 4.2 V (NMC). Protocol 1 (rate, DOD, regime; 25 C) is two cells of each chemistry at C/25, C/5 and C/1 with 90, 80, 60, 40, 20 and 10% DOD rests (and 2, 4, 6, 94, 96, 98% for selected cells), each step followed by a 4 h rest, a C/25 residual capacity step and a second 4 h rest; protocol 2 (temperature, rate) starts with an RPT at 25 C at C/25, C/5, C/2, C/1 and 2C, then C/25 and C/1 cycles from 0 to 55 C in 5 C steps, two cells per chemistry with increasing temperatures (25 to 55 C) and two with decreasing (30 to -15 C), with a C/50 residual step. DOD is rate-specific (USABC definition). OCV is considered reached below 1 mV/min. Maccor 4300 cycler; the temperature chamber setting is the temperature (no cell sensor is described). The 2C RPT rates are in the paper but the dataset readme and plot code label only C/25, C/5 and C/1, so the recorded 1C maximum follows the data labels. The 24 formatted cells of the readme (12 here) hold two cells per condition. The paper's nominal voltage is not stated. Profile labels: charge and discharge are stepped constant-current profiles (a C/n step per 10% depth-of-discharge interval followed by a 4 h rest), so both are listed as multi-stage CC and the protocol class is multistage_CC rather than pulse."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -375,11 +286,8 @@
    "identity.institution": "raw_docs",
    "identity.year": "ref_name",
    "identity.doi": "registry",
-<<<<<<< Updated upstream
-=======
    "identity.paper_doi": "paper",
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "raw_docs",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -389,32 +297,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_docs",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.model": "raw_filenames",
-   "cell.cathode_chemistry": "raw_docs",
-   "cell.anode_chemistry": "raw_docs",
-   "cell.chemistry_label_raw": "raw_docs",
-   "cell.form_factor": "registry",
-   "conditions.temperature_setpoints_C": "landing_page",
-   "conditions.protocol_charge_raw": "raw_docs",
-   "cell.dimensions_mm": "derived",
-   "conditions.c_rate": "derived",
-   "conditions.charge_c_rate_max": "raw_docs",
-   "conditions.discharge_c_rate_max": "derived"
-  },
-  "confidence": "verified",
-  "last_verified": "2026-09-29",
-=======
    "cell.form_factors": "registry",
    "cell.cell_format_codes": "derived",
    "cell.cathode_chemistries": "raw_docs",
@@ -437,7 +325,6 @@
   },
   "confidence": "verified",
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_31.json",
   "landing_evidence": "evidence/landing/dataset_31.json"
  }

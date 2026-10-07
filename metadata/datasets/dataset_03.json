@@ -11,27 +11,14 @@
   "doi": null,
   "paper_doi": "10.1038/s41560-019-0356-8",
   "source_url": "https://doi.org/10.1038/s41560-019-0356-8",
-<<<<<<< Updated upstream
-  "study_group": null
-=======
   "study_group": null,
   "notes": "94 LFP/graphite 18650 cells (124 declared); multi-policy fast charging (up to 8C) with 4C CC-CV discharge at 30 °C; two of the three study batches; Severson et al. Nature Energy 2019"
->>>>>>> Stashed changes
  },
  "cell": {
   "manufacturer": "A123",
   "model": "APR18650M1A",
-<<<<<<< Updated upstream
-  "cathode_chemistry": "LFP",
-  "anode_chemistry": "graphite",
   "chemistry_label_raw": "LFP",
   "chemistry_is_multi": false,
-  "form_factor": "cylindrical",
-  "cell_format_code": "18650",
-=======
-  "chemistry_label_raw": "LFP",
-  "chemistry_is_multi": false,
->>>>>>> Stashed changes
   "dimensions_mm": {
    "diameter": 18.2,
    "height": 64.95,
@@ -42,12 +29,6 @@
   },
   "nominal_capacity_Ah": 1.1,
   "capacity_basis": "rated",
-<<<<<<< Updated upstream
-  "nominal_voltage_V": null,
-  "voltage_level": "cell",
-  "voltage_min_V": 2.0,
-  "voltage_max_V": 3.6
-=======
   "nominal_voltage_V": 3.3,
   "voltage_level": "cell",
   "voltage_min_V": 2.0,
@@ -73,7 +54,6 @@
   "nominal_capacities_Ah": [
    1.1
   ]
->>>>>>> Stashed changes
  },
  "conditions": {
   "temperature_min_C": 30.0,
@@ -84,12 +64,6 @@
   "temperature_basis": "chamber_setpoint",
   "charge_c_rate_max": 8.0,
   "discharge_c_rate_max": 4.0,
-<<<<<<< Updated upstream
-  "c_rate_profile": "constant",
-  "protocol_class": "multistage_CC",
-  "protocol_charge_raw": "4.8C(80%)-4.8C",
-  "protocol_discharge_raw": "CC-CV discharge at 4C to 2.0 V, then CV until C/50",
-=======
   "charge_c_rate_max_fraction": null,
   "discharge_c_rate_max_fraction": null,
   "c_rate_profile": "multistage",
@@ -113,7 +87,6 @@
   ],
   "single_side_profiles": [],
   "dynamic_subprofiles": [],
->>>>>>> Stashed changes
   "soc_window_min_pct": null,
   "soc_window_max_pct": null,
   "aging_type": "cyclic",
@@ -150,10 +123,7 @@
   ],
   "has_waveforms": true,
   "cycle_basis": "number of cycle records in the batch `cycles` struct (cycle_life is the authors' label)",
-<<<<<<< Updated upstream
-=======
   "count_basis": "124 cells in the full study per the author documentation; no cycle total (an earlier estimate was removed). The 2019 extension is excluded.",
->>>>>>> Stashed changes
   "observed": {
    "voltage_V": [
     0.0,
@@ -468,11 +438,7 @@
    "voltage_excursion_above_cutoff",
    "partial_raw"
   ],
-<<<<<<< Updated upstream
-  "notes": "Charging policy of each cell is read from the batch file's policy_readable field (e.g. 3.6C(80%)-3.6C). The two batch files present cover two of the three batches of the study; cell specification is not in Raw_Dataset. Cell and test conditions read from the Severson et al. Methods section (fetched from the MIT-hosted PDF); the dataset itself ships no documentation. Charge-rate maximum is taken across all locally available cell policies, not the modal policy; the discharge rate is independently stated as 4C in the paper Methods."
-=======
   "notes": "Charging policy of each cell is read from the batch file's policy_readable field (e.g. 3.6C(80%)-3.6C). The two batch files present cover two of the three batches of the study; cell specification is not in Raw_Dataset. Cell and test conditions read from the Severson et al. Methods section (fetched from the MIT-hosted PDF); the dataset itself ships no documentation. Charge-rate maximum is taken across all locally available cell policies, not the modal policy; the discharge rate is independently stated as 4C in the paper Methods. Charging profile: the charge rate differs between cells but is fixed within each cell. The full text of the paper was supplied by the user and read in full: it confirms the A123 APR18650M1A cell (1.1 Ah, 3.3 V), the 124-cell total over three batches (this record holds 94 from two of them), 30 C, one- and two-step 0-80% SOC charging policies of 3.6C to 6C (8C/4C only in the diagnostic experiments of Fig. 4), a uniform 1C CC-CV charge from 80% to 100% to 3.6 V with C/50 cut-off, and a 4C CC-CV discharge to 2.0 V with C/50 cut-off. Rate combinations: the charge is multi-stage, not a single CC-CV rate, so none are listed; the 4C discharge is the same for all cells. Rate groups: the multi-stage CC-CV charge (a different policy per cell, no single rate) against the 4C CC-CV discharge, listed as a group with no charge rates."
->>>>>>> Stashed changes
  },
  "provenance": {
   "field_sources": {
@@ -481,10 +447,7 @@
    "identity.institution": "registry",
    "identity.year": "ref_name",
    "identity.paper_doi": "registry",
-<<<<<<< Updated upstream
-=======
    "identity.notes": "curated",
->>>>>>> Stashed changes
    "conditions.aging_type": "registry",
    "conditions.application_domain": "derived",
    "content.supported_tasks": "curated",
@@ -494,29 +457,12 @@
    "scale.n_entities_declared": "registry",
    "scale.n_raw_files": "raw_inventory",
    "scale.raw_bytes": "raw_inventory",
-<<<<<<< Updated upstream
-=======
    "conditions.charging_profile": "raw_data",
->>>>>>> Stashed changes
    "content.signals": "raw_data",
    "content.raw_columns": "raw_data",
    "content.observed": "raw_data",
    "content.source_format": "raw_inventory",
    "quality.flags": "derived",
-<<<<<<< Updated upstream
-   "identity.ref_name": "registry",
-   "cell.manufacturer": "paper",
-   "cell.model": "paper",
-   "cell.cathode_chemistry": "registry",
-   "cell.anode_chemistry": "paper",
-   "cell.chemistry_label_raw": "registry",
-   "cell.form_factor": "registry",
-   "cell.nominal_capacity_Ah": "paper",
-   "cell.voltage_max_V": "paper",
-   "cell.voltage_min_V": "paper",
-   "conditions.temperature_setpoints_C": "paper",
-   "conditions.protocol_charge_raw": "raw_data",
-=======
    "content.count_basis": "registry",
    "cell.form_factors": "registry",
    "cell.cell_format_codes": "derived",
@@ -537,7 +483,6 @@
    "cell.voltage_min_V": "paper",
    "conditions.temperature_setpoints_C": "paper",
    "conditions.protocol_charge_raw": "paper",
->>>>>>> Stashed changes
    "conditions.protocol_discharge_raw": "paper",
    "cell.dimensions_mm": "datasheet",
    "conditions.c_rate": "derived",
@@ -545,11 +490,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-<<<<<<< Updated upstream
-  "last_verified": "2026-09-29",
-=======
   "last_verified": "2026-10-07",
->>>>>>> Stashed changes
   "raw_evidence": "evidence/raw/dataset_03.json",
   "landing_evidence": "evidence/landing/dataset_03.json"
  }
