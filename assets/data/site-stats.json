@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-06T21:43:43Z",
-  "total_visits": 3271,
+  "updated_at": "2026-10-07T22:04:54Z",
+  "total_visits": 3362,
   "dataset_downloads": 495,
   "skill_uses": 114,
   "model_downloads": {
@@ -17,27 +17,27 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-06T21:43:43Z",
+    "updatedAt": "2026-10-07T22:04:54Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-06"
+      "endDate": "2026-10-07"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 56
+        "visitors": 58
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 50
+        "visitors": 53
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 44
+        "visitors": 45
       },
       {
         "country": "Poland",
@@ -65,13 +65,13 @@
         "visitors": 4
       },
       {
-        "country": "Iran",
-        "countryCode": "IR",
-        "visitors": 3
-      },
-      {
         "country": "Vietnam",
         "countryCode": "VN",
+        "visitors": 4
+      },
+      {
+        "country": "Iran",
+        "countryCode": "IR",
         "visitors": 3
       },
       {
@@ -125,6 +125,11 @@
         "visitors": 1
       },
       {
+        "country": "New Zealand",
+        "countryCode": "NZ",
+        "visitors": 1
+      },
+      {
         "country": "Russia",
         "countryCode": "RU",
         "visitors": 1
@@ -140,25 +145,25 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 54,
+        "visitors": 56,
         "lng": 103.85,
         "lat": 1.29
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "city": "Ashburn",
-        "visitors": 11,
-        "lng": -77.487,
-        "lat": 39.044
+        "city": "Council Bluffs",
+        "visitors": 13,
+        "lng": -95.861,
+        "lat": 41.262
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "city": "Council Bluffs",
-        "visitors": 11,
-        "lng": -95.861,
-        "lat": 41.262
+        "city": "Ashburn",
+        "visitors": 12,
+        "lng": -77.487,
+        "lat": 39.044
       },
       {
         "country": "China",
@@ -257,6 +262,14 @@
         "lat": 36.065
       },
       {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Zhuhai",
+        "visitors": 3,
+        "lng": 113.568,
+        "lat": 22.277
+      },
+      {
         "country": "Canada",
         "countryCode": "CA",
         "city": "Burnaby",
@@ -297,14 +310,6 @@
         "lat": 24.48
       },
       {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Zhuhai",
-        "visitors": 2,
-        "lng": 113.568,
-        "lat": 22.277
-      },
-      {
         "country": "United Kingdom",
         "countryCode": "GB",
         "city": "London",
@@ -319,6 +324,14 @@
         "visitors": 2,
         "lng": 51.422,
         "lat": 35.694
+      },
+      {
+        "country": "Vietnam",
+        "countryCode": "VN",
+        "city": "Ho Chi Minh City",
+        "visitors": 2,
+        "lng": 106.63,
+        "lat": 10.823
       },
       {
         "country": "China",
@@ -441,6 +454,14 @@
         "lat": 43.252
       },
       {
+        "country": "New Zealand",
+        "countryCode": "NZ",
+        "city": "Hamilton",
+        "visitors": 1,
+        "lng": 175.283,
+        "lat": -37.783
+      },
+      {
         "country": "Russia",
         "countryCode": "RU",
         "city": "Khabarovsk",
@@ -487,14 +508,6 @@
         "visitors": 1,
         "lng": 105.841,
         "lat": 21.024
-      },
-      {
-        "country": "Vietnam",
-        "countryCode": "VN",
-        "city": "Ho Chi Minh City",
-        "visitors": 1,
-        "lng": 106.63,
-        "lat": 10.823
       }
     ]
   }
