@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-44">
 <link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-4">
 <link rel="stylesheet" href="styles/studio-calibration-map.css?v=7">
-<link rel="stylesheet" href="styles/studio-research-schematic.css?v=3">
+<link rel="stylesheet" href="styles/studio-research-schematic.css?v=5">
 </head>
 <body>
 <div class="app">
@@ -902,18 +902,15 @@ bash run_benchmark.sh</pre>
           <div class="studio-feedback" role="img" aria-label="If validation does not meet the acceptance criteria, return to parameter estimation"><svg class="studio-feedback-desktop" viewBox="0 0 100 42" preserveAspectRatio="none" aria-hidden="true"><path d="M79 0V24Q79 34 69 34H31Q21 34 21 24V0M17 7L21 0L25 7"/></svg><svg class="studio-feedback-mobile" viewBox="0 0 18 526" preserveAspectRatio="none" aria-hidden="true"><path d="M0 414H8Q16 414 16 406V120Q16 112 8 112H0M6 106L0 112L6 118"/></svg></div>
         </div>
         <div class="studio-research" aria-labelledby="studio-research-title">
-          <div class="studio-research-heading"><span>02 / Research schematic</span><strong id="studio-research-title">Battery digital twin · calibration and feedback</strong></div>
+          <div class="studio-research-heading"><span id="studio-research-title">02 / Research schematic</span></div>
           <div class="studio-research-scroll">
-            <svg class="studio-research-diagram" viewBox="0 0 1400 430" role="img" aria-labelledby="studio-research-svg-title studio-research-svg-desc" xmlns="http://www.w3.org/2000/svg">
+            <svg class="studio-research-diagram" viewBox="0 65 1400 365" role="img" aria-labelledby="studio-research-svg-title studio-research-svg-desc" xmlns="http://www.w3.org/2000/svg">
               <title id="studio-research-svg-title">Battery digital twin research schematic</title>
               <desc id="studio-research-svg-desc">Read the main flow from left to right: experimental data, parameter identification, battery model, state estimation, model validation, and validated twin. A lower branch brings real-world cycling data into an adaptive parameter update, which feeds the model. Failed validation returns to that update.</desc>
               <defs>
                 <marker id="research-blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#4b8dce"/></marker>
                 <marker id="research-green-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#48a876"/></marker>
               </defs>
-              <text class="research-lane-label" x="45" y="50">Calibration → inference → validation → use</text>
-              <path class="research-lane-rule" d="M410 45H1350"/>
-
               <path class="research-link research-link-blue" d="M240 150H280" marker-end="url(#research-blue-arrow)"/>
               <path class="research-link research-link-blue" d="M460 150H500" marker-end="url(#research-blue-arrow)"/>
               <path class="research-link research-link-blue" d="M680 132H720" marker-end="url(#research-blue-arrow)"/>
@@ -940,7 +937,6 @@ bash run_benchmark.sh</pre>
               <g class="research-card research-card-update"><rect x="500" y="280" width="180" height="92" rx="12"/><text class="research-card-eyebrow" x="590" y="307" text-anchor="middle">Adaptive loop</text><text class="research-card-title" x="590" y="345" text-anchor="middle">Parameter update</text></g>
             </svg>
           </div>
-          <div class="studio-research-legend"><span><i class="research-legend-blue"></i>Experimental calibration</span><span><i class="research-legend-green"></i>Field data and feedback</span><span>Validation uses held-out cycles</span></div>
         </div>
       </section>
 
