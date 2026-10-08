@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-07T22:04:54Z",
-  "total_visits": 3362,
-  "dataset_downloads": 495,
+  "updated_at": "2026-10-08T22:11:59Z",
+  "total_visits": 3449,
+  "dataset_downloads": 496,
   "skill_uses": 114,
   "model_downloads": {
     "cnn": 16,
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-07T22:04:54Z",
+    "updatedAt": "2026-10-08T22:11:59Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-07"
+      "endDate": "2026-10-08"
     },
     "countries": [
       {
@@ -32,12 +32,17 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 53
+        "visitors": 56
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 45
+        "visitors": 50
+      },
+      {
+        "country": "Hong Kong",
+        "countryCode": "HK",
+        "visitors": 7
       },
       {
         "country": "Poland",
@@ -45,9 +50,9 @@
         "visitors": 7
       },
       {
-        "country": "Hong Kong",
-        "countryCode": "HK",
-        "visitors": 6
+        "country": "France",
+        "countryCode": "FR",
+        "visitors": 5
       },
       {
         "country": "India",
@@ -82,11 +87,6 @@
       {
         "country": "Germany",
         "countryCode": "DE",
-        "visitors": 2
-      },
-      {
-        "country": "France",
-        "countryCode": "FR",
         "visitors": 2
       },
       {
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 13,
+        "visitors": 14,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -161,7 +161,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 12,
+        "visitors": 13,
         "lng": -77.487,
         "lat": 39.044
       },
@@ -172,6 +172,14 @@
         "visitors": 9,
         "lng": 121.458,
         "lat": 31.222
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Shenzhen",
+        "visitors": 9,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "United States",
@@ -188,14 +196,6 @@
         "visitors": 7,
         "lng": 21.012,
         "lat": 52.23
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Shenzhen",
-        "visitors": 5,
-        "lng": 114.068,
-        "lat": 22.546
       },
       {
         "country": "United States",
@@ -228,6 +228,14 @@
         "visitors": 4,
         "lng": 118.778,
         "lat": 32.062
+      },
+      {
+        "country": "France",
+        "countryCode": "FR",
+        "city": "Paris",
+        "visitors": 4,
+        "lng": 2.349,
+        "lat": 48.853
       },
       {
         "country": "Netherlands",
@@ -318,6 +326,14 @@
         "lat": 51.509
       },
       {
+        "country": "Hong Kong",
+        "countryCode": "HK",
+        "city": "Hong Kong",
+        "visitors": 2,
+        "lng": 114.175,
+        "lat": 22.278
+      },
+      {
         "country": "Iran",
         "countryCode": "IR",
         "city": "Tehran",
@@ -388,22 +404,6 @@
         "visitors": 1,
         "lng": 108.929,
         "lat": 34.258
-      },
-      {
-        "country": "France",
-        "countryCode": "FR",
-        "city": "Paris",
-        "visitors": 1,
-        "lng": 2.349,
-        "lat": 48.853
-      },
-      {
-        "country": "Hong Kong",
-        "countryCode": "HK",
-        "city": "Hong Kong",
-        "visitors": 1,
-        "lng": 114.175,
-        "lat": 22.278
       },
       {
         "country": "Indonesia",
@@ -492,6 +492,14 @@
         "visitors": 1,
         "lng": -123.262,
         "lat": 44.565
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Portland",
+        "visitors": 1,
+        "lng": -122.676,
+        "lat": 45.523
       },
       {
         "country": "United States",
