@@ -1,8 +1,10 @@
 /* Visual and research views of the Studio calibration workflow. */
 #page-studio .studio-diagram-kicker { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 10px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .02em; }
 #page-studio .studio-diagram-kicker span { color: var(--text3); font-weight: 600; letter-spacing: 0; text-transform: none; }
-#page-studio .studio-calibration-map { grid-template-columns: minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr); grid-template-rows: auto auto; column-gap: 4px; row-gap: 5px; align-items: stretch; }
+#page-studio .studio-calibration-map { position: relative; grid-template-columns: minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr); grid-template-rows: auto auto; column-gap: 4px; row-gap: 5px; align-items: stretch; }
+#page-studio .studio-particle-flow { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none; }
 #page-studio .studio-calibration-map .studio-process-node { box-sizing: border-box; height: 224px; min-height: 0; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+#page-studio .studio-calibration-map .studio-process-node-head { position: relative; z-index: 4; background: inherit; }
 #page-studio .studio-calibration-map .studio-process-logo { flex: 1; min-height: 0; height: auto; display: grid; place-items: center; margin: 6px 0 0; overflow: visible; }
 #page-studio .studio-calibration-map .studio-process-logo img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; transform: none; mix-blend-mode: normal; }
 #page-studio .studio-data-visual, #page-studio .studio-model-visual, #page-studio .studio-fit-preview { flex: 1; min-height: 0; width: 100%; margin-top: 9px; display: grid; place-items: center; position: relative; overflow: hidden; border: 1px solid rgba(73,132,210,.15); border-radius: 10px; background: radial-gradient(circle at 50% 45%,rgba(112,196,255,.18),transparent 70%),var(--surface); }
@@ -24,6 +26,7 @@
 #page-studio .studio-model-node { fill: #61d8ff; opacity: .2; filter: drop-shadow(0 0 5px #4e9cff); animation: studio-model-node 20s ease-in-out infinite; }
 #page-studio .studio-calibration-map .studio-process-estimation { border-color: color-mix(in srgb,var(--accent) 38%,var(--border)); background: color-mix(in srgb,var(--accent-light) 18%,var(--surface)); }
 #page-studio .studio-fit-preview { background: radial-gradient(circle at 50% 55%,rgba(93,170,255,.16),transparent 70%),var(--surface); }
+#page-studio .studio-fit-preview svg { position: relative; z-index: 4; }
 #page-studio .studio-fit-measured, #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 #page-studio .studio-fit-measured { stroke: #25384f; stroke-width: 2.2; stroke-dasharray: 4 4; opacity: .82; }
 #page-studio .studio-fit-rough { stroke: #eb9a58; stroke-width: 3; opacity: 0; animation: studio-fit-rough 20s ease-in-out infinite; }
@@ -34,15 +37,10 @@
 #page-studio[data-flow-stage] .studio-calibration-map .studio-process-arrow { animation: none; }
 #page-studio .studio-calibration-map .studio-process-arrow::before { content: ''; display: block; position: absolute; left: 1px; right: 9px; top: 17px; width: auto; height: 4px; border: 0; border-radius: 4px; background: linear-gradient(90deg,#4dbbff,#2665eb); box-shadow: 0 0 9px rgba(46,129,255,.7); opacity: .25; }
 #page-studio .studio-calibration-map .studio-process-arrow::after { content: ''; display: block; position: absolute; left: auto; right: 3px; top: 10px; width: 13px; height: 13px; border: 0; border-top: 4px solid #2665eb; border-right: 4px solid #2665eb; transform: rotate(45deg); filter: drop-shadow(0 0 4px rgba(48,132,255,.65)); }
-#page-studio .studio-calibration-map .studio-process-arrow i { position: absolute; z-index: 1; top: 14px; left: 0; width: 7px; height: 7px; border: 1px solid #e8ffff; border-radius: 50%; background: #40c9ff; box-shadow: 0 0 7px 1px #42c6ff; opacity: 0; animation: studio-transfer-one 20s linear infinite; }
-#page-studio .studio-calibration-map .studio-process-arrow i:nth-child(1) { animation-delay: 0s; }
-#page-studio .studio-calibration-map .studio-process-arrow i:nth-child(2) { animation-delay: .22s; top: 11px; width: 5px; height: 5px; }
-#page-studio .studio-calibration-map .studio-process-arrow i:nth-child(3) { animation-delay: .44s; top: 22px; width: 6px; height: 6px; }
-#page-studio .studio-calibration-map .studio-process-arrow i:nth-child(4) { animation-delay: .66s; top: 14px; width: 4px; height: 4px; }
-#page-studio .studio-calibration-map .studio-process-arrow i:nth-child(5) { animation-delay: .88s; top: 21px; width: 5px; height: 5px; }
-#page-studio .studio-calibration-map .studio-process-arrow-2 i { animation-name: studio-transfer-two; }
-#page-studio .studio-calibration-map .studio-process-arrow b { position: absolute; z-index: 2; top: 17px; left: 0; width: 16px; height: 4px; border-radius: 5px; background: #fff; box-shadow: 0 0 9px 3px #43cfff; opacity: 0; animation: studio-transfer-one 20s linear infinite; }
-#page-studio .studio-calibration-map .studio-process-arrow-2 b { animation-name: studio-transfer-two; }
+#page-studio .studio-calibration-map .studio-process-arrow-1::before,
+#page-studio .studio-calibration-map .studio-process-arrow-1::after,
+#page-studio .studio-calibration-map .studio-process-arrow-2::before,
+#page-studio .studio-calibration-map .studio-process-arrow-2::after { display: none; }
 #page-studio .studio-feedback { grid-column: 5/8; grid-row: 2; height: 42px; margin-top: -5px; display: block; }
 #page-studio .studio-feedback svg { display: block; width: 100%; height: 100%; overflow: visible; }
 #page-studio .studio-feedback .studio-feedback-mobile { display: none; }
@@ -61,8 +59,6 @@
 #page-studio .studio-academic-decision b { color: var(--text1); }
 /* One 20-second story: select → transfer → configure → rough fit → second transfer → refined fit. */
 @keyframes studio-dataset-pick { 0%,2%,100% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } 8%,49%,55%,96% { transform: translateY(-4px) scale(1); opacity: 1; filter: drop-shadow(0 5px 7px rgba(34,125,245,.35)); } 51%,52% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } }
-@keyframes studio-transfer-one { 0%,9%,22%,56%,69%,100% { left: 0; opacity: 0; } 10%,57% { left: 0; opacity: 1; } 19%,66% { left: calc(100% - 10px); opacity: 1; } 21%,68% { left: calc(100% - 10px); opacity: 0; } }
-@keyframes studio-transfer-two { 0%,31%,44%,74%,87%,100% { left: 0; opacity: 0; } 32%,75% { left: 0; opacity: 1; } 41%,84% { left: calc(100% - 10px); opacity: 1; } 43%,86% { left: calc(100% - 10px); opacity: 0; } }
 @keyframes studio-model-turn { 0%,21% { transform: rotate(0); } 35%,67% { transform: rotate(180deg); } 81%,100% { transform: rotate(360deg); } }
 @keyframes studio-model-pulse { 0%,20%,57%,66%,100% { transform: scale(.78); opacity: .2; } 27%,36%,72%,81% { transform: scale(1.03); opacity: .75; } }
 @keyframes studio-model-activate { 0%,20%,66%,100% { stroke-dashoffset: 280; } 29%,40%,73%,84% { stroke-dashoffset: 0; } 57%,65% { stroke-dashoffset: 280; } }
@@ -98,9 +94,8 @@
   #page-studio .studio-dataset-picked,
   #page-studio .studio-model-ring, #page-studio .studio-model-circuit, #page-studio .studio-model-cell-lines, #page-studio .studio-model-node,
   #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final, #page-studio .studio-fit-scan,
-  #page-studio .studio-calibration-map .studio-process-arrow i, #page-studio .studio-calibration-map .studio-process-arrow b { animation: none; }
+  #page-studio .studio-calibration-map .studio-process-arrow { animation: none; }
   #page-studio .studio-model-circuit, #page-studio .studio-model-cell-lines { stroke-dashoffset: 0; }
-  #page-studio .studio-model-node, #page-studio .studio-fit-final, #page-studio .studio-calibration-map .studio-process-arrow i { opacity: 1; }
-  #page-studio .studio-calibration-map .studio-process-arrow b { display: none; }
+  #page-studio .studio-model-node, #page-studio .studio-fit-final { opacity: 1; }
   #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-scan { opacity: 0; }
 }
