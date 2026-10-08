@@ -6,17 +6,29 @@
   const canvas = map.querySelector('.studio-particle-flow');
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  const visuals = ['.studio-data-visual', '.studio-model-visual', '.studio-fit-preview']
+  const visuals = ['.studio-data-visual', '.studio-model-visual', '.studio-fit-preview',
+    '.studio-validation-visual', '.studio-generation-visual']
     .map(selector => map.querySelector(selector));
+  const feedback = map.querySelector('.studio-feedback');
   const timingNode = map.querySelector('.studio-dataset-picked');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const colors = ['#27b6a8', '#36c4e3', '#3b9bf1', '#686de9', '#a27be8'];
+  const palettes = {
+    data: ['#159e91', '#1bb4a9', '#28c4bc', '#40d0c4', '#76ddcc'],
+    model: ['#257cce', '#318ce3', '#489eed', '#64aef4', '#8bc3f7'],
+    validation: ['#ce793d', '#df8f49', '#e9a65a', '#f0b977', '#f4c995'],
+    feedback: ['#8057c4', '#9265d6', '#a478e6', '#b78ef0', '#c9a5f4'],
+    output: ['#14966c', '#1cac78', '#30bd88', '#55cb9c', '#83d8b5']
+  };
   const endLanes = [1, 0, 3, 4, 2];
   const waves = [
-    { from: 0, to: 1, start: .10, end: .21 },
-    { from: 1, to: 2, start: .32, end: .43 },
-    { from: 0, to: 1, start: .57, end: .68 },
-    { from: 1, to: 2, start: .75, end: .86 }
+    { from: 0, to: 1, start: .08, end: .16, kind: 'data' },
+    { from: 1, to: 2, start: .24, end: .32, kind: 'model' },
+    { from: 2, to: 3, start: .40, end: .47, kind: 'validation' },
+    { from: 3, to: 2, start: .48, end: .55, kind: 'feedback' },
+    { from: 0, to: 1, start: .56, end: .63, kind: 'data' },
+    { from: 1, to: 2, start: .70, end: .78, kind: 'model' },
+    { from: 2, to: 3, start: .88, end: .94, kind: 'validation' },
+    { from: 3, to: 4, start: .94, end: 1, kind: 'output' }
   ];
   let visible = false;
   let frame = 0;
@@ -45,21 +57,39 @@
         top: rect.top - bounds.top, bottom: rect.bottom - bounds.top,
         width: rect.width, height: rect.height };
     });
+    const feedbackRect = feedback.getBoundingClientRect();
+    const returnPath = { left: feedbackRect.left - bounds.left, right: feedbackRect.right - bounds.left,
+      top: feedbackRect.top - bounds.top, bottom: feedbackRect.bottom - bounds.top,
+      width: feedbackRect.width, height: feedbackRect.height };
     const vertical = rects[1].top > rects[0].bottom;
     geometry = waves.map(wave => Array.from({ length: 5 }, (_, lane) => {
       const from = rects[wave.from];
       const to = rects[wave.to];
       const a = .27 + lane * .115;
       const b = .27 + endLanes[lane] * .115;
+      if (wave.kind === 'feedback') {
+        if (vertical) {
+          const start = { x: from.right - 17, y: from.top + from.height * (.34 + lane * .08) };
+          const end = { x: to.right - 17, y: to.top + to.height * (.34 + endLanes[lane] * .08) };
+          const outerX = returnPath.right + 4 + lane * 2;
+          return [start, { x: outerX, y: start.y - 12 },
+            { x: outerX, y: end.y + 12 }, end];
+        }
+        const start = { x: from.left + from.width * (.34 + lane * .08), y: from.bottom - 13 };
+        const end = { x: to.left + to.width * (.34 + endLanes[lane] * .08), y: to.bottom - 13 };
+        const lowerY = returnPath.top + returnPath.height * .6 + lane * 2;
+        return [start, { x: start.x + 10, y: lowerY },
+          { x: end.x - 10, y: lowerY }, end];
+      }
       if (vertical) {
-        const start = { x: from.left + from.width * a, y: from.bottom - 28 };
-        const end = { x: to.left + to.width * b, y: to.top + 28 };
+        const start = { x: from.left + from.width * a, y: from.bottom - 15 };
+        const end = { x: to.left + to.width * b, y: to.top + 15 };
         const reach = (end.y - start.y) * .43;
         return [start, { x: start.x + (lane - 2) * 10, y: start.y + reach },
           { x: end.x - (lane - 2) * 10, y: end.y - reach }, end];
       }
-      const start = { x: from.left + from.width * .38, y: from.top + from.height * a };
-      const end = { x: to.left + to.width * .62, y: to.top + to.height * b };
+      const start = { x: from.left + from.width * .72, y: from.top + from.height * a };
+      const end = { x: to.left + to.width * .28, y: to.top + to.height * b };
       const reach = (end.x - start.x) * .43;
       return [start, { x: start.x + reach, y: start.y + (lane - 2) * 7 },
         { x: end.x - reach, y: end.y - (lane - 2) * 7 }, end];
@@ -82,6 +112,7 @@
     const fade = staticView ? 1 : Math.min(1, progress * 8, (1 - progress) * 9);
     if (fade <= 0) return;
     const curves = geometry[index];
+    const colors = palettes[waves[index].kind];
     curves.forEach((curve, lane) => {
       drawRibbon(curve, colors[lane], staticView ? 1 : Math.min(1, progress * 1.4),
         staticView ? .11 : .18 * fade);
@@ -110,20 +141,18 @@
   function drawStatic() {
     if (!geometry.length) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawWave(0, .55, true);
-    drawWave(1, .55, true);
+    [0, 1, 2, 3, 7].forEach(index => drawWave(index, .55, true));
   }
   function currentPhase() {
     const animation = timingNode.getAnimations && timingNode.getAnimations()[0];
     const time = animation && animation.currentTime != null
       ? Number(animation.currentTime) : performance.now() - fallbackStart;
-    return ((time % 20000) + 20000) % 20000 / 20000;
+    return ((time % 36000) + 36000) % 36000 / 36000;
   }
   function tick() {
     if (!visible || document.hidden || reducedMotion.matches) { frame = 0; return; }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawWave(0, .55, true);
-    drawWave(1, .55, true);
+    [0, 1, 2, 3, 7].forEach(index => drawWave(index, .55, true));
     const phase = currentPhase();
     waves.forEach((wave, index) => {
       if (phase >= wave.start && phase <= wave.end) {

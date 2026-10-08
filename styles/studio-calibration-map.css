@@ -7,44 +7,56 @@
 #page-studio .studio-calibration-map .studio-process-node-head { position: relative; z-index: 4; background: inherit; }
 #page-studio .studio-calibration-map .studio-process-logo { flex: 1; min-height: 0; height: auto; display: grid; place-items: center; margin: 6px 0 0; overflow: visible; }
 #page-studio .studio-calibration-map .studio-process-logo img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; transform: none; mix-blend-mode: normal; }
-#page-studio .studio-data-visual, #page-studio .studio-model-visual, #page-studio .studio-fit-preview { flex: 1; min-height: 0; width: 100%; margin-top: 9px; display: grid; place-items: center; position: relative; overflow: hidden; border: 1px solid rgba(73,132,210,.15); border-radius: 10px; background: radial-gradient(circle at 50% 45%,rgba(112,196,255,.18),transparent 70%),var(--surface); }
-#page-studio .studio-data-visual svg, #page-studio .studio-model-visual svg, #page-studio .studio-fit-preview svg { display: block; width: 100%; height: 100%; }
+#page-studio .studio-data-visual, #page-studio .studio-model-visual, #page-studio .studio-fit-preview, #page-studio .studio-validation-visual, #page-studio .studio-generation-visual { flex: 1; min-height: 0; width: 100%; margin-top: 9px; display: grid; place-items: center; position: relative; overflow: hidden; border: 1px solid rgba(73,132,210,.15); border-radius: 10px; background: radial-gradient(circle at 50% 45%,rgba(112,196,255,.18),transparent 70%),var(--surface); }
+#page-studio .studio-data-visual svg, #page-studio .studio-model-visual svg, #page-studio .studio-fit-preview svg, #page-studio .studio-validation-visual svg, #page-studio .studio-generation-visual svg { display: block; width: 76%; height: 76%; }
+#page-studio .studio-fit-preview svg { width: 86%; height: 86%; }
 #page-studio .studio-fit-grid { fill: none; stroke: rgba(74,125,195,.16); stroke-width: 1; }
 #page-studio .studio-dataset-back { fill: #f0f6ff; stroke: #aecdf2; stroke-width: 1.5; }
 #page-studio .studio-dataset-rows { fill: none; stroke: #9abce8; stroke-width: 3; stroke-linecap: round; }
-#page-studio .studio-dataset-picked { transform-origin: 91px 82px; animation: studio-dataset-pick 20s ease-in-out infinite; }
+#page-studio .studio-dataset-picked { transform-origin: 91px 82px; animation: studio-dataset-pick 36s ease-in-out infinite; }
 #page-studio .studio-dataset-picked rect { fill: #e6f2ff; stroke: #348af8; stroke-width: 2.5; }
 #page-studio .studio-dataset-picked circle { fill: #2780ef; }
 #page-studio .studio-dataset-picked .studio-dataset-rows { stroke: #65a6f7; }
 #page-studio .studio-dataset-check { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 #page-studio .studio-model-ring { fill: none; stroke: #55b9ff; transform-origin: 90px 76px; }
-#page-studio .studio-model-ring-outer { stroke-width: 2; stroke-dasharray: 7 6; filter: drop-shadow(0 0 5px #4aa5ff); animation: studio-model-turn 20s linear infinite; }
-#page-studio .studio-model-ring-inner { stroke-width: 1.8; opacity: .45; animation: studio-model-pulse 20s ease-in-out infinite; }
-#page-studio .studio-model-circuit { fill: none; stroke: #378bff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 280; stroke-dashoffset: 280; animation: studio-model-activate 20s linear infinite; }
+#page-studio .studio-model-ring-outer { stroke-width: 2; stroke-dasharray: 7 6; filter: drop-shadow(0 0 5px #4aa5ff); animation: studio-model-turn 36s linear infinite; }
+#page-studio .studio-model-ring-inner { stroke-width: 1.8; opacity: .45; animation: studio-model-pulse 36s ease-in-out infinite; }
+#page-studio .studio-model-circuit { fill: none; stroke: #378bff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 280; stroke-dashoffset: 280; animation: studio-model-activate 36s linear infinite; }
 #page-studio .studio-model-cell { fill: rgba(67,142,255,.1); stroke: #2672db; stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(52,132,255,.35)); }
-#page-studio .studio-model-cell-lines { fill: none; stroke: #5dbfff; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 160; stroke-dashoffset: 160; animation: studio-model-activate 20s linear infinite; }
-#page-studio .studio-model-node { fill: #61d8ff; opacity: .2; filter: drop-shadow(0 0 5px #4e9cff); animation: studio-model-node 20s ease-in-out infinite; }
+#page-studio .studio-model-cell-lines { fill: none; stroke: #5dbfff; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 160; stroke-dashoffset: 160; animation: studio-model-activate 36s linear infinite; }
+#page-studio .studio-model-node { fill: #61d8ff; opacity: .2; filter: drop-shadow(0 0 5px #4e9cff); animation: studio-model-node 36s ease-in-out infinite; }
 #page-studio .studio-calibration-map .studio-process-estimation { border-color: color-mix(in srgb,var(--accent) 38%,var(--border)); background: color-mix(in srgb,var(--accent-light) 18%,var(--surface)); }
 #page-studio .studio-fit-preview { background: radial-gradient(circle at 50% 55%,rgba(93,170,255,.16),transparent 70%),var(--surface); }
 #page-studio .studio-fit-preview svg { position: relative; z-index: 4; }
 #page-studio .studio-fit-measured, #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 #page-studio .studio-fit-measured { stroke: #25384f; stroke-width: 2.2; stroke-dasharray: 4 4; opacity: .82; }
-#page-studio .studio-fit-rough { stroke: #eb9a58; stroke-width: 3; opacity: 0; animation: studio-fit-rough 20s ease-in-out infinite; }
-#page-studio .studio-fit-middle { stroke: #8969ef; stroke-width: 3; opacity: 0; animation: studio-fit-middle 20s ease-in-out infinite; }
-#page-studio .studio-fit-final { stroke: #258fff; stroke-width: 3.8; opacity: 0; filter: drop-shadow(0 0 4px rgba(28,149,255,.68)); animation: studio-fit-final 20s ease-in-out infinite; }
-#page-studio .studio-fit-scan { position: absolute; inset: 0 auto 0 -25%; width: 20%; transform: skewX(-15deg); background: linear-gradient(90deg,transparent,rgba(98,206,255,.32),transparent); animation: studio-fit-sweep 20s ease-in-out infinite; pointer-events: none; }
+#page-studio .studio-fit-rough { stroke: #eb9a58; stroke-width: 3; opacity: 0; animation: studio-fit-rough 36s ease-in-out infinite; }
+#page-studio .studio-fit-middle { stroke: #8969ef; stroke-width: 3; opacity: 0; animation: studio-fit-middle 36s ease-in-out infinite; }
+#page-studio .studio-fit-final { stroke: #258fff; stroke-width: 3.8; opacity: 0; filter: drop-shadow(0 0 4px rgba(28,149,255,.68)); animation: studio-fit-final 36s ease-in-out infinite; }
+#page-studio .studio-validate-frame, #page-studio .studio-generate-back, #page-studio .studio-generate-front { fill: #edf6ff; stroke: #3c8eeb; stroke-width: 2.5; }
+#page-studio .studio-validate-grid, #page-studio .studio-generate-grid { fill: none; stroke: #b8d5f7; stroke-width: 1.6; }
+#page-studio .studio-validate-measured, #page-studio .studio-validate-estimated, #page-studio .studio-generate-curve { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#page-studio .studio-validate-measured { stroke: #314861; stroke-width: 2.4; stroke-dasharray: 4 4; }
+#page-studio .studio-validate-estimated { stroke: #449df0; stroke-width: 3.2; animation: studio-validate-curve 36s ease-in-out infinite; }
+#page-studio .studio-validate-badge { fill: #e7f1ff; stroke: #588fe8; stroke-width: 2; animation: studio-validate-badge 36s ease-in-out infinite; }
+#page-studio .studio-validate-review, #page-studio .studio-validate-check { fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+#page-studio .studio-validate-review { animation: studio-validate-review 36s linear infinite; }
+#page-studio .studio-validate-check { animation: studio-validate-check 36s linear infinite; }
+#page-studio .studio-generate-back { opacity: .55; }
+#page-studio .studio-generate-front { fill: #e8f3ff; animation: studio-generate-card 36s ease-in-out infinite; }
+#page-studio .studio-generate-fold { fill: none; stroke: #3c8eeb; stroke-width: 2.5; stroke-linejoin: round; }
+#page-studio .studio-generate-curve { stroke: #2389ee; stroke-width: 3.4; stroke-dasharray: 135; animation: studio-generate-curve 36s ease-in-out infinite; }
+#page-studio .studio-generate-dot { fill: #40b9ef; }
 #page-studio .studio-calibration-map .studio-process-arrow { position: relative; grid-row: 1; align-self: center; width: calc(100% + 10px); height: 38px; margin-left: -5px; overflow: visible; color: transparent; font-size: 0; transform: none; }
 #page-studio[data-flow-stage] .studio-calibration-map .studio-process-arrow { animation: none; }
 #page-studio .studio-calibration-map .studio-process-arrow::before { content: ''; display: block; position: absolute; left: 1px; right: 9px; top: 17px; width: auto; height: 4px; border: 0; border-radius: 4px; background: linear-gradient(90deg,#4dbbff,#2665eb); box-shadow: 0 0 9px rgba(46,129,255,.7); opacity: .25; }
 #page-studio .studio-calibration-map .studio-process-arrow::after { content: ''; display: block; position: absolute; left: auto; right: 3px; top: 10px; width: 13px; height: 13px; border: 0; border-top: 4px solid #2665eb; border-right: 4px solid #2665eb; transform: rotate(45deg); filter: drop-shadow(0 0 4px rgba(48,132,255,.65)); }
-#page-studio .studio-calibration-map .studio-process-arrow-1::before,
-#page-studio .studio-calibration-map .studio-process-arrow-1::after,
-#page-studio .studio-calibration-map .studio-process-arrow-2::before,
-#page-studio .studio-calibration-map .studio-process-arrow-2::after { display: none; }
+#page-studio .studio-calibration-map .studio-process-arrow::before,
+#page-studio .studio-calibration-map .studio-process-arrow::after { display: none; }
 #page-studio .studio-feedback { grid-column: 5/8; grid-row: 2; height: 42px; margin-top: -5px; display: block; }
 #page-studio .studio-feedback svg { display: block; width: 100%; height: 100%; overflow: visible; }
 #page-studio .studio-feedback .studio-feedback-mobile { display: none; }
-#page-studio .studio-feedback path { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 3px rgba(42,95,234,.2)); }
+#page-studio .studio-feedback path { fill: none; stroke: #a16ae6; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; opacity: .5; filter: drop-shadow(0 0 3px rgba(124,74,209,.25)); }
 #page-studio .studio-academic-flow { display: grid; gap: 0; margin-top: 22px; padding: 22px 26px; border: 1px solid var(--border2); border-radius: 14px; color: var(--text2); background: var(--surface); }
 #page-studio .studio-academic-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
 #page-studio .studio-academic-heading span { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .02em; }
@@ -57,16 +69,21 @@
 #page-studio .studio-academic-decision span { padding: 10px 12px; border-left: 2px solid #d97706; background: color-mix(in srgb,#d97706 5%,var(--surface)); }
 #page-studio .studio-academic-decision span:last-child { border-color: #16a36b; background: color-mix(in srgb,#16a36b 5%,var(--surface)); }
 #page-studio .studio-academic-decision b { color: var(--text1); }
-/* One 20-second story: select → transfer → configure → rough fit → second transfer → refined fit. */
-@keyframes studio-dataset-pick { 0%,2%,100% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } 8%,49%,55%,96% { transform: translateY(-4px) scale(1); opacity: 1; filter: drop-shadow(0 5px 7px rgba(34,125,245,.35)); } 51%,52% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } }
-@keyframes studio-model-turn { 0%,21% { transform: rotate(0); } 35%,67% { transform: rotate(180deg); } 81%,100% { transform: rotate(360deg); } }
-@keyframes studio-model-pulse { 0%,20%,57%,66%,100% { transform: scale(.78); opacity: .2; } 27%,36%,72%,81% { transform: scale(1.03); opacity: .75; } }
-@keyframes studio-model-activate { 0%,20%,66%,100% { stroke-dashoffset: 280; } 29%,40%,73%,84% { stroke-dashoffset: 0; } 57%,65% { stroke-dashoffset: 280; } }
-@keyframes studio-model-node { 0%,20%,57%,66%,100% { opacity: .15; } 28%,41%,73%,84% { opacity: 1; } }
-@keyframes studio-fit-rough { 0%,41%,100% { opacity: 0; } 45%,80% { opacity: 1; } 84% { opacity: 0; } }
-@keyframes studio-fit-middle { 0%,81%,100% { opacity: 0; } 85%,90% { opacity: 1; } 93% { opacity: 0; } }
-@keyframes studio-fit-final { 0%,89% { opacity: 0; } 93%,100% { opacity: 1; } }
-@keyframes studio-fit-sweep { 0%,40% { left: -25%; opacity: 0; } 46%,88% { opacity: 1; } 99%,100% { left: 110%; opacity: 0; } }
+/* One 36-second story: data → model → rough fit → review → feedback → refined fit → output. */
+@keyframes studio-dataset-pick { 0%,2%,53% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } 7%,50%,58%,100% { transform: translateY(-4px) scale(1); opacity: 1; filter: drop-shadow(0 5px 7px rgba(34,125,245,.35)); } 55% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } }
+@keyframes studio-model-turn { 0%,16% { transform: rotate(0); } 25%,63% { transform: rotate(180deg); } 72%,100% { transform: rotate(360deg); } }
+@keyframes studio-model-pulse { 0%,16%,55%,63%,100% { transform: scale(.78); opacity: .2; } 21%,28%,68%,75% { transform: scale(1.03); opacity: .75; } }
+@keyframes studio-model-activate { 0%,16%,55%,63%,100% { stroke-dashoffset: 280; } 23%,29%,70%,78% { stroke-dashoffset: 0; } }
+@keyframes studio-model-node { 0%,16%,55%,63%,100% { opacity: .15; } 22%,30%,69%,79% { opacity: 1; } }
+@keyframes studio-fit-rough { 0%,30%,100% { opacity: 0; } 34%,78% { opacity: 1; } 82% { opacity: 0; } }
+@keyframes studio-fit-middle { 0%,77%,100% { opacity: 0; } 82%,87% { opacity: 1; } 91% { opacity: 0; } }
+@keyframes studio-fit-final { 0%,85% { opacity: 0; } 89%,100% { opacity: 1; } }
+@keyframes studio-validate-curve { 0%,40%,55%,87% { opacity: .35; } 44%,52%,92%,100% { opacity: 1; } }
+@keyframes studio-validate-badge { 0%,40%,56%,88% { fill: #e7f1ff; stroke: #588fe8; } 45%,53% { fill: #e8a351; stroke: #d47e31; } 94%,100% { fill: #25aa79; stroke: #168b65; } }
+@keyframes studio-validate-review { 0%,42%,56%,100% { opacity: 0; } 46%,53% { opacity: 1; } }
+@keyframes studio-validate-check { 0%,90% { opacity: 0; } 94%,100% { opacity: 1; } }
+@keyframes studio-generate-card { 0%,92% { opacity: .58; transform: translateY(4px); } 97%,100% { opacity: 1; transform: translateY(0); } }
+@keyframes studio-generate-curve { 0%,92% { stroke-dashoffset: 135; } 98%,100% { stroke-dashoffset: 0; } }
 @media (max-width:1150px) {
   #page-studio .studio-calibration-map { grid-template-columns: minmax(0,1fr); grid-template-rows: auto 68px auto 68px auto 68px auto auto auto; }
   #page-studio .studio-calibration-map .studio-process-node { height: 224px; min-height: 0; }
@@ -93,9 +110,13 @@
 @media (prefers-reduced-motion: reduce) {
   #page-studio .studio-dataset-picked,
   #page-studio .studio-model-ring, #page-studio .studio-model-circuit, #page-studio .studio-model-cell-lines, #page-studio .studio-model-node,
-  #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final, #page-studio .studio-fit-scan,
+  #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final,
+  #page-studio .studio-validate-estimated, #page-studio .studio-validate-badge, #page-studio .studio-validate-review, #page-studio .studio-validate-check,
+  #page-studio .studio-generate-front, #page-studio .studio-generate-curve,
   #page-studio .studio-calibration-map .studio-process-arrow { animation: none; }
   #page-studio .studio-model-circuit, #page-studio .studio-model-cell-lines { stroke-dashoffset: 0; }
-  #page-studio .studio-model-node, #page-studio .studio-fit-final { opacity: 1; }
-  #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-scan { opacity: 0; }
+  #page-studio .studio-model-node, #page-studio .studio-fit-final, #page-studio .studio-validate-check { opacity: 1; }
+  #page-studio .studio-validate-badge { fill: #25aa79; stroke: #168b65; }
+  #page-studio .studio-generate-curve { stroke-dashoffset: 0; }
+  #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-validate-review { opacity: 0; }
 }
