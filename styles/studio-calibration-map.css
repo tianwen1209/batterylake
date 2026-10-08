@@ -1,15 +1,18 @@
 /* Visual and research views of the Studio calibration workflow. */
 #page-studio .studio-diagram-kicker { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 10px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .02em; }
 #page-studio .studio-diagram-kicker span { color: var(--text3); font-weight: 600; letter-spacing: 0; text-transform: none; }
-#page-studio .studio-calibration-map { position: relative; grid-template-columns: minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr) 48px minmax(0,1fr); grid-template-rows: auto auto; column-gap: 4px; row-gap: 5px; align-items: stretch; }
+#page-studio .studio-calibration-map { position: relative; grid-template-columns: minmax(0,1fr) 72px minmax(0,1fr) 72px minmax(0,1fr) 72px minmax(0,1fr) 72px minmax(0,1fr); grid-template-rows: auto auto; column-gap: 4px; row-gap: 5px; align-items: stretch; }
 #page-studio .studio-particle-flow { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none; }
-#page-studio .studio-calibration-map .studio-process-node { box-sizing: border-box; height: 224px; min-height: 0; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+#page-studio .studio-calibration-map .studio-process-node { box-sizing: border-box; height: 200px; min-height: 0; display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 10px; }
 #page-studio .studio-calibration-map .studio-process-node-head { position: relative; z-index: 4; background: inherit; }
+#page-studio .studio-calibration-map .studio-process-node-head .studio-process-number { flex-basis: 28px; }
+#page-studio .studio-calibration-map .studio-process-node-head { gap: 6px; }
+#page-studio .studio-calibration-map .studio-process-node-head strong { font-size: 10.5px; }
 #page-studio .studio-calibration-map .studio-process-logo { flex: 1; min-height: 0; height: auto; display: grid; place-items: center; margin: 6px 0 0; overflow: visible; }
 #page-studio .studio-calibration-map .studio-process-logo img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; transform: none; mix-blend-mode: normal; }
-#page-studio .studio-data-visual, #page-studio .studio-model-visual, #page-studio .studio-fit-preview, #page-studio .studio-validation-visual, #page-studio .studio-generation-visual { flex: 1; min-height: 0; width: 100%; margin-top: 9px; display: grid; place-items: center; position: relative; overflow: hidden; border: 1px solid rgba(73,132,210,.15); border-radius: 10px; background: radial-gradient(circle at 50% 45%,rgba(112,196,255,.18),transparent 70%),var(--surface); }
-#page-studio .studio-data-visual svg, #page-studio .studio-model-visual svg, #page-studio .studio-fit-preview svg, #page-studio .studio-validation-visual svg, #page-studio .studio-generation-visual svg { display: block; width: 76%; height: 76%; }
-#page-studio .studio-fit-preview svg { width: 86%; height: 86%; }
+#page-studio .studio-data-visual, #page-studio .studio-model-visual, #page-studio .studio-fit-preview, #page-studio .studio-validation-visual, #page-studio .studio-generation-visual { flex: 1; min-height: 0; width: 100%; margin-top: 5px; display: grid; place-items: center; position: relative; overflow: visible; border: 0; border-radius: 0; background: transparent; }
+#page-studio .studio-data-visual svg, #page-studio .studio-model-visual svg, #page-studio .studio-fit-preview svg, #page-studio .studio-validation-visual svg, #page-studio .studio-generation-visual svg { display: block; width: 92%; height: 92%; }
+#page-studio .studio-fit-preview svg { width: 96%; height: 96%; }
 #page-studio .studio-fit-grid { fill: none; stroke: rgba(74,125,195,.16); stroke-width: 1; }
 #page-studio .studio-dataset-back { fill: #f0f6ff; stroke: #aecdf2; stroke-width: 1.5; }
 #page-studio .studio-dataset-rows { fill: none; stroke: #9abce8; stroke-width: 3; stroke-linecap: round; }
@@ -26,12 +29,11 @@
 #page-studio .studio-model-cell-lines { fill: none; stroke: #5dbfff; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 160; stroke-dashoffset: 160; animation: studio-model-activate 36s linear infinite; }
 #page-studio .studio-model-node { fill: #61d8ff; opacity: .2; filter: drop-shadow(0 0 5px #4e9cff); animation: studio-model-node 36s ease-in-out infinite; }
 #page-studio .studio-calibration-map .studio-process-estimation { border-color: color-mix(in srgb,var(--accent) 38%,var(--border)); background: color-mix(in srgb,var(--accent-light) 18%,var(--surface)); }
-#page-studio .studio-fit-preview { background: radial-gradient(circle at 50% 55%,rgba(93,170,255,.16),transparent 70%),var(--surface); }
+#page-studio .studio-fit-preview { background: transparent; }
 #page-studio .studio-fit-preview svg { position: relative; z-index: 4; }
-#page-studio .studio-fit-measured, #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#page-studio .studio-fit-measured, #page-studio .studio-fit-rough, #page-studio .studio-fit-final { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 #page-studio .studio-fit-measured { stroke: #25384f; stroke-width: 2.2; stroke-dasharray: 4 4; opacity: .82; }
 #page-studio .studio-fit-rough { stroke: #eb9a58; stroke-width: 3; opacity: 0; animation: studio-fit-rough 36s ease-in-out infinite; }
-#page-studio .studio-fit-middle { stroke: #8969ef; stroke-width: 3; opacity: 0; animation: studio-fit-middle 36s ease-in-out infinite; }
 #page-studio .studio-fit-final { stroke: #258fff; stroke-width: 3.8; opacity: 0; filter: drop-shadow(0 0 4px rgba(28,149,255,.68)); animation: studio-fit-final 36s ease-in-out infinite; }
 #page-studio .studio-validate-frame, #page-studio .studio-generate-back, #page-studio .studio-generate-front { fill: #edf6ff; stroke: #3c8eeb; stroke-width: 2.5; }
 #page-studio .studio-validate-grid, #page-studio .studio-generate-grid { fill: none; stroke: #b8d5f7; stroke-width: 1.6; }
@@ -56,7 +58,7 @@
 #page-studio .studio-feedback { grid-column: 5/8; grid-row: 2; height: 42px; margin-top: -5px; display: block; }
 #page-studio .studio-feedback svg { display: block; width: 100%; height: 100%; overflow: visible; }
 #page-studio .studio-feedback .studio-feedback-mobile { display: none; }
-#page-studio .studio-feedback path { fill: none; stroke: #a16ae6; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; opacity: .5; filter: drop-shadow(0 0 3px rgba(124,74,209,.25)); }
+#page-studio .studio-feedback path { opacity: 0; }
 #page-studio .studio-academic-flow { display: grid; gap: 0; margin-top: 22px; padding: 22px 26px; border: 1px solid var(--border2); border-radius: 14px; color: var(--text2); background: var(--surface); }
 #page-studio .studio-academic-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
 #page-studio .studio-academic-heading span { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .02em; }
@@ -70,23 +72,22 @@
 #page-studio .studio-academic-decision span:last-child { border-color: #16a36b; background: color-mix(in srgb,#16a36b 5%,var(--surface)); }
 #page-studio .studio-academic-decision b { color: var(--text1); }
 /* One 36-second story: data → model → rough fit → review → feedback → refined fit → output. */
-@keyframes studio-dataset-pick { 0%,2%,53% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } 7%,50%,58%,100% { transform: translateY(-4px) scale(1); opacity: 1; filter: drop-shadow(0 5px 7px rgba(34,125,245,.35)); } 55% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } }
+@keyframes studio-dataset-pick { 0%,2%,53%,100% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } 7%,50%,58%,97% { transform: translateY(-4px) scale(1); opacity: 1; filter: drop-shadow(0 5px 7px rgba(34,125,245,.35)); } 55% { transform: translateY(5px) scale(.94); opacity: .55; filter: none; } }
 @keyframes studio-model-turn { 0%,16% { transform: rotate(0); } 25%,63% { transform: rotate(180deg); } 72%,100% { transform: rotate(360deg); } }
 @keyframes studio-model-pulse { 0%,16%,55%,63%,100% { transform: scale(.78); opacity: .2; } 21%,28%,68%,75% { transform: scale(1.03); opacity: .75; } }
 @keyframes studio-model-activate { 0%,16%,55%,63%,100% { stroke-dashoffset: 280; } 23%,29%,70%,78% { stroke-dashoffset: 0; } }
 @keyframes studio-model-node { 0%,16%,55%,63%,100% { opacity: .15; } 22%,30%,69%,79% { opacity: 1; } }
-@keyframes studio-fit-rough { 0%,30%,100% { opacity: 0; } 34%,78% { opacity: 1; } 82% { opacity: 0; } }
-@keyframes studio-fit-middle { 0%,77%,100% { opacity: 0; } 82%,87% { opacity: 1; } 91% { opacity: 0; } }
-@keyframes studio-fit-final { 0%,85% { opacity: 0; } 89%,100% { opacity: 1; } }
-@keyframes studio-validate-curve { 0%,40%,55%,87% { opacity: .35; } 44%,52%,92%,100% { opacity: 1; } }
-@keyframes studio-validate-badge { 0%,40%,56%,88% { fill: #e7f1ff; stroke: #588fe8; } 45%,53% { fill: #e8a351; stroke: #d47e31; } 94%,100% { fill: #25aa79; stroke: #168b65; } }
+@keyframes studio-fit-rough { 0%,30%,100% { opacity: 0; } 34%,79% { opacity: 1; } 84% { opacity: 0; } }
+@keyframes studio-fit-final { 0%,79%,100% { opacity: 0; } 84%,97% { opacity: 1; } }
+@keyframes studio-validate-curve { 0%,40%,55%,85%,100% { opacity: .35; } 44%,52%,90%,97% { opacity: 1; } }
+@keyframes studio-validate-badge { 0%,40%,56%,85%,100% { fill: #e7f1ff; stroke: #588fe8; } 45%,53% { fill: #e8a351; stroke: #d47e31; } 90%,97% { fill: #25aa79; stroke: #168b65; } }
 @keyframes studio-validate-review { 0%,42%,56%,100% { opacity: 0; } 46%,53% { opacity: 1; } }
-@keyframes studio-validate-check { 0%,90% { opacity: 0; } 94%,100% { opacity: 1; } }
-@keyframes studio-generate-card { 0%,92% { opacity: .58; transform: translateY(4px); } 97%,100% { opacity: 1; transform: translateY(0); } }
-@keyframes studio-generate-curve { 0%,92% { stroke-dashoffset: 135; } 98%,100% { stroke-dashoffset: 0; } }
+@keyframes studio-validate-check { 0%,88%,100% { opacity: 0; } 91%,97% { opacity: 1; } }
+@keyframes studio-generate-card { 0%,89%,100% { opacity: .58; transform: translateY(4px); } 95%,97% { opacity: 1; transform: translateY(0); } }
+@keyframes studio-generate-curve { 0%,89%,100% { stroke-dashoffset: 135; } 95%,97% { stroke-dashoffset: 0; } }
 @media (max-width:1150px) {
-  #page-studio .studio-calibration-map { grid-template-columns: minmax(0,1fr); grid-template-rows: auto 68px auto 68px auto 68px auto auto auto; }
-  #page-studio .studio-calibration-map .studio-process-node { height: 224px; min-height: 0; }
+  #page-studio .studio-calibration-map { grid-template-columns: minmax(0,1fr); grid-template-rows: auto 80px auto 80px auto 80px auto 80px auto; }
+  #page-studio .studio-calibration-map .studio-process-node { height: 200px; min-height: 0; }
   #page-studio .studio-calibration-map .studio-process-arrow-1,
   #page-studio .studio-calibration-map .studio-process-arrow-2,
   #page-studio .studio-calibration-map .studio-process-arrow-3 { grid-column: 1; width: 70px; height: 38px; margin-left: 0; justify-self: center; transform: rotate(90deg); }
@@ -110,7 +111,7 @@
 @media (prefers-reduced-motion: reduce) {
   #page-studio .studio-dataset-picked,
   #page-studio .studio-model-ring, #page-studio .studio-model-circuit, #page-studio .studio-model-cell-lines, #page-studio .studio-model-node,
-  #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-fit-final,
+  #page-studio .studio-fit-rough, #page-studio .studio-fit-final,
   #page-studio .studio-validate-estimated, #page-studio .studio-validate-badge, #page-studio .studio-validate-review, #page-studio .studio-validate-check,
   #page-studio .studio-generate-front, #page-studio .studio-generate-curve,
   #page-studio .studio-calibration-map .studio-process-arrow { animation: none; }
@@ -118,5 +119,5 @@
   #page-studio .studio-model-node, #page-studio .studio-fit-final, #page-studio .studio-validate-check { opacity: 1; }
   #page-studio .studio-validate-badge { fill: #25aa79; stroke: #168b65; }
   #page-studio .studio-generate-curve { stroke-dashoffset: 0; }
-  #page-studio .studio-fit-rough, #page-studio .studio-fit-middle, #page-studio .studio-validate-review { opacity: 0; }
+  #page-studio .studio-fit-rough, #page-studio .studio-validate-review { opacity: 0; }
 }
