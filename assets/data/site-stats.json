@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-08T22:11:59Z",
-  "total_visits": 3449,
+  "updated_at": "2026-10-09T21:46:16Z",
+  "total_visits": 3521,
   "dataset_downloads": 496,
-  "skill_uses": 114,
+  "skill_uses": 116,
   "model_downloads": {
     "cnn": 16,
     "linear": 4
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-08T22:11:59Z",
+    "updatedAt": "2026-10-09T21:46:16Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-08"
+      "endDate": "2026-10-09"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 58
+        "visitors": 59
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 56
+        "visitors": 58
       },
       {
         "country": "China",
@@ -75,14 +75,14 @@
         "visitors": 4
       },
       {
-        "country": "Iran",
-        "countryCode": "IR",
+        "country": "Canada",
+        "countryCode": "CA",
         "visitors": 3
       },
       {
-        "country": "Canada",
-        "countryCode": "CA",
-        "visitors": 2
+        "country": "Iran",
+        "countryCode": "IR",
+        "visitors": 3
       },
       {
         "country": "Germany",
@@ -145,7 +145,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 56,
+        "visitors": 57,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 14,
+        "visitors": 15,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -492,6 +492,14 @@
         "visitors": 1,
         "lng": -123.262,
         "lat": 44.565
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Independence",
+        "visitors": 1,
+        "lng": -94.416,
+        "lat": 39.091
       },
       {
         "country": "United States",
