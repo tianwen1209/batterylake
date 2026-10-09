@@ -84,7 +84,9 @@ class DatasetsPageTest(unittest.TestCase):
         page.wait_for_function("document.querySelectorAll('#dataset-grid .dataset-section').length > 0")
         page.close()
         self.assertTrue(any(u.endswith('metadata/index.json') for u in requested))
-        self.assertFalse([u for u in requested if '/metadata/datasets/' in u])
+        # the per-dataset records are preloaded once each with the catalogue, never once per popup
+        records = [u for u in requested if '/metadata/datasets/' in u or '/metadata/research/' in u]
+        self.assertEqual(len(records), len(set(records)))
         rows = {r['dataset_id']: r for r in self.page.evaluate("BatteryLakeDatasetMetadata.loadCatalog()")}
         research = {r['dataset_id']: r for r in json.loads((META/'index_research.json').read_text())['datasets']}
         for row in self.index:
@@ -96,6 +98,15 @@ class DatasetsPageTest(unittest.TestCase):
             self.assertEqual([{k: v for k, v in x.items() if k != 'label'} for x in got['single_side_profiles']], row['single_side_profiles'])
             self.assertEqual([x['label'] for x in got['single_side_profiles']], [self.label(x) for x in row['single_side_profiles']])
             self.assertEqual(got['category'], research[row['dataset_id']]['category'])
+
+    def test_opening_a_popup_requests_no_metadata(self):
+        self.page.wait_for_function("getFiltered().length > 0 && getFiltered().every(d => d.detailReady)")
+        requested = []
+        self.page.on('request', lambda r: requested.append(r.url))
+        self.page.evaluate("openDatasetModal('dataset_08')")
+        self.page.wait_for_function("document.getElementById('modal-details').textContent.includes('Has temperature time-series')")
+        self.page.evaluate("closeModal()")
+        self.assertEqual([u for u in requested if '/metadata/' in u], [])
 
     def test_index_entries_match_their_records(self):
         for row in self.index:

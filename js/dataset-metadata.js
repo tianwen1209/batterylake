@@ -52,14 +52,17 @@
     };
   }
 
-  /* The popup-only fields of one dataset, from its record. */
+  /* The popup-only fields of one dataset, from its record and its research profile.
+   * A dataset without a research profile keeps has_temperature_timeseries undefined. */
   function loadDetail(id) {
-    return fetchJSON(`datasets/${id}.json`).then(rec => {
+    const research = fetchJSON(`research/${id}.json`).catch(() => null);
+    return Promise.all([fetchJSON(`datasets/${id}.json`), research]).then(([rec, profile]) => {
       const cond = rec.conditions || {};
       return {
         charge_c_rate_max_fraction: cond.charge_c_rate_max_fraction,
         discharge_c_rate_max_fraction: cond.discharge_c_rate_max_fraction,
-        count_basis: (rec.content || {}).count_basis
+        count_basis: (rec.content || {}).count_basis,
+        has_temperature_timeseries: profile ? (profile.timeseries || {}).has_temperature_timeseries : undefined
       };
     });
   }

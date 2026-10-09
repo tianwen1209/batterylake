@@ -666,7 +666,8 @@ function openDatasetModal(id) {
     d.manufacturer ? field('Manufacturer', esc(d.manufacturer)) : '',
     d.n_entities != null ? field(titleCase(unit), esc(Number(d.n_entities).toLocaleString('en-US'))) : '',
     d.n_cycles_total ? field('Cycles', esc(Number(d.n_cycles_total).toLocaleString('en-US'))) : '',
-    capacities.length ? field('Capacity', esc(capacities.map(c => fmtNum(c) + '\u00a0Ah').join(', '))) : ''
+    capacities.length ? field('Capacity', esc(capacities.map(c => fmtNum(c) + '\u00a0Ah').join(', '))) : '',
+    d.has_temperature_timeseries == null ? '' : field('Has temperature time-series', d.has_temperature_timeseries ? 'Yes' : 'No')
   ].filter(Boolean);
   /* 4 or fewer: one row of four columns. 5 or 6: two rows of three columns. 7: 4 + 3 on the four-column grid. */
   const n = plain.length, half = Math.ceil(n / 2), subrow = (items, cls) => `<div class="modal-field modal-field--wide modal-chiprow${cls ? ' ' + cls : ''}">${items.join('')}</div>`;
@@ -702,14 +703,25 @@ function openDatasetModal(id) {
   document.getElementById('modal-links').innerHTML = `<div class="modal-links-row">${row(hasDoi, lg.doi, 'Source Dataset', extIcon, 'Source', 'source_dataset')}${row(hasProc, lg.processed_url, 'Processed Dataset', dlIcon, 'Download', 'processed_dataset')}${qa}</div>`;
   document.getElementById('modal-links-section').style.display = 'block';
   document.getElementById('modal').classList.add('show'); document.documentElement.classList.add('modal-open');
-  /* count_basis and the max C-rate fractions are not in the index: read them from the record once, then redraw if this popup is still open. */
-  if (!d.detailLoaded) {
-    d.detailLoaded = true;
-    BatteryLakeDatasetMetadata.loadDetail(id).then(extra => {
-      Object.assign(d, extra);
+  /* the popup-only fields are preloaded with the catalogue; if they are still loading, redraw once they arrive while this popup is open */
+  if (!d.detailReady) {
+    loadRowDetail(d).then(() => {
       if (document.getElementById('modal').classList.contains('show') && document.getElementById('modal-refname').textContent === d.ref_name) openDatasetModal(id);
-    }).catch(err => console.warn('Dataset detail failed to load:', err && err.message));
+    });
   }
+}
+/* The popup-only fields (count_basis, C-rate fractions, temperature time-series flag) are read once per dataset and shared by every caller. */
+function loadRowDetail(d) {
+  if (!d.detailPromise) {
+    d.detailPromise = BatteryLakeDatasetMetadata.loadDetail(d.dataset_id).then(extra => {
+      Object.assign(d, extra, { detailReady: true });
+      return d;
+    }).catch(err => {
+      d.detailPromise = null;
+      console.warn('Dataset detail failed to load:', err && err.message);
+    });
+  }
+  return d.detailPromise;
 }
 function closeModal() { document.getElementById('modal').classList.remove('show'); document.documentElement.classList.remove('modal-open'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
@@ -731,6 +743,7 @@ function ensureLoaded() {
       }));
       ROWS.forEach(d => { d.chemistry = cathodeList(d); d.form = formStatLabel(d); });
       status = 'ready';
+      ROWS.forEach(loadRowDetail);   /* preload the popup fields so opening a dataset does not wait on the network */
       buildFilterGrid();
       syncPendingFromActive(); renderChips(); filterDatasets();
     }).catch(err => {
