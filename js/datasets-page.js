@@ -702,6 +702,14 @@ function openDatasetModal(id) {
   document.getElementById('modal-links').innerHTML = `<div class="modal-links-row">${row(hasDoi, lg.doi, 'Source Dataset', extIcon, 'Source', 'source_dataset')}${row(hasProc, lg.processed_url, 'Processed Dataset', dlIcon, 'Download', 'processed_dataset')}${qa}</div>`;
   document.getElementById('modal-links-section').style.display = 'block';
   document.getElementById('modal').classList.add('show'); document.documentElement.classList.add('modal-open');
+  /* count_basis and the max C-rate fractions are not in the index: read them from the record once, then redraw if this popup is still open. */
+  if (!d.detailLoaded) {
+    d.detailLoaded = true;
+    BatteryLakeDatasetMetadata.loadDetail(id).then(extra => {
+      Object.assign(d, extra);
+      if (document.getElementById('modal').classList.contains('show') && document.getElementById('modal-refname').textContent === d.ref_name) openDatasetModal(id);
+    }).catch(err => console.warn('Dataset detail failed to load:', err && err.message));
+  }
 }
 function closeModal() { document.getElementById('modal').classList.remove('show'); document.documentElement.classList.remove('modal-open'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });

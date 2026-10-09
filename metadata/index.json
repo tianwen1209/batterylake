@@ -1,8 +1,8 @@
 {
  "$schema": "./schema/batterylake-index-2.0.json",
  "schema_version": "2.0.0",
- "generated": "2026-10-07",
- "content_hash": "60da622998e41fb269e255c88a2f3c2d4361033013fcc7dc56b18bcda786beb6",
+ "generated": "2026-10-09",
+ "content_hash": "8db982e4a67dbd9cde7dfc4de7fa858cb99de1d225a533e5ce707794b0af057f",
  "record_schema": "./schema/batterylake-dataset-2.0.json",
  "description": "Single source of truth for BatteryLake dataset metadata. One row per dataset; record_path points at the full record, which additionally carries per-cell rows. Read-only consumers should filter on this file and open a record only when per-cell detail is needed.",
  "counts": {
@@ -241,6 +241,7 @@
     "LCO"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     2.0
    ],
@@ -250,6 +251,51 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "Square wave",
+     "kind": "square_wave",
+     "detail": "0.05 Hz, 50% duty, 4 A for B0025-B0027 and 2 A for B0028"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.75,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.75,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.75,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.75,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "Square wave"
+    }
    ],
    "nominal_capacity_Ah": 2.0,
    "nominal_voltage_V": null,
@@ -316,6 +362,7 @@
     "LCO"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     1.1
    ],
@@ -324,6 +371,28 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": null,
@@ -394,6 +463,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     1.1
    ],
@@ -402,6 +477,22 @@
    ],
    "discharge_profiles": [
     "CC-CV"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "multi-stage CC-CV",
+     "discharge": "CC-CV"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "multi-stage CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 4.0
+    }
    ],
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": 3.3,
@@ -474,6 +565,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LCO-NCO",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     0.74
    ],
@@ -484,6 +581,45 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "Artemis Urban",
+     "kind": "drive_cycle",
+     "detail": "derived from the Artemis Urban profile"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.05,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.05
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "Artemis Urban"
+    }
    ],
    "nominal_capacity_Ah": 0.74,
    "nominal_voltage_V": null,
@@ -547,6 +683,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     2.05
    ],
@@ -559,6 +701,82 @@
     "CC",
     "CC-CV",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC-CV"
+    },
+    {
+     "charge": "pulse",
+     "discharge": "pulse"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.25,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.25,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 2.0
+    }
    ],
    "nominal_capacity_Ah": 2.05,
    "nominal_voltage_V": null,
@@ -636,6 +854,20 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     1.1,
     2.7,
@@ -649,6 +881,50 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 3.0
+    }
    ],
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": null,
@@ -723,6 +999,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LCO-NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     2.8
    ],
@@ -731,6 +1013,22 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    }
    ],
    "nominal_capacity_Ah": 2.8,
    "nominal_voltage_V": null,
@@ -802,6 +1100,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.4
    ],
@@ -810,6 +1114,22 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    }
    ],
    "nominal_capacity_Ah": 3.4,
    "nominal_voltage_V": 3.6,
@@ -881,6 +1201,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     2.0
    ],
@@ -889,6 +1210,28 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 3.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": 2.0,
    "nominal_voltage_V": 3.6,
@@ -955,6 +1298,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.0
    ],
@@ -964,6 +1313,75 @@
    "discharge_profiles": [
     "CC-CV",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC-CV"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "WLTP Class 3b",
+     "kind": "drive_cycle",
+     "detail": "power profile of all four phases (low, medium, high, extra high), profile A"
+    },
+    {
+     "name": "WLTP Class 3b Extra High",
+     "kind": "drive_cycle",
+     "detail": "extra-high phase only, profile B"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 0.3333,
+     "charge_c_rate_fraction": "1/3",
+     "discharge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0,
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.6667,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0,
+     "charge_c_rate_fraction": "5/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP Class 3b",
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.6667,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP Class 3b Extra High",
+     "charge_c_rate_fraction": "5/3"
+    }
    ],
    "nominal_capacity_Ah": 3.0,
    "nominal_voltage_V": 3.6,
@@ -1031,6 +1449,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     145.0,
     153.0,
@@ -1042,6 +1461,23 @@
     "multi-stage CC"
    ],
    "discharge_profiles": [],
+   "profile_combinations": [],
+   "single_side_profiles": [
+    {
+     "side": "charge",
+     "profile": "CC"
+    },
+    {
+     "side": "charge",
+     "profile": "CC-CV"
+    },
+    {
+     "side": "charge",
+     "profile": "multi-stage CC"
+    }
+   ],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
@@ -1105,6 +1541,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.0
    ],
@@ -1114,6 +1556,75 @@
    "discharge_profiles": [
     "CC-CV",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC-CV"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "WLTP Class 3b",
+     "kind": "drive_cycle",
+     "detail": "power profile of all four phases (low, medium, high, extra high), profile A"
+    },
+    {
+     "name": "WLTP Class 3b Extra High",
+     "kind": "drive_cycle",
+     "detail": "extra-high phase only, profile B"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 0.3333,
+     "charge_c_rate_fraction": "1/3",
+     "discharge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0,
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.6667,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0,
+     "charge_c_rate_fraction": "5/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP Class 3b",
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.6667,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP Class 3b Extra High",
+     "charge_c_rate_fraction": "5/3"
+    }
    ],
    "nominal_capacity_Ah": 3.0,
    "nominal_voltage_V": 3.6,
@@ -1186,6 +1697,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     4.2
    ],
@@ -1196,6 +1713,46 @@
    "discharge_profiles": [
     "CC",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "pulse",
+     "discharge": "pulse"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.05,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.05
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.1,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.1
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.3333,
+     "charge_c_rate_fraction": "1/3",
+     "discharge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": 4.2,
    "nominal_voltage_V": 3.6,
@@ -1266,6 +1823,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     155.0
    ],
@@ -1275,6 +1833,33 @@
    ],
    "discharge_profiles": [
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "dynamic"
+    },
+    {
+     "charge": "multi-stage CC",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "Real driving",
+     "kind": "real_driving",
+     "detail": "random, user-determined load of vehicles in service"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.15,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "Real driving"
+    }
    ],
    "nominal_capacity_Ah": 155.0,
    "nominal_voltage_V": null,
@@ -1342,6 +1927,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     10.0,
     21.0,
@@ -1356,6 +1942,26 @@
    "discharge_profiles": [
     "CC",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "pulse",
+     "discharge": "pulse"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -1426,6 +2032,7 @@
     "LFP"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     2.5
    ],
@@ -1436,6 +2043,32 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "dynamic",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "WLTP (HEV)",
+     "kind": "drive_cycle",
+     "detail": "WLTP-derived hybrid power profile, scaled per cell for 95k, 206k and 300k km"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": 2.5,
    "nominal_voltage_V": null,
@@ -1508,6 +2141,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     1.1
    ],
@@ -1518,6 +2157,59 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "dynamic"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "WLTP",
+     "kind": "drive_cycle",
+     "detail": "WLTP cycle current profile, 1800 s, about C/3 on average"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP",
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP",
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP"
+    }
    ],
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": 3.2,
@@ -1589,6 +2281,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.0
    ],
@@ -1598,6 +2296,38 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.25,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    }
    ],
    "nominal_capacity_Ah": 3.0,
    "nominal_voltage_V": null,
@@ -1674,6 +2404,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     2.6,
     3.0,
@@ -1687,6 +2418,80 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "dynamic",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "DST",
+     "kind": "drive_cycle",
+     "detail": null
+    },
+    {
+     "name": "FUDS",
+     "kind": "drive_cycle",
+     "detail": null
+    },
+    {
+     "name": "UDDS",
+     "kind": "drive_cycle",
+     "detail": null
+    },
+    {
+     "name": "WLTP",
+     "kind": "drive_cycle",
+     "detail": "the sheet is named WLTS in most files"
+    },
+    {
+     "name": "US06",
+     "kind": "drive_cycle",
+     "detail": null
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -1759,6 +2564,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     3.12
    ],
@@ -1768,6 +2574,65 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "eVTOL mission",
+     "kind": "duty_cycle",
+     "detail": "constant power: take-off 54 W for 75 s, cruise 16 W for 400 to 1000 s, landing 54 W for 105 s; variants at -10% and -20% power"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "eVTOL mission"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "eVTOL mission"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.5,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "eVTOL mission"
+    }
    ],
    "nominal_capacity_Ah": 3.12,
    "nominal_voltage_V": 3.6,
@@ -1839,6 +2704,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC811",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.5
    ],
@@ -1849,6 +2720,49 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "dynamic",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "Real driving (city)",
+     "kind": "real_driving",
+     "detail": "SOC window 70-90%, current profile recorded on an electric van"
+    },
+    {
+     "name": "Real driving (city, highway, intermediate roads)",
+     "kind": "real_driving",
+     "detail": "SOC window 10-90%, current profile; one cell also with a power profile"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    }
    ],
    "nominal_capacity_Ah": 3.5,
    "nominal_voltage_V": null,
@@ -1918,6 +2832,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC811",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.5
    ],
@@ -1928,6 +2848,49 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "dynamic",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "Real driving (city)",
+     "kind": "real_driving",
+     "detail": "SOC window 70-90%, current profile recorded on an electric van"
+    },
+    {
+     "name": "Real driving (city, highway, intermediate roads)",
+     "kind": "real_driving",
+     "detail": "SOC window 10-90%, current profile; one cell also with a power profile"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    }
    ],
    "nominal_capacity_Ah": 3.5,
    "nominal_voltage_V": null,
@@ -2002,6 +2965,20 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     2.5,
     3.35,
@@ -2012,6 +2989,64 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.05
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 3.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 5.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 10.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 15.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 20.0
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -2075,6 +3110,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     4.85
    ],
@@ -2084,6 +3120,84 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "UDDS",
+     "kind": "drive_cycle",
+     "detail": "UDDS cycles from 80% to 20% SOC, charge at C/4, C/2, 1C or 3C per cell"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.25,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.05
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 3.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.25
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.25,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "UDDS"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "UDDS"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "UDDS"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 3.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "UDDS"
+    }
    ],
    "nominal_capacity_Ah": 4.85,
    "nominal_voltage_V": 3.63,
@@ -2158,6 +3272,16 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NCA",
+     "anode": "Si-graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     4.85,
     4.9
@@ -2168,6 +3292,48 @@
    "discharge_profiles": [
     "CC",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "pulse"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.05,
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.75,
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0,
+     "charge_c_rate_fraction": "1/3"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "pulse",
+     "discharge_c_rate": null,
+     "charge_c_rate_fraction": "1/3"
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -2236,6 +3402,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     4.85
    ],
@@ -2246,6 +3418,67 @@
     "CC",
     "dynamic",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "pulse"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "Residential grid-storage duty cycle",
+     "kind": "duty_cycle",
+     "detail": "synthetic 48 h peak-shaving profile for a single-family home; cells V4, W9, W10"
+    },
+    {
+     "name": "Commercial grid-storage duty cycle",
+     "kind": "duty_cycle",
+     "detail": "synthetic 48 h peak-shaving profile for an office building; cells W8, V5, G1"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.05
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "Commercial grid-storage duty cycle"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "Residential grid-storage duty cycle"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "pulse",
+     "discharge_c_rate": 0.5
+    }
    ],
    "nominal_capacity_Ah": 4.85,
    "nominal_voltage_V": 3.63,
@@ -2317,6 +3550,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     2.5
    ],
@@ -2329,6 +3568,140 @@
     "CC-CV",
     "dynamic",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC",
+     "discharge": "CC-CV"
+    },
+    {
+     "charge": "CC",
+     "discharge": "pulse"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "WLTP",
+     "kind": "drive_cycle",
+     "detail": "average 1C, C/2 and C/10"
+    },
+    {
+     "name": "Shifted WLTP",
+     "kind": "drive_cycle",
+     "detail": "time-shifted WLTP used for cells 7 and 8"
+    },
+    {
+     "name": "HPPC + WLTP",
+     "kind": "drive_cycle",
+     "detail": "HPPC pulses followed by WLTP, 10% SOC steps"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.1,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.1
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 0.1,
+     "discharge_subprofile": "HPPC + WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 0.1,
+     "discharge_subprofile": "WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 0.5,
+     "discharge_subprofile": "HPPC + WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 0.5,
+     "discharge_subprofile": "Shifted WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 0.5,
+     "discharge_subprofile": "WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 1.0,
+     "discharge_subprofile": "HPPC + WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 1.0,
+     "discharge_subprofile": "Shifted WLTP"
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": 1.0,
+     "discharge_subprofile": "WLTP"
+    }
    ],
    "nominal_capacity_Ah": 2.5,
    "nominal_voltage_V": 3.3,
@@ -2408,6 +3781,24 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LCO",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     0.12,
     0.24,
@@ -2424,6 +3815,44 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 3.0
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -2490,9 +3919,14 @@
    "cell_format_codes": [],
    "cathode_chemistries": [],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [],
    "charge_profiles": [],
    "discharge_profiles": [],
+   "profile_combinations": [],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
@@ -2554,6 +3988,16 @@
     "Si-graphite",
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC811",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     1.1,
     3.5
@@ -2564,6 +4008,15 @@
    "discharge_profiles": [
     "multi-stage CC"
    ],
+   "profile_combinations": [
+    {
+     "charge": "multi-stage CC",
+     "discharge": "multi-stage CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": 2.0,
@@ -2631,6 +4084,7 @@
     "LFP"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     0.6
    ],
@@ -2639,6 +4093,22 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    }
    ],
    "nominal_capacity_Ah": 0.6,
    "nominal_voltage_V": 3.2,
@@ -2703,6 +4173,16 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     96.3,
     163.3
@@ -2712,6 +4192,23 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.1,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.3333,
+     "discharge_c_rate_fraction": "1/3"
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -2778,6 +4275,32 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LCO",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "LMO-LNO",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC-LMO",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC811",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     0.5,
     1.5,
@@ -2803,6 +4326,10 @@
    ],
    "charge_profiles": [],
    "discharge_profiles": [],
+   "profile_combinations": [],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
    "voltage_min_V": null,
@@ -2870,6 +4397,20 @@
     "Si-graphite",
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NCA",
+     "anode": "Si-graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     3.117,
     3.892,
@@ -2883,6 +4424,29 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [
+    {
+     "side": "charge",
+     "profile": "CC"
+    }
+   ],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3333,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.3333,
+     "charge_c_rate_fraction": "1/3",
+     "discharge_c_rate_fraction": "1/3"
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -2945,6 +4509,12 @@
    "anode_chemistries": [
     "Si-graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC811",
+     "anode": "Si-graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     5.0
    ],
@@ -2954,6 +4524,39 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "WLTP",
+     "kind": "drive_cycle",
+     "detail": "WLTP class 3 current profile scaled to the cell, 1.62 A average discharge and 0.53 A average charge; experiment 4 only"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "dynamic",
+     "discharge_c_rate": null,
+     "discharge_subprofile": "WLTP"
+    }
    ],
    "nominal_capacity_Ah": 5.0,
    "nominal_voltage_V": null,
@@ -3030,6 +4633,7 @@
     "NMC"
    ],
    "anode_chemistries": [],
+   "electrode_combinations": [],
    "nominal_capacities_Ah": [
     4.9
    ],
@@ -3042,6 +4646,264 @@
     "CC",
     "CC-CV",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC",
+     "discharge": "CC"
+    },
+    {
+     "charge": "CC-CV",
+     "discharge": "CC-CV"
+    },
+    {
+     "charge": "pulse",
+     "discharge": "pulse"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.44
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.9
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.4
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.24,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.7
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.2
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.3
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.7
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.3
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.4
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.5
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.8
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.3
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.4
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.6,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.1
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.7,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.2
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.7,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.8
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.7,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.7
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.7,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.9
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.3
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.4
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.6
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.9
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.7
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.9,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.9
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.9,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.1
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.9,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.6
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.9,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.9
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 0.9,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.26
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.4
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.8
+    },
+    {
+     "charge_profile": "CC",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC-CV",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": 4.9,
    "nominal_voltage_V": null,
@@ -3112,6 +4974,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     0.25
    ],
@@ -3120,6 +4988,316 @@
    ],
    "discharge_profiles": [
     "CC"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.6,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.4
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.675,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.325
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.725,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.725,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.375
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.775,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.275
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.8
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.925,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.125
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.975,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.675
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.4
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.025,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.475
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.125,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.725
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.175,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.425
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.225,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.025
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.325,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.825
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.2
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.425,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.875
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.475,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.575,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.425
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.6,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.6,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.8
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.775,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.175
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.8,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.6
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.825,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.825,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.025
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.875,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.875,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.325
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.975,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.675
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.2
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.025,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.825
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.075,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.075,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.775
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.125,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.975
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.175,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.975
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.2,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.275,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.875
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.325,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.925
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.375,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.225
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.4,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.6
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.425,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.625
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.475,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.575
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 3.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    }
    ],
    "nominal_capacity_Ah": 0.25,
    "nominal_voltage_V": 3.7,
@@ -3189,6 +5367,16 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     8.0,
     100.0
@@ -3200,6 +5388,76 @@
    "discharge_profiles": [
     "CC",
     "dynamic"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "multi-stage CC-CV",
+     "discharge": "CC"
+    },
+    {
+     "charge": "multi-stage CC-CV",
+     "discharge": "dynamic"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [
+    {
+     "name": "UDDS",
+     "kind": "drive_cycle",
+     "detail": null
+    },
+    {
+     "name": "HWFET",
+     "kind": "drive_cycle",
+     "detail": null
+    },
+    {
+     "name": "Hybrid",
+     "kind": "drive_cycle",
+     "detail": "named Hybrid in the working-profile field"
+    }
+   ],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.3,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 0.5
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 0.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    },
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 2.5,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.5
+    },
+    {
+     "charge_profile": "multi-stage CC-CV",
+     "charge_c_rate": null,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 2.5
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -3269,6 +5527,32 @@
     "LTO",
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LCO",
+     "anode": "LTO"
+    },
+    {
+     "cathode": "LCO",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "LMO",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NCA",
+     "anode": "graphite"
+    },
+    {
+     "cathode": "NMC",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     1.3,
     1.6,
@@ -3282,6 +5566,27 @@
    "discharge_profiles": [
     "CC",
     "pulse"
+   ],
+   "profile_combinations": [
+    {
+     "charge": "CC-CV",
+     "discharge": "CC"
+    }
+   ],
+   "single_side_profiles": [
+    {
+     "side": "discharge",
+     "profile": "pulse"
+    }
+   ],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [
+    {
+     "charge_profile": "CC-CV",
+     "charge_c_rate": 1.0,
+     "discharge_profile": "CC",
+     "discharge_c_rate": 1.0
+    }
    ],
    "nominal_capacity_Ah": null,
    "nominal_voltage_V": null,
@@ -3348,6 +5653,12 @@
    "anode_chemistries": [
     "graphite"
    ],
+   "electrode_combinations": [
+    {
+     "cathode": "LFP",
+     "anode": "graphite"
+    }
+   ],
    "nominal_capacities_Ah": [
     1.1
    ],
@@ -3357,6 +5668,15 @@
    "discharge_profiles": [
     "multi-stage CC"
    ],
+   "profile_combinations": [
+    {
+     "charge": "multi-stage CC-CV",
+     "discharge": "multi-stage CC"
+    }
+   ],
+   "single_side_profiles": [],
+   "dynamic_subprofiles": [],
+   "rate_combinations": [],
    "nominal_capacity_Ah": 1.1,
    "nominal_voltage_V": 3.3,
    "voltage_min_V": 2.0,

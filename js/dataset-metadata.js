@@ -2,14 +2,13 @@
  *
  *   const rows = await BatteryLakeDatasetMetadata.loadCatalog();
  *
- * One flat row per dataset, built from three sources:
- *   metadata/index.json            the dataset list (ids and order)
- *   metadata/datasets/<id>.json    identity, cell, conditions, scale and content blocks
+ * One flat row per dataset, built from two files (the per-dataset records are not read):
+ *   metadata/index.json            the dataset list (ids and order) and the fields the cards and filters use
  *   metadata/index_research.json   the Datasets-page category
- * Beyond renaming and flattening, only three things are derived here, because the records do not store them:
- * the charge and discharge profile lists (the profiles of the record's pairs plus its single-side entries) and the
- * label of each single-side entry ("CC Charging"). A metadata fix shows up on the page as soon as the file is deployed.
- * A dataset without a record is dropped; one without a research row gets category ''. */
+ * Only the label of each single-side entry ("CC Charging") is derived here, because the index does not store it.
+ * loadDetail(id) reads one record on demand, for the few popup-only fields the index does not carry
+ * (count_basis and the max C-rate fractions). A metadata fix shows up on the page as soon as the file is deployed.
+ * A dataset without an index entry is not listed; one without a research row gets category ''. */
 (() => {
   'use strict';
 
@@ -31,65 +30,51 @@
 
   const list = v => (Array.isArray(v) ? v : []);
 
-  /* The profile types of one side: those of the pairs plus the single-side entries, sorted like the metadata's own lists. */
-  function profileList(side, combos, singles) {
-    const found = new Set(combos.map(p => p[side]).filter(Boolean));
-    singles.filter(x => x.side === side).forEach(x => found.add(x.profile));
-    return [...found].sort();
-  }
   const sideLabel = x => x.profile + (x.side === 'charge' ? ' Charging' : ' Discharging');
 
-  /* A per-dataset record -> the flat row the page reads. */
-  function toRow(rec, research) {
-    const id = rec.identity || {}, cell = rec.cell || {}, cond = rec.conditions || {}, scale = rec.scale || {}, content = rec.content || {};
-    const combos = list(cond.profile_combinations);
-    const singles = list(cond.single_side_profiles).map(x => ({ ...x, label: sideLabel(x) }));
+  /* An index entry -> the flat row the page reads. */
+  function toRow(entry, research) {
     return {
-      dataset_id: rec.dataset_id,
-      ref_name: id.ref_name,
-      dataset_name: id.dataset_name,
-      notes: id.notes,
-      institution: id.institution,
-      year: id.year,
-      manufacturer: cell.manufacturer,
-      category: research ? research.category : '',
-      application_domain: cond.application_domain,
-      form_factors: list(cell.form_factors),
-      cell_format_codes: list(cell.cell_format_codes),
-      cathode_chemistries: list(cell.cathode_chemistries),
-      anode_chemistries: list(cell.anode_chemistries),
-      electrode_combinations: list(cell.electrode_combinations),
-      nominal_capacities_Ah: list(cell.nominal_capacities_Ah),
-      charge_profiles: profileList('charge', combos, singles),
-      discharge_profiles: profileList('discharge', combos, singles),
-      profile_combinations: combos,
-      single_side_profiles: singles,
-      dynamic_subprofiles: list(cond.dynamic_subprofiles),
-      rate_combinations: list(cond.rate_combinations),
-      charge_c_rate_max: cond.charge_c_rate_max,
-      discharge_c_rate_max: cond.discharge_c_rate_max,
-      charge_c_rate_max_fraction: cond.charge_c_rate_max_fraction,
-      discharge_c_rate_max_fraction: cond.discharge_c_rate_max_fraction,
-      entity_type: scale.entity_type,
-      n_entities: scale.n_entities,
-      n_cycles_total: scale.n_cycles_total,
-      raw_bytes: scale.raw_bytes,
-      count_basis: content.count_basis,
+      ...entry,
+      form_factors: list(entry.form_factors),
+      cell_format_codes: list(entry.cell_format_codes),
+      cathode_chemistries: list(entry.cathode_chemistries),
+      anode_chemistries: list(entry.anode_chemistries),
+      electrode_combinations: list(entry.electrode_combinations),
+      nominal_capacities_Ah: list(entry.nominal_capacities_Ah),
+      charge_profiles: list(entry.charge_profiles),
+      discharge_profiles: list(entry.discharge_profiles),
+      profile_combinations: list(entry.profile_combinations),
+      single_side_profiles: list(entry.single_side_profiles).map(x => ({ ...x, label: sideLabel(x) })),
+      dynamic_subprofiles: list(entry.dynamic_subprofiles),
+      rate_combinations: list(entry.rate_combinations),
+      category: research ? research.category : ''
     };
+  }
+
+  /* The popup-only fields of one dataset, from its record. */
+  function loadDetail(id) {
+    return fetchJSON(`datasets/${id}.json`).then(rec => {
+      const cond = rec.conditions || {};
+      return {
+        charge_c_rate_max_fraction: cond.charge_c_rate_max_fraction,
+        discharge_c_rate_max_fraction: cond.discharge_c_rate_max_fraction,
+        count_basis: (rec.content || {}).count_basis
+      };
+    });
   }
 
   let catalog = null;
   function loadCatalog() {
     if (!catalog) {
-      catalog = Promise.all([fetchJSON('index.json'), fetchJSON('index_research.json')]).then(async ([index, researchIndex]) => {
+      catalog = Promise.all([fetchJSON('index.json'), fetchJSON('index_research.json')]).then(([index, researchIndex]) => {
         const research = new Map(list(researchIndex.datasets).map(r => [r.dataset_id, r]));
-        const records = await Promise.all(list(index.datasets).map(r => fetchJSON(`datasets/${r.dataset_id}.json`)));
-        return records.map(rec => toRow(rec, research.get(rec.dataset_id)));
+        return list(index.datasets).map(entry => toRow(entry, research.get(entry.dataset_id)));
       });
       catalog.catch(() => { catalog = null; });   // allow a retry after a failed load
     }
     return catalog;
   }
 
-  window.BatteryLakeDatasetMetadata = { loadCatalog, toRow };
+  window.BatteryLakeDatasetMetadata = { loadCatalog, loadDetail, toRow };
 })();

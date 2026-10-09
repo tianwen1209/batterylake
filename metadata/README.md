@@ -103,6 +103,10 @@ const record = await fetch(`/metadata/${rows[0].record_path}`).then((r) => r.jso
 | Quality | `quality_flags` |
 | Numeric ranges (`min_` / `max_` prefix) | `nominal_capacity_Ah`, `nominal_voltage_V`, `voltage_min_V`, `voltage_max_V`, `temperature_min_C`, `temperature_max_C`, `charge_c_rate_max`, `discharge_c_rate_max`, `n_entities`, `raw_bytes` |
 
+Each row also carries the combination fields of its record, copied unchanged: `electrode_combinations`,
+`profile_combinations`, `single_side_profiles`, `dynamic_subprofiles` and `rate_combinations`, so pairings can be shown
+without opening the record.
+
 ## Coverage as built
 
 40 datasets, 3,451 entities (cells, modules or vehicles, as `entity_type` says), 4,135 raw files,

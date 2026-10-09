@@ -74,24 +74,45 @@ class DatasetsPageTest(unittest.TestCase):
         self.assertEqual(ids, [r['dataset_id'] for r in self.index])
         self.assertEqual(self.count(), len(self.index))
 
-    def test_rows_come_from_the_records_and_research_index(self):
+    def test_rows_come_from_the_index_files_and_load_no_records(self):
+        requested = []
+        page = self.browser.new_page()
+        page.on('request', lambda r: requested.append(r.url))
+        for pattern in ('**/googletagmanager.com/**', '**/fonts.googleapis.com/**', '**/fonts.gstatic.com/**'):
+            page.route(pattern, lambda route: route.abort())
+        page.goto(self.url + 'index.html#datasets')
+        page.wait_for_function("document.querySelectorAll('#dataset-grid .dataset-section').length > 0")
+        page.close()
+        self.assertTrue(any(u.endswith('metadata/index.json') for u in requested))
+        self.assertFalse([u for u in requested if '/metadata/datasets/' in u])
         rows = {r['dataset_id']: r for r in self.page.evaluate("BatteryLakeDatasetMetadata.loadCatalog()")}
         research = {r['dataset_id']: r for r in json.loads((META/'index_research.json').read_text())['datasets']}
         for row in self.index:
-            rec = json.loads((META/'datasets'/f"{row['dataset_id']}.json").read_text())
             got = rows[row['dataset_id']]
-            self.assertEqual(got['ref_name'], rec['identity']['ref_name'])
-            self.assertEqual(got['electrode_combinations'], rec['cell']['electrode_combinations'])
-            self.assertEqual(got['rate_combinations'], rec['conditions']['rate_combinations'])
-            # the loader adds a label to each single-side entry and derives the profile lists; index.json carries the same lists
-            self.assertEqual([{k: v for k, v in x.items() if k != 'label'} for x in got['single_side_profiles']], rec['conditions']['single_side_profiles'])
-            self.assertEqual([x['label'] for x in got['single_side_profiles']], [self.label(x) for x in rec['conditions']['single_side_profiles']])
-            self.assertEqual(got['charge_profiles'], row['charge_profiles'])
-            self.assertEqual(got['discharge_profiles'], row['discharge_profiles'])
-            self.assertEqual(got['charge_profiles'], sorted(self.profiles(rec['conditions'], 'charge')))
-            self.assertEqual(got['discharge_profiles'], sorted(self.profiles(rec['conditions'], 'discharge')))
-            self.assertEqual(got['count_basis'], rec['content']['count_basis'])
+            for key in ('ref_name', 'electrode_combinations', 'rate_combinations', 'profile_combinations', 'dynamic_subprofiles',
+                        'charge_profiles', 'discharge_profiles', 'n_entities', 'n_cycles_total', 'entity_type', 'application_domain'):
+                self.assertEqual(got[key], row[key], (row['dataset_id'], key))
+            # the loader only adds a label to each single-side entry
+            self.assertEqual([{k: v for k, v in x.items() if k != 'label'} for x in got['single_side_profiles']], row['single_side_profiles'])
+            self.assertEqual([x['label'] for x in got['single_side_profiles']], [self.label(x) for x in row['single_side_profiles']])
             self.assertEqual(got['category'], research[row['dataset_id']]['category'])
+
+    def test_index_entries_match_their_records(self):
+        for row in self.index:
+            rec = json.loads((META/'datasets'/f"{row['dataset_id']}.json").read_text())
+            for key in ('electrode_combinations',):
+                self.assertEqual(row[key], rec['cell'][key], (row['dataset_id'], key))
+            for key in ('profile_combinations', 'single_side_profiles', 'dynamic_subprofiles', 'rate_combinations'):
+                self.assertEqual(row[key], rec['conditions'][key], (row['dataset_id'], key))
+            self.assertEqual(row['charge_profiles'], sorted(self.profiles(rec['conditions'], 'charge')))
+            self.assertEqual(row['discharge_profiles'], sorted(self.profiles(rec['conditions'], 'discharge')))
+
+    def test_popup_reads_count_basis_from_the_record(self):
+        rid = self.index[0]['dataset_id']
+        rec = json.loads((META/'datasets'/f'{rid}.json').read_text())
+        self.page.evaluate(f"openDatasetModal('{rid}')")
+        self.page.wait_for_function("document.querySelector('#modal-body, #modal')?.innerText.includes('Count basis')")
+        self.assertIn(rec['content']['count_basis'][:30], self.page.inner_text('#modal'))
 
     # ── filters ──
     def test_records_do_not_store_what_the_loader_derives(self):

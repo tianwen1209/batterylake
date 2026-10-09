@@ -90,6 +90,8 @@ const record = await fetch(`/metadata/${rows[0].record_path}`).then((r) => r.jso
 | 质量 | `quality_flags` |
 | 数值范围（可加 `min_` / `max_` 前缀） | `nominal_capacity_Ah`、`nominal_voltage_V`、`voltage_min_V`、`voltage_max_V`、`temperature_min_C`、`temperature_max_C`、`charge_c_rate_max`、`discharge_c_rate_max`、`n_entities`、`raw_bytes` |
 
+每一行还原样带有对应记录中的组合字段：`electrode_combinations`、`profile_combinations`、`single_side_profiles`、`dynamic_subprofiles` 和 `rate_combinations`，因此无需打开记录即可展示搭配关系。
+
 ## 当前构建的覆盖情况
 
 40 个数据集，3,451 个实体（电芯、模组或车辆，由 `entity_type` 说明），4,135 个原始文件，300.8 GB，记录的循环计数之和为 7,848,847。各数据集的计数定义不同，比较前请查阅 `content.cycle_basis` and `content.count_basis`。40 个数据集均已从原始文件解析（`provenance.confidence: verified`）；已知缺失、无法读取或尚未解析的输入在各条记录中有注明。
