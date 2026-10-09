@@ -75,7 +75,8 @@
             "partial_waveforms",
             "waveform_sample_only",
             "summary_tables_only",
-            "unlabelled_channels"
+            "unlabelled_channels",
+            "not_standardised"
           ]
         },
         "signals_basis": {
@@ -85,6 +86,7 @@
             "landing_page",
             "paper",
             "curated",
+            "processed_data",
             null
           ]
         },
@@ -394,7 +396,8 @@
         "derived",
         "hand_checked",
         "raw_data",
-        "folder_layout"
+        "folder_layout",
+        "processed_data"
       ]
     },
     "suitable_task": {

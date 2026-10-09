@@ -10,7 +10,7 @@
   "has_temperature_timeseries": false,
   "complete_v_i_t_timeseries": false,
   "resolution": "partial_waveforms",
-  "signals_basis": "raw_data",
+  "signals_basis": "processed_data",
   "caveats": [
    "voltage_excursion_above_cutoff",
    "voltage_excursion_below_cutoff"
@@ -71,11 +71,11 @@
  ],
  "provenance": {
   "derived_from": "datasets/dataset_22.json",
-  "generated": "2026-10-07",
+  "generated": "2026-10-09",
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
-   "timeseries.*": "derived",
+   "timeseries.*": "processed_data",
    "soc.*": "derived",
    "soh.*": "derived",
    "capacity_degradation.*": "derived",
@@ -88,6 +88,6 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07"
+  "last_verified": "2026-10-09"
  }
 }

@@ -12,7 +12,7 @@
 
 | 字段 | 含义 |
 |---|---|
-| `timeseries` | 是否存在电压、电流、温度通道，以及 `resolution`（分辨率）：`full_waveforms`（V、I、T 均为波形）、`partial_waveforms`（有波形但缺某个通道）、`waveform_sample_only`（仅为源数据的节选，标记 `sample_only_raw`）、`summary_tables_only`（只有逐循环或逐测试的汇总表，无波形）、`unlabelled_channels`（有数据，但列没有名称或单位，即数据集 12 和 30）。`caveats` 列出限定它的基础记录标记。 |
+| `timeseries` | **处理后**数据中的标准时间序列情况，而非原始文件的内容。某个通道（`has_voltage_timeseries`、`has_current_timeseries`、`has_temperature_timeseries`，后者指电芯温度而非环境温度）在标准时间序列表中至少 1% 的行有值时计为存在；`complete_v_i_t_timeseries` 要求三者都达到 99% 以上。`resolution`：`full_waveforms`（V、I、T 均完整）、`partial_waveforms`（有标准序列但缺少或稀疏某个通道）、`waveform_sample_only`（序列仅来自源数据的样本）、`summary_tables_only`（只有 RPT、循环特征或检测表：38、39、40）、`unlabelled_channels`（无命名通道的原生矩阵或张量：12、30）、`not_standardised`（处理后的数据中没有标准时间序列表，即使原始数据含波形）。`signals_basis` 为 `processed_data`；`caveats` 列出限定它的基础记录标记，`not_standardised` 另加 `processed_series_missing`。其余字段（`soc`、`research_applicability`、`suitable_tasks`、`thermal`）仍读取原始信号。 |
 | `soc.computable` | 电压和电流波形允许安时积分计算 SOC，或存在显式 `soc` 通道时为真。 |
 | `soh.computable` | 仅当**人工整理的** `supported_tasks` 含 `SOH`、原始数据中有容量通道、且没有阻断标记（`capacity_exceeds_nominal`）时为真。整理过程带有仅凭列名无法看出的领域知识——例如某个容量列其实是吞吐量计数器。 |
 | `capacity_degradation` | 是否存在纵向衰减趋势：有容量通道，`aging_type` 为 `cyclic`、`calendar`、`profile`、`field`、`mixed` 或 `second_life`，且循环数多于一次。数据集可以 `soh.computable: true`（一个快照标签）而 `capacity_degradation.present: false`（没有老化轴）。 |
@@ -39,7 +39,8 @@
 | 取值 | 含义 | 用于 |
 |---|---|---|
 | `dataset_record` | 原样复制自 `datasets/dataset_NN.json`。 | `ref_name`、`source_quality_flags` |
-| `derived` | 由固定规则从基础记录字段计算得出。对 `ocv.*` 而言，也用于没有任何原始来源说明有 OCV 测量的数据集，意为"未证明存在"。 | `timeseries.*`、`soc.*`、`soh.*`、`capacity_degradation.*`、`thermal.*`、`research_applicability.*`、`suitable_tasks` |
+| `derived` | 由固定规则从基础记录字段计算得出。对 `ocv.*` 而言，也用于没有任何原始来源说明有 OCV 测量的数据集，意为"未证明存在"。 | `soc.*`、`soh.*`、`capacity_degradation.*`、`thermal.*`、`research_applicability.*`、`suitable_tasks` |
+| `processed_data` | 由处理后数据的标准时间序列表计数（`timeseries` 块）。 | `timeseries.*` |
 | `raw_data` | 读取自从原始数据提取的逐实体证据：电阻列、阻抗文件、EIS 谱。原始数据中什么也没有时同样使用该值。 | `internal_resistance.*`、`eis.*` |
 | `hand_checked` | 已确认 OCV 与内部电阻测量的带出处表中的一条：从原始 README、原始文件布局或原始数据列读到、但基础 schema 不保存的事实。每条的 `basis` 指明所引用的原始文件。 | `ocv.*`（04、11、13、18、19、26、28、31）、`internal_resistance.*`（05、11、13、38） |
 | `folder_layout` | 数据集所在的类别文件夹。 | `category` |
