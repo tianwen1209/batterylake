@@ -28,10 +28,10 @@
 <link rel="stylesheet" href="styles/preprocessing.css?v=numbered-cards-8">
 <link rel="stylesheet" href="styles/contribute.css?v=workflow-1">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-44">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-45">
 <link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-4">
 <link rel="stylesheet" href="styles/studio-calibration-map.css?v=12">
-<link rel="stylesheet" href="styles/studio-research-schematic.css?v=5">
+<link rel="stylesheet" href="styles/studio-research-schematic.css?v=6">
 </head>
 <body>
 <div class="app">
@@ -902,39 +902,28 @@ bash run_benchmark.sh</pre>
           <div class="studio-feedback" role="img" aria-label="Validation sends a review decision back to parameter estimation, not measurement data"><svg class="studio-feedback-desktop" viewBox="0 0 100 42" preserveAspectRatio="none" aria-hidden="true"><path d="M79 0V24Q79 34 69 34H31Q21 34 21 24V0M17 7L21 0L25 7"/></svg><svg class="studio-feedback-mobile" viewBox="0 0 18 526" preserveAspectRatio="none" aria-hidden="true"><path d="M0 414H8Q16 414 16 406V120Q16 112 8 112H0M6 106L0 112L6 118"/></svg></div>
         </div>
         <div class="studio-research" aria-labelledby="studio-research-title">
-          <div class="studio-research-heading"><span id="studio-research-title">02 / Research schematic</span></div>
+          <div class="studio-research-heading"><span id="studio-research-title">02 / Prototype workflow</span></div>
           <div class="studio-research-scroll">
-            <svg class="studio-research-diagram" viewBox="0 65 1400 365" role="img" aria-labelledby="studio-research-svg-title studio-research-svg-desc" xmlns="http://www.w3.org/2000/svg">
-              <title id="studio-research-svg-title">Battery digital twin research schematic</title>
-              <desc id="studio-research-svg-desc">Read the main flow from left to right: experimental data, parameter identification, battery model, state estimation, model validation, and validated twin. A lower branch brings real-world cycling data into an adaptive parameter update, which feeds the model. Failed validation returns to that update.</desc>
+            <svg class="studio-research-diagram" viewBox="0 65 1400 290" role="img" aria-labelledby="studio-research-svg-title studio-research-svg-desc" xmlns="http://www.w3.org/2000/svg">
+              <title id="studio-research-svg-title">Battery digital twin Studio prototype workflow</title>
+              <desc id="studio-research-svg-desc">Choose a catalog dataset, initialize the displayed PIML model, run illustrative parameter estimation and validation, then set operating conditions to generate and download synthetic cycle data. Failed demo validation can return to parameter estimation for demo recalibration.</desc>
               <defs>
                 <marker id="research-blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#4b8dce"/></marker>
                 <marker id="research-green-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#48a876"/></marker>
               </defs>
-              <path class="research-link research-link-blue" d="M240 150H280" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-blue" d="M460 150H500" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-blue" d="M680 132H720" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-green" d="M720 177H680" marker-end="url(#research-green-arrow)"/>
-              <text class="research-link-label research-link-label-tight" x="700" y="117" text-anchor="middle">Predict</text>
-              <text class="research-link-label research-link-label-green research-link-label-tight" x="700" y="195" text-anchor="middle">Update</text>
-              <path class="research-link research-link-blue" d="M900 150H940" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-green" d="M1120 150H1160" marker-end="url(#research-green-arrow)"/>
-              <text class="research-link-label research-link-label-green research-link-label-tight" x="1140" y="136" text-anchor="middle">Pass</text>
+              <path class="research-link research-link-blue" d="M270 150H330" marker-end="url(#research-blue-arrow)"/>
+              <path class="research-link research-link-blue" d="M540 150H600" marker-end="url(#research-blue-arrow)"/>
+              <path class="research-link research-link-blue" d="M810 150H870" marker-end="url(#research-blue-arrow)"/>
+              <path class="research-link research-link-green" d="M1080 150H1140" marker-end="url(#research-green-arrow)"/>
+              <text class="research-link-label research-link-label-green" x="1110" y="135" text-anchor="middle">Pass</text>
+              <path class="research-link research-link-green research-link-feedback" d="M975 200V300H705V200" marker-end="url(#research-green-arrow)"/>
+              <text class="research-link-label research-link-label-green" x="840" y="290" text-anchor="middle">Needs review · recalibrate demo</text>
 
-              <path class="research-link research-link-green" d="M460 326H500" marker-end="url(#research-green-arrow)"/>
-              <path class="research-link research-link-green" d="M590 280V200" marker-end="url(#research-green-arrow)"/>
-              <path class="research-link research-link-green research-link-feedback" d="M1030 200V396H590V372" marker-end="url(#research-green-arrow)"/>
-              <text class="research-link-label research-link-label-green" x="810" y="387" text-anchor="middle">Criteria unmet · recalibrate</text>
-
-              <g class="research-card research-card-data"><path d="M69 100H240L231 200H60Z"/><text class="research-card-eyebrow" x="150" y="128" text-anchor="middle">01 / Lab input</text><text class="research-card-title" x="150" y="170" text-anchor="middle">Experimental data</text></g>
-              <g class="research-card"><rect x="280" y="100" width="180" height="100" rx="12"/><text class="research-card-eyebrow" x="370" y="128" text-anchor="middle">02 / Initial fit</text><text class="research-card-title" x="370" y="158" text-anchor="middle">Parameter</text><text class="research-card-title" x="370" y="179" text-anchor="middle">identification</text></g>
-              <g class="research-card research-card-model"><rect x="500" y="100" width="180" height="100" rx="12"/><text class="research-card-eyebrow" x="590" y="128" text-anchor="middle">03 / Digital core</text><text class="research-card-title" x="590" y="170" text-anchor="middle">Battery model</text></g>
-              <g class="research-card"><rect x="720" y="100" width="180" height="100" rx="12"/><text class="research-card-eyebrow" x="810" y="128" text-anchor="middle">04 / Online inference</text><text class="research-card-title" x="810" y="170" text-anchor="middle">State estimation</text></g>
-              <g class="research-card research-card-validation"><rect x="940" y="100" width="180" height="100" rx="12"/><text class="research-card-eyebrow" x="1030" y="128" text-anchor="middle">05 / Independent check</text><text class="research-card-title" x="1030" y="170" text-anchor="middle">Model validation</text></g>
-              <g class="research-card research-card-output"><rect x="1160" y="100" width="180" height="100" rx="12"/><text class="research-card-eyebrow" x="1250" y="128" text-anchor="middle">06 / Deployable twin</text><text class="research-card-title" x="1250" y="170" text-anchor="middle">Validated twin</text></g>
-
-              <g class="research-card research-card-data research-card-live"><path d="M289 280H460L451 372H280Z"/><text class="research-card-eyebrow" x="370" y="307" text-anchor="middle">Field input</text><text class="research-card-title" x="370" y="345" text-anchor="middle">Real-world cycling</text></g>
-              <g class="research-card research-card-update"><rect x="500" y="280" width="180" height="92" rx="12"/><text class="research-card-eyebrow" x="590" y="307" text-anchor="middle">Adaptive loop</text><text class="research-card-title" x="590" y="345" text-anchor="middle">Parameter update</text></g>
+              <g class="research-card research-card-data"><path d="M69 100H270L261 200H60Z"/><text class="research-card-eyebrow" x="165" y="128" text-anchor="middle">01 / Catalog</text><text class="research-card-title" x="165" y="170" text-anchor="middle">Choose dataset</text></g>
+              <g class="research-card research-card-model"><rect x="330" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="435" y="128" text-anchor="middle">02 / PIML display</text><text class="research-card-title" x="435" y="158" text-anchor="middle">Initialize</text><text class="research-card-title" x="435" y="179" text-anchor="middle">model</text></g>
+              <g class="research-card"><rect x="600" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="705" y="128" text-anchor="middle">03 / Illustrative fit</text><text class="research-card-title" x="705" y="158" text-anchor="middle">Parameter</text><text class="research-card-title" x="705" y="179" text-anchor="middle">estimation</text></g>
+              <g class="research-card research-card-validation"><rect x="870" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="975" y="128" text-anchor="middle">04 / Demo check</text><text class="research-card-title" x="975" y="170" text-anchor="middle">Validation</text></g>
+              <g class="research-card research-card-output"><rect x="1140" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="1245" y="128" text-anchor="middle">05 / Set conditions</text><text class="research-card-title" x="1245" y="158" text-anchor="middle">Synthetic data</text><text class="research-card-title" x="1245" y="179" text-anchor="middle">&amp; CSV download</text></g>
             </svg>
           </div>
         </div>
@@ -2103,7 +2092,7 @@ for dataset in resp.json()["items"]:
 <script src="js/dataset-metadata.js?v=catalog-redesign-2"></script>
 <script src="js/datasets-page.js?v=catalog-redesign-4"></script>
 <script src="js/main.js?v=catalog-redesign-2"></script>
-<script src="js/digital-twin.js?v=studio-workflow-26"></script>
+<script src="js/digital-twin.js?v=studio-workflow-27"></script>
 <script src="js/studio-particle-flow.js?v=11"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>

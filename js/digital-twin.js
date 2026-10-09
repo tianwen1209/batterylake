@@ -4,7 +4,7 @@
   const root = document.getElementById('page-studio');
   if (!root) return;
   const el = id => document.getElementById('studio-' + id);
-  const state = { selected: null, confirmed: null, initialized: false, estimated: false, validated: false, page: 1, query: '', charge: 1, discharge: 1, temperature: 25, initialSoc: 90, cycles: 500, scenario: 'constant', generatedData: null };
+  const state = { selected: null, confirmed: null, initialized: false, estimated: false, validated: false, calibrationAttempts: 0, page: 1, query: '', charge: 1, discharge: 1, temperature: 25, initialSoc: 90, cycles: 500, scenario: 'constant', generatedData: null };
   const datasetPageSize = 6;
   const emptyFilters = () => ({ all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() });
   let filters = emptyFilters();
@@ -179,7 +179,7 @@
   function selectedDataset() { return catalog().find(d => d.id === state.confirmed); }
   function demoCapacity(dataset) {
     const seed = Number(String(dataset?.id || '').match(/\d+/)?.[0] || 1);
-    return 2.8 + seed % 5 * .08;
+    return 2.8 + seed % 5 * .08 - state.calibrationAttempts * .01;
   }
   function renderParameters() {
     if (!state.estimated) { el('estimated-parameters').innerHTML = '<span class="studio-placeholder-copy">Estimated values appear after initialization.</span>'; return; }
@@ -187,9 +187,9 @@
     const seed = Number(String(dataset.id).match(/\d+/)?.[0] || 1);
     const values = [
       ['Capacity', demoCapacity(dataset).toFixed(2), 'Ah'],
-      ['Internal Resistance', (34 + seed % 7 * 2.1).toFixed(1), 'mΩ'],
-      ['Thermal parameter', (0.72 + seed % 4 * .03).toFixed(2), 'W/K'],
-      ['Aging coefficient', (0.013 + seed % 5 * .001).toFixed(3), 'cycle⁻¹']
+      ['Internal Resistance', (34 + seed % 7 * 2.1 - state.calibrationAttempts * .8).toFixed(1), 'mΩ'],
+      ['Thermal parameter', (0.72 + seed % 4 * .03 + state.calibrationAttempts * .01).toFixed(2), 'W/K'],
+      ['Aging coefficient', (0.013 + seed % 5 * .001 - state.calibrationAttempts * .001).toFixed(3), 'cycle⁻¹']
     ];
     el('estimated-parameters').innerHTML = values.map(([label, number, unit]) => `<div><span>${label}</span><strong>${number} <small>${unit}</small></strong></div>`).join('') + '<small class="studio-demo-note">Illustrative prototype estimates; no optimization is run.</small>';
   }
@@ -202,7 +202,12 @@
     const ticks = [min, (min + max) / 2, max];
     return `<svg class="studio-chart" viewBox="0 0 300 180" role="img" aria-label="${title}, measured and simulated response"><g class="studio-chart-grid">${ticks.map(tick => `<line x1="40" x2="280" y1="${y(tick)}" y2="${y(tick)}"/><text x="34" y="${y(tick) + 4}" text-anchor="end">${tick.toFixed(1)}${unit}</text>`).join('')}<text x="40" y="174">0</text><text x="280" y="174" text-anchor="end">Time</text></g><polyline class="studio-curve studio-measured-curve" points="${line(measured)}"/><polyline class="studio-curve studio-simulated-curve" points="${line(simulated)}"/></svg>`;
   }
-  function enableDatasetReviewAction() {
+  function enableValidationReviewActions() {
+    el('validation-results').querySelector('.studio-recalibrate-action')?.addEventListener('click', () => {
+      state.calibrationAttempts += 1;
+      calibrateTwin();
+      root.querySelector('[data-studio-step="estimation"]').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
     el('validation-results').querySelector('.studio-review-action')?.addEventListener('click', () => {
       el('reset').click();
       root.querySelector('[data-studio-step="data"]').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -213,7 +218,7 @@
     const dataset = selectedDataset();
     // Prototype-only variation: catalog processing flags are not measured-response validation evidence.
     const seed = Array.from(String(dataset.id)).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 0);
-    const reviewDemo = seed % 5 === 0;
+    const reviewDemo = seed % 5 === 0 && state.calibrationAttempts === 0;
     const measuredVoltage = Array.from({ length: 25 }, (_, i) => 4.15 - .91 * i / 24 - .11 * Math.pow(i / 24, 5));
     const simulatedVoltage = measuredVoltage.map((value, i) => value + (reviewDemo ? .09 : .012) * Math.sin(i * .8 + seed));
     const measuredTemp = Array.from({ length: 25 }, (_, i) => 25 + 5.8 * (1 - Math.exp(-i / 7)));
@@ -228,8 +233,8 @@
     el('validation-results').innerHTML = `<div class="studio-subsection-head"><span class="studio-status-pill ${state.validated ? 'is-ready' : 'is-review'}">${state.validated ? 'Validation Passed' : 'Needs Review'}</span></div>
       <div class="studio-validation-charts"><figure class="studio-prediction-block"><figcaption>Measured Voltage vs PIML Twin Voltage</figcaption>${comparisonChart('Voltage comparison', measuredVoltage, simulatedVoltage, ' V')}</figure><figure class="studio-prediction-block"><figcaption>Measured Temperature vs PIML Twin Temperature</figcaption>${comparisonChart('Temperature comparison', measuredTemp, simulatedTemp, ' °C')}</figure></div>
       <div class="studio-response-legend"><span><i></i>Measured Response</span><span><i></i>Simulated Response</span></div>
-      <section class="studio-validation-metrics"><div class="studio-subsection-head"><h4>Validation Metrics</h4></div><div class="studio-parameter-grid">${metric('Voltage RMSE', voltageRmse.toFixed(3) + ' V')}${metric('Temperature RMSE', tempRmse.toFixed(2) + ' °C')}${metric('Capacity Error', capacityError.toFixed(1) + '%')}${metric('Physics Residual', residual.toFixed(3))}</div><small class="studio-demo-note">Illustrative only: both response traces and metrics are generated in the browser from the selected dataset ID. No measured files or real PIML validation are used.</small></section>${state.validated ? '' : '<div class="studio-validation-review"><div class="studio-review-guidance"><div><strong>Why this appears</strong><p>One or more demo metrics exceed the prototype limits. This does not evaluate the actual dataset or twin.</p></div><div><strong>What to do</strong><p>Try another dataset to explore a different result. Real validation would require measured responses and model recalibration.</p></div></div><button type="button" class="bw-pg studio-action studio-review-action">Choose Another Dataset</button></div>'}`;
-    if (!state.validated) enableDatasetReviewAction();
+      <section class="studio-validation-metrics"><div class="studio-subsection-head"><h4>Validation Metrics</h4></div><div class="studio-parameter-grid">${metric('Voltage RMSE', voltageRmse.toFixed(3) + ' V')}${metric('Temperature RMSE', tempRmse.toFixed(2) + ' °C')}${metric('Capacity Error', capacityError.toFixed(1) + '%')}${metric('Physics Residual', residual.toFixed(3))}</div><small class="studio-demo-note">Illustrative only: response traces and metrics are generated in the browser from the dataset ID and demo recalibration count. No measured files or real PIML validation are used.</small></section>${state.validated ? '' : '<div class="studio-validation-review"><div class="studio-review-guidance"><div><strong>Why this appears</strong><p>One or more demo metrics exceed the prototype limits. This does not evaluate the actual dataset or twin.</p></div><div><strong>What to do</strong><p>Recalibrate the demonstration, then run validation again. You can also choose another dataset. Real recalibration would require measured responses and model optimization.</p></div></div><div class="studio-review-actions"><button type="button" class="bw-pg active studio-action studio-recalibrate-action">Recalibrate Demo</button><button type="button" class="bw-pg studio-action studio-review-action">Choose Another Dataset</button></div></div>'}`;
+    if (!state.validated) enableValidationReviewActions();
     syncWorkflow();
   }
   function renderTwin() {
@@ -340,7 +345,7 @@
   function refresh() {
     const list = catalog();
     if (!list.some(d => d.id === state.selected)) state.selected = null;
-    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; clearResults(true); }
+    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.calibrationAttempts = 0; clearResults(true); }
     renderDatasets(); renderTwin(); syncWorkflow();
   }
   controls.forEach((control, index) => {
@@ -516,7 +521,7 @@
   });
   el('reset').addEventListener('click', () => {
     cancelAnimationFrame(calibrationFrame);
-    state.selected = null; state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.page = 1; state.query = '';
+    state.selected = null; state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.calibrationAttempts = 0; state.page = 1; state.query = '';
     filters = emptyFilters(); pendingFilters = emptyFilters();
     el('search').value = '';
     root.querySelector('.studio-live-loss')?.classList.add('is-reset');
@@ -533,7 +538,7 @@
     if (!state.selected) return;
     cancelAnimationFrame(calibrationFrame);
     state.confirmed = state.selected;
-    state.initialized = false; state.estimated = false; state.validated = false;
+    state.initialized = false; state.estimated = false; state.validated = false; state.calibrationAttempts = 0;
     root.classList.remove('is-calibrating');
     root.querySelector('.studio-live-loss')?.classList.add('is-reset');
     root.querySelector('.studio-live-loss')?.classList.remove('is-training');

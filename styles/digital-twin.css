@@ -463,6 +463,7 @@
 #page-studio .studio-response-legend span:last-child i { border-color: var(--accent); border-top-style: dashed; }
 #page-studio .studio-validation-metrics { margin-top: 16px; }
 #page-studio .studio-validation-review { display: grid; justify-items: end; gap: 16px; margin-top: 16px; padding: 18px; border: 1px solid rgba(217,119,6,.22); border-radius: 11px; background: var(--surface); }
+#page-studio .studio-review-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
 #page-studio .studio-review-guidance { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 #page-studio .studio-review-guidance > div { min-width: 0; padding: 15px 16px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-alt); }
 #page-studio .studio-review-guidance strong { color: var(--text1); font-size: 13px; font-weight: 700; }

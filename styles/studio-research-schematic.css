@@ -1,4 +1,4 @@
-/* Research schematic: vector diagram with fixed geometry and readable mobile scrolling. */
+/* Prototype workflow: vector diagram with fixed geometry and readable mobile scrolling. */
 #page-studio .studio-research {
   margin-top: 22px;
   padding: 22px 24px 20px;
@@ -18,7 +18,6 @@
 #page-studio .research-link-green { stroke: #48a876; }
 #page-studio .research-link-feedback { stroke-dasharray: 7 6; }
 #page-studio .research-link-label { fill: #527eae; font-size: 11px; font-weight: 700; }
-#page-studio .research-link-label-tight { font-size: 8px; font-weight: 600; letter-spacing: -.02em; }
 #page-studio .research-link-label-green { fill: #39855f; }
 #page-studio .research-card rect, #page-studio .research-card path {
   fill: var(--surface);
@@ -27,11 +26,8 @@
   filter: drop-shadow(0 5px 9px rgba(32, 81, 129, .08));
 }
 #page-studio .research-card-model rect { fill: color-mix(in srgb, var(--accent-light) 48%, var(--surface)); stroke: #4b8dce; }
-#page-studio .research-card-live path, #page-studio .research-card-update rect { fill: color-mix(in srgb, #e8f7ee 52%, var(--surface)); stroke: #69a988; }
 #page-studio .research-card-output rect { fill: color-mix(in srgb, #e8f7ee 75%, var(--surface)); stroke: #48a876; }
 #page-studio .research-card-eyebrow { fill: #6584a5; font-size: 10px; font-weight: 800; letter-spacing: .11em; }
-#page-studio .research-card-live .research-card-eyebrow,
-#page-studio .research-card-update .research-card-eyebrow,
 #page-studio .research-card-output .research-card-eyebrow { fill: #408360; }
 #page-studio .research-card-title { fill: var(--text1); font-size: 18px; font-weight: 700; }
 #page-studio .research-card-data .research-card-title { font-size: 16px; }
