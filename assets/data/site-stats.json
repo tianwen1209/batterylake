@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-09T21:46:16Z",
-  "total_visits": 3521,
+  "updated_at": "2026-10-10T20:35:58Z",
+  "total_visits": 3536,
   "dataset_downloads": 496,
   "skill_uses": 116,
   "model_downloads": {
@@ -17,27 +17,27 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-09T21:46:16Z",
+    "updatedAt": "2026-10-10T20:35:58Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-09"
+      "endDate": "2026-10-10"
     },
     "countries": [
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 59
+        "visitors": 60
       },
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 58
+        "visitors": 59
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 50
+        "visitors": 51
       },
       {
         "country": "Hong Kong",
@@ -55,6 +55,16 @@
         "visitors": 5
       },
       {
+        "country": "Taiwan",
+        "countryCode": "TW",
+        "visitors": 5
+      },
+      {
+        "country": "Canada",
+        "countryCode": "CA",
+        "visitors": 4
+      },
+      {
         "country": "India",
         "countryCode": "IN",
         "visitors": 4
@@ -65,19 +75,9 @@
         "visitors": 4
       },
       {
-        "country": "Taiwan",
-        "countryCode": "TW",
-        "visitors": 4
-      },
-      {
         "country": "Vietnam",
         "countryCode": "VN",
         "visitors": 4
-      },
-      {
-        "country": "Canada",
-        "countryCode": "CA",
-        "visitors": 3
       },
       {
         "country": "Iran",
@@ -145,7 +145,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 57,
+        "visitors": 58,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -161,7 +161,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 13,
+        "visitors": 14,
         "lng": -77.487,
         "lat": 39.044
       },
@@ -262,6 +262,14 @@
         "lat": 37.354
       },
       {
+        "country": "Canada",
+        "countryCode": "CA",
+        "city": "Burnaby",
+        "visitors": 3,
+        "lng": -122.953,
+        "lat": 49.266
+      },
+      {
         "country": "China",
         "countryCode": "CN",
         "city": "Qingdao",
@@ -276,14 +284,6 @@
         "visitors": 3,
         "lng": 113.568,
         "lat": 22.277
-      },
-      {
-        "country": "Canada",
-        "countryCode": "CA",
-        "city": "Burnaby",
-        "visitors": 2,
-        "lng": -122.953,
-        "lat": 49.266
       },
       {
         "country": "China",
@@ -308,6 +308,14 @@
         "visitors": 2,
         "lng": 113.25,
         "lat": 23.117
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Xi'An",
+        "visitors": 2,
+        "lng": 108.929,
+        "lat": 34.258
       },
       {
         "country": "China",
@@ -396,14 +404,6 @@
         "visitors": 1,
         "lng": 118.586,
         "lat": 24.914
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Xi'An",
-        "visitors": 1,
-        "lng": 108.929,
-        "lat": 34.258
       },
       {
         "country": "Indonesia",
