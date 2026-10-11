@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-10T20:35:58Z",
-  "total_visits": 3536,
+  "updated_at": "2026-10-11T20:59:42Z",
+  "total_visits": 3590,
   "dataset_downloads": 496,
   "skill_uses": 116,
   "model_downloads": {
@@ -17,27 +17,27 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-10T20:35:58Z",
+    "updatedAt": "2026-10-11T20:59:42Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-10"
+      "endDate": "2026-10-11"
     },
     "countries": [
       {
-        "country": "Singapore",
-        "countryCode": "SG",
-        "visitors": 60
-      },
-      {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 59
+        "visitors": 69
+      },
+      {
+        "country": "Singapore",
+        "countryCode": "SG",
+        "visitors": 64
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 51
+        "visitors": 54
       },
       {
         "country": "Hong Kong",
@@ -52,7 +52,7 @@
       {
         "country": "France",
         "countryCode": "FR",
-        "visitors": 5
+        "visitors": 6
       },
       {
         "country": "Taiwan",
@@ -95,6 +95,11 @@
         "visitors": 2
       },
       {
+        "country": "Thailand",
+        "countryCode": "TH",
+        "visitors": 2
+      },
+      {
         "country": "T\u00fcrkiye",
         "countryCode": "TR",
         "visitors": 2
@@ -133,11 +138,6 @@
         "country": "Russia",
         "countryCode": "RU",
         "visitors": 1
-      },
-      {
-        "country": "Thailand",
-        "countryCode": "TH",
-        "visitors": 1
       }
     ],
     "cities": [
@@ -145,7 +145,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 58,
+        "visitors": 62,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 15,
+        "visitors": 23,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -168,18 +168,18 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shanghai",
-        "visitors": 9,
-        "lng": 121.458,
-        "lat": 31.222
+        "city": "Shenzhen",
+        "visitors": 10,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shenzhen",
+        "city": "Shanghai",
         "visitors": 9,
-        "lng": 114.068,
-        "lat": 22.546
+        "lng": 121.458,
+        "lat": 31.222
       },
       {
         "country": "United States",
@@ -201,7 +201,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Glenview",
-        "visitors": 5,
+        "visitors": 7,
         "lng": -87.788,
         "lat": 42.07
       },
@@ -209,7 +209,7 @@
         "country": "China",
         "countryCode": "CN",
         "city": "Beijing",
-        "visitors": 4,
+        "visitors": 5,
         "lng": 116.397,
         "lat": 39.907
       },
@@ -350,6 +350,14 @@
         "lat": 35.694
       },
       {
+        "country": "Thailand",
+        "countryCode": "TH",
+        "city": "Bangkok",
+        "visitors": 2,
+        "lng": 100.501,
+        "lat": 13.754
+      },
+      {
         "country": "Vietnam",
         "countryCode": "VN",
         "city": "Ho Chi Minh City",
@@ -404,6 +412,14 @@
         "visitors": 1,
         "lng": 118.586,
         "lat": 24.914
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Zhangjiajie",
+        "visitors": 1,
+        "lng": 110.478,
+        "lat": 29.129
       },
       {
         "country": "Indonesia",
@@ -468,14 +484,6 @@
         "visitors": 1,
         "lng": 135.097,
         "lat": 48.462
-      },
-      {
-        "country": "Thailand",
-        "countryCode": "TH",
-        "city": "Bangkok",
-        "visitors": 1,
-        "lng": 100.501,
-        "lat": 13.754
       },
       {
         "country": "T\u00fcrkiye",
