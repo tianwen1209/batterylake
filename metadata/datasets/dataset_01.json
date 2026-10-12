@@ -11,6 +11,7 @@
   "doi": null,
   "paper_doi": null,
   "source_url": "https://data.nasa.gov",
+  "delivery_url": null,
   "study_group": null,
   "notes": "34 LCO 18650 cells; charge/discharge cycling with interleaved EIS sweeps (0.1 Hz-5 kHz) to 30% fade; 4-44 °C; CC-CV charge, 1-4 A discharge"
  },
@@ -331,7 +332,7 @@
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_01.json",
   "landing_evidence": "evidence/landing/dataset_01.json"
  }

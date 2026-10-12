@@ -11,6 +11,7 @@
   "doi": "10.14459/2023mp1717758",
   "paper_doi": "10.1016/j.etran.2023.100305",
   "source_url": "https://mediatum.ub.tum.de/node?id=1717758",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDQO731L9BFTJFbT1yd5v0sATsRaFRcYUeCAolktoq3jnM?e=2mgSCz",
   "study_group": null,
   "notes": "2 prismatic modules; thermal-runaway propagation in multi-cell modules (GraphiteLFP and GraphiteNMC-811); cell voltage plus cell, venting and surface temperatures; Schöberl et al. eTransportation 2024"
  },
@@ -281,7 +282,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_33.json",
   "landing_evidence": "evidence/landing/dataset_33.json"
  }

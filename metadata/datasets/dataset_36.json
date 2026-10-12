@@ -11,6 +11,7 @@
   "doi": "10.5281/zenodo.10637534",
   "paper_doi": "10.1016/j.jpowsour.2024.234185",
   "source_url": "https://doi.org/10.5281/zenodo.10637534",
+  "delivery_url": null,
   "study_group": null,
   "notes": "40 NMC811/Si-graphite 21700 cells; LG M50T cycle ageing (Si-, C- and cathode-degradation and drive-cycle experiments); ageing at 10, 25 and 40 °C, performance checks at 25 °C; Kirkaldy et al. Journal of Power Sources 2024"
  },
@@ -400,7 +401,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_36.json",
   "landing_evidence": "evidence/landing/dataset_36.json"
  }

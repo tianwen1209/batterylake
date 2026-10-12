@@ -27,6 +27,7 @@
   "doi": "10.25380/iastate.22582234.v2",
   "paper_doi": "10.1016/j.xcrp.2024.101891; 10.48550/arXiv.2307.08382",
   "source_url": "https://iastate.figshare.com/articles/dataset/_b_ISU-ILCC_Battery_Aging_Dataset_b_/22582234",
+  "delivery_url": null,
   "study_group": null,
   "notes": "251 NMC/graphite 502030 pouch cells; capacity fade versus charge rate, discharge rate and depth of discharge at 30 °C; reference tests at C/5 and C/2"
  },
@@ -1267,7 +1268,7 @@
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_38.json",
   "landing_evidence": "evidence/landing/dataset_38.json"
  }

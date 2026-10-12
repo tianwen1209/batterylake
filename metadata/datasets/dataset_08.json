@@ -11,6 +11,7 @@
   "doi": null,
   "paper_doi": "10.1149/1945-7111/abc8c0",
   "source_url": "https://batteryarchive.org",
+  "delivery_url": null,
   "study_group": null,
   "notes": "10 NCA/graphite 18650 cells (21 declared); BatteryLife v12 copy of UL-Purdue cycling data; Panasonic NCR18650B; 0.5C cycling at 23 °C; Juarez-Robles et al. Journal of The Electrochemical Society 2020"
  },
@@ -300,7 +301,7 @@
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_08.json",
   "landing_evidence": "evidence/landing/dataset_08.json"
  }

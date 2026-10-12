@@ -11,6 +11,7 @@
   "doi": "10.35097/1969",
   "paper_doi": "10.1038/s41597-024-03831-x",
   "source_url": "https://doi.org/10.1038/s41597-024-03831-x",
+  "delivery_url": null,
   "study_group": "KIT_Luh_Blank_228cells",
   "notes": "228 NMC/Si-graphite 18650 cells; KIT v1 log release; cyclic, calendar and drive-cycle ageing at 0-40 °C; CC-CV charge to 4.2 V, 1/3C reference discharge to 2.5 V; Luh et al. Scientific Data 2024"
  },
@@ -956,7 +957,7 @@
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_11.json",
   "landing_evidence": "evidence/landing/dataset_11.json"
  }

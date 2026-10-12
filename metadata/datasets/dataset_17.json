@@ -11,6 +11,7 @@
   "doi": "10.5683/SP3/23MFNE",
   "paper_doi": "10.1016/j.apenergy.2021.116440",
   "source_url": "https://borealisdata.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/23MFNE",
+  "delivery_url": null,
   "study_group": null,
   "notes": "3 LFP 26650 cells; A123 ANR26650M1-B; WLTP-based HEV power-profile ageing to 70%, 40% and 15% SOH; 1C reference tests; Anselma et al. Applied Energy 2021"
  },
@@ -224,7 +225,7 @@
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_17.json",
   "landing_evidence": "evidence/landing/dataset_17.json"
  }

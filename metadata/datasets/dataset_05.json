@@ -11,6 +11,7 @@
   "doi": "10.18154/RWTH-2021-04545",
   "paper_doi": null,
   "source_url": "https://publications.rwth-aachen.de/record/818642",
+  "delivery_url": null,
   "study_group": null,
   "notes": "48 NMC/graphite 18650 cells; Sanyo/Panasonic UR18650E; CC-CV capacity tests and 20-80% SOC cycling at 25 °C"
  },
@@ -417,7 +418,7 @@
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_05.json",
   "landing_evidence": "evidence/landing/dataset_05.json"
  }

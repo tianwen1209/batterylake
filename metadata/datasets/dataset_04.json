@@ -20,6 +20,7 @@
   "doi": "10.5287/bodleian:KO2kdmYGg",
   "paper_doi": "10.5287/ora-x55vvezkm",
   "source_url": "https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac",
+  "delivery_url": null,
   "study_group": null,
   "notes": "8 LCO-NCO/graphite 533459 pouch cells; Artemis urban drive-cycle ageing at 40 °C; 1C and pseudo-OCV characterisation every 100 cycles; Birkl University of Oxford 2017"
  },
@@ -242,7 +243,7 @@
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_04.json",
   "landing_evidence": "evidence/landing/dataset_04.json"
  }

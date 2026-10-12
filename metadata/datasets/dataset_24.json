@@ -11,6 +11,7 @@
   "doi": "10.17632/kxsbr4x3j2.2",
   "paper_doi": "10.1016/j.dib.2021.106894",
   "source_url": "https://data.mendeley.com/datasets/kxsbr4x3j2/2",
+  "delivery_url": null,
   "study_group": null,
   "notes": "18 mixed-cathode/graphite cylindrical cells; LFP, NMC and NCA cells; galvanostatic discharge at set C-rates (up to 20C on LFP) at 5, 25 and 35 °C; Catenaro et al. Data in Brief 2021"
  },
@@ -439,7 +440,7 @@
    "conditions.discharge_c_rate_max": "raw_filenames"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_24.json",
   "landing_evidence": "evidence/landing/dataset_24.json"
  }

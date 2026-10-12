@@ -26,6 +26,7 @@
   "doi": "10.6084/m9.figshare.25975315",
   "paper_doi": "10.1038/s41597-024-03859-z",
   "source_url": "https://figshare.com/articles/dataset/Multi-Stage_Lithium_Ion_Battery_Aging_Study/25975315",
+  "delivery_url": null,
   "study_group": null,
   "notes": "279 NMC 21700 cells; Samsung INR21700-50E; multi-stage ageing test points with per-cell C-rate, SOC and DOD at 10-45 °C; Stroebl et al. Scientific Data 2024"
  },
@@ -2443,7 +2444,7 @@
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_37.json",
   "landing_evidence": "evidence/landing/dataset_37.json"
  }

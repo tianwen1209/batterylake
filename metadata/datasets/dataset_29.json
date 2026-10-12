@@ -20,6 +20,7 @@
   "doi": "10.17605/OSF.IO/JU325",
   "paper_doi": "10.1016/j.joule.2024.11.013",
   "source_url": "https://osf.io/ju325/",
+  "delivery_url": null,
   "study_group": null,
   "notes": "248 mixed-chemistry cells (259 declared); calendar ageing of 8 cell types stored at 2 SOC and 4 temperatures (24-85 °C); check-up summary and raw tables; Lam et al. Joule 2025"
  },
@@ -3439,7 +3440,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_29.json",
   "landing_evidence": "evidence/landing/dataset_29.json"
  }

@@ -19,6 +19,7 @@
   "doi": "10.5281/zenodo.21149533",
   "paper_doi": "10.1149/1945-7111/abae37",
   "source_url": "https://zenodo.org/records/21149533",
+  "delivery_url": null,
   "study_group": "SNL_Preger_2020",
   "notes": "61 mixed-cathode/graphite 18650 cells; BatteryLife v12 copy of Sandia (SNL) cycling data; LFP, NCA and NMC cells at 15, 25 and 35 °C; Preger et al. Journal of The Electrochemical Society 2020"
  },
@@ -1138,7 +1139,7 @@
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_06.json",
   "landing_evidence": "evidence/landing/dataset_06.json"
  }

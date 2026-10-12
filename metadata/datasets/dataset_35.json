@@ -11,6 +11,7 @@
   "doi": "10.5281/zenodo.7707929",
   "paper_doi": "10.3390/batteries9050237",
   "source_url": "https://zenodo.org/records/7707929",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgB1hWybnqR0S4g51LY_C7KOAaC0Bmnca4PJFyj20J92TkM?e=vOMFzn",
   "study_group": null,
   "notes": "55 mixed-chemistry 21700 cells; accelerating-rate-calorimetry heating curves of NMC, NCA and LFP cells at several SOC; Ohneseit et al. Batteries 2023"
  },
@@ -808,7 +809,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_35.json",
   "landing_evidence": "evidence/landing/dataset_35.json"
  }

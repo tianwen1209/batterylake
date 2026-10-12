@@ -20,6 +20,7 @@
   "doi": null,
   "paper_doi": null,
   "source_url": "https://calce.umd.edu",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDZCQ_ywev_R6kfIpQwg8dnAWdU_8iELeNATFa_UKNjgf0?e=yD0Eaa",
   "study_group": null,
   "notes": "6 LCO prismatic cells; CS2 type; Arbin workbooks; CC-CV charge at 0.5C; 0.5C, 1C, alternating-level and partial-SOC discharge groups"
  },
@@ -227,7 +228,7 @@
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_02.json",
   "landing_evidence": "evidence/landing/dataset_02.json"
  }

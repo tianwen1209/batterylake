@@ -20,6 +20,7 @@
   "doi": null,
   "paper_doi": "10.3390/en11051031",
   "source_url": "https://batteryarchive.org",
+  "delivery_url": null,
   "study_group": null,
   "notes": "14 LCO-NMC/graphite 18650 cells; BatteryLife v12 copy of HNEI cycling data at 25 °C; Devie et al. Energies 2018"
  },
@@ -341,7 +342,7 @@
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_07.json",
   "landing_evidence": "evidence/landing/dataset_07.json"
  }

@@ -19,6 +19,7 @@
   "doi": "10.17605/OSF.IO/9CEAV",
   "paper_doi": "10.1038/s41597-025-05725-y",
   "source_url": "https://osf.io/9ceav/",
+  "delivery_url": null,
   "study_group": null,
   "notes": "45 NMC/Si-graphite 21700 cells; Molicel P42A; CDT, HCGT, EIS and pulse characterization at 5, 25 and 40 °C; Khan et al. Scientific Data 2025"
  },
@@ -415,7 +416,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_14.json",
   "landing_evidence": "evidence/landing/dataset_14.json"
  }

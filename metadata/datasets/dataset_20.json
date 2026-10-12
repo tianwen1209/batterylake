@@ -11,6 +11,7 @@
   "doi": "10.17632/29kw38kzwj.1",
   "paper_doi": "10.1016/j.est.2022.106049",
   "source_url": "https://data.mendeley.com/datasets/29kw38kzwj/1",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDQ61NNqFBXSpOQWLjcg9QJAQH9BAjruEBu-6KCA1cHTwE?e=4AbRvu",
   "study_group": null,
   "notes": "3 mixed-cathode cylindrical cells; LFP, NCA and NMC cell types; constant-rate discharge (0.5C-1.5C), DST/FUDS/UDDS/WLTP/US06 drive cycles and HPPC at 5, 25 and 45 °C; Shrivastava et al. Journal of Energy Storage 2022"
  },
@@ -395,7 +396,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_20.json",
   "landing_evidence": "evidence/landing/dataset_20.json"
  }

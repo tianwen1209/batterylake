@@ -11,6 +11,7 @@
   "doi": "10.1184/R1/14226830.v3",
   "paper_doi": "10.1038/s41597-023-02180-5",
   "source_url": "https://figshare.com/articles/dataset/eVTOL_Battery_Dataset/14226830",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgAYrIYSMEDRSr_gL3WU05fUAR4MaMnUlJKZjlDR-tEBKFw?e=ONmAbG",
   "study_group": null,
   "notes": "22 NMC 18650 cells; Sony-Murata VTC6; eVTOL mission-profile discharge with CC-CV charge variants; Bills et al. Scientific Data 2023"
  },
@@ -322,7 +323,7 @@
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_21.json",
   "landing_evidence": "evidence/landing/dataset_21.json"
  }

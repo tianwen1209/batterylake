@@ -11,6 +11,7 @@
   "doi": "10.6084/m9.figshare.23736582",
   "paper_doi": "10.1016/j.dib.2024.110947",
   "source_url": "https://figshare.com/articles/dataset/Li-ion_Batteries_EIS_measurements/23736582",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBDVJk_F_ttSoUiYVWn6MtCAf99mFvUqIZvuAV8J9CRtNs?e=tEvQnM",
   "study_group": null,
   "notes": "11 LFP cells; EIS sweeps (0.01 Hz-1 kHz) at 5-100% SOC and 0.12 A capacity tests; file names read IFR14500; Mustafa et al. Data in Brief 2024"
  },
@@ -228,7 +229,7 @@
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_32.json",
   "landing_evidence": "evidence/landing/dataset_32.json"
  }

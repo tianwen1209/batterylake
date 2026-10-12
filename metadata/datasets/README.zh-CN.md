@@ -29,6 +29,7 @@ soh_ready = usable_for(index, "SOH", exclude_flags=(
 | `ref_name_aliases` | 该数据集用过的所有其他名称，使旧引用仍可解析。每项含 `name`、`status`（`historical`：同一研究被取代的旧名；`mismatched`：属于另一项研究的名称）和 `seen_in`（`registry_history` 表示登记表在早期提交中用过的名称，`raw_readme` 表示原始 README 的"Other names"行）。索引行只保存名称。 |
 | `doi` 与 `paper_doi` | `doi` 标识数据集本身；`paper_doi` 标识描述它的论文。只有登记表的落地页、原始文档或落地页元数据声明了时才记录。通常只有其中一个。 |
 | `source_url` | 数据的上游来源，来自登记表。 |
+| `delivery_url` | 数据的下载交付地址。不作为任何取值的来源；在填写之前为空（`null`）。 |
 | `notes` | 沿用登记表风格的一行描述，例如 `94 LFP/graphite 18650 cells (124 declared); multi-policy fast charging ...; Severson et al. Nature Energy 2019`。开头是原始数据实际交付内容的数量、化学体系和规格（`scale.n_entities`，与登记数量不同时在括号中标出登记数），随后是少量人工整理的测试事实，最后是关联论文（`paper_doi`）。数量、化学体系和引文由 `build.py` 依据本记录自身字段生成，因此不会与记录脱节；中间的描述语句复述 `conditions.*`、`content.*` 和 `quality.notes`。这是面向读者展示的文字。`quality.notes` 不同：它为使用数据的人记录注意事项和来源冲突，可能提到登记表的错误。 |
 
 ### 电芯（Cell）

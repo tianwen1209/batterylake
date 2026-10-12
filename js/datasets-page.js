@@ -1,6 +1,7 @@
 /* Datasets page: catalogue cards, filters, sorting and the dataset popup.
  * Rows come from the BatteryLake metadata (js/dataset-metadata.js). The processed-files checklist and the
- * source / processed links still come from the dataset registry rows in main.js (DATASETS).
+ * The processed-files checklist still comes from the dataset registry rows in main.js (DATASETS);
+ * the source and processed links come from the dataset metadata record (identity.source_url, identity.delivery_url).
  * Shared helpers from main.js: DATASET_CATEGORIES, getDatasetPageCategory, getCatLabel, getCatClass.
  * The inline handlers in index.html and the assistant call the functions exported at the bottom. */
 (() => {
@@ -690,8 +691,8 @@ function openDatasetModal(id) {
   document.getElementById('modal-checklist').innerHTML = checks.map((k, i) =>
     `<div class="check-item"><span class="ci-icon ${lg[k] === 'yes' ? 'ci-yes' : 'ci-no'}">${lg[k] === 'yes' ? '✓' : '—'}</span>${labels[i]}</div>`).join('');
   document.getElementById('modal-notes').textContent = d.notes || '';
-  const hasDoi = lg.doi && lg.doi.startsWith('http');
-  const hasProc = lg.processed_url && lg.processed_url.startsWith('http');
+  const hasSource = d.source_url && d.source_url.startsWith('http');
+  const hasDelivery = !!d.delivery_url;
   const extIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
   const dlIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
   const qaIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M8 15l2.3-4.2 2.4 2 3.3-6.1"/></svg>`;
@@ -700,7 +701,7 @@ function openDatasetModal(id) {
     ? `<a class="modal-link-row modal-link-row--dl" href="${esc(href)}" target="_blank" rel="noopener noreferrer" ${track(type)}><span class="modal-link-label">${label}</span><span class="modal-link-dl-btn">${icon} ${btn}</span></a>`
     : `<div class="modal-link-row modal-link-row--na"><span class="modal-link-label">${label}</span><span class="modal-link-dl-btn modal-link-btn-na">${icon} ${btn}</span></div>`;
   const qa = `<button class="modal-link-row modal-link-row--dl" type="button" onclick="closeModal(); showDatasetQuality('${esc(d.dataset_id)}')"><span class="modal-link-label">Quality Report</span><span class="modal-link-dl-btn">${qaIcon} View</span></button>`;
-  document.getElementById('modal-links').innerHTML = `<div class="modal-links-row">${row(hasDoi, lg.doi, 'Source Dataset', extIcon, 'Source', 'source_dataset')}${row(hasProc, lg.processed_url, 'Processed Dataset', dlIcon, 'Download', 'processed_dataset')}${qa}</div>`;
+  document.getElementById('modal-links').innerHTML = `<div class="modal-links-row">${row(hasSource, d.source_url, 'Source Dataset', extIcon, 'Source', 'source_dataset')}${row(hasDelivery, d.delivery_url, 'Processed Dataset', dlIcon, 'Download', 'processed_dataset')}${qa}</div>`;
   document.getElementById('modal-links-section').style.display = 'block';
   document.getElementById('modal').classList.add('show'); document.documentElement.classList.add('modal-open');
   /* the popup-only fields are preloaded with the catalogue; if they are still loading, redraw once they arrive while this popup is open */

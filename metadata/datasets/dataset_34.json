@@ -11,6 +11,7 @@
   "doi": "10.17632/sn2kv34r4h.2",
   "paper_doi": "10.1016/j.est.2023.106798",
   "source_url": "https://data.mendeley.com/datasets/sn2kv34r4h/2",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgDF295KV5XVQK51KLx-4lqFAQhM_BHa-9HmhcTTXcATQ70?e=VbfA6n",
   "study_group": null,
   "notes": "253 mixed-cathode/graphite pouch cells (109 declared); single-side indentation tests that induce thermal runaway; force, displacement, voltage and temperature; Lin et al. Journal of Energy Storage 2023"
  },
@@ -2156,7 +2157,7 @@
    "conditions.c_rate": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_34.json",
   "landing_evidence": "evidence/landing/dataset_34.json"
  }

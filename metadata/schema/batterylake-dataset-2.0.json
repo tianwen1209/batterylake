@@ -37,6 +37,7 @@
         "year",
         "doi",
         "source_url",
+        "delivery_url",
         "notes"
       ],
       "additionalProperties": false,
@@ -114,6 +115,12 @@
           ]
         },
         "source_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "delivery_url": {
           "type": [
             "string",
             "null"

@@ -11,6 +11,7 @@
   "doi": "10.4121/13739296.v1",
   "paper_doi": null,
   "source_url": "https://data.4tu.nl/datasets/e19fe272-4f46-450c-9125-6545c4c1a98b",
+  "delivery_url": null,
   "study_group": null,
   "notes": "17 NMC811/Si-graphite 18650 cells; EVERLASTING 4TU release as a zip (repeated in dataset_22); LG INR18650 MJ1; rate-based cycling and drive-cycle ageing at 25 and 45 °C"
  },
@@ -339,7 +340,7 @@
    "conditions.discharge_c_rate_max": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_23.json",
   "landing_evidence": "evidence/landing/dataset_23.json"
  }

@@ -62,6 +62,8 @@
         charge_c_rate_max_fraction: cond.charge_c_rate_max_fraction,
         discharge_c_rate_max_fraction: cond.discharge_c_rate_max_fraction,
         count_basis: (rec.content || {}).count_basis,
+        source_url: (rec.identity || {}).source_url,
+        delivery_url: (rec.identity || {}).delivery_url,
         has_temperature_timeseries: profile ? (profile.timeseries || {}).has_temperature_timeseries : undefined
       };
     });

@@ -11,6 +11,7 @@
   "doi": null,
   "paper_doi": "10.1038/s41560-019-0356-8",
   "source_url": "https://doi.org/10.1038/s41560-019-0356-8",
+  "delivery_url": "https://entuedu-my.sharepoint.com/:f:/g/personal/hao-wang_staff_main_ntu_edu_sg/IgBhhMfCk283RaKCYAqvrb_tAcxeSG5G8SmpJMx4y5wVPwM?e=4iHPyO",
   "study_group": null,
   "notes": "94 LFP/graphite 18650 cells (124 declared); multi-policy fast charging (up to 8C) with 4C CC-CV discharge at 30 °C; two of the three study batches; Severson et al. Nature Energy 2019"
  },
@@ -490,7 +491,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_03.json",
   "landing_evidence": "evidence/landing/dataset_03.json"
  }

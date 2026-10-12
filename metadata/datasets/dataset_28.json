@@ -11,6 +11,7 @@
   "doi": null,
   "paper_doi": "10.1021/acsenergylett.4c03223",
   "source_url": "https://github.com/LeXuSECL/ML_SOC_Estimation_ACS_Energy_Letters",
+  "delivery_url": null,
   "study_group": null,
   "notes": "8 LFP/graphite 26650 cells; capacity, GITT, pseudo-OCV and dynamic-profile tests at 10-45 °C for SOC estimation; Che et al. ACS Energy Letters 2025"
  },
@@ -368,7 +369,7 @@
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_28.json",
   "landing_evidence": "evidence/landing/dataset_28.json"
  }

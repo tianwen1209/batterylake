@@ -11,6 +11,7 @@
   "doi": "10.17632/n3b54nsw8m.9",
   "paper_doi": "10.1016/j.xcrp.2023.101743",
   "source_url": "https://data.mendeley.com/datasets/n3b54nsw8m/9",
+  "delivery_url": null,
   "study_group": null,
   "notes": "47 mixed-cathode cells; pouch/prismatic cells; per-cycle capacity and partial-charge features only; load profile named per cell; Che et al. Cell Reports Physical Science 2023"
  },
@@ -519,7 +520,7 @@
    "conditions.discharge_c_rate_max": "paper"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_39.json",
   "landing_evidence": "evidence/landing/dataset_39.json"
  }

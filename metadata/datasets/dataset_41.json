@@ -11,6 +11,7 @@
   "doi": "10.17632/nsc7hnsg4s.2",
   "paper_doi": "10.1039/d2ee01676a",
   "source_url": "https://data.mendeley.com/datasets/nsc7hnsg4s/2",
+  "delivery_url": null,
   "study_group": null,
   "notes": "77 LFP/graphite 18650 cells; cycle ageing at 30 °C with per-cycle voltage-current-capacity frames and the authors' RUL labels; Ma et al. Energy & Environmental Science 2022"
  },
@@ -426,7 +427,7 @@
    "conditions.discharge_c_rate_max": "raw_data"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-07",
+  "last_verified": "2026-10-09",
   "raw_evidence": "evidence/raw/dataset_41.json",
   "landing_evidence": "evidence/landing/dataset_41.json"
  }
