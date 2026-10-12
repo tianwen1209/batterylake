@@ -301,10 +301,10 @@
     el('confirm').disabled = !state.selected || state.selected === state.confirmed;
     el('confirm').textContent = state.selected && state.selected === state.confirmed ? 'Dataset in use' : 'Use Dataset';
   }
-  // A card as on the Datasets page. A click selects the dataset for this workflow instead of opening the dataset popup.
+  // A card in the original Studio layout (catalogue.compactCardHTML). A click selects the dataset for this workflow instead of opening the dataset popup.
   function datasetCard(d) {
     const template = document.createElement('template');
-    template.innerHTML = catalogue.cardHTML(d).trim();
+    template.innerHTML = catalogue.compactCardHTML(d).trim();
     const card = template.content.firstElementChild;
     card.removeAttribute('onclick');
     card.dataset.datasetId = d.dataset_id;

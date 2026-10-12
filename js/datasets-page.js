@@ -317,6 +317,43 @@ function cardHTML(d) {
     </div>`;
 }
 
+/* The Studio's Data Preparation card, in its original layout: title and subtitle with the chemistry icon, cells / format / cycles, and one
+   row of short tags. Chip dropdowns are left out, so every card keeps the same height. */
+function compactCardHTML(d) {
+  const cy = fmtCycles(Number(d.n_cycles_total) || 0);
+  const unit = ENTITY_UNITS[d.entity_type] || d.entity_type || 'cells';
+  // a cylindrical cell shows its format code (18650, 21700); other cells show their form factor (Pouch, Prismatic)
+  const factor = d.form_factors[0] || '';
+  const format = factor === 'cylindrical' && d.cell_format_codes.length ? d.cell_format_codes[0] : factor ? formFactorLabel(factor) : (d.cell_format_codes[0] || '');
+  const cathodeCount = d.cathode_chemistries.length;
+  const chemistry = cathodeCount === 1 ? titleCase(d.cathode_chemistries[0]) : cathodeCount > 1 ? 'Multi' : '';
+  const profiles = profilePairList(d).filter(p => p !== UNKNOWN);
+  const profile = profiles.length === 1 ? profiles[0] : profiles.length > 1 ? profiles.length + ' Profiles' : '';
+  const tags = [
+    `<span class="dc-tag ${filterTypeClass('category')}">${esc(getCatLabel(d.category))}</span>`,
+    chemistry && `<span class="dc-tag ${filterTypeClass('chemistry')}">${esc(chemistry)}</span>`,
+    d.application_domain && `<span class="dc-tag ${filterTypeClass('domain')}">${esc(domainLabel(d.application_domain))}</span>`,
+    format && `<span class="dc-tag ${filterTypeClass('form')}">${esc(format)}</span>`,
+    profile && `<span class="dc-tag ${filterTypeClass('profile')}">${esc(profile)}</span>`
+  ].filter(Boolean).join('');
+  return `
+    <div class="dataset-card">
+      <div class="dc-top">
+        <div class="dc-icon ${getChemClass(d)}">${chemLetter(d)}</div>
+        <div class="dc-body">
+          <div class="dc-name" title="${esc(d.ref_name || d.dataset_name).replace(/"/g, '&quot;')}">${esc(d.ref_name || d.dataset_name)}</div>
+          ${d.ref_name && d.dataset_name && d.dataset_name !== d.ref_name ? `<div class="dc-refname" title="${esc(d.dataset_name).replace(/"/g, '&quot;')}">${esc(d.dataset_name)}</div>` : ''}
+        </div>
+      </div>
+      <div class="dc-stats">
+        ${d.n_entities ? `<span class="dc-stat"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg> <span class="stat-val">${Number(d.n_entities).toLocaleString('en-US')}</span> ${esc(unit)}</span>` : ''}
+        ${format ? `<span class="dc-stat"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M22 11h-2a2 2 0 000 4h2"/></svg> <span class="stat-val">${esc(format)}</span></span>` : ''}
+        ${cy ? `<span class="dc-stat"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> <span class="stat-val">${cy}</span> cycles</span>` : ''}
+      </div>
+      <div class="dc-tags">${tags}</div>
+    </div>`;
+}
+
 const hasFilters = () => FILTER_KEYS.some(k => active[k].size);
 const hasSearch = () => !!document.getElementById('searchInput').value.trim();
 const resultsMode = () => hasSearch() || hasFilters() || allDatasetsApplied;
@@ -799,7 +836,7 @@ function searchChanged() { allDatasetsApplied = false; syncPendingFromActive(); 
 
 window.DatasetsPage = { ensureLoaded, reload, showCategory, showAllCategories, searchChanged,
   /* Cards, filters and sorting, shared with the Studio's Data Preparation list (js/digital-twin.js). rows() is the loaded catalogue. */
-  catalogue: { rows: () => ROWS, newSelection: newSets, FILTER_KEYS, filterRows, sortDatasets, cardHTML, filterGridHTML,
+  catalogue: { rows: () => ROWS, newSelection: newSets, FILTER_KEYS, filterRows, sortDatasets, compactCardHTML, filterGridHTML,
     toggleSelection, removeSelection, syncFilterTags, selectionChips, filterTypeClass, chemistryLabel: chemTagLabel } };
 Object.assign(window, {
   filterDatasets, getFiltered, renderAppliedFilterChips: renderChips, syncPendingFromActive, removeAppliedFilter,

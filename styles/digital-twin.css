@@ -81,23 +81,24 @@
 .studio-flow-arrow span::after { content: ''; position: absolute; left: -4px; bottom: 0; width: 7px; height: 7px; border-right: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); transform: rotate(45deg); }
 
 /* Dataset selection: the search, filter popover and cards are the Datasets page's (base.css, datasets.css and polish.css also apply to
-   #page-studio), so the cards carry its border, shadow, tags, colours and hover. The Studio keeps its compact card size: two columns,
-   98px rows, and the card, icon and text sizes set below (vertical spacing is tightened so that a card with two tag rows still fits 98px). */
+   #page-studio), so the cards carry its border, shadow, tags, colours and hover. The Studio keeps its original card layout and size: two
+   columns, 98px rows, and the spacing, icon and text sizes set below. */
 .studio-search-tools { position: relative; margin-bottom: 12px; }
 #page-studio .dataset-search { min-width: 0; }
 #page-studio .dataset-search input,#page-studio .dataset-filter-toggle { height: 42px; font-size: 13px; box-shadow: none; }
 #page-studio .dataset-search input { padding-left: 38px; padding-right: 12px; }
 #studio-dataset-list { display: grid; flex: 1; grid-template-columns: repeat(2,minmax(0,1fr)); grid-auto-rows: minmax(98px,1fr); gap: 8px; min-height: 310px; align-content: stretch; }
-#studio-dataset-list .dataset-card { min-height: 98px; height: auto; padding: 7px 12px; }
+#studio-dataset-list .dataset-card { min-height: 98px; height: auto; padding: 10px 12px; overflow: hidden; }
 #studio-dataset-list .dataset-card.studio-selected { border-color: var(--accent) !important; background: var(--accent-light) !important; box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--accent) 24%,transparent); }
 #studio-dataset-list .dc-top { gap: 10px; }
+#studio-dataset-list .dc-body { min-width: 0; }
 #studio-dataset-list .dc-icon { width: 30px; height: 30px; border-radius: 6px; font-size: 14px; }
-#studio-dataset-list .dc-name { font-size: 12px; line-height: 1.3; white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; word-break: break-word; }
-#studio-dataset-list .dc-refname { margin-top: 0; font-size: 13px; line-height: 1.3; white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; word-break: break-word; }
-#studio-dataset-list .dc-stats { gap: 12px; margin-top: 2px; line-height: 1; }
+#studio-dataset-list .dc-name { font-size: 12px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#studio-dataset-list .dc-refname { margin-top: 2px; font-size: 13px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#studio-dataset-list .dc-stats { gap: 12px; margin-top: 5px; line-height: 1; }
 #studio-dataset-list .dc-stat { font-size: 12px; }
 #studio-dataset-list .dc-stat svg { width: 11px; height: 11px; }
-#studio-dataset-list .dc-tags { margin-top: 3px; gap: 2px; flex-wrap: wrap; }
+#studio-dataset-list .dc-tags { margin-top: 5px; gap: 4px; flex-wrap: wrap; }
 #studio-dataset-list .dc-tag { padding: 1px 5px; font-size: 10px; white-space: nowrap; }
 .studio-datasets { display: flex; flex-direction: column; }.studio-dataset-footer { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 15px; }
 .studio-dataset-actions { display: flex; align-items: center; gap: 8px; }
