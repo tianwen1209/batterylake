@@ -21,15 +21,15 @@
 
 <link rel="stylesheet" href="styles/benchmark.css?v=numbered-cards-1">
 <!-- DESIGN POLISH LAYER: visual tokens and component refinements. -->
-<link rel="stylesheet" href="styles/polish.css?v=studio-controls-4">
+<link rel="stylesheet" href="styles/polish.css?v=studio-controls-3">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css">
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css?v=numbered-cards-8">
 <link rel="stylesheet" href="styles/contribute.css?v=workflow-1">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-46">
-<link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-5">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-45">
+<link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-4">
 <link rel="stylesheet" href="styles/studio-calibration-map.css?v=12">
 <link rel="stylesheet" href="styles/studio-research-schematic.css?v=6">
 </head>
@@ -936,30 +936,14 @@ bash run_benchmark.sh</pre>
             <div class="studio-step-head"><span class="studio-step-number">01</span><div class="studio-step-title"><h3 id="studio-datasets-title">Data Preparation</h3><span class="studio-step-info" tabindex="0" aria-label="Data Preparation information"><span aria-hidden="true">i</span><span class="studio-step-info-text" role="tooltip">Choose a battery dataset with measurements the digital twin can use. Search or filter, then select Use Dataset.</span></span></div></div>
             <div class="studio-search-tools">
               <div class="dataset-search-row">
-                <div class="dataset-search" id="studio-search-box">
+                <div class="dataset-search">
                   <span class="search-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-                  <input type="text" id="studio-search" placeholder="Search datasets" aria-label="Search studio datasets" autocomplete="off">
-                  <button class="search-clear" id="studio-search-clear" type="button" aria-label="Clear search" title="Clear search">×</button>
+                  <input type="search" id="studio-search" placeholder="Search datasets" aria-label="Search studio datasets">
                 </div>
-                <button type="button" class="dataset-filter-toggle" id="studio-filter-toggle" aria-expanded="false" aria-controls="studio-filter-popover"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M7 12h10M10 19h4"/></svg>Filters</button>
+                <button type="button" class="dataset-filter-toggle" id="studio-filter-toggle" aria-expanded="false" aria-controls="studio-filters"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M7 12h10M10 19h4"/></svg>Filters</button>
               </div>
               <div id="studio-applied-filter-chips" class="applied-filter-chips"></div>
-              <div class="dataset-filter-popover" id="studio-filter-popover">
-                <div class="dataset-filter-grid" id="studio-filter-grid"></div>
-                <div class="dataset-filter-actions">
-                  <button class="dataset-filter-action" id="studio-filter-clear" type="button">Clear</button>
-                  <button class="dataset-filter-action apply" id="studio-filter-apply" type="button">Apply</button>
-                </div>
-              </div>
-            </div>
-            <div class="dataset-results-head">
-              <span class="filter-count" id="studio-filter-count">0 datasets</span>
-              <div class="dataset-results-tools">
-                <div class="filter-sort">
-                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16"/><path d="M3 16l4 4 4-4"/><path d="M17 20V4"/><path d="M13 8l4-4 4 4"/></svg>
-                  <select id="studio-sort" aria-label="Sort datasets"></select>
-                </div>
-              </div>
+              <div id="studio-filters" class="dataset-filter-popover"></div>
             </div>
             <div id="studio-dataset-list" class="dataset-card-grid" role="group" aria-label="Choose one dataset"></div>
             <div class="studio-dataset-footer">
@@ -2106,9 +2090,9 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/dataset-metadata.js?v=catalog-redesign-4"></script>
-<script src="js/datasets-page.js?v=catalog-redesign-9"></script>
+<script src="js/datasets-page.js?v=catalog-redesign-8"></script>
 <script src="js/main.js?v=catalog-redesign-2"></script>
-<script src="js/digital-twin.js?v=studio-workflow-28"></script>
+<script src="js/digital-twin.js?v=studio-workflow-27"></script>
 <script src="js/studio-particle-flow.js?v=11"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>

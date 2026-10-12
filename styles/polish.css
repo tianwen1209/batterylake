@@ -2119,61 +2119,61 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
   overflow: visible;
   box-shadow: none;
 }
-:is(#page-datasets, #page-studio) {
+#page-datasets {
   --dataset-lift-bg: color-mix(in srgb, var(--bg) 96%, var(--accent-light));
   --dataset-lift-border: color-mix(in srgb, var(--accent) 42%, var(--border));
   --dataset-lift-shadow: 0 0 0 3px rgba(37,99,235,.09), 0 12px 28px rgba(37,99,235,.13), var(--card-shadow-hover);
   --dataset-lift-transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease, background .16s ease;
 }
-:is(#page-datasets, #page-studio) .dataset-card-grid .dataset-card {
+#page-datasets .dataset-card-grid .dataset-card {
   background: transparent !important;
   transition: var(--dataset-lift-transition);
 }
-:is(#page-datasets, #page-studio) .dataset-card-grid .dataset-card::before {
+#page-datasets .dataset-card-grid .dataset-card::before {
   display: none;
 }
-:is(#page-datasets, #page-studio) .dataset-card-grid .dataset-card:hover {
+#page-datasets .dataset-card-grid .dataset-card:hover {
   background: var(--dataset-lift-bg) !important;
   border-color: var(--dataset-lift-border) !important;
   box-shadow: var(--dataset-lift-shadow) !important;
   transform: translateY(-1px) !important;
 }
-:is(#page-datasets, #page-studio) .dataset-search input:hover,
-:is(#page-datasets, #page-studio) .dataset-search input:focus {
+#page-datasets .dataset-search input:hover,
+#page-datasets .dataset-search input:focus {
   background: var(--dataset-lift-bg) !important;
   border-color: var(--dataset-lift-border) !important;
   box-shadow: var(--dataset-lift-shadow) !important;
 }
-:is(#page-datasets, #page-studio) .filter-token {
+#page-datasets .filter-token {
   background: var(--tag-bg) !important;
   border-color: var(--tag-border) !important;
   color: var(--tag-fg) !important;
 }
-:is(#page-datasets, #page-studio) .dataset-filter-popover .filter-token:not(.active) {
+#page-datasets .dataset-filter-popover .filter-token:not(.active) {
   background: var(--bg2) !important;
   border-color: var(--border) !important;
   color: var(--text3) !important;
   box-shadow: none !important;
 }
-:is(#page-datasets, #page-studio) .filter-token.active,
-:is(#page-datasets, #page-studio) .filter-token.is-active {
+#page-datasets .filter-token.active,
+#page-datasets .filter-token.is-active {
   background: var(--tag-bg) !important;
   border-color: var(--tag-border) !important;
   color: var(--tag-fg) !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--tag-fg) 16%, transparent) !important;
 }
-:is(#page-datasets, #page-studio) .dataset-filter-popover .filter-token.active {
+#page-datasets .dataset-filter-popover .filter-token.active {
   background: var(--tag-bg) !important;
   border-color: var(--tag-border) !important;
   color: var(--tag-fg) !important;
 }
 /* Datasets Category filter has more options than Benchmarks — keep layout local. */
-:is(#page-datasets, #page-studio) .dataset-filter-popover {
+#page-datasets #dataset-filter-popover {
   width: min(860px, calc(100% - 36px));
 }
 /* Category spans a full row; Chemistry/Domain/Form/Profile stay in a 2×2 below. */
 @media (min-width: 961px) {
-  #page-datasets .dataset-filter-grid .filter-group--category {
+  #page-datasets #dataset-filter-grid .filter-group--category {
     grid-column: 1 / -1;
   }
 }
@@ -2402,9 +2402,9 @@ select:focus,
 #page-home .home-metrics .metric-cell:hover,
 #page-home .home-metrics,
 #page-datasets .dataset-grid,
-:is(#page-datasets, #page-studio) .dataset-card-grid,
-:is(#page-datasets, #page-studio) .dataset-card-grid .dataset-card,
-:is(#page-datasets, #page-studio) .dataset-card-grid .dataset-card:hover {
+#page-datasets .dataset-card-grid,
+#page-datasets .dataset-card-grid .dataset-card,
+#page-datasets .dataset-card-grid .dataset-card:hover {
   background: transparent !important;
 }
 

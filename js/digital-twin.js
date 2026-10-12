@@ -4,40 +4,59 @@
   const root = document.getElementById('page-studio');
   if (!root) return;
   const el = id => document.getElementById('studio-' + id);
-  const state = { selected: null, confirmed: null, initialized: false, estimated: false, validated: false, calibrationAttempts: 0, page: 1, query: '', sort: 'oldest', charge: 1, discharge: 1, temperature: 25, initialSoc: 90, cycles: 500, scenario: 'constant', generatedData: null };
+  const state = { selected: null, confirmed: null, initialized: false, estimated: false, validated: false, calibrationAttempts: 0, page: 1, query: '', charge: 1, discharge: 1, temperature: 25, initialSoc: 90, cycles: 500, scenario: 'constant', generatedData: null };
   const datasetPageSize = 6;
-  // Data Preparation shows the Datasets page catalogue (js/datasets-page.js): the same metadata rows, cards, filters, search and sort.
-  const catalogue = window.DatasetsPage.catalogue;
-  // As on the Datasets page under its Cycle Aging category, the Studio lists cycle-aging datasets only (fixed, so no category chip).
-  const newSelection = () => { const sel = catalogue.newSelection(); sel.cat.add('cycle_aging'); return sel; };
-  const resetSelection = sel => { catalogue.FILTER_KEYS.forEach(key => sel[key].clear()); sel.cat.add('cycle_aging'); };
-  const copySelection = (dst, src) => catalogue.FILTER_KEYS.forEach(key => { dst[key].clear(); src[key].forEach(v => dst[key].add(v)); });
-  let active = newSelection();    // filters applied to the list
-  let pending = newSelection();   // filters being edited in the popover
-  let datasetRows = [];           // the catalogue rows, once loaded
-  let datasetsLoaded = false;
+  const emptyFilters = () => ({ all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() });
+  let filters = emptyFilters();
+  let pendingFilters = emptyFilters();
   let calibrationFrame = 0;
   let revealObserver = null;
-  const filterGrid = () => el('filter-grid');
-  const syncFilterGrid = () => catalogue.syncFilterTags(filterGrid(), pending);
+  const filterTypes = { chem: 'chemistry', form: 'form', cat: 'category', domain: 'domain', duty: 'profile' };
+  // Reuse Benchmark's filter markup and tokens, with independent Studio state.
+  const filterTemplate = document.getElementById('bwr-dataset-filter-popover').cloneNode(true);
+  filterTemplate.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+  filterTemplate.querySelectorAll('[onclick]').forEach(node => node.removeAttribute('onclick'));
+  filterTemplate.querySelectorAll('.filter-token').forEach(token => {
+    const entry = Object.entries(token.dataset).find(([key]) => key.startsWith('bwr'));
+    const type = entry[0].slice(3).toLowerCase();
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = token.className; button.textContent = token.textContent;
+    button.dataset.filterType = type; button.dataset.filterValue = entry[1];
+    button.addEventListener('click', () => {
+      if (type === 'all') {
+        const all = !pendingFilters.all; pendingFilters = emptyFilters(); pendingFilters.all = all;
+      } else {
+        pendingFilters.all = false;
+        const set = pendingFilters[type];
+        if (set.has(entry[1])) set.delete(entry[1]); else set.add(entry[1]);
+      }
+      syncFilters();
+    });
+    token.replaceWith(button);
+  });
+  el('filters').replaceChildren(...filterTemplate.childNodes);
+  function syncFilters() {
+    el('filters').querySelectorAll('.filter-token').forEach(button => {
+      const { filterType: type, filterValue: value } = button.dataset;
+      const active = type === 'all' ? pendingFilters.all : pendingFilters[type].has(value);
+      button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
+    });
+  }
   function renderFilterChips() {
-    const box = el('applied-filter-chips');
-    const chips = catalogue.selectionChips(active).filter(([key]) => key !== 'cat');
-    box.classList.toggle('has-chips', chips.length > 0);
-    box.replaceChildren(...chips.map(([key, type, value, label]) => {
-      const chip = document.createElement('span');
-      chip.className = `applied-chip ${catalogue.filterTypeClass(type)}`;
+    const box = el('applied-filter-chips'); box.replaceChildren();
+    const chips = filters.all ? [{ type: 'all', value: 'all', label: 'All datasets' }] : [];
+    Object.keys(filterTypes).forEach(type => filters[type].forEach(value => chips.push({ type, value, label: bwFilterLabel(type, value) })));
+    chips.forEach(({ type, value, label }) => {
+      const chip = document.createElement('span'); chip.className = 'applied-chip ' + filterTypeClass(filterTypes[type] || 'all');
       chip.append(document.createTextNode(label));
-      const remove = document.createElement('button');
-      remove.type = 'button'; remove.textContent = '×'; remove.setAttribute('aria-label', `Remove ${label} filter`);
+      const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = '×'; remove.setAttribute('aria-label', 'Remove ' + label + ' filter');
       remove.addEventListener('click', () => {
-        catalogue.removeSelection(active, key, value, datasetRows);
-        copySelection(pending, active);
-        state.page = 1; syncFilterGrid(); renderFilterChips(); renderDatasets();
+        if (type === 'all') filters.all = false; else filters[type].delete(value);
+        pendingFilters = bwCloneFilterState(filters); state.page = 1; syncFilters(); renderDatasets();
       });
-      chip.append(remove);
-      return chip;
-    }));
+      chip.append(remove); box.append(chip);
+    });
+    box.classList.toggle('has-chips', chips.length > 0);
   }
   const controls = [
     { label: 'Charge Rate (C)', keys: ['charge'], min: 0.1, max: 5, step: 0.1, unit: 'C' },
@@ -46,6 +65,8 @@
     { label: 'Initial SOC (%)', keys: ['initialSoc'], min: 10, max: 100, step: 1, unit: '%' },
     { label: 'Number of Cycles', keys: ['cycles'], min: 1, max: 1000, step: 1, unit: '' }
   ];
+  // Use the same cycle-aging catalog and ordering as Benchmark's data selection.
+  const catalog = () => bwFlowSortedDatasets(getCatalogDatasets().filter(bwIsCycleAgingDataset));
   const format = (key, value) => ['charge', 'discharge'].includes(key) ? value.toFixed(1) : String(value);
   const twinAssets = {
     '18650': 'assets/images/studio-batteries/18650.png?v=2',
@@ -74,8 +95,6 @@
     if (value.includes('cyl')) return 'cyl';
     return value;
   }
-  // The illustration follows the cell format code when there is one, else the form factor.
-  const twinSource = dataset => dataset.cell_format_codes.find(code => twinAssetFor(code)) || dataset.form_factors.find(factor => twinAssetFor(factor)) || '';
   function clearResults(reset = false) {
     el('download').disabled = true;
     if (!reset && el('results').classList.contains('has-results')) {
@@ -157,15 +176,15 @@
     };
     calibrationFrame = requestAnimationFrame(tick);
   }
-  function selectedDataset() { return datasetRows.find(d => d.dataset_id === state.confirmed); }
+  function selectedDataset() { return catalog().find(d => d.id === state.confirmed); }
   function demoCapacity(dataset) {
-    const seed = Number(String(dataset?.dataset_id || '').match(/\d+/)?.[0] || 1);
+    const seed = Number(String(dataset?.id || '').match(/\d+/)?.[0] || 1);
     return 2.8 + seed % 5 * .08 - state.calibrationAttempts * .01;
   }
   function renderParameters() {
     if (!state.estimated) { el('estimated-parameters').innerHTML = '<span class="studio-placeholder-copy">Estimated values appear after initialization.</span>'; return; }
     const dataset = selectedDataset();
-    const seed = Number(String(dataset.dataset_id).match(/\d+/)?.[0] || 1);
+    const seed = Number(String(dataset.id).match(/\d+/)?.[0] || 1);
     const values = [
       ['Capacity', demoCapacity(dataset).toFixed(2), 'Ah'],
       ['Internal Resistance', (34 + seed % 7 * 2.1 - state.calibrationAttempts * .8).toFixed(1), 'mΩ'],
@@ -198,7 +217,7 @@
     if (!state.estimated) return;
     const dataset = selectedDataset();
     // Prototype-only variation: catalog processing flags are not measured-response validation evidence.
-    const seed = Array.from(String(dataset.dataset_id)).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 0);
+    const seed = Array.from(String(dataset.id)).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 0);
     const reviewDemo = seed % 5 === 0 && state.calibrationAttempts === 0;
     const measuredVoltage = Array.from({ length: 25 }, (_, i) => 4.15 - .91 * i / 24 - .11 * Math.pow(i / 24, 5));
     const simulatedVoltage = measuredVoltage.map((value, i) => value + (reviewDemo ? .09 : .012) * Math.sin(i * .8 + seed));
@@ -226,15 +245,14 @@
       const caption = document.createElement('div');
       caption.className = 'studio-twin-caption';
       const name = document.createElement('strong');
-      name.textContent = dataset.dataset_name;
+      name.textContent = dataset.name;
       const meta = document.createElement('span');
-      meta.textContent = [catalogue.chemistryLabel(dataset), dataset.form].filter(Boolean).join(' · ');
+      meta.textContent = [dataset.chemistry, dataset.form].filter(Boolean).join(' · ');
       caption.append(name, meta);
-      const source = twinSource(dataset);
-      const asset = twinAssetFor(source);
+      const asset = twinAssetFor(dataset.form);
       if (asset) {
         const visual = document.createElement('div');
-        visual.className = `studio-twin-visual twin-form-${twinFormKey(source)}`;
+        visual.className = `studio-twin-visual twin-form-${twinFormKey(dataset.form)}`;
         const image = document.createElement('img');
         image.className = 'studio-twin-image';
         image.src = asset;
@@ -262,22 +280,45 @@
     }
   }
   function renderDatasets() {
-    if (!datasetsLoaded) {
-      el('filter-count').textContent = 'Loading datasets…';
-      el('dataset-list').innerHTML = '<div class="dataset-empty">Loading datasets…</div>';
-      el('pager-info').textContent = '';
-      el('pager').replaceChildren();
-      el('confirm').disabled = true;
-      return;
-    }
-    const list = catalogue.sortDatasets(catalogue.filterRows(datasetRows, active, state.query), state.sort);
+    const list = catalog().filter(d => {
+      if (state.query && ![d.name, d.ref_name, d.notes, d.chemistry, d.form].join(' ').toLowerCase().includes(state.query)) return false;
+      if (filters.all) return true;
+      return (!filters.chem.size || filters.chem.has(d.chemistry))
+        && (!filters.form.size || filters.form.has(d.form))
+        && (!filters.cat.size || filters.cat.has(d.category))
+        && (!filters.domain.size || inferDatasetDomains(d).some(value => filters.domain.has(value)))
+        && (!filters.duty.size || inferDatasetProfiles(d).some(value => filters.duty.has(value)));
+    });
+    renderFilterChips();
     const pages = Math.max(1, Math.ceil(list.length / datasetPageSize));
     state.page = Math.min(state.page, pages);
     const start = (state.page - 1) * datasetPageSize;
-    el('filter-count').textContent = `${list.length} datasets found`;
     el('dataset-list').replaceChildren();
-    if (!list.length) el('dataset-list').innerHTML = '<div class="dataset-empty">No datasets match your filters.</div>';
-    list.slice(start, start + datasetPageSize).forEach(d => el('dataset-list').append(datasetCard(d)));
+    list.slice(start, start + datasetPageSize).forEach(d => {
+      // Keep the shared renderer's metadata and tags; replace only modal behavior.
+      const template = document.createElement('template');
+      template.innerHTML = datasetCardHTML(d).trim();
+      const card = template.content.firstElementChild;
+      card.removeAttribute('onclick');
+      card.dataset.datasetId = d.id;
+      card.classList.toggle('studio-selected', d.id === state.selected);
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-pressed', String(d.id === state.selected));
+      card.setAttribute('aria-label', d.name);
+      card.querySelector('.dc-name').title = d.ref_name || d.name;
+      const choose = () => {
+        state.selected = d.id;
+        renderDatasets();
+        Array.from(el('dataset-list').children).find(c => c.dataset.datasetId === d.id)?.focus({ preventScroll: true });
+      };
+      card.addEventListener('click', choose);
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choose(); }
+      });
+      el('dataset-list').append(card);
+    });
+    if (!list.length) el('dataset-list').innerHTML = '<div class="studio-empty">No datasets match your search or filters</div>';
     el('pager-info').textContent = list.length ? `${start + 1}–${Math.min(start + datasetPageSize, list.length)} of ${list.length} datasets` : '0 datasets';
     el('pager').replaceChildren();
     const pageButton = (text, page, label, disabled) => {
@@ -301,41 +342,12 @@
     el('confirm').disabled = !state.selected || state.selected === state.confirmed;
     el('confirm').textContent = state.selected && state.selected === state.confirmed ? 'Dataset in use' : 'Use Dataset';
   }
-  // A card as on the Datasets page. A click selects the dataset for this workflow instead of opening the dataset popup.
-  function datasetCard(d) {
-    const template = document.createElement('template');
-    template.innerHTML = catalogue.cardHTML(d).trim();
-    const card = template.content.firstElementChild;
-    card.removeAttribute('onclick');
-    card.dataset.datasetId = d.dataset_id;
-    card.classList.toggle('studio-selected', d.dataset_id === state.selected);
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-pressed', String(d.dataset_id === state.selected));
-    card.setAttribute('aria-label', d.dataset_name);
-    const choose = () => {
-      state.selected = d.dataset_id;
-      renderDatasets();
-      Array.from(el('dataset-list').children).find(c => c.dataset.datasetId === d.dataset_id)?.focus({ preventScroll: true });
-    };
-    card.addEventListener('click', choose);
-    card.addEventListener('keydown', event => {
-      // Keys pressed on the card's own chip dropdown buttons are left to those buttons.
-      if (event.target === card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); choose(); }
-    });
-    return card;
-  }
   function refresh() {
-    return window.DatasetsPage.ensureLoaded().then(() => {
-      datasetRows = catalogue.rows();
-      datasetsLoaded = true;
-      if (!datasetRows.some(d => d.dataset_id === state.selected)) state.selected = null;
-      if (!datasetRows.some(d => d.dataset_id === state.confirmed)) { state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.calibrationAttempts = 0; clearResults(true); }
-      filterGrid().innerHTML = catalogue.filterGridHTML(datasetRows, { category: false, onclick: null });
-      syncFilterGrid(); renderFilterChips(); renderDatasets(); renderTwin(); syncWorkflow();
-    });
+    const list = catalog();
+    if (!list.some(d => d.id === state.selected)) state.selected = null;
+    if (!list.some(d => d.id === state.confirmed)) { state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.calibrationAttempts = 0; clearResults(true); }
+    renderDatasets(); renderTwin(); syncWorkflow();
   }
-
   controls.forEach((control, index) => {
     const row = document.createElement('div');
     row.className = 'studio-control';
@@ -391,7 +403,7 @@
     const cycleCount = params.cycles;
     const consistency = Math.max(94, 99.4 - Math.abs(params.temperature - 25) * .025 - Math.max(0, params.charge - 1) * .3);
     const temperatureValid = peak >= 0 && peak <= 60;
-    const dataset = selectedDataset();
+    const dataset = catalog().find(d => d.id === params.confirmed);
     const baselineCapacity = demoCapacity(dataset);
     const finalCapacity = baselineCapacity * soh(params.cycles) / 100;
     state.generatedData = {
@@ -408,7 +420,7 @@
     el('results').classList.add('has-results');
     el('results').classList.remove('is-stale');
     el('run').textContent = 'Run Simulation & Generate Data';
-    const datasetName = dataset?.dataset_name || '';
+    const datasetName = dataset?.name || '';
     el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)} · Synthetic dataset</strong></div><span id="studio-result-status" role="status">Illustrative output · prototype simulation</span></div>
       <section class="studio-prediction-block" aria-labelledby="studio-performance-title">
         <div class="studio-chart-heading"><h3 id="studio-performance-title">Synthetic Signal Profile ${info('Illustrative signals generated from the selected operating envelope. No backend parameter optimization or simulation API request is performed.')}</h3>
@@ -479,63 +491,42 @@
     };
     const { dataset, params, rows } = generated;
     const header = ['dataset_id', 'dataset_name', 'scenario', 'cycle', 'charge_rate_c', 'discharge_rate_c', 'temperature_c', 'initial_soc_pct', 'soh_pct', 'capacity_ah'];
-    const csv = [header, ...rows.map(row => [dataset?.dataset_id || '', dataset?.dataset_name || '', params.scenario, row.cycle, params.charge.toFixed(1), params.discharge.toFixed(1), params.temperature, params.initialSoc, row.soh.toFixed(3), row.capacity.toFixed(4)])]
+    const csv = [header, ...rows.map(row => [dataset?.id || '', dataset?.name || '', params.scenario, row.cycle, params.charge.toFixed(1), params.discharge.toFixed(1), params.temperature, params.initialSoc, row.soh.toFixed(3), row.capacity.toFixed(4)])]
       .map(row => row.map(csvEscape).join(','))
       .join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `batterylake-synthetic-${dataset?.dataset_id || 'dataset'}-${params.cycles}-cycles.csv`;
+    link.download = `batterylake-synthetic-${dataset?.id || 'dataset'}-${params.cycles}-cycles.csv`;
     document.body.append(link);
     link.click();
     link.remove();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-  function closeFilters() { el('filter-popover').classList.remove('open'); el('filter-toggle').setAttribute('aria-expanded', 'false'); }
+  el('search').addEventListener('input', event => { state.query = event.target.value.trim().toLowerCase(); state.page = 1; renderDatasets(); });
+  function closeFilters() { el('filters').classList.remove('open'); el('filter-toggle').setAttribute('aria-expanded', 'false'); }
   el('filter-toggle').addEventListener('click', () => {
-    const open = !el('filter-popover').classList.contains('open');
-    if (open) { copySelection(pending, active); syncFilterGrid(); }
-    el('filter-popover').classList.toggle('open', open);
-    el('filter-toggle').setAttribute('aria-expanded', String(open));
+    if (el('filters').classList.contains('open')) return;
+    pendingFilters = bwCloneFilterState(filters); syncFilters();
+    el('filters').classList.add('open'); el('filter-toggle').setAttribute('aria-expanded', 'true');
   });
   document.addEventListener('click', event => { if (!root.querySelector('.studio-search-tools').contains(event.target)) closeFilters(); });
-  el('filter-popover').addEventListener('keydown', event => { if (event.key === 'Escape') { closeFilters(); el('filter-toggle').focus(); } });
-  filterGrid().addEventListener('click', event => {
-    const tag = event.target.closest('.filter-tag[data-fk]');
-    if (!tag) return;
-    catalogue.toggleSelection(pending, tag.dataset.fk, tag.dataset.fv, { partial: tag.classList.contains('partial'), rows: datasetRows });
-    syncFilterGrid();
+  el('filters').addEventListener('keydown', event => { if (event.key === 'Escape') { closeFilters(); el('filter-toggle').focus(); } });
+  el('filters').querySelector('.dataset-filter-action:not(.apply)').addEventListener('click', () => {
+    pendingFilters = emptyFilters(); syncFilters();
   });
-  el('filter-clear').addEventListener('click', () => {
-    resetSelection(pending); resetSelection(active); state.page = 1;
-    syncFilterGrid(); renderFilterChips(); renderDatasets(); closeFilters();
+  el('filters').querySelector('.dataset-filter-action.apply').addEventListener('click', () => {
+    filters = bwCloneFilterState(pendingFilters); state.page = 1; closeFilters(); renderDatasets(); el('filter-toggle').focus();
   });
-  el('filter-apply').addEventListener('click', () => {
-    copySelection(active, pending); state.page = 1;
-    closeFilters(); renderFilterChips(); renderDatasets(); el('filter-toggle').focus();
-  });
-  el('search').addEventListener('input', event => {
-    state.query = event.target.value; state.page = 1;
-    el('search-box').classList.toggle('has-text', !!event.target.value);
-    renderDatasets();
-  });
-  el('search-clear').addEventListener('click', () => {
-    el('search').value = ''; state.query = ''; state.page = 1;
-    el('search-box').classList.remove('has-text');
-    renderDatasets(); el('search').focus();
-  });
-  el('sort').innerHTML = document.getElementById('sort-select')?.innerHTML || '';   // the Datasets page's sort options
-  el('sort').value = state.sort;
-  el('sort').addEventListener('change', () => { state.sort = el('sort').value; state.page = 1; renderDatasets(); });
   el('reset').addEventListener('click', () => {
     cancelAnimationFrame(calibrationFrame);
     state.selected = null; state.confirmed = null; state.initialized = false; state.estimated = false; state.validated = false; state.calibrationAttempts = 0; state.page = 1; state.query = '';
-    resetSelection(active); resetSelection(pending);
-    el('search').value = ''; el('search-box').classList.remove('has-text');
+    filters = emptyFilters(); pendingFilters = emptyFilters();
+    el('search').value = '';
     root.querySelector('.studio-live-loss')?.classList.add('is-reset');
     root.querySelector('.studio-live-loss')?.classList.remove('is-training');
-    closeFilters(); syncFilterGrid(); renderFilterChips(); clearResults(true); renderDatasets(); renderTwin();
+    closeFilters(); syncFilters(); clearResults(true); renderDatasets(); renderTwin();
     renderParameters();
     el('validation-results').innerHTML = '<div class="studio-empty studio-results-empty">Complete battery parameter estimation to validate measured and simulated responses.</div>';
     el('initialize-status').textContent = '';
@@ -578,5 +569,5 @@
     }), { threshold: .12 });
     revealNodes.forEach(node => revealObserver.observe(node));
   }
-  syncControls(); renderDatasets(); refresh();
+  syncControls(); refresh();
 })();

@@ -1,10 +1,8 @@
 /* Datasets page: catalogue cards, filters, sorting and the dataset popup.
- * Rows come from the BatteryLake metadata (js/dataset-metadata.js). The processed-files checklist still comes from
- * the dataset registry rows in main.js (DATASETS); the source and processed links come from the dataset metadata record
- * (identity.source_url, identity.delivery_url).
+ * Rows come from the BatteryLake metadata (js/dataset-metadata.js). The processed-files checklist and the
+ * The processed-files checklist still comes from the dataset registry rows in main.js (DATASETS);
+ * the source and processed links come from the dataset metadata record (identity.source_url, identity.delivery_url).
  * Shared helpers from main.js: DATASET_CATEGORIES, getDatasetPageCategory, getCatLabel, getCatClass.
- * window.DatasetsPage.catalogue (cards, filters, sorting) is also used by the Studio's Data Preparation list
- * (js/digital-twin.js), so both pages show the same datasets for the same filters.
  * The inline handlers in index.html and the assistant call the functions exported at the bottom. */
 (() => {
 'use strict';
@@ -160,9 +158,9 @@ const chemLetter = d => getChemClass(d).replace('chem-', '').charAt(0);
 const uniq = arr => Array.from(new Set(arr));
 /* Distinct values of a field in alphanumeric order of their displayed label (numbers by value, case-insensitive); Unknown goes last. */
 const alphaCollator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-const sortedValues = (getter, label = String, rows = ROWS) => {
+const sortedValues = (getter, label = String) => {
   const seen = new Set();
-  rows.forEach(d => getter(d).forEach(v => seen.add(v)));
+  ROWS.forEach(d => getter(d).forEach(v => seen.add(v)));
   return Array.from(seen).sort((a, b) => (a === UNKNOWN) - (b === UNKNOWN) || alphaCollator.compare(label(a), label(b)));
 };
 /* Charging / Discharging: plain profile names, plus "sub:<name>" values for the sub-profiles of the dynamic profile (like format codes under a form factor).
@@ -172,12 +170,12 @@ function profileFilter(side, word) {
   const list = side === 'charge' ? charges : discharges;
   return {
     type: 'profile',
-    test: (d, v, sel = active) => {
+    test: (d, v) => {
       if (isSub(v)) return dynSubs(d, side).includes(v.slice(SUB.length));
       if (v !== 'dynamic') return list(d).includes(v);
       if (!list(d).includes('dynamic')) return false;
       const own = dynSubs(d, side);
-      return !own.length || own.some(n => sel[side].has(SUB + n));
+      return !own.length || own.some(n => active[side].has(SUB + n));
     },
     label: v => isSub(v) ? v.slice(SUB.length) : v,
     chipLabel: v => word + ': ' + (isSub(v) ? v.slice(SUB.length) : v),
@@ -187,14 +185,14 @@ function profileFilter(side, word) {
 const FILTERS = {
   cat:       { type: 'category',  test: (d, v) => pageCat(d.category) === v, label: v => getCatLabel(v) },
   domain:    { type: 'domain',    test: (d, v) => d.application_domain === v, label: domainLabel },
-  form:      { type: 'form',      test: (d, v, sel = active) => {
+  form:      { type: 'form',      test: (d, v) => {
                  const [k, x] = v.split(':');
                  if (k !== 'factor') return d.cell_format_codes.includes(x);
                  /* A selected factor stands for "this factor minus any of its codes deselected afterwards": datasets whose only codes for this
                     factor are deselected drop out; datasets with no code for it, or with at least one selected code, stay. */
                  if (!d.form_factors.includes(x)) return false;
                  const own = d.cell_format_codes.filter(c => FORMAT_CODE_PARENT[c] === x);
-                 return !own.length || own.some(c => sel.form.has('code:' + c));
+                 return !own.length || own.some(c => active.form.has('code:' + c));
                },
                label: v => { const [k, x] = v.split(':'); return k === 'factor' ? formFactorLabel(x) : x; } },
   cathode:   { type: 'chemistry', test: (d, v) => cathodes(d).includes(v), label: v => v === UNKNOWN ? 'Unknown cathode' : v },
@@ -230,58 +228,53 @@ function filterTypeClass(type) { return 'filter-token ' + (FILTER_TYPE_STYLES[ty
 function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
 function escAttr(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
 
-function chip(key, value, onclick = 'toggleFilterTag(this)') {
+function chip(key, value) {
   const f = FILTERS[key];
-  return `<div class="filter-tag ${filterTypeClass(f.type)}" data-fk="${key}" data-fv="${esc(value)}"${onclick ? ` onclick="${onclick}"` : ''}>${esc(f.raw && f.raw(value) ? f.label(value) : titleCase(f.label(value)))}</div>`;
+  return `<div class="filter-tag ${filterTypeClass(f.type)}" data-fk="${key}" data-fv="${esc(value)}" onclick="toggleFilterTag(this)">${esc(f.raw && f.raw(value) ? f.label(value) : titleCase(f.label(value)))}</div>`;
 }
-/* The filter popover grid for a set of rows: Category, Domain, Form Factor, Chemistry and Profile chips. onclick is the handler
-   attribute of each chip (null: none, for callers that attach their own); category: false leaves out the Category group. */
-function filterGridHTML(rows = ROWS, { category = true, onclick = 'toggleFilterTag(this)' } = {}) {
-  const cats = sortedValues(d => [pageCat(d.category)], getCatLabel, rows);
+function buildFilterGrid() {
+  const cats = sortedValues(d => [pageCat(d.category)], getCatLabel);
   const sub = (label, html) => `<div class="filter-subgroup"><span class="filter-sublabel">${label}</span>${html}</div>`;
-  const chips = (key, values) => values.map(v => chip(key, v, onclick)).join('');
+  const chips = (key, values) => values.map(v => chip(key, v)).join('');
   /* Charging / Discharging chips; the dynamic profile becomes a grouped pill with its sub-profiles beside it (like a form factor and its format codes) */
   const profileChips = side => {
-    const subs = sortedValues(d => dynSubs(d, side), String, rows);
-    return sortedValues(side === 'charge' ? charges : discharges, String, rows).map(v => v === 'dynamic' && subs.length
-      ? `<div class="filter-form-box" data-factor="dynamic">${chip(side, 'dynamic', onclick)}<div class="filter-form-codes">${chips(side, subs.map(n => SUB + n))}</div></div>`
-      : chip(side, v, onclick)).join('');
+    const subs = sortedValues(d => dynSubs(d, side));
+    return sortedValues(side === 'charge' ? charges : discharges).map(v => v === 'dynamic' && subs.length
+      ? `<div class="filter-form-box" data-factor="dynamic">${chip(side, 'dynamic')}<div class="filter-form-codes">${chips(side, subs.map(n => SUB + n))}</div></div>`
+      : chip(side, v)).join('');
   };
 
   // Form: each form factor followed by its format codes.
-  const factors = sortedValues(d => d.form_factors, formFactorLabel, rows);
-  const codes = sortedValues(d => d.cell_format_codes, String, rows);
+  const factors = sortedValues(d => d.form_factors, formFactorLabel);
+  const codes = sortedValues(d => d.cell_format_codes);
   /* factors with format codes: a grouped box (factor chip as header, codes beneath); factors without codes: plain chips */
   const withCodes = factors.filter(f => codes.some(c => FORMAT_CODE_PARENT[c] === f));
   const plain = factors.filter(f => !withCodes.includes(f));
-  const formRows = withCodes.map(f => `<div class="filter-form-box" data-factor="${esc(f)}">${chip('form', 'factor:' + f, onclick)}<div class="filter-form-codes">${chips('form', codes.filter(c => FORMAT_CODE_PARENT[c] === f).map(c => 'code:' + c))}</div></div>`).join('')
-    + (plain.length ? `<div class="filter-form-row">${plain.map(f => chip('form', 'factor:' + f, onclick)).join('')}</div>` : '');
+  const formRows = withCodes.map(f => `<div class="filter-form-box" data-factor="${esc(f)}">${chip('form', 'factor:' + f)}<div class="filter-form-codes">${chips('form', codes.filter(c => FORMAT_CODE_PARENT[c] === f).map(c => 'code:' + c))}</div></div>`).join('')
+    + (plain.length ? `<div class="filter-form-row">${plain.map(f => chip('form', 'factor:' + f)).join('')}</div>` : '');
   const orphanCodes = codes.filter(c => !FORMAT_CODE_PARENT[c]);
   const formExtra = orphanCodes.length ? `<div class="filter-form-row"><span class="filter-sublabel">Other codes</span>${chips('form', orphanCodes.map(c => 'code:' + c))}</div>` : '';
 
-  return `
-    ${category ? `<div class="filter-group filter-group--category">
+  document.getElementById('dataset-filter-grid').innerHTML = `
+    <div class="filter-group filter-group--category">
       <span class="filter-label">Category</span>${chips('cat', cats)}
-    </div>` : ''}
+    </div>
     <div class="filter-group">
-      <span class="filter-label">Domain</span>${chips('domain', sortedValues(d => [d.application_domain], domainLabel, rows))}
+      <span class="filter-label">Domain</span>${chips('domain', sortedValues(d => [d.application_domain], domainLabel))}
     </div>
     <div class="filter-group">
       <span class="filter-label">Form Factor</span>${formRows}${formExtra}
     </div>
     <div class="filter-group filter-group--wide">
       <span class="filter-label">Chemistry</span>
-      ${sub('Cathode', chips('cathode', sortedValues(cathodes, String, rows)))}
-      ${sub('Anode', chips('anode', sortedValues(anodes, String, rows)))}
+      ${sub('Cathode', chips('cathode', sortedValues(cathodes)))}
+      ${sub('Anode', chips('anode', sortedValues(anodes)))}
     </div>
     <div class="filter-group filter-group--wide">
       <span class="filter-label">Profile</span>
       ${sub('Charging', profileChips('charge'))}
       ${sub('Discharging', profileChips('discharge'))}
     </div>`;
-}
-function buildFilterGrid() {
-  document.getElementById('dataset-filter-grid').innerHTML = filterGridHTML(ROWS);
 }
 
 /* ── cards & sections ────────────────────────────────────────────── */
@@ -371,26 +364,22 @@ function sortDatasets(arr, mode) {
    Chemistry (cathode OR anode) and Profile (charging OR discharging) each combine their two sub-filters with OR:
    a dataset matches when it has any selected cathode or any selected anode, any selected charging or discharging profile. */
 const FILTER_GROUPS = [['cat'], ['domain'], ['form'], ['cathode', 'anode'], ['charge', 'discharge']];
-function matchesGroup(d, keys, sel = active) {
-  const picked = keys.flatMap(k => [...sel[k]].map(v => [k, v]));
-  return !picked.length || picked.some(([k, v]) => FILTERS[k].test(d, v, sel));
-}
-/* The text the search box matches against (lower case). */
-const searchText = d => [dynamicNames(d).join(' '), d.dataset_id, d.dataset_name, d.ref_name, d.notes, d.institution, d.year, getCatLabel(d.category),
-  domainLabel(d.application_domain), cathodes(d).join(' '), anodes(d).join(' '), charges(d).join(' '), discharges(d).join(' '), charges(d).concat(discharges(d)).map(titleCase).join(' '), d.form_factors.join(' '), d.cell_format_codes.join(' ')].join(' ').toLowerCase();
-/* Rows that pass every filter group in sel and contain every word of the query. Not sorted. */
-function filterRows(rows, sel = active, query = '') {
-  const tokens = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  return rows.filter(d => {
-    if (!FILTER_GROUPS.every(keys => matchesGroup(d, keys, sel))) return false;
-    if (!tokens.length) return true;
-    const hay = searchText(d);
-    return tokens.every(t => hay.includes(t));
-  });
+function matchesGroup(d, keys) {
+  const sel = keys.flatMap(k => [...active[k]].map(v => [k, v]));
+  return !sel.length || sel.some(([k, v]) => FILTERS[k].test(d, v));
 }
 function getFiltered() {
   if (allDatasetsApplied) return sortDatasets(ROWS, activeSort);
-  return sortDatasets(filterRows(ROWS, active, document.getElementById('searchInput').value), activeSort);
+  const tokens = document.getElementById('searchInput').value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return sortDatasets(ROWS.filter(d => {
+    if (!FILTER_GROUPS.every(keys => matchesGroup(d, keys))) return false;
+    if (tokens.length) {
+      const hay = [dynamicNames(d).join(' '), d.dataset_id, d.dataset_name, d.ref_name, d.notes, d.institution, d.year, getCatLabel(d.category),
+        domainLabel(d.application_domain), cathodes(d).join(' '), anodes(d).join(' '), charges(d).join(' '), discharges(d).join(' '), charges(d).concat(discharges(d)).map(titleCase).join(' '), d.form_factors.join(' '), d.cell_format_codes.join(' ')].join(' ').toLowerCase();
+      if (!tokens.every(t => hay.includes(t))) return false;
+    }
+    return true;
+  }), activeSort);
 }
 function filterDatasets() { renderDatasets(getFiltered()); }
 function toggleDatasetCategorySection(cat) {
@@ -400,20 +389,16 @@ function toggleDatasetCategorySection(cat) {
 function changeSort(m) { activeSort = m; filterDatasets(); }
 
 /* ── filter popover ──────────────────────────────────────────────── */
-/* Marks the chips of a filter grid that are selected in sel. A factor or Dynamic chip is "partial" when some of its codes or sub-profiles are selected. */
-function syncFilterTags(grid, sel) {
-  grid.querySelectorAll('.filter-tag[data-fk]').forEach(t => t.classList.toggle('active', sel[t.dataset.fk].has(t.dataset.fv)));
+function syncTags() {
+  document.querySelectorAll('#dataset-filter-grid .filter-tag[data-fk]').forEach(t => t.classList.toggle('active', pending[t.dataset.fk].has(t.dataset.fv)));
   /* a factor that is not selected but has any of its codes selected shows a "partial" state */
-  grid.querySelectorAll('.filter-form-box').forEach(box => {
+  document.querySelectorAll('#dataset-filter-grid .filter-form-box').forEach(box => {
     const codeTags = [...box.querySelectorAll('.filter-form-codes .filter-tag')], n = codeTags.filter(c => c.classList.contains('active')).length;
     const parent = box.querySelector(':scope > .filter-tag');
     /* a selected Dynamic chip with some of its sub-profiles deselected is partial as well (it then narrows the results); form factors keep their own rule */
     const narrowed = box.dataset.factor === 'dynamic' && parent.classList.contains('active') && n < codeTags.length;
     parent.classList.toggle('partial', n > 0 && (!parent.classList.contains('active') || narrowed));
   });
-}
-function syncTags() {
-  syncFilterTags(document.getElementById('dataset-filter-grid'), pending);
   document.querySelectorAll('#page-datasets .filter-tag[data-all-datasets]').forEach(t => t.classList.toggle('active', pendingAllDatasets));
 }
 function copyInto(dst, src) { FILTER_KEYS.forEach(k => { dst[k].clear(); src[k].forEach(v => dst[k].add(v)); }); }
@@ -425,30 +410,26 @@ function linkFormSelection(set, v) {
   if (k === 'factor' && set.has(v)) Object.keys(FORMAT_CODE_PARENT).filter(c => FORMAT_CODE_PARENT[c] === x).forEach(c => set.add('code:' + c));
 }
 /* Charging / Discharging: selecting "dynamic" also selects all its sub-profiles (deselecting it by click clears them too, see toggleFilterTag). */
-function linkProfileSelection(side, set, v, rows = ROWS) {
-  if (v === 'dynamic' && set.has(v)) sortedValues(d => dynSubs(d, side), String, rows).forEach(n => set.add(SUB + n));
+function linkProfileSelection(side, set, v) {
+  if (v === 'dynamic' && set.has(v)) sortedValues(d => dynSubs(d, side)).forEach(n => set.add(SUB + n));
 }
-function linkSelection(key, set, v, rows = ROWS) {
+function linkSelection(key, set, v) {
   if (key === 'form') linkFormSelection(set, v);
-  else if (key === 'charge' || key === 'discharge') linkProfileSelection(key, set, v, rows);
-}
-/* Toggles one chip of a selection (sel, e.g. pending) with the links between chips. partial: the chip is a Dynamic profile in the partial state
-   (some of its sub-profiles deselected), so a click clears it and all its sub-profiles. */
-function toggleSelection(sel, fk, v, { partial = false, rows = ROWS } = {}) {
-  const s = sel[fk], profile = fk === 'charge' || fk === 'discharge';
-  /* a Dynamic chip in the partial state clears itself and all its sub-profiles */
-  if (profile && v === 'dynamic' && partial) {
-    [...s].filter(x => x === v || isSub(x)).forEach(x => s.delete(x));
-    return;
-  }
-  s.has(v) ? s.delete(v) : s.add(v);
-  linkSelection(fk, s, v, rows);
-  /* clicking the Dynamic chip toggles all its sub-profiles with it (unlike a form factor, whose codes stay when it is deselected) */
-  if (profile && v === 'dynamic' && !s.has(v)) [...s].filter(isSub).forEach(x => s.delete(x));
+  else if (key === 'charge' || key === 'discharge') linkProfileSelection(key, set, v);
 }
 function toggleFilterTag(el) {
   pendingAllDatasets = false;
-  toggleSelection(pending, el.dataset.fk, el.dataset.fv, { partial: el.classList.contains('partial') });
+  const s = pending[el.dataset.fk], v = el.dataset.fv;
+  /* a Dynamic chip in the partial state clears itself and all its sub-profiles */
+  if ((el.dataset.fk === 'charge' || el.dataset.fk === 'discharge') && v === 'dynamic' && el.classList.contains('partial')) {
+    [...s].filter(x => x === v || isSub(x)).forEach(x => s.delete(x));
+    syncTags(); return;
+  }
+  s.has(v) ? s.delete(v) : s.add(v);
+  linkSelection(el.dataset.fk, s, v);
+  /* clicking the Dynamic chip toggles all its sub-profiles with it (unlike a form factor, whose codes stay when it is deselected) */
+  const side = el.dataset.fk;
+  if ((side === 'charge' || side === 'discharge') && v === 'dynamic' && !s.has(v)) [...s].filter(isSub).forEach(x => s.delete(x));
   syncTags();
 }
 function toggleAllDatasetsFilter() {
@@ -485,26 +466,16 @@ document.addEventListener('click', e => {
   if (e.target.closest('#dataset-filter-popover') || e.target.closest('#page-datasets .dataset-filter-toggle')) return;
   closeDatasetFilters();
 });
-/* [key, type, value, label] for each applied chip of a selection; allFlag adds the "All datasets" chip. */
-function selectionChips(sel = active, allFlag = false) {
-  const chips = [];
-  if (allFlag) chips.push(['all', 'all', 'all', 'All datasets']);
-  FILTER_KEYS.forEach(k => sel[k].forEach(v => { const l = (FILTERS[k].chipLabel || FILTERS[k].label)(v); chips.push([k, FILTERS[k].type, v, FILTERS[k].raw && FILTERS[k].raw(v) ? l : titleCase(l)]); }));
-  return chips;
-}
 function renderChips() {
   const box = document.getElementById('applied-filter-chips');
-  const chips = selectionChips(active, allDatasetsApplied);
+  const chips = [];
+  if (allDatasetsApplied) chips.push(['all', 'all', 'all', 'All datasets']);
+  FILTER_KEYS.forEach(k => active[k].forEach(v => { const l = (FILTERS[k].chipLabel || FILTERS[k].label)(v); chips.push([k, FILTERS[k].type, v, FILTERS[k].raw && FILTERS[k].raw(v) ? l : titleCase(l)]); }));
   box.classList.toggle('has-chips', chips.length > 0);
   box.innerHTML = chips.map(([k, t, v, l]) => `<span class="applied-chip ${filterTypeClass(t)}">${esc(l)}<button aria-label="Remove ${esc(l)} filter" onclick="removeAppliedFilter('${k}','${escAttr(v)}')">×</button></span>`).join('');
 }
-/* Removes one value from a selection, with the same links as toggleSelection. */
-function removeSelection(sel, k, v, rows = ROWS) {
-  sel[k].delete(v);
-  linkSelection(k, sel[k], v, rows);
-}
 function removeAppliedFilter(k, v) {
-  if (k === 'all') allDatasetsApplied = false; else removeSelection(active, k, v);
+  if (k === 'all') allDatasetsApplied = false; else { active[k].delete(v); linkSelection(k, active[k], v); }
   syncPendingFromActive(); renderChips(); filterDatasets();
 }
 
@@ -797,10 +768,7 @@ function showAllCategories() { clearAllFilters(); syncPendingFromActive(); rende
 /* The search box was filled from outside (topbar search): leave "All datasets" mode and refresh. */
 function searchChanged() { allDatasetsApplied = false; syncPendingFromActive(); renderChips(); filterDatasets(); }
 
-window.DatasetsPage = { ensureLoaded, reload, showCategory, showAllCategories, searchChanged,
-  /* Cards, filters and sorting, shared with the Studio's Data Preparation list (js/digital-twin.js). rows() is the loaded catalogue. */
-  catalogue: { rows: () => ROWS, newSelection: newSets, FILTER_KEYS, filterRows, sortDatasets, cardHTML, filterGridHTML,
-    toggleSelection, removeSelection, syncFilterTags, selectionChips, filterTypeClass, chemistryLabel: chemTagLabel } };
+window.DatasetsPage = { ensureLoaded, reload, showCategory, showAllCategories, searchChanged };
 Object.assign(window, {
   filterDatasets, getFiltered, renderAppliedFilterChips: renderChips, syncPendingFromActive, removeAppliedFilter,
   toggleFilterTag, toggleAllDatasetsFilter, toggleDatasetFilters, closeDatasetFilters, applyDatasetFilters, clearPendingDatasetFilters,
