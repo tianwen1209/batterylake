@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-12T23:39:37Z",
-  "total_visits": 3662,
-  "dataset_downloads": 498,
+  "updated_at": "2026-10-13T21:53:32Z",
+  "total_visits": 3769,
+  "dataset_downloads": 501,
   "skill_uses": 116,
   "model_downloads": {
     "cnn": 16,
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-12T23:39:37Z",
+    "updatedAt": "2026-10-13T21:53:32Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-12"
+      "endDate": "2026-10-13"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 71
+        "visitors": 74
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 66
+        "visitors": 71
       },
       {
         "country": "China",
@@ -55,19 +55,19 @@
         "visitors": 6
       },
       {
-        "country": "Taiwan",
-        "countryCode": "TW",
-        "visitors": 5
-      },
-      {
         "country": "Vietnam",
         "countryCode": "VN",
-        "visitors": 5
+        "visitors": 6
       },
       {
         "country": "Canada",
         "countryCode": "CA",
-        "visitors": 4
+        "visitors": 5
+      },
+      {
+        "country": "Taiwan",
+        "countryCode": "TW",
+        "visitors": 5
       },
       {
         "country": "India",
@@ -145,7 +145,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 64,
+        "visitors": 69,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 24,
+        "visitors": 25,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -214,6 +214,14 @@
         "lat": 39.907
       },
       {
+        "country": "Canada",
+        "countryCode": "CA",
+        "city": "Burnaby",
+        "visitors": 4,
+        "lng": -122.953,
+        "lat": 49.266
+      },
+      {
         "country": "China",
         "countryCode": "CN",
         "city": "Fuzhou",
@@ -262,14 +270,6 @@
         "lat": 37.354
       },
       {
-        "country": "Canada",
-        "countryCode": "CA",
-        "city": "Burnaby",
-        "visitors": 3,
-        "lng": -122.953,
-        "lat": 49.266
-      },
-      {
         "country": "China",
         "countryCode": "CN",
         "city": "Qingdao",
@@ -284,6 +284,14 @@
         "visitors": 3,
         "lng": 113.568,
         "lat": 22.277
+      },
+      {
+        "country": "Vietnam",
+        "countryCode": "VN",
+        "city": "Hanoi",
+        "visitors": 3,
+        "lng": 105.841,
+        "lat": 21.024
       },
       {
         "country": "China",
@@ -364,14 +372,6 @@
         "visitors": 2,
         "lng": 100.501,
         "lat": 13.754
-      },
-      {
-        "country": "Vietnam",
-        "countryCode": "VN",
-        "city": "Hanoi",
-        "visitors": 2,
-        "lng": 105.841,
-        "lat": 21.024
       },
       {
         "country": "Vietnam",
@@ -512,6 +512,14 @@
       {
         "country": "United States",
         "countryCode": "US",
+        "city": "Ann Arbor",
+        "visitors": 1,
+        "lng": -83.741,
+        "lat": 42.278
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
         "city": "Corvallis",
         "visitors": 1,
         "lng": -123.262,
@@ -532,6 +540,14 @@
         "visitors": 1,
         "lng": -122.676,
         "lat": 45.523
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Reston",
+        "visitors": 1,
+        "lng": -77.341,
+        "lat": 38.969
       },
       {
         "country": "United States",
