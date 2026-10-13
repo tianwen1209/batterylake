@@ -551,7 +551,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 }
 .dataset-results-head.browse { justify-content: flex-end; }
 .dataset-results-head.browse .filter-count,
-.dataset-results-head.browse .dataset-results-tools { display: none; }
+.dataset-results-head.browse .dataset-results-tools .filter-sort:not(.dataset-columns) { display: none; }
 .filter-count {
   color: var(--text1);
   font-family: var(--sans);
@@ -596,6 +596,20 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   border-radius: 10px;
   box-shadow: var(--card-shadow);
 }
+/* Datasets page: cards per row. 1 column below 1024px, 2 from 1024px; the Columns dropdown (js/datasets-page.js)
+   overrides it through --dataset-cols-user, up to the columns the width allows (2, or 3 from 1600px). */
+#page-datasets { --dataset-cols-default: 1; }
+@media (min-width: 1024px) { #page-datasets { --dataset-cols-default: 2; } }
+#page-datasets .dataset-card-grid {
+  display: grid; flex-direction: initial;
+  grid-template-columns: repeat(var(--dataset-cols-user, var(--dataset-cols-default)), minmax(0, 1fr));
+}
+.filter-sort.dataset-columns { display: none; }
+@media (min-width: 1024px) { .filter-sort.dataset-columns { display: inline-flex; } }
+/* columns icon on the left, a dropdown caret on the right so it reads as a menu */
+.dataset-columns .dataset-columns-icon { left: 10px; right: auto; }
+.filter-sort.dataset-columns select { padding-left: 32px; }
+.dataset-columns:hover .dataset-columns-caret { color: var(--text1); }
 .dataset-card-grid .dataset-card:hover { border-color: var(--border2); box-shadow: var(--card-shadow-hover); }
 .dataset-card-grid .dataset-card::before { border-radius: 10px 0 0 10px; }
 .dataset-empty {

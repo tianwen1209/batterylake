@@ -52,8 +52,8 @@
     };
   }
 
-  /* The popup-only fields of one dataset, from its record and its research profile.
-   * A dataset without a research profile keeps has_temperature_timeseries undefined. */
+  /* The fields the index does not carry, from the dataset's record and its research profile: the popup fields and the
+   * processed time-series flags (Benchmarks Select Input Signals). A dataset without a research profile keeps the flags undefined. */
   function loadDetail(id) {
     const research = fetchJSON(`research/${id}.json`).catch(() => null);
     return Promise.all([fetchJSON(`datasets/${id}.json`), research]).then(([rec, profile]) => {
@@ -64,7 +64,10 @@
         count_basis: (rec.content || {}).count_basis,
         source_url: (rec.identity || {}).source_url,
         delivery_url: (rec.identity || {}).delivery_url,
-        has_temperature_timeseries: profile ? (profile.timeseries || {}).has_temperature_timeseries : undefined
+        has_voltage_timeseries: profile ? (profile.timeseries || {}).has_voltage_timeseries : undefined,
+        has_current_timeseries: profile ? (profile.timeseries || {}).has_current_timeseries : undefined,
+        has_temperature_timeseries: profile ? (profile.timeseries || {}).has_temperature_timeseries : undefined,
+        has_time_timeseries: profile ? (profile.timeseries || {}).has_time_timeseries : undefined
       };
     });
   }

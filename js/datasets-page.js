@@ -399,6 +399,28 @@ function toggleDatasetCategorySection(cat) {
 }
 function changeSort(m) { activeSort = m; filterDatasets(); }
 
+/* ── cards per row ───────────────────────────────────────────────── */
+/* Below 1024px the grid is one column and the dropdown is hidden; from 1024px it offers 1-2 columns, from 1600px 1-3 (2 by default on both).
+   The CSS (styles/base.css) sets the default; a choice is passed to it as --dataset-cols-user and dropped when the width no longer allows it. */
+const COLUMN_QUERIES = [[window.matchMedia('(min-width: 1600px)'), 3], [window.matchMedia('(min-width: 1024px)'), 2]];
+const maxColumns = () => (COLUMN_QUERIES.find(([q]) => q.matches) || [null, 1])[1];
+const defaultColumns = () => Math.min(maxColumns(), 2);   // keep in step with --dataset-cols-default
+let chosenColumns = null;
+function syncColumns() {
+  const max = maxColumns();
+  if (chosenColumns > max) chosenColumns = null;
+  const grid = document.getElementById('dataset-grid'), select = document.getElementById('columns-select');
+  if (chosenColumns) grid.style.setProperty('--dataset-cols-user', chosenColumns); else grid.style.removeProperty('--dataset-cols-user');
+  select.innerHTML = Array.from({ length: max }, (_, i) => `<option value="${i + 1}">${i + 1} column${i ? 's' : ''}</option>`).join('');
+  const n = chosenColumns || defaultColumns();
+  select.value = n;
+  /* the icon shows the selected layout: a box split into n columns */
+  document.querySelector('#dataset-columns .dataset-columns-icon path').setAttribute('d', { 1: '', 2: 'M12 4v16', 3: 'M9 4v16M15 4v16' }[n]);
+}
+function changeColumns(n) { chosenColumns = Number(n) === defaultColumns() ? null : Number(n); syncColumns(); }
+COLUMN_QUERIES.forEach(([q]) => q.addEventListener('change', syncColumns));
+syncColumns();
+
 /* ── filter popover ──────────────────────────────────────────────── */
 /* Marks the chips of a filter grid that are selected in sel. A factor or Dynamic chip is "partial" when some of its codes or sub-profiles are selected. */
 function syncFilterTags(grid, sel) {
@@ -740,7 +762,7 @@ function openDatasetModal(id) {
     });
   }
 }
-/* The popup-only fields (count_basis, C-rate fractions, temperature time-series flag) are read once per dataset and shared by every caller. */
+/* The fields outside the index (count_basis, C-rate fractions, links, time-series flags) are read once per dataset and shared by every caller. */
 function loadRowDetail(d) {
   if (!d.detailPromise) {
     d.detailPromise = BatteryLakeDatasetMetadata.loadDetail(d.dataset_id).then(extra => {
@@ -800,11 +822,13 @@ function searchChanged() { allDatasetsApplied = false; syncPendingFromActive(); 
 window.DatasetsPage = { ensureLoaded, reload, showCategory, showAllCategories, searchChanged,
   /* Cards, filters and sorting, shared with the Studio's Data Preparation list (js/digital-twin.js). rows() is the loaded catalogue. */
   catalogue: { rows: () => ROWS, newSelection: newSets, FILTER_KEYS, filterRows, sortDatasets, cardHTML, filterGridHTML,
-    toggleSelection, removeSelection, syncFilterTags, selectionChips, filterTypeClass, chemistryLabel: chemTagLabel } };
+    toggleSelection, removeSelection, syncFilterTags, selectionChips, filterTypeClass, chemistryLabel: chemTagLabel,
+    /* resolves once every row has its record and research fields (a row whose files failed to load keeps them undefined) */
+    detailsLoaded: () => Promise.all(ROWS.map(loadRowDetail)) } };
 Object.assign(window, {
   filterDatasets, getFiltered, renderAppliedFilterChips: renderChips, syncPendingFromActive, removeAppliedFilter,
   toggleFilterTag, toggleAllDatasetsFilter, toggleDatasetFilters, closeDatasetFilters, applyDatasetFilters, clearPendingDatasetFilters,
-  toggleDatasetCategorySection, toggleChipDD, changeSort, onSearchInput, clearSearch,
+  toggleDatasetCategorySection, toggleChipDD, changeSort, changeColumns, onSearchInput, clearSearch,
   openDatasetModal, closeModal, pendingChems, pendingForms, pendingCategories, pendingDomains, pendingDuties
 });
 renderDatasets([]);

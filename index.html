@@ -21,15 +21,15 @@
 
 <link rel="stylesheet" href="styles/benchmark.css?v=numbered-cards-1">
 <!-- DESIGN POLISH LAYER: visual tokens and component refinements. -->
-<link rel="stylesheet" href="styles/polish.css?v=studio-controls-4">
+<link rel="stylesheet" href="styles/polish.css?v=studio-controls-5">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css">
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
 <link rel="stylesheet" href="styles/preprocessing.css?v=numbered-cards-8">
 <link rel="stylesheet" href="styles/contribute.css?v=workflow-1">
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
-<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-46">
-<link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-5">
+<link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-48">
+<link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-6">
 <link rel="stylesheet" href="styles/studio-calibration-map.css?v=12">
 <link rel="stylesheet" href="styles/studio-research-schematic.css?v=6">
 </head>
@@ -524,6 +524,11 @@ for ds in resp.json()["items"]:
     <div class="dataset-results-head">
       <span class="filter-count" id="filter-count">0 datasets</span>
       <div class="dataset-results-tools">
+        <div class="filter-sort dataset-columns" id="dataset-columns">
+        <svg class="sort-icon dataset-columns-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/></svg>
+        <select id="columns-select" onchange="changeColumns(this.value)" aria-label="Cards per row"></select>
+        <svg class="sort-icon dataset-columns-caret" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
         <div class="filter-sort">
         <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16"/><path d="M3 16l4 4 4-4"/><path d="M17 20V4"/><path d="M13 8l4-4 4 4"/></svg>
         <select id="sort-select" onchange="changeSort(this.value)" aria-label="Sort datasets">
@@ -653,42 +658,7 @@ for ds in resp.json()["items"]:
             </div>
             <div class="applied-filter-chips" id="bwr-applied-filter-chips"></div>
             <div class="dataset-filter-popover" id="bwr-dataset-filter-popover">
-              <div class="dataset-filter-all">
-                <button class="filter-tag filter-token filter-type-all" data-bwr-all="true" onclick="bwToggleAllDatasetsFilter(this)">All datasets</button>
-              </div>
-              <div class="dataset-filter-grid" id="bwr-dataset-filter-grid">
-                <div class="filter-group">
-                  <span class="filter-label">Category</span>
-                  <div class="filter-tag filter-token filter-type-category" data-bwr-cat="cycle_aging" onclick="bwToggleDatasetFilterTag(this,'cat')">Cycle Aging</div>
-                </div>
-                <div class="filter-group">
-                  <span class="filter-label">Chemistry</span>
-                  <div class="filter-tag filter-token filter-type-chemistry" data-bwr-chem="LCO" onclick="bwToggleDatasetFilterTag(this,'chem')">LCO</div>
-                  <div class="filter-tag filter-token filter-type-chemistry" data-bwr-chem="LFP" onclick="bwToggleDatasetFilterTag(this,'chem')">LFP</div>
-                  <div class="filter-tag filter-token filter-type-chemistry" data-bwr-chem="NCA" onclick="bwToggleDatasetFilterTag(this,'chem')">NCA</div>
-                  <div class="filter-tag filter-token filter-type-chemistry" data-bwr-chem="NMC" onclick="bwToggleDatasetFilterTag(this,'chem')">NMC</div>
-                </div>
-                <div class="filter-group">
-                  <span class="filter-label">Domain</span>
-                  <div class="filter-tag filter-token filter-type-domain" data-bwr-domain="ev" onclick="bwToggleDatasetFilterTag(this,'domain')">EV</div>
-                  <div class="filter-tag filter-token filter-type-domain" data-bwr-domain="grid" onclick="bwToggleDatasetFilterTag(this,'domain')">Grid</div>
-                  <div class="filter-tag filter-token filter-type-domain" data-bwr-domain="lab" onclick="bwToggleDatasetFilterTag(this,'domain')">Lab</div>
-                </div>
-                <div class="filter-group">
-                  <span class="filter-label">Form</span>
-                  <div class="filter-tag filter-token filter-type-form" data-bwr-form="18650" onclick="bwToggleDatasetFilterTag(this,'form')">18650</div>
-                  <div class="filter-tag filter-token filter-type-form" data-bwr-form="21700" onclick="bwToggleDatasetFilterTag(this,'form')">21700</div>
-                  <div class="filter-tag filter-token filter-type-form" data-bwr-form="Cyl" onclick="bwToggleDatasetFilterTag(this,'form')">Cyl</div>
-                  <div class="filter-tag filter-token filter-type-form" data-bwr-form="Pouch" onclick="bwToggleDatasetFilterTag(this,'form')">Pouch</div>
-                  <div class="filter-tag filter-token filter-type-form" data-bwr-form="Prismatic" onclick="bwToggleDatasetFilterTag(this,'form')">Prismatic</div>
-                </div>
-                <div class="filter-group">
-                  <span class="filter-label">Profile</span>
-                  <div class="filter-tag filter-token filter-type-profile" data-bwr-duty="cccv" onclick="bwToggleDatasetFilterTag(this,'duty')">CC/CV</div>
-                  <div class="filter-tag filter-token filter-type-profile" data-bwr-duty="dynamic" onclick="bwToggleDatasetFilterTag(this,'duty')">Dynamic</div>
-                  <div class="filter-tag filter-token filter-type-profile" data-bwr-duty="multi" onclick="bwToggleDatasetFilterTag(this,'duty')">Multi-rate</div>
-                </div>
-              </div>
+              <div class="dataset-filter-grid" id="bwr-dataset-filter-grid"></div>
               <div class="dataset-filter-actions">
                 <button class="dataset-filter-action" onclick="bwClearPendingDatasetFilters()">Clear</button>
                 <button class="dataset-filter-action apply" onclick="bwApplyDatasetFilters()">Apply</button>
@@ -2097,9 +2067,9 @@ for dataset in resp.json()["items"]:
 <script src="js/analytics.js"></script>
 <script src="js/quality-engine.js"></script>
 <script src="js/dataset-metadata.js?v=catalog-redesign-4"></script>
-<script src="js/datasets-page.js?v=catalog-redesign-9"></script>
-<script src="js/main.js?v=catalog-redesign-2"></script>
-<script src="js/digital-twin.js?v=studio-workflow-28"></script>
+<script src="js/datasets-page.js?v=catalog-redesign-11"></script>
+<script src="js/main.js?v=catalog-redesign-3"></script>
+<script src="js/digital-twin.js?v=studio-workflow-30"></script>
 <script src="js/studio-particle-flow.js?v=11"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>

@@ -18,18 +18,18 @@ html.modal-open { overflow: hidden; }
 [data-theme="dark"] .filter-type-domain { --tag-fg: #c2dcff; --tag-bg: rgba(56, 125, 255, .34); --tag-border: rgba(96, 165, 255, .55); }
 [data-theme="dark"] .filter-type-chemistry { --tag-bg: rgba(251, 191, 36, .20); }
 [data-theme="dark"] .filter-type-all { --tag-bg: rgba(74, 222, 128, .20); }
-[data-theme="dark"] :is(#page-datasets, #page-studio) .dataset-filter-popover .filter-token:not(.active) { background: rgba(159, 176, 199, 0.12) !important; border-color: var(--border2) !important; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid { max-height: min(62vh, 620px); overflow-y: auto; padding-right: 4px; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-group--wide { grid-column: 1 / -1; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-group--wide > .filter-label { flex: 0 0 100%; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-subgroup { display: flex; flex: 1 1 calc(50% - 4px); min-width: 0px; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 7px; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-box { flex: 0 1 auto; max-width: 100%; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 3px 5px 3px 3px; border: 1px solid var(--border); border-radius: 999px; background: transparent; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-codes { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; padding-left: 7px; border-left: 1px solid var(--border); }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-codes .filter-tag { font-size: 12px; padding: 3px 9px; font-weight: 500; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-tag.partial { background: var(--tag-bg) !important; border: 1.5px dashed var(--tag-fg) !important; color: var(--tag-fg) !important; box-shadow: none !important; }   /* partial: dashed outline in the chip's own colour */
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-row { display: flex; flex: 0 0 100%; flex-wrap: wrap; align-items: center; gap: 7px; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-sublabel { flex: 0 0 100%; min-width: 0px; font-size: 12px; font-weight: 500; color: var(--text3); }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-sep { color: var(--text3); font-size: 14px; line-height: 1; margin: 0px 1px; }
+[data-theme="dark"] :is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-popover .filter-token:not(.active) { background: rgba(159, 176, 199, 0.12) !important; border-color: var(--border2) !important; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid { max-height: min(62vh, 620px); overflow-y: auto; padding-right: 4px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-group--wide { grid-column: 1 / -1; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-group--wide > .filter-label { flex: 0 0 100%; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-subgroup { display: flex; flex: 1 1 calc(50% - 4px); min-width: 0px; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 7px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-box { flex: 0 1 auto; max-width: 100%; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 3px 5px 3px 3px; border: 1px solid var(--border); border-radius: 999px; background: transparent; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-codes { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; padding-left: 7px; border-left: 1px solid var(--border); }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-codes .filter-tag { font-size: 12px; padding: 3px 9px; font-weight: 500; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-tag.partial { background: var(--tag-bg) !important; border: 1.5px dashed var(--tag-fg) !important; color: var(--tag-fg) !important; box-shadow: none !important; }   /* partial: dashed outline in the chip's own colour */
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-row { display: flex; flex: 0 0 100%; flex-wrap: wrap; align-items: center; gap: 7px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-sublabel { flex: 0 0 100%; min-width: 0px; font-size: 12px; font-weight: 500; color: var(--text3); }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-sep { color: var(--text3); font-size: 14px; line-height: 1; margin: 0px 1px; }
 @media (max-width: 760px) #page-datasets #dataset-filter-grid .filter-subgroup { flex-basis: 100%; }
 #modal .md-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 #modal .md-chips--scroll { max-height: 190px; overflow-y: auto; padding: 2px 4px 2px 0px; }
@@ -85,20 +85,20 @@ html.modal-open { overflow: hidden; }
 #modal .md-chipdd-body .md-rates { padding-left: 0px; columns: auto; }
 #modal .md-rate-k { display: inline-block; min-width: 64px; opacity: 0.65; font-weight: 500; }
 #modal .md-rate-note { opacity: 0.65; }
-:is(#page-datasets, #page-studio) .chip-dd { position: relative; display: inline-block; }
-:is(#page-datasets, #page-studio) .chip-dd-btn { appearance: none; border: 0px; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-:is(#page-datasets, #page-studio) .chip-dd-btn::after { content: ""; flex: 0 0 5px; box-sizing: border-box; width: 5px; height: 5px; border-right: 1.5px solid; border-bottom: 1.5px solid; transform: translateY(-0.5px) rotate(45deg); transform-origin: 75% 67.5%; opacity: 0.7; transition: transform 0.15s; }
-:is(#page-datasets, #page-studio) .chip-dd-btn[aria-expanded="true"]::after { transform: translateY(-0.5px) rotate(225deg); }
-:is(#page-datasets, #page-studio) .chip-dd-btn:focus-visible { outline: currentcolor solid 2px; outline-offset: 2px; }
-:is(#page-datasets, #page-studio) .chip-dd-panel { position: absolute; top: calc(100% + 4px); left: 0px; z-index: 30; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; box-shadow: rgba(15, 23, 42, 0.14) 0px 8px 22px; white-space: nowrap; cursor: default; }
-:is(#page-datasets, #page-studio) .chip-dd-sub { margin-left: 12px; font-size: 11px; }
-:is(#page-datasets, #page-studio) .chip-dd-panel[hidden] { display: none; }
-:is(#page-datasets, #page-studio) .dataset-card:has(.chip-dd-panel:not([hidden])) { z-index: 5; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd { position: relative; display: inline-block; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-btn { appearance: none; border: 0px; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-btn::after { content: ""; flex: 0 0 5px; box-sizing: border-box; width: 5px; height: 5px; border-right: 1.5px solid; border-bottom: 1.5px solid; transform: translateY(-0.5px) rotate(45deg); transform-origin: 75% 67.5%; opacity: 0.7; transition: transform 0.15s; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-btn[aria-expanded="true"]::after { transform: translateY(-0.5px) rotate(225deg); }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-btn:focus-visible { outline: currentcolor solid 2px; outline-offset: 2px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-panel { position: absolute; top: calc(100% + 4px); left: 0px; z-index: 30; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; box-shadow: rgba(15, 23, 42, 0.14) 0px 8px 22px; white-space: nowrap; cursor: default; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-sub { margin-left: 12px; font-size: 11px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .chip-dd-panel[hidden] { display: none; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-card:has(.chip-dd-panel:not([hidden])) { z-index: 5; }
 .dc-icon.chem-Unknown { background: rgb(229, 231, 235); color: rgb(107, 114, 128); }
 [data-theme="dark"] .dc-icon.chem-Unknown { background: rgba(255, 255, 255, 0.12); color: var(--text3); }
 #modal-details .modal-field:not(.modal-field--wide) { flex: 0 0 calc(25% - 18px); }
 /* Dynamic profile under Charging / Discharging: its sub-profile list wraps over several lines, so it is a rounded box with the
    profile chip as a header and the sub-profiles below, not the single-line pill used for form factors. */
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-box[data-factor="dynamic"] { display: block; flex: 1 1 100%; border-radius: 12px; padding: 6px 8px 8px; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-box[data-factor="dynamic"] > .filter-tag { margin-bottom: 6px; }
-:is(#page-datasets, #page-studio) .dataset-filter-grid .filter-form-box[data-factor="dynamic"] .filter-form-codes { padding-left: 0; border-left: 0; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-box[data-factor="dynamic"] { display: block; flex: 1 1 100%; border-radius: 12px; padding: 6px 8px 8px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-box[data-factor="dynamic"] > .filter-tag { margin-bottom: 6px; }
+:is(#page-datasets, #page-studio, #page-benchmarks) .dataset-filter-grid .filter-form-box[data-factor="dynamic"] .filter-form-codes { padding-left: 0; border-left: 0; }

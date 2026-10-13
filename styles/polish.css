@@ -291,7 +291,8 @@ select:focus-visible, [tabindex]:focus-visible {
   font-family: var(--sans);
   transition: background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
 }
-.bw-feat:hover { border-color: var(--border2); background: var(--bg3); }
+.bw-feat:hover:not(:disabled) { border-color: var(--border2); background: var(--bg3); }
+.bw-feat:disabled { opacity: .45; cursor: not-allowed; }
 .bw-feat.selected { background: var(--accent-light); border-color: var(--accent); color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 .bw-feat-x { font-size: 15px; line-height: 1; opacity: .72; }
 .bw-feat-add { border-style: dashed; background: #fff; color: var(--text3); }

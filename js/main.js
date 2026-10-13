@@ -4328,8 +4328,7 @@ var BWR = {
   models: new Set(),
   downloaded: false,
   uploaded: false,
-  filters: { q: '', all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() },
-  pendingFilters: { all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() },
+  filters: null,   // { q, active, pending }: see bwrResetFilters
   datasetPage: 1,
   datasetPageSize: 4,
   dragHandle: null
@@ -4357,16 +4356,6 @@ function bwFlowInit() {
   bwUpdateProgress();
 }
 
-function bwCloneFilterState(src) {
-  return {
-    all: !!src.all,
-    chem: cloneSet(src.chem || new Set()),
-    form: cloneSet(src.form || new Set()),
-    cat: cloneSet(src.cat || new Set()),
-    domain: cloneSet(src.domain || new Set()),
-    duty: cloneSet(src.duty || new Set())
-  };
-}
 function bwDatasetYear(d) {
   return extractYearFromRef(d.ref_name) || extractYearFromRef(d.name) || 0;
 }
@@ -4382,59 +4371,63 @@ const BWR_BASE_CATEGORY = 'cycle_aging';
 function bwIsCycleAgingDataset(d) {
   return !!(d && d.category === BWR_BASE_CATEGORY);
 }
+/* Select Dataset uses the Datasets page catalogue (js/datasets-page.js), as the Studio does: the metadata rows, the Datasets page
+   filters and search, and its cards, limited to cycle-aging datasets. The list keeps this step's own order (bwFlowSortedDatasets). */
+function bwrCatalogue() { return window.DatasetsPage.catalogue; }
+function bwrRows() { return bwrCatalogue().rows(); }
+function bwrNewSelection() { const sel = bwrCatalogue().newSelection(); sel.cat.add('cycle_aging'); return sel; }
+function bwrCopySelection(dst, src) { bwrCatalogue().FILTER_KEYS.forEach(k => { dst[k].clear(); src[k].forEach(v => dst[k].add(v)); }); }
+function bwrResetFilters() { BWR.filters = { q: '', active: bwrNewSelection(), pending: bwrNewSelection() }; }
+/* Select Input Signals: which processed time series a dataset has, from its research profile (timeseries.has_*_timeseries).
+   A dataset with none of them is not offered. */
+const BWR_SIGNAL_FIELDS = { 'Voltage (V)': 'has_voltage_timeseries', 'Current (A)': 'has_current_timeseries', 'Temperature (\u00b0C)': 'has_temperature_timeseries', 'Time (s)': 'has_time_timeseries' };
+function bwrHasAnySignal(d) { return Object.values(BWR_SIGNAL_FIELDS).some(f => d[f] === true); }
+function bwrSignalAvailable(d, name) { return d[BWR_SIGNAL_FIELDS[name]] === true; }
+let bwrDetailsReady = false;
+function bwrDatasetRow(id) { return bwrRows().find(d => d.dataset_id === id && getDatasetPageCategory(d.category) === 'cycle_aging' && bwrHasAnySignal(d)) || null; }
+/* Disables the signal buttons the selected dataset lacks and drops them from the selection. With no dataset selected all stay enabled. */
+function bwrSyncSignals() {
+  const d = BWR.datasetId ? bwrDatasetRow(BWR.datasetId) : null;
+  document.querySelectorAll('#bwr-signals .bw-feat').forEach(btn => {
+    const name = btn.dataset.name || btn.textContent.trim(), ok = !d || bwrSignalAvailable(d, name);
+    btn.disabled = !ok;
+    btn.title = ok ? '' : 'Not available in this dataset';
+    if (!ok) { btn.classList.remove('selected'); BWR.signals.delete(name); }
+  });
+}
+bwrResetFilters();
 function bwFlowFilteredDatasets() {
-  const q = BWR.filters.q;
-  const f = BWR.filters;
-  // Same live catalog as the Datasets page — no separate hardcoded list.
-  return bwFlowSortedDatasets(getCatalogDatasets().filter(d => {
-    if (!bwIsCycleAgingDataset(d)) return false;
-    if (q) {
-      const hay = [d.name, d.ref_name, d.notes, d.chemistry, d.form].join(' ').toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
-    if (f.all) return true;
-    if (!bwDatasetMatchesSet(f.chem, set => set.has(d.chemistry))) return false;
-    if (!bwDatasetMatchesSet(f.form, set => set.has(d.form))) return false;
-    if (!bwDatasetMatchesSet(f.cat, set => set.has(d.category))) return false;
-    if (!bwDatasetMatchesSet(f.domain, set => inferDatasetDomains(d).some(v => set.has(v)))) return false;
-    if (!bwDatasetMatchesSet(f.duty, set => inferDatasetProfiles(d).some(v => set.has(v)))) return false;
-    return true;
-  }));
-}
-function bwHasDatasetFilters(state) {
-  return !!(state.all || state.chem.size || state.form.size || state.cat.size || state.domain.size || state.duty.size);
-}
-function bwFilterLabel(type, value) {
-  if (type === 'cat') return getCatLabel(value);
-  if (type === 'domain') return String(value).toUpperCase() === 'EV' ? 'EV' : String(value).charAt(0).toUpperCase() + String(value).slice(1);
-  if (type === 'duty') return ({ cccv: 'CC/CV', dynamic: 'Dynamic', multi: 'Multi-rate' }[value] || value);
-  return value;
+  return bwFlowSortedDatasets(bwrCatalogue().filterRows(bwrRows().filter(bwrHasAnySignal), BWR.filters.active, BWR.filters.q));
 }
 function bwRenderAppliedDatasetFilters() {
   const box = document.getElementById('bwr-applied-filter-chips');
   if (!box) return;
-  const chips = [];
-  if (BWR.filters.all) chips.push({ type: 'all', tokenType: 'all', value: 'all', label: 'All datasets' });
-  [['chem','chemistry'], ['form','form'], ['cat','category'], ['domain','domain'], ['duty','profile']].forEach(([type, tokenType]) => {
-    BWR.filters[type].forEach(value => chips.push({ type, tokenType, value, label: bwFilterLabel(type, value) }));
-  });
+  // the cycle-aging scope is fixed, so it has no chip
+  const chips = bwrCatalogue().selectionChips(BWR.filters.active).filter(([k]) => k !== 'cat');
   box.classList.toggle('has-chips', chips.length > 0);
-  box.innerHTML = chips.map(chip => `<span class="applied-chip ${filterTypeClass(chip.tokenType)}">${esc(chip.label)}<button aria-label="Remove ${escAttr(chip.label)} filter" onclick="bwRemoveAppliedDatasetFilter('${chip.type}','${escAttr(chip.value)}')">×</button></span>`).join('');
+  box.innerHTML = chips.map(([k, t, v, l]) => `<span class="applied-chip ${bwrCatalogue().filterTypeClass(t)}">${esc(l)}<button aria-label="Remove ${escAttr(l)} filter" onclick="bwRemoveAppliedDatasetFilter('${k}','${escAttr(v)}')">×</button></span>`).join('');
 }
 function bwSyncDatasetFilterPopup() {
-  document.querySelectorAll('[data-bwr-chem]').forEach(t => t.classList.toggle('active', BWR.pendingFilters.chem.has(t.dataset.bwrChem)));
-  document.querySelectorAll('[data-bwr-form]').forEach(t => t.classList.toggle('active', BWR.pendingFilters.form.has(t.dataset.bwrForm)));
-  document.querySelectorAll('[data-bwr-cat]').forEach(t => t.classList.toggle('active', BWR.pendingFilters.cat.has(t.dataset.bwrCat)));
-  document.querySelectorAll('[data-bwr-domain]').forEach(t => t.classList.toggle('active', BWR.pendingFilters.domain.has(t.dataset.bwrDomain)));
-  document.querySelectorAll('[data-bwr-duty]').forEach(t => t.classList.toggle('active', BWR.pendingFilters.duty.has(t.dataset.bwrDuty)));
-  const all = document.querySelector('[data-bwr-all]');
-  if (all) all.classList.toggle('active', BWR.pendingFilters.all);
+  const grid = document.getElementById('bwr-dataset-filter-grid');
+  if (grid && grid.childElementCount) bwrCatalogue().syncFilterTags(grid, BWR.filters.pending);
 }
+function bwBuildDatasetFilterGrid() {
+  const grid = document.getElementById('bwr-dataset-filter-grid');
+  if (!grid || grid.childElementCount || !bwrRows().length) return;
+  grid.innerHTML = bwrCatalogue().filterGridHTML(bwrRows(), { category: false, onclick: null });
+  bwSyncDatasetFilterPopup();
+}
+document.addEventListener('click', e => {
+  const tag = e.target.closest('#bwr-dataset-filter-grid .filter-tag[data-fk]');
+  if (!tag) return;
+  bwrCatalogue().toggleSelection(BWR.filters.pending, tag.dataset.fk, tag.dataset.fv, { partial: tag.classList.contains('partial'), rows: bwrRows() });
+  bwSyncDatasetFilterPopup();
+});
 function bwFlowDatasetCardHTML(d) {
-  const html = datasetCardHTML(d)
-    .replace('class="dataset-card"', 'class="dataset-card bwr-dataset-card' + (BWR.datasetId === d.id ? ' bwr-selected' : '') + '"')
-    .replace(/onclick="openDatasetModal\('[^']+'\)"/, `onclick="bwSelectDataset('${escAttr(d.id)}')"`);
-  return html;
+  // The Datasets page card. A click selects the dataset for this benchmark instead of opening the dataset popup.
+  return bwrCatalogue().cardHTML(d)
+    .replace('class="dataset-card"', 'class="dataset-card bwr-dataset-card' + (BWR.datasetId === d.dataset_id ? ' bwr-selected' : '') + '"')
+    .replace(/onclick="openDatasetModal\('[^']+'\)"/, `onclick="bwSelectDataset('${escAttr(d.dataset_id)}')" data-dataset-id="${escAttr(d.dataset_id)}"`);
 }
 function bwRenderDatasetPager(total, pages) {
   const info = document.getElementById('bwr-pager-info');
@@ -4479,14 +4472,25 @@ function bwFlowRenderDatasets() {
   if (!box) return;
   // refreshAll() runs during init, before the Benchmarks flow state below is created.
   if (typeof BWR === 'undefined' || !BWR) return;
-  // Drop stale selection if the chosen dataset was hidden or is outside Cycle Aging.
-  if (BWR.datasetId) {
-    const selected = DATASETS.find(d => d.id === BWR.datasetId);
-    if (selected && (isHiddenFromCatalog(selected) || !bwIsCycleAgingDataset(selected))) {
-      BWR.datasetId = null;
-      BW.selId = null;
-    }
+  // The catalogue rows load with the Datasets page; render again once they are in.
+  if (!bwrRows().length) {
+    box.innerHTML = '<div class="bw-flow-empty">Loading datasets…</div>';
+    window.DatasetsPage.ensureLoaded().then(() => { if (bwrRows().length) { bwBuildDatasetFilterGrid(); bwFlowRenderDatasets(); } });
+    return;
   }
+  // The signal flags come from each dataset's research profile, read after the catalogue.
+  if (!bwrDetailsReady) {
+    box.innerHTML = '<div class="bw-flow-empty">Loading datasets…</div>';
+    bwrCatalogue().detailsLoaded().then(() => { bwrDetailsReady = true; bwFlowRenderDatasets(); });
+    return;
+  }
+  bwBuildDatasetFilterGrid();
+  // Drop a stale selection that is no longer a cycle-aging dataset with signals in the catalogue.
+  if (BWR.datasetId && !bwrDatasetRow(BWR.datasetId)) {
+    BWR.datasetId = null;
+    BW.selId = null;
+  }
+  bwrSyncSignals();
   const list = bwFlowFilteredDatasets();
   const pages = Math.max(1, Math.ceil(list.length / BWR.datasetPageSize));
   if (BWR.datasetPage > pages) BWR.datasetPage = pages;
@@ -4512,8 +4516,7 @@ window.bwClearSearch = function() {
   bwFlowRenderDatasets();
 };
 window.bwClearFilters = function() {
-  BWR.filters = { q: '', all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() };
-  BWR.pendingFilters = bwCloneFilterState(BWR.filters);
+  bwrResetFilters();
   const input = document.getElementById('bwr-ds-search');
   if (input) input.value = '';
   BWR.datasetPage = 1;
@@ -4525,7 +4528,7 @@ window.bwToggleDatasetFilters = function() {
   const btn = document.querySelector('#page-benchmarks .bwr-dataset-search-panel .dataset-filter-toggle');
   if (!pop) return;
   if (pop.classList.contains('open')) return;
-  BWR.pendingFilters = bwCloneFilterState(BWR.filters);
+  bwrCopySelection(BWR.filters.pending, BWR.filters.active);
   bwSyncDatasetFilterPopup();
   pop.classList.add('open');
   if (btn) btn.setAttribute('aria-expanded', 'true');
@@ -4542,34 +4545,25 @@ document.addEventListener('click', e => {
   if (e.target.closest('#bwr-dataset-filter-popover') || e.target.closest('#page-benchmarks .bwr-dataset-search-panel .dataset-filter-toggle')) return;
   bwCloseDatasetFilters();
 });
-window.bwToggleAllDatasetsFilter = function(el) {
-  BWR.pendingFilters.all = !BWR.pendingFilters.all;
-  if (BWR.pendingFilters.all) ['chem','form','cat','domain','duty'].forEach(k => BWR.pendingFilters[k].clear());
-  bwSyncDatasetFilterPopup();
-};
-window.bwToggleDatasetFilterTag = function(el, type) {
-  const map = { chem: 'bwrChem', form: 'bwrForm', cat: 'bwrCat', domain: 'bwrDomain', duty: 'bwrDuty' };
-  const value = el.dataset[map[type]];
-  if (!value) return;
-  BWR.pendingFilters.all = false;
-  const set = BWR.pendingFilters[type];
-  if (set.has(value)) set.delete(value); else set.add(value);
-  bwSyncDatasetFilterPopup();
-};
+// Clear resets the applied and pending filters and closes the popover, as on the Datasets page.
 window.bwClearPendingDatasetFilters = function() {
-  BWR.pendingFilters = { all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() };
+  const q = BWR.filters.q;
+  bwrResetFilters();
+  BWR.filters.q = q;
+  BWR.datasetPage = 1;
   bwSyncDatasetFilterPopup();
+  bwCloseDatasetFilters();
+  bwFlowRenderDatasets();
 };
 window.bwApplyDatasetFilters = function() {
-  BWR.filters = Object.assign(bwCloneFilterState(BWR.pendingFilters), { q: BWR.filters.q });
+  bwrCopySelection(BWR.filters.active, BWR.filters.pending);
   BWR.datasetPage = 1;
   bwCloseDatasetFilters();
   bwFlowRenderDatasets();
 };
 window.bwRemoveAppliedDatasetFilter = function(type, value) {
-  if (type === 'all') BWR.filters.all = false;
-  else if (BWR.filters[type]) BWR.filters[type].delete(value);
-  BWR.pendingFilters = bwCloneFilterState(BWR.filters);
+  bwrCatalogue().removeSelection(BWR.filters.active, type, value, bwrRows());
+  bwrCopySelection(BWR.filters.pending, BWR.filters.active);
   BWR.datasetPage = 1;
   bwSyncDatasetFilterPopup();
   bwFlowRenderDatasets();
@@ -4580,11 +4574,10 @@ window.bwGoDatasetPage = function(page) {
   bwFlowRenderDatasets();
 };
 window.bwSelectDataset = function(id) {
-  const d = DATASETS.find(x => x.id === id);
-  if (!d || isHiddenFromCatalog(d) || !bwIsCycleAgingDataset(d)) return;
+  if (!bwrDatasetRow(id)) return;
   BWR.datasetId = id;
   BW.selId = id;
-  bwFlowRenderDatasets();
+  bwFlowRenderDatasets();   // also updates the signal buttons for this dataset
   bwSyncSplitCells();
   bwUpdatePackagePreview();
   bwUpdateProgress();
@@ -4633,9 +4626,10 @@ window.bwPickSplitProtocol = function(el, name) {
 
 function bwSelectedDataset() {
   if (!BWR.datasetId) return null;
-  const d = DATASETS.find(x => x.id === BWR.datasetId);
-  if (!d || isHiddenFromCatalog(d) || !bwIsCycleAgingDataset(d)) return null;
-  return d;
+  const row = bwrDatasetRow(BWR.datasetId);
+  if (!row) return null;
+  // Later steps read the registry row when there is one (same id); the metadata row has the same aliases (cells, name, ...).
+  return DATASETS.find(x => x.id === BWR.datasetId && !isHiddenFromCatalog(x)) || row;
 }
 function bwFlowDatasetCellCount() {
   const ds = bwSelectedDataset();
@@ -4995,11 +4989,11 @@ window.bwRunAnotherBenchmark = function() {
   BWR.splitError = false;
   BWR.splitProtocol = 'Manual';
   BWR.datasetPage = 1;
-  BWR.filters = { q: '', all: false, chem: new Set(), form: new Set(), cat: new Set(), domain: new Set(), duty: new Set() };
-  BWR.pendingFilters = bwCloneFilterState(BWR.filters);
+  bwrResetFilters();
   BW.selId = null;
   BW.results = null;
   document.querySelectorAll('#page-benchmarks .bw-flow .selected').forEach(el => el.classList.remove('selected'));
+  bwrSyncSignals();
   const search = document.getElementById('bwr-ds-search');
   if (search) search.value = '';
   document.getElementById('bwr-upload-card')?.classList.remove('uploaded', 'is-next');
