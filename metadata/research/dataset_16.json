@@ -8,6 +8,7 @@
   "has_voltage_timeseries": true,
   "has_current_timeseries": true,
   "has_temperature_timeseries": true,
+  "has_time_timeseries": false,
   "complete_v_i_t_timeseries": true,
   "resolution": "full_waveforms",
   "signals_basis": "processed_data",
@@ -75,7 +76,7 @@
  ],
  "provenance": {
   "derived_from": "datasets/dataset_16.json",
-  "generated": "2026-10-09",
+  "generated": "2026-10-13",
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",

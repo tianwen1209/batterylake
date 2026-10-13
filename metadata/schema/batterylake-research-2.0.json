@@ -50,6 +50,7 @@
         "has_voltage_timeseries",
         "has_current_timeseries",
         "has_temperature_timeseries",
+        "has_time_timeseries",
         "complete_v_i_t_timeseries",
         "resolution",
         "signals_basis",
@@ -64,6 +65,9 @@
           "type": "boolean"
         },
         "has_temperature_timeseries": {
+          "type": "boolean"
+        },
+        "has_time_timeseries": {
           "type": "boolean"
         },
         "complete_v_i_t_timeseries": {
