@@ -3419,7 +3419,7 @@
    "conditions.c_rate": "derived"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-09",
+  "last_verified": "2026-10-14",
   "raw_evidence": "evidence/raw/dataset_12.json",
   "landing_evidence": "evidence/landing/dataset_12.json"
  }

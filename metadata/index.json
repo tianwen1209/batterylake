@@ -1,7 +1,7 @@
 {
  "$schema": "./schema/batterylake-index-2.0.json",
  "schema_version": "2.0.0",
- "generated": "2026-10-09",
+ "generated": "2026-10-14",
  "content_hash": "8db982e4a67dbd9cde7dfc4de7fa858cb99de1d225a533e5ce707794b0af057f",
  "record_schema": "./schema/batterylake-dataset-2.0.json",
  "description": "Single source of truth for BatteryLake dataset metadata. One row per dataset; record_path points at the full record, which additionally carries per-cell rows. Read-only consumers should filter on this file and open a record only when per-cell detail is needed.",

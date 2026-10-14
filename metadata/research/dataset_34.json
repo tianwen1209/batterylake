@@ -7,7 +7,7 @@
  "timeseries": {
   "has_voltage_timeseries": true,
   "has_current_timeseries": false,
-  "has_temperature_timeseries": false,
+  "has_temperature_timeseries": true,
   "has_time_timeseries": true,
   "complete_v_i_t_timeseries": false,
   "resolution": "partial_waveforms",
@@ -65,7 +65,7 @@
  ],
  "provenance": {
   "derived_from": "datasets/dataset_34.json",
-  "generated": "2026-10-13",
+  "generated": "2026-10-14",
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -82,6 +82,6 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-09"
+  "last_verified": "2026-10-14"
  }
 }

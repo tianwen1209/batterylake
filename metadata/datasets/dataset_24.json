@@ -440,7 +440,7 @@
    "conditions.discharge_c_rate_max": "raw_filenames"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-09",
+  "last_verified": "2026-10-14",
   "raw_evidence": "evidence/raw/dataset_24.json",
   "landing_evidence": "evidence/landing/dataset_24.json"
  }

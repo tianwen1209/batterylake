@@ -990,7 +990,7 @@
    "conditions.discharge_c_rate_max": "raw_docs"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-09",
+  "last_verified": "2026-10-14",
   "raw_evidence": "evidence/raw/dataset_13.json",
   "landing_evidence": "evidence/landing/dataset_13.json"
  }

@@ -78,6 +78,7 @@
             "full_waveforms",
             "partial_waveforms",
             "waveform_sample_only",
+            "time_only",
             "summary_tables_only",
             "unlabelled_channels",
             "not_standardised"

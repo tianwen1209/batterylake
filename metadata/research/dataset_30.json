@@ -13,7 +13,8 @@
   "resolution": "unlabelled_channels",
   "signals_basis": "processed_data",
   "caveats": [
-   "partial_raw"
+   "partial_raw",
+   "processed_series_missing"
   ]
  },
  "soc": {
@@ -67,7 +68,7 @@
  ],
  "provenance": {
   "derived_from": "datasets/dataset_30.json",
-  "generated": "2026-10-13",
+  "generated": "2026-10-14",
   "field_sources": {
    "ref_name": "dataset_record",
    "category": "folder_layout",
@@ -84,6 +85,6 @@
    "source_quality_flags": "dataset_record"
   },
   "confidence": "verified",
-  "last_verified": "2026-10-09"
+  "last_verified": "2026-10-14"
  }
 }
