@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-13T21:53:32Z",
-  "total_visits": 3769,
+  "updated_at": "2026-10-14T20:47:02Z",
+  "total_visits": 3845,
   "dataset_downloads": 501,
   "skill_uses": 116,
   "model_downloads": {
@@ -9,25 +9,25 @@
   },
   "model_runs": {
     "cnn": 10,
+    "pinn": 4,
     "linear": 3,
-    "pinn": 3,
     "xgboost": 3,
     "lstm": 2,
     "baseline-package": 1,
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-13T21:53:32Z",
+    "updatedAt": "2026-10-14T20:47:02Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-13"
+      "endDate": "2026-10-14"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 74
+        "visitors": 76
       },
       {
         "country": "Singapore",
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 55
+        "visitors": 56
       },
       {
         "country": "Hong Kong",
@@ -85,14 +85,14 @@
         "visitors": 3
       },
       {
-        "country": "Iran",
-        "countryCode": "IR",
+        "country": "United Kingdom",
+        "countryCode": "GB",
         "visitors": 3
       },
       {
-        "country": "United Kingdom",
-        "countryCode": "GB",
-        "visitors": 2
+        "country": "Iran",
+        "countryCode": "IR",
+        "visitors": 3
       },
       {
         "country": "Indonesia",
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 25,
+        "visitors": 26,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -286,6 +286,14 @@
         "lat": 22.277
       },
       {
+        "country": "United Kingdom",
+        "countryCode": "GB",
+        "city": "London",
+        "visitors": 3,
+        "lng": -0.126,
+        "lat": 51.509
+      },
+      {
         "country": "Vietnam",
         "countryCode": "VN",
         "city": "Hanoi",
@@ -332,14 +340,6 @@
         "visitors": 2,
         "lng": 118.082,
         "lat": 24.48
-      },
-      {
-        "country": "United Kingdom",
-        "countryCode": "GB",
-        "city": "London",
-        "visitors": 2,
-        "lng": -0.126,
-        "lat": 51.509
       },
       {
         "country": "Hong Kong",
