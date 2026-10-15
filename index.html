@@ -1376,6 +1376,17 @@ bash run_benchmark.sh</pre>
     </div>
 
     <section class="qa-upload-panel reveal">
+      <div class="qa-dataset-picker">
+        <label for="qaReportSelect">Dataset</label>
+        <select id="qaReportSelect" onchange="qaSelectCatalogReport(this.value)">
+          <option value="">Choose a dataset…</option>
+        </select>
+      </div>
+      <button class="prep-btn" id="qaRunBtn" type="button" onclick="runQualityAssessment()" disabled>Run Assessment</button>
+    </section>
+
+    <!-- Retired dataset upload + sample CSV assessment (replaced by the dataset picker); kept commented for reference.
+    <section class="qa-upload-panel reveal">
       <label class="drop-zone qa-drop-zone" id="qaDropZone" for="qaFileInput">
         <input id="qaFileInput" type="file" accept=".csv,.json,.parquet,.h5,.hdf5,.txt" hidden onchange="handleQualityFileInput(event)">
         <span class="drop-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg></span>
@@ -1401,6 +1412,7 @@ bash run_benchmark.sh</pre>
         </div>
       </div>
     </section>
+    -->
 
     <section class="qa-results qa-is-example" id="qaResults">
       <div class="qa-results-bar reveal" id="qaResultsBar">

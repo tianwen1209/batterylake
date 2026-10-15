@@ -876,8 +876,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .qa-upload-panel {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 22px;
+  align-items: flex-end;
+  gap: 14px 16px;
   margin: 22px 0 18px;
   padding: 20px 24px;
   border: 1px solid var(--border);
@@ -885,6 +885,28 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   background: #fff;
   box-shadow: var(--card-shadow);
 }
+.qa-dataset-picker { display: flex; flex-direction: column; gap: 5px; flex: 1 1 320px; min-width: 0; }
+.qa-dataset-picker label { font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--text3); }
+.qa-dataset-picker select {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  /* custom caret inset 12px from the right edge, matching the 12px text inset on the left */
+  padding: 9px 36px 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  /* !important: polish.css resets every select's background with !important (fill comes from --input-bg there) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23718096' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><polyline points='1 1.5 6 6.5 11 1.5'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  color: var(--text1);
+  font: 600 13px var(--sans);
+}
+.qa-upload-panel .prep-btn { white-space: nowrap; }
+
+/* Retired dataset upload + sample CSV assessment (replaced by the dataset picker); kept commented for reference.
 .qa-drop-zone { flex: 1 1 420px; min-height: 0; min-width: 280px; padding: 16px 20px; justify-content: center; }
 .qa-drop-zone .drop-title { font-size: 15.5px; }
 .qa-upload-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
@@ -902,6 +924,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   font-weight: 700;
   color: var(--text1);
 }
+*/
 
 .qa-example-badge {
   display: inline-flex;
@@ -1116,7 +1139,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 }
 @media (max-width: 760px) {
   .qa-upload-panel { padding: 18px; flex-direction: column; align-items: stretch; }
-  .qa-upload-actions { flex-direction: column; align-items: stretch; min-width: 0; }
+  /* .qa-upload-actions { flex-direction: column; align-items: stretch; min-width: 0; } */
 }
 @media (max-width: 640px) {
   .qa-score-row, .diag-list { grid-template-columns: 1fr; }
@@ -2480,7 +2503,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   background: var(--bg3);
 }
 
-/* Quality page: sample excerpts + catalog report picker */
+/* Retired dataset upload + sample CSV assessment (replaced by the dataset picker); kept commented for reference.
+( Quality page: sample excerpts + catalog report picker )
 .qa-try {
   margin: 0 0 18px;
   padding: 18px 22px 20px;
@@ -2531,14 +2555,15 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .qa-sample-actions .prep-btn { padding: 7px 12px; font-size: 12.5px; }
 .qa-sample-actions a.prep-btn { text-decoration: none; display: inline-flex; align-items: center; }
 .qa-sample.is-running { opacity: .7; pointer-events: none; }
-.qa-results-source { font-size: 12.5px; color: var(--text3); }
-.qa-results-source strong { color: var(--text2); font-weight: 700; }
 [data-theme="dark"] .qa-sample { background: var(--surface-raised); }
 [data-theme="dark"] .qa-try-picker select { background: var(--input-bg); }
 @media (max-width: 760px) {
   .qa-try { padding: 14px; }
   .qa-try-picker { min-width: 0; width: 100%; }
 }
+*/
+.qa-results-source { font-size: 12.5px; color: var(--text3); }
+.qa-results-source strong { color: var(--text2); font-weight: 700; }
 .qa-chip.review { background: rgba(239,68,68,.12); color: #dc2626; border-color: rgba(239,68,68,.25); }
 [data-theme="dark"] .qa-chip.review { color: #f87171; }
 
@@ -2568,7 +2593,8 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 [data-theme="dark"] .ai-msg-sender.is-model { color: #7db3ff; }
 [data-theme="dark"] .ai-msg-sender.is-site { color: #2dd4bf; }
 
-/* Quality page: compact sample links (replaces the sample cards) */
+/* Retired dataset upload + sample CSV assessment (replaced by the dataset picker); kept commented for reference.
+( Quality page: compact sample links (replaces the sample cards) )
 .qa-try-head { align-items: flex-end; margin-bottom: 0; }
 .qa-try-picker { flex: 0 1 420px; }
 .qa-try-samples { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1 1 320px; }
@@ -2599,6 +2625,7 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .qa-try-link button:hover { background: var(--accent-light); }
 .qa-try-link.is-running { opacity: .6; pointer-events: none; }
 [data-theme="dark"] .qa-try-link { background: var(--surface-raised); }
+*/
 
 /* AI assistant: agent-mode action log */
 .ai-actions { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }

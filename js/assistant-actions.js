@@ -27,7 +27,7 @@
     { name: 'open_dataset', description: 'Open the detail window of a catalog dataset (metadata, source and processed downloads).', args: { dataset_id: 'catalog id such as dataset_21' } },
     { name: 'open_quality_report', description: 'Open the precomputed quality report of a dataset on the Quality page.', args: { dataset_id: 'catalog id' } },
     { name: 'download_quality_report', description: 'Download the quality report JSON (of a dataset, or of the report currently shown).', args: { dataset_id: 'catalog id, optional' } },
-    { name: 'assess_quality_sample', description: 'Run the browser quality engine on a bundled sample excerpt of a dataset (only dataset_21, dataset_17, dataset_05, dataset_35 have samples).', args: { dataset_id: 'catalog id' } },
+    // { name: 'assess_quality_sample', description: 'Run the browser quality engine on a bundled sample excerpt of a dataset (only dataset_21, dataset_17, dataset_05, dataset_35 have samples).', args: { dataset_id: 'catalog id' } },
     { name: 'filter_datasets', description: 'Filter the Datasets catalog. Omitted fields are left unfiltered; the previous filter is replaced.', args: { chemistry: 'list of ' + CHEMS.join(' | '), form: 'list of ' + FORMS.join(' | '), category: 'list of ' + CATEGORIES.join(' | '), domain: 'list of ' + DOMAINS.join(' | '), query: 'free-text search, optional' } },
     { name: 'clear_filters', description: 'Clear all catalog filters and the search box.', args: {} },
     { name: 'download_skill', description: 'Download the batterylake-processing agent skill package (zip).', args: {} },
@@ -142,18 +142,19 @@
       call('downloadQualityReport');
       return { ok: true, summary: 'Downloaded the quality report JSON', navigated: true };
     },
-    assess_quality_sample: async function (args) {
-      var d = resolveDataset(datasetArg(args));
-      gotoPage('quality');
-      await call('qaLoadSamples');
-      var grid = document.getElementById('qaSampleGrid');
-      var samples = [];
-      try { samples = JSON.parse((grid && grid.dataset.samples) || '[]'); } catch (_) { samples = []; }
-      var idx = d ? samples.findIndex(function (s) { return s.dataset_id === d.id; }) : -1;
-      if (idx < 0) return { ok: false, summary: 'No sample excerpt for ' + (d ? link(d) : '"' + datasetArg(args) + '"') + '. Samples: ' + samples.map(function (s) { return s.dataset_id; }).join(', '), navigated: true };
-      call('qaRunSample', idx);
-      return { ok: true, summary: 'Running the quality engine on the ' + link(d) + ' sample (' + samples[idx].rows + ' rows) in your browser', navigated: true };
-    },
+    // Retired with the Quality page sample CSVs:
+    // assess_quality_sample: async function (args) {
+    //   var d = resolveDataset(datasetArg(args));
+    //   gotoPage('quality');
+    //   await call('qaLoadSamples');
+    //   var grid = document.getElementById('qaSampleGrid');
+    //   var samples = [];
+    //   try { samples = JSON.parse((grid && grid.dataset.samples) || '[]'); } catch (_) { samples = []; }
+    //   var idx = d ? samples.findIndex(function (s) { return s.dataset_id === d.id; }) : -1;
+    //   if (idx < 0) return { ok: false, summary: 'No sample excerpt for ' + (d ? link(d) : '"' + datasetArg(args) + '"') + '. Samples: ' + samples.map(function (s) { return s.dataset_id; }).join(', '), navigated: true };
+    //   call('qaRunSample', idx);
+    //   return { ok: true, summary: 'Running the quality engine on the ' + link(d) + ' sample (' + samples[idx].rows + ' rows) in your browser', navigated: true };
+    // },
     filter_datasets: function (args) {
       var chems = asList(args.chemistry).map(normChem).filter(Boolean);
       var forms = asList(args.form || args.form_factor).map(normForm).filter(Boolean);
@@ -398,9 +399,9 @@
       download: /\b(download|export|save)\b|下载|导出/.test(q),
       filter: /\b(filter|only|list|find|which|search|all the)\b|筛选|列出|找出|找到|有哪些|哪些|所有|搜索|搜/.test(q),
       quality: /\b(quality|report|assess|assessment|score)\b|质量|报告|评估|评分/.test(q),
+      // sample: /\b(sample|excerpt|example|try)\b|样例|示例|试/.test(q),
       skill: /\bskill\b|技能/.test(q),
       preprocess: /\b(preprocess|preprocessing|process|convert|prompt)\b|预处理|处理|转换|提示词/.test(q),
-      sample: /\b(sample|excerpt|example|try)\b|样例|示例|试/.test(q),
       dark: /\b(dark|night)\b|深色|夜间|暗色/.test(q),
       light: /\b(light|bright|day)\b|浅色|亮色|白天/.test(q),
       theme: /\b(theme|mode)\b|主题|模式/.test(q),
@@ -436,7 +437,7 @@
     else if (wants.clear && (wants.filter || /filter|筛选|搜索/.test(q))) actions.push({ tool: 'clear_filters', args: {} });
     else if (wants.skill && wants.download) actions.push({ tool: 'download_skill', args: {} });
     else if (wants.skill) actions.push({ tool: 'open_page', args: { page: 'preprocessing' } });
-    else if (wants.quality && wants.sample && d) actions.push({ tool: 'assess_quality_sample', args: { dataset_id: d.id } });
+    // else if (wants.quality && wants.sample && d) actions.push({ tool: 'assess_quality_sample', args: { dataset_id: d.id } });
     else if (wants.quality && d) actions.push({ tool: wants.download ? 'download_quality_report' : 'open_quality_report', args: { dataset_id: d.id } });
     else if (wants.quality && wants.download) actions.push({ tool: 'download_quality_report', args: {} });
     else if (wants.quality && !filt) actions.push({ tool: 'open_page', args: { page: 'quality' } });
