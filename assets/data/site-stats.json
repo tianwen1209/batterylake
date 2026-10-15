@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-14T20:47:02Z",
-  "total_visits": 3845,
-  "dataset_downloads": 501,
-  "skill_uses": 116,
+  "updated_at": "2026-10-15T20:24:09Z",
+  "total_visits": 3896,
+  "dataset_downloads": 506,
+  "skill_uses": 121,
   "model_downloads": {
     "cnn": 16,
     "linear": 4
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-14T20:47:02Z",
+    "updatedAt": "2026-10-15T20:24:09Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-14"
+      "endDate": "2026-10-15"
     },
     "countries": [
       {
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 56
+        "visitors": 57
       },
       {
         "country": "Hong Kong",
@@ -532,6 +532,14 @@
         "visitors": 1,
         "lng": -94.416,
         "lat": 39.091
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Jacksonville",
+        "visitors": 1,
+        "lng": -81.656,
+        "lat": 30.332
       },
       {
         "country": "United States",
