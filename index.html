@@ -30,8 +30,7 @@
 <link rel="stylesheet" href="styles/benchmark-results.css?v=real-curves-1">
 <link rel="stylesheet" href="styles/digital-twin.css?v=studio-workflow-48">
 <link rel="stylesheet" href="styles/datasets.css?v=catalog-redesign-6">
-<link rel="stylesheet" href="styles/studio-calibration-map.css?v=12">
-<link rel="stylesheet" href="styles/studio-research-schematic.css?v=6">
+<link rel="stylesheet" href="styles/studio-calibration-map.css?v=18">
 </head>
 <body>
 <div class="app">
@@ -857,46 +856,53 @@ bash run_benchmark.sh</pre>
     <div class="studio-workspace">
       <section class="studio-explainer" aria-labelledby="studio-overview-title">
         <div class="studio-section-heading"><h2 id="studio-overview-title">How the Studio Works</h2></div>
-        <p class="studio-diagram-kicker">01 / Visual workflow <span>Illustrative calibration cycle</span></p>
-        <div class="studio-process-flow studio-calibration-map" aria-label="Battery digital twin calibration workflow">
-          <canvas class="studio-particle-flow" aria-hidden="true"></canvas>
-          <div class="studio-process-node studio-process-data"><div class="studio-process-node-head"><span class="studio-process-number">01</span><strong>Data Preparation</strong></div><div class="studio-data-visual" role="img" aria-label="A dataset is selected from the BatteryLake catalog"><svg viewBox="0 0 180 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect class="studio-dataset-back" x="15" y="30" width="70" height="80" rx="9"/><path class="studio-dataset-rows" d="M27 47H63M27 57H58M27 67H65"/><rect class="studio-dataset-back" x="95" y="24" width="70" height="80" rx="9"/><path class="studio-dataset-rows" d="M107 41H143M107 51H138M107 61H145"/><g class="studio-dataset-picked"><rect x="49" y="38" width="84" height="88" rx="11"/><path class="studio-dataset-rows" d="M64 59H110M64 70H102M64 81H113"/><circle cx="106" cy="106" r="12"/><path class="studio-dataset-check" d="M100 106L104 110L112 101"/></g></svg></div></div>
+        <div class="studio-process-flow studio-calibration-map" role="img" aria-label="Physical battery measurements flow into operational data and a digital twin, which supports prediction, application decisions, and synthetic data generation. A continuous operating loop returns new observations to the physical system and model.">
+          <article class="studio-process-node studio-system-node studio-process-source">
+            <div class="studio-process-node-head"><span class="studio-process-number">01</span><div><strong>Physical Battery</strong></div></div>
+            <div class="studio-system-visual studio-battery-visual" aria-hidden="true"><svg viewBox="0 0 150 112"><g class="studio-icon-float"><rect class="studio-icon-panel studio-battery-shell" x="29" y="32" width="88" height="55" rx="13"/><path class="studio-icon-surface" d="M117 49h8c2 0 4 2 4 4v13c0 2-2 4-4 4h-8Z"/><rect class="studio-battery-cell" x="40" y="43" width="18" height="33" rx="5"/><rect class="studio-battery-cell" x="64" y="43" width="18" height="33" rx="5"/><rect class="studio-battery-cell" x="88" y="43" width="18" height="33" rx="5"/><path class="studio-icon-line" d="M46 28v-6h13v6m29 0v-6h13v6"/><path class="studio-battery-charge" d="m76 47-8 13h7l-3 12 11-16h-7Z"/><circle class="studio-icon-port studio-icon-pulse" cx="119" cy="41" r="3.5"/></g></svg></div>
+          </article>
           <span class="studio-process-arrow studio-process-arrow-1" aria-hidden="true"></span>
-          <div class="studio-process-node studio-process-model"><div class="studio-process-node-head"><span class="studio-process-number">02</span><strong>Battery Model Configuration</strong></div><div class="studio-model-visual" role="img" aria-label="Battery model receives measurement data and activates its physics structure"><svg viewBox="0 0 180 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><circle class="studio-model-ring studio-model-ring-outer" cx="90" cy="76" r="57"/><circle class="studio-model-ring studio-model-ring-inner" cx="90" cy="76" r="43"/><path class="studio-model-circuit" d="M14 75H42L55 54H73M166 75H138L125 96H107M90 15V34M90 118V137"/><rect class="studio-model-cell" x="66" y="44" width="48" height="68" rx="9"/><path class="studio-model-cell-lines" d="M76 59H104M76 71H104M76 83H104M76 95H96"/><circle class="studio-model-node" cx="42" cy="75" r="4"/><circle class="studio-model-node" cx="138" cy="75" r="4"/><circle class="studio-model-node" cx="90" cy="26" r="4"/><circle class="studio-model-node" cx="90" cy="126" r="4"/></svg></div></div>
+          <article class="studio-process-node studio-system-node studio-process-data">
+            <div class="studio-process-node-head"><span class="studio-process-number">02</span><div><strong>Operational Data</strong></div></div>
+            <div class="studio-system-visual studio-data-stream-visual" aria-hidden="true"><svg viewBox="0 0 150 112"><rect class="studio-icon-panel" x="17" y="16" width="116" height="80" rx="14"/><path class="studio-icon-grid" d="M35 30v51M61 30v51M87 30v51M113 30v51M28 43h94M28 63h94M28 81h94"/><path class="studio-data-wave studio-data-wave-voltage" d="M28 48c9 0 8-16 17-16s9 27 19 27 9-20 20-20 9 12 18 12 8-9 20-9"/><path class="studio-data-wave studio-data-wave-current" d="M28 72c12 0 12-10 23-10s11 12 22 12 10-16 22-16 10 9 27 9"/><circle class="studio-icon-port studio-data-dot" cx="122" cy="42" r="3.5"/><circle class="studio-icon-port studio-data-dot studio-data-dot-late" cx="122" cy="67" r="3.5"/></svg></div>
+          </article>
           <span class="studio-process-arrow studio-process-arrow-2" aria-hidden="true"></span>
-          <div class="studio-process-node studio-process-estimation"><div class="studio-process-node-head"><span class="studio-process-number">03</span><strong>Battery Parameter Estimation</strong></div><div class="studio-fit-preview" role="img" aria-label="An initial estimate improves after a second measurement transfer"><svg viewBox="0 0 180 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="studio-fit-grid" d="M10 26H170M10 61H170M10 96H170M10 131H170"/><path class="studio-fit-measured" d="M11 105 C35 105 34 53 57 52 S83 112 106 91 S140 37 169 46"/><path class="studio-fit-rough" d="M11 89 C35 93 37 67 57 65 S84 105 106 98 S140 52 169 59"/><path class="studio-fit-final" d="M11 103 C35 104 35 56 57 55 S83 110 106 93 S140 40 169 49"/></svg></div></div>
-          <span class="studio-process-arrow studio-process-arrow-3" aria-hidden="true">→</span>
-          <div class="studio-process-node studio-process-validation"><div class="studio-process-node-head"><span class="studio-process-number">04</span><strong>Model Validation</strong></div><div class="studio-validation-visual" role="img" aria-label="Measured and estimated responses are compared before a validation decision"><svg viewBox="0 0 180 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect class="studio-validate-frame" x="20" y="27" width="140" height="93" rx="12"/><path class="studio-validate-grid" d="M33 49H147M33 76H147M33 103H147"/><path class="studio-validate-measured" d="M34 88C52 88 51 49 70 49S91 96 108 80S135 49 146 54"/><path class="studio-validate-estimated" d="M34 79C52 82 56 60 71 60S92 88 108 86S135 58 146 62"/><circle class="studio-validate-badge" cx="132" cy="111" r="15"/><path class="studio-validate-review" d="M132 103V113M132 118V119"/><path class="studio-validate-check" d="M125 111L130 116L139 106"/></svg></div></div>
-          <span class="studio-process-arrow studio-process-arrow-4" aria-hidden="true">→</span>
-          <div class="studio-process-node studio-process-simulation"><div class="studio-process-node-head"><span class="studio-process-number">05</span><strong>Data Generation</strong></div><div class="studio-generation-visual" role="img" aria-label="A validated digital twin produces a new synthetic dataset"><svg viewBox="0 0 180 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="studio-generate-back" d="M31 29H115L139 53V107Q139 115 131 115H31Q23 115 23 107V37Q23 29 31 29Z"/><path class="studio-generate-fold" d="M115 29V53H139"/><rect class="studio-generate-front" x="43" y="42" width="111" height="85" rx="9"/><path class="studio-generate-grid" d="M56 62H141M56 81H141M56 100H141"/><path class="studio-generate-curve" d="M56 107C73 102 77 75 91 79S111 103 121 83S136 70 141 66"/><circle class="studio-generate-dot" cx="66" cy="54" r="3"/><circle class="studio-generate-dot" cx="79" cy="54" r="3"/><circle class="studio-generate-dot" cx="92" cy="54" r="3"/></svg></div></div>
-          <div class="studio-feedback" role="img" aria-label="Validation sends a review decision back to parameter estimation, not measurement data"><svg class="studio-feedback-desktop" viewBox="0 0 100 42" preserveAspectRatio="none" aria-hidden="true"><path d="M79 0V24Q79 34 69 34H31Q21 34 21 24V0M17 7L21 0L25 7"/></svg><svg class="studio-feedback-mobile" viewBox="0 0 18 526" preserveAspectRatio="none" aria-hidden="true"><path d="M0 414H8Q16 414 16 406V120Q16 112 8 112H0M6 106L0 112L6 118"/></svg></div>
-        </div>
-        <div class="studio-research" aria-labelledby="studio-research-title">
-          <div class="studio-research-heading"><span id="studio-research-title">02 / Prototype workflow</span></div>
-          <div class="studio-research-scroll">
-            <svg class="studio-research-diagram" viewBox="0 65 1400 290" role="img" aria-labelledby="studio-research-svg-title studio-research-svg-desc" xmlns="http://www.w3.org/2000/svg">
-              <title id="studio-research-svg-title">Battery digital twin Studio prototype workflow</title>
-              <desc id="studio-research-svg-desc">Choose a catalog dataset, initialize the displayed PIML model, run illustrative parameter estimation and validation, then set operating conditions to generate and download synthetic cycle data. Failed demo validation can return to parameter estimation for demo recalibration.</desc>
-              <defs>
-                <marker id="research-blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#4b8dce"/></marker>
-                <marker id="research-green-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#48a876"/></marker>
-              </defs>
-              <path class="research-link research-link-blue" d="M270 150H330" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-blue" d="M540 150H600" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-blue" d="M810 150H870" marker-end="url(#research-blue-arrow)"/>
-              <path class="research-link research-link-green" d="M1080 150H1140" marker-end="url(#research-green-arrow)"/>
-              <text class="research-link-label research-link-label-green" x="1110" y="135" text-anchor="middle">Pass</text>
-              <path class="research-link research-link-green research-link-feedback" d="M975 200V300H705V200" marker-end="url(#research-green-arrow)"/>
-              <text class="research-link-label research-link-label-green" x="840" y="290" text-anchor="middle">Needs review · recalibrate demo</text>
-
-              <g class="research-card research-card-data"><path d="M69 100H270L261 200H60Z"/><text class="research-card-eyebrow" x="165" y="128" text-anchor="middle">01 / Catalog</text><text class="research-card-title" x="165" y="170" text-anchor="middle">Choose dataset</text></g>
-              <g class="research-card research-card-model"><rect x="330" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="435" y="128" text-anchor="middle">02 / PIML display</text><text class="research-card-title" x="435" y="158" text-anchor="middle">Initialize</text><text class="research-card-title" x="435" y="179" text-anchor="middle">model</text></g>
-              <g class="research-card"><rect x="600" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="705" y="128" text-anchor="middle">03 / Illustrative fit</text><text class="research-card-title" x="705" y="158" text-anchor="middle">Parameter</text><text class="research-card-title" x="705" y="179" text-anchor="middle">estimation</text></g>
-              <g class="research-card research-card-validation"><rect x="870" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="975" y="128" text-anchor="middle">04 / Demo check</text><text class="research-card-title" x="975" y="170" text-anchor="middle">Validation</text></g>
-              <g class="research-card research-card-output"><rect x="1140" y="100" width="210" height="100" rx="12"/><text class="research-card-eyebrow" x="1245" y="128" text-anchor="middle">05 / Set conditions</text><text class="research-card-title" x="1245" y="158" text-anchor="middle">Synthetic data</text><text class="research-card-title" x="1245" y="179" text-anchor="middle">&amp; CSV download</text></g>
-            </svg>
+          <article class="studio-process-node studio-system-node studio-process-model">
+            <div class="studio-process-node-head"><span class="studio-process-number">03</span><div><strong>Digital Twin</strong></div></div>
+            <div class="studio-system-visual studio-twin-core" aria-hidden="true"><svg viewBox="0 0 150 112"><circle class="studio-twin-halo" cx="75" cy="56" r="43"/><g class="studio-twin-orbit"><ellipse class="studio-icon-orbit" cx="75" cy="56" rx="52" ry="25"/><ellipse class="studio-icon-orbit" cx="75" cy="56" rx="52" ry="25" transform="rotate(60 75 56)"/><ellipse class="studio-icon-orbit" cx="75" cy="56" rx="52" ry="25" transform="rotate(120 75 56)"/><circle class="studio-icon-port" cx="127" cy="56" r="3.5"/><circle class="studio-icon-port studio-icon-port-green" cx="49" cy="11" r="3.5"/></g><rect class="studio-icon-front" x="55" y="31" width="40" height="52" rx="9"/><path class="studio-icon-line" d="M65 43h20M65 53h20M65 63h15M69 27v-5h12v5"/><circle class="studio-twin-core-dot studio-icon-pulse" cx="75" cy="73" r="5"/></svg></div>
+          </article>
+          <span class="studio-process-arrow studio-process-arrow-3" aria-hidden="true"></span>
+          <article class="studio-process-node studio-system-node studio-process-prediction">
+            <div class="studio-process-node-head"><span class="studio-process-number">04</span><div><strong>Prediction</strong></div></div>
+            <div class="studio-system-visual studio-prediction-visual" aria-hidden="true"><svg viewBox="0 0 150 112"><rect class="studio-icon-panel" x="17" y="15" width="116" height="82" rx="14"/><path class="studio-icon-grid" d="M31 34h88M31 55h88M31 76h88M48 27v58M74 27v58M100 27v58"/><path class="studio-prediction-area" d="M31 38c17 4 24 8 34 17s23 6 34 16 14 10 20 11v8H31Z"/><path class="studio-prediction-truth" d="M31 37c17 4 24 8 34 17s23 6 34 16 14 10 20 11"/><path class="studio-prediction-forecast" d="M31 43c17 2 24 5 34 15s23 5 34 14 14 8 20 9"/><line class="studio-prediction-scan" x1="31" y1="27" x2="31" y2="87"/><circle class="studio-icon-port studio-icon-pulse" cx="119" cy="81" r="4"/></svg></div>
+          </article>
+          <span class="studio-process-arrow studio-process-arrow-4" aria-hidden="true"></span>
+          <article class="studio-process-node studio-system-node studio-process-application">
+            <div class="studio-process-node-head"><span class="studio-process-number">05</span><div><strong>Application</strong></div></div>
+            <div class="studio-system-visual studio-application-visual" aria-hidden="true"><svg viewBox="0 0 150 112"><rect class="studio-icon-panel studio-app-dashboard" x="28" y="24" width="94" height="66" rx="14"/><path class="studio-app-header" d="M29 39h92"/><circle class="studio-app-status" cx="42" cy="32" r="2.5"/><circle class="studio-app-status" cx="51" cy="32" r="2.5"/><circle class="studio-app-status" cx="60" cy="32" r="2.5"/><path class="studio-app-track" d="M43 52h63M43 65h63M43 78h63"/><circle class="studio-app-node studio-app-node-one" cx="64" cy="52" r="5"/><circle class="studio-app-node studio-app-node-two" cx="91" cy="65" r="5"/><circle class="studio-app-node studio-app-node-three" cx="56" cy="78" r="5"/><path class="studio-app-check" d="m101 75 5 5 10-12"/></svg></div>
+          </article>
+          <span class="studio-process-arrow studio-process-arrow-5" aria-hidden="true"></span>
+          <article class="studio-process-node studio-system-node studio-process-simulation">
+            <div class="studio-process-node-head"><span class="studio-process-number">06</span><div><strong>Data Generation</strong></div></div>
+            <div class="studio-system-visual studio-generation-visual" aria-hidden="true"><svg viewBox="0 0 150 112"><g class="studio-generation-stack"><rect class="studio-icon-side studio-generation-back" x="28" y="35" width="83" height="55" rx="9"/><rect class="studio-icon-surface studio-generation-mid" x="36" y="27" width="83" height="55" rx="9"/><rect class="studio-icon-front studio-generation-front" x="44" y="19" width="83" height="55" rx="9"/><path class="studio-icon-line" d="M58 35h35M58 45h55M58 55h39"/><path class="studio-generation-curve" d="M58 65c8-1 11-11 19-10s10 8 18 2 10-8 18-8"/><path class="studio-generation-spark" d="M122 22v10m-5-5h10M30 26v8m-4-4h8"/><circle class="studio-icon-port studio-generation-dot" cx="111" cy="34" r="3"/></g></svg></div>
+          </article>
+          <div class="studio-cycle-return" aria-hidden="true">
+            <svg viewBox="0 0 1000 74" preserveAspectRatio="none"><defs><linearGradient id="studio-loop-gradient" x1="1" x2="0"><stop offset="0" stop-color="#2f80ed"/><stop offset=".55" stop-color="#4b9bdb"/><stop offset="1" stop-color="#28aa83"/></linearGradient></defs><path class="studio-loop-glow" d="M960 3c15 0 20 10 20 24v19c0 14-10 22-26 22H47C29 68 20 58 20 42V8"/><path class="studio-loop-line" d="M960 3c15 0 20 10 20 24v19c0 14-10 22-26 22H47C29 68 20 58 20 42V8"/><path class="studio-loop-arrow" d="m12 17 8-13 8 13"/><circle class="studio-loop-particle" r="4"><animateMotion dur="5.5s" repeatCount="indefinite" path="M960 3c15 0 20 10 20 24v19c0 14-10 22-26 22H47C29 68 20 58 20 42V8"/></circle></svg>
+            <span>Continuous Operation · Online Data Acquisition · Continuous Model Updates</span>
           </div>
         </div>
+        <section class="studio-learning-trajectory" aria-labelledby="studio-learning-title">
+          <div class="studio-learning-heading"><div><h3 id="studio-learning-title">The digital twin becomes more accurate as operational data accumulates</h3></div><p>Measured response <i></i> Twin prediction</p></div>
+          <div class="studio-learning-stages">
+            <article class="studio-learning-stage"><header><span>01</span><strong>Initial</strong><small>Limited observations</small></header><svg viewBox="0 0 150 82" aria-hidden="true"><path class="studio-learning-grid" d="M16 19h121M16 40h121M16 61h121"/><path class="studio-learning-truth" d="M17 26c15 5 18 23 33 19s20-18 33-9 19 25 34 13 12-23 20-20"/><path class="studio-learning-prediction stage-one" d="M17 15c16 21 20 2 33 19s20 2 33 17 20 3 34 10 13-25 20-17"/></svg><em>Wide prediction gap</em></article>
+            <span class="studio-learning-arrow" aria-hidden="true"></span>
+            <article class="studio-learning-stage"><header><span>02</span><strong>Adapting</strong><small>Broader conditions</small></header><svg viewBox="0 0 150 82" aria-hidden="true"><path class="studio-learning-grid" d="M16 19h121M16 40h121M16 61h121"/><path class="studio-learning-truth" d="M17 26c15 5 18 23 33 19s20-18 33-9 19 25 34 13 12-23 20-20"/><path class="studio-learning-prediction stage-two" d="M17 21c15 10 19 17 33 17s20-12 33-3 19 21 34 16 13-26 20-19"/></svg><em>Model calibrating</em></article>
+            <span class="studio-learning-arrow" aria-hidden="true"></span>
+            <article class="studio-learning-stage"><header><span>03</span><strong>Refined</strong><small>More operating data</small></header><svg viewBox="0 0 150 82" aria-hidden="true"><path class="studio-learning-grid" d="M16 19h121M16 40h121M16 61h121"/><path class="studio-learning-truth" d="M17 26c15 5 18 23 33 19s20-18 33-9 19 25 34 13 12-23 20-20"/><path class="studio-learning-prediction stage-three" d="M17 24c15 7 18 21 33 18s20-16 33-7 19 23 34 15 12-24 20-19"/></svg><em>Low prediction error</em></article>
+            <span class="studio-learning-arrow" aria-hidden="true"></span>
+            <article class="studio-learning-stage studio-learning-stage-final"><header><span>04</span><strong>Converged</strong><small>Continuous operation</small></header><svg viewBox="0 0 150 82" aria-hidden="true"><path class="studio-learning-grid" d="M16 19h121M16 40h121M16 61h121"/><path class="studio-learning-truth" d="M17 26c15 5 18 23 33 19s20-18 33-9 19 25 34 13 12-23 20-20"/><path class="studio-learning-prediction stage-four" d="M17 27c15 4 18 22 33 18s20-17 33-8 19 24 34 13 12-23 20-20"/></svg><em>High-fidelity digital twin</em></article>
+          </div>
+        </section>
       </section>
 
       <section class="studio-operations" aria-labelledby="studio-workspace-title">
@@ -2069,8 +2075,7 @@ for dataset in resp.json()["items"]:
 <script src="js/dataset-metadata.js?v=catalog-redesign-4"></script>
 <script src="js/datasets-page.js?v=catalog-redesign-12"></script>
 <script src="js/main.js?v=catalog-redesign-3"></script>
-<script src="js/digital-twin.js?v=studio-workflow-30"></script>
-<script src="js/studio-particle-flow.js?v=11"></script>
+<script src="js/digital-twin.js?v=studio-workflow-31"></script>
 <script src="js/benchmark-results.js?v=real-curves-1"></script>
 <script src="js/preprocessing.js"></script>
 <script src="js/contribute.js"></script>

@@ -79,9 +79,11 @@
   function clearResults(reset = false) {
     el('download').disabled = true;
     if (!reset && el('results').classList.contains('has-results')) {
+      state.generatedData = null;
       el('results').classList.add('is-stale');
       el('result-status').textContent = 'Setup changed · run simulation again to update';
       el('run').textContent = 'Run Simulation & Generate Data';
+      setFlowStage('application');
       return;
     }
     state.generatedData = null;
@@ -95,9 +97,9 @@
     el('calibration-value').textContent = progress + '%';
   }
   function setFlowStage(stage) {
-    const stages = ['data', 'model', 'estimation', 'validation', 'simulation'];
-    const selectors = ['.studio-process-data', '.studio-process-model', '.studio-process-estimation', '.studio-process-validation', '.studio-process-simulation'];
-    const current = stages.indexOf(stage);
+    const currentByStage = { data: 1, model: 2, estimation: 2, validation: 3, application: 4, generation: 5 };
+    const selectors = ['.studio-process-source', '.studio-process-data', '.studio-process-model', '.studio-process-prediction', '.studio-process-application', '.studio-process-simulation'];
+    const current = currentByStage[stage] ?? 1;
     selectors.forEach((selector, index) => {
       const node = root.querySelector(selector);
       node.classList.toggle('is-complete', index < current);
@@ -120,7 +122,8 @@
     else if (!state.initialized) setFlowStage('model');
     else if (!state.estimated) setFlowStage('estimation');
     else if (!state.validated) setFlowStage('validation');
-    else setFlowStage('simulation');
+    else if (!state.generatedData) setFlowStage('application');
+    else setFlowStage('generation');
   }
   function restartSignalAnimation(selector, className) {
     const node = root.querySelector(selector);
@@ -408,6 +411,7 @@
     el('results').classList.add('has-results');
     el('results').classList.remove('is-stale');
     el('run').textContent = 'Run Simulation & Generate Data';
+    setFlowStage('generation');
     const datasetName = dataset?.dataset_name || '';
     el('results').innerHTML = `<div class="studio-report-head"><div><strong>${esc(datasetName)} · Synthetic dataset</strong></div><span id="studio-result-status" role="status">Illustrative output · prototype simulation</span></div>
       <section class="studio-prediction-block" aria-labelledby="studio-performance-title">
