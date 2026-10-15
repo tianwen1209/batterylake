@@ -104,7 +104,7 @@
     }
   ],
   "warn_count": 1,
-  "generated_at": "2026-09-08T15:54:04Z",
+  "generated_at": "2026-10-15T09:06:46Z",
   "source": "canonical_v2_sample",
   "sample": {
     "shards_total": 5739,
@@ -113,7 +113,7 @@
     "rows_per_shard_cap": 50000,
     "note": "evenly spaced canonical time-series shards, leading rows per shard"
   },
-  "ref_name": "2024_TUM_Stroebl_NMC_21700_Multistage_25T",
+  "ref_name": "2024_HM_Stroebl_NMC_21700_Multistage_MultiT",
   "category": "cycle_aging",
   "processing_status": "needs_semantic_review"
 }

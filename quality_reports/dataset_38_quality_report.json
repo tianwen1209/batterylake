@@ -1,0 +1,119 @@
+{
+  "dataset_id": "dataset_38",
+  "file_name": "canonical/time_series (13/251 shards)",
+  "chemistry": "NMC",
+  "n_rows": 645878,
+  "metrics": {
+    "n_rows": 645878,
+    "n_cells": 13,
+    "channels_present": [
+      "voltage",
+      "current",
+      "timestamp"
+    ],
+    "channels_missing": [
+      "temperature",
+      "capacity"
+    ],
+    "missing_pct": 0.0,
+    "sequence_flags": 1,
+    "schema_errors": 0
+  },
+  "quality_score": {
+    "completeness": 0.8,
+    "consistency": 0.75,
+    "accuracy": 1.0,
+    "validity": 1.0
+  },
+  "overall": 0.89,
+  "gate": "ready_with_warning",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "100.0% within 2.5-4.35V"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "0 negative interval(s), 0 large gap(s)"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "warn",
+      "score": 0.5,
+      "note": "only one current sign present"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "passed": true
+    },
+    {
+      "name": "energy_balance",
+      "passed": true
+    },
+    {
+      "name": "capacity_mono",
+      "passed": true
+    },
+    {
+      "name": "temperature_consistency",
+      "passed": true
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "status": "review"
+    }
+  ],
+  "warn_count": 1,
+  "generated_at": "2026-10-15T09:06:50Z",
+  "source": "canonical_v2_sample",
+  "sample": {
+    "shards_total": 251,
+    "shards_used": 13,
+    "rows_loaded": 645878,
+    "rows_per_shard_cap": 50000,
+    "note": "evenly spaced canonical time-series shards, leading rows per shard"
+  },
+  "ref_name": "2023_ISU_ILCC_Li_NMC_Pouch_MultiC_30T",
+  "category": "cycle_aging",
+  "processing_status": "converted_native_rpt_features"
+}

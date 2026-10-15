@@ -1,0 +1,119 @@
+{
+  "dataset_id": "dataset_22",
+  "file_name": "canonical/{ingested,oxford_rpt,batterylife_v12}/*/{canonical/time_series,traces,signals/*} (12/17 shards)",
+  "chemistry": "NMC",
+  "n_rows": 600000,
+  "metrics": {
+    "n_rows": 600000,
+    "n_cells": 12,
+    "channels_present": [
+      "voltage",
+      "current",
+      "capacity",
+      "timestamp"
+    ],
+    "channels_missing": [
+      "temperature"
+    ],
+    "missing_pct": 0.0,
+    "sequence_flags": 41563,
+    "schema_errors": 0
+  },
+  "quality_score": {
+    "completeness": 0.9,
+    "consistency": 0.98,
+    "accuracy": 0.75,
+    "validity": 1.0
+  },
+  "overall": 0.91,
+  "gate": "ready_with_warning",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "pass",
+      "score": 0.9992,
+      "note": "99.9% within 2.5-4.35V"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "warn",
+      "score": 0.3345,
+      "note": "33.4% of 598166 cycles CE in 95-105%"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "warn",
+      "score": 0.9307,
+      "note": "41562 non-monotonic step(s) over 599989 cycles"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "1 negative interval(s), 0 large gap(s)"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "charge 82% / discharge 18% of non-zero samples"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "passed": true
+    },
+    {
+      "name": "energy_balance",
+      "status": "review"
+    },
+    {
+      "name": "capacity_mono",
+      "status": "review"
+    },
+    {
+      "name": "temperature_consistency",
+      "passed": true
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "passed": true
+    }
+  ],
+  "warn_count": 2,
+  "generated_at": "2026-10-15T09:06:40Z",
+  "source": "canonical_v2_sample",
+  "sample": {
+    "shards_total": 17,
+    "shards_used": 12,
+    "rows_loaded": 600000,
+    "rows_per_shard_cap": 50000,
+    "note": "evenly spaced canonical time-series shards, leading rows per shard"
+  },
+  "ref_name": "2022_EVERLASTING_4TU_NMC-SiGr_18650_3.5Ah_MultiC_25-45T",
+  "category": "cycle_aging",
+  "processing_status": "needs_semantic_review"
+}

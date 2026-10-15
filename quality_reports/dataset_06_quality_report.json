@@ -1,0 +1,119 @@
+{
+  "dataset_id": "dataset_06",
+  "file_name": "canonical/{ingested,oxford_rpt,batterylife_v12}/*/{canonical/time_series,traces,signals/*} (13/61 shards)",
+  "chemistry": "NCA",
+  "n_rows": 638734,
+  "metrics": {
+    "n_rows": 638734,
+    "n_cells": 13,
+    "channels_present": [
+      "voltage",
+      "current",
+      "temperature",
+      "capacity"
+    ],
+    "channels_missing": [
+      "timestamp"
+    ],
+    "missing_pct": 0.82,
+    "sequence_flags": 6,
+    "schema_errors": 0
+  },
+  "quality_score": {
+    "completeness": 0.9,
+    "consistency": 1.0,
+    "accuracy": 0.92,
+    "validity": 1.0
+  },
+  "overall": 0.96,
+  "gate": "ready_with_warning",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "warn",
+      "score": 0.9811,
+      "note": "98.1% within 2.5-4.3V"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "pass",
+      "score": 0.9984,
+      "note": "99.8% of 4871 cycles CE in 95-105%"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "pass",
+      "score": 0.9988,
+      "note": "6 non-monotonic step(s) over 4859 cycles"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "warn",
+      "score": 0.709,
+      "note": "70.9% within +/-5C of 25.9C"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "charge 63% / discharge 37% of non-zero samples"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "status": "review"
+    },
+    {
+      "name": "energy_balance",
+      "passed": true
+    },
+    {
+      "name": "capacity_mono",
+      "passed": true
+    },
+    {
+      "name": "temperature_consistency",
+      "status": "review"
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "passed": true
+    }
+  ],
+  "warn_count": 2,
+  "generated_at": "2026-10-15T09:06:37Z",
+  "source": "canonical_v2_sample",
+  "sample": {
+    "shards_total": 61,
+    "shards_used": 13,
+    "rows_loaded": 638734,
+    "rows_per_shard_cap": 50000,
+    "note": "evenly spaced canonical time-series shards, leading rows per shard"
+  },
+  "ref_name": "2020_SNL_BatteryArchive_NCA-NMC-LFP_18650_MultiDOD_MultiC_15-25-35T",
+  "category": "cycle_aging",
+  "processing_status": "needs_semantic_review"
+}

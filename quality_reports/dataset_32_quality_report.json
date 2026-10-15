@@ -1,0 +1,119 @@
+{
+  "dataset_id": "dataset_32",
+  "file_name": "canonical/{ingested,oxford_rpt,batterylife_v12}/*/{canonical/time_series,traces,signals/*} (11/11 shards)",
+  "chemistry": "LFP",
+  "n_rows": 109374,
+  "metrics": {
+    "n_rows": 109374,
+    "n_cells": 11,
+    "channels_present": [
+      "timestamp"
+    ],
+    "channels_missing": [
+      "voltage",
+      "current",
+      "temperature",
+      "capacity"
+    ],
+    "missing_pct": 0.0,
+    "sequence_flags": 0,
+    "schema_errors": 2
+  },
+  "quality_score": {
+    "completeness": 0.6,
+    "consistency": 1.0,
+    "accuracy": 0.9,
+    "validity": 0.5
+  },
+  "overall": 0.75,
+  "gate": "needs_review",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "0 negative interval(s), 0 large gap(s)"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "passed": true
+    },
+    {
+      "name": "energy_balance",
+      "passed": true
+    },
+    {
+      "name": "capacity_mono",
+      "passed": true
+    },
+    {
+      "name": "temperature_consistency",
+      "passed": true
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "passed": true
+    }
+  ],
+  "warn_count": 0,
+  "generated_at": "2026-10-15T09:06:53Z",
+  "source": "canonical_v2_sample",
+  "sample": {
+    "shards_total": 11,
+    "shards_used": 11,
+    "rows_loaded": 109374,
+    "rows_per_shard_cap": 54545,
+    "note": "all canonical time-series shards (leading rows per shard)"
+  },
+  "ref_name": "2023_Figshare_LFP_Pouch_0.6Ah_EIS_MultiT",
+  "category": "eis",
+  "processing_status": "needs_semantic_review"
+}

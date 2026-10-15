@@ -1,0 +1,118 @@
+{
+  "dataset_id": "dataset_03",
+  "file_name": "canonical/time_series (13/94 shards)",
+  "chemistry": "LFP",
+  "n_rows": 644043,
+  "metrics": {
+    "n_rows": 644043,
+    "n_cells": 13,
+    "channels_present": [
+      "voltage",
+      "current",
+      "temperature",
+      "capacity",
+      "timestamp"
+    ],
+    "channels_missing": [],
+    "missing_pct": 0.0,
+    "sequence_flags": 554,
+    "schema_errors": 0
+  },
+  "quality_score": {
+    "completeness": 1.0,
+    "consistency": 1.0,
+    "accuracy": 0.99,
+    "validity": 1.0
+  },
+  "overall": 1.0,
+  "gate": "ready_with_warning",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "warn",
+      "score": 0.956,
+      "note": "95.6% within 2.0-3.8V"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "100.0% of 567 cycles CE in 95-105%"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "0 non-monotonic step(s) over 555 cycles"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "pass",
+      "score": 0.9918,
+      "note": "99.2% within +/-5C of 32.0C"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass",
+      "score": 0.9991,
+      "note": "554 negative interval(s), 0 large gap(s)"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "charge 58% / discharge 42% of non-zero samples"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "status": "review"
+    },
+    {
+      "name": "energy_balance",
+      "passed": true
+    },
+    {
+      "name": "capacity_mono",
+      "passed": true
+    },
+    {
+      "name": "temperature_consistency",
+      "passed": true
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "passed": true
+    }
+  ],
+  "warn_count": 1,
+  "generated_at": "2026-10-15T09:06:36Z",
+  "source": "canonical_v2_sample",
+  "sample": {
+    "shards_total": 94,
+    "shards_used": 13,
+    "rows_loaded": 644043,
+    "rows_per_shard_cap": 50000,
+    "note": "evenly spaced canonical time-series shards, leading rows per shard"
+  },
+  "ref_name": "2019_Stanford_MIT_TRI_LFP_18650_MultiC_30T",
+  "category": "cycle_aging",
+  "processing_status": "needs_semantic_review"
+}

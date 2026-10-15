@@ -1,0 +1,119 @@
+{
+  "dataset_id": "dataset_25",
+  "file_name": "canonical/{ingested,oxford_rpt,batterylife_v12}/*/{canonical/time_series,traces,signals/*} (12/4025 shards)",
+  "chemistry": "NMC",
+  "n_rows": 600000,
+  "metrics": {
+    "n_rows": 600000,
+    "n_cells": 12,
+    "channels_present": [
+      "voltage",
+      "current",
+      "capacity",
+      "timestamp"
+    ],
+    "channels_missing": [
+      "temperature"
+    ],
+    "missing_pct": 4.1,
+    "sequence_flags": 0,
+    "schema_errors": 0
+  },
+  "quality_score": {
+    "completeness": 0.88,
+    "consistency": 1.0,
+    "accuracy": 0.5,
+    "validity": 0.97
+  },
+  "overall": 0.84,
+  "gate": "ready_with_warning",
+  "checks_detail": [
+    {
+      "key": "voltage_range",
+      "name": "Voltage Range Validation",
+      "detail": "All cell voltages within nominal operating range for the stated chemistry.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "100.0% within 2.5-4.35V"
+    },
+    {
+      "key": "energy_balance",
+      "name": "Energy Balance Check",
+      "detail": "Charge/discharge energy integral consistency; coulombic efficiency within 95-105% per cycle.",
+      "status": "warn",
+      "score": 0.0,
+      "note": "0.0% of 12 cycles CE in 95-105%"
+    },
+    {
+      "key": "capacity_mono",
+      "name": "Capacity Monotonicity",
+      "detail": "Degradation trajectory follows expected non-increasing trend with allowable recovery windows.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "temperature_consistency",
+      "name": "Temperature Consistency",
+      "detail": "Cell surface temperature stays within 5C of the stated test condition.",
+      "status": "pass",
+      "score": null,
+      "note": "channel not available \u2014 skipped"
+    },
+    {
+      "key": "timestamp_integrity",
+      "name": "Timestamp Integrity",
+      "detail": "Monotonically increasing timestamps with no negative intervals or gaps above 24h.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "0 negative interval(s), 0 large gap(s)"
+    },
+    {
+      "key": "current_direction",
+      "name": "Current Direction Consistency",
+      "detail": "Charge and discharge current signs follow one convention throughout the dataset.",
+      "status": "pass",
+      "score": 1.0,
+      "note": "charge 53% / discharge 47% of non-zero samples"
+    }
+  ],
+  "checks": [
+    {
+      "name": "voltage_range",
+      "passed": true
+    },
+    {
+      "name": "energy_balance",
+      "status": "review"
+    },
+    {
+      "name": "capacity_mono",
+      "passed": true
+    },
+    {
+      "name": "temperature_consistency",
+      "passed": true
+    },
+    {
+      "name": "timestamp_integrity",
+      "passed": true
+    },
+    {
+      "name": "current_direction",
+      "passed": true
+    }
+  ],
+  "warn_count": 1,
+  "generated_at": "2026-10-15T09:06:46Z",
+  "source": "canonical_v2_sample",
+  "sample": {
+    "shards_total": 4025,
+    "shards_used": 12,
+    "rows_loaded": 600000,
+    "rows_per_shard_cap": 50000,
+    "note": "evenly spaced canonical time-series shards, leading rows per shard"
+  },
+  "ref_name": "2022_Stanford_Onori_NMC_Cyl_RealDriving_MultiT",
+  "category": "cycle_aging",
+  "processing_status": "needs_semantic_review"
+}
