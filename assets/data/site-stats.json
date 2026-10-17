@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-16T19:59:10Z",
-  "total_visits": 3960,
+  "updated_at": "2026-10-17T19:30:44Z",
+  "total_visits": 3969,
   "dataset_downloads": 509,
   "skill_uses": 126,
   "model_downloads": {
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-16T19:59:10Z",
+    "updatedAt": "2026-10-17T19:30:44Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-16"
+      "endDate": "2026-10-17"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 80
+        "visitors": 83
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 71
+        "visitors": 72
       },
       {
         "country": "China",
@@ -55,6 +55,11 @@
         "visitors": 6
       },
       {
+        "country": "Taiwan",
+        "countryCode": "TW",
+        "visitors": 6
+      },
+      {
         "country": "Vietnam",
         "countryCode": "VN",
         "visitors": 6
@@ -62,11 +67,6 @@
       {
         "country": "Canada",
         "countryCode": "CA",
-        "visitors": 5
-      },
-      {
-        "country": "Taiwan",
-        "countryCode": "TW",
         "visitors": 5
       },
       {
@@ -145,7 +145,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 69,
+        "visitors": 70,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 27,
+        "visitors": 28,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -161,7 +161,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 15,
+        "visitors": 16,
         "lng": -77.487,
         "lat": 39.044
       },
@@ -374,6 +374,14 @@
         "lat": 13.754
       },
       {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Ann Arbor",
+        "visitors": 2,
+        "lng": -83.741,
+        "lat": 42.278
+      },
+      {
         "country": "Vietnam",
         "countryCode": "VN",
         "city": "Ho Chi Minh City",
@@ -516,14 +524,6 @@
         "visitors": 1,
         "lng": 28.95,
         "lat": 41.014
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Ann Arbor",
-        "visitors": 1,
-        "lng": -83.741,
-        "lat": 42.278
       },
       {
         "country": "United States",
