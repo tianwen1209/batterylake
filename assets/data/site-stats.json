@@ -1,33 +1,33 @@
 {
-  "updated_at": "2026-10-17T19:30:44Z",
-  "total_visits": 3969,
-  "dataset_downloads": 509,
-  "skill_uses": 126,
+  "updated_at": "2026-10-18T19:28:48Z",
+  "total_visits": 4001,
+  "dataset_downloads": 511,
+  "skill_uses": 127,
   "model_downloads": {
     "cnn": 16,
     "linear": 4
   },
   "model_runs": {
     "cnn": 10,
+    "linear": 4,
     "pinn": 4,
-    "linear": 3,
     "xgboost": 3,
     "lstm": 2,
     "baseline-package": 1,
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-17T19:30:44Z",
+    "updatedAt": "2026-10-18T19:28:48Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-17"
+      "endDate": "2026-10-18"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 83
+        "visitors": 84
       },
       {
         "country": "Singapore",
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 58
+        "visitors": 59
       },
       {
         "country": "Hong Kong",
@@ -105,6 +105,11 @@
         "visitors": 2
       },
       {
+        "country": "Italy",
+        "countryCode": "IT",
+        "visitors": 2
+      },
+      {
         "country": "Thailand",
         "countryCode": "TH",
         "visitors": 2
@@ -117,11 +122,6 @@
       {
         "country": "Ireland",
         "countryCode": "IE",
-        "visitors": 1
-      },
-      {
-        "country": "Italy",
-        "countryCode": "IT",
         "visitors": 1
       },
       {
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 28,
+        "visitors": 29,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -272,6 +272,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Guangzhou",
+        "visitors": 3,
+        "lng": 113.25,
+        "lat": 23.117
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Qingdao",
         "visitors": 3,
         "lng": 120.38,
@@ -320,14 +328,6 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Guangzhou",
-        "visitors": 2,
-        "lng": 113.25,
-        "lat": 23.117
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
         "city": "Xi'An",
         "visitors": 2,
         "lng": 108.929,
@@ -364,6 +364,14 @@
         "visitors": 2,
         "lng": 51.422,
         "lat": 35.694
+      },
+      {
+        "country": "Italy",
+        "countryCode": "IT",
+        "city": "Milan",
+        "visitors": 2,
+        "lng": 9.19,
+        "lat": 45.464
       },
       {
         "country": "Thailand",
@@ -476,14 +484,6 @@
         "visitors": 1,
         "lng": 76.966,
         "lat": 11.006
-      },
-      {
-        "country": "Italy",
-        "countryCode": "IT",
-        "city": "Milan",
-        "visitors": 1,
-        "lng": 9.19,
-        "lat": 45.464
       },
       {
         "country": "Japan",
