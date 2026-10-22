@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-21T20:42:23Z",
-  "total_visits": 4102,
+  "updated_at": "2026-10-22T20:36:54Z",
+  "total_visits": 4105,
   "dataset_downloads": 526,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-21T20:42:23Z",
+    "updatedAt": "2026-10-22T20:36:54Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-21"
+      "endDate": "2026-10-22"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 88
+        "visitors": 90
       },
       {
         "country": "Singapore",
@@ -161,7 +161,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 16,
+        "visitors": 17,
         "lng": -77.487,
         "lat": 39.044
       },
@@ -564,6 +564,14 @@
         "visitors": 1,
         "lng": -81.656,
         "lat": 30.332
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "North Charleston",
+        "visitors": 1,
+        "lng": -79.975,
+        "lat": 32.855
       },
       {
         "country": "United States",
