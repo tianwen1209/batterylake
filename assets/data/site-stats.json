@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-23T20:31:01Z",
-  "total_visits": 4168,
+  "updated_at": "2026-10-24T19:34:11Z",
+  "total_visits": 4213,
   "dataset_downloads": 526,
   "skill_uses": 130,
   "model_downloads": {
@@ -11,23 +11,23 @@
     "cnn": 10,
     "linear": 4,
     "pinn": 4,
+    "lstm": 3,
     "xgboost": 3,
-    "lstm": 2,
     "baseline-package": 1,
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-23T20:31:01Z",
+    "updatedAt": "2026-10-24T19:34:11Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-23"
+      "endDate": "2026-10-24"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 91
+        "visitors": 96
       },
       {
         "country": "Singapore",
@@ -37,12 +37,12 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 62
+        "visitors": 63
       },
       {
         "country": "France",
         "countryCode": "FR",
-        "visitors": 7
+        "visitors": 8
       },
       {
         "country": "Hong Kong",
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 33,
+        "visitors": 34,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -206,6 +206,14 @@
         "lat": 42.07
       },
       {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Beijing",
+        "visitors": 6,
+        "lng": 116.397,
+        "lat": 39.907
+      },
+      {
         "country": "United States",
         "countryCode": "US",
         "city": "Santa Clara",
@@ -216,18 +224,26 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Beijing",
-        "visitors": 5,
-        "lng": 116.397,
-        "lat": 39.907
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
         "city": "Nanjing",
         "visitors": 5,
         "lng": 118.778,
         "lat": 32.062
+      },
+      {
+        "country": "France",
+        "countryCode": "FR",
+        "city": "Paris",
+        "visitors": 5,
+        "lng": 2.349,
+        "lat": 48.853
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Los Angeles",
+        "visitors": 5,
+        "lng": -118.244,
+        "lat": 34.052
       },
       {
         "country": "Canada",
@@ -254,28 +270,12 @@
         "lat": 26.061
       },
       {
-        "country": "France",
-        "countryCode": "FR",
-        "city": "Paris",
-        "visitors": 4,
-        "lng": 2.349,
-        "lat": 48.853
-      },
-      {
         "country": "Netherlands",
         "countryCode": "NL",
         "city": "Haarlem",
         "visitors": 4,
         "lng": 4.637,
         "lat": 52.381
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Los Angeles",
-        "visitors": 4,
-        "lng": -118.244,
-        "lat": 34.052
       },
       {
         "country": "China",
@@ -388,6 +388,22 @@
         "visitors": 2,
         "lng": -83.741,
         "lat": 42.278
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Indianapolis",
+        "visitors": 2,
+        "lng": -86.158,
+        "lat": 39.768
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Sunnyvale",
+        "visitors": 2,
+        "lng": -122.036,
+        "lat": 37.369
       },
       {
         "country": "Vietnam",
@@ -548,14 +564,6 @@
         "visitors": 1,
         "lng": -94.416,
         "lat": 39.091
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Indianapolis",
-        "visitors": 1,
-        "lng": -86.158,
-        "lat": 39.768
       },
       {
         "country": "United States",
