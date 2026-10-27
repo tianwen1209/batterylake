@@ -1922,6 +1922,9 @@ body.ai-panel-open #page-home .home-metrics .metric-val {
   object-fit: contain;
 }
 .home-logo-tile-cap { width: 224px; height: 46px; }
+.home-logo-tile-cap .cap-logo-dark { display: none; }
+[data-theme="dark"] .home-logo-tile-cap .cap-logo-light { display: none; }
+[data-theme="dark"] .home-logo-tile-cap .cap-logo-dark { display: block; }
 .home-logo-tile-ntu { width: 224px; height: 54px; }
 .home-logo-tile-soda { width: 250px; height: 40px; }
 .home-logo-tile-astar { width: 230px; height: 78px; }
