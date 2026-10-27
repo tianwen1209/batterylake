@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-26T21:40:23Z",
-  "total_visits": 4245,
-  "dataset_downloads": 527,
+  "updated_at": "2026-10-27T21:23:42Z",
+  "total_visits": 4281,
+  "dataset_downloads": 529,
   "skill_uses": 130,
   "model_downloads": {
     "cnn": 16,
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-26T21:40:23Z",
+    "updatedAt": "2026-10-27T21:23:42Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-26"
+      "endDate": "2026-10-27"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 101
+        "visitors": 102
       },
       {
         "country": "Singapore",
@@ -60,6 +60,11 @@
         "visitors": 7
       },
       {
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "visitors": 6
+      },
+      {
         "country": "Taiwan",
         "countryCode": "TW",
         "visitors": 6
@@ -70,6 +75,11 @@
         "visitors": 5
       },
       {
+        "country": "Italy",
+        "countryCode": "IT",
+        "visitors": 5
+      },
+      {
         "country": "India",
         "countryCode": "IN",
         "visitors": 4
@@ -77,16 +87,6 @@
       {
         "country": "Iran",
         "countryCode": "IR",
-        "visitors": 4
-      },
-      {
-        "country": "Italy",
-        "countryCode": "IT",
-        "visitors": 4
-      },
-      {
-        "country": "Netherlands",
-        "countryCode": "NL",
         "visitors": 4
       },
       {
@@ -190,20 +190,20 @@
         "lat": 41.024
       },
       {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Glenview",
+        "visitors": 8,
+        "lng": -87.788,
+        "lat": 42.07
+      },
+      {
         "country": "Poland",
         "countryCode": "PL",
         "city": "Warsaw",
         "visitors": 7,
         "lng": 21.012,
         "lat": 52.23
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Glenview",
-        "visitors": 7,
-        "lng": -87.788,
-        "lat": 42.07
       },
       {
         "country": "China",
@@ -270,6 +270,14 @@
         "lat": 26.061
       },
       {
+        "country": "Italy",
+        "countryCode": "IT",
+        "city": "Milan",
+        "visitors": 4,
+        "lng": 9.19,
+        "lat": 45.464
+      },
+      {
         "country": "Netherlands",
         "countryCode": "NL",
         "city": "Haarlem",
@@ -326,14 +334,6 @@
         "lat": 35.694
       },
       {
-        "country": "Italy",
-        "countryCode": "IT",
-        "city": "Milan",
-        "visitors": 3,
-        "lng": 9.19,
-        "lat": 45.464
-      },
-      {
         "country": "China",
         "countryCode": "CN",
         "city": "Chongzuo",
@@ -372,6 +372,14 @@
         "visitors": 2,
         "lng": 106.845,
         "lat": -6.215
+      },
+      {
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "city": "Amsterdam",
+        "visitors": 2,
+        "lng": 4.89,
+        "lat": 52.374
       },
       {
         "country": "Thailand",
@@ -564,6 +572,14 @@
         "visitors": 1,
         "lng": 28.95,
         "lat": 41.014
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Cambridge",
+        "visitors": 1,
+        "lng": -71.106,
+        "lat": 42.375
       },
       {
         "country": "United States",
