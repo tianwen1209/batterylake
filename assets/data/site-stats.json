@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-27T21:23:42Z",
-  "total_visits": 4281,
+  "updated_at": "2026-10-28T21:44:14Z",
+  "total_visits": 4282,
   "dataset_downloads": 529,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-27T21:23:42Z",
+    "updatedAt": "2026-10-28T21:44:14Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-27"
+      "endDate": "2026-10-28"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 102
+        "visitors": 103
       },
       {
         "country": "Singapore",
@@ -153,7 +153,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 36,
+        "visitors": 37,
         "lng": -95.861,
         "lat": 41.262
       },
