@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-28T21:44:14Z",
-  "total_visits": 4282,
+  "updated_at": "2026-10-29T21:52:21Z",
+  "total_visits": 4285,
   "dataset_downloads": 529,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-28T21:44:14Z",
+    "updatedAt": "2026-10-29T21:52:21Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-28"
+      "endDate": "2026-10-29"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 103
+        "visitors": 104
       },
       {
         "country": "Singapore",
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 63
+        "visitors": 66
       },
       {
         "country": "France",
@@ -120,6 +120,11 @@
         "visitors": 2
       },
       {
+        "country": "Czechia",
+        "countryCode": "CZ",
+        "visitors": 1
+      },
+      {
         "country": "Ireland",
         "countryCode": "IE",
         "visitors": 1
@@ -153,7 +158,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 37,
+        "visitors": 38,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -198,20 +203,20 @@
         "lat": 42.07
       },
       {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Beijing",
+        "visitors": 7,
+        "lng": 116.397,
+        "lat": 39.907
+      },
+      {
         "country": "Poland",
         "countryCode": "PL",
         "city": "Warsaw",
         "visitors": 7,
         "lng": 21.012,
         "lat": 52.23
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Beijing",
-        "visitors": 6,
-        "lng": 116.397,
-        "lat": 39.907
       },
       {
         "country": "United States",
@@ -472,6 +477,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Kunming",
+        "visitors": 1,
+        "lng": 102.718,
+        "lat": 25.039
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Nanchang",
         "visitors": 1,
         "lng": 115.853,
@@ -504,10 +517,26 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Tianjin",
+        "visitors": 1,
+        "lng": 117.177,
+        "lat": 39.142
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Zhangjiajie",
         "visitors": 1,
         "lng": 110.478,
         "lat": 29.129
+      },
+      {
+        "country": "Czechia",
+        "countryCode": "CZ",
+        "city": "Prague",
+        "visitors": 1,
+        "lng": 14.421,
+        "lat": 50.088
       },
       {
         "country": "Ireland",
