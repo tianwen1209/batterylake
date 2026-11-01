@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-31T20:29:47Z",
-  "total_visits": 4287,
-  "dataset_downloads": 529,
+  "updated_at": "2026-11-01T21:15:56Z",
+  "total_visits": 4290,
+  "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
     "cnn": 16,
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-10-31T20:29:47Z",
+    "updatedAt": "2026-11-01T21:15:56Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-10-31"
+      "endDate": "2026-11-01"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 106
+        "visitors": 108
       },
       {
         "country": "Singapore",
@@ -50,6 +50,11 @@
         "visitors": 7
       },
       {
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "visitors": 7
+      },
+      {
         "country": "Poland",
         "countryCode": "PL",
         "visitors": 7
@@ -58,11 +63,6 @@
         "country": "Vietnam",
         "countryCode": "VN",
         "visitors": 7
-      },
-      {
-        "country": "Netherlands",
-        "countryCode": "NL",
-        "visitors": 6
       },
       {
         "country": "Taiwan",
@@ -158,7 +158,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 40,
+        "visitors": 41,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -166,7 +166,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 17,
+        "visitors": 18,
         "lng": -77.487,
         "lat": 39.044
       },
@@ -339,6 +339,14 @@
         "lat": 35.694
       },
       {
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "city": "Amsterdam",
+        "visitors": 3,
+        "lng": 4.89,
+        "lat": 52.374
+      },
+      {
         "country": "China",
         "countryCode": "CN",
         "city": "Chongzuo",
@@ -377,14 +385,6 @@
         "visitors": 2,
         "lng": 106.845,
         "lat": -6.215
-      },
-      {
-        "country": "Netherlands",
-        "countryCode": "NL",
-        "city": "Amsterdam",
-        "visitors": 2,
-        "lng": 4.89,
-        "lat": 52.374
       },
       {
         "country": "Thailand",
