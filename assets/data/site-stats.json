@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-01T21:15:56Z",
-  "total_visits": 4290,
+  "updated_at": "2026-11-02T23:56:12Z",
+  "total_visits": 4292,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-01T21:15:56Z",
+    "updatedAt": "2026-11-02T23:56:12Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-01"
+      "endDate": "2026-11-02"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 108
+        "visitors": 109
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 75
+        "visitors": 76
       },
       {
         "country": "China",
@@ -150,7 +150,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 73,
+        "visitors": 74,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -221,6 +221,14 @@
       {
         "country": "United States",
         "countryCode": "US",
+        "city": "Los Angeles",
+        "visitors": 6,
+        "lng": -118.244,
+        "lat": 34.052
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
         "city": "Santa Clara",
         "visitors": 6,
         "lng": -121.955,
@@ -241,14 +249,6 @@
         "visitors": 5,
         "lng": 2.349,
         "lat": 48.853
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Los Angeles",
-        "visitors": 5,
-        "lng": -118.244,
-        "lat": 34.052
       },
       {
         "country": "Canada",
