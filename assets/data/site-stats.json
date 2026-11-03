@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-02T23:56:12Z",
-  "total_visits": 4292,
+  "updated_at": "2026-11-03T22:23:29Z",
+  "total_visits": 4302,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-02T23:56:12Z",
+    "updatedAt": "2026-11-03T22:23:29Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-02"
+      "endDate": "2026-11-03"
     },
     "countries": [
       {
@@ -90,6 +90,11 @@
         "visitors": 4
       },
       {
+        "country": "Japan",
+        "countryCode": "JP",
+        "visitors": 4
+      },
+      {
         "country": "Germany",
         "countryCode": "DE",
         "visitors": 3
@@ -97,11 +102,6 @@
       {
         "country": "United Kingdom",
         "countryCode": "GB",
-        "visitors": 3
-      },
-      {
-        "country": "Japan",
-        "countryCode": "JP",
         "visitors": 3
       },
       {
@@ -127,6 +127,11 @@
       {
         "country": "Ireland",
         "countryCode": "IE",
+        "visitors": 1
+      },
+      {
+        "country": "South Korea",
+        "countryCode": "KR",
         "visitors": 1
       },
       {
@@ -569,6 +574,14 @@
         "visitors": 1,
         "lng": 135.501,
         "lat": 34.694
+      },
+      {
+        "country": "South Korea",
+        "countryCode": "KR",
+        "city": "Incheon",
+        "visitors": 1,
+        "lng": 126.705,
+        "lat": 37.456
       },
       {
         "country": "Kazakhstan",
