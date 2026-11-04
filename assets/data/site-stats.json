@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-03T22:23:29Z",
-  "total_visits": 4302,
+  "updated_at": "2026-11-04T22:42:06Z",
+  "total_visits": 4304,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-03T22:23:29Z",
+    "updatedAt": "2026-11-04T22:42:06Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-03"
+      "endDate": "2026-11-04"
     },
     "countries": [
       {
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 66
+        "visitors": 67
       },
       {
         "country": "France",
@@ -242,6 +242,14 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Chengdu",
+        "visitors": 5,
+        "lng": 104.067,
+        "lat": 30.667
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Nanjing",
         "visitors": 5,
         "lng": 118.778,
@@ -262,14 +270,6 @@
         "visitors": 4,
         "lng": -122.953,
         "lat": 49.266
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Chengdu",
-        "visitors": 4,
-        "lng": 104.067,
-        "lat": 30.667
       },
       {
         "country": "China",
