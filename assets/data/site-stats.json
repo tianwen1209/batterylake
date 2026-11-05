@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-04T22:42:06Z",
-  "total_visits": 4304,
+  "updated_at": "2026-11-05T22:42:50Z",
+  "total_visits": 4312,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-04T22:42:06Z",
+    "updatedAt": "2026-11-05T22:42:50Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-04"
+      "endDate": "2026-11-05"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 109
+        "visitors": 114
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 76
+        "visitors": 77
       },
       {
         "country": "China",
@@ -140,6 +140,11 @@
         "visitors": 1
       },
       {
+        "country": "Nigeria",
+        "countryCode": "NG",
+        "visitors": 1
+      },
+      {
         "country": "New Zealand",
         "countryCode": "NZ",
         "visitors": 1
@@ -163,7 +168,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Council Bluffs",
-        "visitors": 41,
+        "visitors": 42,
         "lng": -95.861,
         "lat": 41.262
       },
@@ -203,7 +208,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Glenview",
-        "visitors": 8,
+        "visitors": 9,
         "lng": -87.788,
         "lat": 42.07
       },
@@ -352,6 +357,14 @@
         "lat": 52.374
       },
       {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "San Jose",
+        "visitors": 3,
+        "lng": -121.895,
+        "lat": 37.339
+      },
+      {
         "country": "China",
         "countryCode": "CN",
         "city": "Chongzuo",
@@ -422,14 +435,6 @@
         "visitors": 2,
         "lng": -81.656,
         "lat": 30.332
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "San Jose",
-        "visitors": 2,
-        "lng": -121.895,
-        "lat": 37.339
       },
       {
         "country": "United States",
@@ -592,6 +597,14 @@
         "lat": 43.252
       },
       {
+        "country": "Nigeria",
+        "countryCode": "NG",
+        "city": "Lagos",
+        "visitors": 1,
+        "lng": 3.395,
+        "lat": 6.454
+      },
+      {
         "country": "New Zealand",
         "countryCode": "NZ",
         "city": "Hamilton",
@@ -630,6 +643,14 @@
         "visitors": 1,
         "lng": -123.262,
         "lat": 44.565
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Dallas",
+        "visitors": 1,
+        "lng": -96.807,
+        "lat": 32.783
       },
       {
         "country": "United States",
