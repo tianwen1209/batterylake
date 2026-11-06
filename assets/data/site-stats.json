@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-05T22:42:50Z",
-  "total_visits": 4312,
+  "updated_at": "2026-11-06T22:11:13Z",
+  "total_visits": 4320,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-05T22:42:50Z",
+    "updatedAt": "2026-11-06T22:11:13Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-05"
+      "endDate": "2026-11-06"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 114
+        "visitors": 115
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 77
+        "visitors": 78
       },
       {
         "country": "China",
@@ -105,6 +105,11 @@
         "visitors": 3
       },
       {
+        "country": "Czechia",
+        "countryCode": "CZ",
+        "visitors": 2
+      },
+      {
         "country": "Indonesia",
         "countryCode": "ID",
         "visitors": 2
@@ -118,11 +123,6 @@
         "country": "T\u00fcrkiye",
         "countryCode": "TR",
         "visitors": 2
-      },
-      {
-        "country": "Czechia",
-        "countryCode": "CZ",
-        "visitors": 1
       },
       {
         "country": "Ireland",
@@ -389,6 +389,14 @@
         "lat": 24.48
       },
       {
+        "country": "Czechia",
+        "countryCode": "CZ",
+        "city": "Prague",
+        "visitors": 2,
+        "lng": 14.421,
+        "lat": 50.088
+      },
+      {
         "country": "Hong Kong",
         "countryCode": "HK",
         "city": "Hong Kong",
@@ -541,14 +549,6 @@
         "lat": 29.129
       },
       {
-        "country": "Czechia",
-        "countryCode": "CZ",
-        "city": "Prague",
-        "visitors": 1,
-        "lng": 14.421,
-        "lat": 50.088
-      },
-      {
         "country": "Ireland",
         "countryCode": "IE",
         "city": "Dublin",
@@ -675,6 +675,14 @@
         "visitors": 1,
         "lng": -79.975,
         "lat": 32.855
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Phoenix",
+        "visitors": 1,
+        "lng": -112.074,
+        "lat": 33.448
       },
       {
         "country": "United States",
