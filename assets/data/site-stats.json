@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-06T22:11:13Z",
-  "total_visits": 4320,
+  "updated_at": "2026-11-07T20:58:32Z",
+  "total_visits": 4324,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,22 +17,22 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-06T22:11:13Z",
+    "updatedAt": "2026-11-07T20:58:32Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-06"
+      "endDate": "2026-11-07"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 115
+        "visitors": 116
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 78
+        "visitors": 79
       },
       {
         "country": "China",
@@ -40,14 +40,14 @@
         "visitors": 67
       },
       {
+        "country": "Hong Kong",
+        "countryCode": "HK",
+        "visitors": 9
+      },
+      {
         "country": "France",
         "countryCode": "FR",
         "visitors": 8
-      },
-      {
-        "country": "Hong Kong",
-        "countryCode": "HK",
-        "visitors": 7
       },
       {
         "country": "Netherlands",
@@ -269,6 +269,14 @@
         "lat": 48.853
       },
       {
+        "country": "Italy",
+        "countryCode": "IT",
+        "city": "Milan",
+        "visitors": 5,
+        "lng": 9.19,
+        "lat": 45.464
+      },
+      {
         "country": "Canada",
         "countryCode": "CA",
         "city": "Burnaby",
@@ -285,12 +293,12 @@
         "lat": 26.061
       },
       {
-        "country": "Italy",
-        "countryCode": "IT",
-        "city": "Milan",
+        "country": "Hong Kong",
+        "countryCode": "HK",
+        "city": "Hong Kong",
         "visitors": 4,
-        "lng": 9.19,
-        "lat": 45.464
+        "lng": 114.175,
+        "lat": 22.278
       },
       {
         "country": "Netherlands",
@@ -397,14 +405,6 @@
         "lat": 50.088
       },
       {
-        "country": "Hong Kong",
-        "countryCode": "HK",
-        "city": "Hong Kong",
-        "visitors": 2,
-        "lng": 114.175,
-        "lat": 22.278
-      },
-      {
         "country": "Indonesia",
         "countryCode": "ID",
         "city": "Jakarta",
@@ -443,6 +443,14 @@
         "visitors": 2,
         "lng": -81.656,
         "lat": 30.332
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Phoenix",
+        "visitors": 2,
+        "lng": -112.074,
+        "lat": 33.448
       },
       {
         "country": "United States",
@@ -675,14 +683,6 @@
         "visitors": 1,
         "lng": -79.975,
         "lat": 32.855
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Phoenix",
-        "visitors": 1,
-        "lng": -112.074,
-        "lat": 33.448
       },
       {
         "country": "United States",
