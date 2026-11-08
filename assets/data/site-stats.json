@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-07T20:58:32Z",
-  "total_visits": 4324,
+  "updated_at": "2026-11-08T21:14:44Z",
+  "total_visits": 4326,
   "dataset_downloads": 530,
   "skill_uses": 130,
   "model_downloads": {
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-07T20:58:32Z",
+    "updatedAt": "2026-11-08T21:14:44Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-07"
+      "endDate": "2026-11-08"
     },
     "countries": [
       {
@@ -32,12 +32,12 @@
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 79
+        "visitors": 81
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 67
+        "visitors": 68
       },
       {
         "country": "Hong Kong",
@@ -75,6 +75,11 @@
         "visitors": 5
       },
       {
+        "country": "Iran",
+        "countryCode": "IR",
+        "visitors": 5
+      },
+      {
         "country": "Italy",
         "countryCode": "IT",
         "visitors": 5
@@ -82,11 +87,6 @@
       {
         "country": "India",
         "countryCode": "IN",
-        "visitors": 4
-      },
-      {
-        "country": "Iran",
-        "countryCode": "IR",
         "visitors": 4
       },
       {
@@ -183,18 +183,18 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shenzhen",
+        "city": "Shanghai",
         "visitors": 10,
-        "lng": 114.068,
-        "lat": 22.546
+        "lng": 121.458,
+        "lat": 31.222
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shanghai",
-        "visitors": 9,
-        "lng": 121.458,
-        "lat": 31.222
+        "city": "Shenzhen",
+        "visitors": 10,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "United States",
@@ -301,6 +301,14 @@
         "lat": 22.278
       },
       {
+        "country": "Iran",
+        "countryCode": "IR",
+        "city": "Tehran",
+        "visitors": 4,
+        "lng": 51.422,
+        "lat": 35.694
+      },
+      {
         "country": "Netherlands",
         "countryCode": "NL",
         "city": "Haarlem",
@@ -347,14 +355,6 @@
         "visitors": 3,
         "lng": -0.126,
         "lat": 51.509
-      },
-      {
-        "country": "Iran",
-        "countryCode": "IR",
-        "city": "Tehran",
-        "visitors": 3,
-        "lng": 51.422,
-        "lat": 35.694
       },
       {
         "country": "Netherlands",
