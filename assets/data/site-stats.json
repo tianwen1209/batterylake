@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-11-08T21:14:44Z",
-  "total_visits": 4326,
-  "dataset_downloads": 530,
-  "skill_uses": 130,
+  "updated_at": "2026-11-10T00:44:18Z",
+  "total_visits": 4346,
+  "dataset_downloads": 537,
+  "skill_uses": 131,
   "model_downloads": {
-    "cnn": 16,
+    "cnn": 17,
     "linear": 4
   },
   "model_runs": {
-    "cnn": 10,
+    "cnn": 11,
     "linear": 4,
     "pinn": 4,
     "lstm": 3,
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-08T21:14:44Z",
+    "updatedAt": "2026-11-10T00:44:18Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-08"
+      "endDate": "2026-11-10"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 116
+        "visitors": 117
       },
       {
         "country": "Singapore",
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 68
+        "visitors": 70
       },
       {
         "country": "Hong Kong",
@@ -52,7 +52,7 @@
       {
         "country": "Netherlands",
         "countryCode": "NL",
-        "visitors": 7
+        "visitors": 8
       },
       {
         "country": "Poland",
@@ -176,9 +176,17 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Ashburn",
-        "visitors": 18,
+        "visitors": 19,
         "lng": -77.487,
         "lat": 39.044
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Shenzhen",
+        "visitors": 12,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "China",
@@ -187,14 +195,6 @@
         "visitors": 10,
         "lng": 121.458,
         "lat": 31.222
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Shenzhen",
-        "visitors": 10,
-        "lng": 114.068,
-        "lat": 22.546
       },
       {
         "country": "United States",
@@ -293,6 +293,14 @@
         "lat": 26.061
       },
       {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Guangzhou",
+        "visitors": 4,
+        "lng": 113.25,
+        "lat": 23.117
+      },
+      {
         "country": "Hong Kong",
         "countryCode": "HK",
         "city": "Hong Kong",
@@ -311,6 +319,14 @@
       {
         "country": "Netherlands",
         "countryCode": "NL",
+        "city": "Amsterdam",
+        "visitors": 4,
+        "lng": 4.89,
+        "lat": 52.374
+      },
+      {
+        "country": "Netherlands",
+        "countryCode": "NL",
         "city": "Haarlem",
         "visitors": 4,
         "lng": 4.637,
@@ -323,14 +339,6 @@
         "visitors": 4,
         "lng": 105.841,
         "lat": 21.024
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Guangzhou",
-        "visitors": 3,
-        "lng": 113.25,
-        "lat": 23.117
       },
       {
         "country": "China",
@@ -355,14 +363,6 @@
         "visitors": 3,
         "lng": -0.126,
         "lat": 51.509
-      },
-      {
-        "country": "Netherlands",
-        "countryCode": "NL",
-        "city": "Amsterdam",
-        "visitors": 3,
-        "lng": 4.89,
-        "lat": 52.374
       },
       {
         "country": "United States",
