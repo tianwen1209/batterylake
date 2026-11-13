@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-12T22:46:17Z",
-  "total_visits": 4362,
+  "updated_at": "2026-11-13T22:42:54Z",
+  "total_visits": 4379,
   "dataset_downloads": 540,
   "skill_uses": 131,
   "model_downloads": {
@@ -10,18 +10,18 @@
   "model_runs": {
     "cnn": 11,
     "linear": 4,
+    "lstm": 4,
     "pinn": 4,
-    "lstm": 3,
     "xgboost": 3,
     "baseline-package": 1,
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-12T22:46:17Z",
+    "updatedAt": "2026-11-13T22:42:54Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-12"
+      "endDate": "2026-11-13"
     },
     "countries": [
       {
@@ -32,7 +32,7 @@
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 86
+        "visitors": 87
       },
       {
         "country": "China",
@@ -45,13 +45,13 @@
         "visitors": 9
       },
       {
-        "country": "France",
-        "countryCode": "FR",
-        "visitors": 8
-      },
-      {
         "country": "Netherlands",
         "countryCode": "NL",
+        "visitors": 9
+      },
+      {
+        "country": "France",
+        "countryCode": "FR",
         "visitors": 8
       },
       {
@@ -115,6 +115,11 @@
         "visitors": 2
       },
       {
+        "country": "South Korea",
+        "countryCode": "KR",
+        "visitors": 2
+      },
+      {
         "country": "Thailand",
         "countryCode": "TH",
         "visitors": 2
@@ -127,11 +132,6 @@
       {
         "country": "Ireland",
         "countryCode": "IE",
-        "visitors": 1
-      },
-      {
-        "country": "South Korea",
-        "countryCode": "KR",
         "visitors": 1
       },
       {
@@ -285,6 +285,14 @@
         "lat": 45.464
       },
       {
+        "country": "Netherlands",
+        "countryCode": "NL",
+        "city": "Amsterdam",
+        "visitors": 5,
+        "lng": 4.89,
+        "lat": 52.374
+      },
+      {
         "country": "Canada",
         "countryCode": "CA",
         "city": "Burnaby",
@@ -323,14 +331,6 @@
         "visitors": 4,
         "lng": 51.422,
         "lat": 35.694
-      },
-      {
-        "country": "Netherlands",
-        "countryCode": "NL",
-        "city": "Amsterdam",
-        "visitors": 4,
-        "lng": 4.89,
-        "lat": 52.374
       },
       {
         "country": "Netherlands",
@@ -587,6 +587,14 @@
         "visitors": 1,
         "lng": 135.501,
         "lat": 34.694
+      },
+      {
+        "country": "South Korea",
+        "countryCode": "KR",
+        "city": "Daegu",
+        "visitors": 1,
+        "lng": 128.591,
+        "lat": 35.87
       },
       {
         "country": "South Korea",
