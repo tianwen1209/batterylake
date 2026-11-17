@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-15T21:53:53Z",
-  "total_visits": 4460,
+  "updated_at": "2026-11-17T00:52:19Z",
+  "total_visits": 4466,
   "dataset_downloads": 540,
   "skill_uses": 132,
   "model_downloads": {
@@ -17,27 +17,27 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-15T21:53:53Z",
+    "updatedAt": "2026-11-17T00:52:19Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-15"
+      "endDate": "2026-11-17"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 119
+        "visitors": 121
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 97
+        "visitors": 98
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 87
+        "visitors": 89
       },
       {
         "country": "Hong Kong",
@@ -110,6 +110,11 @@
         "visitors": 3
       },
       {
+        "country": "Malaysia",
+        "countryCode": "MY",
+        "visitors": 3
+      },
+      {
         "country": "Indonesia",
         "countryCode": "ID",
         "visitors": 2
@@ -117,11 +122,6 @@
       {
         "country": "South Korea",
         "countryCode": "KR",
-        "visitors": 2
-      },
-      {
-        "country": "Malaysia",
-        "countryCode": "MY",
         "visitors": 2
       },
       {
@@ -199,7 +199,7 @@
         "country": "China",
         "countryCode": "CN",
         "city": "Shanghai",
-        "visitors": 12,
+        "visitors": 13,
         "lng": 121.458,
         "lat": 31.222
       },
@@ -494,6 +494,14 @@
       {
         "country": "United States",
         "countryCode": "US",
+        "city": "South Riding",
+        "visitors": 2,
+        "lng": -77.504,
+        "lat": 38.921
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
         "city": "Sunnyvale",
         "visitors": 2,
         "lng": -122.036,
@@ -650,6 +658,14 @@
         "visitors": 1,
         "lng": 76.912,
         "lat": 43.252
+      },
+      {
+        "country": "Malaysia",
+        "countryCode": "MY",
+        "city": "Johor Bahru",
+        "visitors": 1,
+        "lng": 103.758,
+        "lat": 1.466
       },
       {
         "country": "Nigeria",
