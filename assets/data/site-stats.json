@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-17T00:52:19Z",
-  "total_visits": 4466,
+  "updated_at": "2026-11-17T23:53:01Z",
+  "total_visits": 4482,
   "dataset_downloads": 540,
   "skill_uses": 132,
   "model_downloads": {
@@ -17,7 +17,7 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-17T00:52:19Z",
+    "updatedAt": "2026-11-17T23:53:01Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
@@ -27,17 +27,17 @@
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 121
+        "visitors": 124
       },
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 98
+        "visitors": 99
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 89
+        "visitors": 90
       },
       {
         "country": "Hong Kong",
@@ -110,6 +110,11 @@
         "visitors": 3
       },
       {
+        "country": "South Korea",
+        "countryCode": "KR",
+        "visitors": 3
+      },
+      {
         "country": "Malaysia",
         "countryCode": "MY",
         "visitors": 3
@@ -117,11 +122,6 @@
       {
         "country": "Indonesia",
         "countryCode": "ID",
-        "visitors": 2
-      },
-      {
-        "country": "South Korea",
-        "countryCode": "KR",
         "visitors": 2
       },
       {
@@ -175,7 +175,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 83,
+        "visitors": 84,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -207,7 +207,7 @@
         "country": "China",
         "countryCode": "CN",
         "city": "Shenzhen",
-        "visitors": 12,
+        "visitors": 13,
         "lng": 114.068,
         "lat": 22.546
       },
@@ -247,7 +247,7 @@
         "country": "United States",
         "countryCode": "US",
         "city": "Los Angeles",
-        "visitors": 7,
+        "visitors": 8,
         "lng": -118.244,
         "lat": 34.052
       },
@@ -390,6 +390,14 @@
       {
         "country": "United States",
         "countryCode": "US",
+        "city": "Phoenix",
+        "visitors": 3,
+        "lng": -112.074,
+        "lat": 33.448
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
         "city": "San Jose",
         "visitors": 3,
         "lng": -121.895,
@@ -482,14 +490,6 @@
         "visitors": 2,
         "lng": -81.656,
         "lat": 30.332
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Phoenix",
-        "visitors": 2,
-        "lng": -112.074,
-        "lat": 33.448
       },
       {
         "country": "United States",
@@ -650,6 +650,14 @@
         "visitors": 1,
         "lng": 126.705,
         "lat": 37.456
+      },
+      {
+        "country": "South Korea",
+        "countryCode": "KR",
+        "city": "Seoul",
+        "visitors": 1,
+        "lng": 126.978,
+        "lat": 37.566
       },
       {
         "country": "Kazakhstan",
