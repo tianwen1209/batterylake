@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-17T23:53:01Z",
-  "total_visits": 4482,
+  "updated_at": "2026-11-18T23:26:09Z",
+  "total_visits": 4486,
   "dataset_downloads": 540,
   "skill_uses": 132,
   "model_downloads": {
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-17T23:53:01Z",
+    "updatedAt": "2026-11-18T23:26:09Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-17"
+      "endDate": "2026-11-18"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 124
+        "visitors": 126
       },
       {
         "country": "Singapore",
@@ -356,6 +356,22 @@
         "lat": 52.381
       },
       {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "Phoenix",
+        "visitors": 4,
+        "lng": -112.074,
+        "lat": 33.448
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "San Jose",
+        "visitors": 4,
+        "lng": -121.895,
+        "lat": 37.339
+      },
+      {
         "country": "Vietnam",
         "countryCode": "VN",
         "city": "Hanoi",
@@ -386,22 +402,6 @@
         "visitors": 3,
         "lng": 14.421,
         "lat": 50.088
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Phoenix",
-        "visitors": 3,
-        "lng": -112.074,
-        "lat": 33.448
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "San Jose",
-        "visitors": 3,
-        "lng": -121.895,
-        "lat": 37.339
       },
       {
         "country": "China",
