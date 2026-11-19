@@ -262,6 +262,21 @@ If BatteryLake supports your research, please cite:
 }
 ```
 
+If you use the Battery Digital Twin Studio, digital-twin calibration, or digital-twin-generated data, please also cite **BatteryTwin** (🎉 accepted to the KDD 2027 Research Track; code and dataset: [tianwen1209/BatteryTwin-KDD2027](https://github.com/tianwen1209/BatteryTwin-KDD2027)):
+
+```bibtex
+@inproceedings{zhu2027batterytwin,
+  title     = {BatteryTwin: A Physics-Grounded Digital Twin and Benchmark for Battery Data Curation},
+  author    = {Zhu, Tianwen and Wang, Hao and Du, Yingpeng and Su, Lingzhi and Xu, Yan and Wen, Yonggang},
+  booktitle = {Proceedings of the 33rd ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+  series    = {KDD '27},
+  year      = {2027},
+  publisher = {Association for Computing Machinery},
+  address   = {San Jose, CA, USA},
+  url       = {https://github.com/tianwen1209/BatteryTwin-KDD2027}
+}
+```
+
 ---
 
 ## 🙏 Acknowledgements
