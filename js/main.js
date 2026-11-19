@@ -873,9 +873,9 @@ function renderTasks() {
   `).join('');
 }
 
-async function copyTermsBibTeX() {
-  const block = document.getElementById('terms-bibtex');
-  const btn = document.getElementById('terms-copy-btn');
+async function copyTermsBibTeX(blockId = 'terms-bibtex', btnId = 'terms-copy-btn') {
+  const block = document.getElementById(blockId);
+  const btn = document.getElementById(btnId);
   const text = block ? block.textContent.replace(/^\n+/, '').replace(/\n+$/, '') : '';
   if (!text) return;
   try {
@@ -893,11 +893,10 @@ async function copyTermsBibTeX() {
       area.remove();
     }
     if (btn) {
-      const previous = btn.textContent;
       btn.textContent = 'Copied';
-      clearTimeout(copyTermsBibTeX._timer);
-      copyTermsBibTeX._timer = setTimeout(() => {
-        btn.textContent = previous || 'Copy BibTeX';
+      clearTimeout(btn._copyTimer);
+      btn._copyTimer = setTimeout(() => {
+        btn.textContent = 'Copy BibTeX';
       }, 1600);
     }
   } catch (_) {

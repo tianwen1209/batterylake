@@ -962,3 +962,27 @@
     border-bottom: 0;
   }
 }
+
+/* ── KDD 2027 announcement (hero) ── */
+.sc-hero-news {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px;
+  margin-top: 22px; padding: 10px 14px;
+  max-width: 560px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  background: color-mix(in srgb, var(--accent-light) 70%, var(--surface, #fff));
+  font-size: 14px; line-height: 1.45; color: var(--text2);
+}
+.sc-hero-news-tag {
+  flex-shrink: 0;
+  padding: 3px 9px; border-radius: 999px;
+  font-size: 12px; font-weight: 800; letter-spacing: .02em;
+  color: #fff; background: var(--accent);
+}
+.sc-hero-news-text b { color: var(--text1); }
+.sc-hero-news-links { display: inline-flex; gap: 12px; }
+.sc-hero-news-links a {
+  color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap;
+}
+.sc-hero-news-links a::after { content: " →"; }
+.sc-hero-news-links a:hover { text-decoration: underline; }

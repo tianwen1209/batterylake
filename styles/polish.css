@@ -7188,3 +7188,22 @@ body.ai-panel-open .main {
     transition: none;
   }
 }
+
+/* ── BatteryTwin (KDD 2027) citation ── */
+#page-terms .terms-citation-stack + .terms-citation-stack {
+  margin-top: 16px;
+  scroll-margin-top: 24px;
+}
+#page-terms .terms-paper-links {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+#page-terms .terms-paper-badge {
+  padding: 3px 9px; border-radius: 999px;
+  font-size: 12px; font-weight: 800;
+  color: var(--accent); background: var(--accent-light);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+}
+#page-terms .terms-paper-links a { color: var(--accent); font-weight: 700; text-decoration: none; }
+#page-terms .terms-paper-links a:hover { text-decoration: underline; }

@@ -504,3 +504,20 @@
 @media (prefers-reduced-motion:reduce) {
   #page-studio .studio-live-loss.is-training .studio-loss-line { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
 }
+
+/* ── BatteryTwin paper note (Studio hero) ── */
+.studio-hero .studio-paper-note {
+  position: relative; z-index: 2;
+  max-width: min(680px, 58%);
+  margin-top: 14px; padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  background: color-mix(in srgb, var(--accent-light) 70%, var(--surface, #fff));
+  font-size: 13.5px; line-height: 1.5; color: var(--text2);
+}
+.studio-hero .studio-paper-note b { color: var(--text1); }
+.studio-hero .studio-paper-note a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.studio-hero .studio-paper-note a:hover { text-decoration: underline; }
+@media (max-width: 900px) {
+  .studio-hero .studio-paper-note { max-width: 100%; }
+}
