@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-19T23:38:36Z",
-  "total_visits": 4491,
+  "updated_at": "2026-11-20T23:11:15Z",
+  "total_visits": 4520,
   "dataset_downloads": 540,
   "skill_uses": 132,
   "model_downloads": {
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-19T23:38:36Z",
+    "updatedAt": "2026-11-20T23:11:15Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-19"
+      "endDate": "2026-11-20"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 126
+        "visitors": 128
       },
       {
         "country": "Singapore",
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 90
+        "visitors": 91
       },
       {
         "country": "Hong Kong",
