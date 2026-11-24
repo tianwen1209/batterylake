@@ -26,7 +26,8 @@ window.BATTERYLAKE_AI_CONFIG = {
   apiKey: '',
   model: '',
   endpoint: 'https://tianwen-gemini-proxy.tianwen-4e0.workers.dev/chat',
-  timeoutMs: 25000,
+  // The proxy can try fallback models before answering; allow that time.
+  timeoutMs: 60000,
   // Optional direct raw-data upload for the Contribute page. Leave empty (the
   // page then asks for a download link). To enable, point it at a receiver
   // implementing the upload protocol: the Worker with an R2 bucket bound as

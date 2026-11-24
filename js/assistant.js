@@ -60,6 +60,10 @@
     probing: null,           // promise while probing a remote provider
     dead: new Set(),         // providers that failed permanently this session
     cooldownUntil: {},       // provider -> timestamp until which it is skipped
+    cooldownTimer: null,
+    verified: new Set(),     // providers that actually returned a model answer
+    models: {},             // model identifiers reported by the API, never self-reported prose
+    failures: {},           // provider -> user-facing failure category
     history: []              // [{role:'user'|'assistant', text}]
   };
 
@@ -357,6 +361,7 @@
     const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
     const text = parts.map(p => p.text || '').join('').trim();
     if (!text) throw new Error('Gemini returned no text');
+    state.models.gemini = data.modelVersion || model;
     return text;
   }
 
@@ -437,11 +442,12 @@
     // A Cloudflare edge occasionally egresses through a region Gemini blocks
     // ("User location is not supported"); a new request usually succeeds.
     for (let attempt = 0; ; attempt++) {
-      const res = await fetchWithTimeout(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }, timeoutOverride || 25000);
+      const res = await fetchWithTimeout(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }, timeoutOverride || CONFIG.timeoutMs);
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         const text = data.text || data.reply || data.response || '';
         if (!String(text).trim()) throw new Error('Empty proxy response');
+        state.models.worker = data.modelVersion || data.model || '';
         return String(text).trim();
       }
       const err = new Error((data.error || ('Proxy HTTP ' + res.status)) + (data.detail ? ': ' + data.detail : ''));
@@ -525,25 +531,64 @@
     return state.probing;
   }
   function applyProviderStatus() {
-    const active = remoteAvailable(state.provider) ? state.provider : 'local';
+    const provider = state.provider;
+    const active = remoteAvailable(provider) ? provider : 'local';
     let l = PROVIDER_LABELS[active] || PROVIDER_LABELS.local;
     if (activeMode === 'agent') l = { subtitle: 'Agent · ' + (active === 'local' ? 'rule-based planner' : 'Gemini plans the actions'), status: l.status };
-    if (active === 'local' && state.provider !== 'local' && state.cooldownUntil[state.provider] > Date.now()) {
-      setStatus('busy', l.subtitle, 'Model busy · retrying shortly');
+    if (provider && provider !== 'local' && active === 'local') {
+      const cooling = state.cooldownUntil[provider] > Date.now();
+      setStatus('offline', l.subtitle, cooling
+        ? 'Site knowledge · model ' + (state.failures[provider] || 'unavailable')
+        : 'Site knowledge · model unavailable');
       return;
     }
-    setStatus('online', l.subtitle, l.status);
+    if (active !== 'local' && !state.verified.has(active)) {
+      setStatus('offline', l.subtitle, state.failures[provider]
+        ? 'Site knowledge · retry model on next message'
+        : 'Model configured · not verified');
+      return;
+    }
+    setStatus('online', l.subtitle, state.models[active] ? 'Connected · ' + state.models[active] : l.status);
   }
-  /* A failed remote call parks the provider for a cooldown instead of the whole
-     session, so a temporary "high demand" answer does not disable the model. */
+  /* Cooldown expiry enables a retry on the NEXT message; it does not send a
+     background request or claim a connection before a response arrives. */
   const COOLDOWN_MS = 90000;
-  const SHORT_COOLDOWN_MS = 15000;   // location / capacity blips clear quickly
-  function demoteProvider(reason, transient) {
-    console.warn('AI assistant: ' + state.provider + ' unavailable (' + reason + '); using built-in knowledge base' + (transient ? ' for a while.' : '.'));
+  const SHORT_COOLDOWN_MS = 15000;
+  function demoteProvider(reason, transient, status) {
+    const provider = state.provider;
+    console.warn('AI assistant: ' + provider + ' unavailable (' + reason + '); using built-in knowledge base' + (transient ? ' for a while.' : '.'));
+    state.verified.delete(provider);
+    state.failures[provider] = status === 429 ? 'rate limited'
+      : /abort|timeout/i.test(reason || '') ? 'timed out'
+      : /location is not supported/i.test(reason || '') ? 'region blocked'
+      : /failed to fetch|networkerror|load failed/i.test(reason || '') ? 'network error'
+      : 'unavailable';
     const brief = /location is not supported|high demand|overloaded/i.test(reason || '');
-    if (transient) state.cooldownUntil[state.provider] = Date.now() + (brief ? SHORT_COOLDOWN_MS : COOLDOWN_MS);
-    else state.dead.add(state.provider);
+    if (transient) {
+      const delay = brief ? SHORT_COOLDOWN_MS : COOLDOWN_MS;
+      state.cooldownUntil[provider] = Date.now() + delay;
+      clearTimeout(state.cooldownTimer);
+      state.cooldownTimer = setTimeout(() => applyProviderStatus(), delay + 50);
+    } else state.dead.add(provider);
     applyProviderStatus();
+  }
+  function markProviderConnected(provider) {
+    state.verified.add(provider);
+    delete state.cooldownUntil[provider];
+    delete state.failures[provider];
+    clearTimeout(state.cooldownTimer);
+    applyProviderStatus();
+  }
+  function asksModelIdentity(question) {
+    return /(?:你|您)(?:是|用的是?|使用的是?|当前使用的是?|现在用的是?|的)?(?:哪个|什么|哪种|哪一[个种款])\s*(?:gemini\s*)?模型|\b(?:which|what)\s+(?:gemini\s+)?model(?:\s+(?:version|name))?\s+(?:are you|do you use|is this)|\byour\s+model\s+(?:version|name)|你(?:的|使用的|用的)?模型(?:是.*|的)?版本/i.test(question);
+  }
+  function modelIdentity(question, provider) {
+    const model = state.models[provider];
+    const zh = /[\u3400-\u9fff]/.test(question);
+    if (model) return zh ? '本次 API 返回的模型标识是：' + model + '。代理可能在后续请求中切换模型。'
+      : 'The model identifier returned by the API for this request is ' + model + '. The proxy may switch models on later requests.';
+    return zh ? '本次模型 API 已成功响应，但接口未返回模型版本，无法确认具体型号。'
+      : 'The model API responded successfully, but did not report a model version, so I cannot confirm the exact model.';
   }
   function remoteAvailable(provider) {
     if (!provider || provider === 'local' || state.dead.has(provider)) return false;
@@ -552,6 +597,17 @@
 
   /* ── answering ─────────────────────────────────────────────────── */
   function localAnswer(question) {
+    const provider = state.provider;
+    const degraded = provider && provider !== 'local' && state.failures[provider];
+    if (degraded) {
+      const zh = /[\u3400-\u9fff]/.test(question);
+      const notice = zh ? '模型 API 暂时不可用，本次使用站点内置知识库。' : 'The model API is unavailable; this reply uses the built-in site knowledge base.';
+      if (asksModelIdentity(question)) return { text: notice + (zh ? '\n\n本次没有获得 Gemini 模型响应，无法确认当前模型版本。' : '\n\nNo Gemini response was received for this question, so I cannot confirm the current model version.'), source: 'kb' };
+      if (KB) {
+        const result = KB.answer(question);
+        return { ...result, text: notice + '\n\n' + result.text };
+      }
+    }
     if (KB) return KB.answer(question);
     return { text: 'The assistant knowledge base failed to load. Please refresh the page.', source: 'fallback' };
   }
@@ -563,11 +619,11 @@
     if (!remoteAvailable(provider)) return localAnswer(question);
     try {
       const text = await askRemote(provider, question);
-      if (state.cooldownUntil[provider]) { delete state.cooldownUntil[provider]; applyProviderStatus(); }
-      return { text, source: provider };
+      markProviderConnected(provider);
+      return { text: asksModelIdentity(question) ? modelIdentity(question, provider) : text, source: provider };
     } catch (err) {
       const msg = err && err.message ? err.message : 'error';
-      demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg));
+      demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg), err && err.status);
       return localAnswer(question);
     }
   }
@@ -586,12 +642,13 @@
       timeoutOverride = 45000;
       try {
         const text = await askRemote(provider, command);
+        markProviderConnected(provider);
         const plan = ACTIONS.parsePlan(text);
         if (plan) return Object.assign(plan, { source: 'agent-model' });
         console.warn('AI agent: model reply was not a plan, using rules:', String(text).slice(0, 200));
       } catch (err) {
         const msg = err && err.message ? err.message : 'error';
-        demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg));
+        demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg), err && err.status);
       } finally {
         promptOverride = null;
         historyOverride = null;
