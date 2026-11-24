@@ -2,7 +2,8 @@
 
 The hosted site (GitHub Pages) cannot keep a secret, so the AI assistant talks
 to Gemini through a small Cloudflare Worker that holds the API key and only
-accepts requests from the BatteryLake origin. `worker.js` in this folder is the
+accepts requests from the BatteryLake origins (`https://batterytwin.ai` and
+`https://tianwen1209.github.io`). `worker.js` in this folder is the
 reference implementation.
 
 ## Contract
@@ -31,7 +32,8 @@ Worker and a minimal `{message} -> {text}` Worker work.
 3. Optional plain variables: `GEMINI_MODEL` (default `gemini-flash-lite-latest`,
    falls back to `gemini-flash-latest` and `gemini-3.5-flash-lite` on 429/503),
    `ALLOWED_ORIGINS` (comma separated; default allows
-   `https://tianwen1209.github.io` plus `localhost` / `127.0.0.1` on ports 8000
+   `https://batterytwin.ai`, `https://tianwen1209.github.io`, and
+   `localhost` / `127.0.0.1` on ports 8000
    and 8767 for local testing).
 4. Point the site at it in `js/ai-config.js`:
 
@@ -52,6 +54,29 @@ Without the `Origin` header the Worker answers `403 Forbidden origin`, which is
 the intended behaviour. Free-tier Gemini allows roughly 15 requests per minute;
 bursts beyond that come back as `429` and the site falls back to its built-in
 answers until the next request.
+
+## Custom-domain CORS errors
+
+If the browser shows `Site knowledge · model network error` on
+`https://batterytwin.ai`, check the Worker's CORS preflight for that origin:
+
+```bash
+curl -i -X OPTIONS https://tianwen-gemini-proxy.tianwen-4e0.workers.dev/chat \
+  -H 'Origin: https://batterytwin.ai' \
+  -H 'Access-Control-Request-Method: POST' \
+  -H 'Access-Control-Request-Headers: content-type'
+```
+
+It must return `204` and `Access-Control-Allow-Origin: https://batterytwin.ai`.
+A `403` means the Worker does not allow the custom domain; the browser blocks
+the chat request before it reaches Gemini.
+
+Deploy the updated `worker.js` to Cloudflare. If `ALLOWED_ORIGINS` is set, it
+**replaces** the defaults: include both `https://batterytwin.ai` and
+`https://tianwen1209.github.io` in that comma-separated variable, along with any
+local development origins you still need. For an older minimal Worker with a
+hardcoded allowlist, update that allowlist or deploy this implementation.
+Pushing this repository to GitHub does not update the deployed Worker.
 
 ## Dataset contributions (raw-data upload) — optional, currently off
 
