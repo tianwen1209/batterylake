@@ -74,12 +74,12 @@ test('429 uses explicit local fallback, never retries in background, and recover
   assert.equal(first.source, 'kb');
   assert.match(first.text, /built-in site knowledge base/);
   assert.match(w.status(), /rate limited/);
-  await w.api.ask('你是哪个gemini模型');
+  await w.api.ask('Which Gemini model are you?');
   assert.equal(w.requests.length, 1);
   w.advance(90051);
   assert.match(w.status(), /retry model on next message/);
   assert.equal(w.requests.length, 1, 'cooldown does not issue a hidden request');
-  const recovered = await w.api.ask('你是哪个gemini模型');
+  const recovered = await w.api.ask('Which Gemini model are you?');
   assert.equal(recovered.source, 'worker');
   assert.match(recovered.text, /gemini-3.5-flash-lite/);
   assert.equal(w.status(), 'Connected · gemini-3.5-flash-lite');
@@ -88,9 +88,9 @@ test('429 uses explicit local fallback, never retries in background, and recover
 test('aborted requests report a timeout, and local answers never claim a Gemini identity', async () => {
   const timeout = Object.assign(new Error('This operation was aborted'), { name: 'AbortError' });
   const w = widget([timeout]);
-  const result = await w.api.ask('你是哪个gemini模型？');
+  const result = await w.api.ask('Which Gemini model are you?');
   assert.match(w.status(), /timed out/);
-  assert.match(result.text, /没有获得 Gemini 模型响应/);
+  assert.match(result.text, /No Gemini response was received/);
   assert.equal(result.source, 'kb');
   assert.doesNotMatch(w.status(), /retrying shortly|connected/i);
 });
@@ -118,5 +118,5 @@ test('model identity uses response metadata and admits missing metadata', async 
 test('model recommendations are sent through rather than replaced by model identity', async () => {
   const w = widget([ok(), ok()]);
   assert.equal((await w.api.ask('Which models can you compare?')).text, 'Model answer');
-  assert.equal((await w.api.ask('你推荐什么模型？')).text, 'Model answer');
+  assert.equal((await w.api.ask('What model do you recommend?')).text, 'Model answer');
 });

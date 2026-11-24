@@ -51,7 +51,7 @@
   `;
 
   const SHOW_SOURCE_TAGS = false;
-  const welcomeText = 'Hi! I answer questions about BatteryLake: catalog numbers, individual datasets, the processing skill, status.json, benchmarks and citation. Ask in English or 中文.';
+  const welcomeText = 'Hi! I answer questions about BatteryLake: catalog numbers, individual datasets, the processing skill, status.json, benchmarks and citation. Ask in English or Chinese.';
 
   /* ── state ─────────────────────────────────────────────────────── */
   const state = {
@@ -317,7 +317,7 @@
     const zh = KB && typeof KB.isChinese === 'function' ? KB.isChinese(question) : /[\u3400-\u9fff]/.test(question);
     return [
       'You are the BatteryLake AI Assistant embedded in the BatteryLake website (battery aging datasets, SOH/RUL benchmarking).',
-      zh ? 'The user wrote in Chinese: answer in Chinese (简体中文).' : 'The user wrote in English: answer in English only.',
+      zh ? 'The user wrote in Chinese: answer in Simplified Chinese.' : 'The user wrote in English: answer in English only.',
       'Quote numbers exactly as given in the context (e.g. 55,300 cycles), never rescale them.',
       'Be concise: at most about 150 words, plain sentences or short "- " bullet lists; no headings, no tables.',
       'Plain text only: no LaTeX or math markup (write LiFePO4, NMC811, 80% SOH), no HTML.',
@@ -580,15 +580,12 @@
     applyProviderStatus();
   }
   function asksModelIdentity(question) {
-    return /(?:你|您)(?:是|用的是?|使用的是?|当前使用的是?|现在用的是?|的)?(?:哪个|什么|哪种|哪一[个种款])\s*(?:gemini\s*)?模型|\b(?:which|what)\s+(?:gemini\s+)?model(?:\s+(?:version|name))?\s+(?:are you|do you use|is this)|\byour\s+model\s+(?:version|name)|你(?:的|使用的|用的)?模型(?:是.*|的)?版本/i.test(question);
+    return /(?:\u4f60|\u60a8)(?:\u662f|\u7528\u7684\u662f?|\u4f7f\u7528\u7684\u662f?|\u5f53\u524d\u4f7f\u7528\u7684\u662f?|\u73b0\u5728\u7528\u7684\u662f?|\u7684)?(?:\u54ea\u4e2a|\u4ec0\u4e48|\u54ea\u79cd|\u54ea\u4e00[\u4e2a\u79cd\u6b3e])\s*(?:gemini\s*)?\u6a21\u578b|\b(?:which|what)\s+(?:gemini\s+)?model(?:\s+(?:version|name))?\s+(?:are you|do you use|is this)|\byour\s+model\s+(?:version|name)|\u4f60(?:\u7684|\u4f7f\u7528\u7684|\u7528\u7684)?\u6a21\u578b(?:\u662f.*|\u7684)?\u7248\u672c/i.test(question);
   }
-  function modelIdentity(question, provider) {
+  function modelIdentity(provider) {
     const model = state.models[provider];
-    const zh = /[\u3400-\u9fff]/.test(question);
-    if (model) return zh ? '本次 API 返回的模型标识是：' + model + '。代理可能在后续请求中切换模型。'
-      : 'The model identifier returned by the API for this request is ' + model + '. The proxy may switch models on later requests.';
-    return zh ? '本次模型 API 已成功响应，但接口未返回模型版本，无法确认具体型号。'
-      : 'The model API responded successfully, but did not report a model version, so I cannot confirm the exact model.';
+    if (model) return 'The model identifier returned by the API for this request is ' + model + '. The proxy may switch models on later requests.';
+    return 'The model API responded successfully, but did not report a model version, so I cannot confirm the exact model.';
   }
   function remoteAvailable(provider) {
     if (!provider || provider === 'local' || state.dead.has(provider)) return false;
@@ -600,9 +597,8 @@
     const provider = state.provider;
     const degraded = provider && provider !== 'local' && state.failures[provider];
     if (degraded) {
-      const zh = /[\u3400-\u9fff]/.test(question);
-      const notice = zh ? '模型 API 暂时不可用，本次使用站点内置知识库。' : 'The model API is unavailable; this reply uses the built-in site knowledge base.';
-      if (asksModelIdentity(question)) return { text: notice + (zh ? '\n\n本次没有获得 Gemini 模型响应，无法确认当前模型版本。' : '\n\nNo Gemini response was received for this question, so I cannot confirm the current model version.'), source: 'kb' };
+      const notice = 'The model API is unavailable; this reply uses the built-in site knowledge base.';
+      if (asksModelIdentity(question)) return { text: notice + '\n\nNo Gemini response was received for this question, so I cannot confirm the current model version.', source: 'kb' };
       if (KB) {
         const result = KB.answer(question);
         return { ...result, text: notice + '\n\n' + result.text };
@@ -620,7 +616,7 @@
     try {
       const text = await askRemote(provider, question);
       markProviderConnected(provider);
-      return { text: asksModelIdentity(question) ? modelIdentity(question, provider) : text, source: provider };
+      return { text: asksModelIdentity(question) ? modelIdentity(provider) : text, source: provider };
     } catch (err) {
       const msg = err && err.message ? err.message : 'error';
       demoteProvider(msg, !!(err && (err.transient || err.name === 'AbortError')) || isTransient(err && err.status, msg), err && err.status);
@@ -659,14 +655,13 @@
   }
 
   function renderAgentResult(el, plan, results) {
-    const zh = KB && KB.isChinese ? KB.isChinese(plan.reply || '') : false;
     let html = plan.reply ? renderMarkdownLite(plan.reply) : '';
     if (results.length) {
       html += '<ul class="ai-actions">' + results.map(r =>
         `<li class="ai-action ${r.ok ? 'ok' : 'fail'}"><span class="ai-action-icon" aria-hidden="true">${r.ok ? '✓' : '!'}</span><span>${renderInline(r.summary || r.tool)}</span></li>`
       ).join('') + '</ul>';
     } else if (!plan.reply) {
-      html = renderMarkdownLite(zh ? '没有可执行的操作。' : 'Nothing to do.');
+      html = renderMarkdownLite('Nothing to do.');
     }
     el.innerHTML = html;
   }
