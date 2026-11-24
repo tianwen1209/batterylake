@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-22T22:34:37Z",
-  "total_visits": 4524,
+  "updated_at": "2026-11-24T03:22:11Z",
+  "total_visits": 4554,
   "dataset_downloads": 540,
   "skill_uses": 132,
   "model_downloads": {
@@ -17,17 +17,17 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-22T22:34:37Z",
+    "updatedAt": "2026-11-24T03:22:11Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-22"
+      "endDate": "2026-11-24"
     },
     "countries": [
       {
         "country": "United States",
         "countryCode": "US",
-        "visitors": 129
+        "visitors": 130
       },
       {
         "country": "Singapore",
@@ -37,7 +37,7 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 92
+        "visitors": 94
       },
       {
         "country": "Hong Kong",
@@ -65,6 +65,11 @@
         "visitors": 7
       },
       {
+        "country": "Italy",
+        "countryCode": "IT",
+        "visitors": 6
+      },
+      {
         "country": "Taiwan",
         "countryCode": "TW",
         "visitors": 6
@@ -77,11 +82,6 @@
       {
         "country": "Iran",
         "countryCode": "IR",
-        "visitors": 5
-      },
-      {
-        "country": "Italy",
-        "countryCode": "IT",
         "visitors": 5
       },
       {
@@ -152,6 +152,11 @@
       {
         "country": "Nigeria",
         "countryCode": "NG",
+        "visitors": 1
+      },
+      {
+        "country": "Norway",
+        "countryCode": "NO",
         "visitors": 1
       },
       {
@@ -260,6 +265,22 @@
         "lat": 23.117
       },
       {
+        "country": "Italy",
+        "countryCode": "IT",
+        "city": "Milan",
+        "visitors": 6,
+        "lng": 9.19,
+        "lat": 45.464
+      },
+      {
+        "country": "United States",
+        "countryCode": "US",
+        "city": "San Jose",
+        "visitors": 6,
+        "lng": -121.895,
+        "lat": 37.339
+      },
+      {
         "country": "United States",
         "countryCode": "US",
         "city": "Santa Clara",
@@ -292,28 +313,12 @@
         "lat": 48.853
       },
       {
-        "country": "Italy",
-        "countryCode": "IT",
-        "city": "Milan",
-        "visitors": 5,
-        "lng": 9.19,
-        "lat": 45.464
-      },
-      {
         "country": "Netherlands",
         "countryCode": "NL",
         "city": "Amsterdam",
         "visitors": 5,
         "lng": 4.89,
         "lat": 52.374
-      },
-      {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "San Jose",
-        "visitors": 5,
-        "lng": -121.895,
-        "lat": 37.339
       },
       {
         "country": "Canada",
@@ -422,10 +427,26 @@
       {
         "country": "China",
         "countryCode": "CN",
+        "city": "Quanzhou",
+        "visitors": 2,
+        "lng": 118.586,
+        "lat": 24.914
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
         "city": "Suzhou",
         "visitors": 2,
         "lng": 120.595,
         "lat": 31.304
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Tianjin",
+        "visitors": 2,
+        "lng": 117.177,
+        "lat": 39.142
       },
       {
         "country": "China",
@@ -590,18 +611,10 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Quanzhou",
+        "city": "Wuxi",
         "visitors": 1,
-        "lng": 118.586,
-        "lat": 24.914
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Tianjin",
-        "visitors": 1,
-        "lng": 117.177,
-        "lat": 39.142
+        "lng": 120.289,
+        "lat": 31.569
       },
       {
         "country": "China",
