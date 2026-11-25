@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-24T03:22:11Z",
-  "total_visits": 4554,
-  "dataset_downloads": 540,
-  "skill_uses": 132,
+  "updated_at": "2026-11-25T01:28:18Z",
+  "total_visits": 4670,
+  "dataset_downloads": 541,
+  "skill_uses": 134,
   "model_downloads": {
     "cnn": 17,
     "linear": 4
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-24T03:22:11Z",
+    "updatedAt": "2026-11-25T01:28:18Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-24"
+      "endDate": "2026-11-25"
     },
     "countries": [
       {
@@ -32,17 +32,17 @@
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 104
+        "visitors": 109
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "visitors": 94
+        "visitors": 96
       },
       {
         "country": "Hong Kong",
         "countryCode": "HK",
-        "visitors": 9
+        "visitors": 10
       },
       {
         "country": "Netherlands",
@@ -135,6 +135,16 @@
         "visitors": 2
       },
       {
+        "country": "Argentina",
+        "countryCode": "AR",
+        "visitors": 1
+      },
+      {
+        "country": "Brazil",
+        "countryCode": "BR",
+        "visitors": 1
+      },
+      {
         "country": "Finland",
         "countryCode": "FI",
         "visitors": 1
@@ -180,7 +190,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 89,
+        "visitors": 94,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -203,18 +213,18 @@
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shanghai",
-        "visitors": 13,
-        "lng": 121.458,
-        "lat": 31.222
+        "city": "Shenzhen",
+        "visitors": 14,
+        "lng": 114.068,
+        "lat": 22.546
       },
       {
         "country": "China",
         "countryCode": "CN",
-        "city": "Shenzhen",
+        "city": "Shanghai",
         "visitors": 13,
-        "lng": 114.068,
-        "lat": 22.546
+        "lng": 121.458,
+        "lat": 31.222
       },
       {
         "country": "China",
@@ -313,6 +323,14 @@
         "lat": 48.853
       },
       {
+        "country": "Hong Kong",
+        "countryCode": "HK",
+        "city": "Hong Kong",
+        "visitors": 5,
+        "lng": 114.175,
+        "lat": 22.278
+      },
+      {
         "country": "Netherlands",
         "countryCode": "NL",
         "city": "Amsterdam",
@@ -343,14 +361,6 @@
         "visitors": 4,
         "lng": -0.126,
         "lat": 51.509
-      },
-      {
-        "country": "Hong Kong",
-        "countryCode": "HK",
-        "city": "Hong Kong",
-        "visitors": 4,
-        "lng": 114.175,
-        "lat": 22.278
       },
       {
         "country": "Iran",
@@ -423,6 +433,14 @@
         "visitors": 2,
         "lng": 120.161,
         "lat": 30.294
+      },
+      {
+        "country": "China",
+        "countryCode": "CN",
+        "city": "Luoyang",
+        "visitors": 2,
+        "lng": 112.437,
+        "lat": 34.673
       },
       {
         "country": "China",
@@ -537,6 +555,22 @@
         "lat": 10.823
       },
       {
+        "country": "Argentina",
+        "countryCode": "AR",
+        "city": "Moreno",
+        "visitors": 1,
+        "lng": -58.791,
+        "lat": -34.634
+      },
+      {
+        "country": "Brazil",
+        "countryCode": "BR",
+        "city": "Sao Paulo",
+        "visitors": 1,
+        "lng": -46.636,
+        "lat": -23.547
+      },
+      {
         "country": "China",
         "countryCode": "CN",
         "city": "Guilin",
@@ -583,14 +617,6 @@
         "visitors": 1,
         "lng": 116.715,
         "lat": 39.521
-      },
-      {
-        "country": "China",
-        "countryCode": "CN",
-        "city": "Luoyang",
-        "visitors": 1,
-        "lng": 112.437,
-        "lat": 34.673
       },
       {
         "country": "China",
