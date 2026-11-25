@@ -996,7 +996,7 @@
 .sc-news-repo-label { flex: 1; font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--text3); }
 .sc-news-repo-top > svg { color: var(--text3); flex-shrink: 0; }
 .sc-news-repo h3 { margin: 20px 0 26px; font-size: 24px; letter-spacing: -.025em; }
-.sc-news-repo-foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: auto; padding-top: 18px; border-top: 1px solid var(--border); }
+.sc-news-repo-foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: auto; padding-top: 18px; }
 .sc-news-star { display: inline-flex; align-items: center; gap: 8px; color: var(--repo-accent); font-size: 13px; font-weight: 700; }
 .sc-news-star svg { flex-shrink: 0; color: var(--amber); }
 .sc-news a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
