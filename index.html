@@ -2183,17 +2183,31 @@ for dataset in resp.json()["items"]:
         </div>
         <div>
           <div class="ai-chat-title">BatteryLake AI Assistant</div>
-          <div class="ai-chat-subtitle" id="aiChatSubtitle">BatteryLake assistant</div>
-          <div class="ai-chat-status"><span class="ai-chat-status-dot is-online"></span><span id="aiChatStatusText">Online</span></div>
+          <div class="ai-chat-subtitle" id="aiChatSubtitle">Choose how to get started</div>
+          <div class="ai-chat-status" id="aiChatStatus" hidden><span class="ai-chat-status-dot is-online"></span><span id="aiChatStatusText">Online</span></div>
         </div>
       </div>
       <div class="ai-chat-tools">
-        <button class="ai-chat-clear" id="aiChatClear" type="button" aria-label="Clear conversation" title="Clear conversation">
+        <button class="ai-chat-close ai-entry-back" id="aiEntryBack" type="button" aria-label="Back to mode selection" title="Back to mode selection" hidden><svg class="ai-entry-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="ai-chat-clear" id="aiChatClear" hidden type="button" aria-label="Clear conversation" title="Clear conversation">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="Close AI assistant">&times;</button>
       </div>
     </div>
+    <div class="ai-entry-screen" id="aiEntryScreen" aria-label="Choose an API mode">
+      <button class="ai-entry-option" id="aiGuestMode" type="button">
+        <strong>Guest Mode<svg class="ai-entry-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></strong>
+      </button>
+      <button class="ai-entry-option" id="aiOwnApiMode" type="button">
+        <strong>Connect Your API<svg class="ai-entry-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></strong>
+      </button>
+    </div>
+    <div class="ai-entry-screen ai-entry-coming-soon" id="aiOwnApiScreen" tabindex="-1" hidden>
+      <h2>Connect Your API</h2>
+      <p>This feature is under development.</p>
+    </div>
+    <div class="ai-guest-screen" id="aiGuestScreen" hidden>
     <div class="ai-mode-toolbar" id="aiModeToolbar">
       <div class="ai-mode-switch" id="aiModeOptions" role="group" aria-label="Assistant mode">
         <button class="ai-mode-button" type="button" data-ai-mode="chat" aria-pressed="true">Chat</button>
@@ -2239,6 +2253,7 @@ for dataset in resp.json()["items"]:
         </svg>
       </button>
     </form>
+    </div>
   </section>
 </div>
 <script src="js/ai-config.js"></script>

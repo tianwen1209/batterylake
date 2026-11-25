@@ -1794,6 +1794,79 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
   color: var(--text1);
 }
 .ai-chat-panel [hidden] { display: none !important; }
+.ai-guest-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.ai-entry-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  padding: 24px;
+  overflow-y: auto;
+  background-color: var(--bg2);
+  background-image:
+    radial-gradient(ellipse at 95% 8%, rgba(96,165,250,.14), transparent 52%),
+    radial-gradient(ellipse at 0% 95%, rgba(129,140,248,.10), transparent 48%),
+    radial-gradient(circle, rgba(100,116,139,.13) .8px, transparent 1px);
+  background-size: auto, auto, 22px 22px;
+}
+.ai-entry-option {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+  color: #2563eb;
+  font-family: var(--sans);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37,99,235,.04);
+  transition: border-color .15s, box-shadow .15s;
+}
+.ai-entry-option:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 6px 22px rgba(37,99,235,.10);
+}
+.ai-entry-option:focus-visible,
+.ai-entry-back:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 3px;
+}
+.ai-entry-option strong {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+}
+.ai-entry-arrow {
+  display: block;
+  flex-shrink: 0;
+}
+.ai-entry-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.ai-entry-back .ai-entry-arrow { transform: rotate(180deg); }
+.ai-entry-coming-soon p {
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.ai-entry-coming-soon { text-align: center; gap: 10px; }
+.ai-entry-coming-soon h2 { margin: 0; font-size: 22px; color: var(--text1); }
+.ai-entry-coming-soon p { margin: 0; }
 .ai-mode-toolbar {
   display: flex;
   align-items: center;

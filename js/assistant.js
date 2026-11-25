@@ -28,6 +28,14 @@
   const modeCollapse = document.getElementById('aiModeCollapse');
   const modeSummary = document.getElementById('aiModeSummary');
   const agentMessages = document.getElementById('aiAgentMessages');
+  const entryScreen = document.getElementById('aiEntryScreen');
+  const guestScreen = document.getElementById('aiGuestScreen');
+  const ownApiScreen = document.getElementById('aiOwnApiScreen');
+  const guestButton = document.getElementById('aiGuestMode');
+  const ownApiButton = document.getElementById('aiOwnApiMode');
+  const entryBack = document.getElementById('aiEntryBack');
+  const statusRow = document.getElementById('aiChatStatus');
+  let entryView = 'entry';
   let activeMode = 'chat';
   let sending = false;
   const STORAGE_KEY = 'batteryLakeAiChatHistoryV2';
@@ -215,7 +223,31 @@
   function setPanelOpen(isOpen) {
     panel.classList.toggle('open', isOpen);
     document.body.classList.toggle('ai-panel-open', isOpen);
-    if (isOpen) { input.focus(); void ensureProvider(); }
+    if (isOpen) {
+      if (entryView === 'guest') { input.focus(); void ensureProvider(); }
+      else if (entryView === 'own-api') ownApiScreen.focus();
+      else guestButton.focus();
+    }
+  }
+  function setEntryView(view) {
+    entryView = view;
+    const isGuest = view === 'guest';
+    entryScreen.hidden = view !== 'entry';
+    guestScreen.hidden = !isGuest;
+    ownApiScreen.hidden = view !== 'own-api';
+    entryBack.hidden = view === 'entry';
+    if (clearBtn) clearBtn.hidden = !isGuest;
+    statusRow.hidden = !isGuest;
+    if (isGuest) {
+      applyProviderStatus();
+      resizeInput();
+      input.focus();
+      void ensureProvider();
+    } else {
+      subtitleEl.textContent = view === 'own-api' ? 'Connect your own API' : 'Choose how to get started';
+      if (view === 'own-api') ownApiScreen.focus();
+      else guestButton.focus();
+    }
   }
   const AGENT_WELCOME = 'Agent mode: tell me what to do on the site and I will do it — open a dataset or its quality report, filter the catalog, download the processing skill, switch pages or theme, or start a dataset contribution.\n\nExample: "I want to contribute a dataset: 24 NMC 21700 cells from NTU, 2025, 1C/1C at 25 °C, 4.0 Ah, CC BY" fills the contribution form; then "what is still missing?" and "submit my contribution" finish it. Try the suggestions below.';
   const CHAT_SUGGESTIONS = [
@@ -263,7 +295,7 @@
     input.style.height = Math.min(input.scrollHeight, 116) + 'px';
   }
   function setStatus(mode, subtitle, statusText) {
-    if (subtitleEl && subtitle) subtitleEl.textContent = subtitle;
+    if (subtitleEl && subtitle && entryView === 'guest') subtitleEl.textContent = subtitle;
     if (statusTextEl && statusText) statusTextEl.textContent = statusText;
     if (statusDot) {
       statusDot.classList.remove('is-online', 'is-busy', 'is-offline');
@@ -706,7 +738,7 @@
       input.disabled = true;
       sendButton.disabled = true;
       try { await runAgentCommand(cleanMessage); }
-      finally { sending = false; input.disabled = false; sendButton.disabled = false; if (panel.classList.contains('open')) input.focus(); }
+      finally { sending = false; input.disabled = false; sendButton.disabled = false; if (entryView === 'guest' && panel.classList.contains('open')) input.focus(); }
       return;
     }
     sending = true;
@@ -747,11 +779,14 @@
       sending = false;
       input.disabled = false;
       sendButton.disabled = false;
-      if (panel.classList.contains('open')) input.focus();
+      if (entryView === 'guest' && panel.classList.contains('open')) input.focus();
     }
   }
 
   /* ── events ────────────────────────────────────────────────────── */
+  guestButton.addEventListener('click', () => setEntryView('guest'));
+  ownApiButton.addEventListener('click', () => setEntryView('own-api'));
+  entryBack.addEventListener('click', () => setEntryView('entry'));
   modeButtons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.aiMode)));
   modeCollapse.addEventListener('click', () => {
     const collapsed = modeCollapse.getAttribute('aria-expanded') === 'true';
@@ -808,14 +843,15 @@
   window.batteryTwinAI = {
     open() { setPanelOpen(true); },
     addBotNote(text) {
+      setEntryView('guest');
       setMode('chat');
       setPanelOpen(true);
       const time = new Date().toISOString();
       addMessage(text, 'bot', { time, source: 'kb' });
       saveMessage(text, 'bot', time, 'kb');
     },
-    send(message) { setMode('chat'); setPanelOpen(true); return sendMessage(message); },
-    act(command) { setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
+    send(message) { setEntryView('guest'); setMode('chat'); setPanelOpen(true); return sendMessage(message); },
+    act(command) { setEntryView('guest'); setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
     mode() { return activeMode; },
     ask(message) { return answer(String(message || '')); },
     provider() { return state.provider; }

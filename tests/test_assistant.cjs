@@ -8,9 +8,9 @@ const vm = require('node:vm');
 function widget(responses) {
   function element() {
     return {
-      textContent: '', innerHTML: '', style: {}, dataset: {},
+      textContent: '', innerHTML: '', style: {}, dataset: {}, listeners: {},
       classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },
-      append() {}, appendChild() {}, addEventListener() {}, setAttribute() {}, focus() {},
+      append() {}, appendChild() {}, addEventListener(type, fn) { this.listeners[type] = fn; }, setAttribute() {}, focus() {},
       querySelector() { return element(); }, querySelectorAll() { return []; }
     };
   }
@@ -46,6 +46,8 @@ function widget(responses) {
   vm.runInNewContext(fs.readFileSync('js/assistant.js', 'utf8'), context);
   return {
     api: window.batteryTwinAI, requests, timers,
+    element: id => elements.get(id),
+    click: id => elements.get(id).listeners.click(),
     status: () => elements.get('aiChatStatusText').textContent,
     advance(ms) {
       now += ms;
@@ -60,6 +62,7 @@ const ok = (model = 'gemini-flash-lite-latest') => ({ status: 200, body: { text:
 test('connection is unverified until an actual answer and proxy timeout allows fallback models', async () => {
   const w = widget([ok()]);
   w.api.open();
+  w.click('aiGuestMode');
   await Promise.resolve(); await Promise.resolve();
   assert.match(w.status(), /not verified/);
   assert.equal((await w.api.ask('Explain battery aging')).text, 'Model answer');
@@ -119,4 +122,29 @@ test('model recommendations are sent through rather than replaced by model ident
   const w = widget([ok(), ok()]);
   assert.equal((await w.api.ask('Which models can you compare?')).text, 'Model answer');
   assert.equal((await w.api.ask('What model do you recommend?')).text, 'Model answer');
+});
+
+
+test('entry offers guest access and an API placeholder without making requests', async () => {
+  const w = widget([]);
+  w.api.open();
+  assert.equal(w.requests.length, 0);
+  w.click('aiOwnApiMode');
+  assert.equal(w.element('aiEntryScreen').hidden, true);
+  assert.equal(w.element('aiOwnApiScreen').hidden, false);
+  assert.equal(w.element('aiGuestScreen').hidden, true);
+  assert.equal(w.element('aiChatClear').hidden, true);
+  assert.equal(w.element('aiChatStatus').hidden, true);
+  assert.equal(w.requests.length, 0);
+  w.click('aiEntryBack');
+  assert.equal(w.element('aiEntryScreen').hidden, false);
+  assert.equal(w.element('aiOwnApiScreen').hidden, true);
+  w.click('aiGuestMode');
+  assert.equal(w.element('aiGuestScreen').hidden, false);
+  assert.equal(w.element('aiEntryScreen').hidden, true);
+  assert.equal(w.element('aiChatClear').hidden, false);
+  assert.equal(w.element('aiChatStatus').hidden, false);
+  w.click('aiEntryBack');
+  assert.equal(w.element('aiGuestScreen').hidden, true);
+  assert.equal(w.element('aiEntryScreen').hidden, false);
 });
