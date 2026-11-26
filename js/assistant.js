@@ -42,16 +42,7 @@
   const LOCAL_BACKEND_URL = 'http://127.0.0.1:8000/api/chat';
 
   const batteryBotIcon = `
-    <svg class="ai-battery-bot" viewBox="0 0 48 48" aria-hidden="true">
-      <rect x="11" y="9" width="26" height="30" rx="7" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
-      <rect x="19" y="5" width="10" height="5" rx="2" fill="#93c5fd"/>
-      <rect x="15" y="14" width="18" height="16" rx="4" fill="#dbeafe"/>
-      <rect x="18" y="25" width="12" height="8" rx="3" fill="#22c55e"/>
-      <circle cx="20" cy="21" r="2" fill="#1d4ed8"/>
-      <circle cx="28" cy="21" r="2" fill="#1d4ed8"/>
-      <path d="M21 27h6" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M11 22H6M37 22h5M17 39l-3 4M31 39l3 4" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
-    </svg>
+    <img class="ai-battery-bot" src="assets/logos/ai-assistant.png" width="38" height="38" alt="" aria-hidden="true">
   `;
 
   const SHOW_SOURCE_TAGS = false;
