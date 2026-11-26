@@ -856,7 +856,7 @@
       saveMessage(text, 'bot', time, 'kb');
     },
     send(message) { if (entryView === 'own-api') return window.BatteryLakePrivateAssistant.send(message); setEntryView('guest'); setMode('chat'); setPanelOpen(true); return sendMessage(message); },
-    act(command) { if (entryView === 'own-api') return Promise.resolve({ text: 'Agent actions are available in Guest Mode only.', source: 'local' }); setEntryView('guest'); setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
+    act(command) { if (entryView === 'own-api') return window.BatteryLakePrivateAssistant.act(String(command || '')); setEntryView('guest'); setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
     mode() { return activeMode; },
     ask(message) { return answer(String(message || '')); },
     provider() { return entryView === 'own-api' ? 'own-api' : state.provider; }

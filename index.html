@@ -2235,6 +2235,13 @@ for dataset in resp.json()["items"]:
           <button id="aiPrivateClear" type="button">Clear chat</button>
           <button id="aiPrivateDisconnect" type="button">Disconnect</button>
         </div>
+        <div class="ai-mode-toolbar" role="group" aria-label="Your API assistant mode">
+          <div class="ai-mode-switch">
+            <button class="ai-mode-button" id="aiPrivateChatMode" type="button" aria-pressed="true">Chat</button>
+            <button class="ai-mode-button" id="aiPrivateAgentMode" type="button" aria-pressed="false">Agent <span class="ai-mode-badge">Beta</span></button>
+          </div>
+        </div>
+        <p class="ai-private-note" id="aiPrivateModeHint">Chat with your model. Switch to Agent to operate the website.</p>
         <div class="ai-chat-messages" id="aiPrivateMessages" role="log" aria-label="Private API conversation" aria-live="polite"></div>
         <form class="ai-chat-form" id="aiPrivateChatForm" autocomplete="off">
           <textarea id="aiPrivateInput" rows="2" maxlength="4000" placeholder="Ask your model…" aria-label="Message to your model" autocomplete="off" spellcheck="false" required></textarea>
@@ -2250,7 +2257,7 @@ for dataset in resp.json()["items"]:
         <div class="ai-private-privacy-details">
           <p>Chats stay in memory for this session. Clear, disconnect, close, back or reload discards them.</p>
           <p>Your messages go to your chosen provider, whose retention policy applies.</p>
-          <p>Text chat only. Agent actions and file uploads are unavailable in this mode.</p>
+          <p>Agent can navigate, filter datasets and download public reports or the processing skill. Actions may load public website resources. Contribution form editing, submission and file uploads are unavailable.</p>
         </div>
       </details>
     </div>
@@ -2305,9 +2312,9 @@ for dataset in resp.json()["items"]:
 </div>
 <script src="js/ai-config.js"></script>
 <script src="js/assistant-knowledge.js"></script>
-<script src="js/assistant-actions.js"></script>
-<script src="js/assistant-private.js?v=local-api-ui-1"></script>
-<script src="js/assistant.js?v=local-api-1"></script>
+<script src="js/assistant-actions.js?v=private-agent-1"></script>
+<script src="js/assistant-private.js?v=local-api-agent-1"></script>
+<script src="js/assistant.js?v=local-api-agent-1"></script>
 <script src="js/showcase.js"></script>
 </body>
 </html>

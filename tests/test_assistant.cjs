@@ -24,7 +24,7 @@ function widget(responses, privateMode = false) {
   const window = {
     addEventListener(type, fn) { events[type] = fn; },
     BATTERYLAKE_AI_CONFIG: { provider: 'worker', endpoint: 'https://proxy.example/chat', timeoutMs: 60000 },
-    BatteryLakeKnowledge: { answer: () => ({ text: 'Catalog answer', source: 'kb' }), context: () => '', isChinese: q => /[\u3400-\u9fff]/.test(q) }
+    BatteryLakeKnowledge: { catalog: () => [], answer: () => ({ text: 'Catalog answer', source: 'kb' }), context: () => '', isChinese: q => /[\u3400-\u9fff]/.test(q) }
   };
   const context = {
     window, location: { hostname: 'example.com', origin: 'https://example.com' }, AbortController,
@@ -46,10 +46,11 @@ function widget(responses, privateMode = false) {
       return { ok: response.status === 200, status: response.status, json: async () => response.body };
     }
   };
+  if (privateMode) vm.runInNewContext(fs.readFileSync('js/assistant-actions.js', 'utf8'), context);
   if (privateMode) vm.runInNewContext(fs.readFileSync('js/assistant-private.js', 'utf8'), context);
   vm.runInNewContext(fs.readFileSync('js/assistant.js', 'utf8'), context);
   return {
-    api: window.batteryTwinAI, requests, timers, storageWrites, events,
+    window, context, api: window.batteryTwinAI, requests, timers, storageWrites, events,
     element: id => elements.get(id),
     click: id => elements.get(id).listeners.click(),
     submit: id => elements.get(id).listeners.submit({ preventDefault() {} }),
@@ -188,8 +189,7 @@ test('private chat sends only to loopback, omits guest history and never writes 
     assert.equal(request.options.referrerPolicy, 'no-referrer');
   }
   assert.equal(w.storageWrites.length, 0);
-  await w.api.act('Submit private research');
-  assert.equal(w.requests.length, 3, 'agent API cannot select guest while private');
+  assert.equal(w.api.provider(), 'own-api');
 });
 
 test('private provider failures do not echo upstream details or use a guest fallback', async () => {
@@ -284,4 +284,101 @@ test('private exit preserves guest mode and never sends private context to the g
   assert.equal(w.requests[2].url, 'https://proxy.example/chat');
   assert.doesNotMatch(w.requests[2].options.body, /CONFIDENTIAL_PRIVATE|Private answer/);
   assert.ok(w.storageWrites.length > 0, 'guest history behavior is preserved');
+});
+
+
+test('private Agent uses own provider, executes production tools and returns real results in follow-ups', async () => {
+  const plan = { actions: [{ tool: 'open_page', args: { page: 'quality' } }], reply: 'Opening quality.' };
+  const w = widget([paired, privateReply(JSON.stringify(plan)), privateReply(JSON.stringify({ actions: [], reply: 'Done.' }))], true);
+  const pages = [];
+  w.window.showPage = page => pages.push(page);
+  await pair(w);
+  await w.api.act('Open quality');
+  assert.deepEqual(pages, ['quality']);
+  const body = JSON.parse(w.requests[1].options.body);
+  assert.match(body.messages[0].content, /BatteryLake Agent/);
+  assert.doesNotMatch(body.messages[0].content, /- submit_contribution/);
+  assert.match(w.element('aiPrivateMessages').children[1].children[0].textContent, /✓ Opened/);
+  await w.api.send('What happened?');
+  assert.match(JSON.parse(w.requests[2].options.body).messages[2].content, /"ok":true/);
+  assert.equal(w.storageWrites.length, 0);
+  assert.ok(w.requests.every(request => request.url.startsWith('http://127.0.0.1:8765/')));
+});
+
+test('private Agent rejects forbidden, inherited and unknown tools and reports failures', async () => {
+  const plan = { actions: [
+    { tool: 'submit_contribution', args: {} }, { tool: 'set_theme', args: { theme: 'dark' } },
+    { tool: 'constructor', args: {} }, { tool: 'open_page', args: { page: 'missing' } }
+  ], reply: '' };
+  const w = widget([paired, privateReply(JSON.stringify(plan))], true);
+  await pair(w);
+  await w.api.act('Try these actions');
+  const text = w.element('aiPrivateMessages').children[1].children[0].textContent;
+  assert.match(text, /Action unavailable.*submit_contribution/);
+  assert.match(text, /Action unavailable.*set_theme/);
+  assert.match(text, /Action unavailable.*constructor/);
+  assert.match(text, /Unknown page/);
+  assert.equal(w.storageWrites.length, 0);
+});
+
+test('private Agent never executes malformed plans or cancelled late plans', async () => {
+  let resolve;
+  const pending = new Promise(r => { resolve = r; });
+  const w = widget([paired, privateReply('Not JSON'), pending], true);
+  const pages = [];
+  w.window.showPage = page => pages.push(page);
+  await pair(w);
+  w.click('aiPrivateAgentMode');
+  await w.api.send('Open quality');
+  assert.match(w.element('aiPrivateStatus').textContent, /valid Agent plan/);
+  const sending = w.api.send('Open quality');
+  w.click('aiPrivateClear');
+  resolve(privateReply(JSON.stringify({ actions: [{ tool: 'open_page', args: { page: 'quality' } }], reply: '' })));
+  await sending;
+  assert.deepEqual(pages, []);
+  assert.equal(w.element('aiPrivateMessages').children.length, 0);
+});
+
+test('switching private modes discards prior mode context and Chat cannot execute plans', async () => {
+  const plan = JSON.stringify({ actions: [{ tool: 'open_page', args: { page: 'quality' } }], reply: 'Plan' });
+  const w = widget([paired, privateReply(plan), privateReply(plan), privateReply('Chat answer')], true);
+  const pages = [];
+  w.window.showPage = page => pages.push(page);
+  await pair(w);
+  await w.api.send('Chat only');
+  assert.deepEqual(pages, []);
+  w.click('aiPrivateAgentMode');
+  assert.equal(w.element('aiPrivateMessages').children.length, 0);
+  await w.api.send('Open quality');
+  assert.deepEqual(pages, ['quality']);
+  assert.equal(JSON.parse(w.requests[2].options.body).messages.length, 2);
+  w.click('aiPrivateChatMode');
+  await w.api.send('Hello');
+  const body = JSON.parse(w.requests[3].options.body);
+  assert.equal(body.messages.length, 2);
+  assert.match(body.messages[0].content, /cannot execute site actions/);
+});
+
+
+test('private clear stops the remaining steps of a running Agent plan', async () => {
+  let resolve;
+  const report = new Promise(r => { resolve = r; });
+  const plan = { actions: [
+    { tool: 'open_quality_report', args: { dataset_id: 'dataset_21' } },
+    { tool: 'open_page', args: { page: 'models' } }
+  ], reply: '' };
+  const w = widget([paired, privateReply(JSON.stringify(plan))], true);
+  w.window.BatteryLakeKnowledge.catalog = () => [{ id: 'dataset_21', name: 'Test' }];
+  w.window.loadQualityReport = () => report;
+  w.window.showDatasetQuality = () => {};
+  const pages = [];
+  w.window.showPage = page => pages.push(page);
+  await pair(w);
+  const sending = w.api.act('Open report then models');
+  for (let i = 0; i < 12; i++) await Promise.resolve();
+  w.click('aiPrivateClear');
+  resolve({ overall: 0.9, gate: 'ready' });
+  await sending;
+  assert.deepEqual(pages, []);
+  assert.equal(w.element('aiPrivateMessages').children.length, 0);
 });

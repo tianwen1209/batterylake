@@ -1,8 +1,8 @@
-# Connect Your API — local, session-only chat
+# Connect Your API — local, session-only Chat and Agent
 
-This mode is separate from Guest Mode. It supports text chat with Gemini and
-OpenAI-compatible HTTPS chat completions endpoints. It does not support agent
-actions, file uploads, history synchronization, or automatic guest fallback.
+This mode is separate from Guest Mode. It supports Chat and Agent with Gemini and
+OpenAI-compatible HTTPS chat completions endpoints. It does not support
+file uploads, history synchronization, or automatic guest fallback.
 No change to the BatteryLake server is needed.
 
 ## Setup
@@ -59,6 +59,29 @@ project. Avoid assuming that a model listed in pricing is available to a new
 project: Google limits access to its 2.5 series to prior active users. See
 [Google's model availability notice](https://ai.google.dev/gemini-api/docs/deprecations#gemini-2.5-flash-models).
 
+## Agent mode
+
+After pairing, choose **Agent Beta** beside Chat. For example: “筛选 LFP 软包数据集”,
+“打开 dataset_21 的质量报告”, or “下载处理 skill”. Chat remains the default.
+Switching modes clears the conversation to keep chat and planning context separate.
+
+Your chosen model returns a JSON plan through the same local connector; no native
+provider tool-calling API or connector upgrade is required (version 3+). The browser
+executes up to six allowlisted actions and displays each actual success or failure.
+Follow-up messages include those results. Invalid plans and provider failures are
+reported without a guest or rule-based fallback and without automatic retries.
+
+Available actions: open a site page, dataset or model; open/download public quality
+reports; filter/clear the dataset catalog; download the processing skill; select a
+preprocessing dataset. Contribution editing/submission and theme persistence are
+excluded. This does not run Python, preprocess datasets or train models.
+
+Agent actions may load public website resources and download files normally. Chat
+text is still sent only through the connector to your provider. Chat and action
+history remain in session memory. Clear/disconnect/close/back cancel pending model
+requests and stop subsequent actions; completed or already-started website actions
+and downloaded files cannot be undone by clearing the chat.
+
 ## What is sent and retained
 
 ```text
@@ -95,8 +118,8 @@ Website in your browser -> 127.0.0.1 connector -> your chosen HTTPS provider
   This does **not** guarantee zero Google-side retention. Google free-tier data
   may be used to improve its products: use public test prompts, not confidential
   research data. See [Google's data-use and pricing terms](https://ai.google.dev/gemini-api/docs/pricing).
-- Responses are plain text: no automatic model-generated link/image fetches,
-  executable HTML, tool calls or site actions. Public site context is computed
+- Responses are rendered as plain text: no automatic model-generated link/image fetches
+  or executable HTML. Only explicit Agent mode executes allowlisted site actions. Public site context is computed
   from already loaded catalog data; no query containing private chat text is
   sent to the website. Ordinary website asset/catalog requests still occur.
 - Guest Mode keeps its existing provider and browser history behavior. Its
