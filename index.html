@@ -16,12 +16,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="js/theme-init.js"></script>
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/base.css?v=local-api-ui-1">
 <script src="assets/vendor/papaparse.min.js"></script>
 
 <link rel="stylesheet" href="styles/benchmark.css?v=numbered-cards-1">
 <!-- DESIGN POLISH LAYER: visual tokens and component refinements. -->
-<link rel="stylesheet" href="styles/polish.css?v=kdd2027-batterytwin-1">
+<link rel="stylesheet" href="styles/polish.css?v=local-api-1">
 <!-- SHOWCASE LAYER: Home / Quality / APIs redesign (scroll reveals, interactive console). -->
 <link rel="stylesheet" href="styles/showcase.css?v=home-news-2">
 <!-- PREPROCESSING PAGE: agent-skill hand-off (redesigned 2026-09-08). -->
@@ -2203,9 +2203,56 @@ for dataset in resp.json()["items"]:
         <strong>Connect Your API<svg class="ai-entry-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></strong>
       </button>
     </div>
-    <div class="ai-entry-screen ai-entry-coming-soon" id="aiOwnApiScreen" tabindex="-1" hidden>
-      <h2>Connect Your API</h2>
-      <p>This feature is under development.</p>
+    <div class="ai-private-screen" id="aiOwnApiScreen" tabindex="-1" hidden>
+      <div class="ai-private-setup" id="aiPrivateSetup">
+        <span class="ai-private-badge">LOCAL CONNECTION</span>
+        <h2>Connect Your API</h2>
+        <p>Your key stays in a connector on your computer. Chats go from that connector to your chosen provider, without passing through BatteryLake servers.</p>
+        <ol>
+          <li><a href="scripts/local_api_connector.py" download="local_api_connector.py">Download the Python connector</a> (Python 3.10+).</li>
+          <li>Run it in a terminal with your provider's full chat completions URL and model ID:</li>
+        </ol>
+        <pre id="aiPrivateCommand"></pre>
+        <p>Enter your API key only in the terminal, then paste the connector's pairing code below. <a href="docs/LOCAL_API.md" target="_blank" rel="noopener noreferrer">Setup guide</a></p>
+        <form id="aiPrivateConnectForm" autocomplete="off">
+          <label for="aiPrivateToken">Pairing code (not your API key)</label>
+          <input id="aiPrivateToken" type="password" autocomplete="off" spellcheck="false" maxlength="128" required placeholder="Paste code from the connector">
+          <button id="aiPrivateConnect" type="submit">Connect locally</button>
+        </form>
+        <p class="ai-private-note">Allow local network access if your browser asks. Use Guest Mode if local connections are unavailable; private chats are never automatically sent there.</p>
+      </div>
+      <div class="ai-private-connection" id="aiPrivateConnection" hidden>
+        <div class="ai-private-connection-top">
+          <span class="ai-private-provider"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c0 5-4 9-9 9 5 0 9 4 9 9 0-5 4-9 9-9-5 0-9-4-9-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="aiPrivateProviderName">Your provider</span></span>
+          <span class="ai-private-connection-state" id="aiPrivateConnectionState">Paired</span>
+        </div>
+        <div class="ai-private-model" id="aiPrivateModelName"></div>
+      </div>
+      <p class="ai-private-status" id="aiPrivateStatus" role="status" aria-live="polite">Not connected</p>
+      <div class="ai-private-session" id="aiPrivateSession" hidden>
+        <div class="ai-private-session-tools">
+          <span class="ai-private-badge">YOUR API</span>
+          <button id="aiPrivateClear" type="button">Clear chat</button>
+          <button id="aiPrivateDisconnect" type="button">Disconnect</button>
+        </div>
+        <div class="ai-chat-messages" id="aiPrivateMessages" role="log" aria-label="Private API conversation" aria-live="polite"></div>
+        <form class="ai-chat-form" id="aiPrivateChatForm" autocomplete="off">
+          <textarea id="aiPrivateInput" rows="2" maxlength="4000" placeholder="Ask your model…" aria-label="Message to your model" autocomplete="off" spellcheck="false" required></textarea>
+          <button id="aiPrivateSend" type="submit">Send</button>
+        </form>
+      </div>
+      <details class="ai-private-privacy" id="aiPrivatePrivacy">
+        <summary>
+          <svg class="ai-private-shield" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8 3v5c0 5-4 8-8 10-4-2-8-5-8-10V6l8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.5 11.5 2.5 2.5 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>No saved chat history</strong><span class="ai-private-privacy-caption">Provider retention rules still apply.</span></span>
+          <svg class="ai-private-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="ai-private-privacy-details">
+          <p>Chats stay in memory for this session. Clear, disconnect, close, back or reload discards them.</p>
+          <p>Your messages go to your chosen provider, whose retention policy applies.</p>
+          <p>Text chat only. Agent actions and file uploads are unavailable in this mode.</p>
+        </div>
+      </details>
     </div>
     <div class="ai-guest-screen" id="aiGuestScreen" hidden>
     <div class="ai-mode-toolbar" id="aiModeToolbar">
@@ -2259,7 +2306,8 @@ for dataset in resp.json()["items"]:
 <script src="js/ai-config.js"></script>
 <script src="js/assistant-knowledge.js"></script>
 <script src="js/assistant-actions.js"></script>
-<script src="js/assistant.js"></script>
+<script src="js/assistant-private.js?v=local-api-ui-1"></script>
+<script src="js/assistant.js?v=local-api-1"></script>
 <script src="js/showcase.js"></script>
 </body>
 </html>

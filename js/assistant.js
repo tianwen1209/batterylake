@@ -221,6 +221,7 @@
   }
 
   function setPanelOpen(isOpen) {
+    if (!isOpen && entryView === 'own-api' && window.BatteryLakePrivateAssistant) window.BatteryLakePrivateAssistant.reset();
     panel.classList.toggle('open', isOpen);
     document.body.classList.toggle('ai-panel-open', isOpen);
     if (isOpen) {
@@ -230,6 +231,7 @@
     }
   }
   function setEntryView(view) {
+    if (entryView === 'own-api' && view !== 'own-api' && window.BatteryLakePrivateAssistant) window.BatteryLakePrivateAssistant.reset();
     entryView = view;
     const isGuest = view === 'guest';
     entryScreen.hidden = view !== 'entry';
@@ -641,6 +643,7 @@
   }
 
   async function answer(question) {
+    if (entryView === 'own-api') return window.BatteryLakePrivateAssistant.send(question);
     // Do not wait more than a moment for the initial probe; the knowledge base can answer immediately.
     await Promise.race([ensureProvider(), new Promise(resolve => setTimeout(resolve, 1500))]);
     const provider = state.ready ? state.provider : 'local';
@@ -728,6 +731,7 @@
   }
 
   async function sendMessage(message) {
+    if (entryView === 'own-api') return window.BatteryLakePrivateAssistant.send(message);
     if (sending) return;
     const cleanMessage = message.trim();
     if (!cleanMessage) return;
@@ -843,6 +847,7 @@
   window.batteryTwinAI = {
     open() { setPanelOpen(true); },
     addBotNote(text) {
+      if (entryView === 'own-api') return;
       setEntryView('guest');
       setMode('chat');
       setPanelOpen(true);
@@ -850,11 +855,11 @@
       addMessage(text, 'bot', { time, source: 'kb' });
       saveMessage(text, 'bot', time, 'kb');
     },
-    send(message) { setEntryView('guest'); setMode('chat'); setPanelOpen(true); return sendMessage(message); },
-    act(command) { setEntryView('guest'); setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
+    send(message) { if (entryView === 'own-api') return window.BatteryLakePrivateAssistant.send(message); setEntryView('guest'); setMode('chat'); setPanelOpen(true); return sendMessage(message); },
+    act(command) { if (entryView === 'own-api') return Promise.resolve({ text: 'Agent actions are available in Guest Mode only.', source: 'local' }); setEntryView('guest'); setMode('agent'); setPanelOpen(true); return sendMessage(String(command || '')); },
     mode() { return activeMode; },
     ask(message) { return answer(String(message || '')); },
-    provider() { return state.provider; }
+    provider() { return entryView === 'own-api' ? 'own-api' : state.provider; }
   };
   window.BatteryLakeAssistant = window.batteryTwinAI;
 

@@ -5,29 +5,32 @@ const vm = require('node:vm');
 
 // Exercise the public widget API with the production script, without a browser
 // or network. Fake timers let us check cooldown expiry without a 90-second wait.
-function widget(responses) {
+function widget(responses, privateMode = false) {
   function element() {
     return {
-      textContent: '', innerHTML: '', style: {}, dataset: {}, listeners: {},
+      textContent: '', innerHTML: '', value: '', style: {}, dataset: {}, listeners: {}, children: [],
       classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },
-      append() {}, appendChild() {}, addEventListener(type, fn) { this.listeners[type] = fn; }, setAttribute() {}, focus() {},
+      append() {}, appendChild(child) { this.children.push(child); }, replaceChildren() { this.children = []; }, addEventListener(type, fn) { this.listeners[type] = fn; }, setAttribute() {}, focus() {},
       querySelector() { return element(); }, querySelectorAll() { return []; }
     };
   }
   const elements = new Map();
   const timers = new Map();
   const requests = [];
+  const storageWrites = [];
+  const events = {};
   let now = 100000;
   let timerId = 0;
   const window = {
+    addEventListener(type, fn) { events[type] = fn; },
     BATTERYLAKE_AI_CONFIG: { provider: 'worker', endpoint: 'https://proxy.example/chat', timeoutMs: 60000 },
     BatteryLakeKnowledge: { answer: () => ({ text: 'Catalog answer', source: 'kb' }), context: () => '', isChinese: q => /[\u3400-\u9fff]/.test(q) }
   };
   const context = {
-    window, location: { hostname: 'example.com' }, AbortController,
+    window, location: { hostname: 'example.com', origin: 'https://example.com' }, AbortController,
     Date: class extends Date { static now() { return now; } },
     console: { warn() {} },
-    localStorage: { getItem() { return null; } },
+    localStorage: { getItem() { return null; }, setItem(...args) { storageWrites.push(args); }, removeItem(...args) { storageWrites.push(args); } },
     document: {
       body: element(),
       getElementById(id) { if (!elements.has(id)) elements.set(id, element()); return elements.get(id); },
@@ -37,17 +40,19 @@ function widget(responses) {
     clearTimeout(id) { timers.delete(id); },
     async fetch(url, options) {
       requests.push({ url, options, timerDelays: [...timers.values()].map(t => t.delay) });
-      const response = responses.shift();
+      const response = await responses.shift();
       if (response instanceof Error) throw response;
       assert.ok(response, 'unexpected model request');
       return { ok: response.status === 200, status: response.status, json: async () => response.body };
     }
   };
+  if (privateMode) vm.runInNewContext(fs.readFileSync('js/assistant-private.js', 'utf8'), context);
   vm.runInNewContext(fs.readFileSync('js/assistant.js', 'utf8'), context);
   return {
-    api: window.batteryTwinAI, requests, timers,
+    api: window.batteryTwinAI, requests, timers, storageWrites, events,
     element: id => elements.get(id),
     click: id => elements.get(id).listeners.click(),
+    submit: id => elements.get(id).listeners.submit({ preventDefault() {} }),
     status: () => elements.get('aiChatStatusText').textContent,
     advance(ms) {
       now += ms;
@@ -125,7 +130,7 @@ test('model recommendations are sent through rather than replaced by model ident
 });
 
 
-test('entry offers guest access and an API placeholder without making requests', async () => {
+test('entry offers guest and private setup without making requests', async () => {
   const w = widget([]);
   w.api.open();
   assert.equal(w.requests.length, 0);
@@ -147,4 +152,136 @@ test('entry offers guest access and an API placeholder without making requests',
   w.click('aiEntryBack');
   assert.equal(w.element('aiGuestScreen').hidden, true);
   assert.equal(w.element('aiEntryScreen').hidden, false);
+});
+
+const paired = { status: 200, body: { protocol: 'batterylake-local-v1', provider: 'provider.example', model: 'user-model', version: 3, transport: 'chat-completions' } };
+const privateReply = text => ({ status: 200, body: { reply: text } });
+async function pair(w) {
+  w.click('aiOwnApiMode');
+  w.element('aiPrivateToken').value = 'x'.repeat(43);
+  await w.submit('aiPrivateConnectForm');
+}
+
+test('private chat sends only to loopback, omits guest history and never writes storage', async () => {
+  const w = widget([paired, privateReply('<img src="https://evil.example/leak">'), privateReply('Second answer')], true);
+  await pair(w);
+  assert.equal(w.requests.length, 1, 'pairing makes no model probe');
+  assert.equal(w.element('aiPrivateToken').value, '');
+  assert.equal(w.element('aiPrivateSession').hidden, false);
+  assert.match(w.element('aiPrivateStatus').textContent, /Send a message to verify/);
+  assert.equal(w.element('aiPrivateConnectionState').textContent, 'Paired');
+  await w.api.send('Private research');
+  assert.equal(w.element('aiPrivateConnectionState').textContent, 'Connected');
+  const body = JSON.parse(w.requests[1].options.body);
+  assert.equal(body.messages.at(-1).content, 'Private research');
+  assert.equal(body.messages.length, 2);
+  const reply = w.element('aiPrivateMessages').children[1].children[0];
+  assert.equal(reply.textContent, '<img src="https://evil.example/leak">');
+  assert.equal(reply.innerHTML, '', 'model output is rendered as text');
+  await w.api.ask('Follow-up');
+  assert.equal(JSON.parse(w.requests[2].options.body).messages[1].content, 'Private research');
+  for (const request of w.requests) {
+    assert.match(request.url, /^http:\/\/127\.0\.0\.1:8765\/(status|chat)$/);
+    assert.equal(request.options.credentials, 'omit');
+    assert.equal(request.options.cache, 'no-store');
+    assert.equal(request.options.redirect, 'error');
+    assert.equal(request.options.referrerPolicy, 'no-referrer');
+  }
+  assert.equal(w.storageWrites.length, 0);
+  await w.api.act('Submit private research');
+  assert.equal(w.requests.length, 3, 'agent API cannot select guest while private');
+});
+
+test('private provider failures do not echo upstream details or use a guest fallback', async () => {
+  const w = widget([paired, { status: 502, body: { error: 'SECRET KEY or PROMPT' } }], true);
+  await pair(w);
+  await w.api.send('Confidential question');
+  assert.match(w.element('aiPrivateStatus').textContent, /Provider request failed/);
+  assert.doesNotMatch(w.element('aiPrivateStatus').textContent, /SECRET|PROMPT/);
+  assert.equal(w.requests.length, 2);
+  assert.equal(w.storageWrites.length, 0);
+  assert.equal(w.api.provider(), 'own-api');
+});
+
+test('private diagnostics use only allowlisted categories and never display upstream error text', async () => {
+  for (const [code, expected] of [
+    ['provider_auth', /denied access/], ['provider_quota', /quota or rate limit/],
+    ['provider_request', /does not necessarily mean a format error/], ['provider_tls', /TLS/],
+    ['provider_key_invalid', /Google rejected the API key/], ['provider_billing', /free-tier eligibility/],
+    ['provider_precondition', /FAILED_PRECONDITION/], ['provider_region', /unavailable from this location/],
+    ['provider_parameter_store', /store parameter/],
+    ['provider_response', /empty or unsupported response/],
+    ['SECRET_KEY_PRIVATE_PROMPT', /Provider request failed/], ['toString', /Provider request failed/]
+  ]) {
+    const w = widget([paired, { status: 502, body: { code, error: 'SECRET_ERROR_BODY' } }], true);
+    await pair(w);
+    await w.api.send('Private question');
+    assert.match(w.element('aiPrivateStatus').textContent, expected);
+    assert.doesNotMatch(w.element('aiPrivateStatus').textContent, /SECRET|PRIVATE_PROMPT/);
+    assert.equal(w.requests.length, 2, 'diagnostics never retry or invoke guest');
+    assert.equal(w.storageWrites.length, 0);
+  }
+});
+
+test('old connectors fail visibly before any private question is sent', async () => {
+  const w = widget([{ status: 200, body: { ...paired.body, version: 2 } }], true);
+  await pair(w);
+  assert.match(w.element('aiPrivateStatus').textContent, /Outdated connector/);
+  await w.api.send('Private question');
+  assert.equal(w.requests.length, 1);
+  assert.equal(w.element('aiPrivateSession').hidden, true);
+});
+
+test('private clear aborts pending requests, drops late responses and discards context', async () => {
+  let resolve;
+  const pending = new Promise(r => { resolve = r; });
+  const w = widget([paired, pending, privateReply('Fresh')], true);
+  await pair(w);
+  const sending = w.api.send('Old question');
+  const signal = w.requests[1].options.signal;
+  w.click('aiPrivateClear');
+  assert.equal(signal.aborted, true);
+  resolve(privateReply('Late confidential reply'));
+  await sending;
+  assert.equal(w.element('aiPrivateMessages').children.length, 0);
+  await w.api.send('New question');
+  assert.equal(JSON.parse(w.requests[2].options.body).messages.length, 2);
+});
+
+test('disconnect, close, back and page exit discard private pairing and messages', async () => {
+  for (const leave of [w => w.click('aiPrivateDisconnect'), w => w.click('aiChatClose'), w => w.click('aiEntryBack'), w => w.events.pagehide()]) {
+    const w = widget([paired, privateReply('Private answer')], true);
+    await pair(w);
+    await w.api.send('Private question');
+    leave(w);
+    assert.equal(w.element('aiPrivateMessages').children.length, 0);
+    assert.equal(w.element('aiPrivateSession').hidden, true);
+    assert.equal(w.element('aiPrivateToken').value, '');
+    assert.equal(w.storageWrites.length, 0);
+  }
+});
+
+test('failed pairing and API keys in the pairing field cause no provider request', async () => {
+  const w = widget([{ status: 401, body: {} }], true);
+  w.click('aiOwnApiMode');
+  w.element('aiPrivateToken').value = 'sk-not-a-pairing-code';
+  await w.submit('aiPrivateConnectForm');
+  assert.equal(w.requests.length, 0);
+  assert.equal(w.element('aiPrivateToken').value, '');
+  await pair(w);
+  assert.match(w.element('aiPrivateStatus').textContent, /Pairing code rejected/);
+  await w.api.send('Secret question');
+  assert.equal(w.requests.length, 1);
+});
+
+test('private exit preserves guest mode and never sends private context to the guest proxy', async () => {
+  const w = widget([paired, privateReply('Private answer'), ok()], true);
+  await pair(w);
+  await w.api.send('CONFIDENTIAL_PRIVATE');
+  w.click('aiEntryBack');
+  w.click('aiGuestMode');
+  await w.api.send('Public catalog question');
+  assert.equal(w.requests[2].url, 'https://proxy.example/chat');
+  assert.doesNotMatch(w.requests[2].options.body, /CONFIDENTIAL_PRIVATE|Private answer/);
+  assert.ok(w.storageWrites.length > 0, 'guest history behavior is preserved');
 });
