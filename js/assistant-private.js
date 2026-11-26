@@ -89,6 +89,7 @@
     verified = false;
     connection.hidden = true;
     el('aiPrivateModelName').textContent = '';
+    el('aiPrivatePrivacy').open = false;
     setup.hidden = false;
     session.hidden = true;
     connectButton.disabled = false;

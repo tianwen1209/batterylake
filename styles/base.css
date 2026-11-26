@@ -1866,6 +1866,11 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .ai-private-setup ol { padding-left: 20px; margin: 12px 0; }
 .ai-private-setup a { color: var(--accent); text-decoration: underline; }
 .ai-private-setup pre { padding: 12px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; line-height: 1.7; border: 1px solid var(--border); border-radius: 10px; background: var(--bg3); user-select: all; }
+.ai-setup-privacy { margin: 20px 0; padding-top: 14px; border-top: 1px solid var(--border); color: var(--text3); font-size: 11px; line-height: 1.6; }
+.ai-setup-privacy summary { cursor: pointer; width: fit-content; font-weight: 550; }
+.ai-setup-privacy summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
+.ai-setup-privacy p { margin: 10px 0 0; }
+
 #aiPrivateConnectForm { display: grid; gap: 8px; margin: 14px 0; }
 #aiPrivateConnectForm label { color: var(--text1); font-weight: 650; }
 #aiPrivateToken { min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text1); font: inherit; }

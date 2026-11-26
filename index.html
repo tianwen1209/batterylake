@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="js/theme-init.js"></script>
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="styles/base.css?v=assistant-refined-2">
+<link rel="stylesheet" href="styles/base.css?v=setup-privacy-1">
 <script src="assets/vendor/papaparse.min.js"></script>
 
 <link rel="stylesheet" href="styles/benchmark.css?v=numbered-cards-1">
@@ -2217,6 +2217,14 @@ for dataset in resp.json()["items"]:
           <input id="aiPrivateToken" type="password" autocomplete="off" spellcheck="false" maxlength="128" required placeholder="Paste code from the connector">
           <button id="aiPrivateConnect" type="submit">Connect locally</button>
         </form>
+        <details class="ai-setup-privacy" id="aiPrivatePrivacy">
+          <summary>Privacy</summary>
+          <div>
+            <p>Your API key stays in the local connector’s memory. Messages go directly to your chosen provider, whose retention policy applies.</p>
+            <p>Chat history stays in this session and is not saved. Clear, disconnect, close, back or reload discards it. Only an optional “Don’t show this again” preference is saved.</p>
+            <p>Agent actions may load public website resources. Private conversations are never automatically sent to Guest Mode.</p>
+          </div>
+        </details>
       </div>
       <div class="ai-session-info" id="aiPrivateConnection" hidden>
         <span class="ai-session-model" id="aiPrivateModelName"></span>
