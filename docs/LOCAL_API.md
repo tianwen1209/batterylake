@@ -62,7 +62,7 @@ project: Google limits access to its 2.5 series to prior active users. See
 ## Agent mode
 
 After pairing, choose **Agent Beta** beside Chat. For example: “筛选 LFP 软包数据集”,
-“打开 dataset_21 的质量报告”, or “下载处理 skill”. Chat remains the default.
+“打开 dataset_21 的质量报告”, or “下载处理 skill”. Chat remains the default. Both modes share the header’s clear button.
 Switching modes clears the conversation to keep chat and planning context separate.
 
 Your chosen model returns a JSON plan through the same local connector; no native
@@ -78,7 +78,9 @@ excluded. This does not run Python, preprocess datasets or train models.
 
 Agent actions may load public website resources and download files normally. Chat
 text is still sent only through the connector to your provider. Chat and action
-history remain in session memory. Clear/disconnect/close/back cancel pending model
+history remain in session memory. Back and close show a confirmation before discarding
+the session. “Don’t show this again” saves only that preference in localStorage;
+no messages or pairing details are stored. Clear/disconnect/close/back cancel pending model
 requests and stop subsequent actions; completed or already-started website actions
 and downloaded files cannot be undone by clearing the chat.
 

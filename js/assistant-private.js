@@ -1,4 +1,4 @@
-/* User-owned API path. Never uses guest providers, browser storage, analytics,
+/* User-owned API path. Never uses guest providers, chat storage, analytics,
  * remote markdown resources, or the BatteryLake backend. The connector owns the
  * API key and destination; the browser receives only a bounded pairing token. */
 (function () {
@@ -26,11 +26,18 @@
   let connected = false;
   let busy = false;
   let verified = false;
+  const EXIT_PREFERENCE = 'batteryLakeSkipPrivateExitWarning';
+  const exitDialog = el('aiPrivateExitDialog');
+  let pendingLeave = null;
+  let returnFocus = null;
 
   function setStatus(text, tone = 'idle') {
-    status.textContent = text;
+    status.textContent = tone === 'error' ? text : '';
+    status.hidden = tone !== 'error';
     status.dataset.tone = tone;
     connection.dataset.state = tone;
+    connectionState.title = text;
+    if (window.BatteryLakeAssistantUI) window.BatteryLakeAssistantUI.refresh();
     connectionState.textContent = tone === 'busy' ? 'Thinking' : tone === 'error' ? 'Needs attention' : verified ? 'Connected' : 'Paired';
   }
 
@@ -56,10 +63,7 @@
     clear();
     el('aiPrivateChatMode').setAttribute('aria-pressed', String(mode === 'chat'));
     el('aiPrivateAgentMode').setAttribute('aria-pressed', String(mode === 'agent'));
-    el('aiPrivateModeHint').textContent = mode === 'agent'
-      ? 'Ask Agent to filter datasets, open quality reports or download the processing skill. Website actions may load public resources.'
-      : 'Chat with your model. Switch to Agent to operate the website.';
-    input.placeholder = mode === 'agent' ? 'Try: 筛选 LFP 软包数据集' : 'Ask your model…';
+    input.placeholder = mode === 'agent' ? 'Try: Filter LFP pouch datasets' : 'Ask a question...';
   }
 
   function clear() {
@@ -70,9 +74,10 @@
     input.value = '';
     messages.replaceChildren();
     busy = false;
+    input.style.height = '';
     input.disabled = !connected;
     sendButton.disabled = !connected;
-    if (connected) setStatus('Conversation cleared. Ready in ' + mode + ' mode.', 'ready');
+    if (connected) setStatus('', 'ready');
   }
 
   function reset() {
@@ -83,9 +88,7 @@
     tokenInput.value = '';
     verified = false;
     connection.hidden = true;
-    el('aiPrivateProviderName').textContent = '';
     el('aiPrivateModelName').textContent = '';
-    el('aiPrivatePrivacy').open = false;
     setup.hidden = false;
     session.hidden = true;
     connectButton.disabled = false;
@@ -177,11 +180,8 @@
       if (!Number.isInteger(info.version) || info.version < 3) throw new Error('Outdated connector. Restart version 3 or newer from the website repository, then pair again.');
       token = pairingToken;
       connected = true;
-      const isGemini = info.provider === 'generativelanguage.googleapis.com';
-      el('aiPrivateProviderName').textContent = isGemini ? 'Gemini' : info.provider;
-      el('aiPrivateProviderName').title = info.provider;
       el('aiPrivateModelName').textContent = info.model;
-      el('aiPrivateModelName').title = info.transport === 'gemini-native' ? 'Connected through the local Gemini native adapter' : 'Connected through your local API connector';
+      el('aiPrivateModelName').title = info.provider + (info.transport === 'gemini-native' ? ' · Gemini native adapter' : ' · Local connector');
       connection.hidden = false;
       setStatus('Paired locally. Send a message to verify the model.', 'ready');
       setup.hidden = true;
@@ -256,18 +256,52 @@
 
   el('aiPrivateConnectForm').addEventListener('submit', event => { event.preventDefault(); return connect(); });
   el('aiPrivateChatForm').addEventListener('submit', event => { event.preventDefault(); return send(input.value); });
-  el('aiPrivateClear').addEventListener('click', clear);
-  el('aiPrivateDisconnect').addEventListener('click', reset);
+  input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 116) + 'px'; });
   input.addEventListener('keydown', event => {
     if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
       event.preventDefault();
       el('aiPrivateChatForm').requestSubmit();
     }
   });
-  window.addEventListener('pagehide', reset);
+  function closeWarning(leave) {
+    if (!pendingLeave) return;
+    const finish = pendingLeave;
+    pendingLeave = null;
+    exitDialog.hidden = true;
+    if (leave) {
+      if (el('aiPrivateExitRemember').checked) {
+        try { localStorage.setItem(EXIT_PREFERENCE, '1'); } catch (_) { /* preference is optional */ }
+      }
+      finish();
+    } else if (returnFocus) returnFocus.focus();
+  }
+
+  function requestLeave(finish) {
+    let skip = false;
+    try { skip = localStorage.getItem(EXIT_PREFERENCE) === '1'; } catch (_) { /* show warning */ }
+    if (skip || (!connected && !input.value.trim() && !busy)) { finish(); return; }
+    if (pendingLeave) return;
+    pendingLeave = finish;
+    returnFocus = document.activeElement;
+    el('aiPrivateExitRemember').checked = false;
+    exitDialog.hidden = false;
+    el('aiPrivateExitCancel').focus();
+  }
+
+  el('aiPrivateExitCancel').addEventListener('click', () => closeWarning(false));
+  el('aiPrivateExitConfirm').addEventListener('click', () => closeWarning(true));
+  exitDialog.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); closeWarning(false); }
+    if (event.key === 'Tab') {
+      const first = el('aiPrivateExitRemember'), last = el('aiPrivateExitConfirm');
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('pagehide', () => { pendingLeave = null; exitDialog.hidden = true; reset(); });
   el('aiPrivateChatMode').addEventListener('click', () => setMode('chat'));
   el('aiPrivateAgentMode').addEventListener('click', () => setMode('agent'));
-  window.BatteryLakePrivateAssistant = { reset, clear, send, act(text) {
+  window.BatteryLakePrivateAssistant = { reset, clear, send, requestLeave, isConnected: () => connected, act(text) {
     if (!connected || busy) return Promise.resolve();
     if (mode !== 'agent') setMode('agent');
     return send(text);

@@ -1861,51 +1861,31 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 .ai-entry-back .ai-entry-arrow { transform: rotate(180deg); }
 .ai-private-screen { display: flex; flex: 1; flex-direction: column; min-height: 0; overflow-y: auto; background: var(--bg2); }
 .ai-private-setup { padding: 20px 20px 0; color: var(--text2); font-size: 13px; line-height: 1.6; }
-.ai-private-setup h2 { margin: 7px 0; font-size: 21px; color: var(--text1); }
+.ai-private-setup h2 { margin: 0 0 12px; font-size: 19px; color: var(--text1); }
 .ai-private-setup p { margin: 8px 0; }
 .ai-private-setup ol { padding-left: 20px; margin: 12px 0; }
 .ai-private-setup a { color: var(--accent); text-decoration: underline; }
 .ai-private-setup pre { padding: 12px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; line-height: 1.7; border: 1px solid var(--border); border-radius: 10px; background: var(--bg3); user-select: all; }
-.ai-private-badge { color: var(--accent); font-size: 10px; letter-spacing: .08em; font-weight: 800; }
 #aiPrivateConnectForm { display: grid; gap: 8px; margin: 14px 0; }
 #aiPrivateConnectForm label { color: var(--text1); font-weight: 650; }
 #aiPrivateToken { min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text1); font: inherit; }
-#aiPrivateConnect, .ai-private-session-tools button { padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg3); color: var(--text1); font: inherit; cursor: pointer; }
+#aiPrivateConnect { padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg3); color: var(--text1); font: inherit; cursor: pointer; }
 #aiPrivateConnect { background: var(--accent); color: #fff; font-weight: 700; }
 #aiPrivateConnect:disabled { opacity: .6; cursor: wait; }
-.ai-private-connection { flex-shrink: 0; margin: 16px 16px 0; padding: 14px 15px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); box-shadow: 0 3px 12px rgba(15,23,42,.025); }
-.ai-private-connection-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.ai-private-provider { display: inline-flex; align-items: center; gap: 7px; min-width: 0; color: var(--accent); font-size: 13px; font-weight: 750; }
-.ai-private-provider svg { flex-shrink: 0; }
-#aiPrivateProviderName { overflow-wrap: anywhere; }
-.ai-private-connection-state { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; padding: 4px 8px; border-radius: 20px; background: var(--bg3); color: var(--text3); font-size: 10px; line-height: 1.3; font-weight: 650; }
-.ai-private-connection-state::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-.ai-private-connection[data-state="ready"] .ai-private-connection-state { color: var(--green); background: var(--green-bg); }
-.ai-private-connection[data-state="busy"] .ai-private-connection-state { color: var(--accent); background: var(--accent-light); }
-.ai-private-connection[data-state="busy"] .ai-private-connection-state::before { animation: ai-private-pulse 1.2s ease-in-out infinite; }
-.ai-private-connection[data-state="error"] .ai-private-connection-state { color: var(--amber); background: var(--amber-bg); }
-.ai-private-model { margin-top: 8px; color: var(--text2); font: 11px/1.5 var(--mono); overflow-wrap: anywhere; }
+/* Shared model/status row for Guest Mode and Connect Your API. */
+.ai-session-info { display: flex; align-items: center; justify-content: center; gap: 12px; flex-shrink: 0; min-height: 42px; padding: 12px 20px 2px; font-size: 12px; line-height: 20px; text-align: center; }
+.ai-session-model { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text2); font-weight: 550; }
+.ai-session-state { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; padding-left: 12px; border-left: 1px solid var(--border); color: var(--text3); font-size: 11px; line-height: 16px; }
+.ai-session-state::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--text3); }
+.ai-session-info[data-state="ready"] .ai-session-state::before { background: var(--green); }
+.ai-session-info[data-state="busy"] .ai-session-state::before { background: var(--accent); animation: ai-private-pulse 1.2s ease-in-out infinite; }
+.ai-session-info[data-state="error"] .ai-session-state::before { background: var(--amber); }
 .ai-private-status { flex-shrink: 0; margin: 9px 20px 12px; color: var(--text3); font-size: 11px; line-height: 1.55; overflow-wrap: anywhere; }
 .ai-private-status[data-tone="error"] { margin: 10px 16px 12px; padding: 10px 12px; border: 1px solid var(--border); border-left: 3px solid var(--amber); border-radius: 8px; color: var(--text2); background: var(--amber-bg); }
 .ai-private-note { color: var(--text3); font-size: 11px; line-height: 1.6; }
-.ai-private-privacy { flex-shrink: 0; margin: 0 16px 14px; padding-top: 11px; border-top: 1px solid var(--border); color: var(--text3); font-size: 11px; line-height: 1.55; }
-.ai-private-privacy summary { display: flex; align-items: center; gap: 9px; list-style: none; cursor: pointer; border-radius: 5px; }
-.ai-private-privacy summary::-webkit-details-marker { display: none; }
-.ai-private-privacy summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.ai-private-privacy summary strong { display: block; color: var(--text2); font-size: 11px; font-weight: 650; }
-.ai-private-shield { flex-shrink: 0; color: var(--text3); }
-.ai-private-privacy-caption { display: block; font-size: 10px; margin-top: 1px; }
-.ai-private-chevron { margin-left: auto; flex-shrink: 0; transition: transform .15s ease; }
-.ai-private-privacy[open] .ai-private-chevron { transform: rotate(180deg); }
-.ai-private-privacy-details { margin: 10px 0 0 26px; max-width: 40em; }
-.ai-private-privacy-details p + p { margin-top: 6px; }
 @keyframes ai-private-pulse { 50% { opacity: .3; } }
-@media (prefers-reduced-motion: reduce) { .ai-private-connection[data-state="busy"] .ai-private-connection-state::before { animation: none; } }
-.ai-private-session { display: flex; flex: 1; min-height: 240px; flex-direction: column; }
-.ai-private-session-tools { display: flex; align-items: center; gap: 8px; padding: 0 16px 8px; flex-wrap: wrap; font-size: 11px; }
-.ai-private-session-tools button { padding: 6px 9px; background: transparent; color: var(--text3); border-color: transparent; transition: background .15s, color .15s; }
-.ai-private-session-tools button:hover { background: var(--bg3); color: var(--text1); }
-.ai-private-session-tools .ai-private-badge { margin-right: auto; }
+@media (prefers-reduced-motion: reduce) { .ai-session-info[data-state="busy"] .ai-session-state::before { animation: none; } }
+.ai-private-session { display: flex; flex: 1; min-height: 160px; flex-direction: column; }
 .ai-private-text { white-space: pre-wrap; overflow-wrap: anywhere; }
 .ai-mode-toolbar {
   display: flex;
@@ -2760,3 +2740,24 @@ body { font-family: var(--sans); background: var(--bg2); color: var(--text1); mi
 [data-theme="dark"] .ai-action { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08); }
 [data-theme="dark"] .ai-action.ok .ai-action-icon { color: #4ade80; }
 [data-theme="dark"] .ai-action.fail .ai-action-icon { color: #f87171; }
+
+/* Keep the exit confirmation within the assistant, with matching controls. */
+.ai-exit-overlay { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(15,23,42,.22); backdrop-filter: blur(3px); }
+.ai-exit-card { width: 100%; max-width: 350px; padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg); color: var(--text1); box-shadow: 0 16px 48px rgba(15,23,42,.14); }
+.ai-exit-card h2 { margin: 0 0 10px; font-size: 18px; }
+.ai-exit-card p { margin: 0 0 20px; color: var(--text2); font-size: 13px; line-height: 1.6; }
+.ai-exit-preference { display: flex; align-items: center; gap: 8px; color: var(--text3); font-size: 12px; cursor: pointer; }
+.ai-exit-preference input { accent-color: var(--accent); }
+.ai-exit-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 24px; }
+.ai-exit-actions button { padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); color: var(--text1); font: 600 12px var(--sans); cursor: pointer; }
+#aiPrivateExitConfirm { background: var(--accent); border-color: var(--accent); color: #fff; }
+.ai-exit-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* One continuous chat surface, with a single inset composer in both modes. */
+.ai-chat-panel .ai-guest-screen { background: var(--bg2); }
+.ai-chat-panel .ai-chat-suggestions { padding: 10px 16px 0; border-top: 0; background: transparent; }
+.ai-chat-panel .ai-chat-form { align-items: center; flex-shrink: 0; gap: 6px; margin: 12px 16px 16px; padding: 6px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); box-shadow: 0 2px 8px rgba(15,23,42,.025); }
+.ai-chat-panel .ai-chat-form:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-light); }
+.ai-chat-panel .ai-chat-form textarea { display: block; margin: 0; padding: 8px 10px; border: 0; border-radius: 0; background: transparent; box-shadow: none; font-size: 13px; line-height: 20px; }
+.ai-chat-panel .ai-chat-form textarea:focus { border: 0; box-shadow: none; }
+.ai-chat-panel .ai-chat-form button { width: 34px; height: 34px; border-radius: 10px; background: var(--accent); }

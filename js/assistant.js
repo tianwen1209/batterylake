@@ -17,16 +17,12 @@
   const messages = document.getElementById('aiChatMessages');
   const subtitleEl = document.getElementById('aiChatSubtitle');
   const statusTextEl = document.getElementById('aiChatStatusText');
-  const statusDot = panel ? panel.querySelector('.ai-chat-status-dot') : null;
+  const guestModel = document.getElementById('aiGuestModelName');
   if (!panel || !toggle || !form || !input || !messages) return;
   const sendButton = form.querySelector('button[type="submit"]');
   const suggestions = document.querySelectorAll('.ai-suggestion');
   const suggestionMenu = panel.querySelector('.ai-chat-suggestions');
   const modeButtons = panel.querySelectorAll('[data-ai-mode]');
-  const modeToolbar = document.getElementById('aiModeToolbar');
-  const modeOptions = document.getElementById('aiModeOptions');
-  const modeCollapse = document.getElementById('aiModeCollapse');
-  const modeSummary = document.getElementById('aiModeSummary');
   const agentMessages = document.getElementById('aiAgentMessages');
   const entryScreen = document.getElementById('aiEntryScreen');
   const guestScreen = document.getElementById('aiGuestScreen');
@@ -220,7 +216,11 @@
     return { text: content, meta, bubble, sender };
   }
 
-  function setPanelOpen(isOpen) {
+  function setPanelOpen(isOpen, confirmed = false) {
+    if (!isOpen && !confirmed && entryView === 'own-api' && window.BatteryLakePrivateAssistant) {
+      window.BatteryLakePrivateAssistant.requestLeave(() => setPanelOpen(false, true));
+      return;
+    }
     if (!isOpen && entryView === 'own-api' && window.BatteryLakePrivateAssistant) window.BatteryLakePrivateAssistant.reset();
     panel.classList.toggle('open', isOpen);
     document.body.classList.toggle('ai-panel-open', isOpen);
@@ -230,7 +230,11 @@
       else guestButton.focus();
     }
   }
-  function setEntryView(view) {
+  function setEntryView(view, confirmed = false) {
+    if (!confirmed && entryView === 'own-api' && view !== 'own-api' && window.BatteryLakePrivateAssistant) {
+      window.BatteryLakePrivateAssistant.requestLeave(() => setEntryView(view, true));
+      return;
+    }
     if (entryView === 'own-api' && view !== 'own-api' && window.BatteryLakePrivateAssistant) window.BatteryLakePrivateAssistant.reset();
     entryView = view;
     const isGuest = view === 'guest';
@@ -238,7 +242,7 @@
     guestScreen.hidden = !isGuest;
     ownApiScreen.hidden = view !== 'own-api';
     entryBack.hidden = view === 'entry';
-    if (clearBtn) clearBtn.hidden = !isGuest;
+    refreshControls();
     statusRow.hidden = !isGuest;
     if (isGuest) {
       applyProviderStatus();
@@ -246,7 +250,8 @@
       input.focus();
       void ensureProvider();
     } else {
-      subtitleEl.textContent = view === 'own-api' ? 'Connect your own API' : 'Choose how to get started';
+      subtitleEl.textContent = '';
+      subtitleEl.hidden = true;
       if (view === 'own-api') ownApiScreen.focus();
       else guestButton.focus();
     }
@@ -275,7 +280,6 @@
     activeMode = mode === 'agent' ? 'agent' : 'chat';
     const isAgent = activeMode === 'agent';
     modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.aiMode === activeMode)));
-    modeSummary.textContent = isAgent ? 'Agent mode' : 'Chat mode';
     messages.hidden = isAgent;
     agentMessages.hidden = !isAgent;
     input.placeholder = isAgent ? 'Tell me what to do, e.g. "open dataset_21 quality report"' : 'Ask a question...';
@@ -296,13 +300,30 @@
     input.style.height = 'auto';
     input.style.height = Math.min(input.scrollHeight, 116) + 'px';
   }
-  function setStatus(mode, subtitle, statusText) {
-    if (subtitleEl && subtitle && entryView === 'guest') subtitleEl.textContent = subtitle;
-    if (statusTextEl && statusText) statusTextEl.textContent = statusText;
-    if (statusDot) {
-      statusDot.classList.remove('is-online', 'is-busy', 'is-offline');
-      statusDot.classList.add(mode === 'online' ? 'is-online' : mode === 'busy' ? 'is-busy' : 'is-offline');
-    }
+  function refreshControls() {
+    if (clearBtn) clearBtn.hidden = entryView !== 'guest' && !(entryView === 'own-api' && window.BatteryLakePrivateAssistant && window.BatteryLakePrivateAssistant.isConnected());
+  }
+  window.BatteryLakeAssistantUI = { refresh: refreshControls };
+
+  function setStatus(mode, subtitle, detail) {
+    subtitleEl.hidden = true;
+    subtitleEl.textContent = '';
+    statusRow.dataset.state = mode === 'online' ? 'ready' : mode === 'busy' ? 'busy' : 'idle';
+    const provider = state.provider;
+    const remote = remoteAvailable(provider);
+    guestModel.textContent = remote
+      ? state.models[provider] || ({ gemini: 'Gemini', worker: 'Gemini', openai: 'Custom model', backend: 'Local model', pollinations: 'Pollinations' }[provider] || 'Model')
+      : 'Site knowledge';
+    guestModel.title = detail || '';
+    statusRow.title = detail || '';
+    statusTextEl.textContent = mode === 'busy' ? 'Connecting'
+      : /retry model on next message/.test(detail) ? 'Retry available'
+      : /not verified/.test(detail) ? 'Unverified'
+      : /rate limited/.test(detail) ? 'Rate limited'
+      : /timed out/.test(detail) ? 'Timed out'
+      : /unavailable/.test(detail) ? 'Model unavailable'
+      : 'Ready';
+    statusTextEl.title = detail || '';
   }
 
   function showWelcome() {
@@ -792,19 +813,12 @@
   ownApiButton.addEventListener('click', () => setEntryView('own-api'));
   entryBack.addEventListener('click', () => setEntryView('entry'));
   modeButtons.forEach(button => button.addEventListener('click', () => setMode(button.dataset.aiMode)));
-  modeCollapse.addEventListener('click', () => {
-    const collapsed = modeCollapse.getAttribute('aria-expanded') === 'true';
-    modeOptions.hidden = collapsed;
-    modeSummary.hidden = !collapsed;
-    modeToolbar.classList.toggle('is-collapsed', collapsed);
-    modeCollapse.setAttribute('aria-expanded', String(!collapsed));
-    const label = collapsed ? 'Expand mode selector' : 'Collapse mode selector';
-    modeCollapse.setAttribute('aria-label', label);
-    modeCollapse.title = label;
-  });
   toggle.addEventListener('click', () => setPanelOpen(!panel.classList.contains('open')));
   if (close) close.addEventListener('click', () => setPanelOpen(false));
-  if (clearBtn) clearBtn.addEventListener('click', clearConversation);
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    if (entryView === 'own-api') window.BatteryLakePrivateAssistant.clear();
+    else clearConversation();
+  });
   input.addEventListener('input', resizeInput);
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {

@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="js/theme-init.js"></script>
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="styles/base.css?v=local-api-ui-1">
+<link rel="stylesheet" href="styles/base.css?v=assistant-refined-2">
 <script src="assets/vendor/papaparse.min.js"></script>
 
 <link rel="stylesheet" href="styles/benchmark.css?v=numbered-cards-1">
@@ -2183,8 +2183,7 @@ for dataset in resp.json()["items"]:
         </div>
         <div>
           <div class="ai-chat-title">BatteryLake AI Assistant</div>
-          <div class="ai-chat-subtitle" id="aiChatSubtitle">Choose how to get started</div>
-          <div class="ai-chat-status" id="aiChatStatus" hidden><span class="ai-chat-status-dot is-online"></span><span id="aiChatStatusText">Online</span></div>
+          <div class="ai-chat-subtitle" id="aiChatSubtitle" hidden></div>
         </div>
       </div>
       <div class="ai-chat-tools">
@@ -2205,9 +2204,8 @@ for dataset in resp.json()["items"]:
     </div>
     <div class="ai-private-screen" id="aiOwnApiScreen" tabindex="-1" hidden>
       <div class="ai-private-setup" id="aiPrivateSetup">
-        <span class="ai-private-badge">LOCAL CONNECTION</span>
         <h2>Connect Your API</h2>
-        <p>Your key stays in a connector on your computer. Chats go from that connector to your chosen provider, without passing through BatteryLake servers.</p>
+        <p>Your API key stays on your computer. Messages go directly to your provider.</p>
         <ol>
           <li><a href="scripts/local_api_connector.py" download="local_api_connector.py">Download the Python connector</a> (Python 3.10+).</li>
           <li>Run it in a terminal with your provider's full chat completions URL and model ID:</li>
@@ -2219,58 +2217,38 @@ for dataset in resp.json()["items"]:
           <input id="aiPrivateToken" type="password" autocomplete="off" spellcheck="false" maxlength="128" required placeholder="Paste code from the connector">
           <button id="aiPrivateConnect" type="submit">Connect locally</button>
         </form>
-        <p class="ai-private-note">Allow local network access if your browser asks. Use Guest Mode if local connections are unavailable; private chats are never automatically sent there.</p>
       </div>
-      <div class="ai-private-connection" id="aiPrivateConnection" hidden>
-        <div class="ai-private-connection-top">
-          <span class="ai-private-provider"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c0 5-4 9-9 9 5 0 9 4 9 9 0-5 4-9 9-9-5 0-9-4-9-9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="aiPrivateProviderName">Your provider</span></span>
-          <span class="ai-private-connection-state" id="aiPrivateConnectionState">Paired</span>
-        </div>
-        <div class="ai-private-model" id="aiPrivateModelName"></div>
+      <div class="ai-session-info" id="aiPrivateConnection" hidden>
+        <span class="ai-session-model" id="aiPrivateModelName"></span>
+        <span class="ai-session-state" id="aiPrivateConnectionState">Paired</span>
       </div>
-      <p class="ai-private-status" id="aiPrivateStatus" role="status" aria-live="polite">Not connected</p>
+      <p class="ai-private-status" id="aiPrivateStatus" role="status" aria-live="polite" hidden></p>
       <div class="ai-private-session" id="aiPrivateSession" hidden>
-        <div class="ai-private-session-tools">
-          <span class="ai-private-badge">YOUR API</span>
-          <button id="aiPrivateClear" type="button">Clear chat</button>
-          <button id="aiPrivateDisconnect" type="button">Disconnect</button>
-        </div>
         <div class="ai-mode-toolbar" role="group" aria-label="Your API assistant mode">
           <div class="ai-mode-switch">
             <button class="ai-mode-button" id="aiPrivateChatMode" type="button" aria-pressed="true">Chat</button>
             <button class="ai-mode-button" id="aiPrivateAgentMode" type="button" aria-pressed="false">Agent <span class="ai-mode-badge">Beta</span></button>
           </div>
         </div>
-        <p class="ai-private-note" id="aiPrivateModeHint">Chat with your model. Switch to Agent to operate the website.</p>
         <div class="ai-chat-messages" id="aiPrivateMessages" role="log" aria-label="Private API conversation" aria-live="polite"></div>
         <form class="ai-chat-form" id="aiPrivateChatForm" autocomplete="off">
-          <textarea id="aiPrivateInput" rows="2" maxlength="4000" placeholder="Ask your model…" aria-label="Message to your model" autocomplete="off" spellcheck="false" required></textarea>
-          <button id="aiPrivateSend" type="submit">Send</button>
+          <textarea id="aiPrivateInput" rows="1" maxlength="4000" placeholder="Ask a question..." aria-label="Message to your model" autocomplete="off" spellcheck="false" required></textarea>
+          <button id="aiPrivateSend" type="submit" aria-label="Send message">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </form>
       </div>
-      <details class="ai-private-privacy" id="aiPrivatePrivacy">
-        <summary>
-          <svg class="ai-private-shield" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8 3v5c0 5-4 8-8 10-4-2-8-5-8-10V6l8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.5 11.5 2.5 2.5 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>No saved chat history</strong><span class="ai-private-privacy-caption">Provider retention rules still apply.</span></span>
-          <svg class="ai-private-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="ai-private-privacy-details">
-          <p>Chats stay in memory for this session. Clear, disconnect, close, back or reload discards them.</p>
-          <p>Your messages go to your chosen provider, whose retention policy applies.</p>
-          <p>Agent can navigate, filter datasets and download public reports or the processing skill. Actions may load public website resources. Contribution form editing, submission and file uploads are unavailable.</p>
-        </div>
-      </details>
     </div>
     <div class="ai-guest-screen" id="aiGuestScreen" hidden>
+    <div class="ai-session-info" id="aiChatStatus" hidden>
+      <span class="ai-session-model" id="aiGuestModelName">Site knowledge</span>
+      <span class="ai-session-state" id="aiChatStatusText">Ready</span>
+    </div>
     <div class="ai-mode-toolbar" id="aiModeToolbar">
       <div class="ai-mode-switch" id="aiModeOptions" role="group" aria-label="Assistant mode">
         <button class="ai-mode-button" type="button" data-ai-mode="chat" aria-pressed="true">Chat</button>
         <button class="ai-mode-button" type="button" data-ai-mode="agent" aria-pressed="false">Agent <span class="ai-mode-badge">Beta</span></button>
       </div>
-      <button class="ai-mode-collapse" id="aiModeCollapse" type="button" aria-expanded="true" aria-controls="aiModeOptions" aria-label="Collapse mode selector" title="Collapse mode selector">
-        <span id="aiModeSummary" hidden>Chat mode</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
     <div class="ai-chat-messages" id="aiAgentMessages" aria-label="Agent mode" hidden></div>
     <div class="ai-chat-messages" id="aiChatMessages">
@@ -2308,13 +2286,24 @@ for dataset in resp.json()["items"]:
       </button>
     </form>
     </div>
+    <div class="ai-exit-overlay" id="aiPrivateExitDialog" role="alertdialog" aria-modal="true" aria-labelledby="aiPrivateExitTitle" aria-describedby="aiPrivateExitDescription" hidden>
+      <div class="ai-exit-card">
+        <h2 id="aiPrivateExitTitle">Leave this chat?</h2>
+        <p id="aiPrivateExitDescription">Your chat history will disappear when you leave. This also disconnects your API.</p>
+        <label class="ai-exit-preference"><input id="aiPrivateExitRemember" type="checkbox"> Don’t show this again</label>
+        <div class="ai-exit-actions">
+          <button id="aiPrivateExitCancel" type="button">Keep chatting</button>
+          <button id="aiPrivateExitConfirm" type="button">Leave chat</button>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
 <script src="js/ai-config.js"></script>
 <script src="js/assistant-knowledge.js"></script>
 <script src="js/assistant-actions.js?v=private-agent-1"></script>
-<script src="js/assistant-private.js?v=local-api-agent-1"></script>
-<script src="js/assistant.js?v=local-api-agent-1"></script>
+<script src="js/assistant-private.js?v=assistant-refined-2"></script>
+<script src="js/assistant.js?v=assistant-refined-2"></script>
 <script src="js/showcase.js"></script>
 </body>
 </html>
