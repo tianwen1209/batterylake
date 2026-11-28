@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-27T01:03:31Z",
-  "total_visits": 4723,
+  "updated_at": "2026-11-28T00:35:25Z",
+  "total_visits": 4771,
   "dataset_downloads": 541,
   "skill_uses": 134,
   "model_downloads": {
@@ -17,11 +17,11 @@
     "transformer": 1
   },
   "locations": {
-    "updatedAt": "2026-11-27T01:03:31Z",
+    "updatedAt": "2026-11-28T00:35:25Z",
     "metric": "activeUsers",
     "dateRange": {
       "startDate": "2026-07-15",
-      "endDate": "2026-11-27"
+      "endDate": "2026-11-28"
     },
     "countries": [
       {
@@ -32,7 +32,7 @@
       {
         "country": "Singapore",
         "countryCode": "SG",
-        "visitors": 113
+        "visitors": 114
       },
       {
         "country": "China",
@@ -40,13 +40,13 @@
         "visitors": 98
       },
       {
-        "country": "Hong Kong",
-        "countryCode": "HK",
-        "visitors": 10
-      },
-      {
         "country": "Netherlands",
         "countryCode": "NL",
+        "visitors": 11
+      },
+      {
+        "country": "Hong Kong",
+        "countryCode": "HK",
         "visitors": 10
       },
       {
@@ -60,14 +60,14 @@
         "visitors": 8
       },
       {
-        "country": "Vietnam",
-        "countryCode": "VN",
+        "country": "Italy",
+        "countryCode": "IT",
         "visitors": 7
       },
       {
-        "country": "Italy",
-        "countryCode": "IT",
-        "visitors": 6
+        "country": "Vietnam",
+        "countryCode": "VN",
+        "visitors": 7
       },
       {
         "country": "Taiwan",
@@ -195,7 +195,7 @@
         "country": "Singapore",
         "countryCode": "SG",
         "city": "Singapore",
-        "visitors": 98,
+        "visitors": 99,
         "lng": 103.85,
         "lat": 1.29
       },
@@ -283,7 +283,7 @@
         "country": "Italy",
         "countryCode": "IT",
         "city": "Milan",
-        "visitors": 6,
+        "visitors": 7,
         "lng": 9.19,
         "lat": 45.464
       },
@@ -291,7 +291,7 @@
         "country": "Netherlands",
         "countryCode": "NL",
         "city": "Amsterdam",
-        "visitors": 6,
+        "visitors": 7,
         "lng": 4.89,
         "lat": 52.374
       },
